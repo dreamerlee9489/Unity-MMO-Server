@@ -9,6 +9,9 @@ public:
 };
 
 using MsgCallbackFun = std::function<void(Packet*)>;
+/// <summary>
+/// 只要挂载了MessageCallBack的实体, ProcessPacket()无差别的处理包裹
+/// </summary>
 class MessageCallBack :public IMessageCallBack, public IAwakeFromPoolSystem<MsgCallbackFun>
 {
 public:
@@ -20,6 +23,10 @@ private:
 	MsgCallbackFun _handleFunction;
 };
 
+/// <summary>
+/// ProcessPacket()首先通过包裹中的NetIdentify数据找到唯一实体再处理包裹
+/// </summary>
+/// <typeparam name="T"></typeparam>
 template<class T>
 class MessageCallBackFilter :public IMessageCallBack, public IAwakeFromPoolSystem<>
 {
@@ -32,6 +39,9 @@ public:
 	}
 
 	std::function<void(T*, Packet*)> HandleFunction{ nullptr };
+	/// <summary>
+	/// 根据包裹中NetIdentify数据获取处理包裹的实体
+	/// </summary>
 	std::function<T* (NetIdentify*)> GetFilterObj{ nullptr };
 
 	virtual bool ProcessPacket(Packet* pPacket) override

@@ -30,6 +30,14 @@ public:
 	void RegisterDefaultFunction(IEntity* obj, MsgCallbackFun cbfun);
 	void RemoveFunction(IComponent* obj);
 
+	/// <summary>
+	/// 注册指定实体的处理包裹函数
+	/// </summary>
+	/// <typeparam name="T"></typeparam>
+	/// <param name="obj"></param>
+	/// <param name="msgId"></param>
+	/// <param name="getObj"></param>
+	/// <param name="fun"></param>
 	template<typename T>
 	void RegisterFunctionFilter(IEntity* obj, int msgId, std::function<T* (NetIdentify*)> getObj, std::function<void(T*, Packet*)> fun);
 

@@ -5,16 +5,24 @@
 #include "libserver/socket_object.h"
 #include "libresource/resource_manager.h"
 #include "libresource/resource_help.h"
-#include "libplayer/enemy.h"
+#include "libserver/message_system_help.h"
+#include "libserver/message_system.h"
+#include "libplayer/player_component_last_map.h"
+#include "player_manager_component.h"
+#include "player_component_detail.h"
+#include "move_component.h"
+#include "ai/ai_enemy.h"
+#include "ai/ai_component.h"
 #include <vector>
 
 class Player;
-class Enemy;
+class AIEnemy;
 class World :public Entity<World>, public IWorld, public IAwakeFromPoolSystem<int>
 {
 public:
 	void Awake(int worldId) override;
 	void BackToPool() override;
+	PlayerManagerComponent* GetPlayerManager() const { return _playerManager; }
 
 protected:
 	Player* GetPlayer(NetIdentify* pIdentify);
@@ -36,6 +44,7 @@ private:
 private:
 	// 缓存1秒内增加或是删除的玩家
 	std::set<uint64> _addPlayer;
-	std::vector<Enemy*> _enemies;
+	std::vector<AIEnemy*> _enemies;
+	PlayerManagerComponent* _playerManager;
 };
 

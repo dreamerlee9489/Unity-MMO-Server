@@ -1,19 +1,10 @@
 ﻿#include "world.h"
-#include "player_manager_component.h"
-#include "player_component_detail.h"
-
-#include "libserver/message_system_help.h"
-#include "libserver/message_system.h"
-#include "libplayer/player_component_last_map.h"
-#include "move_component.h"
-#include "../allinone/ai_component.h"
 
 void World::Awake(int worldId)
 {
 	//LOG_DEBUG("create world. id:" << worldId << " sn:" << _sn << " space app id:" << Global::GetAppIdFromSN(_sn));
 	_worldId = worldId;
-
-	AddComponent<PlayerManagerComponent>();
+	_playerManager = AddComponent<PlayerManagerComponent>();
 	AddTimer(0, 10, false, 0, BindFunP0(this, &World::SyncWorldToGather));
 	AddTimer(0, 1, false, 0, BindFunP0(this, &World::SyncAppearTimer));
 	AddTimer(0, 1, false, 0, BindFunP0(this, &World::SyncEnemiesTimer));
@@ -30,7 +21,8 @@ void World::Awake(int worldId)
 	std::vector<ResourceEnemy> _enemyCfgs = worldCfg->GetEnemies();
 	for (auto cfg : _enemyCfgs)
 	{
-		Enemy* enemy = GetSystemManager()->GetEntitySystem()->AddComponent<Enemy>(cfg.id, cfg.initHp, cfg.initPos);
+		AIEnemy* enemy = GetSystemManager()->GetEntitySystem()->AddComponent<AIEnemy>(cfg.id, cfg.initHp, cfg.initPos);
+		enemy->SetWorld(this);
 		enemy->AddComponent<AIComponent>();
 		_enemies.push_back(enemy);
 	}
@@ -41,13 +33,18 @@ void World::BackToPool()
 	_addPlayer.clear();
 }
 
+/// <summary>
+/// 通过player sn找到地图中指定玩家
+/// game线程和space线程通信时打标签
+/// </summary>
+/// <param name="pIdentify"></param>
+/// <returns></returns>
 Player* World::GetPlayer(NetIdentify* pIdentify)
 {
 	auto pTags = pIdentify->GetTagKey();
 	const auto pTagPlayer = pTags->GetTagValue(TagType::Player);
 	if (pTagPlayer == nullptr)
 		return nullptr;
-
 	auto pPlayerMgr = GetComponent<PlayerManagerComponent>();
 	return pPlayerMgr->GetPlayerBySn(pTagPlayer->KeyInt64);
 }
@@ -162,11 +159,9 @@ void World::SyncEnemiesTimer()
 		Proto::EnemyList protoList;
 		for (auto enemy : _enemies)
 		{
-			Proto::Enemy* protoEnemy = protoList.add_enemy();
+			Proto::Enemy* protoEnemy = protoList.add_enemies();
 			protoEnemy->set_id(enemy->GetID());
-			protoEnemy->set_hp(enemy->GetHP());
 			enemy->GetPos().SerializeToProto(protoEnemy->mutable_pos());
-			std::cout << "enemy id=" << enemy->GetID() << " pos=(" << enemy->GetPos().X << "," << enemy->GetPos().Y << "," << enemy->GetPos().Z << ")\n";
 		}
 		BroadcastPacket(Proto::MsgId::S2C_EnemyList, protoList);
 	}
@@ -257,31 +252,41 @@ void World::HandleG2SRemovePlayer(Player* pPlayer, Packet* pPacket)
 	Proto::RoleDisAppear disAppear;
 	disAppear.set_sn(pPlayer->GetPlayerSN());
 	BroadcastPacket(Proto::MsgId::S2C_RoleDisAppear, disAppear);
+	LOG_DEBUG("player disappear: sn=" << pPlayer->GetPlayerSN());
 }
 
 void World::HandleMove(Player* pPlayer, Packet* pPacket)
 {
 	auto proto = pPacket->ParseToProto<Proto::Move>();
-	proto.set_player_sn(pPlayer->GetPlayerSN());
 	const auto positions = proto.mutable_position();
-	auto pMoveComponent = pPlayer->GetComponent<MoveComponent>();
-	if (pMoveComponent == nullptr)
+	int enemyId = proto.enemy_id();
+
+	if (enemyId == -1)
 	{
-		pMoveComponent = pPlayer->AddComponent<MoveComponent>();
-	}
+		proto.set_player_sn(pPlayer->GetPlayerSN());
+		auto pMoveComponent = pPlayer->GetComponent<MoveComponent>();
+		if (pMoveComponent == nullptr)
+			pMoveComponent = pPlayer->AddComponent<MoveComponent>();
 
-	std::queue<Vector3> pos;
-	for (auto index = 0; index < proto.position_size(); index++)
+		std::queue<Vector3> pos;
+		for (auto index = 0; index < proto.position_size(); index++)
+		{
+			Vector3 v3(0, 0, 0);
+			v3.ParserFromProto(positions->Get(index));
+			pos.push(v3);
+		}
+		const auto pComponentLastMap = pPlayer->GetComponent<PlayerComponentLastMap>();
+		pMoveComponent->Update(pos, pComponentLastMap->GetCur()->Position);
+	}
+	else
 	{
-		Vector3 v3(0, 0, 0);
-		v3.ParserFromProto(positions->Get(index));
-		pos.push(v3);
-
-		//LOG_DEBUG("move target. " << v3);
+		if (proto.position_size() > 0)
+		{
+			Vector3 pos;
+			pos.ParserFromProto(positions->Get(proto.position_size() - 1));
+			_enemies[enemyId]->SetPos(pos);
+		}
 	}
-
-	const auto pComponentLastMap = pPlayer->GetComponent<PlayerComponentLastMap>();
-	pMoveComponent->Update(pos, pComponentLastMap->GetCur()->Position);
 
 	BroadcastPacket(Proto::MsgId::S2C_Move, proto);
 }

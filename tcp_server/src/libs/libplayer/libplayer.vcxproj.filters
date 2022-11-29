@@ -13,9 +13,6 @@
     <Filter Include="player\component">
       <UniqueIdentifier>{246b5249-182c-4ff4-beb6-33005676d029}</UniqueIdentifier>
     </Filter>
-    <Filter Include="enemy">
-      <UniqueIdentifier>{b87d5510-5c6a-4515-be1f-0c4d95588bc4}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="player.h">
@@ -35,9 +32,6 @@
     </ClInclude>
     <ClInclude Include="player_component_last_map.h">
       <Filter>player\component</Filter>
-    </ClInclude>
-    <ClInclude Include="enemy.h">
-      <Filter>enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

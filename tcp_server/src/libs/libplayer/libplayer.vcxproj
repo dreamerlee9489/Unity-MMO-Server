@@ -22,7 +22,6 @@
     <Text Include="CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="enemy.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="player_component.h" />
     <ClInclude Include="player_collector_component.h" />

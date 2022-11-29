@@ -83,7 +83,7 @@ void IEntity::RemoveComponent()
 }
 
 template<class T>
-class Entity :virtual public IEntity
+class Entity : public IEntity
 {
 public:
 	const char* GetTypeName() override;

@@ -1690,6 +1690,7 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_msg_2eproto::offsets[] PROTOBU
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   PROTOBUF_FIELD_OFFSET(::Proto::Move, player_sn_),
+  PROTOBUF_FIELD_OFFSET(::Proto::Move, enemy_id_),
   PROTOBUF_FIELD_OFFSET(::Proto::Move, position_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::Proto::Enemy, _internal_metadata_),
@@ -1697,14 +1698,13 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_msg_2eproto::offsets[] PROTOBU
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   PROTOBUF_FIELD_OFFSET(::Proto::Enemy, id_),
-  PROTOBUF_FIELD_OFFSET(::Proto::Enemy, hp_),
   PROTOBUF_FIELD_OFFSET(::Proto::Enemy, pos_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::Proto::EnemyList, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  PROTOBUF_FIELD_OFFSET(::Proto::EnemyList, enemy_),
+  PROTOBUF_FIELD_OFFSET(::Proto::EnemyList, enemies_),
 };
 static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(::Proto::CmdThread)},
@@ -1771,7 +1771,7 @@ static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOB
   { 431, -1, sizeof(::Proto::RoleAppear)},
   { 437, -1, sizeof(::Proto::RoleDisAppear)},
   { 443, -1, sizeof(::Proto::Move)},
-  { 450, -1, sizeof(::Proto::Enemy)},
+  { 451, -1, sizeof(::Proto::Enemy)},
   { 458, -1, sizeof(::Proto::EnemyList)},
 };
 
@@ -1959,22 +1959,22 @@ const char descriptor_table_protodef_msg_2eproto[] PROTOBUF_SECTION_VARIABLE(pro
   "2\r.Proto.Gender\022 \n\010position\030\004 \001(\0132\016.Prot"
   "o.Vector3\"\'\n\nRoleAppear\022\031\n\004role\030\001 \003(\0132\013."
   "Proto.Role\"\033\n\rRoleDisAppear\022\n\n\002sn\030\001 \001(\004\""
-  ";\n\004Move\022\021\n\tplayer_sn\030\001 \001(\004\022 \n\010position\030\002"
-  " \003(\0132\016.Proto.Vector3\"<\n\005Enemy\022\n\n\002id\030\001 \001("
-  "\005\022\n\n\002hp\030\003 \001(\005\022\033\n\003pos\030\004 \001(\0132\016.Proto.Vecto"
-  "r3\"(\n\tEnemyList\022\033\n\005enemy\030\001 \003(\0132\014.Proto.E"
-  "nemy*x\n\007TagType\022\017\n\013TagTypeNone\020\000\022\022\n\016TagT"
-  "ypeAccount\020\001\022\016\n\nTagTypeApp\020\002\022\021\n\rTagTypeE"
-  "ntity\020\003\022\022\n\016TagTypeToWorld\020\004\022\021\n\rTagTypePl"
-  "ayer\020\005*\232\001\n\026AccountCheckReturnCode\022\n\n\006ARC"
-  "_OK\020\000\022\017\n\013ARC_UNKONWN\020\001\022\031\n\025ARC_NOT_FOUND_"
-  "ACCOUNT\020\002\022\026\n\022ARC_PASSWORD_WRONG\020\003\022\017\n\013ARC"
-  "_LOGGING\020\004\022\017\n\013ARC_TIMEOUT\020\005\022\016\n\nARC_ONLIN"
-  "E\020\006*G\n\023LoginHttpReturnCode\022\013\n\007LHRC_OK\020\000\022"
-  "\020\n\014LHRC_TIMEOUT\020\001\022\021\n\rLHRC_NOTFOUND\020\002*L\n\026"
-  "CreatePlayerReturnCode\022\021\n\rCPR_Create_OK\020"
-  "\000\022\017\n\013CPR_Unkonwn\020\001\022\016\n\nCPR_Rename\020\002b\006prot"
-  "o3"
+  "M\n\004Move\022\021\n\tplayer_sn\030\001 \001(\004\022\020\n\010enemy_id\030\002"
+  " \001(\005\022 \n\010position\030\003 \003(\0132\016.Proto.Vector3\"0"
+  "\n\005Enemy\022\n\n\002id\030\001 \001(\005\022\033\n\003pos\030\002 \001(\0132\016.Proto"
+  ".Vector3\"*\n\tEnemyList\022\035\n\007enemies\030\001 \003(\0132\014"
+  ".Proto.Enemy*x\n\007TagType\022\017\n\013TagTypeNone\020\000"
+  "\022\022\n\016TagTypeAccount\020\001\022\016\n\nTagTypeApp\020\002\022\021\n\r"
+  "TagTypeEntity\020\003\022\022\n\016TagTypeToWorld\020\004\022\021\n\rT"
+  "agTypePlayer\020\005*\232\001\n\026AccountCheckReturnCod"
+  "e\022\n\n\006ARC_OK\020\000\022\017\n\013ARC_UNKONWN\020\001\022\031\n\025ARC_NO"
+  "T_FOUND_ACCOUNT\020\002\022\026\n\022ARC_PASSWORD_WRONG\020"
+  "\003\022\017\n\013ARC_LOGGING\020\004\022\017\n\013ARC_TIMEOUT\020\005\022\016\n\nA"
+  "RC_ONLINE\020\006*G\n\023LoginHttpReturnCode\022\013\n\007LH"
+  "RC_OK\020\000\022\020\n\014LHRC_TIMEOUT\020\001\022\021\n\rLHRC_NOTFOU"
+  "ND\020\002*L\n\026CreatePlayerReturnCode\022\021\n\rCPR_Cr"
+  "eate_OK\020\000\022\017\n\013CPR_Unkonwn\020\001\022\016\n\nCPR_Rename"
+  "\020\002b\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_msg_2eproto_deps[1] = {
   &::descriptor_table_db_2eproto,
@@ -2050,7 +2050,7 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_msg
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_msg_2eproto_once;
 static bool descriptor_table_msg_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_msg_2eproto = {
-  &descriptor_table_msg_2eproto_initialized, descriptor_table_protodef_msg_2eproto, "msg.proto", 5162,
+  &descriptor_table_msg_2eproto_initialized, descriptor_table_protodef_msg_2eproto, "msg.proto", 5170,
   &descriptor_table_msg_2eproto_once, descriptor_table_msg_2eproto_sccs, descriptor_table_msg_2eproto_deps, 66, 1,
   schemas, file_default_instances, TableStruct_msg_2eproto::offsets,
   file_level_metadata_msg_2eproto, 66, file_level_enum_descriptors_msg_2eproto, file_level_service_descriptors_msg_2eproto,
@@ -21977,13 +21977,17 @@ Move::Move(const Move& from)
       _internal_metadata_(nullptr),
       position_(from.position_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  player_sn_ = from.player_sn_;
+  ::memcpy(&player_sn_, &from.player_sn_,
+    static_cast<size_t>(reinterpret_cast<char*>(&enemy_id_) -
+    reinterpret_cast<char*>(&player_sn_)) + sizeof(enemy_id_));
   // @@protoc_insertion_point(copy_constructor:Proto.Move)
 }
 
 void Move::SharedCtor() {
   ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_Move_msg_2eproto.base);
-  player_sn_ = PROTOBUF_ULONGLONG(0);
+  ::memset(&player_sn_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&enemy_id_) -
+      reinterpret_cast<char*>(&player_sn_)) + sizeof(enemy_id_));
 }
 
 Move::~Move() {
@@ -22010,7 +22014,9 @@ void Move::Clear() {
   (void) cached_has_bits;
 
   position_.Clear();
-  player_sn_ = PROTOBUF_ULONGLONG(0);
+  ::memset(&player_sn_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&enemy_id_) -
+      reinterpret_cast<char*>(&player_sn_)) + sizeof(enemy_id_));
   _internal_metadata_.Clear();
 }
 
@@ -22029,16 +22035,23 @@ const char* Move::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::inter
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // repeated .Proto.Vector3 position = 2;
+      // int32 enemy_id = 2;
       case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
+          enemy_id_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // repeated .Proto.Vector3 position = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
           ptr -= 1;
           do {
             ptr += 1;
             ptr = ctx->ParseMessage(add_position(), ptr);
             CHK_(ptr);
             if (!ctx->DataAvailable(ptr)) break;
-          } while (::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::uint8>(ptr) == 18);
+          } while (::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::uint8>(ptr) == 26);
         } else goto handle_unusual;
         continue;
       default: {
@@ -22084,9 +22097,22 @@ bool Move::MergePartialFromCodedStream(
         break;
       }
 
-      // repeated .Proto.Vector3 position = 2;
+      // int32 enemy_id = 2;
       case 2: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (18 & 0xFF)) {
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (16 & 0xFF)) {
+
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   ::PROTOBUF_NAMESPACE_ID::int32, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32>(
+                 input, &enemy_id_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // repeated .Proto.Vector3 position = 3;
+      case 3: {
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (26 & 0xFF)) {
           DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
                 input, add_position()));
         } else {
@@ -22127,11 +22153,16 @@ void Move::SerializeWithCachedSizes(
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64(1, this->player_sn(), output);
   }
 
-  // repeated .Proto.Vector3 position = 2;
+  // int32 enemy_id = 2;
+  if (this->enemy_id() != 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32(2, this->enemy_id(), output);
+  }
+
+  // repeated .Proto.Vector3 position = 3;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->position_size()); i < n; i++) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      2,
+      3,
       this->position(static_cast<int>(i)),
       output);
   }
@@ -22154,12 +22185,17 @@ void Move::SerializeWithCachedSizes(
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64ToArray(1, this->player_sn(), target);
   }
 
-  // repeated .Proto.Vector3 position = 2;
+  // int32 enemy_id = 2;
+  if (this->enemy_id() != 0) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(2, this->enemy_id(), target);
+  }
+
+  // repeated .Proto.Vector3 position = 3;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->position_size()); i < n; i++) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        2, this->position(static_cast<int>(i)), target);
+        3, this->position(static_cast<int>(i)), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -22183,7 +22219,7 @@ size_t Move::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated .Proto.Vector3 position = 2;
+  // repeated .Proto.Vector3 position = 3;
   {
     unsigned int count = static_cast<unsigned int>(this->position_size());
     total_size += 1UL * count;
@@ -22199,6 +22235,13 @@ size_t Move::ByteSizeLong() const {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt64Size(
         this->player_sn());
+  }
+
+  // int32 enemy_id = 2;
+  if (this->enemy_id() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
+        this->enemy_id());
   }
 
   int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
@@ -22232,6 +22275,9 @@ void Move::MergeFrom(const Move& from) {
   if (from.player_sn() != 0) {
     set_player_sn(from.player_sn());
   }
+  if (from.enemy_id() != 0) {
+    set_enemy_id(from.enemy_id());
+  }
 }
 
 void Move::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
@@ -22257,6 +22303,7 @@ void Move::InternalSwap(Move* other) {
   _internal_metadata_.Swap(&other->_internal_metadata_);
   CastToBase(&position_)->InternalSwap(CastToBase(&other->position_));
   swap(player_sn_, other->player_sn_);
+  swap(enemy_id_, other->enemy_id_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata Move::GetMetadata() const {
@@ -22299,17 +22346,15 @@ Enemy::Enemy(const Enemy& from)
   } else {
     pos_ = nullptr;
   }
-  ::memcpy(&id_, &from.id_,
-    static_cast<size_t>(reinterpret_cast<char*>(&hp_) -
-    reinterpret_cast<char*>(&id_)) + sizeof(hp_));
+  id_ = from.id_;
   // @@protoc_insertion_point(copy_constructor:Proto.Enemy)
 }
 
 void Enemy::SharedCtor() {
   ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_Enemy_msg_2eproto.base);
   ::memset(&pos_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&hp_) -
-      reinterpret_cast<char*>(&pos_)) + sizeof(hp_));
+      reinterpret_cast<char*>(&id_) -
+      reinterpret_cast<char*>(&pos_)) + sizeof(id_));
 }
 
 Enemy::~Enemy() {
@@ -22340,9 +22385,7 @@ void Enemy::Clear() {
     delete pos_;
   }
   pos_ = nullptr;
-  ::memset(&id_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&hp_) -
-      reinterpret_cast<char*>(&id_)) + sizeof(hp_));
+  id_ = 0;
   _internal_metadata_.Clear();
 }
 
@@ -22361,16 +22404,9 @@ const char* Enemy::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::inte
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // int32 hp = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 24)) {
-          hp_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // .Proto.Vector3 pos = 4;
-      case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 34)) {
+      // .Proto.Vector3 pos = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
           ptr = ctx->ParseMessage(mutable_pos(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
@@ -22418,22 +22454,9 @@ bool Enemy::MergePartialFromCodedStream(
         break;
       }
 
-      // int32 hp = 3;
-      case 3: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (24 & 0xFF)) {
-
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   ::PROTOBUF_NAMESPACE_ID::int32, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32>(
-                 input, &hp_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // .Proto.Vector3 pos = 4;
-      case 4: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (34 & 0xFF)) {
+      // .Proto.Vector3 pos = 2;
+      case 2: {
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (18 & 0xFF)) {
           DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
                input, mutable_pos()));
         } else {
@@ -22474,15 +22497,10 @@ void Enemy::SerializeWithCachedSizes(
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32(1, this->id(), output);
   }
 
-  // int32 hp = 3;
-  if (this->hp() != 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32(3, this->hp(), output);
-  }
-
-  // .Proto.Vector3 pos = 4;
+  // .Proto.Vector3 pos = 2;
   if (this->has_pos()) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      4, _Internal::pos(this), output);
+      2, _Internal::pos(this), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -22503,16 +22521,11 @@ void Enemy::SerializeWithCachedSizes(
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(1, this->id(), target);
   }
 
-  // int32 hp = 3;
-  if (this->hp() != 0) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(3, this->hp(), target);
-  }
-
-  // .Proto.Vector3 pos = 4;
+  // .Proto.Vector3 pos = 2;
   if (this->has_pos()) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        4, _Internal::pos(this), target);
+        2, _Internal::pos(this), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -22536,7 +22549,7 @@ size_t Enemy::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // .Proto.Vector3 pos = 4;
+  // .Proto.Vector3 pos = 2;
   if (this->has_pos()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
@@ -22548,13 +22561,6 @@ size_t Enemy::ByteSizeLong() const {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
         this->id());
-  }
-
-  // int32 hp = 3;
-  if (this->hp() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->hp());
   }
 
   int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
@@ -22590,9 +22596,6 @@ void Enemy::MergeFrom(const Enemy& from) {
   if (from.id() != 0) {
     set_id(from.id());
   }
-  if (from.hp() != 0) {
-    set_hp(from.hp());
-  }
 }
 
 void Enemy::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
@@ -22618,7 +22621,6 @@ void Enemy::InternalSwap(Enemy* other) {
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(pos_, other->pos_);
   swap(id_, other->id_);
-  swap(hp_, other->hp_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata Enemy::GetMetadata() const {
@@ -22642,7 +22644,7 @@ EnemyList::EnemyList()
 EnemyList::EnemyList(const EnemyList& from)
   : ::PROTOBUF_NAMESPACE_ID::Message(),
       _internal_metadata_(nullptr),
-      enemy_(from.enemy_) {
+      enemies_(from.enemies_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   // @@protoc_insertion_point(copy_constructor:Proto.EnemyList)
 }
@@ -22674,7 +22676,7 @@ void EnemyList::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  enemy_.Clear();
+  enemies_.Clear();
   _internal_metadata_.Clear();
 }
 
@@ -22686,13 +22688,13 @@ const char* EnemyList::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
     CHK_(ptr);
     switch (tag >> 3) {
-      // repeated .Proto.Enemy enemy = 1;
+      // repeated .Proto.Enemy enemies = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
           ptr -= 1;
           do {
             ptr += 1;
-            ptr = ctx->ParseMessage(add_enemy(), ptr);
+            ptr = ctx->ParseMessage(add_enemies(), ptr);
             CHK_(ptr);
             if (!ctx->DataAvailable(ptr)) break;
           } while (::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::uint8>(ptr) == 10);
@@ -22728,11 +22730,11 @@ bool EnemyList::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // repeated .Proto.Enemy enemy = 1;
+      // repeated .Proto.Enemy enemies = 1;
       case 1: {
         if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (10 & 0xFF)) {
           DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-                input, add_enemy()));
+                input, add_enemies()));
         } else {
           goto handle_unusual;
         }
@@ -22766,12 +22768,12 @@ void EnemyList::SerializeWithCachedSizes(
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // repeated .Proto.Enemy enemy = 1;
+  // repeated .Proto.Enemy enemies = 1;
   for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->enemy_size()); i < n; i++) {
+      n = static_cast<unsigned int>(this->enemies_size()); i < n; i++) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
       1,
-      this->enemy(static_cast<int>(i)),
+      this->enemies(static_cast<int>(i)),
       output);
   }
 
@@ -22788,12 +22790,12 @@ void EnemyList::SerializeWithCachedSizes(
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // repeated .Proto.Enemy enemy = 1;
+  // repeated .Proto.Enemy enemies = 1;
   for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->enemy_size()); i < n; i++) {
+      n = static_cast<unsigned int>(this->enemies_size()); i < n; i++) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        1, this->enemy(static_cast<int>(i)), target);
+        1, this->enemies(static_cast<int>(i)), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -22817,14 +22819,14 @@ size_t EnemyList::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated .Proto.Enemy enemy = 1;
+  // repeated .Proto.Enemy enemies = 1;
   {
-    unsigned int count = static_cast<unsigned int>(this->enemy_size());
+    unsigned int count = static_cast<unsigned int>(this->enemies_size());
     total_size += 1UL * count;
     for (unsigned int i = 0; i < count; i++) {
       total_size +=
         ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-          this->enemy(static_cast<int>(i)));
+          this->enemies(static_cast<int>(i)));
     }
   }
 
@@ -22855,7 +22857,7 @@ void EnemyList::MergeFrom(const EnemyList& from) {
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  enemy_.MergeFrom(from.enemy_);
+  enemies_.MergeFrom(from.enemies_);
 }
 
 void EnemyList::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
@@ -22879,7 +22881,7 @@ bool EnemyList::IsInitialized() const {
 void EnemyList::InternalSwap(EnemyList* other) {
   using std::swap;
   _internal_metadata_.Swap(&other->_internal_metadata_);
-  CastToBase(&enemy_)->InternalSwap(CastToBase(&other->enemy_));
+  CastToBase(&enemies_)->InternalSwap(CastToBase(&other->enemies_));
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata EnemyList::GetMetadata() const {

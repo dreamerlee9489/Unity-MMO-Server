@@ -101,6 +101,9 @@
     <ClCompile Include="..\game\world_proxy_locator.cpp">
       <Filter>game\world\proxy</Filter>
     </ClCompile>
+    <ClCompile Include="..\space\ai\ai_component.cpp">
+      <Filter>space\ai</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="login">
@@ -193,8 +196,8 @@
     <Filter Include="space\system\move">
       <UniqueIdentifier>{a02cf34a-7c30-4d28-95de-72b3659b885c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="space\system\ai">
-      <UniqueIdentifier>{ae9e056a-bd8e-4210-905c-1f975d513c99}</UniqueIdentifier>
+    <Filter Include="space\ai">
+      <UniqueIdentifier>{21102a23-ebdc-4b8a-9549-5bfa81e56df5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -291,11 +294,26 @@
     <ClInclude Include="..\game\world_proxy_locator.h">
       <Filter>game\world\proxy</Filter>
     </ClInclude>
-    <ClInclude Include="ai_component.h">
-      <Filter>space\system\ai</Filter>
+    <ClInclude Include="..\space\ai\ai_component.h">
+      <Filter>space\ai</Filter>
     </ClInclude>
-    <ClInclude Include="ai_system.h">
-      <Filter>space\system\ai</Filter>
+    <ClInclude Include="..\space\ai\ai_state.h">
+      <Filter>space\ai</Filter>
+    </ClInclude>
+    <ClInclude Include="..\space\ai\ai_system.h">
+      <Filter>space\ai</Filter>
+    </ClInclude>
+    <ClInclude Include="..\space\ai\ai_enemy.h">
+      <Filter>space\ai</Filter>
+    </ClInclude>
+    <ClInclude Include="..\space\ai\idle.h">
+      <Filter>space\ai</Filter>
+    </ClInclude>
+    <ClInclude Include="..\space\ai\patrol.h">
+      <Filter>space\ai</Filter>
+    </ClInclude>
+    <ClInclude Include="..\space\ai\pursuit.h">
+      <Filter>space\ai</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

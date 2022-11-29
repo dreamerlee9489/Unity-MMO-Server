@@ -9997,10 +9997,11 @@ class Move :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kPositionFieldNumber = 2,
+    kPositionFieldNumber = 3,
     kPlayerSnFieldNumber = 1,
+    kEnemyIdFieldNumber = 2,
   };
-  // repeated .Proto.Vector3 position = 2;
+  // repeated .Proto.Vector3 position = 3;
   int position_size() const;
   void clear_position();
   ::Proto::Vector3* mutable_position(int index);
@@ -10016,6 +10017,11 @@ class Move :
   ::PROTOBUF_NAMESPACE_ID::uint64 player_sn() const;
   void set_player_sn(::PROTOBUF_NAMESPACE_ID::uint64 value);
 
+  // int32 enemy_id = 2;
+  void clear_enemy_id();
+  ::PROTOBUF_NAMESPACE_ID::int32 enemy_id() const;
+  void set_enemy_id(::PROTOBUF_NAMESPACE_ID::int32 value);
+
   // @@protoc_insertion_point(class_scope:Proto.Move)
  private:
   class _Internal;
@@ -10023,6 +10029,7 @@ class Move :
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
   ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::Vector3 > position_;
   ::PROTOBUF_NAMESPACE_ID::uint64 player_sn_;
+  ::PROTOBUF_NAMESPACE_ID::int32 enemy_id_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_msg_2eproto;
 };
@@ -10141,11 +10148,10 @@ class Enemy :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kPosFieldNumber = 4,
+    kPosFieldNumber = 2,
     kIdFieldNumber = 1,
-    kHpFieldNumber = 3,
   };
-  // .Proto.Vector3 pos = 4;
+  // .Proto.Vector3 pos = 2;
   bool has_pos() const;
   void clear_pos();
   const ::Proto::Vector3& pos() const;
@@ -10158,11 +10164,6 @@ class Enemy :
   ::PROTOBUF_NAMESPACE_ID::int32 id() const;
   void set_id(::PROTOBUF_NAMESPACE_ID::int32 value);
 
-  // int32 hp = 3;
-  void clear_hp();
-  ::PROTOBUF_NAMESPACE_ID::int32 hp() const;
-  void set_hp(::PROTOBUF_NAMESPACE_ID::int32 value);
-
   // @@protoc_insertion_point(class_scope:Proto.Enemy)
  private:
   class _Internal;
@@ -10170,7 +10171,6 @@ class Enemy :
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
   ::Proto::Vector3* pos_;
   ::PROTOBUF_NAMESPACE_ID::int32 id_;
-  ::PROTOBUF_NAMESPACE_ID::int32 hp_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_msg_2eproto;
 };
@@ -10289,25 +10289,25 @@ class EnemyList :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kEnemyFieldNumber = 1,
+    kEnemiesFieldNumber = 1,
   };
-  // repeated .Proto.Enemy enemy = 1;
-  int enemy_size() const;
-  void clear_enemy();
-  ::Proto::Enemy* mutable_enemy(int index);
+  // repeated .Proto.Enemy enemies = 1;
+  int enemies_size() const;
+  void clear_enemies();
+  ::Proto::Enemy* mutable_enemies(int index);
   ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::Enemy >*
-      mutable_enemy();
-  const ::Proto::Enemy& enemy(int index) const;
-  ::Proto::Enemy* add_enemy();
+      mutable_enemies();
+  const ::Proto::Enemy& enemies(int index) const;
+  ::Proto::Enemy* add_enemies();
   const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::Enemy >&
-      enemy() const;
+      enemies() const;
 
   // @@protoc_insertion_point(class_scope:Proto.EnemyList)
  private:
   class _Internal;
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::Enemy > enemy_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::Enemy > enemies_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_msg_2eproto;
 };
@@ -14219,7 +14219,21 @@ inline void Move::set_player_sn(::PROTOBUF_NAMESPACE_ID::uint64 value) {
   // @@protoc_insertion_point(field_set:Proto.Move.player_sn)
 }
 
-// repeated .Proto.Vector3 position = 2;
+// int32 enemy_id = 2;
+inline void Move::clear_enemy_id() {
+  enemy_id_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 Move::enemy_id() const {
+  // @@protoc_insertion_point(field_get:Proto.Move.enemy_id)
+  return enemy_id_;
+}
+inline void Move::set_enemy_id(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  enemy_id_ = value;
+  // @@protoc_insertion_point(field_set:Proto.Move.enemy_id)
+}
+
+// repeated .Proto.Vector3 position = 3;
 inline int Move::position_size() const {
   return position_.size();
 }
@@ -14264,21 +14278,7 @@ inline void Enemy::set_id(::PROTOBUF_NAMESPACE_ID::int32 value) {
   // @@protoc_insertion_point(field_set:Proto.Enemy.id)
 }
 
-// int32 hp = 3;
-inline void Enemy::clear_hp() {
-  hp_ = 0;
-}
-inline ::PROTOBUF_NAMESPACE_ID::int32 Enemy::hp() const {
-  // @@protoc_insertion_point(field_get:Proto.Enemy.hp)
-  return hp_;
-}
-inline void Enemy::set_hp(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  
-  hp_ = value;
-  // @@protoc_insertion_point(field_set:Proto.Enemy.hp)
-}
-
-// .Proto.Vector3 pos = 4;
+// .Proto.Vector3 pos = 2;
 inline bool Enemy::has_pos() const {
   return this != internal_default_instance() && pos_ != nullptr;
 }
@@ -14327,34 +14327,34 @@ inline void Enemy::set_allocated_pos(::Proto::Vector3* pos) {
 
 // EnemyList
 
-// repeated .Proto.Enemy enemy = 1;
-inline int EnemyList::enemy_size() const {
-  return enemy_.size();
+// repeated .Proto.Enemy enemies = 1;
+inline int EnemyList::enemies_size() const {
+  return enemies_.size();
 }
-inline void EnemyList::clear_enemy() {
-  enemy_.Clear();
+inline void EnemyList::clear_enemies() {
+  enemies_.Clear();
 }
-inline ::Proto::Enemy* EnemyList::mutable_enemy(int index) {
-  // @@protoc_insertion_point(field_mutable:Proto.EnemyList.enemy)
-  return enemy_.Mutable(index);
+inline ::Proto::Enemy* EnemyList::mutable_enemies(int index) {
+  // @@protoc_insertion_point(field_mutable:Proto.EnemyList.enemies)
+  return enemies_.Mutable(index);
 }
 inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::Enemy >*
-EnemyList::mutable_enemy() {
-  // @@protoc_insertion_point(field_mutable_list:Proto.EnemyList.enemy)
-  return &enemy_;
+EnemyList::mutable_enemies() {
+  // @@protoc_insertion_point(field_mutable_list:Proto.EnemyList.enemies)
+  return &enemies_;
 }
-inline const ::Proto::Enemy& EnemyList::enemy(int index) const {
-  // @@protoc_insertion_point(field_get:Proto.EnemyList.enemy)
-  return enemy_.Get(index);
+inline const ::Proto::Enemy& EnemyList::enemies(int index) const {
+  // @@protoc_insertion_point(field_get:Proto.EnemyList.enemies)
+  return enemies_.Get(index);
 }
-inline ::Proto::Enemy* EnemyList::add_enemy() {
-  // @@protoc_insertion_point(field_add:Proto.EnemyList.enemy)
-  return enemy_.Add();
+inline ::Proto::Enemy* EnemyList::add_enemies() {
+  // @@protoc_insertion_point(field_add:Proto.EnemyList.enemies)
+  return enemies_.Add();
 }
 inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::Enemy >&
-EnemyList::enemy() const {
-  // @@protoc_insertion_point(field_list:Proto.EnemyList.enemy)
-  return enemy_;
+EnemyList::enemies() const {
+  // @@protoc_insertion_point(field_list:Proto.EnemyList.enemies)
+  return enemies_;
 }
 
 #ifdef __GNUC__

@@ -5,7 +5,7 @@
 
 struct Vector3
 {
-	Vector3& operator+=(Vector3& other)
+	Vector3& operator+=(const Vector3& other)
 	{
 		this->X += other.X;
 		this->Y += other.Y;
@@ -13,6 +13,27 @@ struct Vector3
 		return *this;
 	}
 
+	Vector3& operator-=(const Vector3& other)
+	{
+		this->X -= other.X;
+		this->Y -= other.Y;
+		this->Z -= other.Z;
+		return *this;
+	}
+
+	friend Vector3 operator+(Vector3 lhs, const Vector3& rhs)
+	{
+		lhs += rhs;
+		return lhs;
+	}
+
+	friend Vector3 operator-(Vector3 lhs, const Vector3& rhs)
+	{
+		lhs -= rhs;
+		return lhs;
+	}
+
+	Vector3() { X = 0; Y = 0; Z = 0; }
 	Vector3(const float x, const float y, const float z) :X(x), Y(y), Z(z) {}
 
 	void ParserFromProto(Proto::Vector3 position);

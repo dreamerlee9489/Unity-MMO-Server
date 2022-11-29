@@ -409,15 +409,15 @@ message RoleDisAppear {
 
 message Move {
 	uint64 player_sn = 1;
-	repeated Vector3 position = 2;
+	int32 enemy_id = 2;
+	repeated Vector3 position = 3;
 }
 
 message Enemy {
 	int32 id = 1;
-	int32 hp = 3;
-	Vector3 pos = 4;
+	Vector3 pos = 2;
 }
 
 message EnemyList {
-	repeated Enemy enemy = 1;
+	repeated Enemy enemies = 1;
 }

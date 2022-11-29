@@ -1,19 +1,20 @@
-﻿#pragma once
+﻿#ifndef AI_SYSTEM
+#define AI_SYSTEM
 #include "libserver/system.h"
 #include "libserver/util_time.h"
 #include "libserver/component_collections.h"
 #include "libserver/entity_system.h"
-#include "../../libs/libplayer/enemy.h"
 #include "ai_component.h"
-#include <iostream>
+#include "ai_enemy.h"
 
 class AISystem : public ISystem<AISystem>
 {
+private:
+	timeutil::Time _lastTime;
+	ComponentCollections* _pCollections{ nullptr };
+
 public:
-	AISystem()
-	{
-		_lastTime = Global::GetInstance()->TimeTick;
-	}
+	AISystem() { _lastTime = Global::GetInstance()->TimeTick; }
 
 	void Update(EntitySystem* pEntities) override
 	{
@@ -32,13 +33,11 @@ public:
 			for (auto iter = pMap->begin(); iter != pMap->end(); ++iter)
 			{
 				AIComponent* pAIComponent = (AIComponent*)iter->second;
-				Enemy* pEnemy = pAIComponent->GetParent<Enemy>();
+				AIEnemy* pEnemy = pAIComponent->GetParent<AIEnemy>();
 				pAIComponent->Update(pEnemy);
 			}
 		}
 	}
-
-private:
-	timeutil::Time _lastTime;
-	ComponentCollections* _pCollections{ nullptr };
 };
+
+#endif // !AI_SYSTEM

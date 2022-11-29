@@ -183,6 +183,7 @@
     <ClCompile Include="..\login\player_component_account.cpp" />
     <ClCompile Include="..\login\player_component_onlineinlogin.cpp" />
     <ClCompile Include="..\login\redis_login.cpp" />
+    <ClCompile Include="..\space\ai\ai_component.cpp" />
     <ClCompile Include="..\space\console_cmd_world.cpp" />
     <ClCompile Include="..\space\move_component.cpp" />
     <ClCompile Include="..\space\move_system.cpp" />
@@ -217,6 +218,13 @@
     <ClInclude Include="..\login\player_component_account.h" />
     <ClInclude Include="..\login\player_component_onlineinlogin.h" />
     <ClInclude Include="..\login\redis_login.h" />
+    <ClInclude Include="..\space\ai\ai_component.h" />
+    <ClInclude Include="..\space\ai\ai_state.h" />
+    <ClInclude Include="..\space\ai\ai_system.h" />
+    <ClInclude Include="..\space\ai\ai_enemy.h" />
+    <ClInclude Include="..\space\ai\idle.h" />
+    <ClInclude Include="..\space\ai\patrol.h" />
+    <ClInclude Include="..\space\ai\pursuit.h" />
     <ClInclude Include="..\space\console_cmd_world.h" />
     <ClInclude Include="..\space\move_component.h" />
     <ClInclude Include="..\space\move_system.h" />
@@ -225,8 +233,6 @@
     <ClInclude Include="..\space\world_operator_component.h" />
     <ClInclude Include="..\space\world.h" />
     <ClInclude Include="..\space\world_gather.h" />
-    <ClInclude Include="ai_component.h" />
-    <ClInclude Include="ai_system.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
