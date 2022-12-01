@@ -138,12 +138,15 @@ enum MsgId : int {
   MI_CmdEfficiency = 20006,
   MI_Efficiency = 20007,
   S2C_EnemyList = 30001,
+  S2C_FsmChangeState = 30002,
+  C2S_PlayerSyncState = 30003,
+  S2C_PlayerSyncState = 30004,
   MsgId_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
   MsgId_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
 };
 bool MsgId_IsValid(int value);
 constexpr MsgId MsgId_MIN = None;
-constexpr MsgId MsgId_MAX = S2C_EnemyList;
+constexpr MsgId MsgId_MAX = S2C_PlayerSyncState;
 constexpr int MsgId_ARRAYSIZE = MsgId_MAX + 1;
 
 const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* MsgId_descriptor();

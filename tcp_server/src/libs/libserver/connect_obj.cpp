@@ -170,7 +170,7 @@ bool ConnectObj::Recv()
 			}
 
 			ThreadMgr::GetInstance()->DispatchPacket(pPacket);
-			LOG_DEBUG("ConnectObj::Recv msgid=" << pPacket->GetMsgId());
+			//LOG_DEBUG("ConnectObj::Recv msgid=" << pPacket->GetMsgId());
 		}
 	}
 
@@ -193,7 +193,7 @@ void ConnectObj::SendPacket(Packet* pPacket) const
 
 	_sendBuffer->AddPacket(pPacket);
 	DynamicPacketPool::GetInstance()->FreeObject(pPacket);
-	LOG_DEBUG("ConnectObj::Send msgid=" << pPacket->GetMsgId());
+	//LOG_DEBUG("ConnectObj::Send msgid=" << pPacket->GetMsgId());
 }
 
 bool ConnectObj::Send()

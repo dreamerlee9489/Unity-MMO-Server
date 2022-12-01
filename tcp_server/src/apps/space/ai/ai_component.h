@@ -6,6 +6,8 @@
 #include "ai_enemy.h"
 #include "ai_state.h"
 
+class AIEnemy;
+class AIState;
 class AIComponent :public Component<AIComponent>, public IAwakeFromPoolSystem<>
 {
 	timeutil::Time _lastTime;
@@ -13,40 +15,21 @@ class AIComponent :public Component<AIComponent>, public IAwakeFromPoolSystem<>
 	AIState* _currState = nullptr;
 
 public:
-	~AIComponent()
-	{
-		delete _currState;
-		_currState = nullptr;
-		std::cout << "~AIComponent()\n";
-	}
+	~AIComponent();
 
 	void Awake() override;
 
 	void BackToPool() override;
 
-	void Update(AIEnemy* pEnemy)
-	{
-		timeutil::Time curTime = Global::GetInstance()->TimeTick;
-		timeutil::Time timeElapsed = curTime - _lastTime;
-		if (_currState != nullptr)
-			_currState->Execute();
+	void Update(AIEnemy* pEnemy);
 
-		if (timeElapsed >= 10000)
-		{
-			_lastTime = curTime;
-			pEnemy->SetRandPos();
-		}
-	}
+	void ResetState();
 
-	void ChangeState(AIState* newState)
-	{
-		if (_prevState)
-			delete _prevState;
-		_prevState = _currState;
-		_currState->Exit();
-		_currState = newState;
-		_currState->Enter();
-	}
+	AIState* GetCurrState() { return _currState; }
+
+	void ChangeState(AIState* newState);
+
+	void SyncAIStateTimer();
 };
 
 #endif // !AI_COMPONENT

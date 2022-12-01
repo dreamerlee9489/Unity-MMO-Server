@@ -104,6 +104,24 @@
     <ClCompile Include="..\space\ai\ai_component.cpp">
       <Filter>space\ai</Filter>
     </ClCompile>
+    <ClCompile Include="..\space\ai\attack.cpp">
+      <Filter>space\ai</Filter>
+    </ClCompile>
+    <ClCompile Include="..\space\ai\idle.cpp">
+      <Filter>space\ai</Filter>
+    </ClCompile>
+    <ClCompile Include="..\space\ai\patrol.cpp">
+      <Filter>space\ai</Filter>
+    </ClCompile>
+    <ClCompile Include="..\space\ai\pursuit.cpp">
+      <Filter>space\ai</Filter>
+    </ClCompile>
+    <ClCompile Include="..\space\ai\ai_enemy.cpp">
+      <Filter>space\ai</Filter>
+    </ClCompile>
+    <ClCompile Include="..\space\ai\ai_system.cpp">
+      <Filter>space\ai</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="login">
@@ -313,6 +331,9 @@
       <Filter>space\ai</Filter>
     </ClInclude>
     <ClInclude Include="..\space\ai\pursuit.h">
+      <Filter>space\ai</Filter>
+    </ClInclude>
+    <ClInclude Include="..\space\ai\attack.h">
       <Filter>space\ai</Filter>
     </ClInclude>
   </ItemGroup>

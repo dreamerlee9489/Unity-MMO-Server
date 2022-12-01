@@ -140,5 +140,8 @@ enum MsgId {
 	MI_Efficiency		= 20007;
 
 	// AI
-	S2C_EnemyList = 30001;
+	S2C_EnemyList 		= 30001;
+	S2C_FsmChangeState	= 30002;
+	C2S_PlayerSyncState = 30003;
+	S2C_PlayerSyncState = 30004;
 }

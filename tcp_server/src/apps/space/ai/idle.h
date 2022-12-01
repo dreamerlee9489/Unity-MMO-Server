@@ -8,19 +8,20 @@ public:
 	Idle(AIEnemy* owner, Player* target = nullptr) : AIState(owner, target) {}
 	~Idle() = default;
 
-	void Enter()
-	{
-		LOG_DEBUG("idle enter: id=" << _owner->GetID());
-	}
+	void Enter() override;
 
-	void Execute()
-	{
-		LOG_DEBUG("idle exe: id=" << _owner->GetID());
-	}
+	void Execute() override;
 
-	void Exit()
+	void Exit() override;
+
+	void SyncState() override
 	{
-		LOG_DEBUG("idle exit: id=" << _owner->GetID());
+		Proto::FsmChangeState proto;
+		proto.set_state((int)AIStateType::Idle);
+		proto.set_code(0);
+		proto.set_enemy_id(_owner->GetID());
+		proto.set_player_sn(0);
+		_owner->GetWorld()->BroadcastPacket(Proto::MsgId::S2C_FsmChangeState, proto);
 	}
 };
 

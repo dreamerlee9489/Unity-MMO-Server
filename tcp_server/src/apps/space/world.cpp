@@ -7,7 +7,7 @@ void World::Awake(int worldId)
 	_playerManager = AddComponent<PlayerManagerComponent>();
 	AddTimer(0, 10, false, 0, BindFunP0(this, &World::SyncWorldToGather));
 	AddTimer(0, 1, false, 0, BindFunP0(this, &World::SyncAppearTimer));
-	AddTimer(0, 1, false, 0, BindFunP0(this, &World::SyncEnemiesTimer));
+	//AddTimer(0, 1, false, 0, BindFunP0(this, &World::SyncEnemiesTimer));
 
 	// message
 	auto pMsgSystem = GetSystemManager()->GetMessageSystem();
@@ -16,6 +16,7 @@ void World::Awake(int worldId)
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::G2S_RequestSyncPlayer, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleRequestSyncPlayer));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::G2S_RemovePlayer, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleG2SRemovePlayer));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_Move, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleMove));
+	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_PlayerSyncState, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandlePlayerState));
 
 	ResourceWorld* worldCfg = ResourceHelp::GetResourceManager()->Worlds->GetResource(_worldId);
 	std::vector<ResourceEnemy> _enemyCfgs = worldCfg->GetEnemies();
@@ -65,12 +66,19 @@ void World::HandleNetworkDisconnect(Packet* pPacket)
 			return;
 		}
 
+		for (auto enemy : _enemies)
+			if (enemy->GetComponent<AIComponent>()->GetCurrState()->GetTarget() == pPlayer)
+				enemy->GetComponent<AIComponent>()->ResetState();
+
 		Proto::SavePlayer protoSave;
 		protoSave.set_player_sn(pPlayer->GetPlayerSN());
 		pPlayer->SerializeToProto(protoSave.mutable_player());
 		MessageSystemHelp::SendPacket(Proto::MsgId::G2DB_SavePlayer, protoSave, APP_DB_MGR);
 
 		// 玩家掉线
+		Proto::RoleDisAppear protoDis;
+		protoDis.set_sn(pPlayer->GetPlayerSN());
+		BroadcastPacket(Proto::MsgId::S2C_RoleDisAppear, protoDis);
 		pPlayerMgr->RemovePlayerBySn(pTagPlayer->KeyInt64);
 	}
 	else
@@ -117,6 +125,18 @@ void World::SyncAppearTimer()
 
 	if (!_addPlayer.empty())
 	{
+		if (!_enemies.empty())
+		{
+			Proto::EnemyList protoList;
+			for (auto enemy : _enemies)
+			{
+				Proto::Enemy* protoEnemy = protoList.add_enemies();
+				protoEnemy->set_id(enemy->GetID());
+				enemy->GetCurrPos().SerializeToProto(protoEnemy->mutable_pos());
+			}
+			BroadcastPacket(Proto::MsgId::S2C_EnemyList, protoList, _addPlayer);
+		}
+
 		// 1.新增的数据，同步到全地图
 		Proto::RoleAppear protoNewAppear;
 		for (auto id : _addPlayer)
@@ -125,6 +145,7 @@ void World::SyncAppearTimer()
 			const auto pPlayer = pPlayerMgr->GetPlayerBySn(id);
 			if (pPlayer == nullptr)
 				continue;
+
 
 			CreateProtoRoleAppear(pPlayer, protoNewAppear);
 		}
@@ -161,7 +182,7 @@ void World::SyncEnemiesTimer()
 		{
 			Proto::Enemy* protoEnemy = protoList.add_enemies();
 			protoEnemy->set_id(enemy->GetID());
-			enemy->GetPos().SerializeToProto(protoEnemy->mutable_pos());
+			enemy->GetCurrPos().SerializeToProto(protoEnemy->mutable_pos());
 		}
 		BroadcastPacket(Proto::MsgId::S2C_EnemyList, protoList);
 	}
@@ -259,34 +280,30 @@ void World::HandleMove(Player* pPlayer, Packet* pPacket)
 {
 	auto proto = pPacket->ParseToProto<Proto::Move>();
 	const auto positions = proto.mutable_position();
-	int enemyId = proto.enemy_id();
+	proto.set_player_sn(pPlayer->GetPlayerSN());
 
-	if (enemyId == -1)
-	{
-		proto.set_player_sn(pPlayer->GetPlayerSN());
-		auto pMoveComponent = pPlayer->GetComponent<MoveComponent>();
-		if (pMoveComponent == nullptr)
-			pMoveComponent = pPlayer->AddComponent<MoveComponent>();
+	auto pMoveComponent = pPlayer->GetComponent<MoveComponent>();
+	if (pMoveComponent == nullptr)
+		pMoveComponent = pPlayer->AddComponent<MoveComponent>();
 
-		std::queue<Vector3> pos;
-		for (auto index = 0; index < proto.position_size(); index++)
-		{
-			Vector3 v3(0, 0, 0);
-			v3.ParserFromProto(positions->Get(index));
-			pos.push(v3);
-		}
-		const auto pComponentLastMap = pPlayer->GetComponent<PlayerComponentLastMap>();
-		pMoveComponent->Update(pos, pComponentLastMap->GetCur()->Position);
-	}
-	else
+	std::queue<Vector3> pos;
+	for (auto index = 0; index < proto.position_size(); index++)
 	{
-		if (proto.position_size() > 0)
-		{
-			Vector3 pos;
-			pos.ParserFromProto(positions->Get(proto.position_size() - 1));
-			_enemies[enemyId]->SetPos(pos);
-		}
+		Vector3 v3(0, 0, 0);
+		v3.ParserFromProto(positions->Get(index));
+		pos.push(v3);
 	}
+	const auto pComponentLastMap = pPlayer->GetComponent<PlayerComponentLastMap>();
+	pMoveComponent->Update(pos, pComponentLastMap->GetCur()->Position);
 
 	BroadcastPacket(Proto::MsgId::S2C_Move, proto);
+}
+
+void World::HandlePlayerState(Player* pPlayer, Packet* pPacket)
+{
+	Proto::PlayerSyncState proto = pPacket->ParseToProto<Proto::PlayerSyncState>();
+	proto.set_player_sn(pPlayer->GetPlayerSN());
+	const auto pComponentLastMap = pPlayer->GetComponent<PlayerComponentLastMap>();
+	pComponentLastMap->GetCur()->Position.ParserFromProto(proto.currpos());
+	BroadcastPacket(Proto::MsgId::S2C_PlayerSyncState, proto);
 }

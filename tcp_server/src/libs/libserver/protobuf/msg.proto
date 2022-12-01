@@ -409,7 +409,6 @@ message RoleDisAppear {
 
 message Move {
 	uint64 player_sn = 1;
-	int32 enemy_id = 2;
 	repeated Vector3 position = 3;
 }
 
@@ -420,4 +419,20 @@ message Enemy {
 
 message EnemyList {
 	repeated Enemy enemies = 1;
+}
+
+message FsmChangeState {
+	int32 state = 1;
+	int32 code = 2;
+	int32 enemy_id = 3;
+	uint64 player_sn = 4;
+}
+
+message PlayerSyncState {
+	int32 state = 1;
+	int32 code = 2;
+	Vector3 currPos = 3;
+	Vector3 target = 4;
+	uint64 player_sn = 5;
+	int32 enemy_id = 6;
 }

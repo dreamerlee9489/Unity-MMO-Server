@@ -36,9 +36,11 @@ struct Vector3
 	Vector3() { X = 0; Y = 0; Z = 0; }
 	Vector3(const float x, const float y, const float z) :X(x), Y(y), Z(z) {}
 
+	static float SqrDistance(Vector3& src, Vector3& dst);
 	void ParserFromProto(Proto::Vector3 position);
 	void SerializeToProto(Proto::Vector3* pProto) const;
-	double GetDistance(Vector3 point) const;
+	float GetDistance(Vector3 point) const;
+	Vector3 Normalize() const;
 
 	float X{ 0 };
 	float Y{ 0 };

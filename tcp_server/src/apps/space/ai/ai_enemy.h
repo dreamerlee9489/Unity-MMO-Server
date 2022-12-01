@@ -8,54 +8,50 @@
 class World;
 class AIEnemy : public Entity<AIEnemy>, public IAwakeFromPoolSystem<int, int, Vector3>
 {
-	std::default_random_engine _eng;
-	std::uniform_real_distribution<float> _dis = std::uniform_real_distribution<float>(-6.0, 6.0);
-	Vector3 _initPos;
-
-protected:
 	int _id = 0;
 	int _hp = 0;
-	Vector3 _pos;
+	float _speed = 0;
+	float _dist = 0;
+	Vector3 _initPos;
+	Vector3 _currPos;
+	Vector3 _nextPos;
 	World* _world;
 
 public:
+	const float WalkSpeed = 1.56f;
+	const float RunSpeed = 5.56f;
+	const float StopDist = 1.0f;
+	const float AttackDist = 3.0f;
+
+	void Awake(int id, int hp, Vector3 pos) override;
+
+	void BackToPool() override;
+
 	int GetID() const { return _id; }
+
 	int GetHP() const { return _hp; }
-	Vector3 GetPos() const { return _pos; }
+
+	float GetCurrSpeed() const { return _speed; }
+
+	float GetDistToNext() const { return _dist; }
+
+	Vector3 GetInitPos() const { return _initPos; }
+
+	Vector3 GetCurrPos() const { return _currPos; }
+
+	Vector3 GetNextPos() const { return _nextPos; }
+
 	World* GetWorld() const { return _world; }
 
-	void Awake(int id, int hp, Vector3 pos) override
-	{
-		_id = id;
-		_hp = hp;
-		_pos = pos;
-		_initPos = pos;
-		_eng = std::default_random_engine(id);
-		SetRandPos();
-	}
+	void SetWorld(World* const world) { _world = world; }
 
-	void BackToPool() override
-	{
-		_id = 0;
-		_hp = 0;
-		_pos = { 0, 0, 0 };
-	}
+	void SetSpeed(const float speed) { _speed = speed; }
 
-	void SetPos(Vector3& pos)
-	{
-		_pos.X = pos.X;
-		_pos.Y = pos.Y;
-		_pos.Z = pos.Z;
-	}
+	void SetNextPos(const Vector3& pos);
 
-	void SetRandPos()
-	{
-		float fx = _dis(_eng), fz = _dis(_eng);
-		_pos.X = _initPos.X + fx;
-		_pos.Z = _initPos.Z + fz;
-	}
+	void SetPatrolPoint(int index);
 
-	void SetWorld(World* world) { _world = world; }
+	void UpdatePos(uint64 timeElapsed);
 };
 
 #endif // !AIENEMY

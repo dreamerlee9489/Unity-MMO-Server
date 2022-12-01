@@ -184,6 +184,12 @@
     <ClCompile Include="..\login\player_component_onlineinlogin.cpp" />
     <ClCompile Include="..\login\redis_login.cpp" />
     <ClCompile Include="..\space\ai\ai_component.cpp" />
+    <ClCompile Include="..\space\ai\ai_enemy.cpp" />
+    <ClCompile Include="..\space\ai\ai_system.cpp" />
+    <ClCompile Include="..\space\ai\attack.cpp" />
+    <ClCompile Include="..\space\ai\idle.cpp" />
+    <ClCompile Include="..\space\ai\patrol.cpp" />
+    <ClCompile Include="..\space\ai\pursuit.cpp" />
     <ClCompile Include="..\space\console_cmd_world.cpp" />
     <ClCompile Include="..\space\move_component.cpp" />
     <ClCompile Include="..\space\move_system.cpp" />
@@ -222,6 +228,7 @@
     <ClInclude Include="..\space\ai\ai_state.h" />
     <ClInclude Include="..\space\ai\ai_system.h" />
     <ClInclude Include="..\space\ai\ai_enemy.h" />
+    <ClInclude Include="..\space\ai\attack.h" />
     <ClInclude Include="..\space\ai\idle.h" />
     <ClInclude Include="..\space\ai\patrol.h" />
     <ClInclude Include="..\space\ai\pursuit.h" />
