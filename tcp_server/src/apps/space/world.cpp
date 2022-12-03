@@ -1,4 +1,5 @@
 ﻿#include "world.h"
+#include "ai/ai_state.h"
 
 void World::Awake(int worldId)
 {
@@ -7,7 +8,6 @@ void World::Awake(int worldId)
 	_playerManager = AddComponent<PlayerManagerComponent>();
 	AddTimer(0, 10, false, 0, BindFunP0(this, &World::SyncWorldToGather));
 	AddTimer(0, 1, false, 0, BindFunP0(this, &World::SyncAppearTimer));
-	//AddTimer(0, 1, false, 0, BindFunP0(this, &World::SyncEnemiesTimer));
 
 	// message
 	auto pMsgSystem = GetSystemManager()->GetMessageSystem();
@@ -170,21 +170,6 @@ void World::SyncAppearTimer()
 			BroadcastPacket(Proto::MsgId::S2C_RoleAppear, protoOther, _addPlayer);
 
 		_addPlayer.clear();
-	}
-}
-
-void World::SyncEnemiesTimer()
-{
-	if (!_enemies.empty())
-	{
-		Proto::EnemyList protoList;
-		for (auto enemy : _enemies)
-		{
-			Proto::Enemy* protoEnemy = protoList.add_enemies();
-			protoEnemy->set_id(enemy->GetID());
-			enemy->GetCurrPos().SerializeToProto(protoEnemy->mutable_pos());
-		}
-		BroadcastPacket(Proto::MsgId::S2C_EnemyList, protoList);
 	}
 }
 

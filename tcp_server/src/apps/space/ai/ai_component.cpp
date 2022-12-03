@@ -10,14 +10,13 @@ AIComponent::~AIComponent()
 
 void AIComponent::Awake()
 {
-	_currState = new Patrol((AIEnemy*)GetParent());
+	_currState = new Idle((AIEnemy*)GetParent());
 	_lastTime = Global::GetInstance()->TimeTick;
-	AddTimer(0, 1, false, 0, BindFunP0(this, &AIComponent::SyncAIStateTimer));
+	//AddTimer(0, 1, false, 0, BindFunP0(this, &AIComponent::SyncAIStateTimer));
 }
 
 void AIComponent::BackToPool()
 {
-	std::cout << "AIComponent BackToPool()\n";
 }
 
 void AIComponent::Update(AIEnemy* pEnemy)

@@ -38,7 +38,6 @@ protected:
 private:
 	void SyncWorldToGather();
 	void SyncAppearTimer();
-	void SyncEnemiesTimer();
 
 	// 缓存1秒内增加或是删除的玩家
 	std::set<uint64> _addPlayer;

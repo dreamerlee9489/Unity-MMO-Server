@@ -17,6 +17,13 @@ void AIEnemy::BackToPool()
 	_nextPos = { 0, 0, 0 };
 }
 
+void AIEnemy::SetCurrPos(const Vector3& pos)
+{
+	_currPos.X = pos.X;
+	_currPos.Y = pos.Y;
+	_currPos.Z = pos.Z;
+}
+
 void AIEnemy::SetNextPos(const Vector3& pos)
 {
 	_nextPos.X = pos.X;
@@ -50,7 +57,7 @@ void AIEnemy::SetPatrolPoint(int index)
 void AIEnemy::UpdatePos(uint64 timeElapsed)
 {
 	_dist = _currPos.GetDistance(_nextPos);
-	if (_dist >= StopDist)
+	if (_dist > StopDist)
 	{
 		float deltaTime = timeElapsed * 1.0 / 1000;
 		Vector3 dir = (_nextPos - _currPos).Normalize();

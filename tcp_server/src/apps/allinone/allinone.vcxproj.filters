@@ -122,6 +122,9 @@
     <ClCompile Include="..\space\ai\ai_system.cpp">
       <Filter>space\ai</Filter>
     </ClCompile>
+    <ClCompile Include="..\space\ai\ai_state.cpp">
+      <Filter>space\ai</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="login">

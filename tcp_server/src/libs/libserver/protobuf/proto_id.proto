@@ -142,6 +142,9 @@ enum MsgId {
 	// AI
 	S2C_EnemyList 		= 30001;
 	S2C_FsmChangeState	= 30002;
-	C2S_PlayerSyncState = 30003;
-	S2C_PlayerSyncState = 30004;
+	C2S_FsmChangeState	= 30003;
+	C2S_PlayerSyncState = 30004;
+	S2C_PlayerSyncState = 30005;
+	C2S_Enemy			= 30006;
+	S2C_Enemy			= 30007;
 }

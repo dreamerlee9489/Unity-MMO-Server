@@ -3,6 +3,7 @@
 #include <map>
 #include <cmath>
 #include <random>
+#include <stdexcept>
 #include "libplayer/player_component_last_map.h"
 #include "libplayer/player.h"
 #include "ai_enemy.h"
@@ -17,17 +18,11 @@ class Player;
 class AIState
 {
 protected:
-	AIEnemy* _owner;
-	Player* _target;
+	AIEnemy* _owner = nullptr;
+	Player* _target = nullptr;
 	timeutil::Time _lastTime, _currTime, _timeElapsed;
 
-	AIState(AIEnemy* owner, Player* target = nullptr)
-		: _owner(owner), _target(target)
-	{
-		_lastTime = Global::GetInstance()->TimeTick;
-		_currTime = _lastTime;
-		_timeElapsed = 0;
-	}
+	AIState(AIEnemy* owner, Player* target = nullptr);
 
 public:
 	virtual ~AIState() = default;

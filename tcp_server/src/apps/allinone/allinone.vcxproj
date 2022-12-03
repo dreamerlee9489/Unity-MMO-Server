@@ -185,6 +185,7 @@
     <ClCompile Include="..\login\redis_login.cpp" />
     <ClCompile Include="..\space\ai\ai_component.cpp" />
     <ClCompile Include="..\space\ai\ai_enemy.cpp" />
+    <ClCompile Include="..\space\ai\ai_state.cpp" />
     <ClCompile Include="..\space\ai\ai_system.cpp" />
     <ClCompile Include="..\space\ai\attack.cpp" />
     <ClCompile Include="..\space\ai\idle.cpp" />

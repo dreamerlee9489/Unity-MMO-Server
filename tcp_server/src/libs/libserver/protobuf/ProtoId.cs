@@ -24,7 +24,7 @@ namespace Proto {
     static ProtoIdReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "Cg5wcm90b19pZC5wcm90bxIFUHJvdG8q4A8KBU1zZ0lkEggKBE5vbmUQABIV",
+            "Cg5wcm90b19pZC5wcm90bxIFUHJvdG8qnBAKBU1zZ0lkEggKBE5vbmUQABIV",
             "ChFNSV9OZXR3b3JrQ29ubmVjdBABEhcKE01JX05ldHdvcmtDb25uZWN0ZWQQ",
             "AhIUChBNSV9OZXR3b3JrTGlzdGVuEAMSFwoTTUlfTmV0d29ya0xpc3Rlbktl",
             "eRAEEhgKFE1JX05ldHdvcmtEaXNjb25uZWN0EAoSGgoWTUlfTmV0d29ya0Rp",
@@ -68,8 +68,9 @@ namespace Proto {
             "cmxkUHJveHkQo5wBEhEKC01JX0NtZFdvcmxkEKScARISCgxNSV9DbWRDcmVh",
             "dGUQpZwBEhYKEE1JX0NtZEVmZmljaWVuY3kQppwBEhMKDU1JX0VmZmljaWVu",
             "Y3kQp5wBEhMKDVMyQ19FbmVteUxpc3QQseoBEhgKElMyQ19Gc21DaGFuZ2VT",
-            "dGF0ZRCy6gESGQoTQzJTX1BsYXllclN5bmNTdGF0ZRCz6gESGQoTUzJDX1Bs",
-            "YXllclN5bmNTdGF0ZRC06gFiBnByb3RvMw=="));
+            "dGF0ZRCy6gESGAoSQzJTX0ZzbUNoYW5nZVN0YXRlELPqARIZChNDMlNfUGxh",
+            "eWVyU3luY1N0YXRlELTqARIZChNTMkNfUGxheWVyU3luY1N0YXRlELXqARIP",
+            "CglDMlNfRW5lbXkQtuoBEg8KCVMyQ19FbmVteRC36gFiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Proto.MsgId), }, null, null));
@@ -358,8 +359,11 @@ namespace Proto {
     /// </summary>
     [pbr::OriginalName("S2C_EnemyList")] S2CEnemyList = 30001,
     [pbr::OriginalName("S2C_FsmChangeState")] S2CFsmChangeState = 30002,
-    [pbr::OriginalName("C2S_PlayerSyncState")] C2SPlayerSyncState = 30003,
-    [pbr::OriginalName("S2C_PlayerSyncState")] S2CPlayerSyncState = 30004,
+    [pbr::OriginalName("C2S_FsmChangeState")] C2SFsmChangeState = 30003,
+    [pbr::OriginalName("C2S_PlayerSyncState")] C2SPlayerSyncState = 30004,
+    [pbr::OriginalName("S2C_PlayerSyncState")] S2CPlayerSyncState = 30005,
+    [pbr::OriginalName("C2S_Enemy")] C2SEnemy = 30006,
+    [pbr::OriginalName("S2C_Enemy")] S2CEnemy = 30007,
   }
 
   #endregion
