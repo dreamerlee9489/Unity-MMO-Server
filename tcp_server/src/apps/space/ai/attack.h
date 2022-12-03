@@ -1,13 +1,13 @@
 ﻿#ifndef AI_ATTACK
 #define AI_ATTACK
-#include "ai_state.h"
+#include "fsm_state.h"
 
-class Attack : public AIState
+class Attack : public FsmState
 {
 	PlayerComponentLastMap* _lastMap = nullptr;
 
 public:
-	Attack(AIEnemy* owner, Player* target = nullptr) : AIState(owner, target) {}
+	Attack(AIEnemy* owner, Player* target = nullptr);
 
 	~Attack() = default;
 
@@ -17,6 +17,8 @@ public:
 
 	void Exit() override;
 
-	void SyncState() override;
+	void BroadcastState() override;
+
+	void SendState(Player* pPlayer) override;
 };
 #endif // !AI_ATTACK

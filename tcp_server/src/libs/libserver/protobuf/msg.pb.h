@@ -49,7 +49,7 @@ struct TableStruct_msg_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxillaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[68]
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[69]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
@@ -132,9 +132,9 @@ extern EnemyListDefaultTypeInternal _EnemyList_default_instance_;
 class EnterWorld;
 class EnterWorldDefaultTypeInternal;
 extern EnterWorldDefaultTypeInternal _EnterWorld_default_instance_;
-class FsmChangeState;
-class FsmChangeStateDefaultTypeInternal;
-extern FsmChangeStateDefaultTypeInternal _FsmChangeState_default_instance_;
+class FsmSyncState;
+class FsmSyncStateDefaultTypeInternal;
+extern FsmSyncStateDefaultTypeInternal _FsmSyncState_default_instance_;
 class GameToken;
 class GameTokenDefaultTypeInternal;
 extern GameTokenDefaultTypeInternal _GameToken_default_instance_;
@@ -204,6 +204,9 @@ extern RemoveComponentDefaultTypeInternal _RemoveComponent_default_instance_;
 class RemovePlayer;
 class RemovePlayerDefaultTypeInternal;
 extern RemovePlayerDefaultTypeInternal _RemovePlayer_default_instance_;
+class RequestSyncEnemies;
+class RequestSyncEnemiesDefaultTypeInternal;
+extern RequestSyncEnemiesDefaultTypeInternal _RequestSyncEnemies_default_instance_;
 class RequestSyncPlayer;
 class RequestSyncPlayerDefaultTypeInternal;
 extern RequestSyncPlayerDefaultTypeInternal _RequestSyncPlayer_default_instance_;
@@ -288,7 +291,7 @@ template<> ::Proto::Efficiency* Arena::CreateMaybeMessage<::Proto::Efficiency>(A
 template<> ::Proto::Enemy* Arena::CreateMaybeMessage<::Proto::Enemy>(Arena*);
 template<> ::Proto::EnemyList* Arena::CreateMaybeMessage<::Proto::EnemyList>(Arena*);
 template<> ::Proto::EnterWorld* Arena::CreateMaybeMessage<::Proto::EnterWorld>(Arena*);
-template<> ::Proto::FsmChangeState* Arena::CreateMaybeMessage<::Proto::FsmChangeState>(Arena*);
+template<> ::Proto::FsmSyncState* Arena::CreateMaybeMessage<::Proto::FsmSyncState>(Arena*);
 template<> ::Proto::GameToken* Arena::CreateMaybeMessage<::Proto::GameToken>(Arena*);
 template<> ::Proto::GameTokenToRedis* Arena::CreateMaybeMessage<::Proto::GameTokenToRedis>(Arena*);
 template<> ::Proto::GameTokenToRedisRs* Arena::CreateMaybeMessage<::Proto::GameTokenToRedisRs>(Arena*);
@@ -312,6 +315,7 @@ template<> ::Proto::QueryWorld* Arena::CreateMaybeMessage<::Proto::QueryWorld>(A
 template<> ::Proto::QueryWorldRs* Arena::CreateMaybeMessage<::Proto::QueryWorldRs>(Arena*);
 template<> ::Proto::RemoveComponent* Arena::CreateMaybeMessage<::Proto::RemoveComponent>(Arena*);
 template<> ::Proto::RemovePlayer* Arena::CreateMaybeMessage<::Proto::RemovePlayer>(Arena*);
+template<> ::Proto::RequestSyncEnemies* Arena::CreateMaybeMessage<::Proto::RequestSyncEnemies>(Arena*);
 template<> ::Proto::RequestSyncPlayer* Arena::CreateMaybeMessage<::Proto::RequestSyncPlayer>(Arena*);
 template<> ::Proto::RequestWorld* Arena::CreateMaybeMessage<::Proto::RequestWorld>(Arena*);
 template<> ::Proto::RobotCreate* Arena::CreateMaybeMessage<::Proto::RobotCreate>(Arena*);
@@ -10314,23 +10318,23 @@ class EnemyList :
 };
 // -------------------------------------------------------------------
 
-class FsmChangeState :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Proto.FsmChangeState) */ {
+class FsmSyncState :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Proto.FsmSyncState) */ {
  public:
-  FsmChangeState();
-  virtual ~FsmChangeState();
+  FsmSyncState();
+  virtual ~FsmSyncState();
 
-  FsmChangeState(const FsmChangeState& from);
-  FsmChangeState(FsmChangeState&& from) noexcept
-    : FsmChangeState() {
+  FsmSyncState(const FsmSyncState& from);
+  FsmSyncState(FsmSyncState&& from) noexcept
+    : FsmSyncState() {
     *this = ::std::move(from);
   }
 
-  inline FsmChangeState& operator=(const FsmChangeState& from) {
+  inline FsmSyncState& operator=(const FsmSyncState& from) {
     CopyFrom(from);
     return *this;
   }
-  inline FsmChangeState& operator=(FsmChangeState&& from) noexcept {
+  inline FsmSyncState& operator=(FsmSyncState&& from) noexcept {
     if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
       if (this != &from) InternalSwap(&from);
     } else {
@@ -10348,37 +10352,37 @@ class FsmChangeState :
   static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
     return GetMetadataStatic().reflection;
   }
-  static const FsmChangeState& default_instance();
+  static const FsmSyncState& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const FsmChangeState* internal_default_instance() {
-    return reinterpret_cast<const FsmChangeState*>(
-               &_FsmChangeState_default_instance_);
+  static inline const FsmSyncState* internal_default_instance() {
+    return reinterpret_cast<const FsmSyncState*>(
+               &_FsmSyncState_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
     66;
 
-  friend void swap(FsmChangeState& a, FsmChangeState& b) {
+  friend void swap(FsmSyncState& a, FsmSyncState& b) {
     a.Swap(&b);
   }
-  inline void Swap(FsmChangeState* other) {
+  inline void Swap(FsmSyncState* other) {
     if (other == this) return;
     InternalSwap(other);
   }
 
   // implements Message ----------------------------------------------
 
-  inline FsmChangeState* New() const final {
-    return CreateMaybeMessage<FsmChangeState>(nullptr);
+  inline FsmSyncState* New() const final {
+    return CreateMaybeMessage<FsmSyncState>(nullptr);
   }
 
-  FsmChangeState* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
-    return CreateMaybeMessage<FsmChangeState>(arena);
+  FsmSyncState* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<FsmSyncState>(arena);
   }
   void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
   void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-  void CopyFrom(const FsmChangeState& from);
-  void MergeFrom(const FsmChangeState& from);
+  void CopyFrom(const FsmSyncState& from);
+  void MergeFrom(const FsmSyncState& from);
   PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
   bool IsInitialized() const final;
 
@@ -10399,10 +10403,10 @@ class FsmChangeState :
   inline void SharedCtor();
   inline void SharedDtor();
   void SetCachedSize(int size) const final;
-  void InternalSwap(FsmChangeState* other);
+  void InternalSwap(FsmSyncState* other);
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "Proto.FsmChangeState";
+    return "Proto.FsmSyncState";
   }
   private:
   inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
@@ -10427,11 +10431,29 @@ class FsmChangeState :
   // accessors -------------------------------------------------------
 
   enum : int {
+    kCurPosFieldNumber = 3,
+    kNxtPosFieldNumber = 4,
     kStateFieldNumber = 1,
     kCodeFieldNumber = 2,
-    kPlayerSnFieldNumber = 4,
-    kEnemyIdFieldNumber = 3,
+    kPlayerSnFieldNumber = 6,
+    kEnemyIdFieldNumber = 5,
   };
+  // .Proto.Vector3 curPos = 3;
+  bool has_curpos() const;
+  void clear_curpos();
+  const ::Proto::Vector3& curpos() const;
+  ::Proto::Vector3* release_curpos();
+  ::Proto::Vector3* mutable_curpos();
+  void set_allocated_curpos(::Proto::Vector3* curpos);
+
+  // .Proto.Vector3 nxtPos = 4;
+  bool has_nxtpos() const;
+  void clear_nxtpos();
+  const ::Proto::Vector3& nxtpos() const;
+  ::Proto::Vector3* release_nxtpos();
+  ::Proto::Vector3* mutable_nxtpos();
+  void set_allocated_nxtpos(::Proto::Vector3* nxtpos);
+
   // int32 state = 1;
   void clear_state();
   ::PROTOBUF_NAMESPACE_ID::int32 state() const;
@@ -10442,21 +10464,23 @@ class FsmChangeState :
   ::PROTOBUF_NAMESPACE_ID::int32 code() const;
   void set_code(::PROTOBUF_NAMESPACE_ID::int32 value);
 
-  // uint64 player_sn = 4;
+  // uint64 player_sn = 6;
   void clear_player_sn();
   ::PROTOBUF_NAMESPACE_ID::uint64 player_sn() const;
   void set_player_sn(::PROTOBUF_NAMESPACE_ID::uint64 value);
 
-  // int32 enemy_id = 3;
+  // int32 enemy_id = 5;
   void clear_enemy_id();
   ::PROTOBUF_NAMESPACE_ID::int32 enemy_id() const;
   void set_enemy_id(::PROTOBUF_NAMESPACE_ID::int32 value);
 
-  // @@protoc_insertion_point(class_scope:Proto.FsmChangeState)
+  // @@protoc_insertion_point(class_scope:Proto.FsmSyncState)
  private:
   class _Internal;
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
+  ::Proto::Vector3* curpos_;
+  ::Proto::Vector3* nxtpos_;
   ::PROTOBUF_NAMESPACE_ID::int32 state_;
   ::PROTOBUF_NAMESPACE_ID::int32 code_;
   ::PROTOBUF_NAMESPACE_ID::uint64 player_sn_;
@@ -10579,28 +10603,28 @@ class PlayerSyncState :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kCurrPosFieldNumber = 3,
-    kTargetFieldNumber = 4,
+    kCurPosFieldNumber = 3,
+    kHitPosFieldNumber = 4,
     kStateFieldNumber = 1,
     kCodeFieldNumber = 2,
     kPlayerSnFieldNumber = 5,
     kEnemyIdFieldNumber = 6,
   };
-  // .Proto.Vector3 currPos = 3;
-  bool has_currpos() const;
-  void clear_currpos();
-  const ::Proto::Vector3& currpos() const;
-  ::Proto::Vector3* release_currpos();
-  ::Proto::Vector3* mutable_currpos();
-  void set_allocated_currpos(::Proto::Vector3* currpos);
+  // .Proto.Vector3 curPos = 3;
+  bool has_curpos() const;
+  void clear_curpos();
+  const ::Proto::Vector3& curpos() const;
+  ::Proto::Vector3* release_curpos();
+  ::Proto::Vector3* mutable_curpos();
+  void set_allocated_curpos(::Proto::Vector3* curpos);
 
-  // .Proto.Vector3 target = 4;
-  bool has_target() const;
-  void clear_target();
-  const ::Proto::Vector3& target() const;
-  ::Proto::Vector3* release_target();
-  ::Proto::Vector3* mutable_target();
-  void set_allocated_target(::Proto::Vector3* target);
+  // .Proto.Vector3 hitPos = 4;
+  bool has_hitpos() const;
+  void clear_hitpos();
+  const ::Proto::Vector3& hitpos() const;
+  ::Proto::Vector3* release_hitpos();
+  ::Proto::Vector3* mutable_hitpos();
+  void set_allocated_hitpos(::Proto::Vector3* hitpos);
 
   // int32 state = 1;
   void clear_state();
@@ -10627,12 +10651,143 @@ class PlayerSyncState :
   class _Internal;
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
-  ::Proto::Vector3* currpos_;
-  ::Proto::Vector3* target_;
+  ::Proto::Vector3* curpos_;
+  ::Proto::Vector3* hitpos_;
   ::PROTOBUF_NAMESPACE_ID::int32 state_;
   ::PROTOBUF_NAMESPACE_ID::int32 code_;
   ::PROTOBUF_NAMESPACE_ID::uint64 player_sn_;
   ::PROTOBUF_NAMESPACE_ID::int32 enemy_id_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_msg_2eproto;
+};
+// -------------------------------------------------------------------
+
+class RequestSyncEnemies :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Proto.RequestSyncEnemies) */ {
+ public:
+  RequestSyncEnemies();
+  virtual ~RequestSyncEnemies();
+
+  RequestSyncEnemies(const RequestSyncEnemies& from);
+  RequestSyncEnemies(RequestSyncEnemies&& from) noexcept
+    : RequestSyncEnemies() {
+    *this = ::std::move(from);
+  }
+
+  inline RequestSyncEnemies& operator=(const RequestSyncEnemies& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline RequestSyncEnemies& operator=(RequestSyncEnemies&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const RequestSyncEnemies& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const RequestSyncEnemies* internal_default_instance() {
+    return reinterpret_cast<const RequestSyncEnemies*>(
+               &_RequestSyncEnemies_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    68;
+
+  friend void swap(RequestSyncEnemies& a, RequestSyncEnemies& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(RequestSyncEnemies* other) {
+    if (other == this) return;
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline RequestSyncEnemies* New() const final {
+    return CreateMaybeMessage<RequestSyncEnemies>(nullptr);
+  }
+
+  RequestSyncEnemies* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<RequestSyncEnemies>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const RequestSyncEnemies& from);
+  void MergeFrom(const RequestSyncEnemies& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  #else
+  bool MergePartialFromCodedStream(
+      ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) final;
+  #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  void SerializeWithCachedSizes(
+      ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(RequestSyncEnemies* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "Proto.RequestSyncEnemies";
+  }
+  private:
+  inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_msg_2eproto);
+    return ::descriptor_table_msg_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kPlayerSnFieldNumber = 1,
+  };
+  // uint64 player_sn = 1;
+  void clear_player_sn();
+  ::PROTOBUF_NAMESPACE_ID::uint64 player_sn() const;
+  void set_player_sn(::PROTOBUF_NAMESPACE_ID::uint64 value);
+
+  // @@protoc_insertion_point(class_scope:Proto.RequestSyncEnemies)
+ private:
+  class _Internal;
+
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::uint64 player_sn_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_msg_2eproto;
 };
@@ -14670,62 +14825,152 @@ EnemyList::enemies() const {
 
 // -------------------------------------------------------------------
 
-// FsmChangeState
+// FsmSyncState
 
 // int32 state = 1;
-inline void FsmChangeState::clear_state() {
+inline void FsmSyncState::clear_state() {
   state_ = 0;
 }
-inline ::PROTOBUF_NAMESPACE_ID::int32 FsmChangeState::state() const {
-  // @@protoc_insertion_point(field_get:Proto.FsmChangeState.state)
+inline ::PROTOBUF_NAMESPACE_ID::int32 FsmSyncState::state() const {
+  // @@protoc_insertion_point(field_get:Proto.FsmSyncState.state)
   return state_;
 }
-inline void FsmChangeState::set_state(::PROTOBUF_NAMESPACE_ID::int32 value) {
+inline void FsmSyncState::set_state(::PROTOBUF_NAMESPACE_ID::int32 value) {
   
   state_ = value;
-  // @@protoc_insertion_point(field_set:Proto.FsmChangeState.state)
+  // @@protoc_insertion_point(field_set:Proto.FsmSyncState.state)
 }
 
 // int32 code = 2;
-inline void FsmChangeState::clear_code() {
+inline void FsmSyncState::clear_code() {
   code_ = 0;
 }
-inline ::PROTOBUF_NAMESPACE_ID::int32 FsmChangeState::code() const {
-  // @@protoc_insertion_point(field_get:Proto.FsmChangeState.code)
+inline ::PROTOBUF_NAMESPACE_ID::int32 FsmSyncState::code() const {
+  // @@protoc_insertion_point(field_get:Proto.FsmSyncState.code)
   return code_;
 }
-inline void FsmChangeState::set_code(::PROTOBUF_NAMESPACE_ID::int32 value) {
+inline void FsmSyncState::set_code(::PROTOBUF_NAMESPACE_ID::int32 value) {
   
   code_ = value;
-  // @@protoc_insertion_point(field_set:Proto.FsmChangeState.code)
+  // @@protoc_insertion_point(field_set:Proto.FsmSyncState.code)
 }
 
-// int32 enemy_id = 3;
-inline void FsmChangeState::clear_enemy_id() {
+// .Proto.Vector3 curPos = 3;
+inline bool FsmSyncState::has_curpos() const {
+  return this != internal_default_instance() && curpos_ != nullptr;
+}
+inline const ::Proto::Vector3& FsmSyncState::curpos() const {
+  const ::Proto::Vector3* p = curpos_;
+  // @@protoc_insertion_point(field_get:Proto.FsmSyncState.curPos)
+  return p != nullptr ? *p : *reinterpret_cast<const ::Proto::Vector3*>(
+      &::Proto::_Vector3_default_instance_);
+}
+inline ::Proto::Vector3* FsmSyncState::release_curpos() {
+  // @@protoc_insertion_point(field_release:Proto.FsmSyncState.curPos)
+  
+  ::Proto::Vector3* temp = curpos_;
+  curpos_ = nullptr;
+  return temp;
+}
+inline ::Proto::Vector3* FsmSyncState::mutable_curpos() {
+  
+  if (curpos_ == nullptr) {
+    auto* p = CreateMaybeMessage<::Proto::Vector3>(GetArenaNoVirtual());
+    curpos_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:Proto.FsmSyncState.curPos)
+  return curpos_;
+}
+inline void FsmSyncState::set_allocated_curpos(::Proto::Vector3* curpos) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == nullptr) {
+    delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(curpos_);
+  }
+  if (curpos) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena = nullptr;
+    if (message_arena != submessage_arena) {
+      curpos = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, curpos, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  curpos_ = curpos;
+  // @@protoc_insertion_point(field_set_allocated:Proto.FsmSyncState.curPos)
+}
+
+// .Proto.Vector3 nxtPos = 4;
+inline bool FsmSyncState::has_nxtpos() const {
+  return this != internal_default_instance() && nxtpos_ != nullptr;
+}
+inline const ::Proto::Vector3& FsmSyncState::nxtpos() const {
+  const ::Proto::Vector3* p = nxtpos_;
+  // @@protoc_insertion_point(field_get:Proto.FsmSyncState.nxtPos)
+  return p != nullptr ? *p : *reinterpret_cast<const ::Proto::Vector3*>(
+      &::Proto::_Vector3_default_instance_);
+}
+inline ::Proto::Vector3* FsmSyncState::release_nxtpos() {
+  // @@protoc_insertion_point(field_release:Proto.FsmSyncState.nxtPos)
+  
+  ::Proto::Vector3* temp = nxtpos_;
+  nxtpos_ = nullptr;
+  return temp;
+}
+inline ::Proto::Vector3* FsmSyncState::mutable_nxtpos() {
+  
+  if (nxtpos_ == nullptr) {
+    auto* p = CreateMaybeMessage<::Proto::Vector3>(GetArenaNoVirtual());
+    nxtpos_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:Proto.FsmSyncState.nxtPos)
+  return nxtpos_;
+}
+inline void FsmSyncState::set_allocated_nxtpos(::Proto::Vector3* nxtpos) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == nullptr) {
+    delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(nxtpos_);
+  }
+  if (nxtpos) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena = nullptr;
+    if (message_arena != submessage_arena) {
+      nxtpos = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, nxtpos, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  nxtpos_ = nxtpos;
+  // @@protoc_insertion_point(field_set_allocated:Proto.FsmSyncState.nxtPos)
+}
+
+// int32 enemy_id = 5;
+inline void FsmSyncState::clear_enemy_id() {
   enemy_id_ = 0;
 }
-inline ::PROTOBUF_NAMESPACE_ID::int32 FsmChangeState::enemy_id() const {
-  // @@protoc_insertion_point(field_get:Proto.FsmChangeState.enemy_id)
+inline ::PROTOBUF_NAMESPACE_ID::int32 FsmSyncState::enemy_id() const {
+  // @@protoc_insertion_point(field_get:Proto.FsmSyncState.enemy_id)
   return enemy_id_;
 }
-inline void FsmChangeState::set_enemy_id(::PROTOBUF_NAMESPACE_ID::int32 value) {
+inline void FsmSyncState::set_enemy_id(::PROTOBUF_NAMESPACE_ID::int32 value) {
   
   enemy_id_ = value;
-  // @@protoc_insertion_point(field_set:Proto.FsmChangeState.enemy_id)
+  // @@protoc_insertion_point(field_set:Proto.FsmSyncState.enemy_id)
 }
 
-// uint64 player_sn = 4;
-inline void FsmChangeState::clear_player_sn() {
+// uint64 player_sn = 6;
+inline void FsmSyncState::clear_player_sn() {
   player_sn_ = PROTOBUF_ULONGLONG(0);
 }
-inline ::PROTOBUF_NAMESPACE_ID::uint64 FsmChangeState::player_sn() const {
-  // @@protoc_insertion_point(field_get:Proto.FsmChangeState.player_sn)
+inline ::PROTOBUF_NAMESPACE_ID::uint64 FsmSyncState::player_sn() const {
+  // @@protoc_insertion_point(field_get:Proto.FsmSyncState.player_sn)
   return player_sn_;
 }
-inline void FsmChangeState::set_player_sn(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+inline void FsmSyncState::set_player_sn(::PROTOBUF_NAMESPACE_ID::uint64 value) {
   
   player_sn_ = value;
-  // @@protoc_insertion_point(field_set:Proto.FsmChangeState.player_sn)
+  // @@protoc_insertion_point(field_set:Proto.FsmSyncState.player_sn)
 }
 
 // -------------------------------------------------------------------
@@ -14760,94 +15005,94 @@ inline void PlayerSyncState::set_code(::PROTOBUF_NAMESPACE_ID::int32 value) {
   // @@protoc_insertion_point(field_set:Proto.PlayerSyncState.code)
 }
 
-// .Proto.Vector3 currPos = 3;
-inline bool PlayerSyncState::has_currpos() const {
-  return this != internal_default_instance() && currpos_ != nullptr;
+// .Proto.Vector3 curPos = 3;
+inline bool PlayerSyncState::has_curpos() const {
+  return this != internal_default_instance() && curpos_ != nullptr;
 }
-inline const ::Proto::Vector3& PlayerSyncState::currpos() const {
-  const ::Proto::Vector3* p = currpos_;
-  // @@protoc_insertion_point(field_get:Proto.PlayerSyncState.currPos)
+inline const ::Proto::Vector3& PlayerSyncState::curpos() const {
+  const ::Proto::Vector3* p = curpos_;
+  // @@protoc_insertion_point(field_get:Proto.PlayerSyncState.curPos)
   return p != nullptr ? *p : *reinterpret_cast<const ::Proto::Vector3*>(
       &::Proto::_Vector3_default_instance_);
 }
-inline ::Proto::Vector3* PlayerSyncState::release_currpos() {
-  // @@protoc_insertion_point(field_release:Proto.PlayerSyncState.currPos)
+inline ::Proto::Vector3* PlayerSyncState::release_curpos() {
+  // @@protoc_insertion_point(field_release:Proto.PlayerSyncState.curPos)
   
-  ::Proto::Vector3* temp = currpos_;
-  currpos_ = nullptr;
+  ::Proto::Vector3* temp = curpos_;
+  curpos_ = nullptr;
   return temp;
 }
-inline ::Proto::Vector3* PlayerSyncState::mutable_currpos() {
+inline ::Proto::Vector3* PlayerSyncState::mutable_curpos() {
   
-  if (currpos_ == nullptr) {
+  if (curpos_ == nullptr) {
     auto* p = CreateMaybeMessage<::Proto::Vector3>(GetArenaNoVirtual());
-    currpos_ = p;
+    curpos_ = p;
   }
-  // @@protoc_insertion_point(field_mutable:Proto.PlayerSyncState.currPos)
-  return currpos_;
+  // @@protoc_insertion_point(field_mutable:Proto.PlayerSyncState.curPos)
+  return curpos_;
 }
-inline void PlayerSyncState::set_allocated_currpos(::Proto::Vector3* currpos) {
+inline void PlayerSyncState::set_allocated_curpos(::Proto::Vector3* curpos) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaNoVirtual();
   if (message_arena == nullptr) {
-    delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(currpos_);
+    delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(curpos_);
   }
-  if (currpos) {
+  if (curpos) {
     ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena = nullptr;
     if (message_arena != submessage_arena) {
-      currpos = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
-          message_arena, currpos, submessage_arena);
+      curpos = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, curpos, submessage_arena);
     }
     
   } else {
     
   }
-  currpos_ = currpos;
-  // @@protoc_insertion_point(field_set_allocated:Proto.PlayerSyncState.currPos)
+  curpos_ = curpos;
+  // @@protoc_insertion_point(field_set_allocated:Proto.PlayerSyncState.curPos)
 }
 
-// .Proto.Vector3 target = 4;
-inline bool PlayerSyncState::has_target() const {
-  return this != internal_default_instance() && target_ != nullptr;
+// .Proto.Vector3 hitPos = 4;
+inline bool PlayerSyncState::has_hitpos() const {
+  return this != internal_default_instance() && hitpos_ != nullptr;
 }
-inline const ::Proto::Vector3& PlayerSyncState::target() const {
-  const ::Proto::Vector3* p = target_;
-  // @@protoc_insertion_point(field_get:Proto.PlayerSyncState.target)
+inline const ::Proto::Vector3& PlayerSyncState::hitpos() const {
+  const ::Proto::Vector3* p = hitpos_;
+  // @@protoc_insertion_point(field_get:Proto.PlayerSyncState.hitPos)
   return p != nullptr ? *p : *reinterpret_cast<const ::Proto::Vector3*>(
       &::Proto::_Vector3_default_instance_);
 }
-inline ::Proto::Vector3* PlayerSyncState::release_target() {
-  // @@protoc_insertion_point(field_release:Proto.PlayerSyncState.target)
+inline ::Proto::Vector3* PlayerSyncState::release_hitpos() {
+  // @@protoc_insertion_point(field_release:Proto.PlayerSyncState.hitPos)
   
-  ::Proto::Vector3* temp = target_;
-  target_ = nullptr;
+  ::Proto::Vector3* temp = hitpos_;
+  hitpos_ = nullptr;
   return temp;
 }
-inline ::Proto::Vector3* PlayerSyncState::mutable_target() {
+inline ::Proto::Vector3* PlayerSyncState::mutable_hitpos() {
   
-  if (target_ == nullptr) {
+  if (hitpos_ == nullptr) {
     auto* p = CreateMaybeMessage<::Proto::Vector3>(GetArenaNoVirtual());
-    target_ = p;
+    hitpos_ = p;
   }
-  // @@protoc_insertion_point(field_mutable:Proto.PlayerSyncState.target)
-  return target_;
+  // @@protoc_insertion_point(field_mutable:Proto.PlayerSyncState.hitPos)
+  return hitpos_;
 }
-inline void PlayerSyncState::set_allocated_target(::Proto::Vector3* target) {
+inline void PlayerSyncState::set_allocated_hitpos(::Proto::Vector3* hitpos) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaNoVirtual();
   if (message_arena == nullptr) {
-    delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(target_);
+    delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(hitpos_);
   }
-  if (target) {
+  if (hitpos) {
     ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena = nullptr;
     if (message_arena != submessage_arena) {
-      target = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
-          message_arena, target, submessage_arena);
+      hitpos = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, hitpos, submessage_arena);
     }
     
   } else {
     
   }
-  target_ = target;
-  // @@protoc_insertion_point(field_set_allocated:Proto.PlayerSyncState.target)
+  hitpos_ = hitpos;
+  // @@protoc_insertion_point(field_set_allocated:Proto.PlayerSyncState.hitPos)
 }
 
 // uint64 player_sn = 5;
@@ -14878,9 +15123,29 @@ inline void PlayerSyncState::set_enemy_id(::PROTOBUF_NAMESPACE_ID::int32 value) 
   // @@protoc_insertion_point(field_set:Proto.PlayerSyncState.enemy_id)
 }
 
+// -------------------------------------------------------------------
+
+// RequestSyncEnemies
+
+// uint64 player_sn = 1;
+inline void RequestSyncEnemies::clear_player_sn() {
+  player_sn_ = PROTOBUF_ULONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint64 RequestSyncEnemies::player_sn() const {
+  // @@protoc_insertion_point(field_get:Proto.RequestSyncEnemies.player_sn)
+  return player_sn_;
+}
+inline void RequestSyncEnemies::set_player_sn(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+  
+  player_sn_ = value;
+  // @@protoc_insertion_point(field_set:Proto.RequestSyncEnemies.player_sn)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

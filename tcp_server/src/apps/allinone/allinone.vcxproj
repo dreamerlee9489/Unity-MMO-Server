@@ -183,9 +183,9 @@
     <ClCompile Include="..\login\player_component_account.cpp" />
     <ClCompile Include="..\login\player_component_onlineinlogin.cpp" />
     <ClCompile Include="..\login\redis_login.cpp" />
-    <ClCompile Include="..\space\ai\ai_component.cpp" />
+    <ClCompile Include="..\space\ai\fsm_component.cpp" />
     <ClCompile Include="..\space\ai\ai_enemy.cpp" />
-    <ClCompile Include="..\space\ai\ai_state.cpp" />
+    <ClCompile Include="..\space\ai\fsm_state.cpp" />
     <ClCompile Include="..\space\ai\ai_system.cpp" />
     <ClCompile Include="..\space\ai\attack.cpp" />
     <ClCompile Include="..\space\ai\idle.cpp" />
@@ -225,8 +225,8 @@
     <ClInclude Include="..\login\player_component_account.h" />
     <ClInclude Include="..\login\player_component_onlineinlogin.h" />
     <ClInclude Include="..\login\redis_login.h" />
-    <ClInclude Include="..\space\ai\ai_component.h" />
-    <ClInclude Include="..\space\ai\ai_state.h" />
+    <ClInclude Include="..\space\ai\fsm_component.h" />
+    <ClInclude Include="..\space\ai\fsm_state.h" />
     <ClInclude Include="..\space\ai\ai_system.h" />
     <ClInclude Include="..\space\ai\ai_enemy.h" />
     <ClInclude Include="..\space\ai\attack.h" />

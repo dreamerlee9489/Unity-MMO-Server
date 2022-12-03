@@ -1,11 +1,11 @@
 ﻿#ifndef AI_IDLE
 #define AI_IDLE
-#include "ai_state.h"
+#include "fsm_state.h"
 
-class Idle : public AIState
+class Idle : public FsmState
 {
 public:
-	Idle(AIEnemy* owner, Player* target = nullptr) : AIState(owner, target) {}
+	Idle(AIEnemy* owner, Player* target = nullptr);
 
 	~Idle() = default;
 
@@ -15,7 +15,9 @@ public:
 
 	void Exit() override;
 
-	void SyncState() override;
+	void BroadcastState() override;
+
+	void SendState(Player* pPlayer) override;
 };
 
 #endif // !AI_IDLE

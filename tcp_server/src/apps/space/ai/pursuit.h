@@ -1,13 +1,13 @@
 ﻿#ifndef AI_PURSUIT
 #define AI_PURSUIT
-#include "ai_state.h"
+#include "fsm_state.h"
 
-class Pursuit : public AIState
+class Pursuit : public FsmState
 {
 	PlayerComponentLastMap* _lastMap = nullptr;
 
 public:
-	Pursuit(AIEnemy* owner, Player* target) : AIState(owner, target) {}
+	Pursuit(AIEnemy* owner, Player* target);
 
 	~Pursuit() = default;
 
@@ -17,7 +17,9 @@ public:
 
 	void Exit() override;
 
-	void SyncState() override;
+	void BroadcastState() override;
+
+	void SendState(Player* pPlayer) override;
 };
 
 #endif // !AI_PURSUIT

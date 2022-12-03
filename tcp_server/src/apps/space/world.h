@@ -12,7 +12,7 @@
 #include "player_component_detail.h"
 #include "move_component.h"
 #include "ai/ai_enemy.h"
-#include "ai/ai_component.h"
+#include "ai/fsm_component.h"
 #include <vector>
 
 class Player;
@@ -30,10 +30,12 @@ protected:
 	Player* GetPlayer(NetIdentify* pIdentify);
 	void HandleNetworkDisconnect(Packet* pPacket);
 	void HandleSyncPlayer(Packet* pPacket);
+	void HandleFsmSyncState(Packet* pPacket);
 	void HandleRequestSyncPlayer(Player* pPlayer, Packet* pPacket);
 	void HandleG2SRemovePlayer(Player* pPlayer, Packet* pPacket);
 	void HandleMove(Player* pPlayer, Packet* pPacket);
-	void HandlePlayerState(Player* pPlayer, Packet* pPacket);
+	void HandlePlayerSyncState(Player* pPlayer, Packet* pPacket);
+	void HandleRequestSyncEnemies(Player* pPlayer);
 
 private:
 	void SyncWorldToGather();

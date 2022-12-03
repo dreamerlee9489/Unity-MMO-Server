@@ -421,18 +421,24 @@ message EnemyList {
 	repeated Enemy enemies = 1;
 }
 
-message FsmChangeState {
+message FsmSyncState {
 	int32 state = 1;
 	int32 code = 2;
-	int32 enemy_id = 3;
-	uint64 player_sn = 4;
+	Vector3 curPos = 3;
+	Vector3 nxtPos = 4;
+	int32 enemy_id = 5;
+	uint64 player_sn = 6;
 }
 
 message PlayerSyncState {
 	int32 state = 1;
 	int32 code = 2;
-	Vector3 currPos = 3;
-	Vector3 target = 4;
+	Vector3 curPos = 3;
+	Vector3 hitPos = 4;
 	uint64 player_sn = 5;
 	int32 enemy_id = 6;
+}
+
+message RequestSyncEnemies {
+	uint64 player_sn = 1;
 }

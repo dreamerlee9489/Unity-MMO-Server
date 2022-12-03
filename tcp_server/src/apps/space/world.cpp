@@ -1,5 +1,5 @@
 ﻿#include "world.h"
-#include "ai/ai_state.h"
+#include "ai/fsm_state.h"
 
 void World::Awake(int worldId)
 {
@@ -13,10 +13,12 @@ void World::Awake(int worldId)
 	auto pMsgSystem = GetSystemManager()->GetMessageSystem();
 	pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_NetworkDisconnect, BindFunP1(this, &World::HandleNetworkDisconnect));
 	pMsgSystem->RegisterFunction(this, Proto::MsgId::G2S_SyncPlayer, BindFunP1(this, &World::HandleSyncPlayer));
+	pMsgSystem->RegisterFunction(this, Proto::MsgId::C2S_FsmSyncState, BindFunP1(this, &World::HandleFsmSyncState));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::G2S_RequestSyncPlayer, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleRequestSyncPlayer));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::G2S_RemovePlayer, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleG2SRemovePlayer));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_Move, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleMove));
-	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_PlayerSyncState, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandlePlayerState));
+	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_PlayerSyncState, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandlePlayerSyncState));
+	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_RequestSyncEnemies, BindFunP1(this, &World::GetPlayer), BindFunP1(this, &World::HandleRequestSyncEnemies));
 
 	ResourceWorld* worldCfg = ResourceHelp::GetResourceManager()->Worlds->GetResource(_worldId);
 	std::vector<ResourceEnemy> _enemyCfgs = worldCfg->GetEnemies();
@@ -24,7 +26,7 @@ void World::Awake(int worldId)
 	{
 		AIEnemy* enemy = GetSystemManager()->GetEntitySystem()->AddComponent<AIEnemy>(cfg.id, cfg.initHp, cfg.initPos);
 		enemy->SetWorld(this);
-		enemy->AddComponent<AIComponent>();
+		enemy->AddComponent<FsmComponent>();
 		_enemies.push_back(enemy);
 	}
 }
@@ -67,8 +69,8 @@ void World::HandleNetworkDisconnect(Packet* pPacket)
 		}
 
 		for (auto enemy : _enemies)
-			if (enemy->GetComponent<AIComponent>()->GetCurrState()->GetTarget() == pPlayer)
-				enemy->GetComponent<AIComponent>()->ResetState();
+			if (enemy->GetComponent<FsmComponent>()->GetCurrState()->GetTarget() == pPlayer)
+				enemy->GetComponent<FsmComponent>()->ResetState();
 
 		Proto::SavePlayer protoSave;
 		protoSave.set_player_sn(pPlayer->GetPlayerSN());
@@ -125,18 +127,6 @@ void World::SyncAppearTimer()
 
 	if (!_addPlayer.empty())
 	{
-		if (!_enemies.empty())
-		{
-			Proto::EnemyList protoList;
-			for (auto enemy : _enemies)
-			{
-				Proto::Enemy* protoEnemy = protoList.add_enemies();
-				protoEnemy->set_id(enemy->GetID());
-				enemy->GetCurrPos().SerializeToProto(protoEnemy->mutable_pos());
-			}
-			BroadcastPacket(Proto::MsgId::S2C_EnemyList, protoList, _addPlayer);
-		}
-
 		// 1.新增的数据，同步到全地图
 		Proto::RoleAppear protoNewAppear;
 		for (auto id : _addPlayer)
@@ -284,11 +274,35 @@ void World::HandleMove(Player* pPlayer, Packet* pPacket)
 	BroadcastPacket(Proto::MsgId::S2C_Move, proto);
 }
 
-void World::HandlePlayerState(Player* pPlayer, Packet* pPacket)
+void World::HandlePlayerSyncState(Player* pPlayer, Packet* pPacket)
 {
 	Proto::PlayerSyncState proto = pPacket->ParseToProto<Proto::PlayerSyncState>();
 	proto.set_player_sn(pPlayer->GetPlayerSN());
 	const auto pComponentLastMap = pPlayer->GetComponent<PlayerComponentLastMap>();
-	pComponentLastMap->GetCur()->Position.ParserFromProto(proto.currpos());
+	pComponentLastMap->GetCur()->Position.ParserFromProto(proto.curpos());
 	BroadcastPacket(Proto::MsgId::S2C_PlayerSyncState, proto);
+}
+
+void World::HandleFsmSyncState(Packet* pPacket)
+{
+	Proto::FsmSyncState proto = pPacket->ParseToProto<Proto::FsmSyncState>();
+	int enemyId = proto.enemy_id();
+	Player* player = _playerManager->GetPlayerBySn(proto.player_sn());
+	_enemies[enemyId]->GetComponent<FsmComponent>()->SyncState(proto, player);
+}
+
+void World::HandleRequestSyncEnemies(Player* pPlayer)
+{
+	if (!_enemies.empty())
+	{
+		Proto::EnemyList protoList;
+		for (auto enemy : _enemies)
+		{
+			Proto::Enemy* protoEnemy = protoList.add_enemies();
+			protoEnemy->set_id(enemy->GetID());
+			enemy->GetCurrPos().SerializeToProto(protoEnemy->mutable_pos());
+			enemy->GetComponent<FsmComponent>()->GetCurrState()->SendState(pPlayer);
+		}
+		MessageSystemHelp::SendPacket(Proto::MsgId::S2C_EnemyList, protoList, pPlayer);
+	}
 }

@@ -25,7 +25,7 @@ static constexpr ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema* schemas = n
 static constexpr ::PROTOBUF_NAMESPACE_ID::Message* const* file_default_instances = nullptr;
 
 const char descriptor_table_protodef_proto_5fid_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\016proto_id.proto\022\005Proto*\234\020\n\005MsgId\022\010\n\004Non"
+  "\n\016proto_id.proto\022\005Proto*\324\020\n\005MsgId\022\010\n\004Non"
   "e\020\000\022\025\n\021MI_NetworkConnect\020\001\022\027\n\023MI_Network"
   "Connected\020\002\022\024\n\020MI_NetworkListen\020\003\022\027\n\023MI_"
   "NetworkListenKey\020\004\022\030\n\024MI_NetworkDisconne"
@@ -74,10 +74,12 @@ const char descriptor_table_protodef_proto_5fid_2eproto[] PROTOBUF_SECTION_VARIA
   "CmdWorldProxy\020\243\234\001\022\021\n\013MI_CmdWorld\020\244\234\001\022\022\n\014"
   "MI_CmdCreate\020\245\234\001\022\026\n\020MI_CmdEfficiency\020\246\234\001"
   "\022\023\n\rMI_Efficiency\020\247\234\001\022\023\n\rS2C_EnemyList\020\261"
-  "\352\001\022\030\n\022S2C_FsmChangeState\020\262\352\001\022\030\n\022C2S_FsmC"
-  "hangeState\020\263\352\001\022\031\n\023C2S_PlayerSyncState\020\264\352"
-  "\001\022\031\n\023S2C_PlayerSyncState\020\265\352\001\022\017\n\tC2S_Enem"
-  "y\020\266\352\001\022\017\n\tS2C_Enemy\020\267\352\001b\006proto3"
+  "\352\001\022\026\n\020S2C_FsmSyncState\020\262\352\001\022\026\n\020C2S_FsmSyn"
+  "cState\020\263\352\001\022\031\n\023C2S_PlayerSyncState\020\264\352\001\022\031\n"
+  "\023S2C_PlayerSyncState\020\265\352\001\022\017\n\tC2S_Enemy\020\266\352"
+  "\001\022\017\n\tS2C_Enemy\020\267\352\001\022\034\n\026C2S_RequestSyncEne"
+  "mies\020\270\352\001\022\034\n\026S2C_RequestSyncEnemies\020\271\352\001b\006"
+  "proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_proto_5fid_2eproto_deps[1] = {
 };
@@ -86,7 +88,7 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_pro
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_proto_5fid_2eproto_once;
 static bool descriptor_table_proto_5fid_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_proto_5fid_2eproto = {
-  &descriptor_table_proto_5fid_2eproto_initialized, descriptor_table_protodef_proto_5fid_2eproto, "proto_id.proto", 2110,
+  &descriptor_table_proto_5fid_2eproto_initialized, descriptor_table_protodef_proto_5fid_2eproto, "proto_id.proto", 2166,
   &descriptor_table_proto_5fid_2eproto_once, descriptor_table_proto_5fid_2eproto_sccs, descriptor_table_proto_5fid_2eproto_deps, 0, 0,
   schemas, file_default_instances, TableStruct_proto_5fid_2eproto::offsets,
   file_level_metadata_proto_5fid_2eproto, 0, file_level_enum_descriptors_proto_5fid_2eproto, file_level_service_descriptors_proto_5fid_2eproto,
@@ -187,6 +189,8 @@ bool MsgId_IsValid(int value) {
     case 30005:
     case 30006:
     case 30007:
+    case 30008:
+    case 30009:
       return true;
     default:
       return false;

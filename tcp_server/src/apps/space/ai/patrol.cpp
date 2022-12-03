@@ -1,8 +1,9 @@
 ﻿#include "patrol.h"
 #include "pursuit.h"
 
-Patrol::Patrol(AIEnemy* owner, Player* target) : AIState(owner, target)
+Patrol::Patrol(AIEnemy* owner, Player* target) : FsmState(owner, target)
 {
+	_type = FsmStateType::Patrol;
 	_eng = std::default_random_engine(_owner->GetID());
 	_players = owner->GetWorld()->GetPlayerManager()->GetAll();
 }
@@ -12,28 +13,17 @@ void Patrol::Enter()
 	_index = _dis(_eng);
 	_owner->SetPatrolPoint(_index);
 	_owner->SetSpeed(_owner->WalkSpeed);
-	SyncState();
+	BroadcastState();
 }
 
 void Patrol::Execute()
 {
-	_currTime = Global::GetInstance()->TimeTick;
-	_timeElapsed = _currTime - _lastTime;
-	for (auto pair : *_players)
+	if (++_round >= 12)
 	{
-		float dist = _owner->GetCurrPos().GetDistance(pair.second->GetComponent<PlayerComponentLastMap>()->GetCur()->Position);
-		if (dist <= 8)
-		{
-			_owner->GetComponent<AIComponent>()->ChangeState(new Pursuit(_owner, pair.second));
-			break;
-		}
-	}
-	if (_timeElapsed >= 10000)
-	{
-		_lastTime = _currTime;
+		_round = 0;
 		_index = _dis(_eng);
 		_owner->SetPatrolPoint(_index);
-		SyncState();
+		BroadcastState();
 	}
 }
 
@@ -41,12 +31,22 @@ void Patrol::Exit()
 {
 }
 
-void Patrol::SyncState()
+void Patrol::BroadcastState()
 {
-	Proto::FsmChangeState proto;
-	proto.set_state((int)AIStateType::Patrol);
+	Proto::FsmSyncState proto;
+	proto.set_state((int)FsmStateType::Patrol);
 	proto.set_code(_index);
 	proto.set_enemy_id(_owner->GetID());
 	proto.set_player_sn(0);
-	_owner->GetWorld()->BroadcastPacket(Proto::MsgId::S2C_FsmChangeState, proto);
+	_owner->GetWorld()->BroadcastPacket(Proto::MsgId::S2C_FsmSyncState, proto);
+}
+
+void Patrol::SendState(Player* pPlayer)
+{
+	Proto::FsmSyncState proto;
+	proto.set_state((int)FsmStateType::Patrol);
+	proto.set_code(_index);
+	proto.set_enemy_id(_owner->GetID());
+	proto.set_player_sn(0);
+	MessageSystemHelp::SendPacket(Proto::MsgId::S2C_FsmSyncState, proto, pPlayer);
 }

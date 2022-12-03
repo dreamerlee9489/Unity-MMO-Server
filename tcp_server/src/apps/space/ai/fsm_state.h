@@ -8,31 +8,31 @@
 #include "libplayer/player.h"
 #include "ai_enemy.h"
 
-enum class AIStateType
-{
-	Idle, Patrol, Pursuit, Attack
-};
+enum class FsmStateType { Idle, Patrol, Pursuit, Attack };
 
 class AIEnemy;
 class Player;
-class AIState
+class FsmState
 {
 protected:
 	AIEnemy* _owner = nullptr;
 	Player* _target = nullptr;
+	FsmStateType _type = FsmStateType::Idle;
 	timeutil::Time _lastTime, _currTime, _timeElapsed;
 
-	AIState(AIEnemy* owner, Player* target = nullptr);
+	FsmState(AIEnemy* owner, Player* target = nullptr);
 
 public:
-	virtual ~AIState() = default;
-
-	Player* GetTarget() { return _target; }
-
+	virtual ~FsmState() = default;
 	virtual void Enter() = 0;
 	virtual void Execute() = 0;
 	virtual void Exit() = 0;
-	virtual void SyncState() = 0;
+	virtual void BroadcastState() = 0;
+	virtual void SendState(Player* pPlayer) = 0;
+
+	Player* GetTarget() { return _target; }
+	FsmStateType GetStateType() { return _type; }
+	static FsmState* GenFsmState(FsmStateType type, AIEnemy* owner, Player* target);
 };
 
 #endif // !AI_STATE

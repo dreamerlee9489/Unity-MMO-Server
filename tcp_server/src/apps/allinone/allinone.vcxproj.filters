@@ -101,7 +101,7 @@
     <ClCompile Include="..\game\world_proxy_locator.cpp">
       <Filter>game\world\proxy</Filter>
     </ClCompile>
-    <ClCompile Include="..\space\ai\ai_component.cpp">
+    <ClCompile Include="..\space\ai\fsm_component.cpp">
       <Filter>space\ai</Filter>
     </ClCompile>
     <ClCompile Include="..\space\ai\attack.cpp">
@@ -122,7 +122,7 @@
     <ClCompile Include="..\space\ai\ai_system.cpp">
       <Filter>space\ai</Filter>
     </ClCompile>
-    <ClCompile Include="..\space\ai\ai_state.cpp">
+    <ClCompile Include="..\space\ai\fsm_state.cpp">
       <Filter>space\ai</Filter>
     </ClCompile>
   </ItemGroup>
@@ -315,10 +315,10 @@
     <ClInclude Include="..\game\world_proxy_locator.h">
       <Filter>game\world\proxy</Filter>
     </ClInclude>
-    <ClInclude Include="..\space\ai\ai_component.h">
+    <ClInclude Include="..\space\ai\fsm_component.h">
       <Filter>space\ai</Filter>
     </ClInclude>
-    <ClInclude Include="..\space\ai\ai_state.h">
+    <ClInclude Include="..\space\ai\fsm_state.h">
       <Filter>space\ai</Filter>
     </ClInclude>
     <ClInclude Include="..\space\ai\ai_system.h">

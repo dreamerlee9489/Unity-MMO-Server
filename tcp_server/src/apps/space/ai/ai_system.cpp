@@ -1,6 +1,6 @@
 ﻿#include "ai_system.h"
-#include "ai_component.h"
 #include "ai_enemy.h"
+#include "fsm_component.h"
 
 void AISystem::Update(EntitySystem* pEntities)
 {
@@ -11,16 +11,16 @@ void AISystem::Update(EntitySystem* pEntities)
 		_lastTime = curTime;
 		if (_pCollections == nullptr)
 		{
-			_pCollections = pEntities->GetComponentCollections<AIComponent>();
+			_pCollections = pEntities->GetComponentCollections<FsmComponent>();
 			if (_pCollections == nullptr)
 				return;
 		}
 		std::map<uint64, IComponent*>* pMap = _pCollections->GetAll();
 		for (auto iter = pMap->begin(); iter != pMap->end(); ++iter)
 		{
-			AIComponent* pAIComponent = (AIComponent*)iter->second;
-			AIEnemy* pEnemy = pAIComponent->GetParent<AIEnemy>();
-			pAIComponent->Update(pEnemy);
+			FsmComponent* pFsmComponent = (FsmComponent*)iter->second;
+			AIEnemy* pEnemy = pFsmComponent->GetParent<AIEnemy>();
+			pFsmComponent->Update(pEnemy);
 			pEnemy->UpdatePos(timeElapsed);
 		}
 	}

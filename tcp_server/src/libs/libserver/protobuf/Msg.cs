@@ -128,22 +128,24 @@ namespace Proto {
             "YXISCgoCc24YASABKAQiOwoETW92ZRIRCglwbGF5ZXJfc24YASABKAQSIAoI",
             "cG9zaXRpb24YAyADKAsyDi5Qcm90by5WZWN0b3IzIjAKBUVuZW15EgoKAmlk",
             "GAEgASgFEhsKA3BvcxgCIAEoCzIOLlByb3RvLlZlY3RvcjMiKgoJRW5lbXlM",
-            "aXN0Eh0KB2VuZW1pZXMYASADKAsyDC5Qcm90by5FbmVteSJSCg5Gc21DaGFu",
-            "Z2VTdGF0ZRINCgVzdGF0ZRgBIAEoBRIMCgRjb2RlGAIgASgFEhAKCGVuZW15",
-            "X2lkGAMgASgFEhEKCXBsYXllcl9zbhgEIAEoBCKUAQoPUGxheWVyU3luY1N0",
-            "YXRlEg0KBXN0YXRlGAEgASgFEgwKBGNvZGUYAiABKAUSHwoHY3VyclBvcxgD",
-            "IAEoCzIOLlByb3RvLlZlY3RvcjMSHgoGdGFyZ2V0GAQgASgLMg4uUHJvdG8u",
-            "VmVjdG9yMxIRCglwbGF5ZXJfc24YBSABKAQSEAoIZW5lbXlfaWQYBiABKAUq",
-            "eAoHVGFnVHlwZRIPCgtUYWdUeXBlTm9uZRAAEhIKDlRhZ1R5cGVBY2NvdW50",
-            "EAESDgoKVGFnVHlwZUFwcBACEhEKDVRhZ1R5cGVFbnRpdHkQAxISCg5UYWdU",
-            "eXBlVG9Xb3JsZBAEEhEKDVRhZ1R5cGVQbGF5ZXIQBSqaAQoWQWNjb3VudENo",
-            "ZWNrUmV0dXJuQ29kZRIKCgZBUkNfT0sQABIPCgtBUkNfVU5LT05XThABEhkK",
-            "FUFSQ19OT1RfRk9VTkRfQUNDT1VOVBACEhYKEkFSQ19QQVNTV09SRF9XUk9O",
-            "RxADEg8KC0FSQ19MT0dHSU5HEAQSDwoLQVJDX1RJTUVPVVQQBRIOCgpBUkNf",
-            "T05MSU5FEAYqRwoTTG9naW5IdHRwUmV0dXJuQ29kZRILCgdMSFJDX09LEAAS",
-            "EAoMTEhSQ19USU1FT1VUEAESEQoNTEhSQ19OT1RGT1VORBACKkwKFkNyZWF0",
-            "ZVBsYXllclJldHVybkNvZGUSEQoNQ1BSX0NyZWF0ZV9PSxAAEg8KC0NQUl9V",
-            "bmtvbnduEAESDgoKQ1BSX1JlbmFtZRACYgZwcm90bzM="));
+            "aXN0Eh0KB2VuZW1pZXMYASADKAsyDC5Qcm90by5FbmVteSKQAQoMRnNtU3lu",
+            "Y1N0YXRlEg0KBXN0YXRlGAEgASgFEgwKBGNvZGUYAiABKAUSHgoGY3VyUG9z",
+            "GAMgASgLMg4uUHJvdG8uVmVjdG9yMxIeCgZueHRQb3MYBCABKAsyDi5Qcm90",
+            "by5WZWN0b3IzEhAKCGVuZW15X2lkGAUgASgFEhEKCXBsYXllcl9zbhgGIAEo",
+            "BCKTAQoPUGxheWVyU3luY1N0YXRlEg0KBXN0YXRlGAEgASgFEgwKBGNvZGUY",
+            "AiABKAUSHgoGY3VyUG9zGAMgASgLMg4uUHJvdG8uVmVjdG9yMxIeCgZoaXRQ",
+            "b3MYBCABKAsyDi5Qcm90by5WZWN0b3IzEhEKCXBsYXllcl9zbhgFIAEoBBIQ",
+            "CghlbmVteV9pZBgGIAEoBSInChJSZXF1ZXN0U3luY0VuZW1pZXMSEQoJcGxh",
+            "eWVyX3NuGAEgASgEKngKB1RhZ1R5cGUSDwoLVGFnVHlwZU5vbmUQABISCg5U",
+            "YWdUeXBlQWNjb3VudBABEg4KClRhZ1R5cGVBcHAQAhIRCg1UYWdUeXBlRW50",
+            "aXR5EAMSEgoOVGFnVHlwZVRvV29ybGQQBBIRCg1UYWdUeXBlUGxheWVyEAUq",
+            "mgEKFkFjY291bnRDaGVja1JldHVybkNvZGUSCgoGQVJDX09LEAASDwoLQVJD",
+            "X1VOS09OV04QARIZChVBUkNfTk9UX0ZPVU5EX0FDQ09VTlQQAhIWChJBUkNf",
+            "UEFTU1dPUkRfV1JPTkcQAxIPCgtBUkNfTE9HR0lORxAEEg8KC0FSQ19USU1F",
+            "T1VUEAUSDgoKQVJDX09OTElORRAGKkcKE0xvZ2luSHR0cFJldHVybkNvZGUS",
+            "CwoHTEhSQ19PSxAAEhAKDExIUkNfVElNRU9VVBABEhEKDUxIUkNfTk9URk9V",
+            "TkQQAipMChZDcmVhdGVQbGF5ZXJSZXR1cm5Db2RlEhEKDUNQUl9DcmVhdGVf",
+            "T0sQABIPCgtDUFJfVW5rb253bhABEg4KCkNQUl9SZW5hbWUQAmIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Proto.DbReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Proto.TagType), typeof(global::Proto.AccountCheckReturnCode), typeof(global::Proto.LoginHttpReturnCode), typeof(global::Proto.CreatePlayerReturnCode), }, null, new pbr::GeneratedClrTypeInfo[] {
@@ -213,8 +215,9 @@ namespace Proto {
             new pbr::GeneratedClrTypeInfo(typeof(global::Proto.Move), global::Proto.Move.Parser, new[]{ "PlayerSn", "Position" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Proto.Enemy), global::Proto.Enemy.Parser, new[]{ "Id", "Pos" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Proto.EnemyList), global::Proto.EnemyList.Parser, new[]{ "Enemies" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.FsmChangeState), global::Proto.FsmChangeState.Parser, new[]{ "State", "Code", "EnemyId", "PlayerSn" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.PlayerSyncState), global::Proto.PlayerSyncState.Parser, new[]{ "State", "Code", "CurrPos", "Target", "PlayerSn", "EnemyId" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.FsmSyncState), global::Proto.FsmSyncState.Parser, new[]{ "State", "Code", "CurPos", "NxtPos", "EnemyId", "PlayerSn" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.PlayerSyncState), global::Proto.PlayerSyncState.Parser, new[]{ "State", "Code", "CurPos", "HitPos", "PlayerSn", "EnemyId" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.RequestSyncEnemies), global::Proto.RequestSyncEnemies.Parser, new[]{ "PlayerSn" }, null, null, null, null)
           }));
     }
     #endregion
@@ -10796,11 +10799,11 @@ namespace Proto {
 
   }
 
-  public sealed partial class FsmChangeState : pb::IMessage<FsmChangeState> {
-    private static readonly pb::MessageParser<FsmChangeState> _parser = new pb::MessageParser<FsmChangeState>(() => new FsmChangeState());
+  public sealed partial class FsmSyncState : pb::IMessage<FsmSyncState> {
+    private static readonly pb::MessageParser<FsmSyncState> _parser = new pb::MessageParser<FsmSyncState>(() => new FsmSyncState());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<FsmChangeState> Parser { get { return _parser; } }
+    public static pb::MessageParser<FsmSyncState> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -10813,24 +10816,26 @@ namespace Proto {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public FsmChangeState() {
+    public FsmSyncState() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public FsmChangeState(FsmChangeState other) : this() {
+    public FsmSyncState(FsmSyncState other) : this() {
       state_ = other.state_;
       code_ = other.code_;
+      curPos_ = other.curPos_ != null ? other.curPos_.Clone() : null;
+      nxtPos_ = other.nxtPos_ != null ? other.nxtPos_.Clone() : null;
       enemyId_ = other.enemyId_;
       playerSn_ = other.playerSn_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public FsmChangeState Clone() {
-      return new FsmChangeState(this);
+    public FsmSyncState Clone() {
+      return new FsmSyncState(this);
     }
 
     /// <summary>Field number for the "state" field.</summary>
@@ -10855,8 +10860,30 @@ namespace Proto {
       }
     }
 
+    /// <summary>Field number for the "curPos" field.</summary>
+    public const int CurPosFieldNumber = 3;
+    private global::Proto.Vector3 curPos_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Proto.Vector3 CurPos {
+      get { return curPos_; }
+      set {
+        curPos_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "nxtPos" field.</summary>
+    public const int NxtPosFieldNumber = 4;
+    private global::Proto.Vector3 nxtPos_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Proto.Vector3 NxtPos {
+      get { return nxtPos_; }
+      set {
+        nxtPos_ = value;
+      }
+    }
+
     /// <summary>Field number for the "enemy_id" field.</summary>
-    public const int EnemyIdFieldNumber = 3;
+    public const int EnemyIdFieldNumber = 5;
     private int enemyId_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int EnemyId {
@@ -10867,7 +10894,7 @@ namespace Proto {
     }
 
     /// <summary>Field number for the "player_sn" field.</summary>
-    public const int PlayerSnFieldNumber = 4;
+    public const int PlayerSnFieldNumber = 6;
     private ulong playerSn_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public ulong PlayerSn {
@@ -10879,11 +10906,11 @@ namespace Proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as FsmChangeState);
+      return Equals(other as FsmSyncState);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(FsmChangeState other) {
+    public bool Equals(FsmSyncState other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -10892,6 +10919,8 @@ namespace Proto {
       }
       if (State != other.State) return false;
       if (Code != other.Code) return false;
+      if (!object.Equals(CurPos, other.CurPos)) return false;
+      if (!object.Equals(NxtPos, other.NxtPos)) return false;
       if (EnemyId != other.EnemyId) return false;
       if (PlayerSn != other.PlayerSn) return false;
       return Equals(_unknownFields, other._unknownFields);
@@ -10902,6 +10931,8 @@ namespace Proto {
       int hash = 1;
       if (State != 0) hash ^= State.GetHashCode();
       if (Code != 0) hash ^= Code.GetHashCode();
+      if (curPos_ != null) hash ^= CurPos.GetHashCode();
+      if (nxtPos_ != null) hash ^= NxtPos.GetHashCode();
       if (EnemyId != 0) hash ^= EnemyId.GetHashCode();
       if (PlayerSn != 0UL) hash ^= PlayerSn.GetHashCode();
       if (_unknownFields != null) {
@@ -10925,12 +10956,20 @@ namespace Proto {
         output.WriteRawTag(16);
         output.WriteInt32(Code);
       }
+      if (curPos_ != null) {
+        output.WriteRawTag(26);
+        output.WriteMessage(CurPos);
+      }
+      if (nxtPos_ != null) {
+        output.WriteRawTag(34);
+        output.WriteMessage(NxtPos);
+      }
       if (EnemyId != 0) {
-        output.WriteRawTag(24);
+        output.WriteRawTag(40);
         output.WriteInt32(EnemyId);
       }
       if (PlayerSn != 0UL) {
-        output.WriteRawTag(32);
+        output.WriteRawTag(48);
         output.WriteUInt64(PlayerSn);
       }
       if (_unknownFields != null) {
@@ -10947,6 +10986,12 @@ namespace Proto {
       if (Code != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Code);
       }
+      if (curPos_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(CurPos);
+      }
+      if (nxtPos_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(NxtPos);
+      }
       if (EnemyId != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(EnemyId);
       }
@@ -10960,7 +11005,7 @@ namespace Proto {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(FsmChangeState other) {
+    public void MergeFrom(FsmSyncState other) {
       if (other == null) {
         return;
       }
@@ -10969,6 +11014,18 @@ namespace Proto {
       }
       if (other.Code != 0) {
         Code = other.Code;
+      }
+      if (other.curPos_ != null) {
+        if (curPos_ == null) {
+          CurPos = new global::Proto.Vector3();
+        }
+        CurPos.MergeFrom(other.CurPos);
+      }
+      if (other.nxtPos_ != null) {
+        if (nxtPos_ == null) {
+          NxtPos = new global::Proto.Vector3();
+        }
+        NxtPos.MergeFrom(other.NxtPos);
       }
       if (other.EnemyId != 0) {
         EnemyId = other.EnemyId;
@@ -10995,11 +11052,25 @@ namespace Proto {
             Code = input.ReadInt32();
             break;
           }
-          case 24: {
+          case 26: {
+            if (curPos_ == null) {
+              CurPos = new global::Proto.Vector3();
+            }
+            input.ReadMessage(CurPos);
+            break;
+          }
+          case 34: {
+            if (nxtPos_ == null) {
+              NxtPos = new global::Proto.Vector3();
+            }
+            input.ReadMessage(NxtPos);
+            break;
+          }
+          case 40: {
             EnemyId = input.ReadInt32();
             break;
           }
-          case 32: {
+          case 48: {
             PlayerSn = input.ReadUInt64();
             break;
           }
@@ -11036,8 +11107,8 @@ namespace Proto {
     public PlayerSyncState(PlayerSyncState other) : this() {
       state_ = other.state_;
       code_ = other.code_;
-      currPos_ = other.currPos_ != null ? other.currPos_.Clone() : null;
-      target_ = other.target_ != null ? other.target_.Clone() : null;
+      curPos_ = other.curPos_ != null ? other.curPos_.Clone() : null;
+      hitPos_ = other.hitPos_ != null ? other.hitPos_.Clone() : null;
       playerSn_ = other.playerSn_;
       enemyId_ = other.enemyId_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
@@ -11070,25 +11141,25 @@ namespace Proto {
       }
     }
 
-    /// <summary>Field number for the "currPos" field.</summary>
-    public const int CurrPosFieldNumber = 3;
-    private global::Proto.Vector3 currPos_;
+    /// <summary>Field number for the "curPos" field.</summary>
+    public const int CurPosFieldNumber = 3;
+    private global::Proto.Vector3 curPos_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Proto.Vector3 CurrPos {
-      get { return currPos_; }
+    public global::Proto.Vector3 CurPos {
+      get { return curPos_; }
       set {
-        currPos_ = value;
+        curPos_ = value;
       }
     }
 
-    /// <summary>Field number for the "target" field.</summary>
-    public const int TargetFieldNumber = 4;
-    private global::Proto.Vector3 target_;
+    /// <summary>Field number for the "hitPos" field.</summary>
+    public const int HitPosFieldNumber = 4;
+    private global::Proto.Vector3 hitPos_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Proto.Vector3 Target {
-      get { return target_; }
+    public global::Proto.Vector3 HitPos {
+      get { return hitPos_; }
       set {
-        target_ = value;
+        hitPos_ = value;
       }
     }
 
@@ -11129,8 +11200,8 @@ namespace Proto {
       }
       if (State != other.State) return false;
       if (Code != other.Code) return false;
-      if (!object.Equals(CurrPos, other.CurrPos)) return false;
-      if (!object.Equals(Target, other.Target)) return false;
+      if (!object.Equals(CurPos, other.CurPos)) return false;
+      if (!object.Equals(HitPos, other.HitPos)) return false;
       if (PlayerSn != other.PlayerSn) return false;
       if (EnemyId != other.EnemyId) return false;
       return Equals(_unknownFields, other._unknownFields);
@@ -11141,8 +11212,8 @@ namespace Proto {
       int hash = 1;
       if (State != 0) hash ^= State.GetHashCode();
       if (Code != 0) hash ^= Code.GetHashCode();
-      if (currPos_ != null) hash ^= CurrPos.GetHashCode();
-      if (target_ != null) hash ^= Target.GetHashCode();
+      if (curPos_ != null) hash ^= CurPos.GetHashCode();
+      if (hitPos_ != null) hash ^= HitPos.GetHashCode();
       if (PlayerSn != 0UL) hash ^= PlayerSn.GetHashCode();
       if (EnemyId != 0) hash ^= EnemyId.GetHashCode();
       if (_unknownFields != null) {
@@ -11166,13 +11237,13 @@ namespace Proto {
         output.WriteRawTag(16);
         output.WriteInt32(Code);
       }
-      if (currPos_ != null) {
+      if (curPos_ != null) {
         output.WriteRawTag(26);
-        output.WriteMessage(CurrPos);
+        output.WriteMessage(CurPos);
       }
-      if (target_ != null) {
+      if (hitPos_ != null) {
         output.WriteRawTag(34);
-        output.WriteMessage(Target);
+        output.WriteMessage(HitPos);
       }
       if (PlayerSn != 0UL) {
         output.WriteRawTag(40);
@@ -11196,11 +11267,11 @@ namespace Proto {
       if (Code != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Code);
       }
-      if (currPos_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(CurrPos);
+      if (curPos_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(CurPos);
       }
-      if (target_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Target);
+      if (hitPos_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(HitPos);
       }
       if (PlayerSn != 0UL) {
         size += 1 + pb::CodedOutputStream.ComputeUInt64Size(PlayerSn);
@@ -11225,17 +11296,17 @@ namespace Proto {
       if (other.Code != 0) {
         Code = other.Code;
       }
-      if (other.currPos_ != null) {
-        if (currPos_ == null) {
-          CurrPos = new global::Proto.Vector3();
+      if (other.curPos_ != null) {
+        if (curPos_ == null) {
+          CurPos = new global::Proto.Vector3();
         }
-        CurrPos.MergeFrom(other.CurrPos);
+        CurPos.MergeFrom(other.CurPos);
       }
-      if (other.target_ != null) {
-        if (target_ == null) {
-          Target = new global::Proto.Vector3();
+      if (other.hitPos_ != null) {
+        if (hitPos_ == null) {
+          HitPos = new global::Proto.Vector3();
         }
-        Target.MergeFrom(other.Target);
+        HitPos.MergeFrom(other.HitPos);
       }
       if (other.PlayerSn != 0UL) {
         PlayerSn = other.PlayerSn;
@@ -11263,17 +11334,17 @@ namespace Proto {
             break;
           }
           case 26: {
-            if (currPos_ == null) {
-              CurrPos = new global::Proto.Vector3();
+            if (curPos_ == null) {
+              CurPos = new global::Proto.Vector3();
             }
-            input.ReadMessage(CurrPos);
+            input.ReadMessage(CurPos);
             break;
           }
           case 34: {
-            if (target_ == null) {
-              Target = new global::Proto.Vector3();
+            if (hitPos_ == null) {
+              HitPos = new global::Proto.Vector3();
             }
-            input.ReadMessage(Target);
+            input.ReadMessage(HitPos);
             break;
           }
           case 40: {
@@ -11282,6 +11353,135 @@ namespace Proto {
           }
           case 48: {
             EnemyId = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class RequestSyncEnemies : pb::IMessage<RequestSyncEnemies> {
+    private static readonly pb::MessageParser<RequestSyncEnemies> _parser = new pb::MessageParser<RequestSyncEnemies>(() => new RequestSyncEnemies());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<RequestSyncEnemies> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Proto.MsgReflection.Descriptor.MessageTypes[68]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public RequestSyncEnemies() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public RequestSyncEnemies(RequestSyncEnemies other) : this() {
+      playerSn_ = other.playerSn_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public RequestSyncEnemies Clone() {
+      return new RequestSyncEnemies(this);
+    }
+
+    /// <summary>Field number for the "player_sn" field.</summary>
+    public const int PlayerSnFieldNumber = 1;
+    private ulong playerSn_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ulong PlayerSn {
+      get { return playerSn_; }
+      set {
+        playerSn_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as RequestSyncEnemies);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(RequestSyncEnemies other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (PlayerSn != other.PlayerSn) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (PlayerSn != 0UL) hash ^= PlayerSn.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (PlayerSn != 0UL) {
+        output.WriteRawTag(8);
+        output.WriteUInt64(PlayerSn);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (PlayerSn != 0UL) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt64Size(PlayerSn);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(RequestSyncEnemies other) {
+      if (other == null) {
+        return;
+      }
+      if (other.PlayerSn != 0UL) {
+        PlayerSn = other.PlayerSn;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            PlayerSn = input.ReadUInt64();
             break;
           }
         }
