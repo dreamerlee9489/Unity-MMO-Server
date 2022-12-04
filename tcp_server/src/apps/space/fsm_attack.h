@@ -1,5 +1,5 @@
-﻿#ifndef AI_ATTACK
-#define AI_ATTACK
+﻿#ifndef FSM_ATTACK
+#define FSM_ATTACK
 #include "fsm_state.h"
 
 class Attack : public FsmState
@@ -21,4 +21,4 @@ public:
 
 	void SendState(Player* pPlayer) override;
 };
-#endif // !AI_ATTACK
+#endif // !FSM_ATTACK

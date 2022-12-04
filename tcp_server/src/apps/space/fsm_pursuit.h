@@ -1,5 +1,5 @@
-﻿#ifndef AI_PURSUIT
-#define AI_PURSUIT
+﻿#ifndef FSM_PURSUIT
+#define FSM_PURSUIT
 #include "fsm_state.h"
 
 class Pursuit : public FsmState
@@ -22,4 +22,4 @@ public:
 	void SendState(Player* pPlayer) override;
 };
 
-#endif // !AI_PURSUIT
+#endif // !FSM_PURSUIT

@@ -1,5 +1,5 @@
-﻿#ifndef AI_COMPONENT
-#define AI_COMPONENT
+﻿#ifndef FSM_COMPONENT
+#define FSM_COMPONENT
 #include "libserver/component.h"
 #include "libserver/system.h"
 #include "libserver/vector3.h"
@@ -35,6 +35,6 @@ public:
 	void SyncState(Proto::FsmSyncState& proto, Player* pPlayer);
 };
 
-#endif // !AI_COMPONENT
+#endif // !FSM_COMPONENT
 
 

@@ -1,5 +1,5 @@
-﻿#ifndef AI_STATE
-#define AI_STATE
+﻿#ifndef FSM_STATE
+#define FSM_STATE
 #include <map>
 #include <cmath>
 #include <random>
@@ -35,4 +35,4 @@ public:
 	static FsmState* GenFsmState(FsmStateType type, AIEnemy* owner, Player* target);
 };
 
-#endif // !AI_STATE
+#endif // !FSM_STATE

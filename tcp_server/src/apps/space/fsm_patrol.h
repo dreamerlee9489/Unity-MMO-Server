@@ -1,5 +1,5 @@
-﻿#ifndef AI_PATROL
-#define AI_PATROL
+﻿#ifndef FSM_PATROL
+#define FSM_PATROL
 #include "fsm_component.h"
 #include "fsm_state.h"
 
@@ -26,4 +26,4 @@ public:
 	void SendState(Player* pPlayer) override;
 };
 
-#endif // !AI_PATROL
+#endif // !FSM_PATROL

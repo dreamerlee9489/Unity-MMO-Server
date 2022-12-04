@@ -1,5 +1,5 @@
-﻿#ifndef AI_IDLE
-#define AI_IDLE
+﻿#ifndef FSM_IDLE
+#define FSM_IDLE
 #include "fsm_state.h"
 
 class Idle : public FsmState
@@ -20,5 +20,5 @@ public:
 	void SendState(Player* pPlayer) override;
 };
 
-#endif // !AI_IDLE
+#endif // !FSM_IDLE
 
