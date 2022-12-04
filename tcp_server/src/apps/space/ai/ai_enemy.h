@@ -11,7 +11,6 @@ class AIEnemy : public Entity<AIEnemy>, public IAwakeFromPoolSystem<int, int, Ve
 	int _id = 0;
 	int _hp = 0;
 	float _speed = 0;
-	float _dist = 0;
 	Vector3 _initPos;
 	Vector3 _currPos;
 	Vector3 _nextPos;
@@ -35,8 +34,6 @@ public:
 
 	float GetCurrSpeed() const { return _speed; }
 
-	float GetDistToNext() const { return _dist; }
-
 	Vector3 GetInitPos() const { return _initPos; }
 
 	Vector3 GetCurrPos() const { return _currPos; }
@@ -54,8 +51,6 @@ public:
 	void SetNextPos(const Vector3& pos);
 
 	void SetPatrolPoint(int index);
-
-	void UpdatePos(uint64 timeElapsed);
 };
 
 #endif // !AIENEMY

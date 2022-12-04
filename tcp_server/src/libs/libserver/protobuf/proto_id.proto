@@ -149,4 +149,5 @@ enum MsgId {
 	S2C_Enemy				= 30007;
 	C2S_RequestSyncEnemies	= 30008;
 	S2C_RequestSyncEnemies	= 30009;
+	S2C_RequestLinkPlayer	= 30010;
 }

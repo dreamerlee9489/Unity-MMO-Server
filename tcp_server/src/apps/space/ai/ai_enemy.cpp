@@ -53,15 +53,3 @@ void AIEnemy::SetPatrolPoint(int index)
 		break;
 	}
 }
-
-void AIEnemy::UpdatePos(uint64 timeElapsed)
-{
-	_dist = _currPos.GetDistance(_nextPos);
-	if (_dist > StopDist)
-	{
-		float deltaTime = timeElapsed * 1.0 / 1000;
-		Vector3 dir = (_nextPos - _currPos).Normalize();
-		_currPos.X += deltaTime * _speed * dir.X;
-		_currPos.Z += deltaTime * _speed * dir.Z;
-	}
-}

@@ -49,7 +49,7 @@ struct TableStruct_msg_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxillaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[69]
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[70]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
@@ -204,6 +204,9 @@ extern RemoveComponentDefaultTypeInternal _RemoveComponent_default_instance_;
 class RemovePlayer;
 class RemovePlayerDefaultTypeInternal;
 extern RemovePlayerDefaultTypeInternal _RemovePlayer_default_instance_;
+class RequestLinkPlayer;
+class RequestLinkPlayerDefaultTypeInternal;
+extern RequestLinkPlayerDefaultTypeInternal _RequestLinkPlayer_default_instance_;
 class RequestSyncEnemies;
 class RequestSyncEnemiesDefaultTypeInternal;
 extern RequestSyncEnemiesDefaultTypeInternal _RequestSyncEnemies_default_instance_;
@@ -315,6 +318,7 @@ template<> ::Proto::QueryWorld* Arena::CreateMaybeMessage<::Proto::QueryWorld>(A
 template<> ::Proto::QueryWorldRs* Arena::CreateMaybeMessage<::Proto::QueryWorldRs>(Arena*);
 template<> ::Proto::RemoveComponent* Arena::CreateMaybeMessage<::Proto::RemoveComponent>(Arena*);
 template<> ::Proto::RemovePlayer* Arena::CreateMaybeMessage<::Proto::RemovePlayer>(Arena*);
+template<> ::Proto::RequestLinkPlayer* Arena::CreateMaybeMessage<::Proto::RequestLinkPlayer>(Arena*);
 template<> ::Proto::RequestSyncEnemies* Arena::CreateMaybeMessage<::Proto::RequestSyncEnemies>(Arena*);
 template<> ::Proto::RequestSyncPlayer* Arena::CreateMaybeMessage<::Proto::RequestSyncPlayer>(Arena*);
 template<> ::Proto::RequestWorld* Arena::CreateMaybeMessage<::Proto::RequestWorld>(Arena*);
@@ -10791,6 +10795,137 @@ class RequestSyncEnemies :
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_msg_2eproto;
 };
+// -------------------------------------------------------------------
+
+class RequestLinkPlayer :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Proto.RequestLinkPlayer) */ {
+ public:
+  RequestLinkPlayer();
+  virtual ~RequestLinkPlayer();
+
+  RequestLinkPlayer(const RequestLinkPlayer& from);
+  RequestLinkPlayer(RequestLinkPlayer&& from) noexcept
+    : RequestLinkPlayer() {
+    *this = ::std::move(from);
+  }
+
+  inline RequestLinkPlayer& operator=(const RequestLinkPlayer& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline RequestLinkPlayer& operator=(RequestLinkPlayer&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const RequestLinkPlayer& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const RequestLinkPlayer* internal_default_instance() {
+    return reinterpret_cast<const RequestLinkPlayer*>(
+               &_RequestLinkPlayer_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    69;
+
+  friend void swap(RequestLinkPlayer& a, RequestLinkPlayer& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(RequestLinkPlayer* other) {
+    if (other == this) return;
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline RequestLinkPlayer* New() const final {
+    return CreateMaybeMessage<RequestLinkPlayer>(nullptr);
+  }
+
+  RequestLinkPlayer* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<RequestLinkPlayer>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const RequestLinkPlayer& from);
+  void MergeFrom(const RequestLinkPlayer& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  #else
+  bool MergePartialFromCodedStream(
+      ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) final;
+  #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  void SerializeWithCachedSizes(
+      ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(RequestLinkPlayer* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "Proto.RequestLinkPlayer";
+  }
+  private:
+  inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_msg_2eproto);
+    return ::descriptor_table_msg_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kEnemyIdFieldNumber = 1,
+  };
+  // int32 enemy_id = 1;
+  void clear_enemy_id();
+  ::PROTOBUF_NAMESPACE_ID::int32 enemy_id() const;
+  void set_enemy_id(::PROTOBUF_NAMESPACE_ID::int32 value);
+
+  // @@protoc_insertion_point(class_scope:Proto.RequestLinkPlayer)
+ private:
+  class _Internal;
+
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::int32 enemy_id_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_msg_2eproto;
+};
 // ===================================================================
 
 
@@ -15141,9 +15276,29 @@ inline void RequestSyncEnemies::set_player_sn(::PROTOBUF_NAMESPACE_ID::uint64 va
   // @@protoc_insertion_point(field_set:Proto.RequestSyncEnemies.player_sn)
 }
 
+// -------------------------------------------------------------------
+
+// RequestLinkPlayer
+
+// int32 enemy_id = 1;
+inline void RequestLinkPlayer::clear_enemy_id() {
+  enemy_id_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 RequestLinkPlayer::enemy_id() const {
+  // @@protoc_insertion_point(field_get:Proto.RequestLinkPlayer.enemy_id)
+  return enemy_id_;
+}
+inline void RequestLinkPlayer::set_enemy_id(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  enemy_id_ = value;
+  // @@protoc_insertion_point(field_set:Proto.RequestLinkPlayer.enemy_id)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

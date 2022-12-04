@@ -136,16 +136,17 @@ namespace Proto {
             "AiABKAUSHgoGY3VyUG9zGAMgASgLMg4uUHJvdG8uVmVjdG9yMxIeCgZoaXRQ",
             "b3MYBCABKAsyDi5Qcm90by5WZWN0b3IzEhEKCXBsYXllcl9zbhgFIAEoBBIQ",
             "CghlbmVteV9pZBgGIAEoBSInChJSZXF1ZXN0U3luY0VuZW1pZXMSEQoJcGxh",
-            "eWVyX3NuGAEgASgEKngKB1RhZ1R5cGUSDwoLVGFnVHlwZU5vbmUQABISCg5U",
-            "YWdUeXBlQWNjb3VudBABEg4KClRhZ1R5cGVBcHAQAhIRCg1UYWdUeXBlRW50",
-            "aXR5EAMSEgoOVGFnVHlwZVRvV29ybGQQBBIRCg1UYWdUeXBlUGxheWVyEAUq",
-            "mgEKFkFjY291bnRDaGVja1JldHVybkNvZGUSCgoGQVJDX09LEAASDwoLQVJD",
-            "X1VOS09OV04QARIZChVBUkNfTk9UX0ZPVU5EX0FDQ09VTlQQAhIWChJBUkNf",
-            "UEFTU1dPUkRfV1JPTkcQAxIPCgtBUkNfTE9HR0lORxAEEg8KC0FSQ19USU1F",
-            "T1VUEAUSDgoKQVJDX09OTElORRAGKkcKE0xvZ2luSHR0cFJldHVybkNvZGUS",
-            "CwoHTEhSQ19PSxAAEhAKDExIUkNfVElNRU9VVBABEhEKDUxIUkNfTk9URk9V",
-            "TkQQAipMChZDcmVhdGVQbGF5ZXJSZXR1cm5Db2RlEhEKDUNQUl9DcmVhdGVf",
-            "T0sQABIPCgtDUFJfVW5rb253bhABEg4KCkNQUl9SZW5hbWUQAmIGcHJvdG8z"));
+            "eWVyX3NuGAEgASgEIiUKEVJlcXVlc3RMaW5rUGxheWVyEhAKCGVuZW15X2lk",
+            "GAEgASgFKngKB1RhZ1R5cGUSDwoLVGFnVHlwZU5vbmUQABISCg5UYWdUeXBl",
+            "QWNjb3VudBABEg4KClRhZ1R5cGVBcHAQAhIRCg1UYWdUeXBlRW50aXR5EAMS",
+            "EgoOVGFnVHlwZVRvV29ybGQQBBIRCg1UYWdUeXBlUGxheWVyEAUqmgEKFkFj",
+            "Y291bnRDaGVja1JldHVybkNvZGUSCgoGQVJDX09LEAASDwoLQVJDX1VOS09O",
+            "V04QARIZChVBUkNfTk9UX0ZPVU5EX0FDQ09VTlQQAhIWChJBUkNfUEFTU1dP",
+            "UkRfV1JPTkcQAxIPCgtBUkNfTE9HR0lORxAEEg8KC0FSQ19USU1FT1VUEAUS",
+            "DgoKQVJDX09OTElORRAGKkcKE0xvZ2luSHR0cFJldHVybkNvZGUSCwoHTEhS",
+            "Q19PSxAAEhAKDExIUkNfVElNRU9VVBABEhEKDUxIUkNfTk9URk9VTkQQAipM",
+            "ChZDcmVhdGVQbGF5ZXJSZXR1cm5Db2RlEhEKDUNQUl9DcmVhdGVfT0sQABIP",
+            "CgtDUFJfVW5rb253bhABEg4KCkNQUl9SZW5hbWUQAmIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Proto.DbReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Proto.TagType), typeof(global::Proto.AccountCheckReturnCode), typeof(global::Proto.LoginHttpReturnCode), typeof(global::Proto.CreatePlayerReturnCode), }, null, new pbr::GeneratedClrTypeInfo[] {
@@ -217,7 +218,8 @@ namespace Proto {
             new pbr::GeneratedClrTypeInfo(typeof(global::Proto.EnemyList), global::Proto.EnemyList.Parser, new[]{ "Enemies" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Proto.FsmSyncState), global::Proto.FsmSyncState.Parser, new[]{ "State", "Code", "CurPos", "NxtPos", "EnemyId", "PlayerSn" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Proto.PlayerSyncState), global::Proto.PlayerSyncState.Parser, new[]{ "State", "Code", "CurPos", "HitPos", "PlayerSn", "EnemyId" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.RequestSyncEnemies), global::Proto.RequestSyncEnemies.Parser, new[]{ "PlayerSn" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.RequestSyncEnemies), global::Proto.RequestSyncEnemies.Parser, new[]{ "PlayerSn" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.RequestLinkPlayer), global::Proto.RequestLinkPlayer.Parser, new[]{ "EnemyId" }, null, null, null, null)
           }));
     }
     #endregion
@@ -11482,6 +11484,135 @@ namespace Proto {
             break;
           case 8: {
             PlayerSn = input.ReadUInt64();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class RequestLinkPlayer : pb::IMessage<RequestLinkPlayer> {
+    private static readonly pb::MessageParser<RequestLinkPlayer> _parser = new pb::MessageParser<RequestLinkPlayer>(() => new RequestLinkPlayer());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<RequestLinkPlayer> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Proto.MsgReflection.Descriptor.MessageTypes[69]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public RequestLinkPlayer() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public RequestLinkPlayer(RequestLinkPlayer other) : this() {
+      enemyId_ = other.enemyId_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public RequestLinkPlayer Clone() {
+      return new RequestLinkPlayer(this);
+    }
+
+    /// <summary>Field number for the "enemy_id" field.</summary>
+    public const int EnemyIdFieldNumber = 1;
+    private int enemyId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int EnemyId {
+      get { return enemyId_; }
+      set {
+        enemyId_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as RequestLinkPlayer);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(RequestLinkPlayer other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (EnemyId != other.EnemyId) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (EnemyId != 0) hash ^= EnemyId.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (EnemyId != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(EnemyId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (EnemyId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(EnemyId);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(RequestLinkPlayer other) {
+      if (other == null) {
+        return;
+      }
+      if (other.EnemyId != 0) {
+        EnemyId = other.EnemyId;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            EnemyId = input.ReadInt32();
             break;
           }
         }

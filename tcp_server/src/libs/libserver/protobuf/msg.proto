@@ -442,3 +442,7 @@ message PlayerSyncState {
 message RequestSyncEnemies {
 	uint64 player_sn = 1;
 }
+
+message RequestLinkPlayer {
+	int32 enemy_id = 1;
+}

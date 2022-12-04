@@ -3,7 +3,7 @@
 
 Vector3 Vector3::Zero = Vector3(0, 0, 0);
 
-void Vector3::ParserFromProto(Proto::Vector3 position)
+void Vector3::ParserFromProto(const Proto::Vector3& position)
 {
 	this->X = position.x();
 	this->Y = position.y();
@@ -22,6 +22,13 @@ float Vector3::GetDistance(Vector3 point) const
 	const auto xv = point.X - this->X;
 	const auto zv = point.Z - this->Z;
 	return sqrt(xv * xv + zv * zv);
+}
+
+float Vector3::GetManhaDist(Vector3 point) const
+{
+	const auto xv = point.X - this->X;
+	const auto zv = point.Z - this->Z;
+	return abs(xv) + abs(zv);
 }
 
 float Vector3::SqrDistance(Vector3& src, Vector3& dst)

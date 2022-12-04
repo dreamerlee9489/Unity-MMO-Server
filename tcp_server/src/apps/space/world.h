@@ -24,6 +24,7 @@ public:
 	void BackToPool() override;
 	void BroadcastPacket(Proto::MsgId msgId, google::protobuf::Message& proto);
 	void BroadcastPacket(Proto::MsgId msgId, google::protobuf::Message& proto, std::set<uint64> players);
+	void SendToNearestPlayer(Vector3& pos, Proto::MsgId msgId, google::protobuf::Message& proto);
 	PlayerManagerComponent* GetPlayerManager() const { return _playerManager; }
 
 protected:
@@ -31,6 +32,7 @@ protected:
 	void HandleNetworkDisconnect(Packet* pPacket);
 	void HandleSyncPlayer(Packet* pPacket);
 	void HandleFsmSyncState(Packet* pPacket);
+	void HandleEnemy(Packet* pPacket);
 	void HandleRequestSyncPlayer(Player* pPlayer, Packet* pPacket);
 	void HandleG2SRemovePlayer(Player* pPlayer, Packet* pPacket);
 	void HandleMove(Player* pPlayer, Packet* pPacket);

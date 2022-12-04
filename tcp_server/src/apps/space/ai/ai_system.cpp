@@ -21,7 +21,6 @@ void AISystem::Update(EntitySystem* pEntities)
 			FsmComponent* pFsmComponent = (FsmComponent*)iter->second;
 			AIEnemy* pEnemy = pFsmComponent->GetParent<AIEnemy>();
 			pFsmComponent->Update(pEnemy);
-			pEnemy->UpdatePos(timeElapsed);
 		}
 	}
 }

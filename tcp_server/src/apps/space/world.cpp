@@ -1,5 +1,6 @@
 ﻿#include "world.h"
 #include "ai/fsm_state.h"
+#include <cfloat>
 
 void World::Awake(int worldId)
 {
@@ -14,6 +15,7 @@ void World::Awake(int worldId)
 	pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_NetworkDisconnect, BindFunP1(this, &World::HandleNetworkDisconnect));
 	pMsgSystem->RegisterFunction(this, Proto::MsgId::G2S_SyncPlayer, BindFunP1(this, &World::HandleSyncPlayer));
 	pMsgSystem->RegisterFunction(this, Proto::MsgId::C2S_FsmSyncState, BindFunP1(this, &World::HandleFsmSyncState));
+	pMsgSystem->RegisterFunction(this, Proto::MsgId::C2S_Enemy, BindFunP1(this, &World::HandleEnemy));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::G2S_RequestSyncPlayer, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleRequestSyncPlayer));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::G2S_RemovePlayer, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleG2SRemovePlayer));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_Move, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleMove));
@@ -202,7 +204,7 @@ void World::BroadcastPacket(Proto::MsgId msgId, google::protobuf::Message& proto
 {
 	auto pPlayerMgr = GetComponent<PlayerManagerComponent>();
 	const auto players = pPlayerMgr->GetAll();
-	for (const auto pair : *players)
+	for (const auto& pair : *players)
 	{
 		//LOG_DEBUG("broadcast msgId:" << Log4Help::GetMsgIdName(msgId).c_str() << " player sn:" << pair.second->GetPlayerSN());
 		MessageSystemHelp::SendPacket(msgId, proto, pair.second);
@@ -221,6 +223,23 @@ void World::BroadcastPacket(Proto::MsgId msgId, google::protobuf::Message& proto
 		//LOG_DEBUG("broadcast msgId:" << Log4Help::GetMsgIdName(msgId).c_str() << " player sn:" << one);
 		MessageSystemHelp::SendPacket(msgId, proto, pPlayer);
 	}
+}
+
+void World::SendToNearestPlayer(Vector3& pos, Proto::MsgId msgId, google::protobuf::Message& proto)
+{
+	auto players = _playerManager->GetAll();
+	float dist = FLT_MAX;
+	Player* player = nullptr;
+	for (const auto& pair : *players)
+	{
+		float temp = pos.GetManhaDist(pair.second->GetComponent<PlayerComponentLastMap>()->GetCur()->Position);
+		if (temp < dist)
+		{
+			dist = temp;
+			player = pair.second;
+		}
+	}
+	MessageSystemHelp::SendPacket(msgId, proto, player);
 }
 
 void World::HandleRequestSyncPlayer(Player* pPlayer, Packet* pPacket)
@@ -305,4 +324,12 @@ void World::HandleRequestSyncEnemies(Player* pPlayer)
 		}
 		MessageSystemHelp::SendPacket(Proto::MsgId::S2C_EnemyList, protoList, pPlayer);
 	}
+}
+
+void World::HandleEnemy(Packet* pPacket)
+{
+	Proto::Enemy proto = pPacket->ParseToProto<Proto::Enemy>();
+	Vector3 pos;
+	pos.ParserFromProto(proto.pos());
+	_enemies[proto.id()]->SetCurrPos(pos);
 }
