@@ -14,7 +14,8 @@ class AIEnemy : public Entity<AIEnemy>, public IAwakeFromPoolSystem<int, int, Ve
 	Vector3 _initPos;
 	Vector3 _currPos;
 	Vector3 _nextPos;
-	World* _world;
+	World* _world = nullptr;
+	Player* _linkPlayer = nullptr;
 
 public:
 	void Awake(int id, int hp, Vector3 pos) override;
@@ -27,17 +28,19 @@ public:
 
 	float GetCurrSpeed() const { return _speed; }
 
-	Vector3 GetInitPos() const { return _initPos; }
+	Vector3& GetInitPos() { return _initPos; }
 
-	Vector3 GetCurrPos() const { return _currPos; }
+	Vector3& GetCurrPos() { return _currPos; }
 
-	Vector3 GetNextPos() const { return _nextPos; }
+	Vector3& GetNextPos() { return _nextPos; }
 
 	World* GetWorld() const { return _world; }
 
+	Player* GetLinkPlayer() const { return _linkPlayer; }
+
 	void SetWorld(World* const world) { _world = world; }
 
-	void SetSpeed(const float speed) { _speed = speed; }
+	void SetLinkPlayer(Player* player) { _linkPlayer = player; }
 
 	void SetCurrPos(const Vector3& pos);
 

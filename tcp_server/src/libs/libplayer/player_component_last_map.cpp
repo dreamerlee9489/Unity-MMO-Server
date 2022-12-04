@@ -91,7 +91,7 @@ LastWorld* PlayerComponentLastMap::GetLastDungeon() const
 
 LastWorld* PlayerComponentLastMap::GetCur() const
 {
-	if (!this || !_pPublic)
+	if (!_pPublic)
 		return nullptr;
 	if (_pPublic->WorldId == _curWorldId)
 		return _pPublic;

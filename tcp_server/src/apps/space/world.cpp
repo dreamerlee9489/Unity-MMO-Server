@@ -70,10 +70,6 @@ void World::HandleNetworkDisconnect(Packet* pPacket)
 			return;
 		}
 
-		for (auto enemy : _enemies)
-			if (enemy->GetComponent<FsmComponent>()->GetCurrState()->GetTarget() == pPlayer)
-				enemy->GetComponent<FsmComponent>()->ResetState();
-
 		Proto::SavePlayer protoSave;
 		protoSave.set_player_sn(pPlayer->GetPlayerSN());
 		pPlayer->SerializeToProto(protoSave.mutable_player());
@@ -84,6 +80,18 @@ void World::HandleNetworkDisconnect(Packet* pPacket)
 		protoDis.set_sn(pPlayer->GetPlayerSN());
 		BroadcastPacket(Proto::MsgId::S2C_RoleDisAppear, protoDis);
 		pPlayerMgr->RemovePlayerBySn(pTagPlayer->KeyInt64);
+
+		for (auto enemy : _enemies)
+		{
+			if (enemy->GetComponent<FsmComponent>()->GetCurrState()->GetTarget() == pPlayer)
+				enemy->GetComponent<FsmComponent>()->ResetState();
+			if (enemy->GetLinkPlayer() == pPlayer)
+			{
+				Proto::RequestLinkPlayer proto;
+				proto.set_enemy_id(enemy->GetID());
+				enemy->SetLinkPlayer(SendToNearestPlayer(enemy->GetCurrPos(), Proto::MsgId::S2C_RequestLinkPlayer, proto));
+			}
+		}
 	}
 	else
 	{
@@ -225,7 +233,7 @@ void World::BroadcastPacket(Proto::MsgId msgId, google::protobuf::Message& proto
 	}
 }
 
-void World::SendToNearestPlayer(Vector3& pos, Proto::MsgId msgId, google::protobuf::Message& proto)
+Player* World::SendToNearestPlayer(Vector3& pos, Proto::MsgId msgId, google::protobuf::Message& proto)
 {
 	auto players = _playerManager->GetAll();
 	float dist = FLT_MAX;
@@ -240,6 +248,7 @@ void World::SendToNearestPlayer(Vector3& pos, Proto::MsgId msgId, google::protob
 		}
 	}
 	MessageSystemHelp::SendPacket(msgId, proto, player);
+	return player;
 }
 
 void World::HandleRequestSyncPlayer(Player* pPlayer, Packet* pPacket)

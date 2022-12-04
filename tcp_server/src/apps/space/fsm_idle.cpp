@@ -6,7 +6,7 @@ Idle::Idle(AIEnemy* owner, Player* target) : FsmState(owner, target)
 	_type = FsmStateType::Idle;
 	Proto::RequestLinkPlayer proto;
 	proto.set_enemy_id(_owner->GetID());
-	_owner->GetWorld()->SendToNearestPlayer(_owner->GetCurrPos(), Proto::MsgId::S2C_RequestLinkPlayer, proto);
+	_owner->SetLinkPlayer(_owner->GetWorld()->SendToNearestPlayer(_owner->GetCurrPos(), Proto::MsgId::S2C_RequestLinkPlayer, proto));
 }
 
 void Idle::Enter()

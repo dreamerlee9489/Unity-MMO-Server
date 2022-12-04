@@ -24,7 +24,7 @@ public:
 	void BackToPool() override;
 	void BroadcastPacket(Proto::MsgId msgId, google::protobuf::Message& proto);
 	void BroadcastPacket(Proto::MsgId msgId, google::protobuf::Message& proto, std::set<uint64> players);
-	void SendToNearestPlayer(Vector3& pos, Proto::MsgId msgId, google::protobuf::Message& proto);
+	Player* SendToNearestPlayer(Vector3& pos, Proto::MsgId msgId, google::protobuf::Message& proto);
 	PlayerManagerComponent* GetPlayerManager() const { return _playerManager; }
 
 protected:
