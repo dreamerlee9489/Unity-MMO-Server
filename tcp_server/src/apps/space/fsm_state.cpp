@@ -1,8 +1,8 @@
 ﻿#include "fsm_state.h"
-#include "idle.h"
-#include "patrol.h"
-#include "pursuit.h"
-#include "attack.h"
+#include "fsm_idle.h"
+#include "fsm_patrol.h"
+#include "fsm_pursuit.h"
+#include "fsm_attack.h"
 
 FsmState::FsmState(AIEnemy* owner, Player* target) : _owner(owner), _target(target)
 {

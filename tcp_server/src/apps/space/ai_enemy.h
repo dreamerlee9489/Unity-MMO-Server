@@ -3,7 +3,7 @@
 #include "libserver/entity.h"
 #include "libserver/system.h"
 #include "libserver/vector3.h"
-#include "../world.h"
+#include "world.h"
 
 class World;
 class AIEnemy : public Entity<AIEnemy>, public IAwakeFromPoolSystem<int, int, Vector3>
@@ -17,13 +17,6 @@ class AIEnemy : public Entity<AIEnemy>, public IAwakeFromPoolSystem<int, int, Ve
 	World* _world;
 
 public:
-	const float WalkSpeed = 1.56f;
-	const float RunSpeed = 5.56f;
-	const float StopDist = 1.0f;
-	const float ViewDist = 6.0f;
-	const float PursuitDist = 4.0f;
-	const float AttackDist = 1.5f;
-
 	void Awake(int id, int hp, Vector3 pos) override;
 
 	void BackToPool() override;

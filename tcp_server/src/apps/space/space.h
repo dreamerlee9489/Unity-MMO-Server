@@ -4,7 +4,7 @@
 #include "world_operator_component.h"
 #include "world_gather.h"
 #include "move_system.h"
-#include "ai/ai_system.h"
+#include "ai_system.h"
 
 inline void InitializeComponentSpace(ThreadMgr* pThreadMgr)
 {

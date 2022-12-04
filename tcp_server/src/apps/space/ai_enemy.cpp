@@ -7,7 +7,6 @@ void AIEnemy::Awake(int id, int hp, Vector3 pos)
 	_initPos = pos;
 	_currPos = pos;
 	_nextPos = pos;
-	_speed = WalkSpeed;
 }
 
 void AIEnemy::BackToPool()

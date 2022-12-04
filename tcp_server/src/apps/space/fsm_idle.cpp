@@ -1,5 +1,5 @@
-﻿#include "idle.h"
-#include "patrol.h"
+﻿#include "fsm_idle.h"
+#include "fsm_patrol.h"
 
 Idle::Idle(AIEnemy* owner, Player* target) : FsmState(owner, target)
 {
@@ -11,7 +11,6 @@ Idle::Idle(AIEnemy* owner, Player* target) : FsmState(owner, target)
 
 void Idle::Enter()
 {
-	_owner->SetSpeed(_owner->WalkSpeed);
 	BroadcastState();
 }
 

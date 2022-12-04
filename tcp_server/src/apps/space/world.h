@@ -11,8 +11,8 @@
 #include "player_manager_component.h"
 #include "player_component_detail.h"
 #include "move_component.h"
-#include "ai/ai_enemy.h"
-#include "ai/fsm_component.h"
+#include "fsm_component.h"
+#include "ai_enemy.h"
 #include <vector>
 
 class Player;

@@ -101,28 +101,28 @@
     <ClCompile Include="..\game\world_proxy_locator.cpp">
       <Filter>game\world\proxy</Filter>
     </ClCompile>
-    <ClCompile Include="..\space\ai\fsm_component.cpp">
+    <ClCompile Include="..\space\ai_enemy.cpp">
       <Filter>space\ai</Filter>
     </ClCompile>
-    <ClCompile Include="..\space\ai\attack.cpp">
+    <ClCompile Include="..\space\ai_system.cpp">
       <Filter>space\ai</Filter>
     </ClCompile>
-    <ClCompile Include="..\space\ai\idle.cpp">
+    <ClCompile Include="..\space\fsm_attack.cpp">
       <Filter>space\ai</Filter>
     </ClCompile>
-    <ClCompile Include="..\space\ai\patrol.cpp">
+    <ClCompile Include="..\space\fsm_component.cpp">
       <Filter>space\ai</Filter>
     </ClCompile>
-    <ClCompile Include="..\space\ai\pursuit.cpp">
+    <ClCompile Include="..\space\fsm_idle.cpp">
       <Filter>space\ai</Filter>
     </ClCompile>
-    <ClCompile Include="..\space\ai\ai_enemy.cpp">
+    <ClCompile Include="..\space\fsm_patrol.cpp">
       <Filter>space\ai</Filter>
     </ClCompile>
-    <ClCompile Include="..\space\ai\ai_system.cpp">
+    <ClCompile Include="..\space\fsm_pursuit.cpp">
       <Filter>space\ai</Filter>
     </ClCompile>
-    <ClCompile Include="..\space\ai\fsm_state.cpp">
+    <ClCompile Include="..\space\fsm_state.cpp">
       <Filter>space\ai</Filter>
     </ClCompile>
   </ItemGroup>
@@ -218,7 +218,7 @@
       <UniqueIdentifier>{a02cf34a-7c30-4d28-95de-72b3659b885c}</UniqueIdentifier>
     </Filter>
     <Filter Include="space\ai">
-      <UniqueIdentifier>{21102a23-ebdc-4b8a-9549-5bfa81e56df5}</UniqueIdentifier>
+      <UniqueIdentifier>{ff059f1d-b0ea-473a-bbc2-c10d648a02b0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -315,28 +315,28 @@
     <ClInclude Include="..\game\world_proxy_locator.h">
       <Filter>game\world\proxy</Filter>
     </ClInclude>
-    <ClInclude Include="..\space\ai\fsm_component.h">
+    <ClInclude Include="..\space\ai_enemy.h">
       <Filter>space\ai</Filter>
     </ClInclude>
-    <ClInclude Include="..\space\ai\fsm_state.h">
+    <ClInclude Include="..\space\ai_system.h">
       <Filter>space\ai</Filter>
     </ClInclude>
-    <ClInclude Include="..\space\ai\ai_system.h">
+    <ClInclude Include="..\space\fsm_attack.h">
       <Filter>space\ai</Filter>
     </ClInclude>
-    <ClInclude Include="..\space\ai\ai_enemy.h">
+    <ClInclude Include="..\space\fsm_component.h">
       <Filter>space\ai</Filter>
     </ClInclude>
-    <ClInclude Include="..\space\ai\idle.h">
+    <ClInclude Include="..\space\fsm_idle.h">
       <Filter>space\ai</Filter>
     </ClInclude>
-    <ClInclude Include="..\space\ai\patrol.h">
+    <ClInclude Include="..\space\fsm_patrol.h">
       <Filter>space\ai</Filter>
     </ClInclude>
-    <ClInclude Include="..\space\ai\pursuit.h">
+    <ClInclude Include="..\space\fsm_pursuit.h">
       <Filter>space\ai</Filter>
     </ClInclude>
-    <ClInclude Include="..\space\ai\attack.h">
+    <ClInclude Include="..\space\fsm_state.h">
       <Filter>space\ai</Filter>
     </ClInclude>
   </ItemGroup>

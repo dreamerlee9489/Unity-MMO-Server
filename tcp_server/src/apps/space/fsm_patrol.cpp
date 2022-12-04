@@ -1,5 +1,5 @@
-﻿#include "patrol.h"
-#include "pursuit.h"
+﻿#include "fsm_patrol.h"
+#include "fsm_pursuit.h"
 
 Patrol::Patrol(AIEnemy* owner, Player* target) : FsmState(owner, target)
 {
@@ -12,7 +12,6 @@ void Patrol::Enter()
 {
 	_index = _dis(_eng);
 	_owner->SetPatrolPoint(_index);
-	_owner->SetSpeed(_owner->WalkSpeed);
 	BroadcastState();
 }
 

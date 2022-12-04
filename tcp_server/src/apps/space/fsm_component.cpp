@@ -1,6 +1,6 @@
-﻿#include "./fsm_component.h"
-#include "./patrol.h"
-#include "./idle.h"
+﻿#include "fsm_component.h"
+#include "fsm_patrol.h"
+#include "fsm_idle.h"
 
 FsmComponent::~FsmComponent()
 {

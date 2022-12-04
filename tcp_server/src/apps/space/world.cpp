@@ -1,5 +1,5 @@
 ﻿#include "world.h"
-#include "ai/fsm_state.h"
+#include "fsm_state.h"
 #include <cfloat>
 
 void World::Awake(int worldId)
