@@ -19,7 +19,7 @@ void Idle::Execute()
 {
 	_currTime = Global::GetInstance()->TimeTick;
 	_timeElapsed = _currTime - _lastTime;
-	if (_timeElapsed >= 4000)
+	if (_timeElapsed >= 2000)
 	{
 		_lastTime = _currTime;
 		_owner->GetComponent<FsmComponent>()->ChangeState(new Patrol((AIEnemy*)_owner));
