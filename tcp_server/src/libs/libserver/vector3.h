@@ -40,8 +40,8 @@ struct Vector3
 	static float SqrDistance(Vector3& src, Vector3& dst);
 	void ParserFromProto(const Proto::Vector3& position);
 	void SerializeToProto(Proto::Vector3* pProto) const;
-	float GetDistance(Vector3 point) const;
-	float GetManhaDist(Vector3 point) const;
+	float GetDistance(Vector3& point) const;
+	float GetManhaDist(Vector3& point) const;
 	Vector3 Normalize() const;
 
 	float X{ 0 };

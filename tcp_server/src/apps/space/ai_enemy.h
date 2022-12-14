@@ -40,7 +40,7 @@ public:
 
 	void SetWorld(World* const world) { _world = world; }
 
-	void SetLinkPlayer(Player* player) { _linkPlayer = player; }
+	void SetLinkPlayer(Player* player);
 
 	void SetCurrPos(const Vector3& pos);
 

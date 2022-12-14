@@ -44,22 +44,8 @@ void FsmComponent::SyncState(Proto::FsmSyncState& proto, Player* pPlayer)
 {
 	FsmStateType type = (FsmStateType)proto.state();
 	if (!_currState->GetTarget() && type != _currState->GetStateType())
-	{
-		Vector3 curPos, nxtPos;
-		curPos.ParserFromProto(proto.curpos());
-		nxtPos.ParserFromProto(proto.nxtpos());
-		_parent->SetCurrPos(curPos);
-		_parent->SetNextPos(nxtPos);
 		ChangeState(FsmState::GenFsmState(type, _parent, pPlayer));
-	}
 	else if (pPlayer == _currState->GetTarget())
-	{
-		Vector3 curPos, nxtPos;
-		curPos.ParserFromProto(proto.curpos());
-		nxtPos.ParserFromProto(proto.nxtpos());
-		_parent->SetCurrPos(curPos);
-		_parent->SetNextPos(nxtPos);
 		if (type != _currState->GetStateType())
 			ChangeState(FsmState::GenFsmState(type, _parent, pPlayer));
-	}
 }

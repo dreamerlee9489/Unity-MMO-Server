@@ -163,7 +163,6 @@ message PlayerLittle {
     // 用于登录Game
 	LastWorld last_world = 5;	// 公共地图
 	LastWorld last_dungeon = 6;	// 副本地图
-
 }
 
 message PlayerList {
@@ -420,8 +419,6 @@ message Enemy {
 message FsmSyncState {
 	int32 state = 1;
 	int32 code = 2;
-	Vector3 curPos = 3;
-	Vector3 nxtPos = 4;
 	int32 enemy_id = 5;
 	uint64 player_sn = 6;
 }
@@ -442,4 +439,5 @@ message RequestSyncEnemy {
 
 message RequestLinkPlayer {
 	int32 enemy_id = 1;
+	bool isLinker = 2;
 }

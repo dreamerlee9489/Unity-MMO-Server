@@ -5,11 +5,19 @@
 Attack::Attack(AIEnemy* owner, Player* target) : FsmState(owner, target)
 {
 	_type = FsmStateType::Attack;
+	_lastMap = _target->GetComponent<PlayerComponentLastMap>();
 }
 
 void Attack::Enter()
 {
-	_lastMap = _target->GetComponent<PlayerComponentLastMap>();
+	if (_target != _owner->GetLinkPlayer())
+	{
+		_owner->SetLinkPlayer(_target);
+		Proto::RequestLinkPlayer proto;
+		proto.set_enemy_id(_owner->GetID());
+		proto.set_islinker(true);
+		MessageSystemHelp::SendPacket(Proto::MsgId::S2C_RequestLinkPlayer, proto, _target);
+	}
 	BroadcastState();
 }
 

@@ -17,14 +17,14 @@ void Vector3::SerializeToProto(Proto::Vector3* pProto) const
 	pProto->set_z(Z);
 }
 
-float Vector3::GetDistance(Vector3 point) const
+float Vector3::GetDistance(Vector3& point) const
 {
 	const auto xv = point.X - this->X;
 	const auto zv = point.Z - this->Z;
 	return sqrt(xv * xv + zv * zv);
 }
 
-float Vector3::GetManhaDist(Vector3 point) const
+float Vector3::GetManhaDist(Vector3& point) const
 {
 	const auto xv = point.X - this->X;
 	const auto zv = point.Z - this->Z;

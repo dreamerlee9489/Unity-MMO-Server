@@ -16,14 +16,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "res", "res", "{CEB39B1C-C53
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "proto", "proto", "{9DA1DF6B-B311-480C-ABF8-621A5E688EBA}"
 	ProjectSection(SolutionItems) = preProject
-		src\libs\libserver\protobuf\db.pb.cc = src\libs\libserver\protobuf\db.pb.cc
-		src\libs\libserver\protobuf\db.pb.h = src\libs\libserver\protobuf\db.pb.h
 		src\libs\libserver\protobuf\db.proto = src\libs\libserver\protobuf\db.proto
-		src\libs\libserver\protobuf\msg.pb.cc = src\libs\libserver\protobuf\msg.pb.cc
-		src\libs\libserver\protobuf\msg.pb.h = src\libs\libserver\protobuf\msg.pb.h
 		src\libs\libserver\protobuf\msg.proto = src\libs\libserver\protobuf\msg.proto
-		src\libs\libserver\protobuf\proto_id.pb.cc = src\libs\libserver\protobuf\proto_id.pb.cc
-		src\libs\libserver\protobuf\proto_id.pb.h = src\libs\libserver\protobuf\proto_id.pb.h
 		src\libs\libserver\protobuf\proto_id.proto = src\libs\libserver\protobuf\proto_id.proto
 	EndProjectSection
 EndProject

@@ -4,10 +4,6 @@
 Idle::Idle(AIEnemy* owner, Player* target) : FsmState(owner, target)
 {
 	_type = FsmStateType::Idle;
-	Proto::RequestLinkPlayer proto;
-	proto.set_enemy_id(_owner->GetID());
-	_owner->SetLinkPlayer(_owner->GetWorld()->SendToNearestPlayer
-	(_owner->GetCurrPos(), Proto::MsgId::S2C_RequestLinkPlayer, proto));
 }
 
 void Idle::Enter()
@@ -22,7 +18,7 @@ void Idle::Execute()
 	if (_timeElapsed >= 2000)
 	{
 		_lastTime = _currTime;
-		_owner->GetComponent<FsmComponent>()->ChangeState(new Patrol((AIEnemy*)_owner));
+		_owner->GetComponent<FsmComponent>()->ChangeState(new Patrol(_owner));
 	}
 }
 

@@ -4,12 +4,20 @@
 Pursuit::Pursuit(AIEnemy* owner, Player* target) : FsmState(owner, target)
 {
 	_type = FsmStateType::Pursuit;
+	_lastMap = _target->GetComponent<PlayerComponentLastMap>();
+	_owner->SetNextPos(_lastMap->GetCur()->Position);
 }
 
 void Pursuit::Enter()
 {
-	_lastMap = _target->GetComponent<PlayerComponentLastMap>();
-	_owner->SetNextPos(_lastMap->GetCur()->Position);
+	if (_target != _owner->GetLinkPlayer())
+	{
+		_owner->SetLinkPlayer(_target);
+		Proto::RequestLinkPlayer proto;
+		proto.set_enemy_id(_owner->GetID());
+		proto.set_islinker(true);
+		MessageSystemHelp::SendPacket(Proto::MsgId::S2C_RequestLinkPlayer, proto, _target);
+	}
 	BroadcastState();
 }
 

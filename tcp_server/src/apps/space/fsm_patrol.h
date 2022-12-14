@@ -2,10 +2,12 @@
 #define FSM_PATROL
 #include "fsm_component.h"
 #include "fsm_state.h"
+#include "fsm_idle.h"
 
+class Idle;
 class Patrol : public FsmState
 {
-	int _index = 0, _round = 0;
+	int _index = 0;
 	std::map<uint64, Player*>* _players = nullptr;
 	std::default_random_engine _eng;
 	std::uniform_int_distribution<int> _dis = std::uniform_int_distribution<int>(0, 3);

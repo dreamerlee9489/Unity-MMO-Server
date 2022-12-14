@@ -127,26 +127,25 @@ namespace Proto {
             "ZWFyEhkKBHJvbGUYASADKAsyCy5Qcm90by5Sb2xlIhsKDVJvbGVEaXNBcHBl",
             "YXISCgoCc24YASABKAQiOwoETW92ZRIRCglwbGF5ZXJfc24YASABKAQSIAoI",
             "cG9zaXRpb24YAyADKAsyDi5Qcm90by5WZWN0b3IzIjAKBUVuZW15EgoKAmlk",
-            "GAEgASgFEhsKA3BvcxgCIAEoCzIOLlByb3RvLlZlY3RvcjMikAEKDEZzbVN5",
-            "bmNTdGF0ZRINCgVzdGF0ZRgBIAEoBRIMCgRjb2RlGAIgASgFEh4KBmN1clBv",
-            "cxgDIAEoCzIOLlByb3RvLlZlY3RvcjMSHgoGbnh0UG9zGAQgASgLMg4uUHJv",
-            "dG8uVmVjdG9yMxIQCghlbmVteV9pZBgFIAEoBRIRCglwbGF5ZXJfc24YBiAB",
-            "KAQikwEKD1BsYXllclN5bmNTdGF0ZRINCgVzdGF0ZRgBIAEoBRIMCgRjb2Rl",
-            "GAIgASgFEh4KBmN1clBvcxgDIAEoCzIOLlByb3RvLlZlY3RvcjMSHgoGaGl0",
-            "UG9zGAQgASgLMg4uUHJvdG8uVmVjdG9yMxIRCglwbGF5ZXJfc24YBSABKAQS",
-            "EAoIZW5lbXlfaWQYBiABKAUiNwoQUmVxdWVzdFN5bmNFbmVteRIRCglwbGF5",
-            "ZXJfc24YASABKAQSEAoIZW5lbXlfaWQYAiABKAUiJQoRUmVxdWVzdExpbmtQ",
-            "bGF5ZXISEAoIZW5lbXlfaWQYASABKAUqeAoHVGFnVHlwZRIPCgtUYWdUeXBl",
-            "Tm9uZRAAEhIKDlRhZ1R5cGVBY2NvdW50EAESDgoKVGFnVHlwZUFwcBACEhEK",
-            "DVRhZ1R5cGVFbnRpdHkQAxISCg5UYWdUeXBlVG9Xb3JsZBAEEhEKDVRhZ1R5",
-            "cGVQbGF5ZXIQBSqaAQoWQWNjb3VudENoZWNrUmV0dXJuQ29kZRIKCgZBUkNf",
-            "T0sQABIPCgtBUkNfVU5LT05XThABEhkKFUFSQ19OT1RfRk9VTkRfQUNDT1VO",
-            "VBACEhYKEkFSQ19QQVNTV09SRF9XUk9ORxADEg8KC0FSQ19MT0dHSU5HEAQS",
-            "DwoLQVJDX1RJTUVPVVQQBRIOCgpBUkNfT05MSU5FEAYqRwoTTG9naW5IdHRw",
-            "UmV0dXJuQ29kZRILCgdMSFJDX09LEAASEAoMTEhSQ19USU1FT1VUEAESEQoN",
-            "TEhSQ19OT1RGT1VORBACKkwKFkNyZWF0ZVBsYXllclJldHVybkNvZGUSEQoN",
-            "Q1BSX0NyZWF0ZV9PSxAAEg8KC0NQUl9VbmtvbnduEAESDgoKQ1BSX1JlbmFt",
-            "ZRACYgZwcm90bzM="));
+            "GAEgASgFEhsKA3BvcxgCIAEoCzIOLlByb3RvLlZlY3RvcjMiUAoMRnNtU3lu",
+            "Y1N0YXRlEg0KBXN0YXRlGAEgASgFEgwKBGNvZGUYAiABKAUSEAoIZW5lbXlf",
+            "aWQYBSABKAUSEQoJcGxheWVyX3NuGAYgASgEIpMBCg9QbGF5ZXJTeW5jU3Rh",
+            "dGUSDQoFc3RhdGUYASABKAUSDAoEY29kZRgCIAEoBRIeCgZjdXJQb3MYAyAB",
+            "KAsyDi5Qcm90by5WZWN0b3IzEh4KBmhpdFBvcxgEIAEoCzIOLlByb3RvLlZl",
+            "Y3RvcjMSEQoJcGxheWVyX3NuGAUgASgEEhAKCGVuZW15X2lkGAYgASgFIjcK",
+            "EFJlcXVlc3RTeW5jRW5lbXkSEQoJcGxheWVyX3NuGAEgASgEEhAKCGVuZW15",
+            "X2lkGAIgASgFIjcKEVJlcXVlc3RMaW5rUGxheWVyEhAKCGVuZW15X2lkGAEg",
+            "ASgFEhAKCGlzTGlua2VyGAIgASgIKngKB1RhZ1R5cGUSDwoLVGFnVHlwZU5v",
+            "bmUQABISCg5UYWdUeXBlQWNjb3VudBABEg4KClRhZ1R5cGVBcHAQAhIRCg1U",
+            "YWdUeXBlRW50aXR5EAMSEgoOVGFnVHlwZVRvV29ybGQQBBIRCg1UYWdUeXBl",
+            "UGxheWVyEAUqmgEKFkFjY291bnRDaGVja1JldHVybkNvZGUSCgoGQVJDX09L",
+            "EAASDwoLQVJDX1VOS09OV04QARIZChVBUkNfTk9UX0ZPVU5EX0FDQ09VTlQQ",
+            "AhIWChJBUkNfUEFTU1dPUkRfV1JPTkcQAxIPCgtBUkNfTE9HR0lORxAEEg8K",
+            "C0FSQ19USU1FT1VUEAUSDgoKQVJDX09OTElORRAGKkcKE0xvZ2luSHR0cFJl",
+            "dHVybkNvZGUSCwoHTEhSQ19PSxAAEhAKDExIUkNfVElNRU9VVBABEhEKDUxI",
+            "UkNfTk9URk9VTkQQAipMChZDcmVhdGVQbGF5ZXJSZXR1cm5Db2RlEhEKDUNQ",
+            "Ul9DcmVhdGVfT0sQABIPCgtDUFJfVW5rb253bhABEg4KCkNQUl9SZW5hbWUQ",
+            "AmIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Proto.DbReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Proto.TagType), typeof(global::Proto.AccountCheckReturnCode), typeof(global::Proto.LoginHttpReturnCode), typeof(global::Proto.CreatePlayerReturnCode), }, null, new pbr::GeneratedClrTypeInfo[] {
@@ -215,10 +214,10 @@ namespace Proto {
             new pbr::GeneratedClrTypeInfo(typeof(global::Proto.RoleDisAppear), global::Proto.RoleDisAppear.Parser, new[]{ "Sn" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Proto.Move), global::Proto.Move.Parser, new[]{ "PlayerSn", "Position" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Proto.Enemy), global::Proto.Enemy.Parser, new[]{ "Id", "Pos" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.FsmSyncState), global::Proto.FsmSyncState.Parser, new[]{ "State", "Code", "CurPos", "NxtPos", "EnemyId", "PlayerSn" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.FsmSyncState), global::Proto.FsmSyncState.Parser, new[]{ "State", "Code", "EnemyId", "PlayerSn" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Proto.PlayerSyncState), global::Proto.PlayerSyncState.Parser, new[]{ "State", "Code", "CurPos", "HitPos", "PlayerSn", "EnemyId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Proto.RequestSyncEnemy), global::Proto.RequestSyncEnemy.Parser, new[]{ "PlayerSn", "EnemyId" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.RequestLinkPlayer), global::Proto.RequestLinkPlayer.Parser, new[]{ "EnemyId" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.RequestLinkPlayer), global::Proto.RequestLinkPlayer.Parser, new[]{ "EnemyId", "IsLinker" }, null, null, null, null)
           }));
     }
     #endregion
@@ -10706,8 +10705,6 @@ namespace Proto {
     public FsmSyncState(FsmSyncState other) : this() {
       state_ = other.state_;
       code_ = other.code_;
-      curPos_ = other.curPos_ != null ? other.curPos_.Clone() : null;
-      nxtPos_ = other.nxtPos_ != null ? other.nxtPos_.Clone() : null;
       enemyId_ = other.enemyId_;
       playerSn_ = other.playerSn_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
@@ -10737,28 +10734,6 @@ namespace Proto {
       get { return code_; }
       set {
         code_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "curPos" field.</summary>
-    public const int CurPosFieldNumber = 3;
-    private global::Proto.Vector3 curPos_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Proto.Vector3 CurPos {
-      get { return curPos_; }
-      set {
-        curPos_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "nxtPos" field.</summary>
-    public const int NxtPosFieldNumber = 4;
-    private global::Proto.Vector3 nxtPos_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Proto.Vector3 NxtPos {
-      get { return nxtPos_; }
-      set {
-        nxtPos_ = value;
       }
     }
 
@@ -10799,8 +10774,6 @@ namespace Proto {
       }
       if (State != other.State) return false;
       if (Code != other.Code) return false;
-      if (!object.Equals(CurPos, other.CurPos)) return false;
-      if (!object.Equals(NxtPos, other.NxtPos)) return false;
       if (EnemyId != other.EnemyId) return false;
       if (PlayerSn != other.PlayerSn) return false;
       return Equals(_unknownFields, other._unknownFields);
@@ -10811,8 +10784,6 @@ namespace Proto {
       int hash = 1;
       if (State != 0) hash ^= State.GetHashCode();
       if (Code != 0) hash ^= Code.GetHashCode();
-      if (curPos_ != null) hash ^= CurPos.GetHashCode();
-      if (nxtPos_ != null) hash ^= NxtPos.GetHashCode();
       if (EnemyId != 0) hash ^= EnemyId.GetHashCode();
       if (PlayerSn != 0UL) hash ^= PlayerSn.GetHashCode();
       if (_unknownFields != null) {
@@ -10836,14 +10807,6 @@ namespace Proto {
         output.WriteRawTag(16);
         output.WriteInt32(Code);
       }
-      if (curPos_ != null) {
-        output.WriteRawTag(26);
-        output.WriteMessage(CurPos);
-      }
-      if (nxtPos_ != null) {
-        output.WriteRawTag(34);
-        output.WriteMessage(NxtPos);
-      }
       if (EnemyId != 0) {
         output.WriteRawTag(40);
         output.WriteInt32(EnemyId);
@@ -10865,12 +10828,6 @@ namespace Proto {
       }
       if (Code != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Code);
-      }
-      if (curPos_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(CurPos);
-      }
-      if (nxtPos_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(NxtPos);
       }
       if (EnemyId != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(EnemyId);
@@ -10895,18 +10852,6 @@ namespace Proto {
       if (other.Code != 0) {
         Code = other.Code;
       }
-      if (other.curPos_ != null) {
-        if (curPos_ == null) {
-          CurPos = new global::Proto.Vector3();
-        }
-        CurPos.MergeFrom(other.CurPos);
-      }
-      if (other.nxtPos_ != null) {
-        if (nxtPos_ == null) {
-          NxtPos = new global::Proto.Vector3();
-        }
-        NxtPos.MergeFrom(other.NxtPos);
-      }
       if (other.EnemyId != 0) {
         EnemyId = other.EnemyId;
       }
@@ -10930,20 +10875,6 @@ namespace Proto {
           }
           case 16: {
             Code = input.ReadInt32();
-            break;
-          }
-          case 26: {
-            if (curPos_ == null) {
-              CurPos = new global::Proto.Vector3();
-            }
-            input.ReadMessage(CurPos);
-            break;
-          }
-          case 34: {
-            if (nxtPos_ == null) {
-              NxtPos = new global::Proto.Vector3();
-            }
-            input.ReadMessage(NxtPos);
             break;
           }
           case 40: {
@@ -11424,6 +11355,7 @@ namespace Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public RequestLinkPlayer(RequestLinkPlayer other) : this() {
       enemyId_ = other.enemyId_;
+      isLinker_ = other.isLinker_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -11443,6 +11375,17 @@ namespace Proto {
       }
     }
 
+    /// <summary>Field number for the "isLinker" field.</summary>
+    public const int IsLinkerFieldNumber = 2;
+    private bool isLinker_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool IsLinker {
+      get { return isLinker_; }
+      set {
+        isLinker_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as RequestLinkPlayer);
@@ -11457,6 +11400,7 @@ namespace Proto {
         return true;
       }
       if (EnemyId != other.EnemyId) return false;
+      if (IsLinker != other.IsLinker) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -11464,6 +11408,7 @@ namespace Proto {
     public override int GetHashCode() {
       int hash = 1;
       if (EnemyId != 0) hash ^= EnemyId.GetHashCode();
+      if (IsLinker != false) hash ^= IsLinker.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -11481,6 +11426,10 @@ namespace Proto {
         output.WriteRawTag(8);
         output.WriteInt32(EnemyId);
       }
+      if (IsLinker != false) {
+        output.WriteRawTag(16);
+        output.WriteBool(IsLinker);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -11491,6 +11440,9 @@ namespace Proto {
       int size = 0;
       if (EnemyId != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(EnemyId);
+      }
+      if (IsLinker != false) {
+        size += 1 + 1;
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -11506,6 +11458,9 @@ namespace Proto {
       if (other.EnemyId != 0) {
         EnemyId = other.EnemyId;
       }
+      if (other.IsLinker != false) {
+        IsLinker = other.IsLinker;
+      }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -11519,6 +11474,10 @@ namespace Proto {
             break;
           case 8: {
             EnemyId = input.ReadInt32();
+            break;
+          }
+          case 16: {
+            IsLinker = input.ReadBool();
             break;
           }
         }

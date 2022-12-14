@@ -16,6 +16,18 @@ void AIEnemy::BackToPool()
 	_nextPos = { 0, 0, 0 };
 }
 
+void AIEnemy::SetLinkPlayer(Player* player)
+{
+	if (_linkPlayer)
+	{
+		Proto::RequestLinkPlayer proto;
+		proto.set_enemy_id(_id);
+		proto.set_islinker(false);
+		MessageSystemHelp::SendPacket(Proto::MsgId::S2C_RequestLinkPlayer, proto, _linkPlayer);
+	}
+	_linkPlayer = player;
+}
+
 void AIEnemy::SetCurrPos(const Vector3& pos)
 {
 	_currPos.X = pos.X;

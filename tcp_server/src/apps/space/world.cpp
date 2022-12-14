@@ -87,9 +87,12 @@ void World::HandleNetworkDisconnect(Packet* pPacket)
 				enemy->GetComponent<FsmComponent>()->ResetState();
 			if (enemy->GetLinkPlayer() == pPlayer)
 			{
+				Player* target = GetNearestPlayer(enemy->GetCurrPos());
+				enemy->SetLinkPlayer(target);
 				Proto::RequestLinkPlayer proto;
 				proto.set_enemy_id(enemy->GetID());
-				enemy->SetLinkPlayer(SendToNearestPlayer(enemy->GetCurrPos(), Proto::MsgId::S2C_RequestLinkPlayer, proto));
+				proto.set_islinker(true);
+				MessageSystemHelp::SendPacket(Proto::MsgId::S2C_RequestLinkPlayer, proto, target);
 			}
 		}
 	}
@@ -233,7 +236,7 @@ void World::BroadcastPacket(Proto::MsgId msgId, google::protobuf::Message& proto
 	}
 }
 
-Player* World::SendToNearestPlayer(Vector3& pos, Proto::MsgId msgId, google::protobuf::Message& proto)
+Player* World::GetNearestPlayer(Vector3& pos)
 {
 	auto players = _playerManager->GetAll();
 	float dist = FLT_MAX;
@@ -247,7 +250,6 @@ Player* World::SendToNearestPlayer(Vector3& pos, Proto::MsgId msgId, google::pro
 			player = pair.second;
 		}
 	}
-	MessageSystemHelp::SendPacket(msgId, proto, player);
 	return player;
 }
 
