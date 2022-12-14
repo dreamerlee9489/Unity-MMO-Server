@@ -20,7 +20,7 @@ void World::Awake(int worldId)
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::G2S_RemovePlayer, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleG2SRemovePlayer));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_Move, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleMove));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_PlayerSyncState, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandlePlayerSyncState));
-	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_RequestSyncEnemies, BindFunP1(this, &World::GetPlayer), BindFunP1(this, &World::HandleRequestSyncEnemies));
+	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_RequestSyncEnemy, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleRequestSyncEnemy));
 
 	ResourceWorld* worldCfg = ResourceHelp::GetResourceManager()->Worlds->GetResource(_worldId);
 	std::vector<ResourceEnemy> _enemyCfgs = worldCfg->GetEnemies();
@@ -311,28 +311,26 @@ void World::HandlePlayerSyncState(Player* pPlayer, Packet* pPacket)
 	BroadcastPacket(Proto::MsgId::S2C_PlayerSyncState, proto);
 }
 
+void World::HandleRequestSyncEnemy(Player* pPlayer, Packet* pPacket)
+{
+	Proto::RequestSyncEnemy proto = pPacket->ParseToProto<Proto::RequestSyncEnemy>();
+	google::protobuf::int32 id = proto.enemy_id();
+	if (!_enemies.empty())
+	{
+		Proto::Enemy protoEnemy;
+		protoEnemy.set_id(id);
+		_enemies[id]->GetCurrPos().SerializeToProto(protoEnemy.mutable_pos());
+		_enemies[id]->GetComponent<FsmComponent>()->GetCurrState()->SendState(pPlayer);
+		MessageSystemHelp::SendPacket(Proto::MsgId::S2C_Enemy, protoEnemy, pPlayer);
+	}
+}
+
 void World::HandleFsmSyncState(Packet* pPacket)
 {
 	Proto::FsmSyncState proto = pPacket->ParseToProto<Proto::FsmSyncState>();
 	int enemyId = proto.enemy_id();
 	Player* player = _playerManager->GetPlayerBySn(proto.player_sn());
 	_enemies[enemyId]->GetComponent<FsmComponent>()->SyncState(proto, player);
-}
-
-void World::HandleRequestSyncEnemies(Player* pPlayer)
-{
-	if (!_enemies.empty())
-	{
-		Proto::EnemyList protoList;
-		for (auto enemy : _enemies)
-		{
-			Proto::Enemy* protoEnemy = protoList.add_enemies();
-			protoEnemy->set_id(enemy->GetID());
-			enemy->GetCurrPos().SerializeToProto(protoEnemy->mutable_pos());
-			enemy->GetComponent<FsmComponent>()->GetCurrState()->SendState(pPlayer);
-		}
-		MessageSystemHelp::SendPacket(Proto::MsgId::S2C_EnemyList, protoList, pPlayer);
-	}
 }
 
 void World::HandleEnemy(Packet* pPacket)

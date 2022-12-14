@@ -24,7 +24,7 @@ namespace Proto {
     static ProtoIdReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "Cg5wcm90b19pZC5wcm90bxIFUHJvdG8q8RAKBU1zZ0lkEggKBE5vbmUQABIV",
+            "Cg5wcm90b19pZC5wcm90bxIFUHJvdG8q2BAKBU1zZ0lkEggKBE5vbmUQABIV",
             "ChFNSV9OZXR3b3JrQ29ubmVjdBABEhcKE01JX05ldHdvcmtDb25uZWN0ZWQQ",
             "AhIUChBNSV9OZXR3b3JrTGlzdGVuEAMSFwoTTUlfTmV0d29ya0xpc3Rlbktl",
             "eRAEEhgKFE1JX05ldHdvcmtEaXNjb25uZWN0EAoSGgoWTUlfTmV0d29ya0Rp",
@@ -67,12 +67,12 @@ namespace Proto {
             "TUlfQ21kVGhyZWFkEKGcARIPCglNSV9DbWRBcHAQopwBEhYKEE1JX0NtZFdv",
             "cmxkUHJveHkQo5wBEhEKC01JX0NtZFdvcmxkEKScARISCgxNSV9DbWRDcmVh",
             "dGUQpZwBEhYKEE1JX0NtZEVmZmljaWVuY3kQppwBEhMKDU1JX0VmZmljaWVu",
-            "Y3kQp5wBEhMKDVMyQ19FbmVteUxpc3QQseoBEhYKEFMyQ19Gc21TeW5jU3Rh",
-            "dGUQsuoBEhYKEEMyU19Gc21TeW5jU3RhdGUQs+oBEhkKE0MyU19QbGF5ZXJT",
-            "eW5jU3RhdGUQtOoBEhkKE1MyQ19QbGF5ZXJTeW5jU3RhdGUQteoBEg8KCUMy",
-            "U19FbmVteRC26gESDwoJUzJDX0VuZW15ELfqARIcChZDMlNfUmVxdWVzdFN5",
-            "bmNFbmVtaWVzELjqARIcChZTMkNfUmVxdWVzdFN5bmNFbmVtaWVzELnqARIb",
-            "ChVTMkNfUmVxdWVzdExpbmtQbGF5ZXIQuuoBYgZwcm90bzM="));
+            "Y3kQp5wBEhYKEFMyQ19Gc21TeW5jU3RhdGUQsuoBEhYKEEMyU19Gc21TeW5j",
+            "U3RhdGUQs+oBEhkKE0MyU19QbGF5ZXJTeW5jU3RhdGUQtOoBEhkKE1MyQ19Q",
+            "bGF5ZXJTeW5jU3RhdGUQteoBEg8KCUMyU19FbmVteRC26gESDwoJUzJDX0Vu",
+            "ZW15ELfqARIaChRDMlNfUmVxdWVzdFN5bmNFbmVteRC46gESGgoUUzJDX1Jl",
+            "cXVlc3RTeW5jRW5lbXkQueoBEhsKFVMyQ19SZXF1ZXN0TGlua1BsYXllchC6",
+            "6gFiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Proto.MsgId), }, null, null));
@@ -359,15 +359,14 @@ namespace Proto {
     /// <summary>
     /// AI
     /// </summary>
-    [pbr::OriginalName("S2C_EnemyList")] S2CEnemyList = 30001,
     [pbr::OriginalName("S2C_FsmSyncState")] S2CFsmSyncState = 30002,
     [pbr::OriginalName("C2S_FsmSyncState")] C2SFsmSyncState = 30003,
     [pbr::OriginalName("C2S_PlayerSyncState")] C2SPlayerSyncState = 30004,
     [pbr::OriginalName("S2C_PlayerSyncState")] S2CPlayerSyncState = 30005,
     [pbr::OriginalName("C2S_Enemy")] C2SEnemy = 30006,
     [pbr::OriginalName("S2C_Enemy")] S2CEnemy = 30007,
-    [pbr::OriginalName("C2S_RequestSyncEnemies")] C2SRequestSyncEnemies = 30008,
-    [pbr::OriginalName("S2C_RequestSyncEnemies")] S2CRequestSyncEnemies = 30009,
+    [pbr::OriginalName("C2S_RequestSyncEnemy")] C2SRequestSyncEnemy = 30008,
+    [pbr::OriginalName("S2C_RequestSyncEnemy")] S2CRequestSyncEnemy = 30009,
     [pbr::OriginalName("S2C_RequestLinkPlayer")] S2CRequestLinkPlayer = 30010,
   }
 

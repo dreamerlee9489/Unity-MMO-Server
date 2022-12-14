@@ -140,14 +140,13 @@ enum MsgId {
 	MI_Efficiency		= 20007;
 
 	// AI
-	S2C_EnemyList 			= 30001;
 	S2C_FsmSyncState		= 30002;
 	C2S_FsmSyncState		= 30003;
 	C2S_PlayerSyncState 	= 30004;
 	S2C_PlayerSyncState 	= 30005;
 	C2S_Enemy				= 30006;
 	S2C_Enemy				= 30007;
-	C2S_RequestSyncEnemies	= 30008;
-	S2C_RequestSyncEnemies	= 30009;
+	C2S_RequestSyncEnemy	= 30008;
+	S2C_RequestSyncEnemy	= 30009;
 	S2C_RequestLinkPlayer	= 30010;
 }

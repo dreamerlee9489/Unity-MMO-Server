@@ -417,10 +417,6 @@ message Enemy {
 	Vector3 pos = 2;
 }
 
-message EnemyList {
-	repeated Enemy enemies = 1;
-}
-
 message FsmSyncState {
 	int32 state = 1;
 	int32 code = 2;
@@ -439,8 +435,9 @@ message PlayerSyncState {
 	int32 enemy_id = 6;
 }
 
-message RequestSyncEnemies {
+message RequestSyncEnemy {
 	uint64 player_sn = 1;
+	int32 enemy_id = 2;
 }
 
 message RequestLinkPlayer {

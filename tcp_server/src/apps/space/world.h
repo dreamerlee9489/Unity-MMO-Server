@@ -37,7 +37,7 @@ protected:
 	void HandleG2SRemovePlayer(Player* pPlayer, Packet* pPacket);
 	void HandleMove(Player* pPlayer, Packet* pPacket);
 	void HandlePlayerSyncState(Player* pPlayer, Packet* pPacket);
-	void HandleRequestSyncEnemies(Player* pPlayer);
+	void HandleRequestSyncEnemy(Player* pPlayer, Packet* pPacket);
 
 private:
 	void SyncWorldToGather();
