@@ -10,23 +10,33 @@ class AIEnemy : public Entity<AIEnemy>, public IAwakeFromPoolSystem<int, int, Ve
 {
 	int _id = 0;
 	int _hp = 0;
-	float _speed = 0;
 	Vector3 _initPos;
 	Vector3 _currPos;
 	Vector3 _nextPos;
 	World* _world = nullptr;
 	Player* _linkPlayer = nullptr;
+	std::map<uint64, Player*>* _players = nullptr;
 
 public:
 	void Awake(int id, int hp, Vector3 pos) override;
 
 	void BackToPool() override;
 
+	void SetWorld(World* const world) { _world = world; }
+
+	void SetLinkPlayer(Player* player);
+
+	void SetCurrPos(const Vector3& pos);
+
+	void SetNextPos(const Vector3& pos);
+
+	void SetPatrolPoint(int index);
+
 	int GetID() const { return _id; }
 
 	int GetHP() const { return _hp; }
 
-	float GetCurrSpeed() const { return _speed; }
+	void SetAllPlayer(std::map<uint64, Player*>* players) { _players = players; }
 
 	Vector3& GetInitPos() { return _initPos; }
 
@@ -38,15 +48,7 @@ public:
 
 	Player* GetLinkPlayer() const { return _linkPlayer; }
 
-	void SetWorld(World* const world) { _world = world; }
-
-	void SetLinkPlayer(Player* player);
-
-	void SetCurrPos(const Vector3& pos);
-
-	void SetNextPos(const Vector3& pos);
-
-	void SetPatrolPoint(int index);
+	std::map<uint64, Player*>* GetAllPlayer() { return _players; }
 };
 
 #endif // !AIENEMY

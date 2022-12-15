@@ -12,6 +12,7 @@ void FsmComponent::Awake()
 {
 	_parent = (AIEnemy*)GetParent();
 	_currState = new Idle(_parent);
+	_currState->Enter();
 	_lastTime = Global::GetInstance()->TimeTick;
 }
 
@@ -27,7 +28,7 @@ void FsmComponent::Update(AIEnemy* pEnemy)
 
 void FsmComponent::ResetState()
 {
-	ChangeState(new Idle((AIEnemy*)GetParent(), nullptr));
+	ChangeState(new Idle((AIEnemy*)GetParent()));
 }
 
 void FsmComponent::ChangeState(FsmState* newState)

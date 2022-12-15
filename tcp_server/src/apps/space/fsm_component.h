@@ -28,11 +28,11 @@ public:
 
 	void ResetState();
 
-	FsmState* GetCurrState() { return _currState; }
-
 	void ChangeState(FsmState* newState);
 
 	void SyncState(Proto::FsmSyncState& proto, Player* pPlayer);
+
+	FsmState* GetCurrState() { return _currState; }
 };
 
 #endif // !FSM_COMPONENT

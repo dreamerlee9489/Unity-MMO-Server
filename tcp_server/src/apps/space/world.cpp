@@ -28,6 +28,7 @@ void World::Awake(int worldId)
 	{
 		AIEnemy* enemy = GetSystemManager()->GetEntitySystem()->AddComponent<AIEnemy>(cfg.id, cfg.initHp, cfg.initPos);
 		enemy->SetWorld(this);
+		enemy->SetAllPlayer(_playerManager->GetAll());
 		enemy->AddComponent<FsmComponent>();
 		_enemies.push_back(enemy);
 	}
@@ -83,16 +84,18 @@ void World::HandleNetworkDisconnect(Packet* pPacket)
 
 		for (auto enemy : _enemies)
 		{
-			if (enemy->GetComponent<FsmComponent>()->GetCurrState()->GetTarget() == pPlayer)
-				enemy->GetComponent<FsmComponent>()->ResetState();
 			if (enemy->GetLinkPlayer() == pPlayer)
 			{
+				enemy->GetComponent<FsmComponent>()->ResetState();
 				Player* target = GetNearestPlayer(enemy->GetCurrPos());
 				enemy->SetLinkPlayer(target);
-				Proto::RequestLinkPlayer proto;
-				proto.set_enemy_id(enemy->GetID());
-				proto.set_islinker(true);
-				MessageSystemHelp::SendPacket(Proto::MsgId::S2C_RequestLinkPlayer, proto, target);
+				if (target)
+				{
+					Proto::RequestLinkPlayer proto;
+					proto.set_enemy_id(enemy->GetID());
+					proto.set_islinker(true);
+					MessageSystemHelp::SendPacket(Proto::MsgId::S2C_RequestLinkPlayer, proto, target);
+				}
 			}
 		}
 	}

@@ -6,28 +6,19 @@ Patrol::Patrol(AIEnemy* owner, Player* target) : FsmState(owner, target)
 	_currTime = Global::GetInstance()->TimeTick;
 	_type = FsmStateType::Patrol;
 	_eng = std::default_random_engine(_currTime % UINT32_MAX + _owner->GetID());
-	_players = owner->GetWorld()->GetPlayerManager()->GetAll();
 }
 
 void Patrol::Enter()
 {
 	_index = _dis(_eng);
 	_owner->SetPatrolPoint(_index);
-	Player* player = _owner->GetWorld()->GetNearestPlayer(_owner->GetCurrPos());
-	if (player != _owner->GetLinkPlayer())
-	{
-		_owner->SetLinkPlayer(player);
-		Proto::RequestLinkPlayer proto;
-		proto.set_enemy_id(_owner->GetID());
-		proto.set_islinker(true);
-		MessageSystemHelp::SendPacket(Proto::MsgId::S2C_RequestLinkPlayer, proto, player);
-	}
 	BroadcastState();
 }
 
 void Patrol::Execute()
 {
-	if (_owner->GetCurrPos().GetDistance(_owner->GetNextPos()) <= 1)
+	float dist = _owner->GetCurrPos().GetDistance(_owner->GetNextPos());
+	if (dist <= 1)
 		_owner->GetComponent<FsmComponent>()->ChangeState(new Idle(_owner));
 }
 
