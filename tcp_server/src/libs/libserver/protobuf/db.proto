@@ -3,7 +3,7 @@ package Net;
 
 // 本文件中的所有结构，都是会存在DB中的
 
-message Vector3 {
+message Vector3D {
 	float x = 1;
 	float y = 2;
 	float z = 3;
@@ -26,7 +26,7 @@ message PlayerBase {
 message LastWorld {
 	int32 world_id = 1;	
 	int64 world_sn = 2;
-	Vector3 position = 3;
+	Vector3D position = 3;
 }
 
 message PlayerMisc {

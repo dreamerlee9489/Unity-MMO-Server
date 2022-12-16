@@ -25,7 +25,7 @@ extern PROTOBUF_INTERNAL_EXPORT_msg_2eproto ::PROTOBUF_NAMESPACE_ID::internal::S
 extern PROTOBUF_INTERNAL_EXPORT_msg_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_Tag_msg_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_msg_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_TagValue_msg_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_msg_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_TokenInfo_msg_2eproto;
-extern PROTOBUF_INTERNAL_EXPORT_db_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Vector3_db_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_db_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Vector3D_db_2eproto;
 namespace Net {
 class CmdThreadDefaultTypeInternal {
  public:
@@ -628,7 +628,7 @@ static void InitDefaultsscc_info_Enemy_msg_2eproto() {
 
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_Enemy_msg_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsscc_info_Enemy_msg_2eproto}, {
-      &scc_info_Vector3_db_2eproto.base,}};
+      &scc_info_Vector3D_db_2eproto.base,}};
 
 static void InitDefaultsscc_info_EnterWorld_msg_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -643,7 +643,7 @@ static void InitDefaultsscc_info_EnterWorld_msg_2eproto() {
 
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_EnterWorld_msg_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsscc_info_EnterWorld_msg_2eproto}, {
-      &scc_info_Vector3_db_2eproto.base,}};
+      &scc_info_Vector3D_db_2eproto.base,}};
 
 static void InitDefaultsscc_info_FsmSyncState_msg_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -785,7 +785,7 @@ static void InitDefaultsscc_info_Move_msg_2eproto() {
 
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_Move_msg_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsscc_info_Move_msg_2eproto}, {
-      &scc_info_Vector3_db_2eproto.base,}};
+      &scc_info_Vector3D_db_2eproto.base,}};
 
 static void InitDefaultsscc_info_NetworkConnect_msg_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -887,7 +887,7 @@ static void InitDefaultsscc_info_PlayerSyncState_msg_2eproto() {
 
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_PlayerSyncState_msg_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsscc_info_PlayerSyncState_msg_2eproto}, {
-      &scc_info_Vector3_db_2eproto.base,}};
+      &scc_info_Vector3D_db_2eproto.base,}};
 
 static void InitDefaultsscc_info_QueryPlayer_msg_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -1100,7 +1100,7 @@ static void InitDefaultsscc_info_Role_msg_2eproto() {
 
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_Role_msg_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsscc_info_Role_msg_2eproto}, {
-      &scc_info_Vector3_db_2eproto.base,}};
+      &scc_info_Vector3D_db_2eproto.base,}};
 
 static void InitDefaultsscc_info_RoleAppear_msg_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -2021,51 +2021,51 @@ const char descriptor_table_protodef_msg_2eproto[] PROTOBUF_SECTION_VARIABLE(pro
   "t\030\001 \001(\t\022\"\n\ntoken_info\030\002 \001(\0132\016.Net.TokenI"
   "nfo\"J\n\nSyncPlayer\022\016\n\006app_id\030\001 \001(\005\022\017\n\007acc"
   "ount\030\002 \001(\t\022\033\n\006player\030\003 \001(\0132\013.Net.Player\""
-  ">\n\nEnterWorld\022\020\n\010world_id\030\001 \001(\005\022\036\n\010posit"
-  "ion\030\002 \001(\0132\014.Net.Vector3\" \n\014RequestWorld\022"
-  "\020\n\010world_id\030\001 \001(\005\"K\n\013CreateWorld\022\020\n\010worl"
-  "d_id\030\001 \001(\005\022\025\n\rlast_world_sn\030\002 \001(\004\022\023\n\013gam"
-  "e_app_id\030\003 \001(\005\"Q\n\024BroadcastCreateWorld\022\020"
-  "\n\010world_id\030\001 \001(\005\022\020\n\010world_sn\030\002 \001(\004\022\025\n\rla"
-  "st_world_sn\030\003 \001(\004\"\?\n\031BroadcastCreateWorl"
-  "dProxy\022\020\n\010world_id\030\001 \001(\005\022\020\n\010world_sn\030\002 \001"
-  "(\004\"5\n\nQueryWorld\022\020\n\010world_sn\030\001 \001(\004\022\025\n\rla"
-  "st_world_sn\030\002 \001(\004\"\213\001\n\014QueryWorldRs\022\020\n\010wo"
-  "rld_sn\030\001 \001(\004\0221\n\013return_code\030\002 \001(\0162\034.Net."
-  "QueryWorldRs.ReturnCode\"6\n\nReturnCode\022\021\n"
-  "\rQueryWorld_OK\020\000\022\025\n\021QueryWorld_Failed\020\001\""
-  "b\n\010Teleport\022\025\n\rlast_world_sn\030\001 \001(\004\022\021\n\tpl"
-  "ayer_sn\030\002 \001(\004\022\017\n\007account\030\003 \001(\t\022\033\n\006player"
-  "\030\004 \001(\0132\013.Net.Player\"\"\n\rTeleportAfter\022\021\n\t"
-  "player_sn\030\001 \001(\004\"!\n\014RemovePlayer\022\021\n\tplaye"
-  "r_sn\030\001 \001(\004\"&\n\021RequestSyncPlayer\022\021\n\tplaye"
-  "r_sn\030\001 \001(\004\"]\n\004Role\022\014\n\004name\030\001 \001(\t\022\n\n\002sn\030\002"
-  " \001(\004\022\033\n\006gender\030\003 \001(\0162\013.Net.Gender\022\036\n\010pos"
-  "ition\030\004 \001(\0132\014.Net.Vector3\"%\n\nRoleAppear\022"
-  "\027\n\004role\030\001 \003(\0132\t.Net.Role\"\033\n\rRoleDisAppea"
-  "r\022\n\n\002sn\030\001 \001(\004\"9\n\004Move\022\021\n\tplayer_sn\030\001 \001(\004"
-  "\022\036\n\010position\030\003 \003(\0132\014.Net.Vector3\".\n\005Enem"
-  "y\022\n\n\002id\030\001 \001(\005\022\031\n\003pos\030\002 \001(\0132\014.Net.Vector3"
-  "\"P\n\014FsmSyncState\022\r\n\005state\030\001 \001(\005\022\014\n\004code\030"
-  "\002 \001(\005\022\020\n\010enemy_id\030\005 \001(\005\022\021\n\tplayer_sn\030\006 \001"
-  "(\004\"\217\001\n\017PlayerSyncState\022\r\n\005state\030\001 \001(\005\022\014\n"
-  "\004code\030\002 \001(\005\022\034\n\006curPos\030\003 \001(\0132\014.Net.Vector"
-  "3\022\034\n\006hitPos\030\004 \001(\0132\014.Net.Vector3\022\021\n\tplaye"
-  "r_sn\030\005 \001(\004\022\020\n\010enemy_id\030\006 \001(\005\"7\n\020RequestS"
-  "yncEnemy\022\021\n\tplayer_sn\030\001 \001(\004\022\020\n\010enemy_id\030"
-  "\002 \001(\005\"7\n\021RequestLinkPlayer\022\020\n\010enemy_id\030\001"
-  " \001(\005\022\020\n\010isLinker\030\002 \001(\010*x\n\007TagType\022\017\n\013Tag"
-  "TypeNone\020\000\022\022\n\016TagTypeAccount\020\001\022\016\n\nTagTyp"
-  "eApp\020\002\022\021\n\rTagTypeEntity\020\003\022\022\n\016TagTypeToWo"
-  "rld\020\004\022\021\n\rTagTypePlayer\020\005*\232\001\n\026AccountChec"
-  "kReturnCode\022\n\n\006ARC_OK\020\000\022\017\n\013ARC_UNKONWN\020\001"
-  "\022\031\n\025ARC_NOT_FOUND_ACCOUNT\020\002\022\026\n\022ARC_PASSW"
-  "ORD_WRONG\020\003\022\017\n\013ARC_LOGGING\020\004\022\017\n\013ARC_TIME"
-  "OUT\020\005\022\016\n\nARC_ONLINE\020\006*G\n\023LoginHttpReturn"
-  "Code\022\013\n\007LHRC_OK\020\000\022\020\n\014LHRC_TIMEOUT\020\001\022\021\n\rL"
-  "HRC_NOTFOUND\020\002*L\n\026CreatePlayerReturnCode"
-  "\022\021\n\rCPR_Create_OK\020\000\022\017\n\013CPR_Unkonwn\020\001\022\016\n\n"
-  "CPR_Rename\020\002b\006proto3"
+  "\?\n\nEnterWorld\022\020\n\010world_id\030\001 \001(\005\022\037\n\010posit"
+  "ion\030\002 \001(\0132\r.Net.Vector3D\" \n\014RequestWorld"
+  "\022\020\n\010world_id\030\001 \001(\005\"K\n\013CreateWorld\022\020\n\010wor"
+  "ld_id\030\001 \001(\005\022\025\n\rlast_world_sn\030\002 \001(\004\022\023\n\013ga"
+  "me_app_id\030\003 \001(\005\"Q\n\024BroadcastCreateWorld\022"
+  "\020\n\010world_id\030\001 \001(\005\022\020\n\010world_sn\030\002 \001(\004\022\025\n\rl"
+  "ast_world_sn\030\003 \001(\004\"\?\n\031BroadcastCreateWor"
+  "ldProxy\022\020\n\010world_id\030\001 \001(\005\022\020\n\010world_sn\030\002 "
+  "\001(\004\"5\n\nQueryWorld\022\020\n\010world_sn\030\001 \001(\004\022\025\n\rl"
+  "ast_world_sn\030\002 \001(\004\"\213\001\n\014QueryWorldRs\022\020\n\010w"
+  "orld_sn\030\001 \001(\004\0221\n\013return_code\030\002 \001(\0162\034.Net"
+  ".QueryWorldRs.ReturnCode\"6\n\nReturnCode\022\021"
+  "\n\rQueryWorld_OK\020\000\022\025\n\021QueryWorld_Failed\020\001"
+  "\"b\n\010Teleport\022\025\n\rlast_world_sn\030\001 \001(\004\022\021\n\tp"
+  "layer_sn\030\002 \001(\004\022\017\n\007account\030\003 \001(\t\022\033\n\006playe"
+  "r\030\004 \001(\0132\013.Net.Player\"\"\n\rTeleportAfter\022\021\n"
+  "\tplayer_sn\030\001 \001(\004\"!\n\014RemovePlayer\022\021\n\tplay"
+  "er_sn\030\001 \001(\004\"&\n\021RequestSyncPlayer\022\021\n\tplay"
+  "er_sn\030\001 \001(\004\"^\n\004Role\022\014\n\004name\030\001 \001(\t\022\n\n\002sn\030"
+  "\002 \001(\004\022\033\n\006gender\030\003 \001(\0162\013.Net.Gender\022\037\n\010po"
+  "sition\030\004 \001(\0132\r.Net.Vector3D\"%\n\nRoleAppea"
+  "r\022\027\n\004role\030\001 \003(\0132\t.Net.Role\"\033\n\rRoleDisApp"
+  "ear\022\n\n\002sn\030\001 \001(\004\":\n\004Move\022\021\n\tplayer_sn\030\001 \001"
+  "(\004\022\037\n\010position\030\003 \003(\0132\r.Net.Vector3D\"/\n\005E"
+  "nemy\022\n\n\002id\030\001 \001(\005\022\032\n\003pos\030\002 \001(\0132\r.Net.Vect"
+  "or3D\"P\n\014FsmSyncState\022\r\n\005state\030\001 \001(\005\022\014\n\004c"
+  "ode\030\002 \001(\005\022\020\n\010enemy_id\030\005 \001(\005\022\021\n\tplayer_sn"
+  "\030\006 \001(\004\"\221\001\n\017PlayerSyncState\022\r\n\005state\030\001 \001("
+  "\005\022\014\n\004code\030\002 \001(\005\022\035\n\006curPos\030\003 \001(\0132\r.Net.Ve"
+  "ctor3D\022\035\n\006hitPos\030\004 \001(\0132\r.Net.Vector3D\022\021\n"
+  "\tplayer_sn\030\005 \001(\004\022\020\n\010enemy_id\030\006 \001(\005\"7\n\020Re"
+  "questSyncEnemy\022\021\n\tplayer_sn\030\001 \001(\004\022\020\n\010ene"
+  "my_id\030\002 \001(\005\"7\n\021RequestLinkPlayer\022\020\n\010enem"
+  "y_id\030\001 \001(\005\022\020\n\010isLinker\030\002 \001(\010*x\n\007TagType\022"
+  "\017\n\013TagTypeNone\020\000\022\022\n\016TagTypeAccount\020\001\022\016\n\n"
+  "TagTypeApp\020\002\022\021\n\rTagTypeEntity\020\003\022\022\n\016TagTy"
+  "peToWorld\020\004\022\021\n\rTagTypePlayer\020\005*\232\001\n\026Accou"
+  "ntCheckReturnCode\022\n\n\006ARC_OK\020\000\022\017\n\013ARC_UNK"
+  "ONWN\020\001\022\031\n\025ARC_NOT_FOUND_ACCOUNT\020\002\022\026\n\022ARC"
+  "_PASSWORD_WRONG\020\003\022\017\n\013ARC_LOGGING\020\004\022\017\n\013AR"
+  "C_TIMEOUT\020\005\022\016\n\nARC_ONLINE\020\006*G\n\023LoginHttp"
+  "ReturnCode\022\013\n\007LHRC_OK\020\000\022\020\n\014LHRC_TIMEOUT\020"
+  "\001\022\021\n\rLHRC_NOTFOUND\020\002*L\n\026CreatePlayerRetu"
+  "rnCode\022\021\n\rCPR_Create_OK\020\000\022\017\n\013CPR_Unkonwn"
+  "\020\001\022\016\n\nCPR_Rename\020\002b\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_msg_2eproto_deps[1] = {
   &::descriptor_table_db_2eproto,
@@ -2144,7 +2144,7 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_msg
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_msg_2eproto_once;
 static bool descriptor_table_msg_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_msg_2eproto = {
-  &descriptor_table_msg_2eproto_initialized, descriptor_table_protodef_msg_2eproto, "msg.proto", 5380,
+  &descriptor_table_msg_2eproto_initialized, descriptor_table_protodef_msg_2eproto, "msg.proto", 5386,
   &descriptor_table_msg_2eproto_once, descriptor_table_msg_2eproto_sccs, descriptor_table_msg_2eproto_deps, 69, 1,
   schemas, file_default_instances, TableStruct_msg_2eproto::offsets,
   file_level_metadata_msg_2eproto, 69, file_level_enum_descriptors_msg_2eproto, file_level_service_descriptors_msg_2eproto,
@@ -17812,15 +17812,15 @@ void SyncPlayer::InternalSwap(SyncPlayer* other) {
 // ===================================================================
 
 void EnterWorld::InitAsDefaultInstance() {
-  ::Net::_EnterWorld_default_instance_._instance.get_mutable()->position_ = const_cast< ::Net::Vector3*>(
-      ::Net::Vector3::internal_default_instance());
+  ::Net::_EnterWorld_default_instance_._instance.get_mutable()->position_ = const_cast< ::Net::Vector3D*>(
+      ::Net::Vector3D::internal_default_instance());
 }
 class EnterWorld::_Internal {
  public:
-  static const ::Net::Vector3& position(const EnterWorld* msg);
+  static const ::Net::Vector3D& position(const EnterWorld* msg);
 };
 
-const ::Net::Vector3&
+const ::Net::Vector3D&
 EnterWorld::_Internal::position(const EnterWorld* msg) {
   return *msg->position_;
 }
@@ -17840,7 +17840,7 @@ EnterWorld::EnterWorld(const EnterWorld& from)
       _internal_metadata_(nullptr) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   if (from.has_position()) {
-    position_ = new ::Net::Vector3(*from.position_);
+    position_ = new ::Net::Vector3D(*from.position_);
   } else {
     position_ = nullptr;
   }
@@ -17902,7 +17902,7 @@ const char* EnterWorld::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID:
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // .Net.Vector3 position = 2;
+      // .Net.Vector3D position = 2;
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
           ptr = ctx->ParseMessage(mutable_position(), ptr);
@@ -17952,7 +17952,7 @@ bool EnterWorld::MergePartialFromCodedStream(
         break;
       }
 
-      // .Net.Vector3 position = 2;
+      // .Net.Vector3D position = 2;
       case 2: {
         if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (18 & 0xFF)) {
           DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
@@ -17995,7 +17995,7 @@ void EnterWorld::SerializeWithCachedSizes(
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32(1, this->world_id(), output);
   }
 
-  // .Net.Vector3 position = 2;
+  // .Net.Vector3D position = 2;
   if (this->has_position()) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
       2, _Internal::position(this), output);
@@ -18019,7 +18019,7 @@ void EnterWorld::SerializeWithCachedSizes(
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(1, this->world_id(), target);
   }
 
-  // .Net.Vector3 position = 2;
+  // .Net.Vector3D position = 2;
   if (this->has_position()) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
@@ -18047,7 +18047,7 @@ size_t EnterWorld::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // .Net.Vector3 position = 2;
+  // .Net.Vector3D position = 2;
   if (this->has_position()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
@@ -18089,7 +18089,7 @@ void EnterWorld::MergeFrom(const EnterWorld& from) {
   (void) cached_has_bits;
 
   if (from.has_position()) {
-    mutable_position()->::Net::Vector3::MergeFrom(from.position());
+    mutable_position()->::Net::Vector3D::MergeFrom(from.position());
   }
   if (from.world_id() != 0) {
     set_world_id(from.world_id());
@@ -21115,15 +21115,15 @@ void RequestSyncPlayer::InternalSwap(RequestSyncPlayer* other) {
 // ===================================================================
 
 void Role::InitAsDefaultInstance() {
-  ::Net::_Role_default_instance_._instance.get_mutable()->position_ = const_cast< ::Net::Vector3*>(
-      ::Net::Vector3::internal_default_instance());
+  ::Net::_Role_default_instance_._instance.get_mutable()->position_ = const_cast< ::Net::Vector3D*>(
+      ::Net::Vector3D::internal_default_instance());
 }
 class Role::_Internal {
  public:
-  static const ::Net::Vector3& position(const Role* msg);
+  static const ::Net::Vector3D& position(const Role* msg);
 };
 
-const ::Net::Vector3&
+const ::Net::Vector3D&
 Role::_Internal::position(const Role* msg) {
   return *msg->position_;
 }
@@ -21147,7 +21147,7 @@ Role::Role(const Role& from)
     name_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.name_);
   }
   if (from.has_position()) {
-    position_ = new ::Net::Vector3(*from.position_);
+    position_ = new ::Net::Vector3D(*from.position_);
   } else {
     position_ = nullptr;
   }
@@ -21231,7 +21231,7 @@ const char* Role::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::inter
           set_gender(static_cast<::Net::Gender>(val));
         } else goto handle_unusual;
         continue;
-      // .Net.Vector3 position = 4;
+      // .Net.Vector3D position = 4;
       case 4:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 34)) {
           ptr = ctx->ParseMessage(mutable_position(), ptr);
@@ -21310,7 +21310,7 @@ bool Role::MergePartialFromCodedStream(
         break;
       }
 
-      // .Net.Vector3 position = 4;
+      // .Net.Vector3D position = 4;
       case 4: {
         if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (34 & 0xFF)) {
           DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
@@ -21369,7 +21369,7 @@ void Role::SerializeWithCachedSizes(
       3, this->gender(), output);
   }
 
-  // .Net.Vector3 position = 4;
+  // .Net.Vector3D position = 4;
   if (this->has_position()) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
       4, _Internal::position(this), output);
@@ -21410,7 +21410,7 @@ void Role::SerializeWithCachedSizes(
       3, this->gender(), target);
   }
 
-  // .Net.Vector3 position = 4;
+  // .Net.Vector3D position = 4;
   if (this->has_position()) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
@@ -21445,7 +21445,7 @@ size_t Role::ByteSizeLong() const {
         this->name());
   }
 
-  // .Net.Vector3 position = 4;
+  // .Net.Vector3D position = 4;
   if (this->has_position()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
@@ -21497,7 +21497,7 @@ void Role::MergeFrom(const Role& from) {
     name_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.name_);
   }
   if (from.has_position()) {
-    mutable_position()->::Net::Vector3::MergeFrom(from.position());
+    mutable_position()->::Net::Vector3D::MergeFrom(from.position());
   }
   if (from.sn() != 0) {
     set_sn(from.sn());
@@ -22123,7 +22123,7 @@ const char* Move::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::inter
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // repeated .Net.Vector3 position = 3;
+      // repeated .Net.Vector3D position = 3;
       case 3:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
           ptr -= 1;
@@ -22178,7 +22178,7 @@ bool Move::MergePartialFromCodedStream(
         break;
       }
 
-      // repeated .Net.Vector3 position = 3;
+      // repeated .Net.Vector3D position = 3;
       case 3: {
         if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (26 & 0xFF)) {
           DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
@@ -22221,7 +22221,7 @@ void Move::SerializeWithCachedSizes(
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64(1, this->player_sn(), output);
   }
 
-  // repeated .Net.Vector3 position = 3;
+  // repeated .Net.Vector3D position = 3;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->position_size()); i < n; i++) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
@@ -22248,7 +22248,7 @@ void Move::SerializeWithCachedSizes(
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64ToArray(1, this->player_sn(), target);
   }
 
-  // repeated .Net.Vector3 position = 3;
+  // repeated .Net.Vector3D position = 3;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->position_size()); i < n; i++) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
@@ -22277,7 +22277,7 @@ size_t Move::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated .Net.Vector3 position = 3;
+  // repeated .Net.Vector3D position = 3;
   {
     unsigned int count = static_cast<unsigned int>(this->position_size());
     total_size += 1UL * count;
@@ -22361,15 +22361,15 @@ void Move::InternalSwap(Move* other) {
 // ===================================================================
 
 void Enemy::InitAsDefaultInstance() {
-  ::Net::_Enemy_default_instance_._instance.get_mutable()->pos_ = const_cast< ::Net::Vector3*>(
-      ::Net::Vector3::internal_default_instance());
+  ::Net::_Enemy_default_instance_._instance.get_mutable()->pos_ = const_cast< ::Net::Vector3D*>(
+      ::Net::Vector3D::internal_default_instance());
 }
 class Enemy::_Internal {
  public:
-  static const ::Net::Vector3& pos(const Enemy* msg);
+  static const ::Net::Vector3D& pos(const Enemy* msg);
 };
 
-const ::Net::Vector3&
+const ::Net::Vector3D&
 Enemy::_Internal::pos(const Enemy* msg) {
   return *msg->pos_;
 }
@@ -22389,7 +22389,7 @@ Enemy::Enemy(const Enemy& from)
       _internal_metadata_(nullptr) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   if (from.has_pos()) {
-    pos_ = new ::Net::Vector3(*from.pos_);
+    pos_ = new ::Net::Vector3D(*from.pos_);
   } else {
     pos_ = nullptr;
   }
@@ -22451,7 +22451,7 @@ const char* Enemy::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::inte
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // .Net.Vector3 pos = 2;
+      // .Net.Vector3D pos = 2;
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
           ptr = ctx->ParseMessage(mutable_pos(), ptr);
@@ -22501,7 +22501,7 @@ bool Enemy::MergePartialFromCodedStream(
         break;
       }
 
-      // .Net.Vector3 pos = 2;
+      // .Net.Vector3D pos = 2;
       case 2: {
         if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (18 & 0xFF)) {
           DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
@@ -22544,7 +22544,7 @@ void Enemy::SerializeWithCachedSizes(
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32(1, this->id(), output);
   }
 
-  // .Net.Vector3 pos = 2;
+  // .Net.Vector3D pos = 2;
   if (this->has_pos()) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
       2, _Internal::pos(this), output);
@@ -22568,7 +22568,7 @@ void Enemy::SerializeWithCachedSizes(
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(1, this->id(), target);
   }
 
-  // .Net.Vector3 pos = 2;
+  // .Net.Vector3D pos = 2;
   if (this->has_pos()) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
@@ -22596,7 +22596,7 @@ size_t Enemy::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // .Net.Vector3 pos = 2;
+  // .Net.Vector3D pos = 2;
   if (this->has_pos()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
@@ -22638,7 +22638,7 @@ void Enemy::MergeFrom(const Enemy& from) {
   (void) cached_has_bits;
 
   if (from.has_pos()) {
-    mutable_pos()->::Net::Vector3::MergeFrom(from.pos());
+    mutable_pos()->::Net::Vector3D::MergeFrom(from.pos());
   }
   if (from.id() != 0) {
     set_id(from.id());
@@ -23056,22 +23056,22 @@ void FsmSyncState::InternalSwap(FsmSyncState* other) {
 // ===================================================================
 
 void PlayerSyncState::InitAsDefaultInstance() {
-  ::Net::_PlayerSyncState_default_instance_._instance.get_mutable()->curpos_ = const_cast< ::Net::Vector3*>(
-      ::Net::Vector3::internal_default_instance());
-  ::Net::_PlayerSyncState_default_instance_._instance.get_mutable()->hitpos_ = const_cast< ::Net::Vector3*>(
-      ::Net::Vector3::internal_default_instance());
+  ::Net::_PlayerSyncState_default_instance_._instance.get_mutable()->curpos_ = const_cast< ::Net::Vector3D*>(
+      ::Net::Vector3D::internal_default_instance());
+  ::Net::_PlayerSyncState_default_instance_._instance.get_mutable()->hitpos_ = const_cast< ::Net::Vector3D*>(
+      ::Net::Vector3D::internal_default_instance());
 }
 class PlayerSyncState::_Internal {
  public:
-  static const ::Net::Vector3& curpos(const PlayerSyncState* msg);
-  static const ::Net::Vector3& hitpos(const PlayerSyncState* msg);
+  static const ::Net::Vector3D& curpos(const PlayerSyncState* msg);
+  static const ::Net::Vector3D& hitpos(const PlayerSyncState* msg);
 };
 
-const ::Net::Vector3&
+const ::Net::Vector3D&
 PlayerSyncState::_Internal::curpos(const PlayerSyncState* msg) {
   return *msg->curpos_;
 }
-const ::Net::Vector3&
+const ::Net::Vector3D&
 PlayerSyncState::_Internal::hitpos(const PlayerSyncState* msg) {
   return *msg->hitpos_;
 }
@@ -23097,12 +23097,12 @@ PlayerSyncState::PlayerSyncState(const PlayerSyncState& from)
       _internal_metadata_(nullptr) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   if (from.has_curpos()) {
-    curpos_ = new ::Net::Vector3(*from.curpos_);
+    curpos_ = new ::Net::Vector3D(*from.curpos_);
   } else {
     curpos_ = nullptr;
   }
   if (from.has_hitpos()) {
-    hitpos_ = new ::Net::Vector3(*from.hitpos_);
+    hitpos_ = new ::Net::Vector3D(*from.hitpos_);
   } else {
     hitpos_ = nullptr;
   }
@@ -23180,14 +23180,14 @@ const char* PlayerSyncState::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPAC
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // .Net.Vector3 curPos = 3;
+      // .Net.Vector3D curPos = 3;
       case 3:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
           ptr = ctx->ParseMessage(mutable_curpos(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // .Net.Vector3 hitPos = 4;
+      // .Net.Vector3D hitPos = 4;
       case 4:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 34)) {
           ptr = ctx->ParseMessage(mutable_hitpos(), ptr);
@@ -23264,7 +23264,7 @@ bool PlayerSyncState::MergePartialFromCodedStream(
         break;
       }
 
-      // .Net.Vector3 curPos = 3;
+      // .Net.Vector3D curPos = 3;
       case 3: {
         if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (26 & 0xFF)) {
           DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
@@ -23275,7 +23275,7 @@ bool PlayerSyncState::MergePartialFromCodedStream(
         break;
       }
 
-      // .Net.Vector3 hitPos = 4;
+      // .Net.Vector3D hitPos = 4;
       case 4: {
         if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (34 & 0xFF)) {
           DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
@@ -23349,13 +23349,13 @@ void PlayerSyncState::SerializeWithCachedSizes(
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32(2, this->code(), output);
   }
 
-  // .Net.Vector3 curPos = 3;
+  // .Net.Vector3D curPos = 3;
   if (this->has_curpos()) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
       3, _Internal::curpos(this), output);
   }
 
-  // .Net.Vector3 hitPos = 4;
+  // .Net.Vector3D hitPos = 4;
   if (this->has_hitpos()) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
       4, _Internal::hitpos(this), output);
@@ -23394,14 +23394,14 @@ void PlayerSyncState::SerializeWithCachedSizes(
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(2, this->code(), target);
   }
 
-  // .Net.Vector3 curPos = 3;
+  // .Net.Vector3D curPos = 3;
   if (this->has_curpos()) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         3, _Internal::curpos(this), target);
   }
 
-  // .Net.Vector3 hitPos = 4;
+  // .Net.Vector3D hitPos = 4;
   if (this->has_hitpos()) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
@@ -23439,14 +23439,14 @@ size_t PlayerSyncState::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // .Net.Vector3 curPos = 3;
+  // .Net.Vector3D curPos = 3;
   if (this->has_curpos()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *curpos_);
   }
 
-  // .Net.Vector3 hitPos = 4;
+  // .Net.Vector3D hitPos = 4;
   if (this->has_hitpos()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
@@ -23509,10 +23509,10 @@ void PlayerSyncState::MergeFrom(const PlayerSyncState& from) {
   (void) cached_has_bits;
 
   if (from.has_curpos()) {
-    mutable_curpos()->::Net::Vector3::MergeFrom(from.curpos());
+    mutable_curpos()->::Net::Vector3D::MergeFrom(from.curpos());
   }
   if (from.has_hitpos()) {
-    mutable_hitpos()->::Net::Vector3::MergeFrom(from.hitpos());
+    mutable_hitpos()->::Net::Vector3D::MergeFrom(from.hitpos());
   }
   if (from.state() != 0) {
     set_state(from.state());

@@ -104,46 +104,46 @@ namespace Net {
             "ZGlzUnMSDwoHYWNjb3VudBgBIAEoCRIiCgp0b2tlbl9pbmZvGAIgASgLMg4u",
             "TmV0LlRva2VuSW5mbyJKCgpTeW5jUGxheWVyEg4KBmFwcF9pZBgBIAEoBRIP",
             "CgdhY2NvdW50GAIgASgJEhsKBnBsYXllchgDIAEoCzILLk5ldC5QbGF5ZXIi",
-            "PgoKRW50ZXJXb3JsZBIQCgh3b3JsZF9pZBgBIAEoBRIeCghwb3NpdGlvbhgC",
-            "IAEoCzIMLk5ldC5WZWN0b3IzIiAKDFJlcXVlc3RXb3JsZBIQCgh3b3JsZF9p",
-            "ZBgBIAEoBSJLCgtDcmVhdGVXb3JsZBIQCgh3b3JsZF9pZBgBIAEoBRIVCg1s",
-            "YXN0X3dvcmxkX3NuGAIgASgEEhMKC2dhbWVfYXBwX2lkGAMgASgFIlEKFEJy",
-            "b2FkY2FzdENyZWF0ZVdvcmxkEhAKCHdvcmxkX2lkGAEgASgFEhAKCHdvcmxk",
-            "X3NuGAIgASgEEhUKDWxhc3Rfd29ybGRfc24YAyABKAQiPwoZQnJvYWRjYXN0",
-            "Q3JlYXRlV29ybGRQcm94eRIQCgh3b3JsZF9pZBgBIAEoBRIQCgh3b3JsZF9z",
-            "bhgCIAEoBCI1CgpRdWVyeVdvcmxkEhAKCHdvcmxkX3NuGAEgASgEEhUKDWxh",
-            "c3Rfd29ybGRfc24YAiABKAQiiwEKDFF1ZXJ5V29ybGRScxIQCgh3b3JsZF9z",
-            "bhgBIAEoBBIxCgtyZXR1cm5fY29kZRgCIAEoDjIcLk5ldC5RdWVyeVdvcmxk",
-            "UnMuUmV0dXJuQ29kZSI2CgpSZXR1cm5Db2RlEhEKDVF1ZXJ5V29ybGRfT0sQ",
-            "ABIVChFRdWVyeVdvcmxkX0ZhaWxlZBABImIKCFRlbGVwb3J0EhUKDWxhc3Rf",
-            "d29ybGRfc24YASABKAQSEQoJcGxheWVyX3NuGAIgASgEEg8KB2FjY291bnQY",
-            "AyABKAkSGwoGcGxheWVyGAQgASgLMgsuTmV0LlBsYXllciIiCg1UZWxlcG9y",
-            "dEFmdGVyEhEKCXBsYXllcl9zbhgBIAEoBCIhCgxSZW1vdmVQbGF5ZXISEQoJ",
-            "cGxheWVyX3NuGAEgASgEIiYKEVJlcXVlc3RTeW5jUGxheWVyEhEKCXBsYXll",
-            "cl9zbhgBIAEoBCJdCgRSb2xlEgwKBG5hbWUYASABKAkSCgoCc24YAiABKAQS",
-            "GwoGZ2VuZGVyGAMgASgOMgsuTmV0LkdlbmRlchIeCghwb3NpdGlvbhgEIAEo",
-            "CzIMLk5ldC5WZWN0b3IzIiUKClJvbGVBcHBlYXISFwoEcm9sZRgBIAMoCzIJ",
-            "Lk5ldC5Sb2xlIhsKDVJvbGVEaXNBcHBlYXISCgoCc24YASABKAQiOQoETW92",
-            "ZRIRCglwbGF5ZXJfc24YASABKAQSHgoIcG9zaXRpb24YAyADKAsyDC5OZXQu",
-            "VmVjdG9yMyIuCgVFbmVteRIKCgJpZBgBIAEoBRIZCgNwb3MYAiABKAsyDC5O",
-            "ZXQuVmVjdG9yMyJQCgxGc21TeW5jU3RhdGUSDQoFc3RhdGUYASABKAUSDAoE",
-            "Y29kZRgCIAEoBRIQCghlbmVteV9pZBgFIAEoBRIRCglwbGF5ZXJfc24YBiAB",
-            "KAQijwEKD1BsYXllclN5bmNTdGF0ZRINCgVzdGF0ZRgBIAEoBRIMCgRjb2Rl",
-            "GAIgASgFEhwKBmN1clBvcxgDIAEoCzIMLk5ldC5WZWN0b3IzEhwKBmhpdFBv",
-            "cxgEIAEoCzIMLk5ldC5WZWN0b3IzEhEKCXBsYXllcl9zbhgFIAEoBBIQCghl",
-            "bmVteV9pZBgGIAEoBSI3ChBSZXF1ZXN0U3luY0VuZW15EhEKCXBsYXllcl9z",
-            "bhgBIAEoBBIQCghlbmVteV9pZBgCIAEoBSI3ChFSZXF1ZXN0TGlua1BsYXll",
-            "chIQCghlbmVteV9pZBgBIAEoBRIQCghpc0xpbmtlchgCIAEoCCp4CgdUYWdU",
-            "eXBlEg8KC1RhZ1R5cGVOb25lEAASEgoOVGFnVHlwZUFjY291bnQQARIOCgpU",
-            "YWdUeXBlQXBwEAISEQoNVGFnVHlwZUVudGl0eRADEhIKDlRhZ1R5cGVUb1dv",
-            "cmxkEAQSEQoNVGFnVHlwZVBsYXllchAFKpoBChZBY2NvdW50Q2hlY2tSZXR1",
-            "cm5Db2RlEgoKBkFSQ19PSxAAEg8KC0FSQ19VTktPTldOEAESGQoVQVJDX05P",
-            "VF9GT1VORF9BQ0NPVU5UEAISFgoSQVJDX1BBU1NXT1JEX1dST05HEAMSDwoL",
-            "QVJDX0xPR0dJTkcQBBIPCgtBUkNfVElNRU9VVBAFEg4KCkFSQ19PTkxJTkUQ",
-            "BipHChNMb2dpbkh0dHBSZXR1cm5Db2RlEgsKB0xIUkNfT0sQABIQCgxMSFJD",
-            "X1RJTUVPVVQQARIRCg1MSFJDX05PVEZPVU5EEAIqTAoWQ3JlYXRlUGxheWVy",
-            "UmV0dXJuQ29kZRIRCg1DUFJfQ3JlYXRlX09LEAASDwoLQ1BSX1Vua29ud24Q",
-            "ARIOCgpDUFJfUmVuYW1lEAJiBnByb3RvMw=="));
+            "PwoKRW50ZXJXb3JsZBIQCgh3b3JsZF9pZBgBIAEoBRIfCghwb3NpdGlvbhgC",
+            "IAEoCzINLk5ldC5WZWN0b3IzRCIgCgxSZXF1ZXN0V29ybGQSEAoId29ybGRf",
+            "aWQYASABKAUiSwoLQ3JlYXRlV29ybGQSEAoId29ybGRfaWQYASABKAUSFQoN",
+            "bGFzdF93b3JsZF9zbhgCIAEoBBITCgtnYW1lX2FwcF9pZBgDIAEoBSJRChRC",
+            "cm9hZGNhc3RDcmVhdGVXb3JsZBIQCgh3b3JsZF9pZBgBIAEoBRIQCgh3b3Js",
+            "ZF9zbhgCIAEoBBIVCg1sYXN0X3dvcmxkX3NuGAMgASgEIj8KGUJyb2FkY2Fz",
+            "dENyZWF0ZVdvcmxkUHJveHkSEAoId29ybGRfaWQYASABKAUSEAoId29ybGRf",
+            "c24YAiABKAQiNQoKUXVlcnlXb3JsZBIQCgh3b3JsZF9zbhgBIAEoBBIVCg1s",
+            "YXN0X3dvcmxkX3NuGAIgASgEIosBCgxRdWVyeVdvcmxkUnMSEAoId29ybGRf",
+            "c24YASABKAQSMQoLcmV0dXJuX2NvZGUYAiABKA4yHC5OZXQuUXVlcnlXb3Js",
+            "ZFJzLlJldHVybkNvZGUiNgoKUmV0dXJuQ29kZRIRCg1RdWVyeVdvcmxkX09L",
+            "EAASFQoRUXVlcnlXb3JsZF9GYWlsZWQQASJiCghUZWxlcG9ydBIVCg1sYXN0",
+            "X3dvcmxkX3NuGAEgASgEEhEKCXBsYXllcl9zbhgCIAEoBBIPCgdhY2NvdW50",
+            "GAMgASgJEhsKBnBsYXllchgEIAEoCzILLk5ldC5QbGF5ZXIiIgoNVGVsZXBv",
+            "cnRBZnRlchIRCglwbGF5ZXJfc24YASABKAQiIQoMUmVtb3ZlUGxheWVyEhEK",
+            "CXBsYXllcl9zbhgBIAEoBCImChFSZXF1ZXN0U3luY1BsYXllchIRCglwbGF5",
+            "ZXJfc24YASABKAQiXgoEUm9sZRIMCgRuYW1lGAEgASgJEgoKAnNuGAIgASgE",
+            "EhsKBmdlbmRlchgDIAEoDjILLk5ldC5HZW5kZXISHwoIcG9zaXRpb24YBCAB",
+            "KAsyDS5OZXQuVmVjdG9yM0QiJQoKUm9sZUFwcGVhchIXCgRyb2xlGAEgAygL",
+            "MgkuTmV0LlJvbGUiGwoNUm9sZURpc0FwcGVhchIKCgJzbhgBIAEoBCI6CgRN",
+            "b3ZlEhEKCXBsYXllcl9zbhgBIAEoBBIfCghwb3NpdGlvbhgDIAMoCzINLk5l",
+            "dC5WZWN0b3IzRCIvCgVFbmVteRIKCgJpZBgBIAEoBRIaCgNwb3MYAiABKAsy",
+            "DS5OZXQuVmVjdG9yM0QiUAoMRnNtU3luY1N0YXRlEg0KBXN0YXRlGAEgASgF",
+            "EgwKBGNvZGUYAiABKAUSEAoIZW5lbXlfaWQYBSABKAUSEQoJcGxheWVyX3Nu",
+            "GAYgASgEIpEBCg9QbGF5ZXJTeW5jU3RhdGUSDQoFc3RhdGUYASABKAUSDAoE",
+            "Y29kZRgCIAEoBRIdCgZjdXJQb3MYAyABKAsyDS5OZXQuVmVjdG9yM0QSHQoG",
+            "aGl0UG9zGAQgASgLMg0uTmV0LlZlY3RvcjNEEhEKCXBsYXllcl9zbhgFIAEo",
+            "BBIQCghlbmVteV9pZBgGIAEoBSI3ChBSZXF1ZXN0U3luY0VuZW15EhEKCXBs",
+            "YXllcl9zbhgBIAEoBBIQCghlbmVteV9pZBgCIAEoBSI3ChFSZXF1ZXN0TGlu",
+            "a1BsYXllchIQCghlbmVteV9pZBgBIAEoBRIQCghpc0xpbmtlchgCIAEoCCp4",
+            "CgdUYWdUeXBlEg8KC1RhZ1R5cGVOb25lEAASEgoOVGFnVHlwZUFjY291bnQQ",
+            "ARIOCgpUYWdUeXBlQXBwEAISEQoNVGFnVHlwZUVudGl0eRADEhIKDlRhZ1R5",
+            "cGVUb1dvcmxkEAQSEQoNVGFnVHlwZVBsYXllchAFKpoBChZBY2NvdW50Q2hl",
+            "Y2tSZXR1cm5Db2RlEgoKBkFSQ19PSxAAEg8KC0FSQ19VTktPTldOEAESGQoV",
+            "QVJDX05PVF9GT1VORF9BQ0NPVU5UEAISFgoSQVJDX1BBU1NXT1JEX1dST05H",
+            "EAMSDwoLQVJDX0xPR0dJTkcQBBIPCgtBUkNfVElNRU9VVBAFEg4KCkFSQ19P",
+            "TkxJTkUQBipHChNMb2dpbkh0dHBSZXR1cm5Db2RlEgsKB0xIUkNfT0sQABIQ",
+            "CgxMSFJDX1RJTUVPVVQQARIRCg1MSFJDX05PVEZPVU5EEAIqTAoWQ3JlYXRl",
+            "UGxheWVyUmV0dXJuQ29kZRIRCg1DUFJfQ3JlYXRlX09LEAASDwoLQ1BSX1Vu",
+            "a29ud24QARIOCgpDUFJfUmVuYW1lEAJiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Net.DbReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Net.TagType), typeof(global::Net.AccountCheckReturnCode), typeof(global::Net.LoginHttpReturnCode), typeof(global::Net.CreatePlayerReturnCode), }, null, new pbr::GeneratedClrTypeInfo[] {
@@ -8192,9 +8192,9 @@ namespace Net {
 
     /// <summary>Field number for the "position" field.</summary>
     public const int PositionFieldNumber = 2;
-    private global::Net.Vector3 position_;
+    private global::Net.Vector3D position_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Net.Vector3 Position {
+    public global::Net.Vector3D Position {
       get { return position_; }
       set {
         position_ = value;
@@ -8275,7 +8275,7 @@ namespace Net {
       }
       if (other.position_ != null) {
         if (position_ == null) {
-          Position = new global::Net.Vector3();
+          Position = new global::Net.Vector3D();
         }
         Position.MergeFrom(other.Position);
       }
@@ -8296,7 +8296,7 @@ namespace Net {
           }
           case 18: {
             if (position_ == null) {
-              Position = new global::Net.Vector3();
+              Position = new global::Net.Vector3D();
             }
             input.ReadMessage(Position);
             break;
@@ -9967,9 +9967,9 @@ namespace Net {
 
     /// <summary>Field number for the "position" field.</summary>
     public const int PositionFieldNumber = 4;
-    private global::Net.Vector3 position_;
+    private global::Net.Vector3D position_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Net.Vector3 Position {
+    public global::Net.Vector3D Position {
       get { return position_; }
       set {
         position_ = value;
@@ -10074,7 +10074,7 @@ namespace Net {
       }
       if (other.position_ != null) {
         if (position_ == null) {
-          Position = new global::Net.Vector3();
+          Position = new global::Net.Vector3D();
         }
         Position.MergeFrom(other.Position);
       }
@@ -10103,7 +10103,7 @@ namespace Net {
           }
           case 34: {
             if (position_ == null) {
-              Position = new global::Net.Vector3();
+              Position = new global::Net.Vector3D();
             }
             input.ReadMessage(Position);
             break;
@@ -10412,11 +10412,11 @@ namespace Net {
 
     /// <summary>Field number for the "position" field.</summary>
     public const int PositionFieldNumber = 3;
-    private static readonly pb::FieldCodec<global::Net.Vector3> _repeated_position_codec
-        = pb::FieldCodec.ForMessage(26, global::Net.Vector3.Parser);
-    private readonly pbc::RepeatedField<global::Net.Vector3> position_ = new pbc::RepeatedField<global::Net.Vector3>();
+    private static readonly pb::FieldCodec<global::Net.Vector3D> _repeated_position_codec
+        = pb::FieldCodec.ForMessage(26, global::Net.Vector3D.Parser);
+    private readonly pbc::RepeatedField<global::Net.Vector3D> position_ = new pbc::RepeatedField<global::Net.Vector3D>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::Net.Vector3> Position {
+    public pbc::RepeatedField<global::Net.Vector3D> Position {
       get { return position_; }
     }
 
@@ -10561,9 +10561,9 @@ namespace Net {
 
     /// <summary>Field number for the "pos" field.</summary>
     public const int PosFieldNumber = 2;
-    private global::Net.Vector3 pos_;
+    private global::Net.Vector3D pos_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Net.Vector3 Pos {
+    public global::Net.Vector3D Pos {
       get { return pos_; }
       set {
         pos_ = value;
@@ -10644,7 +10644,7 @@ namespace Net {
       }
       if (other.pos_ != null) {
         if (pos_ == null) {
-          Pos = new global::Net.Vector3();
+          Pos = new global::Net.Vector3D();
         }
         Pos.MergeFrom(other.Pos);
       }
@@ -10665,7 +10665,7 @@ namespace Net {
           }
           case 18: {
             if (pos_ == null) {
-              Pos = new global::Net.Vector3();
+              Pos = new global::Net.Vector3D();
             }
             input.ReadMessage(Pos);
             break;
@@ -10952,9 +10952,9 @@ namespace Net {
 
     /// <summary>Field number for the "curPos" field.</summary>
     public const int CurPosFieldNumber = 3;
-    private global::Net.Vector3 curPos_;
+    private global::Net.Vector3D curPos_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Net.Vector3 CurPos {
+    public global::Net.Vector3D CurPos {
       get { return curPos_; }
       set {
         curPos_ = value;
@@ -10963,9 +10963,9 @@ namespace Net {
 
     /// <summary>Field number for the "hitPos" field.</summary>
     public const int HitPosFieldNumber = 4;
-    private global::Net.Vector3 hitPos_;
+    private global::Net.Vector3D hitPos_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Net.Vector3 HitPos {
+    public global::Net.Vector3D HitPos {
       get { return hitPos_; }
       set {
         hitPos_ = value;
@@ -11107,13 +11107,13 @@ namespace Net {
       }
       if (other.curPos_ != null) {
         if (curPos_ == null) {
-          CurPos = new global::Net.Vector3();
+          CurPos = new global::Net.Vector3D();
         }
         CurPos.MergeFrom(other.CurPos);
       }
       if (other.hitPos_ != null) {
         if (hitPos_ == null) {
-          HitPos = new global::Net.Vector3();
+          HitPos = new global::Net.Vector3D();
         }
         HitPos.MergeFrom(other.HitPos);
       }
@@ -11144,14 +11144,14 @@ namespace Net {
           }
           case 26: {
             if (curPos_ == null) {
-              CurPos = new global::Net.Vector3();
+              CurPos = new global::Net.Vector3D();
             }
             input.ReadMessage(CurPos);
             break;
           }
           case 34: {
             if (hitPos_ == null) {
-              HitPos = new global::Net.Vector3();
+              HitPos = new global::Net.Vector3D();
             }
             input.ReadMessage(HitPos);
             break;

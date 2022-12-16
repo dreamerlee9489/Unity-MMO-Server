@@ -8023,13 +8023,13 @@ class EnterWorld :
     kPositionFieldNumber = 2,
     kWorldIdFieldNumber = 1,
   };
-  // .Net.Vector3 position = 2;
+  // .Net.Vector3D position = 2;
   bool has_position() const;
   void clear_position();
-  const ::Net::Vector3& position() const;
-  ::Net::Vector3* release_position();
-  ::Net::Vector3* mutable_position();
-  void set_allocated_position(::Net::Vector3* position);
+  const ::Net::Vector3D& position() const;
+  ::Net::Vector3D* release_position();
+  ::Net::Vector3D* mutable_position();
+  void set_allocated_position(::Net::Vector3D* position);
 
   // int32 world_id = 1;
   void clear_world_id();
@@ -8041,7 +8041,7 @@ class EnterWorld :
   class _Internal;
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
-  ::Net::Vector3* position_;
+  ::Net::Vector3D* position_;
   ::PROTOBUF_NAMESPACE_ID::int32 world_id_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_msg_2eproto;
@@ -9596,13 +9596,13 @@ class Role :
   std::string* release_name();
   void set_allocated_name(std::string* name);
 
-  // .Net.Vector3 position = 4;
+  // .Net.Vector3D position = 4;
   bool has_position() const;
   void clear_position();
-  const ::Net::Vector3& position() const;
-  ::Net::Vector3* release_position();
-  ::Net::Vector3* mutable_position();
-  void set_allocated_position(::Net::Vector3* position);
+  const ::Net::Vector3D& position() const;
+  ::Net::Vector3D* release_position();
+  ::Net::Vector3D* mutable_position();
+  void set_allocated_position(::Net::Vector3D* position);
 
   // uint64 sn = 2;
   void clear_sn();
@@ -9620,7 +9620,7 @@ class Role :
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr name_;
-  ::Net::Vector3* position_;
+  ::Net::Vector3D* position_;
   ::PROTOBUF_NAMESPACE_ID::uint64 sn_;
   int gender_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
@@ -10012,15 +10012,15 @@ class Move :
     kPositionFieldNumber = 3,
     kPlayerSnFieldNumber = 1,
   };
-  // repeated .Net.Vector3 position = 3;
+  // repeated .Net.Vector3D position = 3;
   int position_size() const;
   void clear_position();
-  ::Net::Vector3* mutable_position(int index);
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Net::Vector3 >*
+  ::Net::Vector3D* mutable_position(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Net::Vector3D >*
       mutable_position();
-  const ::Net::Vector3& position(int index) const;
-  ::Net::Vector3* add_position();
-  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Net::Vector3 >&
+  const ::Net::Vector3D& position(int index) const;
+  ::Net::Vector3D* add_position();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Net::Vector3D >&
       position() const;
 
   // uint64 player_sn = 1;
@@ -10033,7 +10033,7 @@ class Move :
   class _Internal;
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Net::Vector3 > position_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Net::Vector3D > position_;
   ::PROTOBUF_NAMESPACE_ID::uint64 player_sn_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_msg_2eproto;
@@ -10156,13 +10156,13 @@ class Enemy :
     kPosFieldNumber = 2,
     kIdFieldNumber = 1,
   };
-  // .Net.Vector3 pos = 2;
+  // .Net.Vector3D pos = 2;
   bool has_pos() const;
   void clear_pos();
-  const ::Net::Vector3& pos() const;
-  ::Net::Vector3* release_pos();
-  ::Net::Vector3* mutable_pos();
-  void set_allocated_pos(::Net::Vector3* pos);
+  const ::Net::Vector3D& pos() const;
+  ::Net::Vector3D* release_pos();
+  ::Net::Vector3D* mutable_pos();
+  void set_allocated_pos(::Net::Vector3D* pos);
 
   // int32 id = 1;
   void clear_id();
@@ -10174,7 +10174,7 @@ class Enemy :
   class _Internal;
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
-  ::Net::Vector3* pos_;
+  ::Net::Vector3D* pos_;
   ::PROTOBUF_NAMESPACE_ID::int32 id_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_msg_2eproto;
@@ -10453,21 +10453,21 @@ class PlayerSyncState :
     kPlayerSnFieldNumber = 5,
     kEnemyIdFieldNumber = 6,
   };
-  // .Net.Vector3 curPos = 3;
+  // .Net.Vector3D curPos = 3;
   bool has_curpos() const;
   void clear_curpos();
-  const ::Net::Vector3& curpos() const;
-  ::Net::Vector3* release_curpos();
-  ::Net::Vector3* mutable_curpos();
-  void set_allocated_curpos(::Net::Vector3* curpos);
+  const ::Net::Vector3D& curpos() const;
+  ::Net::Vector3D* release_curpos();
+  ::Net::Vector3D* mutable_curpos();
+  void set_allocated_curpos(::Net::Vector3D* curpos);
 
-  // .Net.Vector3 hitPos = 4;
+  // .Net.Vector3D hitPos = 4;
   bool has_hitpos() const;
   void clear_hitpos();
-  const ::Net::Vector3& hitpos() const;
-  ::Net::Vector3* release_hitpos();
-  ::Net::Vector3* mutable_hitpos();
-  void set_allocated_hitpos(::Net::Vector3* hitpos);
+  const ::Net::Vector3D& hitpos() const;
+  ::Net::Vector3D* release_hitpos();
+  ::Net::Vector3D* mutable_hitpos();
+  void set_allocated_hitpos(::Net::Vector3D* hitpos);
 
   // int32 state = 1;
   void clear_state();
@@ -10494,8 +10494,8 @@ class PlayerSyncState :
   class _Internal;
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
-  ::Net::Vector3* curpos_;
-  ::Net::Vector3* hitpos_;
+  ::Net::Vector3D* curpos_;
+  ::Net::Vector3D* hitpos_;
   ::PROTOBUF_NAMESPACE_ID::int32 state_;
   ::PROTOBUF_NAMESPACE_ID::int32 code_;
   ::PROTOBUF_NAMESPACE_ID::uint64 player_sn_;
@@ -14056,33 +14056,33 @@ inline void EnterWorld::set_world_id(::PROTOBUF_NAMESPACE_ID::int32 value) {
   // @@protoc_insertion_point(field_set:Net.EnterWorld.world_id)
 }
 
-// .Net.Vector3 position = 2;
+// .Net.Vector3D position = 2;
 inline bool EnterWorld::has_position() const {
   return this != internal_default_instance() && position_ != nullptr;
 }
-inline const ::Net::Vector3& EnterWorld::position() const {
-  const ::Net::Vector3* p = position_;
+inline const ::Net::Vector3D& EnterWorld::position() const {
+  const ::Net::Vector3D* p = position_;
   // @@protoc_insertion_point(field_get:Net.EnterWorld.position)
-  return p != nullptr ? *p : *reinterpret_cast<const ::Net::Vector3*>(
-      &::Net::_Vector3_default_instance_);
+  return p != nullptr ? *p : *reinterpret_cast<const ::Net::Vector3D*>(
+      &::Net::_Vector3D_default_instance_);
 }
-inline ::Net::Vector3* EnterWorld::release_position() {
+inline ::Net::Vector3D* EnterWorld::release_position() {
   // @@protoc_insertion_point(field_release:Net.EnterWorld.position)
   
-  ::Net::Vector3* temp = position_;
+  ::Net::Vector3D* temp = position_;
   position_ = nullptr;
   return temp;
 }
-inline ::Net::Vector3* EnterWorld::mutable_position() {
+inline ::Net::Vector3D* EnterWorld::mutable_position() {
   
   if (position_ == nullptr) {
-    auto* p = CreateMaybeMessage<::Net::Vector3>(GetArenaNoVirtual());
+    auto* p = CreateMaybeMessage<::Net::Vector3D>(GetArenaNoVirtual());
     position_ = p;
   }
   // @@protoc_insertion_point(field_mutable:Net.EnterWorld.position)
   return position_;
 }
-inline void EnterWorld::set_allocated_position(::Net::Vector3* position) {
+inline void EnterWorld::set_allocated_position(::Net::Vector3D* position) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaNoVirtual();
   if (message_arena == nullptr) {
     delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(position_);
@@ -14572,33 +14572,33 @@ inline void Role::set_gender(::Net::Gender value) {
   // @@protoc_insertion_point(field_set:Net.Role.gender)
 }
 
-// .Net.Vector3 position = 4;
+// .Net.Vector3D position = 4;
 inline bool Role::has_position() const {
   return this != internal_default_instance() && position_ != nullptr;
 }
-inline const ::Net::Vector3& Role::position() const {
-  const ::Net::Vector3* p = position_;
+inline const ::Net::Vector3D& Role::position() const {
+  const ::Net::Vector3D* p = position_;
   // @@protoc_insertion_point(field_get:Net.Role.position)
-  return p != nullptr ? *p : *reinterpret_cast<const ::Net::Vector3*>(
-      &::Net::_Vector3_default_instance_);
+  return p != nullptr ? *p : *reinterpret_cast<const ::Net::Vector3D*>(
+      &::Net::_Vector3D_default_instance_);
 }
-inline ::Net::Vector3* Role::release_position() {
+inline ::Net::Vector3D* Role::release_position() {
   // @@protoc_insertion_point(field_release:Net.Role.position)
   
-  ::Net::Vector3* temp = position_;
+  ::Net::Vector3D* temp = position_;
   position_ = nullptr;
   return temp;
 }
-inline ::Net::Vector3* Role::mutable_position() {
+inline ::Net::Vector3D* Role::mutable_position() {
   
   if (position_ == nullptr) {
-    auto* p = CreateMaybeMessage<::Net::Vector3>(GetArenaNoVirtual());
+    auto* p = CreateMaybeMessage<::Net::Vector3D>(GetArenaNoVirtual());
     position_ = p;
   }
   // @@protoc_insertion_point(field_mutable:Net.Role.position)
   return position_;
 }
-inline void Role::set_allocated_position(::Net::Vector3* position) {
+inline void Role::set_allocated_position(::Net::Vector3D* position) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaNoVirtual();
   if (message_arena == nullptr) {
     delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(position_);
@@ -14687,28 +14687,28 @@ inline void Move::set_player_sn(::PROTOBUF_NAMESPACE_ID::uint64 value) {
   // @@protoc_insertion_point(field_set:Net.Move.player_sn)
 }
 
-// repeated .Net.Vector3 position = 3;
+// repeated .Net.Vector3D position = 3;
 inline int Move::position_size() const {
   return position_.size();
 }
-inline ::Net::Vector3* Move::mutable_position(int index) {
+inline ::Net::Vector3D* Move::mutable_position(int index) {
   // @@protoc_insertion_point(field_mutable:Net.Move.position)
   return position_.Mutable(index);
 }
-inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Net::Vector3 >*
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Net::Vector3D >*
 Move::mutable_position() {
   // @@protoc_insertion_point(field_mutable_list:Net.Move.position)
   return &position_;
 }
-inline const ::Net::Vector3& Move::position(int index) const {
+inline const ::Net::Vector3D& Move::position(int index) const {
   // @@protoc_insertion_point(field_get:Net.Move.position)
   return position_.Get(index);
 }
-inline ::Net::Vector3* Move::add_position() {
+inline ::Net::Vector3D* Move::add_position() {
   // @@protoc_insertion_point(field_add:Net.Move.position)
   return position_.Add();
 }
-inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Net::Vector3 >&
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Net::Vector3D >&
 Move::position() const {
   // @@protoc_insertion_point(field_list:Net.Move.position)
   return position_;
@@ -14732,33 +14732,33 @@ inline void Enemy::set_id(::PROTOBUF_NAMESPACE_ID::int32 value) {
   // @@protoc_insertion_point(field_set:Net.Enemy.id)
 }
 
-// .Net.Vector3 pos = 2;
+// .Net.Vector3D pos = 2;
 inline bool Enemy::has_pos() const {
   return this != internal_default_instance() && pos_ != nullptr;
 }
-inline const ::Net::Vector3& Enemy::pos() const {
-  const ::Net::Vector3* p = pos_;
+inline const ::Net::Vector3D& Enemy::pos() const {
+  const ::Net::Vector3D* p = pos_;
   // @@protoc_insertion_point(field_get:Net.Enemy.pos)
-  return p != nullptr ? *p : *reinterpret_cast<const ::Net::Vector3*>(
-      &::Net::_Vector3_default_instance_);
+  return p != nullptr ? *p : *reinterpret_cast<const ::Net::Vector3D*>(
+      &::Net::_Vector3D_default_instance_);
 }
-inline ::Net::Vector3* Enemy::release_pos() {
+inline ::Net::Vector3D* Enemy::release_pos() {
   // @@protoc_insertion_point(field_release:Net.Enemy.pos)
   
-  ::Net::Vector3* temp = pos_;
+  ::Net::Vector3D* temp = pos_;
   pos_ = nullptr;
   return temp;
 }
-inline ::Net::Vector3* Enemy::mutable_pos() {
+inline ::Net::Vector3D* Enemy::mutable_pos() {
   
   if (pos_ == nullptr) {
-    auto* p = CreateMaybeMessage<::Net::Vector3>(GetArenaNoVirtual());
+    auto* p = CreateMaybeMessage<::Net::Vector3D>(GetArenaNoVirtual());
     pos_ = p;
   }
   // @@protoc_insertion_point(field_mutable:Net.Enemy.pos)
   return pos_;
 }
-inline void Enemy::set_allocated_pos(::Net::Vector3* pos) {
+inline void Enemy::set_allocated_pos(::Net::Vector3D* pos) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaNoVirtual();
   if (message_arena == nullptr) {
     delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(pos_);
@@ -14869,33 +14869,33 @@ inline void PlayerSyncState::set_code(::PROTOBUF_NAMESPACE_ID::int32 value) {
   // @@protoc_insertion_point(field_set:Net.PlayerSyncState.code)
 }
 
-// .Net.Vector3 curPos = 3;
+// .Net.Vector3D curPos = 3;
 inline bool PlayerSyncState::has_curpos() const {
   return this != internal_default_instance() && curpos_ != nullptr;
 }
-inline const ::Net::Vector3& PlayerSyncState::curpos() const {
-  const ::Net::Vector3* p = curpos_;
+inline const ::Net::Vector3D& PlayerSyncState::curpos() const {
+  const ::Net::Vector3D* p = curpos_;
   // @@protoc_insertion_point(field_get:Net.PlayerSyncState.curPos)
-  return p != nullptr ? *p : *reinterpret_cast<const ::Net::Vector3*>(
-      &::Net::_Vector3_default_instance_);
+  return p != nullptr ? *p : *reinterpret_cast<const ::Net::Vector3D*>(
+      &::Net::_Vector3D_default_instance_);
 }
-inline ::Net::Vector3* PlayerSyncState::release_curpos() {
+inline ::Net::Vector3D* PlayerSyncState::release_curpos() {
   // @@protoc_insertion_point(field_release:Net.PlayerSyncState.curPos)
   
-  ::Net::Vector3* temp = curpos_;
+  ::Net::Vector3D* temp = curpos_;
   curpos_ = nullptr;
   return temp;
 }
-inline ::Net::Vector3* PlayerSyncState::mutable_curpos() {
+inline ::Net::Vector3D* PlayerSyncState::mutable_curpos() {
   
   if (curpos_ == nullptr) {
-    auto* p = CreateMaybeMessage<::Net::Vector3>(GetArenaNoVirtual());
+    auto* p = CreateMaybeMessage<::Net::Vector3D>(GetArenaNoVirtual());
     curpos_ = p;
   }
   // @@protoc_insertion_point(field_mutable:Net.PlayerSyncState.curPos)
   return curpos_;
 }
-inline void PlayerSyncState::set_allocated_curpos(::Net::Vector3* curpos) {
+inline void PlayerSyncState::set_allocated_curpos(::Net::Vector3D* curpos) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaNoVirtual();
   if (message_arena == nullptr) {
     delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(curpos_);
@@ -14914,33 +14914,33 @@ inline void PlayerSyncState::set_allocated_curpos(::Net::Vector3* curpos) {
   // @@protoc_insertion_point(field_set_allocated:Net.PlayerSyncState.curPos)
 }
 
-// .Net.Vector3 hitPos = 4;
+// .Net.Vector3D hitPos = 4;
 inline bool PlayerSyncState::has_hitpos() const {
   return this != internal_default_instance() && hitpos_ != nullptr;
 }
-inline const ::Net::Vector3& PlayerSyncState::hitpos() const {
-  const ::Net::Vector3* p = hitpos_;
+inline const ::Net::Vector3D& PlayerSyncState::hitpos() const {
+  const ::Net::Vector3D* p = hitpos_;
   // @@protoc_insertion_point(field_get:Net.PlayerSyncState.hitPos)
-  return p != nullptr ? *p : *reinterpret_cast<const ::Net::Vector3*>(
-      &::Net::_Vector3_default_instance_);
+  return p != nullptr ? *p : *reinterpret_cast<const ::Net::Vector3D*>(
+      &::Net::_Vector3D_default_instance_);
 }
-inline ::Net::Vector3* PlayerSyncState::release_hitpos() {
+inline ::Net::Vector3D* PlayerSyncState::release_hitpos() {
   // @@protoc_insertion_point(field_release:Net.PlayerSyncState.hitPos)
   
-  ::Net::Vector3* temp = hitpos_;
+  ::Net::Vector3D* temp = hitpos_;
   hitpos_ = nullptr;
   return temp;
 }
-inline ::Net::Vector3* PlayerSyncState::mutable_hitpos() {
+inline ::Net::Vector3D* PlayerSyncState::mutable_hitpos() {
   
   if (hitpos_ == nullptr) {
-    auto* p = CreateMaybeMessage<::Net::Vector3>(GetArenaNoVirtual());
+    auto* p = CreateMaybeMessage<::Net::Vector3D>(GetArenaNoVirtual());
     hitpos_ = p;
   }
   // @@protoc_insertion_point(field_mutable:Net.PlayerSyncState.hitPos)
   return hitpos_;
 }
-inline void PlayerSyncState::set_allocated_hitpos(::Net::Vector3* hitpos) {
+inline void PlayerSyncState::set_allocated_hitpos(::Net::Vector3D* hitpos) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaNoVirtual();
   if (message_arena == nullptr) {
     delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(hitpos_);

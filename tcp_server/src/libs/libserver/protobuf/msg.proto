@@ -333,7 +333,7 @@ message SyncPlayer {
 
 message EnterWorld {
 	int32 world_id = 1;
-	Vector3 position = 2;
+	Vector3D position = 2;
 }
 
 message RequestWorld {
@@ -395,7 +395,7 @@ message Role {
 	string name = 1;
 	uint64 sn = 2;
 	Gender gender = 3;
-	Vector3 position = 4;
+	Vector3D position = 4;
 }
 
 message RoleAppear {
@@ -408,12 +408,12 @@ message RoleDisAppear {
 
 message Move {
 	uint64 player_sn = 1;
-	repeated Vector3 position = 3;
+	repeated Vector3D position = 3;
 }
 
 message Enemy {
 	int32 id = 1;
-	Vector3 pos = 2;
+	Vector3D pos = 2;
 }
 
 message FsmSyncState {
@@ -426,8 +426,8 @@ message FsmSyncState {
 message PlayerSyncState {
 	int32 state = 1;
 	int32 code = 2;
-	Vector3 curPos = 3;
-	Vector3 hitPos = 4;
+	Vector3D curPos = 3;
+	Vector3D hitPos = 4;
 	uint64 player_sn = 5;
 	int32 enemy_id = 6;
 }

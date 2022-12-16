@@ -24,21 +24,21 @@ namespace Net {
     static DbReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CghkYi5wcm90bxIDTmV0IioKB1ZlY3RvcjMSCQoBeBgBIAEoAhIJCgF5GAIg",
-            "ASgCEgkKAXoYAyABKAIiOAoKUGxheWVyQmFzZRIbCgZnZW5kZXIYASABKA4y",
-            "Cy5OZXQuR2VuZGVyEg0KBWxldmVsGAIgASgFIk8KCUxhc3RXb3JsZBIQCgh3",
-            "b3JsZF9pZBgBIAEoBRIQCgh3b3JsZF9zbhgCIAEoAxIeCghwb3NpdGlvbhgD",
-            "IAEoCzIMLk5ldC5WZWN0b3IzIm4KClBsYXllck1pc2MSIgoKbGFzdF93b3Js",
-            "ZBgBIAEoCzIOLk5ldC5MYXN0V29ybGQSJAoMbGFzdF9kdW5nZW9uGAIgASgL",
-            "Mg4uTmV0Lkxhc3RXb3JsZBIWCg5vbmxpbmVfdmVyc2lvbhgDIAEoBSJgCgZQ",
-            "bGF5ZXISCgoCc24YASABKAQSDAoEbmFtZRgCIAEoCRIdCgRiYXNlGAMgASgL",
-            "Mg8uTmV0LlBsYXllckJhc2USHQoEbWlzYxgEIAEoCzIPLk5ldC5QbGF5ZXJN",
-            "aXNjKigKBkdlbmRlchIICgRub25lEAASCAoEbWFsZRABEgoKBmZlbWFsZRAC",
-            "YgZwcm90bzM="));
+            "CghkYi5wcm90bxIDTmV0IisKCFZlY3RvcjNEEgkKAXgYASABKAISCQoBeRgC",
+            "IAEoAhIJCgF6GAMgASgCIjgKClBsYXllckJhc2USGwoGZ2VuZGVyGAEgASgO",
+            "MgsuTmV0LkdlbmRlchINCgVsZXZlbBgCIAEoBSJQCglMYXN0V29ybGQSEAoI",
+            "d29ybGRfaWQYASABKAUSEAoId29ybGRfc24YAiABKAMSHwoIcG9zaXRpb24Y",
+            "AyABKAsyDS5OZXQuVmVjdG9yM0QibgoKUGxheWVyTWlzYxIiCgpsYXN0X3dv",
+            "cmxkGAEgASgLMg4uTmV0Lkxhc3RXb3JsZBIkCgxsYXN0X2R1bmdlb24YAiAB",
+            "KAsyDi5OZXQuTGFzdFdvcmxkEhYKDm9ubGluZV92ZXJzaW9uGAMgASgFImAK",
+            "BlBsYXllchIKCgJzbhgBIAEoBBIMCgRuYW1lGAIgASgJEh0KBGJhc2UYAyAB",
+            "KAsyDy5OZXQuUGxheWVyQmFzZRIdCgRtaXNjGAQgASgLMg8uTmV0LlBsYXll",
+            "ck1pc2MqKAoGR2VuZGVyEggKBG5vbmUQABIICgRtYWxlEAESCgoGZmVtYWxl",
+            "EAJiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Net.Gender), }, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Net.Vector3), global::Net.Vector3.Parser, new[]{ "X", "Y", "Z" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Net.Vector3D), global::Net.Vector3D.Parser, new[]{ "X", "Y", "Z" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Net.PlayerBase), global::Net.PlayerBase.Parser, new[]{ "Gender", "Level" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Net.LastWorld), global::Net.LastWorld.Parser, new[]{ "WorldId", "WorldSn", "Position" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Net.PlayerMisc), global::Net.PlayerMisc.Parser, new[]{ "LastWorld", "LastDungeon", "OnlineVersion" }, null, null, null, null),
@@ -58,11 +58,11 @@ namespace Net {
   #endregion
 
   #region Messages
-  public sealed partial class Vector3 : pb::IMessage<Vector3> {
-    private static readonly pb::MessageParser<Vector3> _parser = new pb::MessageParser<Vector3>(() => new Vector3());
+  public sealed partial class Vector3D : pb::IMessage<Vector3D> {
+    private static readonly pb::MessageParser<Vector3D> _parser = new pb::MessageParser<Vector3D>(() => new Vector3D());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<Vector3> Parser { get { return _parser; } }
+    public static pb::MessageParser<Vector3D> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -75,14 +75,14 @@ namespace Net {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public Vector3() {
+    public Vector3D() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public Vector3(Vector3 other) : this() {
+    public Vector3D(Vector3D other) : this() {
       x_ = other.x_;
       y_ = other.y_;
       z_ = other.z_;
@@ -90,8 +90,8 @@ namespace Net {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public Vector3 Clone() {
-      return new Vector3(this);
+    public Vector3D Clone() {
+      return new Vector3D(this);
     }
 
     /// <summary>Field number for the "x" field.</summary>
@@ -129,11 +129,11 @@ namespace Net {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as Vector3);
+      return Equals(other as Vector3D);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(Vector3 other) {
+    public bool Equals(Vector3D other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -201,7 +201,7 @@ namespace Net {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(Vector3 other) {
+    public void MergeFrom(Vector3D other) {
       if (other == null) {
         return;
       }
@@ -465,9 +465,9 @@ namespace Net {
 
     /// <summary>Field number for the "position" field.</summary>
     public const int PositionFieldNumber = 3;
-    private global::Net.Vector3 position_;
+    private global::Net.Vector3D position_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Net.Vector3 Position {
+    public global::Net.Vector3D Position {
       get { return position_; }
       set {
         position_ = value;
@@ -560,7 +560,7 @@ namespace Net {
       }
       if (other.position_ != null) {
         if (position_ == null) {
-          Position = new global::Net.Vector3();
+          Position = new global::Net.Vector3D();
         }
         Position.MergeFrom(other.Position);
       }
@@ -585,7 +585,7 @@ namespace Net {
           }
           case 26: {
             if (position_ == null) {
-              Position = new global::Net.Vector3();
+              Position = new global::Net.Vector3D();
             }
             input.ReadMessage(Position);
             break;
