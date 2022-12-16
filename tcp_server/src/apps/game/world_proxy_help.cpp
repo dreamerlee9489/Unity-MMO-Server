@@ -9,7 +9,7 @@ void WorldProxyHelp::Teleport(Player* pPlayer, const uint64 lastWorldSn, const u
 {
     const uint64 playerSn = pPlayer->GetPlayerSN();
 
-    Proto::Teleport proto;
+    Net::Teleport proto;
     proto.set_last_world_sn(lastWorldSn);
     proto.set_account(pPlayer->GetAccount().c_str());
     proto.set_player_sn(playerSn);
@@ -18,5 +18,5 @@ void WorldProxyHelp::Teleport(Player* pPlayer, const uint64 lastWorldSn, const u
     NetIdentify netIdentify;
     netIdentify.GetSocketKey()->CopyFrom(pPlayer->GetSocketKey());
     netIdentify.GetTagKey()->AddTag(TagType::Entity, targetWorldSn);
-    MessageSystemHelp::DispatchPacket(Proto::MsgId::MI_Teleport, proto, &netIdentify);
+    MessageSystemHelp::DispatchPacket(Net::MsgId::MI_Teleport, proto, &netIdentify);
 }

@@ -10,7 +10,7 @@
 void WorldOperatorComponent::Awake()
 {
 	auto pMsgSystem = GetSystemManager()->GetMessageSystem();
-	pMsgSystem->RegisterFunction(this, Proto::MsgId::G2S_CreateWorld, BindFunP1(this, &WorldOperatorComponent::HandleCreateWorld));
+	pMsgSystem->RegisterFunction(this, Net::MsgId::G2S_CreateWorld, BindFunP1(this, &WorldOperatorComponent::HandleCreateWorld));
 }
 
 void WorldOperatorComponent::BackToPool()
@@ -25,7 +25,7 @@ void WorldOperatorComponent::BackToPool()
 /// <param name="pPacket"></param>
 void WorldOperatorComponent::HandleCreateWorld(Packet* pPacket)
 {
-	auto protoWorld = pPacket->ParseToProto<Proto::CreateWorld>();
+	auto protoWorld = pPacket->ParseToProto<Net::CreateWorld>();
 	int worldId = protoWorld.world_id();
 	const int gameAppId = protoWorld.game_app_id();
 	const uint64 lastWorldSn = protoWorld.last_world_sn();
@@ -44,7 +44,7 @@ void WorldOperatorComponent::HandleCreateWorld(Packet* pPacket)
 
 	// 如果 requestWorldSn == 0，广播给所有game, appmgr(公共地图)
 	// 如果 requestWorldSn != 0，则广播给指定的 worldproxy 和 appmgr
-	Proto::BroadcastCreateWorld protoRs;
+	Net::BroadcastCreateWorld protoRs;
 	protoRs.set_world_id(worldId);
 	protoRs.set_world_sn(worldSn);
 	protoRs.set_last_world_sn(lastWorldSn);
@@ -52,7 +52,7 @@ void WorldOperatorComponent::HandleCreateWorld(Packet* pPacket)
 	if ((Global::GetInstance()->GetCurAppType() & APP_APPMGR) == 0)
 	{
 		// 本进程中不包括 AppMgr, 向AppMgr发送消息
-		MessageSystemHelp::SendPacket(Proto::MsgId::MI_BroadcastCreateWorld, protoRs, APP_APPMGR);
+		MessageSystemHelp::SendPacket(Net::MsgId::MI_BroadcastCreateWorld, protoRs, APP_APPMGR);
 	}
 
 	// 本进程中不包括 AppGame
@@ -61,18 +61,18 @@ void WorldOperatorComponent::HandleCreateWorld(Packet* pPacket)
 		if (gameAppId != 0)
 		{
 			// gameAppId!=0, 向指定Game发送创建地图消息
-			MessageSystemHelp::SendPacket(Proto::MsgId::MI_BroadcastCreateWorld, protoRs, APP_GAME, gameAppId);
+			MessageSystemHelp::SendPacket(Net::MsgId::MI_BroadcastCreateWorld, protoRs, APP_GAME, gameAppId);
 		}
 		else
 		{
 			// gameAppId==0, 向所有Game进程广播创建地图消息
-			MessageSystemHelp::SendPacketToAllApp(Proto::MsgId::MI_BroadcastCreateWorld, protoRs, APP_GAME);
+			MessageSystemHelp::SendPacketToAllApp(Net::MsgId::MI_BroadcastCreateWorld, protoRs, APP_GAME);
 		}
 	}
 
 	if ((Global::GetInstance()->GetCurAppType() & APP_GAME) != 0 || (Global::GetInstance()->GetCurAppType() & APP_APPMGR) != 0)
 	{
 		// 本进程中包括了AppGame AppMgr其中一个，需要中转消息
-		MessageSystemHelp::DispatchPacket(Proto::MsgId::MI_BroadcastCreateWorld, protoRs, nullptr);
+		MessageSystemHelp::DispatchPacket(Net::MsgId::MI_BroadcastCreateWorld, protoRs, nullptr);
 	}
 }

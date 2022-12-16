@@ -17,7 +17,7 @@ void ConsoleThreadComponent::Awake(ThreadType iType)
     _threadType = iType;
 
     auto pMsgSystem = GetSystemManager()->GetMessageSystem();
-    pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_CmdThread, BindFunP1(this, &ConsoleThreadComponent::HandleCmdThread));
+    pMsgSystem->RegisterFunction(this, Net::MsgId::MI_CmdThread, BindFunP1(this, &ConsoleThreadComponent::HandleCmdThread));
 }
 
 void ConsoleThreadComponent::BackToPool()
@@ -27,11 +27,11 @@ void ConsoleThreadComponent::BackToPool()
 
 void ConsoleThreadComponent::HandleCmdThread(Packet* pPacket)
 {
-    auto cmdProto = pPacket->ParseToProto<Proto::CmdThread>();
+    auto cmdProto = pPacket->ParseToProto<Net::CmdThread>();
     auto cmdType = cmdProto.cmd_type();
-    if (cmdType == Proto::CmdThread_CmdType_Entity)
+    if (cmdType == Net::CmdThread_CmdType_Entity)
         HandleCmdThreadEntites(pPacket);
-    else if (cmdType == Proto::CmdThread_CmdType_Connect)
+    else if (cmdType == Net::CmdThread_CmdType_Connect)
         HandleCmdThreadConnect(pPacket);
     else
         HandleCmdThreadPool(pPacket);

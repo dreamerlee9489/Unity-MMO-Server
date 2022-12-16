@@ -23,8 +23,8 @@ void NetworkListen::Awake(std::string ip, int port, NetworkType iType)
 	// message
 	auto pMsgSystem = GetSystemManager()->GetMessageSystem();
 
-	pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_NetworkRequestDisconnect, BindFunP1(this, &NetworkListen::HandleDisconnect));
-	pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_NetworkListenKey, BindFunP1(this, &NetworkListen::HandleListenKey));
+	pMsgSystem->RegisterFunction(this, Net::MsgId::MI_NetworkRequestDisconnect, BindFunP1(this, &NetworkListen::HandleDisconnect));
+	pMsgSystem->RegisterFunction(this, Net::MsgId::MI_NetworkListenKey, BindFunP1(this, &NetworkListen::HandleListenKey));
 
 	// update
 	AddComponent<UpdateComponent>(BindFunP0(this, &NetworkListen::Update));

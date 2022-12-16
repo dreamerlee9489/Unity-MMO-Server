@@ -15,7 +15,7 @@ void Player::Awake(NetIdentify* pIdentify, std::string account)
 	_tagKey.AddTag(TagType::Account, _account);
 
 	// 登录成功，修改网络底层的标识
-	MessageSystemHelp::DispatchPacket(Proto::MsgId::MI_NetworkListenKey, this);
+	MessageSystemHelp::DispatchPacket(Net::MsgId::MI_NetworkListenKey, this);
 }
 
 void Player::Awake(NetIdentify* pIdentify, uint64 playerSn, uint64 worldSn)
@@ -33,7 +33,7 @@ void Player::Awake(NetIdentify* pIdentify, uint64 playerSn, uint64 worldSn)
 
 	// space进程调用，但Space不需要修改网络标识
 	// 登录成功，修改网络底层的标识
-	//MessageSystemHelp::DispatchPacket(Proto::MsgId::MI_NetworkListenKey, this);
+	//MessageSystemHelp::DispatchPacket(Net::MsgId::MI_NetworkListenKey, this);
 }
 
 void Player::BackToPool()
@@ -62,7 +62,7 @@ uint64 Player::GetPlayerSN() const
 	return _playerSn;
 }
 
-Proto::Player& Player::GetPlayerProto()
+Net::Player& Player::GetPlayerProto()
 {
 	return _player;
 }
@@ -73,7 +73,7 @@ void Player::ParseFromStream(const uint64 playerSn, std::stringstream* pOpStream
 	_player.ParseFromIstream(pOpStream);
 }
 
-void Player::ParserFromProto(const uint64 playerSn, const Proto::Player& proto)
+void Player::ParserFromProto(const uint64 playerSn, const Net::Player& proto)
 {
 	_playerSn = playerSn;
 	_player.CopyFrom(proto);
@@ -90,7 +90,7 @@ void Player::ParserFromProto(const uint64 playerSn, const Proto::Player& proto)
 	}
 }
 
-void Player::SerializeToProto(Proto::Player* pProto) const
+void Player::SerializeToProto(Net::Player* pProto) const
 {
 	// 基础数据
 	pProto->CopyFrom(_player);

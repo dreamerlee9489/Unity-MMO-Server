@@ -41,7 +41,7 @@ void FsmComponent::ChangeState(FsmState* newState)
 	_currState->Enter();
 }
 
-void FsmComponent::SyncState(Proto::FsmSyncState& proto, Player* pPlayer)
+void FsmComponent::SyncState(Net::FsmSyncState& proto, Player* pPlayer)
 {
 	FsmStateType type = (FsmStateType)proto.state();
 	if (!_currState->GetTarget() && type != _currState->GetStateType())

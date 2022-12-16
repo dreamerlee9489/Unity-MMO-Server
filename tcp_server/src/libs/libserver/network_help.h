@@ -21,13 +21,13 @@ public:
 
 	inline static bool IsHttpMsg(int msgId)
 	{
-		if (msgId == Proto::MsgId::MI_HttpOuterRequest)
+		if (msgId == Net::MsgId::MI_HttpOuterRequest)
 			return true;
 
-		if (msgId == Proto::MsgId::MI_HttpOuterResponse)
+		if (msgId == Net::MsgId::MI_HttpOuterResponse)
 			return true;
 
-		if (msgId == Proto::MsgId::MI_HttpInnerResponse)
+		if (msgId == Net::MsgId::MI_HttpInnerResponse)
 			return true;
 
 		return false;

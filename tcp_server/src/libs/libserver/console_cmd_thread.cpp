@@ -19,9 +19,9 @@ void ConsoleCmdThread::HandleHelp()
 
 void ConsoleCmdThread::HandleEntity(std::vector<std::string>& params)
 {
-    Proto::CmdThread cmdProto;
-    cmdProto.set_cmd_type(Proto::CmdThread_CmdType_Entity);
-	MessageSystemHelp::DispatchPacket(Proto::MsgId::MI_CmdThread, cmdProto, nullptr);
+    Net::CmdThread cmdProto;
+    cmdProto.set_cmd_type(Net::CmdThread_CmdType_Entity);
+	MessageSystemHelp::DispatchPacket(Net::MsgId::MI_CmdThread, cmdProto, nullptr);
 }
 
 void ConsoleCmdThread::HandlePool(std::vector<std::string>& params)
@@ -29,14 +29,14 @@ void ConsoleCmdThread::HandlePool(std::vector<std::string>& params)
     LOG_DEBUG("------------------------------------");
     DynamicPacketPool::GetInstance()->Show();
 
-    Proto::CmdThread cmdProto;
-    cmdProto.set_cmd_type(Proto::CmdThread_CmdType_Pool);
-    MessageSystemHelp::DispatchPacket(Proto::MsgId::MI_CmdThread, cmdProto, nullptr);
+    Net::CmdThread cmdProto;
+    cmdProto.set_cmd_type(Net::CmdThread_CmdType_Pool);
+    MessageSystemHelp::DispatchPacket(Net::MsgId::MI_CmdThread, cmdProto, nullptr);
 }
 
 void ConsoleCmdThread::HandleConnect(std::vector<std::string>& params)
 {
-    Proto::CmdThread cmdProto;
-    cmdProto.set_cmd_type(Proto::CmdThread_CmdType_Connect);
-    MessageSystemHelp::DispatchPacket(Proto::MsgId::MI_CmdThread, cmdProto, nullptr);
+    Net::CmdThread cmdProto;
+    cmdProto.set_cmd_type(Net::CmdThread_CmdType_Connect);
+    MessageSystemHelp::DispatchPacket(Net::MsgId::MI_CmdThread, cmdProto, nullptr);
 }

@@ -9,12 +9,12 @@ public:
 	void Awake() override;
 	void BackToPool() override;
 
-	void ParserFromProto(const Proto::Player& proto) override;
-	void SerializeToProto(Proto::Player* pProto) override;
+	void ParserFromProto(const Net::Player& proto) override;
+	void SerializeToProto(Net::Player* pProto) override;
 
-	Proto::Gender GetGender() const;
+	Net::Gender GetGender() const;
 
 private:
-	Proto::Gender _gender;
+	Net::Gender _gender;
 };
 

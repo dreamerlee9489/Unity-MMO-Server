@@ -56,13 +56,13 @@ private:
 	void CreateComponentWithSn(ThreadType iType, uint64 sn, bool isToAllThead, TArgs... args);
 
 	template <typename...Args>
-	void AnalyseParam(Proto::CreateComponent& proto, int value, Args...args);
+	void AnalyseParam(Net::CreateComponent& proto, int value, Args...args);
 	template <typename...Args>
-	void AnalyseParam(Proto::CreateComponent& proto, std::string value, Args...args);
+	void AnalyseParam(Net::CreateComponent& proto, std::string value, Args...args);
 	template <typename...Args>
-	void AnalyseParam(Proto::CreateComponent& proto, uint64 value, Args...args);
+	void AnalyseParam(Net::CreateComponent& proto, uint64 value, Args...args);
 
-	void AnalyseParam(Proto::CreateComponent& proto)
+	void AnalyseParam(Net::CreateComponent& proto)
 	{
 	}
 
@@ -87,11 +87,11 @@ void ThreadMgr::CreateSystem(TArgs... args)
 		RegistObject<T, TArgs...>();
 	}
 
-	Proto::CreateSystem proto;
+	Net::CreateSystem proto;
 	proto.set_system_name(className.c_str());
 	proto.set_thread_type((int)LogicThread);
 
-	auto pCreatePacket = MessageSystemHelp::CreatePacket(Proto::MsgId::MI_CreateSystem, nullptr);
+	auto pCreatePacket = MessageSystemHelp::CreatePacket(Net::MsgId::MI_CreateSystem, nullptr);
 	pCreatePacket->SerializeToBuffer(proto);
 	DispatchPacket(pCreatePacket);
 }
@@ -131,41 +131,41 @@ void ThreadMgr::CreateComponentWithSn(ThreadType iType, uint64 sn, bool isToAllT
 		RegistToFactory<T, TArgs...>();
 	}
 
-	Proto::CreateComponent proto;
+	Net::CreateComponent proto;
 	proto.set_thread_type((int)iType);
 	proto.set_sn(sn);
 	proto.set_class_name(className.c_str());
 	proto.set_is_to_all_thread(isToAllThead);
 	AnalyseParam(proto, std::forward<TArgs>(args)...);
 
-	auto pCreatePacket = MessageSystemHelp::CreatePacket(Proto::MsgId::MI_CreateComponent, nullptr);
+	auto pCreatePacket = MessageSystemHelp::CreatePacket(Net::MsgId::MI_CreateComponent, nullptr);
 	pCreatePacket->SerializeToBuffer(proto);
 	_createPackets.GetWriterCache()->emplace_back(pCreatePacket);
 }
 
 template<typename ... Args>
-void ThreadMgr::AnalyseParam(Proto::CreateComponent& proto, int value, Args... args)
+void ThreadMgr::AnalyseParam(Net::CreateComponent& proto, int value, Args... args)
 {
 	auto pProtoParam = proto.mutable_params()->Add();
-	pProtoParam->set_type(Proto::CreateComponentParam::Int);
+	pProtoParam->set_type(Net::CreateComponentParam::Int);
 	pProtoParam->set_int_param(value);
 	AnalyseParam(proto, std::forward<Args>(args)...);
 }
 
 template<typename ... Args>
-void ThreadMgr::AnalyseParam(Proto::CreateComponent& proto, std::string value, Args... args)
+void ThreadMgr::AnalyseParam(Net::CreateComponent& proto, std::string value, Args... args)
 {
 	auto pProtoParam = proto.mutable_params()->Add();
-	pProtoParam->set_type(Proto::CreateComponentParam::String);
+	pProtoParam->set_type(Net::CreateComponentParam::String);
 	pProtoParam->set_string_param(value.c_str());
 	AnalyseParam(proto, std::forward<Args>(args)...);
 }
 
 template <typename ... Args>
-void ThreadMgr::AnalyseParam(Proto::CreateComponent& proto, uint64 value, Args... args)
+void ThreadMgr::AnalyseParam(Net::CreateComponent& proto, uint64 value, Args... args)
 {
 	auto pProtoParam = proto.mutable_params()->Add();
-	pProtoParam->set_type(Proto::CreateComponentParam::UInt64);
+	pProtoParam->set_type(Net::CreateComponentParam::UInt64);
 	pProtoParam->set_uint64_param(value);
 	AnalyseParam(proto, std::forward<Args>(args)...);
 }

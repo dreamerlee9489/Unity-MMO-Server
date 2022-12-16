@@ -20,10 +20,10 @@ void AIEnemy::SetLinkPlayer(Player* player)
 {
 	if (_linkPlayer)
 	{
-		Proto::RequestLinkPlayer proto;
+		Net::RequestLinkPlayer proto;
 		proto.set_enemy_id(_id);
 		proto.set_islinker(false);
-		MessageSystemHelp::SendPacket(Proto::MsgId::S2C_RequestLinkPlayer, proto, _linkPlayer);
+		MessageSystemHelp::SendPacket(Net::MsgId::S2C_RequestLinkPlayer, proto, _linkPlayer);
 	}
 	_linkPlayer = player;
 }

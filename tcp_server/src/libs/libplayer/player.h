@@ -17,17 +17,17 @@ public:
 	std::string GetName() const;
 	uint64 GetPlayerSN() const;
 
-	Proto::Player& GetPlayerProto();
+	Net::Player& GetPlayerProto();
 
 	void ParseFromStream(uint64 playerSn, std::stringstream* pOpStream);
-	void ParserFromProto(uint64 playerSn, const Proto::Player& proto);
-	void SerializeToProto(Proto::Player* pProto) const;
+	void ParserFromProto(uint64 playerSn, const Net::Player& proto);
+	void SerializeToProto(Net::Player* pProto) const;
 
 protected:
 	std::string _account{ "" };
 	std::string _name{ "" };
 
 	uint64 _playerSn{ 0 };
-	Proto::Player _player;
+	Net::Player _player;
 };
 

@@ -28,12 +28,12 @@ struct PacketHeadS2S :public PacketHead
 #define DEFAULT_PACKET_BUFFER_SIZE	1024 * 10
 #endif
 
-class Packet : public Entity<Packet>, public Buffer, public NetIdentify, public IAwakeFromPoolSystem<Proto::MsgId, NetIdentify*>
+class Packet : public Entity<Packet>, public Buffer, public NetIdentify, public IAwakeFromPoolSystem<Net::MsgId, NetIdentify*>
 {
 public:
 	Packet();
 	~Packet();
-	void Awake(Proto::MsgId msgId, NetIdentify* pIdentify) override;
+	void Awake(Net::MsgId msgId, NetIdentify* pIdentify) override;
 
 	template<class ProtoClass>
 	ProtoClass ParseToProto()
@@ -83,7 +83,7 @@ public:
 	bool CanBack2Pool() const;
 
 private:
-	Proto::MsgId _msgId;
+	Net::MsgId _msgId;
 
 private:
 	std::atomic<int> _ref{ 0 };

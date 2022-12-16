@@ -12,17 +12,17 @@ void RedisLogin::RegisterMsgFunction()
 {
     auto pMsgSystem = GetSystemManager()->GetMessageSystem();
 
-    pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_AccountSyncOnlineToRedis, BindFunP1(this, &RedisLogin::HandleAccountSyncOnlineToRedis));
-    pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_AccountDeleteOnlineToRedis, BindFunP1(this, &RedisLogin::HandleAccountDeleteOnlineToRedis));
+    pMsgSystem->RegisterFunction(this, Net::MsgId::MI_AccountSyncOnlineToRedis, BindFunP1(this, &RedisLogin::HandleAccountSyncOnlineToRedis));
+    pMsgSystem->RegisterFunction(this, Net::MsgId::MI_AccountDeleteOnlineToRedis, BindFunP1(this, &RedisLogin::HandleAccountDeleteOnlineToRedis));
 
-    pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_LoginTokenToRedis, BindFunP1(this, &RedisLogin::HandleLoginTokenToRedis));
-    pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_AccountQueryOnlineToRedis, BindFunP1(this, &RedisLogin::HandleAccountQueryOnline));
+    pMsgSystem->RegisterFunction(this, Net::MsgId::MI_LoginTokenToRedis, BindFunP1(this, &RedisLogin::HandleLoginTokenToRedis));
+    pMsgSystem->RegisterFunction(this, Net::MsgId::MI_AccountQueryOnlineToRedis, BindFunP1(this, &RedisLogin::HandleAccountQueryOnline));
 }
 
 
 void RedisLogin::HandleAccountSyncOnlineToRedis(Packet* pPacket)
 {
-    auto proto = pPacket->ParseToProto<Proto::AccountSyncOnlineToRedis>();
+    auto proto = pPacket->ParseToProto<Net::AccountSyncOnlineToRedis>();
 
     const std::string key = RedisKeyAccountOnlineLogin + proto.account();
     const std::string value = std::to_string(Global::GetInstance()->GetCurAppId());
@@ -31,7 +31,7 @@ void RedisLogin::HandleAccountSyncOnlineToRedis(Packet* pPacket)
 
 void RedisLogin::HandleAccountDeleteOnlineToRedis(Packet* pPacket)
 {
-    auto proto = pPacket->ParseToProto<Proto::AccountDeleteOnlineToRedis>();
+    auto proto = pPacket->ParseToProto<Net::AccountDeleteOnlineToRedis>();
     const std::string key = RedisKeyAccountOnlineLogin + proto.account();
 
     Delete(key);
@@ -39,13 +39,13 @@ void RedisLogin::HandleAccountDeleteOnlineToRedis(Packet* pPacket)
 
 void RedisLogin::HandleLoginTokenToRedis(Packet* pPacket)
 {
-    auto protoToken = pPacket->ParseToProto<Proto::LoginTokenToRedis>();
+    auto protoToken = pPacket->ParseToProto<Net::LoginTokenToRedis>();
     auto account = protoToken.account();
     auto playerSn = protoToken.player_sn();
 
     auto token = Global::GetInstance()->GenerateUUID();
 
-    Proto::TokenInfo protoInfo;
+    Net::TokenInfo protoInfo;
     protoInfo.set_token(token);
     protoInfo.set_player_sn(playerSn);
 
@@ -67,28 +67,28 @@ void RedisLogin::HandleLoginTokenToRedis(Packet* pPacket)
 #endif
     }
 
-    Proto::LoginTokenToRedisRs protoRs;
+    Net::LoginTokenToRedisRs protoRs;
     protoRs.set_account(account.c_str());
     protoRs.set_token(token.c_str());
-    MessageSystemHelp::DispatchPacket(Proto::MsgId::MI_LoginTokenToRedisRs, protoRs, nullptr);
+    MessageSystemHelp::DispatchPacket(Net::MsgId::MI_LoginTokenToRedisRs, protoRs, nullptr);
 }
 
 void RedisLogin::HandleAccountQueryOnline(Packet* pPacket)
 {
-    auto proto = pPacket->ParseToProto<Proto::AccountQueryOnlineToRedis>();
+    auto proto = pPacket->ParseToProto<Net::AccountQueryOnlineToRedis>();
     auto account = proto.account();
-    Proto::AccountQueryOnlineToRedisRs protoRs;
+    Net::AccountQueryOnlineToRedisRs protoRs;
     protoRs.set_account(account.c_str());
-    protoRs.set_return_code(Proto::AccountQueryOnlineToRedisRs::SOTR_Offline);
+    protoRs.set_return_code(Net::AccountQueryOnlineToRedisRs::SOTR_Offline);
 
     // 是否正在登录
     if (!SetnxExpire(RedisKeyAccountOnlineLogin + proto.account(), Global::GetInstance()->GetCurAppId(), RedisKeyAccountOnlineLoginTimeout))
-        protoRs.set_return_code(Proto::AccountQueryOnlineToRedisRs::SOTR_Online);
+        protoRs.set_return_code(Net::AccountQueryOnlineToRedisRs::SOTR_Online);
 
     // 是否 Game 在线
     if (GetInt(RedisKeyAccountOnlineGame + proto.account()) != 0)
-        protoRs.set_return_code(Proto::AccountQueryOnlineToRedisRs::SOTR_Online);
+        protoRs.set_return_code(Net::AccountQueryOnlineToRedisRs::SOTR_Online);
 
 
-    MessageSystemHelp::DispatchPacket(Proto::MsgId::MI_AccountQueryOnlineToRedisRs, protoRs, nullptr);
+    MessageSystemHelp::DispatchPacket(Net::MsgId::MI_AccountQueryOnlineToRedisRs, protoRs, nullptr);
 }

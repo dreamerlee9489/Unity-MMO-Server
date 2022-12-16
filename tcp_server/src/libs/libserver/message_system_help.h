@@ -18,17 +18,17 @@ struct ParseUrlInfo
 class MessageSystemHelp
 {
 public:
-	static Packet* CreatePacket(Proto::MsgId msgId, NetIdentify* pIdentify);
+	static Packet* CreatePacket(Net::MsgId msgId, NetIdentify* pIdentify);
 
 	static void CreateConnect(NetworkType iType, TagType tagType, TagValue& tagValue, std::string ip, int port);
 
-	static void DispatchPacket(const Proto::MsgId msgId, NetIdentify* pIdentify);
-	static void DispatchPacket(const Proto::MsgId msgId, google::protobuf::Message& proto, NetIdentify* pIdentify);
+	static void DispatchPacket(const Net::MsgId msgId, NetIdentify* pIdentify);
+	static void DispatchPacket(const Net::MsgId msgId, google::protobuf::Message& proto, NetIdentify* pIdentify);
 
-	static void SendPacket(const Proto::MsgId msgId, google::protobuf::Message& proto, NetIdentify* pIdentify);
-	static void SendPacket(const Proto::MsgId msgId, google::protobuf::Message& proto, APP_TYPE appType, int appId = 0);
-	static void SendPacket(const Proto::MsgId msgId, google::protobuf::Message& proto, TagKey* pTagKey, APP_TYPE appType, int appId = 0);
-	static void SendPacket(const Proto::MsgId msgId, TagKey* pTagKey, APP_TYPE appType, int appId = 0);
+	static void SendPacket(const Net::MsgId msgId, google::protobuf::Message& proto, NetIdentify* pIdentify);
+	static void SendPacket(const Net::MsgId msgId, google::protobuf::Message& proto, APP_TYPE appType, int appId = 0);
+	static void SendPacket(const Net::MsgId msgId, google::protobuf::Message& proto, TagKey* pTagKey, APP_TYPE appType, int appId = 0);
+	static void SendPacket(const Net::MsgId msgId, TagKey* pTagKey, APP_TYPE appType, int appId = 0);
 	/// <summary>
 	/// 调用网络层SendPacket
 	/// </summary>
@@ -36,7 +36,7 @@ public:
 	static void SendPacket(Packet* pPacket);
 	static void SendPacket(Packet* pPacket, APP_TYPE appType, int appId);
 
-	static void SendPacketToAllApp(Proto::MsgId msgId, google::protobuf::Message& proto, APP_TYPE appType);
+	static void SendPacketToAllApp(Net::MsgId msgId, google::protobuf::Message& proto, APP_TYPE appType);
 
 	// http
 	// 发送请求

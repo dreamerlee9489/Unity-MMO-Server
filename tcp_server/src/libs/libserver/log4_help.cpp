@@ -18,10 +18,10 @@ bool IsLogShowMsg(const int msgId)
 {
     std::list<int> lists;
 
-    //lists.push_back((int)Proto::MI_Ping);
-    //lists.push_back((int)Proto::MI_AppInfoSync);
-    //lists.push_back((int)Proto::MI_WorldInfoSyncToGather);
-    //lists.push_back((int)Proto::MI_WorldProxyInfoSyncToGather);
+    //lists.push_back((int)Net::MI_Ping);
+    //lists.push_back((int)Net::MI_AppInfoSync);
+    //lists.push_back((int)Net::MI_WorldInfoSyncToGather);
+    //lists.push_back((int)Net::MI_WorldProxyInfoSyncToGather);
 
     const auto iter = std::find(lists.begin(), lists.end(), msgId);
     if (iter != lists.end())
@@ -32,13 +32,13 @@ bool IsLogShowMsg(const int msgId)
 
 #endif
 
-std::string Log4Help::GetMsgIdName(Proto::MsgId msgId)
+std::string Log4Help::GetMsgIdName(Net::MsgId msgId)
 {
-    const google::protobuf::EnumDescriptor* descriptor = Proto::MsgId_descriptor();
+    const google::protobuf::EnumDescriptor* descriptor = Net::MsgId_descriptor();
     return descriptor->FindValueByNumber(msgId)->name();
 }
 
 std::string Log4Help::GetMsgIdName(int msgId)
 {
-    return Log4Help::GetMsgIdName((Proto::MsgId)msgId);
+    return Log4Help::GetMsgIdName((Net::MsgId)msgId);
 }

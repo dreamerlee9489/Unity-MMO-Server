@@ -25,8 +25,8 @@ void NetworkConnector::Awake(int iType, int mixConnectAppType)
     // message
     auto pMsgSystem = GetSystemManager()->GetMessageSystem();
 
-    pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_NetworkConnect, BindFunP1(this, &NetworkConnector::HandleNetworkConnect));
-    pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_NetworkRequestDisconnect, BindFunP1(this, &NetworkConnector::HandleDisconnect));
+    pMsgSystem->RegisterFunction(this, Net::MsgId::MI_NetworkConnect, BindFunP1(this, &NetworkConnector::HandleNetworkConnect));
+    pMsgSystem->RegisterFunction(this, Net::MsgId::MI_NetworkRequestDisconnect, BindFunP1(this, &NetworkConnector::HandleDisconnect));
 
 #ifdef EPOLL
     std::cout << "epoll model. connector:" << GetNetworkTypeName(_networkType) << std::endl;
@@ -134,7 +134,7 @@ bool NetworkConnector::Connect(ConnectDetail* pDetail)
 
 void NetworkConnector::HandleNetworkConnect(Packet* pPacket)
 {
-    auto proto = pPacket->ParseToProto<Proto::NetworkConnect>();
+    auto proto = pPacket->ParseToProto<Net::NetworkConnect>();
     if (proto.network_type() != (int)_networkType)
         return;
 

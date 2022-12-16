@@ -13,5 +13,5 @@ void ConsoleCmdCreate::HandleHelp()
 
 void ConsoleCmdCreate::HandleShowAllWorld(std::vector<std::string>& params)
 {
-    MessageSystemHelp::DispatchPacket(Proto::MsgId::MI_CmdCreate, nullptr);
+    MessageSystemHelp::DispatchPacket(Net::MsgId::MI_CmdCreate, nullptr);
 }

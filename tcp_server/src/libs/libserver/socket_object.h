@@ -40,12 +40,12 @@ struct SocketKey
 
 enum class TagType
 {
-	None = Proto::TagType::TagTypeNone,
-	Account = Proto::TagType::TagTypeAccount,
-	App = Proto::TagType::TagTypeApp,
-	Entity = Proto::TagType::TagTypeEntity,
-	ToWorld = Proto::TagType::TagTypeToWorld,
-	Player = Proto::TagType::TagTypePlayer,
+	None = Net::TagType::TagTypeNone,
+	Account = Net::TagType::TagTypeAccount,
+	App = Net::TagType::TagTypeApp,
+	Entity = Net::TagType::TagTypeEntity,
+	ToWorld = Net::TagType::TagTypeToWorld,
+	Player = Net::TagType::TagTypePlayer,
 };
 
 inline bool IsTagTypeStr(const TagType iType)

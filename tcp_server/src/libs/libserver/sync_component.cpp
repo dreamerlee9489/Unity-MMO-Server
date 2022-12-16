@@ -3,7 +3,7 @@
 #include "packet.h"
 #include "component_help.h"
 
-bool AppInfo::Parse(Proto::AppInfoSync proto)
+bool AppInfo::Parse(Net::AppInfoSync proto)
 {
 	auto pYaml = ComponentHelp::GetYaml();
 	this->AppId = proto.app_id();
@@ -19,7 +19,7 @@ bool AppInfo::Parse(Proto::AppInfoSync proto)
 	return true;
 }
 
-void SyncComponent::Parse(Proto::AppInfoSync proto, SOCKET socket)
+void SyncComponent::Parse(Net::AppInfoSync proto, SOCKET socket)
 {
 	const auto iter = _apps.find(proto.app_id());
 	if (iter == _apps.end())
@@ -41,9 +41,9 @@ void SyncComponent::Parse(Proto::AppInfoSync proto, SOCKET socket)
 
 void SyncComponent::HandleCmdApp(Packet* pPacket)
 {
-	auto cmdProto = pPacket->ParseToProto<Proto::CmdApp>();
+	auto cmdProto = pPacket->ParseToProto<Net::CmdApp>();
 	auto cmdType = cmdProto.cmd_type();
-	if (cmdType == Proto::CmdApp_CmdType_Info)
+	if (cmdType == Net::CmdApp_CmdType_Info)
 	{
 		CmdShow();
 	}
@@ -66,7 +66,7 @@ void SyncComponent::HandleNetworkDisconnect(Packet* pPacket)
 
 void SyncComponent::AppInfoSyncHandle(Packet* pPacket)
 {
-	const auto proto = pPacket->ParseToProto<Proto::AppInfoSync>();
+	const auto proto = pPacket->ParseToProto<Net::AppInfoSync>();
 	Parse(proto, pPacket->GetSocketKey()->Socket);
 }
 

@@ -174,7 +174,7 @@ Packet* RecvNetworkBuffer::GetTcpPacket()
 
     // 4.读出 协议
     // 检查一下id
-    const google::protobuf::EnumDescriptor* descriptor = Proto::MsgId_descriptor();
+    const google::protobuf::EnumDescriptor* descriptor = Net::MsgId_descriptor();
     if (descriptor->FindValueByNumber(pHead->MsgId) == nullptr)
     {
         // 关闭网络
@@ -183,7 +183,7 @@ Packet* RecvNetworkBuffer::GetTcpPacket()
         return nullptr;
     }
 
-    Packet* pPacket = MessageSystemHelp::CreatePacket((Proto::MsgId)pHead->MsgId, _pConnectObj);
+    Packet* pPacket = MessageSystemHelp::CreatePacket((Net::MsgId)pHead->MsgId, _pConnectObj);
     unsigned int dataLength = totalSize - sizeof(PacketHead) - sizeof(TotalSizeType) * 2;
     if (pHeadS2s != nullptr)
         dataLength = totalSize - sizeof(PacketHeadS2S) - sizeof(TotalSizeType) * 2;

@@ -127,7 +127,7 @@ void ThreadMgr::UpdateCreatePacket()
 		auto pPacket = (*iter);
 		if (!_threads.empty())
 		{
-			auto pCreateProto = pPacket->ParseToProto<Proto::CreateComponent>();
+			auto pCreateProto = pPacket->ParseToProto<Net::CreateComponent>();
 			auto threadType = (ThreadType)(pCreateProto.thread_type());
 			if (_threads.find(threadType) == _threads.end())
 			{

@@ -74,10 +74,10 @@ void PlayerManagerComponent::RemoveAllPlayers(NetIdentify* pNetIdentify)
 		iter = _players.erase(iter);
 
 		// save
-		Proto::SavePlayer protoSave;
+		Net::SavePlayer protoSave;
 		protoSave.set_player_sn(pPlayer->GetPlayerSN());
 		pPlayer->SerializeToProto(protoSave.mutable_player());
-		MessageSystemHelp::SendPacket(Proto::MsgId::G2DB_SavePlayer, protoSave, APP_DB_MGR);
+		MessageSystemHelp::SendPacket(Net::MsgId::G2DB_SavePlayer, protoSave, APP_DB_MGR);
 
 		// 
 		GetSystemManager()->GetEntitySystem()->RemoveComponent(pPlayer);

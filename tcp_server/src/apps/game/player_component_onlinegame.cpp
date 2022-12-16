@@ -28,22 +28,22 @@ void PlayerComponentOnlineInGame::Awake(const std::string account)
 
 void PlayerComponentOnlineInGame::BackToPool()
 {
-	Proto::PlayerDeleteOnlineToRedis protoSync;
+	Net::PlayerDeleteOnlineToRedis protoSync;
 	protoSync.set_account(_account.c_str());
 	protoSync.set_version(_onlineVersion);
-	MessageSystemHelp::DispatchPacket(Proto::MsgId::MI_PlayerDeleteOnlineToRedis, protoSync, nullptr);
+	MessageSystemHelp::DispatchPacket(Net::MsgId::MI_PlayerDeleteOnlineToRedis, protoSync, nullptr);
 }
 
 void PlayerComponentOnlineInGame::SetOnlineFlag() const
 {
 	// 设置在线标志
-	Proto::PlayerSyncOnlineToRedis protoSync;
+	Net::PlayerSyncOnlineToRedis protoSync;
 	protoSync.set_account(_account.c_str());
 	protoSync.set_version(_onlineVersion);
-	MessageSystemHelp::DispatchPacket(Proto::MsgId::MI_PlayerSyncOnlineToRedis, protoSync,  nullptr);
+	MessageSystemHelp::DispatchPacket(Net::MsgId::MI_PlayerSyncOnlineToRedis, protoSync,  nullptr);
 }
 
-void PlayerComponentOnlineInGame::ParserFromProto(const Proto::Player& proto)
+void PlayerComponentOnlineInGame::ParserFromProto(const Net::Player& proto)
 {
 	if (!_isReadFromeDB)
 		return;
@@ -53,7 +53,7 @@ void PlayerComponentOnlineInGame::ParserFromProto(const Proto::Player& proto)
 		_onlineVersion = version;
 }
 
-void PlayerComponentOnlineInGame::SerializeToProto(Proto::Player* pProto)
+void PlayerComponentOnlineInGame::SerializeToProto(Net::Player* pProto)
 {
 	pProto->mutable_misc()->set_online_version(_onlineVersion);
 }

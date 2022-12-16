@@ -8,16 +8,16 @@ void MysqlConnector::InitMessageComponent()
 {
     auto pMsgSystem = GetSystemManager()->GetMessageSystem();
 
-    pMsgSystem->RegisterFunction(this, Proto::MsgId::L2DB_QueryPlayerList, BindFunP1(this, &MysqlConnector::HandleQueryPlayerList));
-    pMsgSystem->RegisterFunction(this, Proto::MsgId::L2DB_CreatePlayer, BindFunP1(this, &MysqlConnector::HandleCreatePlayer));
+    pMsgSystem->RegisterFunction(this, Net::MsgId::L2DB_QueryPlayerList, BindFunP1(this, &MysqlConnector::HandleQueryPlayerList));
+    pMsgSystem->RegisterFunction(this, Net::MsgId::L2DB_CreatePlayer, BindFunP1(this, &MysqlConnector::HandleCreatePlayer));
 
-    pMsgSystem->RegisterFunction(this, Proto::MsgId::G2DB_SavePlayer, BindFunP1(this, &MysqlConnector::HandleSavePlayer));
-    pMsgSystem->RegisterFunction(this, Proto::MsgId::G2DB_QueryPlayer, BindFunP1(this, &MysqlConnector::HandleQueryPlayer));
+    pMsgSystem->RegisterFunction(this, Net::MsgId::G2DB_SavePlayer, BindFunP1(this, &MysqlConnector::HandleSavePlayer));
+    pMsgSystem->RegisterFunction(this, Net::MsgId::G2DB_QueryPlayer, BindFunP1(this, &MysqlConnector::HandleQueryPlayer));
 }
 
 void MysqlConnector::HandleQueryPlayerList(Packet* pPacket)
 {
-    auto protoQuery = pPacket->ParseToProto<Proto::QueryPlayerList>();
+    auto protoQuery = pPacket->ParseToProto<Net::QueryPlayerList>();
     QueryPlayerList(protoQuery.account(), pPacket);
 }
 
@@ -31,11 +31,11 @@ void MysqlConnector::QueryPlayerList(std::string account, NetIdentify* pIdentify
         return;
     }
 
-    Proto::PlayerList protoRs;
+    Net::PlayerList protoRs;
     protoRs.set_account(account.c_str());
 
-    Proto::PlayerBase protoBase;
-    Proto::PlayerMisc protoMisc;
+    Net::PlayerBase protoBase;
+    Net::PlayerMisc protoMisc;
     if (affected_rows > 0)
     {
         std::string tempStr;
@@ -68,12 +68,12 @@ void MysqlConnector::QueryPlayerList(std::string account, NetIdentify* pIdentify
     //LOG_DEBUG("player list. account:" << account.c_str() << " player list size:" << protoRs.player_size() << " socket:" << socket);
 
     // 没有找到也需要返回pResultPacket
-    MessageSystemHelp::SendPacket(Proto::MsgId::L2DB_QueryPlayerListRs, protoRs, pIdentify);
+    MessageSystemHelp::SendPacket(Net::MsgId::L2DB_QueryPlayerListRs, protoRs, pIdentify);
 }
 
 void MysqlConnector::HandleQueryPlayer(Packet* pPacket)
 {
-    auto protoQuery = pPacket->ParseToProto<Proto::QueryPlayer>();
+    auto protoQuery = pPacket->ParseToProto<Net::QueryPlayer>();
 
     my_ulonglong affected_rows;
     std::string sql = strutil::format("select sn, name, account, base, item, misc from player where sn = %llu", protoQuery.player_sn());
@@ -83,14 +83,14 @@ void MysqlConnector::HandleQueryPlayer(Packet* pPacket)
         return;
     }
 
-    Proto::QueryPlayerRs protoRs;
+    Net::QueryPlayerRs protoRs;
     if (affected_rows > 0)
     {
         std::string tempStr;
         MYSQL_ROW row;
         if ((row = Fetch()))
         {
-            Proto::Player* pProtoPlayer = protoRs.mutable_player();
+            Net::Player* pProtoPlayer = protoRs.mutable_player();
             pProtoPlayer->set_sn(GetUint64(row, 0));
             pProtoPlayer->set_name(GetString(row, 1));
             protoRs.set_account(GetString(row, 2));
@@ -104,12 +104,12 @@ void MysqlConnector::HandleQueryPlayer(Packet* pPacket)
     }
 
     //LOG_DEBUG("player  account:" << protoQuery.account().c_str() << " player list size:" << protoRs.player_size() << " socket:" << pPacket->GetSocketKey());
-    MessageSystemHelp::SendPacket(Proto::MsgId::G2DB_QueryPlayerRs, protoRs, pPacket);
+    MessageSystemHelp::SendPacket(Net::MsgId::G2DB_QueryPlayerRs, protoRs, pPacket);
 }
 
 void MysqlConnector::HandleCreatePlayer(Packet* pPacket)
 {
-    auto protoCreate = pPacket->ParseToProto<Proto::CreatePlayerToDB>();
+    auto protoCreate = pPacket->ParseToProto<Net::CreatePlayerToDB>();
 
     auto protoPlayer = protoCreate.player();
 
@@ -130,13 +130,13 @@ void MysqlConnector::HandleCreatePlayer(Packet* pPacket)
     AddParamStr(stmt, protoCreate.account().c_str());
     AddParamStr(stmt, protoPlayer.name().c_str());
 
-    Proto::CreatePlayerToDBRs protoRs;
+    Net::CreatePlayerToDBRs protoRs;
     protoRs.set_account(protoCreate.account().c_str());
-    protoRs.set_return_code(Proto::CreatePlayerReturnCode::CPR_Unkonwn);
+    protoRs.set_return_code(Net::CreatePlayerReturnCode::CPR_Unkonwn);
 
     if (ExecuteStmt(stmt))
     {
-        protoRs.set_return_code(Proto::CreatePlayerReturnCode::CPR_Create_OK);
+        protoRs.set_return_code(Net::CreatePlayerReturnCode::CPR_Create_OK);
 
         // save 初始化数据
         OnSavePlayer(stmtSave, protoPlayer);
@@ -144,29 +144,29 @@ void MysqlConnector::HandleCreatePlayer(Packet* pPacket)
 
     // 如果创建成功，将player list发送到客户端
     // 如果失败，将失败码返回到客户端
-    if (protoRs.return_code() == Proto::CreatePlayerReturnCode::CPR_Create_OK)
+    if (protoRs.return_code() == Net::CreatePlayerReturnCode::CPR_Create_OK)
     {
         QueryPlayerList(protoCreate.account(), pPacket);
     }
     else
     {
-        MessageSystemHelp::SendPacket(Proto::MsgId::L2DB_CreatePlayerRs, protoRs, pPacket);
+        MessageSystemHelp::SendPacket(Net::MsgId::L2DB_CreatePlayerRs, protoRs, pPacket);
     }
 }
 
 void MysqlConnector::HandleSavePlayer(Packet* pPacket)
 {
-    auto proto = pPacket->ParseToProto<Proto::SavePlayer>();
+    auto proto = pPacket->ParseToProto<Net::SavePlayer>();
     DatabaseStmt* stmt = GetStmt(DatabaseStmtKey::Save);
     if (stmt == nullptr)
         return;
 
     //LOG_INFO("HandleSavePlayer sn:" << proto.player_sn());
-    Proto::Player protoPlayer = proto.player();
+    Net::Player protoPlayer = proto.player();
     OnSavePlayer(stmt, protoPlayer);
 }
 
-bool MysqlConnector::OnSavePlayer(DatabaseStmt* stmtSave, Proto::Player& protoPlayer)
+bool MysqlConnector::OnSavePlayer(DatabaseStmt* stmtSave, Net::Player& protoPlayer)
 {
     ClearStmtParam(stmtSave);
 

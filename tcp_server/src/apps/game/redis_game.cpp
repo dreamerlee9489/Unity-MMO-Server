@@ -7,14 +7,14 @@ void RedisGame::RegisterMsgFunction()
 {
     auto pMsgSystem = GetSystemManager()->GetMessageSystem();
 
-    pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_PlayerSyncOnlineToRedis, BindFunP1(this, &RedisGame::HandlePlayerSyncOnlineToRedis));
-    pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_PlayerDeleteOnlineToRedis, BindFunP1(this, &RedisGame::HandlePlayerDeleteOnlineToRedis));
-    pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_GameTokenToRedis, BindFunP1(this, &RedisGame::HandleGameTokenToRedis));
+    pMsgSystem->RegisterFunction(this, Net::MsgId::MI_PlayerSyncOnlineToRedis, BindFunP1(this, &RedisGame::HandlePlayerSyncOnlineToRedis));
+    pMsgSystem->RegisterFunction(this, Net::MsgId::MI_PlayerDeleteOnlineToRedis, BindFunP1(this, &RedisGame::HandlePlayerDeleteOnlineToRedis));
+    pMsgSystem->RegisterFunction(this, Net::MsgId::MI_GameTokenToRedis, BindFunP1(this, &RedisGame::HandleGameTokenToRedis));
 }
 
 void RedisGame::HandlePlayerSyncOnlineToRedis(Packet* pPacket)
 {
-    auto proto = pPacket->ParseToProto<Proto::PlayerSyncOnlineToRedis>();
+    auto proto = pPacket->ParseToProto<Net::PlayerSyncOnlineToRedis>();
     auto curValue = proto.version();
 
     const std::string key = RedisKeyAccountOnlineGame + proto.account();
@@ -28,7 +28,7 @@ void RedisGame::HandlePlayerSyncOnlineToRedis(Packet* pPacket)
 
 void RedisGame::HandlePlayerDeleteOnlineToRedis(Packet* pPacket)
 {
-    auto proto = pPacket->ParseToProto<Proto::PlayerDeleteOnlineToRedis>();
+    auto proto = pPacket->ParseToProto<Net::PlayerDeleteOnlineToRedis>();
     auto curValue = proto.version();
 
     const std::string key = RedisKeyAccountOnlineGame + proto.account();
@@ -42,9 +42,9 @@ void RedisGame::HandlePlayerDeleteOnlineToRedis(Packet* pPacket)
 
 void RedisGame::HandleGameTokenToRedis(Packet* pPacket)
 {
-    auto protoToken = pPacket->ParseToProto<Proto::GameTokenToRedis>();
+    auto protoToken = pPacket->ParseToProto<Net::GameTokenToRedis>();
 
-    Proto::GameTokenToRedisRs protoRs;
+    Net::GameTokenToRedisRs protoRs;
     protoRs.set_account(protoToken.account().c_str());
 
     const std::string tokenValue = GetString(RedisKeyAccountTokey + protoToken.account());
@@ -52,5 +52,5 @@ void RedisGame::HandleGameTokenToRedis(Packet* pPacket)
 
     Delete(RedisKeyAccountTokey + protoToken.account());
 
-    MessageSystemHelp::DispatchPacket(Proto::MsgId::MI_GameTokenToRedisRs, protoRs, nullptr);
+    MessageSystemHelp::DispatchPacket(Net::MsgId::MI_GameTokenToRedisRs, protoRs, nullptr);
 }

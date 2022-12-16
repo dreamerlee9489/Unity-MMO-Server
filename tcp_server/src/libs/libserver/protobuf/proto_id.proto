@@ -1,6 +1,5 @@
 syntax = "proto3";
-
-package Proto;
+package Net;
 
 enum MsgId {
 

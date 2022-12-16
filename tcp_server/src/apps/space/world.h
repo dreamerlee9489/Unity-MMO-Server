@@ -22,8 +22,8 @@ class World :public Entity<World>, public IWorld, public IAwakeFromPoolSystem<in
 public:
 	void Awake(int worldId) override;
 	void BackToPool() override;
-	void BroadcastPacket(Proto::MsgId msgId, google::protobuf::Message& proto);
-	void BroadcastPacket(Proto::MsgId msgId, google::protobuf::Message& proto, std::set<uint64> players);
+	void BroadcastPacket(Net::MsgId msgId, google::protobuf::Message& proto);
+	void BroadcastPacket(Net::MsgId msgId, google::protobuf::Message& proto, std::set<uint64> players);
 	Player* GetNearestPlayer(Vector3& pos);
 	PlayerManagerComponent* GetPlayerManager() const { return _playerManager; }
 

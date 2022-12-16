@@ -55,7 +55,7 @@ struct TableStruct_db_2eproto {
   static const ::PROTOBUF_NAMESPACE_ID::uint32 offsets[];
 };
 extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_db_2eproto;
-namespace Proto {
+namespace Net {
 class LastWorld;
 class LastWorldDefaultTypeInternal;
 extern LastWorldDefaultTypeInternal _LastWorld_default_instance_;
@@ -71,15 +71,15 @@ extern PlayerMiscDefaultTypeInternal _PlayerMisc_default_instance_;
 class Vector3;
 class Vector3DefaultTypeInternal;
 extern Vector3DefaultTypeInternal _Vector3_default_instance_;
-}  // namespace Proto
+}  // namespace Net
 PROTOBUF_NAMESPACE_OPEN
-template<> ::Proto::LastWorld* Arena::CreateMaybeMessage<::Proto::LastWorld>(Arena*);
-template<> ::Proto::Player* Arena::CreateMaybeMessage<::Proto::Player>(Arena*);
-template<> ::Proto::PlayerBase* Arena::CreateMaybeMessage<::Proto::PlayerBase>(Arena*);
-template<> ::Proto::PlayerMisc* Arena::CreateMaybeMessage<::Proto::PlayerMisc>(Arena*);
-template<> ::Proto::Vector3* Arena::CreateMaybeMessage<::Proto::Vector3>(Arena*);
+template<> ::Net::LastWorld* Arena::CreateMaybeMessage<::Net::LastWorld>(Arena*);
+template<> ::Net::Player* Arena::CreateMaybeMessage<::Net::Player>(Arena*);
+template<> ::Net::PlayerBase* Arena::CreateMaybeMessage<::Net::PlayerBase>(Arena*);
+template<> ::Net::PlayerMisc* Arena::CreateMaybeMessage<::Net::PlayerMisc>(Arena*);
+template<> ::Net::Vector3* Arena::CreateMaybeMessage<::Net::Vector3>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
-namespace Proto {
+namespace Net {
 
 enum Gender : int {
   none = 0,
@@ -110,7 +110,7 @@ inline bool Gender_Parse(
 // ===================================================================
 
 class Vector3 :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Proto.Vector3) */ {
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Net.Vector3) */ {
  public:
   Vector3();
   virtual ~Vector3();
@@ -197,7 +197,7 @@ class Vector3 :
   void InternalSwap(Vector3* other);
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "Proto.Vector3";
+    return "Net.Vector3";
   }
   private:
   inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
@@ -241,7 +241,7 @@ class Vector3 :
   float z() const;
   void set_z(float value);
 
-  // @@protoc_insertion_point(class_scope:Proto.Vector3)
+  // @@protoc_insertion_point(class_scope:Net.Vector3)
  private:
   class _Internal;
 
@@ -255,7 +255,7 @@ class Vector3 :
 // -------------------------------------------------------------------
 
 class PlayerBase :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Proto.PlayerBase) */ {
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Net.PlayerBase) */ {
  public:
   PlayerBase();
   virtual ~PlayerBase();
@@ -342,7 +342,7 @@ class PlayerBase :
   void InternalSwap(PlayerBase* other);
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "Proto.PlayerBase";
+    return "Net.PlayerBase";
   }
   private:
   inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
@@ -370,17 +370,17 @@ class PlayerBase :
     kGenderFieldNumber = 1,
     kLevelFieldNumber = 2,
   };
-  // .Proto.Gender gender = 1;
+  // .Net.Gender gender = 1;
   void clear_gender();
-  ::Proto::Gender gender() const;
-  void set_gender(::Proto::Gender value);
+  ::Net::Gender gender() const;
+  void set_gender(::Net::Gender value);
 
   // int32 level = 2;
   void clear_level();
   ::PROTOBUF_NAMESPACE_ID::int32 level() const;
   void set_level(::PROTOBUF_NAMESPACE_ID::int32 value);
 
-  // @@protoc_insertion_point(class_scope:Proto.PlayerBase)
+  // @@protoc_insertion_point(class_scope:Net.PlayerBase)
  private:
   class _Internal;
 
@@ -393,7 +393,7 @@ class PlayerBase :
 // -------------------------------------------------------------------
 
 class LastWorld :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Proto.LastWorld) */ {
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Net.LastWorld) */ {
  public:
   LastWorld();
   virtual ~LastWorld();
@@ -480,7 +480,7 @@ class LastWorld :
   void InternalSwap(LastWorld* other);
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "Proto.LastWorld";
+    return "Net.LastWorld";
   }
   private:
   inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
@@ -509,13 +509,13 @@ class LastWorld :
     kWorldSnFieldNumber = 2,
     kWorldIdFieldNumber = 1,
   };
-  // .Proto.Vector3 position = 3;
+  // .Net.Vector3 position = 3;
   bool has_position() const;
   void clear_position();
-  const ::Proto::Vector3& position() const;
-  ::Proto::Vector3* release_position();
-  ::Proto::Vector3* mutable_position();
-  void set_allocated_position(::Proto::Vector3* position);
+  const ::Net::Vector3& position() const;
+  ::Net::Vector3* release_position();
+  ::Net::Vector3* mutable_position();
+  void set_allocated_position(::Net::Vector3* position);
 
   // int64 world_sn = 2;
   void clear_world_sn();
@@ -527,12 +527,12 @@ class LastWorld :
   ::PROTOBUF_NAMESPACE_ID::int32 world_id() const;
   void set_world_id(::PROTOBUF_NAMESPACE_ID::int32 value);
 
-  // @@protoc_insertion_point(class_scope:Proto.LastWorld)
+  // @@protoc_insertion_point(class_scope:Net.LastWorld)
  private:
   class _Internal;
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
-  ::Proto::Vector3* position_;
+  ::Net::Vector3* position_;
   ::PROTOBUF_NAMESPACE_ID::int64 world_sn_;
   ::PROTOBUF_NAMESPACE_ID::int32 world_id_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
@@ -541,7 +541,7 @@ class LastWorld :
 // -------------------------------------------------------------------
 
 class PlayerMisc :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Proto.PlayerMisc) */ {
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Net.PlayerMisc) */ {
  public:
   PlayerMisc();
   virtual ~PlayerMisc();
@@ -628,7 +628,7 @@ class PlayerMisc :
   void InternalSwap(PlayerMisc* other);
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "Proto.PlayerMisc";
+    return "Net.PlayerMisc";
   }
   private:
   inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
@@ -657,34 +657,34 @@ class PlayerMisc :
     kLastDungeonFieldNumber = 2,
     kOnlineVersionFieldNumber = 3,
   };
-  // .Proto.LastWorld last_world = 1;
+  // .Net.LastWorld last_world = 1;
   bool has_last_world() const;
   void clear_last_world();
-  const ::Proto::LastWorld& last_world() const;
-  ::Proto::LastWorld* release_last_world();
-  ::Proto::LastWorld* mutable_last_world();
-  void set_allocated_last_world(::Proto::LastWorld* last_world);
+  const ::Net::LastWorld& last_world() const;
+  ::Net::LastWorld* release_last_world();
+  ::Net::LastWorld* mutable_last_world();
+  void set_allocated_last_world(::Net::LastWorld* last_world);
 
-  // .Proto.LastWorld last_dungeon = 2;
+  // .Net.LastWorld last_dungeon = 2;
   bool has_last_dungeon() const;
   void clear_last_dungeon();
-  const ::Proto::LastWorld& last_dungeon() const;
-  ::Proto::LastWorld* release_last_dungeon();
-  ::Proto::LastWorld* mutable_last_dungeon();
-  void set_allocated_last_dungeon(::Proto::LastWorld* last_dungeon);
+  const ::Net::LastWorld& last_dungeon() const;
+  ::Net::LastWorld* release_last_dungeon();
+  ::Net::LastWorld* mutable_last_dungeon();
+  void set_allocated_last_dungeon(::Net::LastWorld* last_dungeon);
 
   // int32 online_version = 3;
   void clear_online_version();
   ::PROTOBUF_NAMESPACE_ID::int32 online_version() const;
   void set_online_version(::PROTOBUF_NAMESPACE_ID::int32 value);
 
-  // @@protoc_insertion_point(class_scope:Proto.PlayerMisc)
+  // @@protoc_insertion_point(class_scope:Net.PlayerMisc)
  private:
   class _Internal;
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
-  ::Proto::LastWorld* last_world_;
-  ::Proto::LastWorld* last_dungeon_;
+  ::Net::LastWorld* last_world_;
+  ::Net::LastWorld* last_dungeon_;
   ::PROTOBUF_NAMESPACE_ID::int32 online_version_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_db_2eproto;
@@ -692,7 +692,7 @@ class PlayerMisc :
 // -------------------------------------------------------------------
 
 class Player :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Proto.Player) */ {
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Net.Player) */ {
  public:
   Player();
   virtual ~Player();
@@ -779,7 +779,7 @@ class Player :
   void InternalSwap(Player* other);
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "Proto.Player";
+    return "Net.Player";
   }
   private:
   inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
@@ -820,35 +820,35 @@ class Player :
   std::string* release_name();
   void set_allocated_name(std::string* name);
 
-  // .Proto.PlayerBase base = 3;
+  // .Net.PlayerBase base = 3;
   bool has_base() const;
   void clear_base();
-  const ::Proto::PlayerBase& base() const;
-  ::Proto::PlayerBase* release_base();
-  ::Proto::PlayerBase* mutable_base();
-  void set_allocated_base(::Proto::PlayerBase* base);
+  const ::Net::PlayerBase& base() const;
+  ::Net::PlayerBase* release_base();
+  ::Net::PlayerBase* mutable_base();
+  void set_allocated_base(::Net::PlayerBase* base);
 
-  // .Proto.PlayerMisc misc = 4;
+  // .Net.PlayerMisc misc = 4;
   bool has_misc() const;
   void clear_misc();
-  const ::Proto::PlayerMisc& misc() const;
-  ::Proto::PlayerMisc* release_misc();
-  ::Proto::PlayerMisc* mutable_misc();
-  void set_allocated_misc(::Proto::PlayerMisc* misc);
+  const ::Net::PlayerMisc& misc() const;
+  ::Net::PlayerMisc* release_misc();
+  ::Net::PlayerMisc* mutable_misc();
+  void set_allocated_misc(::Net::PlayerMisc* misc);
 
   // uint64 sn = 1;
   void clear_sn();
   ::PROTOBUF_NAMESPACE_ID::uint64 sn() const;
   void set_sn(::PROTOBUF_NAMESPACE_ID::uint64 value);
 
-  // @@protoc_insertion_point(class_scope:Proto.Player)
+  // @@protoc_insertion_point(class_scope:Net.Player)
  private:
   class _Internal;
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr name_;
-  ::Proto::PlayerBase* base_;
-  ::Proto::PlayerMisc* misc_;
+  ::Net::PlayerBase* base_;
+  ::Net::PlayerMisc* misc_;
   ::PROTOBUF_NAMESPACE_ID::uint64 sn_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_db_2eproto;
@@ -869,13 +869,13 @@ inline void Vector3::clear_x() {
   x_ = 0;
 }
 inline float Vector3::x() const {
-  // @@protoc_insertion_point(field_get:Proto.Vector3.x)
+  // @@protoc_insertion_point(field_get:Net.Vector3.x)
   return x_;
 }
 inline void Vector3::set_x(float value) {
   
   x_ = value;
-  // @@protoc_insertion_point(field_set:Proto.Vector3.x)
+  // @@protoc_insertion_point(field_set:Net.Vector3.x)
 }
 
 // float y = 2;
@@ -883,13 +883,13 @@ inline void Vector3::clear_y() {
   y_ = 0;
 }
 inline float Vector3::y() const {
-  // @@protoc_insertion_point(field_get:Proto.Vector3.y)
+  // @@protoc_insertion_point(field_get:Net.Vector3.y)
   return y_;
 }
 inline void Vector3::set_y(float value) {
   
   y_ = value;
-  // @@protoc_insertion_point(field_set:Proto.Vector3.y)
+  // @@protoc_insertion_point(field_set:Net.Vector3.y)
 }
 
 // float z = 3;
@@ -897,31 +897,31 @@ inline void Vector3::clear_z() {
   z_ = 0;
 }
 inline float Vector3::z() const {
-  // @@protoc_insertion_point(field_get:Proto.Vector3.z)
+  // @@protoc_insertion_point(field_get:Net.Vector3.z)
   return z_;
 }
 inline void Vector3::set_z(float value) {
   
   z_ = value;
-  // @@protoc_insertion_point(field_set:Proto.Vector3.z)
+  // @@protoc_insertion_point(field_set:Net.Vector3.z)
 }
 
 // -------------------------------------------------------------------
 
 // PlayerBase
 
-// .Proto.Gender gender = 1;
+// .Net.Gender gender = 1;
 inline void PlayerBase::clear_gender() {
   gender_ = 0;
 }
-inline ::Proto::Gender PlayerBase::gender() const {
-  // @@protoc_insertion_point(field_get:Proto.PlayerBase.gender)
-  return static_cast< ::Proto::Gender >(gender_);
+inline ::Net::Gender PlayerBase::gender() const {
+  // @@protoc_insertion_point(field_get:Net.PlayerBase.gender)
+  return static_cast< ::Net::Gender >(gender_);
 }
-inline void PlayerBase::set_gender(::Proto::Gender value) {
+inline void PlayerBase::set_gender(::Net::Gender value) {
   
   gender_ = value;
-  // @@protoc_insertion_point(field_set:Proto.PlayerBase.gender)
+  // @@protoc_insertion_point(field_set:Net.PlayerBase.gender)
 }
 
 // int32 level = 2;
@@ -929,13 +929,13 @@ inline void PlayerBase::clear_level() {
   level_ = 0;
 }
 inline ::PROTOBUF_NAMESPACE_ID::int32 PlayerBase::level() const {
-  // @@protoc_insertion_point(field_get:Proto.PlayerBase.level)
+  // @@protoc_insertion_point(field_get:Net.PlayerBase.level)
   return level_;
 }
 inline void PlayerBase::set_level(::PROTOBUF_NAMESPACE_ID::int32 value) {
   
   level_ = value;
-  // @@protoc_insertion_point(field_set:Proto.PlayerBase.level)
+  // @@protoc_insertion_point(field_set:Net.PlayerBase.level)
 }
 
 // -------------------------------------------------------------------
@@ -947,13 +947,13 @@ inline void LastWorld::clear_world_id() {
   world_id_ = 0;
 }
 inline ::PROTOBUF_NAMESPACE_ID::int32 LastWorld::world_id() const {
-  // @@protoc_insertion_point(field_get:Proto.LastWorld.world_id)
+  // @@protoc_insertion_point(field_get:Net.LastWorld.world_id)
   return world_id_;
 }
 inline void LastWorld::set_world_id(::PROTOBUF_NAMESPACE_ID::int32 value) {
   
   world_id_ = value;
-  // @@protoc_insertion_point(field_set:Proto.LastWorld.world_id)
+  // @@protoc_insertion_point(field_set:Net.LastWorld.world_id)
 }
 
 // int64 world_sn = 2;
@@ -961,16 +961,16 @@ inline void LastWorld::clear_world_sn() {
   world_sn_ = PROTOBUF_LONGLONG(0);
 }
 inline ::PROTOBUF_NAMESPACE_ID::int64 LastWorld::world_sn() const {
-  // @@protoc_insertion_point(field_get:Proto.LastWorld.world_sn)
+  // @@protoc_insertion_point(field_get:Net.LastWorld.world_sn)
   return world_sn_;
 }
 inline void LastWorld::set_world_sn(::PROTOBUF_NAMESPACE_ID::int64 value) {
   
   world_sn_ = value;
-  // @@protoc_insertion_point(field_set:Proto.LastWorld.world_sn)
+  // @@protoc_insertion_point(field_set:Net.LastWorld.world_sn)
 }
 
-// .Proto.Vector3 position = 3;
+// .Net.Vector3 position = 3;
 inline bool LastWorld::has_position() const {
   return this != internal_default_instance() && position_ != nullptr;
 }
@@ -980,29 +980,29 @@ inline void LastWorld::clear_position() {
   }
   position_ = nullptr;
 }
-inline const ::Proto::Vector3& LastWorld::position() const {
-  const ::Proto::Vector3* p = position_;
-  // @@protoc_insertion_point(field_get:Proto.LastWorld.position)
-  return p != nullptr ? *p : *reinterpret_cast<const ::Proto::Vector3*>(
-      &::Proto::_Vector3_default_instance_);
+inline const ::Net::Vector3& LastWorld::position() const {
+  const ::Net::Vector3* p = position_;
+  // @@protoc_insertion_point(field_get:Net.LastWorld.position)
+  return p != nullptr ? *p : *reinterpret_cast<const ::Net::Vector3*>(
+      &::Net::_Vector3_default_instance_);
 }
-inline ::Proto::Vector3* LastWorld::release_position() {
-  // @@protoc_insertion_point(field_release:Proto.LastWorld.position)
+inline ::Net::Vector3* LastWorld::release_position() {
+  // @@protoc_insertion_point(field_release:Net.LastWorld.position)
   
-  ::Proto::Vector3* temp = position_;
+  ::Net::Vector3* temp = position_;
   position_ = nullptr;
   return temp;
 }
-inline ::Proto::Vector3* LastWorld::mutable_position() {
+inline ::Net::Vector3* LastWorld::mutable_position() {
   
   if (position_ == nullptr) {
-    auto* p = CreateMaybeMessage<::Proto::Vector3>(GetArenaNoVirtual());
+    auto* p = CreateMaybeMessage<::Net::Vector3>(GetArenaNoVirtual());
     position_ = p;
   }
-  // @@protoc_insertion_point(field_mutable:Proto.LastWorld.position)
+  // @@protoc_insertion_point(field_mutable:Net.LastWorld.position)
   return position_;
 }
-inline void LastWorld::set_allocated_position(::Proto::Vector3* position) {
+inline void LastWorld::set_allocated_position(::Net::Vector3* position) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaNoVirtual();
   if (message_arena == nullptr) {
     delete position_;
@@ -1018,14 +1018,14 @@ inline void LastWorld::set_allocated_position(::Proto::Vector3* position) {
     
   }
   position_ = position;
-  // @@protoc_insertion_point(field_set_allocated:Proto.LastWorld.position)
+  // @@protoc_insertion_point(field_set_allocated:Net.LastWorld.position)
 }
 
 // -------------------------------------------------------------------
 
 // PlayerMisc
 
-// .Proto.LastWorld last_world = 1;
+// .Net.LastWorld last_world = 1;
 inline bool PlayerMisc::has_last_world() const {
   return this != internal_default_instance() && last_world_ != nullptr;
 }
@@ -1035,29 +1035,29 @@ inline void PlayerMisc::clear_last_world() {
   }
   last_world_ = nullptr;
 }
-inline const ::Proto::LastWorld& PlayerMisc::last_world() const {
-  const ::Proto::LastWorld* p = last_world_;
-  // @@protoc_insertion_point(field_get:Proto.PlayerMisc.last_world)
-  return p != nullptr ? *p : *reinterpret_cast<const ::Proto::LastWorld*>(
-      &::Proto::_LastWorld_default_instance_);
+inline const ::Net::LastWorld& PlayerMisc::last_world() const {
+  const ::Net::LastWorld* p = last_world_;
+  // @@protoc_insertion_point(field_get:Net.PlayerMisc.last_world)
+  return p != nullptr ? *p : *reinterpret_cast<const ::Net::LastWorld*>(
+      &::Net::_LastWorld_default_instance_);
 }
-inline ::Proto::LastWorld* PlayerMisc::release_last_world() {
-  // @@protoc_insertion_point(field_release:Proto.PlayerMisc.last_world)
+inline ::Net::LastWorld* PlayerMisc::release_last_world() {
+  // @@protoc_insertion_point(field_release:Net.PlayerMisc.last_world)
   
-  ::Proto::LastWorld* temp = last_world_;
+  ::Net::LastWorld* temp = last_world_;
   last_world_ = nullptr;
   return temp;
 }
-inline ::Proto::LastWorld* PlayerMisc::mutable_last_world() {
+inline ::Net::LastWorld* PlayerMisc::mutable_last_world() {
   
   if (last_world_ == nullptr) {
-    auto* p = CreateMaybeMessage<::Proto::LastWorld>(GetArenaNoVirtual());
+    auto* p = CreateMaybeMessage<::Net::LastWorld>(GetArenaNoVirtual());
     last_world_ = p;
   }
-  // @@protoc_insertion_point(field_mutable:Proto.PlayerMisc.last_world)
+  // @@protoc_insertion_point(field_mutable:Net.PlayerMisc.last_world)
   return last_world_;
 }
-inline void PlayerMisc::set_allocated_last_world(::Proto::LastWorld* last_world) {
+inline void PlayerMisc::set_allocated_last_world(::Net::LastWorld* last_world) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaNoVirtual();
   if (message_arena == nullptr) {
     delete last_world_;
@@ -1073,10 +1073,10 @@ inline void PlayerMisc::set_allocated_last_world(::Proto::LastWorld* last_world)
     
   }
   last_world_ = last_world;
-  // @@protoc_insertion_point(field_set_allocated:Proto.PlayerMisc.last_world)
+  // @@protoc_insertion_point(field_set_allocated:Net.PlayerMisc.last_world)
 }
 
-// .Proto.LastWorld last_dungeon = 2;
+// .Net.LastWorld last_dungeon = 2;
 inline bool PlayerMisc::has_last_dungeon() const {
   return this != internal_default_instance() && last_dungeon_ != nullptr;
 }
@@ -1086,29 +1086,29 @@ inline void PlayerMisc::clear_last_dungeon() {
   }
   last_dungeon_ = nullptr;
 }
-inline const ::Proto::LastWorld& PlayerMisc::last_dungeon() const {
-  const ::Proto::LastWorld* p = last_dungeon_;
-  // @@protoc_insertion_point(field_get:Proto.PlayerMisc.last_dungeon)
-  return p != nullptr ? *p : *reinterpret_cast<const ::Proto::LastWorld*>(
-      &::Proto::_LastWorld_default_instance_);
+inline const ::Net::LastWorld& PlayerMisc::last_dungeon() const {
+  const ::Net::LastWorld* p = last_dungeon_;
+  // @@protoc_insertion_point(field_get:Net.PlayerMisc.last_dungeon)
+  return p != nullptr ? *p : *reinterpret_cast<const ::Net::LastWorld*>(
+      &::Net::_LastWorld_default_instance_);
 }
-inline ::Proto::LastWorld* PlayerMisc::release_last_dungeon() {
-  // @@protoc_insertion_point(field_release:Proto.PlayerMisc.last_dungeon)
+inline ::Net::LastWorld* PlayerMisc::release_last_dungeon() {
+  // @@protoc_insertion_point(field_release:Net.PlayerMisc.last_dungeon)
   
-  ::Proto::LastWorld* temp = last_dungeon_;
+  ::Net::LastWorld* temp = last_dungeon_;
   last_dungeon_ = nullptr;
   return temp;
 }
-inline ::Proto::LastWorld* PlayerMisc::mutable_last_dungeon() {
+inline ::Net::LastWorld* PlayerMisc::mutable_last_dungeon() {
   
   if (last_dungeon_ == nullptr) {
-    auto* p = CreateMaybeMessage<::Proto::LastWorld>(GetArenaNoVirtual());
+    auto* p = CreateMaybeMessage<::Net::LastWorld>(GetArenaNoVirtual());
     last_dungeon_ = p;
   }
-  // @@protoc_insertion_point(field_mutable:Proto.PlayerMisc.last_dungeon)
+  // @@protoc_insertion_point(field_mutable:Net.PlayerMisc.last_dungeon)
   return last_dungeon_;
 }
-inline void PlayerMisc::set_allocated_last_dungeon(::Proto::LastWorld* last_dungeon) {
+inline void PlayerMisc::set_allocated_last_dungeon(::Net::LastWorld* last_dungeon) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaNoVirtual();
   if (message_arena == nullptr) {
     delete last_dungeon_;
@@ -1124,7 +1124,7 @@ inline void PlayerMisc::set_allocated_last_dungeon(::Proto::LastWorld* last_dung
     
   }
   last_dungeon_ = last_dungeon;
-  // @@protoc_insertion_point(field_set_allocated:Proto.PlayerMisc.last_dungeon)
+  // @@protoc_insertion_point(field_set_allocated:Net.PlayerMisc.last_dungeon)
 }
 
 // int32 online_version = 3;
@@ -1132,13 +1132,13 @@ inline void PlayerMisc::clear_online_version() {
   online_version_ = 0;
 }
 inline ::PROTOBUF_NAMESPACE_ID::int32 PlayerMisc::online_version() const {
-  // @@protoc_insertion_point(field_get:Proto.PlayerMisc.online_version)
+  // @@protoc_insertion_point(field_get:Net.PlayerMisc.online_version)
   return online_version_;
 }
 inline void PlayerMisc::set_online_version(::PROTOBUF_NAMESPACE_ID::int32 value) {
   
   online_version_ = value;
-  // @@protoc_insertion_point(field_set:Proto.PlayerMisc.online_version)
+  // @@protoc_insertion_point(field_set:Net.PlayerMisc.online_version)
 }
 
 // -------------------------------------------------------------------
@@ -1150,13 +1150,13 @@ inline void Player::clear_sn() {
   sn_ = PROTOBUF_ULONGLONG(0);
 }
 inline ::PROTOBUF_NAMESPACE_ID::uint64 Player::sn() const {
-  // @@protoc_insertion_point(field_get:Proto.Player.sn)
+  // @@protoc_insertion_point(field_get:Net.Player.sn)
   return sn_;
 }
 inline void Player::set_sn(::PROTOBUF_NAMESPACE_ID::uint64 value) {
   
   sn_ = value;
-  // @@protoc_insertion_point(field_set:Proto.Player.sn)
+  // @@protoc_insertion_point(field_set:Net.Player.sn)
 }
 
 // string name = 2;
@@ -1164,39 +1164,39 @@ inline void Player::clear_name() {
   name_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 inline const std::string& Player::name() const {
-  // @@protoc_insertion_point(field_get:Proto.Player.name)
+  // @@protoc_insertion_point(field_get:Net.Player.name)
   return name_.GetNoArena();
 }
 inline void Player::set_name(const std::string& value) {
   
   name_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:Proto.Player.name)
+  // @@protoc_insertion_point(field_set:Net.Player.name)
 }
 inline void Player::set_name(std::string&& value) {
   
   name_.SetNoArena(
     &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:Proto.Player.name)
+  // @@protoc_insertion_point(field_set_rvalue:Net.Player.name)
 }
 inline void Player::set_name(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   
   name_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:Proto.Player.name)
+  // @@protoc_insertion_point(field_set_char:Net.Player.name)
 }
 inline void Player::set_name(const char* value, size_t size) {
   
   name_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:Proto.Player.name)
+  // @@protoc_insertion_point(field_set_pointer:Net.Player.name)
 }
 inline std::string* Player::mutable_name() {
   
-  // @@protoc_insertion_point(field_mutable:Proto.Player.name)
+  // @@protoc_insertion_point(field_mutable:Net.Player.name)
   return name_.MutableNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 inline std::string* Player::release_name() {
-  // @@protoc_insertion_point(field_release:Proto.Player.name)
+  // @@protoc_insertion_point(field_release:Net.Player.name)
   
   return name_.ReleaseNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
@@ -1207,10 +1207,10 @@ inline void Player::set_allocated_name(std::string* name) {
     
   }
   name_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), name);
-  // @@protoc_insertion_point(field_set_allocated:Proto.Player.name)
+  // @@protoc_insertion_point(field_set_allocated:Net.Player.name)
 }
 
-// .Proto.PlayerBase base = 3;
+// .Net.PlayerBase base = 3;
 inline bool Player::has_base() const {
   return this != internal_default_instance() && base_ != nullptr;
 }
@@ -1220,29 +1220,29 @@ inline void Player::clear_base() {
   }
   base_ = nullptr;
 }
-inline const ::Proto::PlayerBase& Player::base() const {
-  const ::Proto::PlayerBase* p = base_;
-  // @@protoc_insertion_point(field_get:Proto.Player.base)
-  return p != nullptr ? *p : *reinterpret_cast<const ::Proto::PlayerBase*>(
-      &::Proto::_PlayerBase_default_instance_);
+inline const ::Net::PlayerBase& Player::base() const {
+  const ::Net::PlayerBase* p = base_;
+  // @@protoc_insertion_point(field_get:Net.Player.base)
+  return p != nullptr ? *p : *reinterpret_cast<const ::Net::PlayerBase*>(
+      &::Net::_PlayerBase_default_instance_);
 }
-inline ::Proto::PlayerBase* Player::release_base() {
-  // @@protoc_insertion_point(field_release:Proto.Player.base)
+inline ::Net::PlayerBase* Player::release_base() {
+  // @@protoc_insertion_point(field_release:Net.Player.base)
   
-  ::Proto::PlayerBase* temp = base_;
+  ::Net::PlayerBase* temp = base_;
   base_ = nullptr;
   return temp;
 }
-inline ::Proto::PlayerBase* Player::mutable_base() {
+inline ::Net::PlayerBase* Player::mutable_base() {
   
   if (base_ == nullptr) {
-    auto* p = CreateMaybeMessage<::Proto::PlayerBase>(GetArenaNoVirtual());
+    auto* p = CreateMaybeMessage<::Net::PlayerBase>(GetArenaNoVirtual());
     base_ = p;
   }
-  // @@protoc_insertion_point(field_mutable:Proto.Player.base)
+  // @@protoc_insertion_point(field_mutable:Net.Player.base)
   return base_;
 }
-inline void Player::set_allocated_base(::Proto::PlayerBase* base) {
+inline void Player::set_allocated_base(::Net::PlayerBase* base) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaNoVirtual();
   if (message_arena == nullptr) {
     delete base_;
@@ -1258,10 +1258,10 @@ inline void Player::set_allocated_base(::Proto::PlayerBase* base) {
     
   }
   base_ = base;
-  // @@protoc_insertion_point(field_set_allocated:Proto.Player.base)
+  // @@protoc_insertion_point(field_set_allocated:Net.Player.base)
 }
 
-// .Proto.PlayerMisc misc = 4;
+// .Net.PlayerMisc misc = 4;
 inline bool Player::has_misc() const {
   return this != internal_default_instance() && misc_ != nullptr;
 }
@@ -1271,29 +1271,29 @@ inline void Player::clear_misc() {
   }
   misc_ = nullptr;
 }
-inline const ::Proto::PlayerMisc& Player::misc() const {
-  const ::Proto::PlayerMisc* p = misc_;
-  // @@protoc_insertion_point(field_get:Proto.Player.misc)
-  return p != nullptr ? *p : *reinterpret_cast<const ::Proto::PlayerMisc*>(
-      &::Proto::_PlayerMisc_default_instance_);
+inline const ::Net::PlayerMisc& Player::misc() const {
+  const ::Net::PlayerMisc* p = misc_;
+  // @@protoc_insertion_point(field_get:Net.Player.misc)
+  return p != nullptr ? *p : *reinterpret_cast<const ::Net::PlayerMisc*>(
+      &::Net::_PlayerMisc_default_instance_);
 }
-inline ::Proto::PlayerMisc* Player::release_misc() {
-  // @@protoc_insertion_point(field_release:Proto.Player.misc)
+inline ::Net::PlayerMisc* Player::release_misc() {
+  // @@protoc_insertion_point(field_release:Net.Player.misc)
   
-  ::Proto::PlayerMisc* temp = misc_;
+  ::Net::PlayerMisc* temp = misc_;
   misc_ = nullptr;
   return temp;
 }
-inline ::Proto::PlayerMisc* Player::mutable_misc() {
+inline ::Net::PlayerMisc* Player::mutable_misc() {
   
   if (misc_ == nullptr) {
-    auto* p = CreateMaybeMessage<::Proto::PlayerMisc>(GetArenaNoVirtual());
+    auto* p = CreateMaybeMessage<::Net::PlayerMisc>(GetArenaNoVirtual());
     misc_ = p;
   }
-  // @@protoc_insertion_point(field_mutable:Proto.Player.misc)
+  // @@protoc_insertion_point(field_mutable:Net.Player.misc)
   return misc_;
 }
-inline void Player::set_allocated_misc(::Proto::PlayerMisc* misc) {
+inline void Player::set_allocated_misc(::Net::PlayerMisc* misc) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaNoVirtual();
   if (message_arena == nullptr) {
     delete misc_;
@@ -1309,7 +1309,7 @@ inline void Player::set_allocated_misc(::Proto::PlayerMisc* misc) {
     
   }
   misc_ = misc;
-  // @@protoc_insertion_point(field_set_allocated:Proto.Player.misc)
+  // @@protoc_insertion_point(field_set_allocated:Net.Player.misc)
 }
 
 #ifdef __GNUC__
@@ -1326,14 +1326,14 @@ inline void Player::set_allocated_misc(::Proto::PlayerMisc* misc) {
 
 // @@protoc_insertion_point(namespace_scope)
 
-}  // namespace Proto
+}  // namespace Net
 
 PROTOBUF_NAMESPACE_OPEN
 
-template <> struct is_proto_enum< ::Proto::Gender> : ::std::true_type {};
+template <> struct is_proto_enum< ::Net::Gender> : ::std::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::Proto::Gender>() {
-  return ::Proto::Gender_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::Net::Gender>() {
+  return ::Net::Gender_descriptor();
 }
 
 PROTOBUF_NAMESPACE_CLOSE

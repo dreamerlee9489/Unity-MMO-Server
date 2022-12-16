@@ -12,15 +12,15 @@ void PlayerComponentOnlineInLogin::Awake(std::string account)
 
 void PlayerComponentOnlineInLogin::BackToPool()
 {
-	Proto::AccountDeleteOnlineToRedis protoSync;
+	Net::AccountDeleteOnlineToRedis protoSync;
 	protoSync.set_account(_account.c_str());
-	MessageSystemHelp::DispatchPacket(Proto::MsgId::MI_AccountDeleteOnlineToRedis, protoSync, nullptr);
+	MessageSystemHelp::DispatchPacket(Net::MsgId::MI_AccountDeleteOnlineToRedis, protoSync, nullptr);
 }
 
 void PlayerComponentOnlineInLogin::SetOnlineFlag() const
 {
 	// 设置在线标志
-	Proto::AccountSyncOnlineToRedis protoSync;
+	Net::AccountSyncOnlineToRedis protoSync;
 	protoSync.set_account(_account.c_str());
-	MessageSystemHelp::DispatchPacket(Proto::MsgId::MI_AccountSyncOnlineToRedis, protoSync, nullptr);
+	MessageSystemHelp::DispatchPacket(Net::MsgId::MI_AccountSyncOnlineToRedis, protoSync, nullptr);
 }

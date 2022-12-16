@@ -13,18 +13,18 @@ void PlayerComponentDetail::BackToPool()
 {
 }
 
-void PlayerComponentDetail::ParserFromProto(const Proto::Player& proto)
+void PlayerComponentDetail::ParserFromProto(const Net::Player& proto)
 {
 	auto protoBase = proto.base();
 	_gender = protoBase.gender();
 }
 
-void PlayerComponentDetail::SerializeToProto(Proto::Player* pProto)
+void PlayerComponentDetail::SerializeToProto(Net::Player* pProto)
 {
 
 }
 
-Proto::Gender PlayerComponentDetail::GetGender() const
+Net::Gender PlayerComponentDetail::GetGender() const
 {
 	return _gender;
 }

@@ -31,14 +31,14 @@ void Lobby::Awake()
 	// message
 	auto pMsgSystem = GetSystemManager()->GetMessageSystem();
 
-	pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_NetworkDisconnect, BindFunP1(this, &Lobby::HandleNetworkDisconnect));
-	pMsgSystem->RegisterFunction(this, Proto::MsgId::C2G_LoginByToken, BindFunP1(this, &Lobby::HandleLoginByToken));
-	pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_GameTokenToRedisRs, BindFunP1(this, &Lobby::HandleGameTokenToRedisRs));
-	pMsgSystem->RegisterFunction(this, Proto::MsgId::G2DB_QueryPlayerRs, BindFunP1(this, &Lobby::HandleQueryPlayerRs));
-	pMsgSystem->RegisterFunction(this, Proto::MsgId::G2M_QueryWorldRs, BindFunP1(this, &Lobby::HandleQueryWorldRs));
+	pMsgSystem->RegisterFunction(this, Net::MsgId::MI_NetworkDisconnect, BindFunP1(this, &Lobby::HandleNetworkDisconnect));
+	pMsgSystem->RegisterFunction(this, Net::MsgId::C2G_LoginByToken, BindFunP1(this, &Lobby::HandleLoginByToken));
+	pMsgSystem->RegisterFunction(this, Net::MsgId::MI_GameTokenToRedisRs, BindFunP1(this, &Lobby::HandleGameTokenToRedisRs));
+	pMsgSystem->RegisterFunction(this, Net::MsgId::G2DB_QueryPlayerRs, BindFunP1(this, &Lobby::HandleQueryPlayerRs));
+	pMsgSystem->RegisterFunction(this, Net::MsgId::G2M_QueryWorldRs, BindFunP1(this, &Lobby::HandleQueryWorldRs));
 
-	pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_BroadcastCreateWorldProxy, BindFunP1(this, &Lobby::HandleBroadcastCreateWorldProxy));
-	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::MI_TeleportAfter, BindFunP1(this, &Lobby::GetPlayer), BindFunP2(this, &Lobby::HandleTeleportAfter));
+	pMsgSystem->RegisterFunction(this, Net::MsgId::MI_BroadcastCreateWorldProxy, BindFunP1(this, &Lobby::HandleBroadcastCreateWorldProxy));
+	pMsgSystem->RegisterFunctionFilter<Player>(this, Net::MsgId::MI_TeleportAfter, BindFunP1(this, &Lobby::GetPlayer), BindFunP2(this, &Lobby::HandleTeleportAfter));
 }
 
 void Lobby::BackToPool()
@@ -71,20 +71,20 @@ void Lobby::HandleLoginByToken(Packet* pPacket)
 {
 	auto pPlayerCollector = GetComponent<PlayerCollectorComponent>();
 
-	auto proto = pPacket->ParseToProto<Proto::LoginByToken>();
+	auto proto = pPacket->ParseToProto<Net::LoginByToken>();
 	auto pPlayer = pPlayerCollector->AddPlayer(pPacket, proto.account());
 	if (pPlayer == nullptr)
 	{
-		MessageSystemHelp::DispatchPacket(Proto::MsgId::MI_NetworkRequestDisconnect, pPacket);
+		MessageSystemHelp::DispatchPacket(Net::MsgId::MI_NetworkRequestDisconnect, pPacket);
 		return;
 	}
 
 	pPlayer->AddComponent<PlayerComponentToken>(proto.token());
 	pPlayer->AddComponent<PlayerComponentOnlineInGame>(pPlayer->GetAccount(), 1);
 
-	Proto::GameTokenToRedis protoToken;
+	Net::GameTokenToRedis protoToken;
 	protoToken.set_account(pPlayer->GetAccount().c_str());
-	MessageSystemHelp::DispatchPacket(Proto::MsgId::MI_GameTokenToRedis, protoToken, nullptr);
+	MessageSystemHelp::DispatchPacket(Net::MsgId::MI_GameTokenToRedis, protoToken, nullptr);
 
 	// 注册SOCKET
 	auto pSocketLocator = ComponentHelp::GetGlobalEntitySystem()->GetComponent<SocketLocator>();
@@ -93,7 +93,7 @@ void Lobby::HandleLoginByToken(Packet* pPacket)
 
 void Lobby::HandleGameTokenToRedisRs(Packet* pPacket)
 {
-	auto protoRs = pPacket->ParseToProto<Proto::GameTokenToRedisRs>();
+	auto protoRs = pPacket->ParseToProto<Net::GameTokenToRedisRs>();
 	auto pPlayer = GetComponent<PlayerCollectorComponent>()->GetPlayerByAccount(protoRs.account());
 	if (pPlayer == nullptr)
 	{
@@ -101,31 +101,31 @@ void Lobby::HandleGameTokenToRedisRs(Packet* pPacket)
 		return;
 	}
 
-	Proto::LoginByTokenRs protoLoginGameRs;
-	protoLoginGameRs.set_return_code(Proto::LoginByTokenRs::LGRC_TOKEN_WRONG);
+	Net::LoginByTokenRs protoLoginGameRs;
+	protoLoginGameRs.set_return_code(Net::LoginByTokenRs::LGRC_TOKEN_WRONG);
 	const auto pTokenComponent = pPlayer->GetComponent<PlayerComponentToken>();
 	if (pTokenComponent->IsTokenValid(protoRs.token_info().token()))
 	{
-		protoLoginGameRs.set_return_code(Proto::LoginByTokenRs::LGRC_OK);
+		protoLoginGameRs.set_return_code(Net::LoginByTokenRs::LGRC_OK);
 	}
 
-	MessageSystemHelp::SendPacket(Proto::MsgId::C2G_LoginByTokenRs, protoLoginGameRs, pPlayer);
+	MessageSystemHelp::SendPacket(Net::MsgId::C2G_LoginByTokenRs, protoLoginGameRs, pPlayer);
 
-	if (protoLoginGameRs.return_code() != Proto::LoginByTokenRs::LGRC_OK)
+	if (protoLoginGameRs.return_code() != Net::LoginByTokenRs::LGRC_OK)
 		return;
 
 	//LOG_DEBUG("enter game. account:" << pPlayer->GetAccount().c_str() << " token:" << protoRs.token_info().token().c_str());
 
 	// 查询玩家数据	
-	Proto::QueryPlayer protoQuery;
+	Net::QueryPlayer protoQuery;
 	protoQuery.set_player_sn(protoRs.token_info().player_sn());
-	MessageSystemHelp::SendPacket(Proto::MsgId::G2DB_QueryPlayer, protoQuery, APP_DB_MGR);
+	MessageSystemHelp::SendPacket(Net::MsgId::G2DB_QueryPlayer, protoQuery, APP_DB_MGR);
 }
 
 void Lobby::HandleQueryPlayerRs(Packet* pPacket)
 {
 	//从数据库中读取到player数据
-	auto protoRs = pPacket->ParseToProto<Proto::QueryPlayerRs>();
+	auto protoRs = pPacket->ParseToProto<Net::QueryPlayerRs>();
 	auto account = protoRs.account();
 	auto pPlayer = GetComponent<PlayerCollectorComponent>()->GetPlayerByAccount(account);
 	if (pPlayer == nullptr)
@@ -135,9 +135,9 @@ void Lobby::HandleQueryPlayerRs(Packet* pPacket)
 	}
 
 	// 向客户端发送玩家数据
-	Proto::SyncPlayer syncPlayer;
+	Net::SyncPlayer syncPlayer;
 	syncPlayer.mutable_player()->CopyFrom(protoRs.player());
-	MessageSystemHelp::SendPacket(Proto::MsgId::G2C_SyncPlayer, syncPlayer, pPlayer);
+	MessageSystemHelp::SendPacket(Net::MsgId::G2C_SyncPlayer, syncPlayer, pPlayer);
 
 	// 分析进入地图
 	auto protoPlayer = protoRs.player();
@@ -166,10 +166,10 @@ void Lobby::HandleQueryPlayerRs(Packet* pPacket)
 		if (_waitingForDungeon[pLastMap->WorldSn].empty())
 		{
 			// 向appmgr查询副本(单线程)
-			Proto::QueryWorld protoToMgr;
+			Net::QueryWorld protoToMgr;
 			protoToMgr.set_world_sn(pLastMap->WorldSn);
 			protoToMgr.set_last_world_sn(GetSN());
-			MessageSystemHelp::SendPacket(Proto::MsgId::G2M_QueryWorld, protoToMgr, APP_APPMGR);
+			MessageSystemHelp::SendPacket(Net::MsgId::G2M_QueryWorld, protoToMgr, APP_APPMGR);
 		}
 
 		_waitingForDungeon[pLastMap->WorldSn].insert(pPlayer->GetPlayerSN());
@@ -206,9 +206,9 @@ void Lobby::EnterPublicWorld(Player* pPlayer)
 	if (_waitingForWorld[pLastMap->WorldId].empty())
 	{
 		// 向appmgr申请创建地图(单线程)
-		Proto::RequestWorld protoToMgr;
+		Net::RequestWorld protoToMgr;
 		protoToMgr.set_world_id(pLastMap->WorldId);
-		MessageSystemHelp::SendPacket(Proto::MsgId::G2M_RequestWorld, protoToMgr, APP_APPMGR);
+		MessageSystemHelp::SendPacket(Net::MsgId::G2M_RequestWorld, protoToMgr, APP_APPMGR);
 	}
 
 	_waitingForWorld[pLastMap->WorldId].insert(pPlayer->GetPlayerSN());
@@ -216,14 +216,14 @@ void Lobby::EnterPublicWorld(Player* pPlayer)
 
 void Lobby::HandleQueryWorldRs(Packet* pPacket)
 {
-	auto proto = pPacket->ParseToProto<Proto::QueryWorldRs>();
+	auto proto = pPacket->ParseToProto<Net::QueryWorldRs>();
 	const auto worldSn = proto.world_sn();
 
 	const auto iter = _waitingForDungeon.find(worldSn);
 	if (iter == _waitingForDungeon.end())
 		return;
 
-	if (proto.return_code() == Proto::QueryWorldRs::QueryWorld_OK)
+	if (proto.return_code() == Net::QueryWorldRs::QueryWorld_OK)
 		return;
 
 	auto pPlayerMgr = GetComponent<PlayerCollectorComponent>();
@@ -248,7 +248,7 @@ void Lobby::HandleQueryWorldRs(Packet* pPacket)
 /// <param name="pPacket"></param>
 void Lobby::HandleBroadcastCreateWorldProxy(Packet* pPacket)
 {
-	auto proto = pPacket->ParseToProto<Proto::BroadcastCreateWorldProxy>();
+	auto proto = pPacket->ParseToProto<Net::BroadcastCreateWorldProxy>();
 	const auto worldId = proto.world_id();
 	const auto worldSn = proto.world_sn();
 

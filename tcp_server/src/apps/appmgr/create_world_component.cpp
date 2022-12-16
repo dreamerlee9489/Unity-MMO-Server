@@ -9,15 +9,15 @@ void CreateWorldComponent::Awake()
 {
 	// message
 	auto pMsgSystem = GetSystemManager()->GetMessageSystem();
-	pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_CmdCreate, BindFunP1(this, &CreateWorldComponent::HandleCmdCreate));
+	pMsgSystem->RegisterFunction(this, Net::MsgId::MI_CmdCreate, BindFunP1(this, &CreateWorldComponent::HandleCmdCreate));
 
-	pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_AppInfoSync, BindFunP1(this, &CreateWorldComponent::HandleAppInfoSync));
-	pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_NetworkDisconnect, BindFunP1(this, &CreateWorldComponent::HandleNetworkDisconnect));
+	pMsgSystem->RegisterFunction(this, Net::MsgId::MI_AppInfoSync, BindFunP1(this, &CreateWorldComponent::HandleAppInfoSync));
+	pMsgSystem->RegisterFunction(this, Net::MsgId::MI_NetworkDisconnect, BindFunP1(this, &CreateWorldComponent::HandleNetworkDisconnect));
 
-	pMsgSystem->RegisterFunction(this, Proto::MsgId::G2M_QueryWorld, BindFunP1(this, &CreateWorldComponent::HandleQueryWorld));
+	pMsgSystem->RegisterFunction(this, Net::MsgId::G2M_QueryWorld, BindFunP1(this, &CreateWorldComponent::HandleQueryWorld));
 
-	pMsgSystem->RegisterFunction(this, Proto::MsgId::G2M_RequestWorld, BindFunP1(this, &CreateWorldComponent::HandleRequestWorld));
-	pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_BroadcastCreateWorld, BindFunP1(this, &CreateWorldComponent::HandleBroadcastCreateWorld));
+	pMsgSystem->RegisterFunction(this, Net::MsgId::G2M_RequestWorld, BindFunP1(this, &CreateWorldComponent::HandleRequestWorld));
+	pMsgSystem->RegisterFunction(this, Net::MsgId::MI_BroadcastCreateWorld, BindFunP1(this, &CreateWorldComponent::HandleBroadcastCreateWorld));
 }
 
 void CreateWorldComponent::BackToPool()
@@ -46,11 +46,11 @@ int CreateWorldComponent::ReqCreateWorld(int worldId)
 	}
 	else
 	{
-		Proto::CreateWorld protoCreate;
+		Net::CreateWorld protoCreate;
 		protoCreate.set_world_id(worldId);
 		protoCreate.set_last_world_sn(0);
 		protoCreate.set_game_app_id(0);//将创建地图消息广播到所有game线程
-		MessageSystemHelp::SendPacket(Proto::MsgId::G2S_CreateWorld, protoCreate, APP_SPACE, appInfo.AppId);
+		MessageSystemHelp::SendPacket(Net::MsgId::G2S_CreateWorld, protoCreate, APP_SPACE, appInfo.AppId);
 		return appInfo.AppId;
 	}
 }
@@ -144,7 +144,7 @@ void CreateWorldComponent::HandleNetworkDisconnect(Packet* pPacket)
 
 void CreateWorldComponent::HandleRequestWorld(Packet* pPacket)
 {
-	auto proto = pPacket->ParseToProto<Proto::RequestWorld>();
+	auto proto = pPacket->ParseToProto<Net::RequestWorld>();
 
 	auto worldId = proto.world_id();
 	auto pResMgr = ResourceHelp::GetResourceManager();
@@ -170,11 +170,11 @@ void CreateWorldComponent::HandleRequestWorld(Packet* pPacket)
 	const auto iter2 = _created.find(worldId);
 	if (iter2 != _created.end())
 	{
-		Proto::BroadcastCreateWorld protoRs;
+		Net::BroadcastCreateWorld protoRs;
 		protoRs.set_world_id(worldId);
 		protoRs.set_world_sn(iter2->second);
 		protoRs.set_last_world_sn(0);
-		MessageSystemHelp::SendPacket(Proto::MI_BroadcastCreateWorld, protoRs, pPacket);
+		MessageSystemHelp::SendPacket(Net::MI_BroadcastCreateWorld, protoRs, pPacket);
 		return;
 	}
 
@@ -185,24 +185,24 @@ void CreateWorldComponent::HandleRequestWorld(Packet* pPacket)
 
 void CreateWorldComponent::HandleQueryWorld(Packet* pPacket)
 {
-	auto proto = pPacket->ParseToProto<Proto::QueryWorld>();
+	auto proto = pPacket->ParseToProto<Net::QueryWorld>();
 	const auto worldSn = proto.world_sn();
 
 	const auto iter = _dungeons.find(worldSn);
 	if (iter == _dungeons.end())
 	{
-		Proto::QueryWorldRs protoQueryRs;
+		Net::QueryWorldRs protoQueryRs;
 		protoQueryRs.set_world_sn(worldSn);
-		protoQueryRs.set_return_code(Proto::QueryWorldRs::QueryWorld_Failed);
-		MessageSystemHelp::SendPacket(Proto::MsgId::G2M_QueryWorldRs, protoQueryRs, pPacket);
+		protoQueryRs.set_return_code(Net::QueryWorldRs::QueryWorld_Failed);
+		MessageSystemHelp::SendPacket(Net::MsgId::G2M_QueryWorldRs, protoQueryRs, pPacket);
 	}
 	else
 	{
-		Proto::BroadcastCreateWorld protoRs;
+		Net::BroadcastCreateWorld protoRs;
 		protoRs.set_world_id(iter->second);
 		protoRs.set_world_sn(iter->first);
 		protoRs.set_last_world_sn(proto.last_world_sn());
-		MessageSystemHelp::SendPacket(Proto::MI_BroadcastCreateWorld, protoRs, pPacket);
+		MessageSystemHelp::SendPacket(Net::MI_BroadcastCreateWorld, protoRs, pPacket);
 	}
 }
 
@@ -212,7 +212,7 @@ void CreateWorldComponent::HandleQueryWorld(Packet* pPacket)
 /// <param name="pPacket"></param>
 void CreateWorldComponent::HandleBroadcastCreateWorld(Packet* pPacket)
 {
-	auto proto = pPacket->ParseToProto<Proto::BroadcastCreateWorld>();
+	auto proto = pPacket->ParseToProto<Net::BroadcastCreateWorld>();
 	const auto worldId = proto.world_id();
 	const auto worldSn = proto.world_sn();
 

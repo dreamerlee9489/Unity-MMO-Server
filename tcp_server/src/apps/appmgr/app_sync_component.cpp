@@ -14,15 +14,15 @@ void AppSyncComponent::Awake()
     auto pMsgSystem = GetSystemManager()->GetMessageSystem();
 
     // http
-    pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_HttpRequestLogin, BindFunP1(this, &AppSyncComponent::HandleHttpRequestLogin));
+    pMsgSystem->RegisterFunction(this, Net::MsgId::MI_HttpRequestLogin, BindFunP1(this, &AppSyncComponent::HandleHttpRequestLogin));
 
     // sync
-    pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_AppInfoSync, BindFunP1(this, &AppSyncComponent::HandleAppInfoSync));
+    pMsgSystem->RegisterFunction(this, Net::MsgId::MI_AppInfoSync, BindFunP1(this, &AppSyncComponent::HandleAppInfoSync));
 
     // cmd
-    pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_CmdApp, BindFunP1(this, &AppSyncComponent::HandleCmdApp));
+    pMsgSystem->RegisterFunction(this, Net::MsgId::MI_CmdApp, BindFunP1(this, &AppSyncComponent::HandleCmdApp));
 
-    pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_NetworkDisconnect, BindFunP1(this, &AppSyncComponent::HandleNetworkDisconnect));
+    pMsgSystem->RegisterFunction(this, Net::MsgId::MI_NetworkDisconnect, BindFunP1(this, &AppSyncComponent::HandleNetworkDisconnect));
 }
 
 void AppSyncComponent::BackToPool()
@@ -37,13 +37,13 @@ void AppSyncComponent::HandleHttpRequestLogin(Packet* pPacket)
     AppInfo info;
     if (!GetOneApp(APP_LOGIN, &info))
     {
-        responseObj["returncode"] = (int)Proto::LoginHttpReturnCode::LHRC_NOTFOUND;
+        responseObj["returncode"] = (int)Net::LoginHttpReturnCode::LHRC_NOTFOUND;
         responseObj["ip"] = "";
         responseObj["port"] = 0;
     }
     else
     {
-        responseObj["returncode"] = (int)Proto::LoginHttpReturnCode::LHRC_OK;
+        responseObj["returncode"] = (int)Net::LoginHttpReturnCode::LHRC_OK;
         responseObj["ip"] = info.Ip;
         responseObj["port"] = info.Port;
     }
@@ -72,7 +72,7 @@ void AppSyncComponent::HandleNetworkDisconnect(Packet* pPacket)
 
 void AppSyncComponent::SyncGameInfoToLogin()
 {
-    Proto::AppInfoListSync proto;
+    Net::AppInfoListSync proto;
     for (auto pair : _apps)
     {
         auto info = pair.second;
@@ -88,6 +88,6 @@ void AppSyncComponent::SyncGameInfoToLogin()
     // 发送给所有login进程
     if (proto.apps_size() > 0)
     {
-        MessageSystemHelp::SendPacketToAllApp(Proto::MsgId::MI_AppInfoListSync, proto, APP_LOGIN);
+        MessageSystemHelp::SendPacketToAllApp(Net::MsgId::MI_AppInfoListSync, proto, APP_LOGIN);
     }
 }

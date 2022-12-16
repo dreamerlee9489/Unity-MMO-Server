@@ -7,9 +7,9 @@ void SpaceSyncHandler::Awake()
 {
     // message
     auto pMsgSystem = GetSystemManager()->GetMessageSystem();
-    pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_AppInfoSync, BindFunP1(this, &SpaceSyncHandler::HandleAppInfoSync));
-    pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_CmdApp, BindFunP1(this, &SpaceSyncHandler::HandleCmdApp));
-    pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_NetworkDisconnect, BindFunP1(this, &SpaceSyncHandler::HandleNetworkDisconnect));
+    pMsgSystem->RegisterFunction(this, Net::MsgId::MI_AppInfoSync, BindFunP1(this, &SpaceSyncHandler::HandleAppInfoSync));
+    pMsgSystem->RegisterFunction(this, Net::MsgId::MI_CmdApp, BindFunP1(this, &SpaceSyncHandler::HandleCmdApp));
+    pMsgSystem->RegisterFunction(this, Net::MsgId::MI_NetworkDisconnect, BindFunP1(this, &SpaceSyncHandler::HandleNetworkDisconnect));
 }
 
 void SpaceSyncHandler::BackToPool()

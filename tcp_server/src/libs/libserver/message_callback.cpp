@@ -13,7 +13,7 @@ void MessageCallBack::BackToPool()
 bool MessageCallBack::ProcessPacket(Packet* pPacket)
 {
 #ifdef LOG_TRACE_COMPONENT_OPEN
-    const google::protobuf::EnumDescriptor* descriptor = Proto::MsgId_descriptor();
+    const google::protobuf::EnumDescriptor* descriptor = Net::MsgId_descriptor();
     const auto name = descriptor->FindValueByNumber(pPacket->GetMsgId())->name();
 
     const auto traceMsg = std::string("process. ")

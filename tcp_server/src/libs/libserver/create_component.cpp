@@ -16,29 +16,29 @@ template<size_t ICount>
 struct DynamicCall
 {
 	template <typename... TArgs>
-	static IComponent* Invoke(EntitySystem* pEntitySystem, const std::string classname, uint64 sn, std::tuple<TArgs...> t1, google::protobuf::RepeatedPtrField<::Proto::CreateComponentParam>& params)
+	static IComponent* Invoke(EntitySystem* pEntitySystem, const std::string classname, uint64 sn, std::tuple<TArgs...> t1, google::protobuf::RepeatedPtrField<::Net::CreateComponentParam>& params)
 	{
 		if (params.empty())
 		{
 			return ComponentFactoryEx(pEntitySystem, classname, sn, t1, std::make_index_sequence<sizeof...(TArgs)>());
 		}
 
-		Proto::CreateComponentParam param = (*(params.begin()));
+		Net::CreateComponentParam param = (*(params.begin()));
 		params.erase(params.begin());
 
-		if (param.type() == Proto::CreateComponentParam::Int)
+		if (param.type() == Net::CreateComponentParam::Int)
 		{
 			auto t2 = std::tuple_cat(t1, std::make_tuple(param.int_param()));
 			return DynamicCall<ICount - 1>::Invoke(pEntitySystem, classname, sn, t2, params);
 		}
 
-		if (param.type() == Proto::CreateComponentParam::String)
+		if (param.type() == Net::CreateComponentParam::String)
 		{
 			auto t2 = std::tuple_cat(t1, std::make_tuple(param.string_param()));
 			return DynamicCall<ICount - 1>::Invoke(pEntitySystem, classname, sn, t2, params);
 		}
 
-		if (param.type() == Proto::CreateComponentParam::UInt64)
+		if (param.type() == Net::CreateComponentParam::UInt64)
 		{
 			auto t2 = std::tuple_cat(t1, std::make_tuple(param.uint64_param()));
 			return DynamicCall<ICount - 1>::Invoke(pEntitySystem, classname, sn, t2, params);
@@ -52,7 +52,7 @@ template<>
 struct DynamicCall<0>
 {
 	template <typename... TArgs>
-	static IComponent* Invoke(EntitySystem* pEntitySystem, const std::string classname, uint64 sn, std::tuple<TArgs...> t1, google::protobuf::RepeatedPtrField<::Proto::CreateComponentParam>& params)
+	static IComponent* Invoke(EntitySystem* pEntitySystem, const std::string classname, uint64 sn, std::tuple<TArgs...> t1, google::protobuf::RepeatedPtrField<::Net::CreateComponentParam>& params)
 	{
 		return nullptr;
 	}
@@ -64,10 +64,10 @@ void CreateComponentC::Awake()
 {
 	auto pMsgSystem = GetSystemManager()->GetMessageSystem();
 
-	pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_CreateComponent, BindFunP1(this, &CreateComponentC::HandleCreateComponent));
-	pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_RemoveComponent, BindFunP1(this, &CreateComponentC::HandleRemoveComponent));
+	pMsgSystem->RegisterFunction(this, Net::MsgId::MI_CreateComponent, BindFunP1(this, &CreateComponentC::HandleCreateComponent));
+	pMsgSystem->RegisterFunction(this, Net::MsgId::MI_RemoveComponent, BindFunP1(this, &CreateComponentC::HandleRemoveComponent));
 
-	pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_CreateSystem, BindFunP1(this, &CreateComponentC::HandleCreateSystem));
+	pMsgSystem->RegisterFunction(this, Net::MsgId::MI_CreateSystem, BindFunP1(this, &CreateComponentC::HandleCreateSystem));
 
 }
 
@@ -79,7 +79,7 @@ void CreateComponentC::BackToPool()
 #define MaxDynamicCall 4
 void CreateComponentC::HandleCreateComponent(Packet* pPacket) const
 {
-	Proto::CreateComponent proto = pPacket->ParseToProto<Proto::CreateComponent>();
+	Net::CreateComponent proto = pPacket->ParseToProto<Net::CreateComponent>();
 	const std::string className = proto.class_name();
 	uint64 sn = proto.sn();
 
@@ -101,13 +101,13 @@ void CreateComponentC::HandleCreateComponent(Packet* pPacket) const
 
 void CreateComponentC::HandleRemoveComponent(Packet* pPacket)
 {
-	Proto::RemoveComponent proto = pPacket->ParseToProto<Proto::RemoveComponent>();
+	Net::RemoveComponent proto = pPacket->ParseToProto<Net::RemoveComponent>();
 	//GetEntitySystem( )->RemoveFromSystem( proto.sn( ) );
 }
 
 void CreateComponentC::HandleCreateSystem(Packet* pPacket)
 {
-	Proto::CreateSystem proto = pPacket->ParseToProto<Proto::CreateSystem>();
+	Net::CreateSystem proto = pPacket->ParseToProto<Net::CreateSystem>();
 	const std::string systemName = proto.system_name();
 
 	const auto pThread = static_cast<Thread*>(GetSystemManager());
