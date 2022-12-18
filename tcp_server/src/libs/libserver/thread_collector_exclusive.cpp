@@ -8,7 +8,7 @@ ThreadCollectorExclusive::ThreadCollectorExclusive(ThreadType threadType, int in
 
 void ThreadCollectorExclusive::HandlerMessage(Packet* pPacket)
 {
-    if (pPacket->GetMsgId() == Net::MsgId::MI_CmdThread)
+    if (pPacket->GetMsgId() == Proto::MsgId::MI_CmdThread)
     {
         // 显示指令，每一个线程都执行
         HandlerCreateMessage(pPacket, true);

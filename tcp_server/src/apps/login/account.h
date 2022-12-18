@@ -35,7 +35,7 @@ private:
 	void HandleTokenToRedisRs(Packet* pPacket);
 
 private:
-	Net::AccountCheckReturnCode ProcessMsg(Json::Value value) const;
+	Proto::AccountCheckReturnCode ProcessMsg(Json::Value value) const;
 
 private:
 	// http

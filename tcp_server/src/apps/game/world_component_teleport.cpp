@@ -66,9 +66,9 @@ void WorldComponentTeleport::CreateWorldFlag(WorldProxy* pWorldProxy, int target
         if (worldSn == static_cast<uint64>(INVALID_ID))
         {
             // 向appmgr申请创建地图
-            Net::RequestWorld protoToMgr;
+            Proto::RequestWorld protoToMgr;
             protoToMgr.set_world_id(targetWorldId);
-            MessageSystemHelp::SendPacket(Net::MsgId::G2M_RequestWorld, protoToMgr, APP_APPMGR);
+            MessageSystemHelp::SendPacket(Proto::MsgId::G2M_RequestWorld, protoToMgr, APP_APPMGR);
 
             pObj->FlagWorld.Flag = TeleportFlagType::Waiting;
         }
@@ -89,11 +89,11 @@ void WorldComponentTeleport::CreateWorldFlag(WorldProxy* pWorldProxy, int target
             return;
         }
 
-        Net::CreateWorld protoCreate;
+        Proto::CreateWorld protoCreate;
         protoCreate.set_world_id(targetWorldId);
         protoCreate.set_last_world_sn(pWorldProxy->GetSN());
         protoCreate.set_game_app_id(Global::GetInstance()->GetCurAppId());
-        MessageSystemHelp::SendPacket(Net::MsgId::G2S_CreateWorld, protoCreate, APP_SPACE, info.AppId);
+        MessageSystemHelp::SendPacket(Proto::MsgId::G2S_CreateWorld, protoCreate, APP_SPACE, info.AppId);
 
         pObj->FlagWorld.Flag = TeleportFlagType::Waiting;
     }
@@ -108,9 +108,9 @@ void WorldComponentTeleport::CreateSyncFlag(WorldProxy* pWorldProxy, TeleportObj
     auto pPlayerMgr = _parent->GetComponent<PlayerCollectorComponent>();
     const auto pPlayer = pPlayerMgr->GetPlayerBySn(pObj->GetPlayerSN());
 
-    Net::RequestSyncPlayer protoSync;
+    Proto::RequestSyncPlayer protoSync;
     protoSync.set_player_sn(pObj->GetPlayerSN());
-    pWorldProxy->SendPacketToWorld(Net::MsgId::G2S_RequestSyncPlayer, protoSync, pPlayer);
+    pWorldProxy->SendPacketToWorld(Proto::MsgId::G2S_RequestSyncPlayer, protoSync, pPlayer);
 
     pObj->FlagPlayerSync.Flag = TeleportFlagType::Waiting;
 }

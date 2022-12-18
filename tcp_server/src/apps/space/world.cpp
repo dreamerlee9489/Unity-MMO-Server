@@ -12,15 +12,15 @@ void World::Awake(int worldId)
 
 	// message
 	auto pMsgSystem = GetSystemManager()->GetMessageSystem();
-	pMsgSystem->RegisterFunction(this, Net::MsgId::MI_NetworkDisconnect, BindFunP1(this, &World::HandleNetworkDisconnect));
-	pMsgSystem->RegisterFunction(this, Net::MsgId::G2S_SyncPlayer, BindFunP1(this, &World::HandleSyncPlayer));
-	pMsgSystem->RegisterFunction(this, Net::MsgId::C2S_FsmSyncState, BindFunP1(this, &World::HandleFsmSyncState));
-	pMsgSystem->RegisterFunction(this, Net::MsgId::C2S_Enemy, BindFunP1(this, &World::HandleEnemy));
-	pMsgSystem->RegisterFunctionFilter<Player>(this, Net::MsgId::G2S_RequestSyncPlayer, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleRequestSyncPlayer));
-	pMsgSystem->RegisterFunctionFilter<Player>(this, Net::MsgId::G2S_RemovePlayer, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleG2SRemovePlayer));
-	pMsgSystem->RegisterFunctionFilter<Player>(this, Net::MsgId::C2S_Move, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleMove));
-	pMsgSystem->RegisterFunctionFilter<Player>(this, Net::MsgId::C2S_PlayerSyncState, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandlePlayerSyncState));
-	pMsgSystem->RegisterFunctionFilter<Player>(this, Net::MsgId::C2S_RequestSyncEnemy, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleRequestSyncEnemy));
+	pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_NetworkDisconnect, BindFunP1(this, &World::HandleNetworkDisconnect));
+	pMsgSystem->RegisterFunction(this, Proto::MsgId::G2S_SyncPlayer, BindFunP1(this, &World::HandleSyncPlayer));
+	pMsgSystem->RegisterFunction(this, Proto::MsgId::C2S_FsmSyncState, BindFunP1(this, &World::HandleFsmSyncState));
+	pMsgSystem->RegisterFunction(this, Proto::MsgId::C2S_Enemy, BindFunP1(this, &World::HandleEnemy));
+	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::G2S_RequestSyncPlayer, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleRequestSyncPlayer));
+	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::G2S_RemovePlayer, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleG2SRemovePlayer));
+	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_Move, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleMove));
+	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_PlayerSyncState, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandlePlayerSyncState));
+	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_RequestSyncEnemy, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleRequestSyncEnemy));
 
 	ResourceWorld* worldCfg = ResourceHelp::GetResourceManager()->Worlds->GetResource(_worldId);
 	std::vector<ResourceEnemy> _enemyCfgs = worldCfg->GetEnemies();
@@ -71,18 +71,18 @@ void World::HandleNetworkDisconnect(Packet* pPacket)
 			return;
 		}
 
-		Net::SavePlayer protoSave;
+		Proto::SavePlayer protoSave;
 		protoSave.set_player_sn(pPlayer->GetPlayerSN());
 		pPlayer->SerializeToProto(protoSave.mutable_player());
-		MessageSystemHelp::SendPacket(Net::MsgId::G2DB_SavePlayer, protoSave, APP_DB_MGR);
+		MessageSystemHelp::SendPacket(Proto::MsgId::G2DB_SavePlayer, protoSave, APP_DB_MGR);
 
 		// 玩家掉线
-		Net::RoleDisAppear protoDis;
+		Proto::RoleDisAppear protoDis;
 		protoDis.set_sn(pPlayer->GetPlayerSN());
-		BroadcastPacket(Net::MsgId::S2C_RoleDisAppear, protoDis);
+		BroadcastPacket(Proto::MsgId::S2C_RoleDisAppear, protoDis);
 		pPlayerMgr->RemovePlayerBySn(pTagPlayer->KeyInt64);
 
-		for (auto enemy : _enemies)
+		for (auto& enemy : _enemies)
 		{
 			if (enemy->GetLinkPlayer() == pPlayer)
 			{
@@ -91,10 +91,10 @@ void World::HandleNetworkDisconnect(Packet* pPacket)
 				enemy->SetLinkPlayer(target);
 				if (target)
 				{
-					Net::RequestLinkPlayer proto;
+					Proto::RequestLinkPlayer proto;
 					proto.set_enemy_id(enemy->GetID());
 					proto.set_islinker(true);
-					MessageSystemHelp::SendPacket(Net::MsgId::S2C_RequestLinkPlayer, proto, target);
+					MessageSystemHelp::SendPacket(Proto::MsgId::S2C_RequestLinkPlayer, proto, target);
 				}
 			}
 		}
@@ -113,17 +113,17 @@ void World::HandleNetworkDisconnect(Packet* pPacket)
 
 void World::SyncWorldToGather()
 {
-	Net::WorldSyncToGather proto;
+	Proto::WorldSyncToGather proto;
 	proto.set_world_sn(GetSN());
 	proto.set_world_id(GetWorldId());
 
 	const int online = GetComponent<PlayerManagerComponent>()->OnlineSize();
 	proto.set_online(online);
 
-	MessageSystemHelp::DispatchPacket(Net::MsgId::MI_WorldSyncToGather, proto, nullptr);
+	MessageSystemHelp::DispatchPacket(Proto::MsgId::MI_WorldSyncToGather, proto, nullptr);
 }
 
-inline void CreateProtoRoleAppear(Player* pPlayer, Net::RoleAppear& protoAppear)
+inline void CreateProtoRoleAppear(Player* pPlayer, Proto::RoleAppear& protoAppear)
 {
 	auto proto = protoAppear.add_role();
 	proto->set_name(pPlayer->GetName().c_str());
@@ -144,8 +144,8 @@ void World::SyncAppearTimer()
 	if (!_addPlayer.empty())
 	{
 		// 1.新增的数据，同步到全地图
-		Net::RoleAppear protoNewAppear;
-		for (auto id : _addPlayer)
+		Proto::RoleAppear protoNewAppear;
+		for (auto& id : _addPlayer)
 		{
 			// 有可能瞬间已下线
 			const auto pPlayer = pPlayerMgr->GetPlayerBySn(id);
@@ -157,12 +157,12 @@ void World::SyncAppearTimer()
 		}
 
 		if (protoNewAppear.role_size() > 0)
-			BroadcastPacket(Net::MsgId::S2C_RoleAppear, protoNewAppear);
+			BroadcastPacket(Proto::MsgId::S2C_RoleAppear, protoNewAppear);
 
 		// 2.原始玩家的数据，同步给新增的玩家
-		Net::RoleAppear protoOther;
+		Proto::RoleAppear protoOther;
 		const auto players = pPlayerMgr->GetAll();
-		for (const auto one : *players)
+		for (const auto& one : *players)
 		{
 			// 排除新玩家
 			if (_addPlayer.find(one.first) != _addPlayer.end())
@@ -173,7 +173,7 @@ void World::SyncAppearTimer()
 		}
 
 		if (protoOther.role_size() > 0)
-			BroadcastPacket(Net::MsgId::S2C_RoleAppear, protoOther, _addPlayer);
+			BroadcastPacket(Proto::MsgId::S2C_RoleAppear, protoOther, _addPlayer);
 
 		_addPlayer.clear();
 	}
@@ -185,7 +185,7 @@ void World::SyncAppearTimer()
 /// <param name="pPacket"></param>
 void World::HandleSyncPlayer(Packet* pPacket)
 {
-	auto proto = pPacket->ParseToProto<Net::SyncPlayer>();
+	auto proto = pPacket->ParseToProto<Proto::SyncPlayer>();
 	const auto playerSn = proto.player().sn();
 	//const int gameAppId = proto.app_id();
 
@@ -207,14 +207,14 @@ void World::HandleSyncPlayer(Packet* pPacket)
 	//LOG_DEBUG("world. recv teleport. map id:" << _worldId << " world sn:" << GetSN() << " playerSn:" << pPlayer->GetPlayerSN());
 
 	//通知客户端进入地图
-	Net::EnterWorld protoEnterWorld;
+	Proto::EnterWorld protoEnterWorld;
 	protoEnterWorld.set_world_id(_worldId);
 	pLastMap->Position.SerializeToProto(protoEnterWorld.mutable_position());
-	MessageSystemHelp::SendPacket(Net::MsgId::S2C_EnterWorld, protoEnterWorld, pPlayer);
+	MessageSystemHelp::SendPacket(Proto::MsgId::S2C_EnterWorld, protoEnterWorld, pPlayer);
 	_addPlayer.insert(playerSn);
 }
 
-void World::BroadcastPacket(Net::MsgId msgId, google::protobuf::Message& proto)
+void World::BroadcastPacket(Proto::MsgId msgId, google::protobuf::Message& proto)
 {
 	auto pPlayerMgr = GetComponent<PlayerManagerComponent>();
 	const auto players = pPlayerMgr->GetAll();
@@ -225,10 +225,10 @@ void World::BroadcastPacket(Net::MsgId msgId, google::protobuf::Message& proto)
 	}
 }
 
-void World::BroadcastPacket(Net::MsgId msgId, google::protobuf::Message& proto, std::set<uint64> players)
+void World::BroadcastPacket(Proto::MsgId msgId, google::protobuf::Message& proto, std::set<uint64> players)
 {
 	auto pPlayerMgr = GetComponent<PlayerManagerComponent>();
-	for (const auto one : players)
+	for (const auto& one : players)
 	{
 		const auto pPlayer = pPlayerMgr->GetPlayerBySn(one);
 		if (pPlayer == nullptr)
@@ -246,7 +246,7 @@ Player* World::GetNearestPlayer(Vector3& pos)
 	Player* player = nullptr;
 	for (const auto& pair : *players)
 	{
-		float temp = pos.GetManhaDist(pair.second->GetComponent<PlayerComponentLastMap>()->GetCur()->Position);
+		float temp = pos.GetManhaDist(pair.second->GetCurrPos());
 		if (temp < dist)
 		{
 			dist = temp;
@@ -258,16 +258,16 @@ Player* World::GetNearestPlayer(Vector3& pos)
 
 void World::HandleRequestSyncPlayer(Player* pPlayer, Packet* pPacket)
 {
-	Net::SyncPlayer protoSync;
+	Proto::SyncPlayer protoSync;
 	protoSync.set_account(pPlayer->GetAccount().c_str());
 	pPlayer->SerializeToProto(protoSync.mutable_player());
 
-	MessageSystemHelp::SendPacket(Net::MsgId::S2G_SyncPlayer, protoSync, pPlayer);
+	MessageSystemHelp::SendPacket(Proto::MsgId::S2G_SyncPlayer, protoSync, pPlayer);
 }
 
 void World::HandleG2SRemovePlayer(Player* pPlayer, Packet* pPacket)
 {
-	auto proto = pPacket->ParseToProto<Net::RemovePlayer>();
+	auto proto = pPacket->ParseToProto<Proto::RemovePlayer>();
 	if (proto.player_sn() != pPlayer->GetPlayerSN())
 	{
 		LOG_ERROR("HandleTeleportAfter. proto.player_sn() != pPlayer->GetPlayerSN()");
@@ -278,15 +278,15 @@ void World::HandleG2SRemovePlayer(Player* pPlayer, Packet* pPacket)
 	pPlayerMgr->RemovePlayerBySn(pPlayer->GetPlayerSN());
 
 	// 通知其他玩家
-	Net::RoleDisAppear disAppear;
+	Proto::RoleDisAppear disAppear;
 	disAppear.set_sn(pPlayer->GetPlayerSN());
-	BroadcastPacket(Net::MsgId::S2C_RoleDisAppear, disAppear);
+	BroadcastPacket(Proto::MsgId::S2C_RoleDisAppear, disAppear);
 	LOG_DEBUG("player disappear: sn=" << pPlayer->GetPlayerSN());
 }
 
 void World::HandleMove(Player* pPlayer, Packet* pPacket)
 {
-	auto proto = pPacket->ParseToProto<Net::Move>();
+	auto proto = pPacket->ParseToProto<Proto::Move>();
 	const auto positions = proto.mutable_position();
 	proto.set_player_sn(pPlayer->GetPlayerSN());
 
@@ -304,32 +304,32 @@ void World::HandleMove(Player* pPlayer, Packet* pPacket)
 	const auto pComponentLastMap = pPlayer->GetComponent<PlayerComponentLastMap>();
 	pMoveComponent->Update(pos, pComponentLastMap->GetCur()->Position);
 
-	BroadcastPacket(Net::MsgId::S2C_Move, proto);
+	BroadcastPacket(Proto::MsgId::S2C_Move, proto);
 }
 
 void World::HandlePlayerSyncState(Player* pPlayer, Packet* pPacket)
 {
-	Net::PlayerSyncState proto = pPacket->ParseToProto<Net::PlayerSyncState>();
+	Proto::PlayerSyncState proto = pPacket->ParseToProto<Proto::PlayerSyncState>();
 	proto.set_player_sn(pPlayer->GetPlayerSN());
 	const auto pComponentLastMap = pPlayer->GetComponent<PlayerComponentLastMap>();
 	pComponentLastMap->GetCur()->Position.ParserFromProto(proto.curpos());
-	BroadcastPacket(Net::MsgId::S2C_PlayerSyncState, proto);
+	BroadcastPacket(Proto::MsgId::S2C_PlayerSyncState, proto);
 }
 
 void World::HandleRequestSyncEnemy(Player* pPlayer, Packet* pPacket)
 {
-	Net::RequestSyncEnemy proto = pPacket->ParseToProto<Net::RequestSyncEnemy>();
+	Proto::RequestSyncEnemy proto = pPacket->ParseToProto<Proto::RequestSyncEnemy>();
 	google::protobuf::int32 id = proto.enemy_id();
-	Net::Enemy protoEnemy;
+	Proto::Enemy protoEnemy;
 	protoEnemy.set_id(id);
 	_enemies[id]->GetCurrPos().SerializeToProto(protoEnemy.mutable_pos());
-	MessageSystemHelp::SendPacket(Net::MsgId::S2C_Enemy, protoEnemy, pPlayer);
+	MessageSystemHelp::SendPacket(Proto::MsgId::S2C_Enemy, protoEnemy, pPlayer);
 	_enemies[id]->GetComponent<FsmComponent>()->GetCurrState()->SendState(pPlayer);
 }
 
 void World::HandleFsmSyncState(Packet* pPacket)
 {
-	Net::FsmSyncState proto = pPacket->ParseToProto<Net::FsmSyncState>();
+	Proto::FsmSyncState proto = pPacket->ParseToProto<Proto::FsmSyncState>();
 	int enemyId = proto.enemy_id();
 	Player* player = _playerManager->GetPlayerBySn(proto.player_sn());
 	_enemies[enemyId]->GetComponent<FsmComponent>()->SyncState(proto, player);
@@ -337,7 +337,7 @@ void World::HandleFsmSyncState(Packet* pPacket)
 
 void World::HandleEnemy(Packet* pPacket)
 {
-	Net::Enemy proto = pPacket->ParseToProto<Net::Enemy>();
+	Proto::Enemy proto = pPacket->ParseToProto<Proto::Enemy>();
 	Vector3 pos;
 	pos.ParserFromProto(proto.pos());
 	_enemies[proto.id()]->SetCurrPos(pos);

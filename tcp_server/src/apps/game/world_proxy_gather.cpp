@@ -14,8 +14,8 @@ void WorldProxyGather::Awake()
 
     // message
     auto pMsgSystem = GetSystemManager()->GetMessageSystem();
-    pMsgSystem->RegisterFunction(this, Net::MsgId::MI_WorldProxySyncToGather, BindFunP1(this, &WorldProxyGather::HandleWorldProxySyncToGather));
-    pMsgSystem->RegisterFunction(this, Net::MsgId::MI_CmdWorldProxy, BindFunP1(this, &WorldProxyGather::HandleCmdWorldProxy));
+    pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_WorldProxySyncToGather, BindFunP1(this, &WorldProxyGather::HandleWorldProxySyncToGather));
+    pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_CmdWorldProxy, BindFunP1(this, &WorldProxyGather::HandleCmdWorldProxy));
 }
 
 void WorldProxyGather::BackToPool()
@@ -25,7 +25,7 @@ void WorldProxyGather::BackToPool()
 
 void WorldProxyGather::SyncGameInfo()
 {
-    Net::AppInfoSync proto;
+    Proto::AppInfoSync proto;
 
     const int online = std::accumulate(_maps.begin(), _maps.end(), 0, [](int value, auto pair)
         {
@@ -36,7 +36,7 @@ void WorldProxyGather::SyncGameInfo()
     proto.set_app_type((int)Global::GetInstance()->GetCurAppType());
     proto.set_online(online);
 
-    MessageSystemHelp::SendPacket(Net::MsgId::MI_AppInfoSync, proto, APP_APPMGR);
+    MessageSystemHelp::SendPacket(Proto::MsgId::MI_AppInfoSync, proto, APP_APPMGR);
 }
 
 void WorldProxyGather::HandleCmdWorldProxy(Packet* pPacket)
@@ -58,7 +58,7 @@ void WorldProxyGather::HandleCmdWorldProxy(Packet* pPacket)
 
 void WorldProxyGather::HandleWorldProxySyncToGather(Packet* pPacket)
 {
-    auto proto = pPacket->ParseToProto<Net::WorldProxySyncToGather>();
+    auto proto = pPacket->ParseToProto<Proto::WorldProxySyncToGather>();
     const uint64 worldSn = proto.world_sn();
     const int worldId = proto.world_id();
     const auto isRemove = proto.is_remove();

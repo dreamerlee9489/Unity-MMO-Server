@@ -2,7 +2,7 @@
 #include "component_help.h"
 #include "socket_object.h"
 
-Packet* DynamicPacketPool::MallocPacket(Net::MsgId msgId, NetIdentify* pIdentify)
+Packet* DynamicPacketPool::MallocPacket(Proto::MsgId msgId, NetIdentify* pIdentify)
 {
     std::lock_guard<std::mutex> guard(_packet_lock);
 
@@ -11,7 +11,7 @@ Packet* DynamicPacketPool::MallocPacket(Net::MsgId msgId, NetIdentify* pIdentify
 #ifdef LOG_TRACE_COMPONENT_OPEN
     if (pIdentify != nullptr)
     {
-        const google::protobuf::EnumDescriptor* descriptor = Net::MsgId_descriptor();
+        const google::protobuf::EnumDescriptor* descriptor = Proto::MsgId_descriptor();
         const auto name = descriptor->FindValueByNumber(msgId)->name();
         std::stringstream os;
         os << "malloc.  "
@@ -28,7 +28,7 @@ Packet* DynamicPacketPool::MallocPacket(Net::MsgId msgId, NetIdentify* pIdentify
 #ifdef LOG_TRACE_COMPONENT_OPEN
 inline void TraceFree(Packet* pPacket)
 {
-    const google::protobuf::EnumDescriptor* descriptor = Net::MsgId_descriptor();
+    const google::protobuf::EnumDescriptor* descriptor = Proto::MsgId_descriptor();
     const auto name = descriptor->FindValueByNumber(pPacket->GetMsgId())->name();
     std::stringstream os;
     os << "free.    "
@@ -91,7 +91,7 @@ void DynamicPacketPool::Show()
         statData[msgId]++;
     }
 
-    const google::protobuf::EnumDescriptor* descriptor = Net::MsgId_descriptor();
+    const google::protobuf::EnumDescriptor* descriptor = Proto::MsgId_descriptor();
     for (auto iter = statData.begin(); iter != statData.end(); ++iter)
     {
         auto name = descriptor->FindValueByNumber(iter->first)->name();

@@ -21,10 +21,10 @@ void Patrol::Execute()
 	{
 		Player* player = _owner->GetWorld()->GetNearestPlayer(_owner->GetCurrPos());
 		_owner->SetLinkPlayer(player);
-		Net::RequestLinkPlayer proto;
+		Proto::RequestLinkPlayer proto;
 		proto.set_enemy_id(_owner->GetID());
 		proto.set_islinker(true);
-		MessageSystemHelp::SendPacket(Net::MsgId::S2C_RequestLinkPlayer, proto, player);
+		MessageSystemHelp::SendPacket(Proto::MsgId::S2C_RequestLinkPlayer, proto, player);
 	}
 	if (_owner->GetCurrPos().GetDistance(_owner->GetNextPos()) <= 1)
 		_owner->GetComponent<FsmComponent>()->ChangeState(new Idle(_owner));
@@ -47,20 +47,20 @@ void Patrol::Exit()
 
 void Patrol::BroadcastState()
 {
-	Net::FsmSyncState proto;
+	Proto::FsmSyncState proto;
 	proto.set_state((int)FsmStateType::Patrol);
 	proto.set_code(_index);
 	proto.set_enemy_id(_owner->GetID());
 	proto.set_player_sn(0);
-	_owner->GetWorld()->BroadcastPacket(Net::MsgId::S2C_FsmSyncState, proto);
+	_owner->GetWorld()->BroadcastPacket(Proto::MsgId::S2C_FsmSyncState, proto);
 }
 
 void Patrol::SendState(Player* pPlayer)
 {
-	Net::FsmSyncState proto;
+	Proto::FsmSyncState proto;
 	proto.set_state((int)FsmStateType::Patrol);
 	proto.set_code(_index);
 	proto.set_enemy_id(_owner->GetID());
 	proto.set_player_sn(0);
-	MessageSystemHelp::SendPacket(Net::MsgId::S2C_FsmSyncState, proto, pPlayer);
+	MessageSystemHelp::SendPacket(Proto::MsgId::S2C_FsmSyncState, proto, pPlayer);
 }

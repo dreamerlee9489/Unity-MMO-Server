@@ -90,7 +90,7 @@ private:
 
 	void HandleCreatePlayer(Packet* pPacket);
 	void HandleSavePlayer(Packet* pPacket);
-	bool OnSavePlayer(DatabaseStmt* stmtSave, Net::Player& protoPlayer);
+	bool OnSavePlayer(DatabaseStmt* stmtSave, Proto::Player& protoPlayer);
 
 protected:
 	// stmt

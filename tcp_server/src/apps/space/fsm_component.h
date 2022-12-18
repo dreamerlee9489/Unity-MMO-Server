@@ -16,6 +16,7 @@ class FsmComponent :public Component<FsmComponent>, public IAwakeFromPoolSystem<
 	FsmState* _prevState = nullptr;
 	FsmState* _currState = nullptr;
 	bool _started = false;
+
 	void Start();
 
 public:
@@ -31,7 +32,7 @@ public:
 
 	void ChangeState(FsmState* newState);
 
-	void SyncState(Net::FsmSyncState& proto, Player* pPlayer);
+	void SyncState(Proto::FsmSyncState& proto, Player* pPlayer);
 
 	FsmState* GetCurrState() { return _currState; }
 };

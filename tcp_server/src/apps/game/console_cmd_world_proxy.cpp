@@ -13,5 +13,5 @@ void ConsoleCmdWorldProxy::HandleHelp()
 
 void ConsoleCmdWorldProxy::HandleShowAllWorld(std::vector<std::string>& params)
 {
-	MessageSystemHelp::DispatchPacket(Net::MsgId::MI_CmdWorldProxy, nullptr);
+	MessageSystemHelp::DispatchPacket(Proto::MsgId::MI_CmdWorldProxy, nullptr);
 }

@@ -13,27 +13,27 @@ void MessageSystemHelp::DispatchPacket(Packet* pPacket)
 	ThreadMgr::GetInstance()->DispatchPacket(pPacket);
 }
 
-void MessageSystemHelp::DispatchPacket(const Net::MsgId msgId, NetIdentify* pIdentify)
+void MessageSystemHelp::DispatchPacket(const Proto::MsgId msgId, NetIdentify* pIdentify)
 {
 	const auto pPacket = CreatePacket(msgId, pIdentify);
 	DispatchPacket(pPacket);
 }
 
-void MessageSystemHelp::DispatchPacket(const Net::MsgId msgId, google::protobuf::Message& proto, NetIdentify* pIdentify)
+void MessageSystemHelp::DispatchPacket(const Proto::MsgId msgId, google::protobuf::Message& proto, NetIdentify* pIdentify)
 {
 	const auto pPacket = CreatePacket(msgId, pIdentify);
 	pPacket->SerializeToBuffer(proto);
 	DispatchPacket(pPacket);
 }
 
-void MessageSystemHelp::SendPacket(const Net::MsgId msgId, google::protobuf::Message& proto, NetIdentify* pIdentify)
+void MessageSystemHelp::SendPacket(const Proto::MsgId msgId, google::protobuf::Message& proto, NetIdentify* pIdentify)
 {
 	const auto pPacket = CreatePacket(msgId, pIdentify);
 	pPacket->SerializeToBuffer(proto);
 	SendPacket(pPacket);
 }
 
-void MessageSystemHelp::SendPacket(const Net::MsgId msgId, google::protobuf::Message& proto, APP_TYPE appType, int appId)
+void MessageSystemHelp::SendPacket(const Proto::MsgId msgId, google::protobuf::Message& proto, APP_TYPE appType, int appId)
 {
 	// 进程内分发消息
 	if ((Global::GetInstance()->GetCurAppType() & appType) != 0)
@@ -77,7 +77,7 @@ void MessageSystemHelp::SendPacket(Packet* pPacket, APP_TYPE appType, int appId)
 	SendPacket(pPacket);
 }
 
-void MessageSystemHelp::SendPacket(const Net::MsgId msgId, google::protobuf::Message& proto, TagKey* pTagKey, APP_TYPE appType, int appId)
+void MessageSystemHelp::SendPacket(const Proto::MsgId msgId, google::protobuf::Message& proto, TagKey* pTagKey, APP_TYPE appType, int appId)
 {
 	if ((Global::GetInstance()->GetCurAppType() & appType) != 0)
 	{
@@ -104,7 +104,7 @@ void MessageSystemHelp::SendPacket(const Net::MsgId msgId, google::protobuf::Mes
 	SendPacket(packet);
 }
 
-void MessageSystemHelp::SendPacket(const Net::MsgId msgId, TagKey* pTagKey, APP_TYPE appType, int appId)
+void MessageSystemHelp::SendPacket(const Proto::MsgId msgId, TagKey* pTagKey, APP_TYPE appType, int appId)
 {
 	if ((Global::GetInstance()->GetCurAppType() & appType) != 0)
 	{
@@ -130,7 +130,7 @@ void MessageSystemHelp::SendPacket(const Net::MsgId msgId, TagKey* pTagKey, APP_
 	SendPacket(packet);
 }
 
-void MessageSystemHelp::SendPacketToAllApp(Net::MsgId msgId, google::protobuf::Message& proto, APP_TYPE appType)
+void MessageSystemHelp::SendPacketToAllApp(Proto::MsgId msgId, google::protobuf::Message& proto, APP_TYPE appType)
 {
 	if ((Global::GetInstance()->GetCurAppType() & appType) != 0)
 	{
@@ -179,23 +179,23 @@ void MessageSystemHelp::SendPacket(Packet* pPacket)
 	LOG_ERROR("failed to send packet." << dynamic_cast<NetIdentify*>(pPacket));
 }
 
-Packet* MessageSystemHelp::CreatePacket(Net::MsgId msgId, NetIdentify* pIdentify)
+Packet* MessageSystemHelp::CreatePacket(Proto::MsgId msgId, NetIdentify* pIdentify)
 {
 	return DynamicPacketPool::GetInstance()->MallocPacket(msgId, pIdentify);
 }
 
 void MessageSystemHelp::CreateConnect(NetworkType iType, TagType tagType, TagValue& tagValue, std::string ip, int port)
 {
-	Net::NetworkConnect protoConn;
+	Proto::NetworkConnect protoConn;
 	protoConn.set_network_type((int)iType);
 	auto protoTag = protoConn.mutable_tag();
-	protoTag->set_tag_type((Net::TagType)tagType);
+	protoTag->set_tag_type((Proto::TagType)tagType);
 	auto protoValue = protoTag->mutable_tag_value();
 	protoValue->set_value_int64(tagValue.KeyInt64);
 	protoValue->set_value_str(tagValue.KeyStr.c_str());
 	protoConn.set_ip(ip.c_str());
 	protoConn.set_port(port);
-	DispatchPacket(Net::MsgId::MI_NetworkConnect, protoConn, nullptr);
+	DispatchPacket(Proto::MsgId::MI_NetworkConnect, protoConn, nullptr);
 	// CreateConnect: NetworkType=HttpConnector TagType=Account KeyStr=test KeyInt=0 ip=192.168.11.129 port=80
 }
 
@@ -209,7 +209,7 @@ void MessageSystemHelp::SendHttpResponseBase(NetIdentify* pIdentify, int status_
 		return;
 	}
 
-	Packet* pPacket = CreatePacket(Net::MsgId::MI_HttpInnerResponse, pIdentify);
+	Packet* pPacket = CreatePacket(Proto::MsgId::MI_HttpInnerResponse, pIdentify);
 
 	std::stringstream buffer;
 	buffer << "HTTP/1.1 " << status_code << " " << mg_status_message(status_code) << "\r\n";
@@ -260,7 +260,7 @@ bool MessageSystemHelp::ParseUrl(const std::string& url, ParseUrlInfo& info)
 
 Packet* MessageSystemHelp::ParseHttp(NetIdentify* pIdentify, const char* s, unsigned int bodyLen, const bool isChunked, http_message* hm)
 {
-	Net::Http proto;
+	Proto::Http proto;
 	if (bodyLen > 0)
 	{
 		if (isChunked)
@@ -284,7 +284,7 @@ Packet* MessageSystemHelp::ParseHttp(NetIdentify* pIdentify, const char* s, unsi
 		}
 	}
 
-	Net::MsgId msgId = Net::MsgId::MI_HttpRequestBad;
+	Proto::MsgId msgId = Proto::MsgId::MI_HttpRequestBad;
 	if (hm->method.len > 0)
 	{
 		// 请求
@@ -294,7 +294,7 @@ Packet* MessageSystemHelp::ParseHttp(NetIdentify* pIdentify, const char* s, unsi
 			{
 				if (mg_vcasecmp(&hm->uri, "/login") == 0)
 				{
-					msgId = Net::MsgId::MI_HttpRequestLogin;
+					msgId = Proto::MsgId::MI_HttpRequestLogin;
 					break;
 				}
 			}
@@ -307,7 +307,7 @@ Packet* MessageSystemHelp::ParseHttp(NetIdentify* pIdentify, const char* s, unsi
 	else
 	{
 		proto.set_status_code(hm->resp_code);
-		msgId = Net::MsgId::MI_HttpOuterResponse;
+		msgId = Proto::MsgId::MI_HttpOuterResponse;
 	}
 
 	auto pPacket = CreatePacket(msgId, pIdentify);
@@ -318,7 +318,7 @@ Packet* MessageSystemHelp::ParseHttp(NetIdentify* pIdentify, const char* s, unsi
 // 发送MsgId::MI_HttpOuterRequest
 void MessageSystemHelp::SendHttpRequest(NetIdentify* pIdentify, std::string ip, const int port, const std::string method, std::map<std::string, std::string>* pParams)
 {
-	Packet* pPacket = CreatePacket(Net::MsgId::MI_HttpOuterRequest, pIdentify);
+	Packet* pPacket = CreatePacket(Proto::MsgId::MI_HttpOuterRequest, pIdentify);
 
 	std::stringstream buffer;
 	buffer << "GET " << method;

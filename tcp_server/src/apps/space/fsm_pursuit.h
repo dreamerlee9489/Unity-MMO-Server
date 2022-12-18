@@ -4,8 +4,6 @@
 
 class Pursuit : public FsmState
 {
-	PlayerComponentLastMap* _lastMap = nullptr;
-
 public:
 	Pursuit(AIEnemy* owner, Player* target);
 

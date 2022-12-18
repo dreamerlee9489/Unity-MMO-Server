@@ -32,7 +32,7 @@ void WorldProxy::Awake(int worldId, uint64 lastWorldSn)
 	pProxyLocator->RegisterToLocator(_worldId, GetSN());
 
 	// 广播给所有进程
-	Net::BroadcastCreateWorldProxy protoCreate;
+	Proto::BroadcastCreateWorldProxy protoCreate;
 	protoCreate.set_world_id(_worldId);
 	protoCreate.set_world_sn(GetSN());
 
@@ -40,24 +40,24 @@ void WorldProxy::Awake(int worldId, uint64 lastWorldSn)
 	{
 		NetIdentify netIdentify;
 		netIdentify.GetTagKey()->AddTag(TagType::Entity, lastWorldSn);
-		MessageSystemHelp::DispatchPacket(Net::MsgId::MI_BroadcastCreateWorldProxy, protoCreate, &netIdentify);
+		MessageSystemHelp::DispatchPacket(Proto::MsgId::MI_BroadcastCreateWorldProxy, protoCreate, &netIdentify);
 	}
 	else
 	{
-		MessageSystemHelp::DispatchPacket(Net::MsgId::MI_BroadcastCreateWorldProxy, protoCreate, nullptr);
+		MessageSystemHelp::DispatchPacket(Proto::MsgId::MI_BroadcastCreateWorldProxy, protoCreate, nullptr);
 	}
 
 	// message
 	auto pMsgSystem = GetSystemManager()->GetMessageSystem();
-	pMsgSystem->RegisterFunction(this, Net::MsgId::MI_NetworkDisconnect, BindFunP1(this, &WorldProxy::HandleNetworkDisconnect));
-	pMsgSystem->RegisterFunction(this, Net::MsgId::MI_Teleport, BindFunP1(this, &WorldProxy::HandleTeleport));
-	pMsgSystem->RegisterFunctionFilter<Player>(this, Net::MsgId::MI_TeleportAfter, BindFunP1(this, &WorldProxy::GetPlayer), BindFunP2(this, &WorldProxy::HandleTeleportAfter));
+	pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_NetworkDisconnect, BindFunP1(this, &WorldProxy::HandleNetworkDisconnect));
+	pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_Teleport, BindFunP1(this, &WorldProxy::HandleTeleport));
+	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::MI_TeleportAfter, BindFunP1(this, &WorldProxy::GetPlayer), BindFunP2(this, &WorldProxy::HandleTeleportAfter));
 
-	pMsgSystem->RegisterFunction(this, Net::MsgId::MI_BroadcastCreateWorldProxy, BindFunP1(this, &WorldProxy::HandleBroadcastCreateWorldProxy));
-	pMsgSystem->RegisterFunctionFilter<Player>(this, Net::MsgId::S2G_SyncPlayer, BindFunP1(this, &WorldProxy::GetPlayer), BindFunP2(this, &WorldProxy::HandleS2GSyncPlayer));
+	pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_BroadcastCreateWorldProxy, BindFunP1(this, &WorldProxy::HandleBroadcastCreateWorldProxy));
+	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::S2G_SyncPlayer, BindFunP1(this, &WorldProxy::GetPlayer), BindFunP2(this, &WorldProxy::HandleS2GSyncPlayer));
 
 	// 客户端发送来的协议
-	pMsgSystem->RegisterFunctionFilter<Player>(this, Net::MsgId::C2G_EnterWorld, BindFunP1(this, &WorldProxy::GetPlayer), BindFunP2(this, &WorldProxy::HandleC2GEnterWorld));
+	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2G_EnterWorld, BindFunP1(this, &WorldProxy::GetPlayer), BindFunP2(this, &WorldProxy::HandleC2GEnterWorld));
 
 	// 默认协议处理函数
 	pMsgSystem->RegisterDefaultFunction(this, BindFunP1(this, &WorldProxy::HandleDefaultFunction));
@@ -67,7 +67,7 @@ void WorldProxy::BackToPool()
 {
 }
 
-void WorldProxy::SendPacketToWorld(const Net::MsgId msgId, ::google::protobuf::Message& proto, Player* pPlayer) const
+void WorldProxy::SendPacketToWorld(const Proto::MsgId msgId, ::google::protobuf::Message& proto, Player* pPlayer) const
 {
 	TagKey tagKey;
 	tagKey.AddTag(TagType::Player, pPlayer->GetPlayerSN());
@@ -79,7 +79,7 @@ void WorldProxy::SendPacketToWorld(const Net::MsgId msgId, ::google::protobuf::M
 	MessageSystemHelp::SendPacket(msgId, proto, &tagKey, APP_SPACE, _spaceAppId);
 }
 
-void WorldProxy::SendPacketToWorld(const Net::MsgId msgId, Player* pPlayer) const
+void WorldProxy::SendPacketToWorld(const Proto::MsgId msgId, Player* pPlayer) const
 {
 	TagKey tagKey;
 	tagKey.AddTag(TagType::Player, pPlayer->GetPlayerSN());
@@ -93,7 +93,7 @@ void WorldProxy::SendPacketToWorld(const Net::MsgId msgId, Player* pPlayer) cons
 
 void WorldProxy::CopyPacketToWorld(Player* pPlayer, Packet* pPacket) const
 {
-	auto pPacketCopy = MessageSystemHelp::CreatePacket((Net::MsgId)pPacket->GetMsgId(), nullptr);
+	auto pPacketCopy = MessageSystemHelp::CreatePacket((Proto::MsgId)pPacket->GetMsgId(), nullptr);
 	pPacketCopy->CopyFrom(pPacket);
 	auto pTagKey = pPacketCopy->GetTagKey();
 	pTagKey->AddTag(TagType::Player, pPlayer->GetPlayerSN());
@@ -156,7 +156,7 @@ void WorldProxy::HandleDefaultFunction(Packet* pPacket)
 	// 默认只作中转操作
 	if (isToClient)
 	{
-		auto pPacketCopy = MessageSystemHelp::CreatePacket((Net::MsgId)pPacket->GetMsgId(), pPlayer);
+		auto pPacketCopy = MessageSystemHelp::CreatePacket((Proto::MsgId)pPacket->GetMsgId(), pPlayer);
 		pPacketCopy->CopyFrom(pPacket);
 		MessageSystemHelp::SendPacket(pPacketCopy);
 		//LOG_DEBUG("transfer msg to client. msgId:" << Log4Help::GetMsgIdName(pPacket->GetMsgId()).c_str());
@@ -191,7 +191,7 @@ void WorldProxy::HandleNetworkDisconnect(Packet* pPacket)
 		auto pCollector = GetComponent<PlayerCollectorComponent>();
 		pCollector->RemovePlayerBySocket(pPacket->GetSocketKey()->Socket);
 
-		SendPacketToWorld(Net::MsgId::MI_NetworkDisconnect, pPlayer);
+		SendPacketToWorld(Proto::MsgId::MI_NetworkDisconnect, pPlayer);
 	}
 	else
 	{
@@ -225,7 +225,7 @@ void WorldProxy::HandleNetworkDisconnect(Packet* pPacket)
 
 void WorldProxy::HandleTeleport(Packet* pPacket)
 {
-	auto proto = pPacket->ParseToProto<Net::Teleport>();
+	auto proto = pPacket->ParseToProto<Proto::Teleport>();
 	const auto playerSn = proto.player_sn();
 
 	auto pCollector = GetComponent<PlayerCollectorComponent>();
@@ -242,18 +242,18 @@ void WorldProxy::HandleTeleport(Packet* pPacket)
 	//LOG_DEBUG("world proxy. recv teleport. map id:" << _worldId << " world sn:" << GetSN() << " account:" << pPlayer->GetAccount().c_str());
 
 	// 将数据转给真实的world
-	Net::SyncPlayer protoSync;
+	Proto::SyncPlayer protoSync;
 	protoSync.set_account(proto.account().c_str());
 	protoSync.mutable_player()->CopyFrom(proto.player());
-	SendPacketToWorld(Net::MsgId::G2S_SyncPlayer, protoSync, pPlayer);
+	SendPacketToWorld(Proto::MsgId::G2S_SyncPlayer, protoSync, pPlayer);
 
 	// 通知旧地图，跳转成功
-	Net::TeleportAfter protoTeleportRs;
+	Proto::TeleportAfter protoTeleportRs;
 	protoTeleportRs.set_player_sn(pPlayer->GetPlayerSN());
 	NetIdentify indentify;
 	indentify.GetTagKey()->AddTag(TagType::Player, pPlayer->GetPlayerSN());
 	indentify.GetTagKey()->AddTag(TagType::Entity, proto.last_world_sn());
-	MessageSystemHelp::DispatchPacket(Net::MsgId::MI_TeleportAfter, protoTeleportRs, &indentify);
+	MessageSystemHelp::DispatchPacket(Proto::MsgId::MI_TeleportAfter, protoTeleportRs, &indentify);
 
 	// 注册SOCKET
 	auto pSocketLocator = ComponentHelp::GetGlobalEntitySystem()->GetComponent<SocketLocator>();
@@ -262,20 +262,20 @@ void WorldProxy::HandleTeleport(Packet* pPacket)
 
 void WorldProxy::HandleTeleportAfter(Player* pPlayer, Packet* pPacket)
 {
-	auto proto = pPacket->ParseToProto<Net::TeleportAfter>();
+	auto proto = pPacket->ParseToProto<Proto::TeleportAfter>();
 	const auto playerSn = proto.player_sn();
 
 	auto pPlayerMgr = GetComponent<PlayerCollectorComponent>();
 	pPlayerMgr->RemovePlayerBySocket(pPlayer->GetSocketKey()->Socket);
 
-	Net::RemovePlayer protoRs;
+	Proto::RemovePlayer protoRs;
 	protoRs.set_player_sn(playerSn);
-	SendPacketToWorld(Net::MsgId::G2S_RemovePlayer, protoRs, pPlayer);
+	SendPacketToWorld(Proto::MsgId::G2S_RemovePlayer, protoRs, pPlayer);
 }
 
 void WorldProxy::HandleC2GEnterWorld(Player* pPlayer, Packet* pPacket)
 {
-	auto proto = pPacket->ParseToProto<Net::EnterWorld>();
+	auto proto = pPacket->ParseToProto<Proto::EnterWorld>();
 	auto worldId = proto.world_id();
 	const auto pResMgr = ResourceHelp::GetResourceManager();
 	const auto pWorldRes = pResMgr->Worlds->GetResource(worldId);
@@ -293,13 +293,13 @@ void WorldProxy::HandleC2GEnterWorld(Player* pPlayer, Packet* pPacket)
 
 void WorldProxy::HandleS2GSyncPlayer(Player* pPlayer, Packet* pPacket)
 {
-	auto proto = pPacket->ParseToProto<Net::SyncPlayer>();
+	auto proto = pPacket->ParseToProto<Proto::SyncPlayer>();
 	pPlayer->ParserFromProto(pPlayer->GetPlayerSN(), proto.player());
 	GetComponent<WorldComponentTeleport>()->BroadcastSyncPlayer(pPlayer->GetPlayerSN());
 }
 
 void WorldProxy::HandleBroadcastCreateWorldProxy(Packet* pPacket)
 {
-	auto proto = pPacket->ParseToProto<Net::BroadcastCreateWorldProxy>();
+	auto proto = pPacket->ParseToProto<Proto::BroadcastCreateWorldProxy>();
 	GetComponent<WorldComponentTeleport>()->HandleBroadcastCreateWorldProxy(proto.world_id(), proto.world_sn());
 }

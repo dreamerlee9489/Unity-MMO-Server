@@ -133,6 +133,6 @@ bool IsLogShowMsg(int msgId);
 #endif
 
 namespace Log4Help {
-    std::string GetMsgIdName(Net::MsgId msgId);
+    std::string GetMsgIdName(Proto::MsgId msgId);
     std::string GetMsgIdName(int msgId);
 }

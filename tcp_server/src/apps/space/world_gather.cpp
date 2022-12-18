@@ -12,8 +12,8 @@ void WorldGather::Awake()
 
     auto pMsgSystem = GetSystemManager()->GetMessageSystem();
 
-    pMsgSystem->RegisterFunction(this, Net::MsgId::MI_WorldSyncToGather, BindFunP1(this, &WorldGather::HandleWorldSyncToGather));
-    pMsgSystem->RegisterFunction(this, Net::MsgId::MI_CmdWorld, BindFunP1(this, &WorldGather::HandleCmdWorld));
+    pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_WorldSyncToGather, BindFunP1(this, &WorldGather::HandleWorldSyncToGather));
+    pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_CmdWorld, BindFunP1(this, &WorldGather::HandleCmdWorld));
 }
 
 void WorldGather::BackToPool()
@@ -23,7 +23,7 @@ void WorldGather::BackToPool()
 
 void WorldGather::SyncSpaceInfo()
 {
-	Net::AppInfoSync proto;
+	Proto::AppInfoSync proto;
 
 	int online = 0;
 	auto iter = _maps.begin();
@@ -39,15 +39,15 @@ void WorldGather::SyncSpaceInfo()
 	proto.set_online(online);
 
     // 对链接的所有Game发送本进程当前状态
-    MessageSystemHelp::SendPacketToAllApp(Net::MsgId::MI_AppInfoSync, proto, APP_GAME);
+    MessageSystemHelp::SendPacketToAllApp(Proto::MsgId::MI_AppInfoSync, proto, APP_GAME);
 
     // 发送给appmgr
-    MessageSystemHelp::SendPacket(Net::MsgId::MI_AppInfoSync, proto, APP_APPMGR);
+    MessageSystemHelp::SendPacket(Proto::MsgId::MI_AppInfoSync, proto, APP_APPMGR);
 }
 
 void WorldGather::HandleWorldSyncToGather(Packet* pPacket)
 {
-	auto proto = pPacket->ParseToProto<Net::WorldSyncToGather>();
+	auto proto = pPacket->ParseToProto<Proto::WorldSyncToGather>();
 	_maps[proto.world_sn()] = proto.online();
 }
 

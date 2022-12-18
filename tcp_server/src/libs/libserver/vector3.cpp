@@ -3,14 +3,14 @@
 
 Vector3 Vector3::Zero = Vector3(0, 0, 0);
 
-void Vector3::ParserFromProto(const Net::Vector3D& position)
+void Vector3::ParserFromProto(const Proto::Vector3D& position)
 {
 	this->X = position.x();
 	this->Y = position.y();
 	this->Z = position.z();
 }
 
-void Vector3::SerializeToProto(Net::Vector3D* pProto) const
+void Vector3::SerializeToProto(Proto::Vector3D* pProto) const
 {
 	pProto->set_x(X);
 	pProto->set_y(Y);

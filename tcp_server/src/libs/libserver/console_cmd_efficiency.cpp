@@ -13,5 +13,5 @@ void ConsoleCmdEfficiency::HandleHelp()
 
 void ConsoleCmdEfficiency::HandleThread(std::vector<std::string>& params)
 {
-	MessageSystemHelp::DispatchPacket(Net::MsgId::MI_CmdEfficiency, 0);
+	MessageSystemHelp::DispatchPacket(Proto::MsgId::MI_CmdEfficiency, 0);
 }

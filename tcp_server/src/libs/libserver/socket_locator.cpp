@@ -4,7 +4,7 @@
 void SocketLocator::Awake()
 {
     auto pMsgSystem = GetSystemManager()->GetMessageSystem();
-    pMsgSystem->RegisterFunction(this, Net::MsgId::MI_NetworkDisconnect, BindFunP1(this, &SocketLocator::HandleNetworkDisconnect));
+    pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_NetworkDisconnect, BindFunP1(this, &SocketLocator::HandleNetworkDisconnect));
 }
 
 void SocketLocator::BackToPool()

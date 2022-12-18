@@ -14,7 +14,7 @@ struct AppInfo
 	int Online;
 	SOCKET Socket;
 
-	bool Parse(Net::AppInfoSync proto);
+	bool Parse(Proto::AppInfoSync proto);
 };
 
 class SyncComponent
@@ -31,7 +31,7 @@ protected:
 	/// <param name="pInfo"></param>
 	/// <returns></returns>
 	bool GetOneApp(APP_TYPE appType, AppInfo* pInfo);
-	void Parse(Net::AppInfoSync proto, SOCKET socket);
+	void Parse(Proto::AppInfoSync proto, SOCKET socket);
 
 	void HandleCmdApp(Packet* pPacket);
 	virtual void HandleNetworkDisconnect(Packet* pPacket);

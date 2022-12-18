@@ -11,7 +11,7 @@
 void WorldProxyLocator::Awake()
 {
 	auto pMsgSystem = GetSystemManager()->GetMessageSystem();
-	pMsgSystem->RegisterFunction(this, Net::MsgId::MI_BroadcastCreateWorld, BindFunP1(this, &WorldProxyLocator::HandleBroadcastCreateWorld));
+	pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_BroadcastCreateWorld, BindFunP1(this, &WorldProxyLocator::HandleBroadcastCreateWorld));
 }
 
 void WorldProxyLocator::BackToPool()
@@ -71,7 +71,7 @@ uint64 WorldProxyLocator::GetWorldSnById(const int worldId)
 void WorldProxyLocator::HandleBroadcastCreateWorld(Packet* pPacket)
 {
 	std::lock_guard<std::mutex> guard(_lock);
-	auto proto = pPacket->ParseToProto<Net::BroadcastCreateWorld>();
+	auto proto = pPacket->ParseToProto<Proto::BroadcastCreateWorld>();
 	const int worldId = proto.world_id();
 	const auto worldSn = proto.world_sn();
 	const uint64 lastWorldSn = proto.last_world_sn();

@@ -22,15 +22,15 @@ public:
 	uint64 GetPlayerSN() const;
 	Vector3& GetCurrPos() { return lastMap->GetCur()->Position; }
 
-	Net::Player& GetPlayerProto();
+	Proto::Player& GetPlayerProto();
 	void ParseFromStream(uint64 playerSn, std::stringstream* pOpStream);
-	void ParserFromProto(uint64 playerSn, const Net::Player& proto);
-	void SerializeToProto(Net::Player* pProto) const;
+	void ParserFromProto(uint64 playerSn, const Proto::Player& proto);
+	void SerializeToProto(Proto::Player* pProto) const;
 
 protected:
 	uint64 _playerSn{ 0 };
 	std::string _account{ "" };
 	std::string _name{ "" };
-	Net::Player _player;
+	Proto::Player _player;
 };
 

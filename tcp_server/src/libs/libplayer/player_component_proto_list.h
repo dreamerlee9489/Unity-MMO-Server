@@ -13,7 +13,7 @@ public:
 	void Awake() override {}
 	void BackToPool() override;
 
-	void Parse(Net::PlayerList& proto);
+	void Parse(Proto::PlayerList& proto);
 	std::stringstream* GetProto(uint64 sn);
 
 private:

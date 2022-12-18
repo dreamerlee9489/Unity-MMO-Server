@@ -46,7 +46,7 @@ void ConnectObj::BackToPool()
 #endif
 
 	// 通知逻辑层，有连接关闭了
-	MessageSystemHelp::DispatchPacket(Net::MsgId::MI_NetworkDisconnect, this);
+	MessageSystemHelp::DispatchPacket(Proto::MsgId::MI_NetworkDisconnect, this);
 
 	if (_socketKey.Socket != INVALID_SOCKET)
 		_sock_close(_socketKey.Socket);
@@ -133,7 +133,7 @@ bool ConnectObj::Recv()
 				}
 			}
 
-			/*const google::protobuf::EnumDescriptor* descriptor = Net::MsgId_descriptor();
+			/*const google::protobuf::EnumDescriptor* descriptor = Proto::MsgId_descriptor();
 			auto name = descriptor->FindValueByNumber(pPacket->GetMsgId())->name();
 			LOG_DEBUG("Recv msgid: " << name.c_str());*/
 
@@ -141,7 +141,7 @@ bool ConnectObj::Recv()
 			const bool isTcp = NetworkHelp::IsTcp(iNetworkType);
 			if (!isTcp)
 			{
-				if (msgId == Net::MsgId::MI_HttpRequestBad)
+				if (msgId == Proto::MsgId::MI_HttpRequestBad)
 				{
 					// 404
 					MessageSystemHelp::SendHttpResponse404(pPacket);
@@ -151,7 +151,7 @@ bool ConnectObj::Recv()
 			}
 			else
 			{
-				if (msgId == Net::MsgId::MI_Ping)
+				if (msgId == Proto::MsgId::MI_Ping)
 				{
 					//RecvPing();
 					continue;
@@ -160,7 +160,7 @@ bool ConnectObj::Recv()
 
 			if (!isTcp)
 			{
-				if ((msgId <= Net::MsgId::MI_HttpBegin || msgId >= Net::MsgId::MI_HttpEnd) && msgId != Net::MsgId::MI_HttpOuterResponse)
+				if ((msgId <= Proto::MsgId::MI_HttpBegin || msgId >= Proto::MsgId::MI_HttpEnd) && msgId != Proto::MsgId::MI_HttpOuterResponse)
 				{
 					// 检查一下http协议编号，非法
 					LOG_WARN("http connect recv. tcp proto");
@@ -186,7 +186,7 @@ bool ConnectObj::HasSendData() const
 
 void ConnectObj::SendPacket(Packet* pPacket) const
 {
-	/*const google::protobuf::EnumDescriptor* descriptor = Net::MsgId_descriptor();
+	/*const google::protobuf::EnumDescriptor* descriptor = Proto::MsgId_descriptor();
 	auto name = descriptor->FindValueByNumber(pPacket->GetMsgId())->name();
 	LOG_DEBUG("Send msgid: " << name.c_str());*/
 
@@ -236,7 +236,7 @@ bool ConnectObj::Send()
 void ConnectObj::Close()
 {
 	// ConnectoObj 一定和Network在同一个线程中的，这里，只需要要本线程发送数据即可
-	const auto pPacketDis = MessageSystemHelp::CreatePacket(Net::MsgId::MI_NetworkRequestDisconnect, this);
+	const auto pPacketDis = MessageSystemHelp::CreatePacket(Proto::MsgId::MI_NetworkRequestDisconnect, this);
 	GetSystemManager()->GetMessageSystem()->AddPacketToList(pPacketDis);
 	pPacketDis->OpenRef();
 }
@@ -258,6 +258,6 @@ void ConnectObj::ChangeStateToConnected()
 	else
 	{
 		// 通知逻辑层，有连接连接成功了
-		MessageSystemHelp::DispatchPacket(Net::MsgId::MI_NetworkConnected, this);
+		MessageSystemHelp::DispatchPacket(Proto::MsgId::MI_NetworkConnected, this);
 	}
 }

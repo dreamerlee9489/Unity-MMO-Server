@@ -14,5 +14,5 @@ void ConsoleCmdWorld::HandleHelp()
 
 void ConsoleCmdWorld::HandleShowAllWorld(std::vector<std::string>& params)
 {
-	MessageSystemHelp::DispatchPacket(Net::MsgId::MI_CmdWorld, nullptr);
+	MessageSystemHelp::DispatchPacket(Proto::MsgId::MI_CmdWorld, nullptr);
 }

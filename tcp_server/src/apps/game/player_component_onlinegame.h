@@ -15,8 +15,8 @@ public:
 	void BackToPool() override;
 	void SetOnlineFlag() const;
 
-	void ParserFromProto(const Net::Player& proto) override;
-	void SerializeToProto(Net::Player* pProto) override;
+	void ParserFromProto(const Proto::Player& proto) override;
+	void SerializeToProto(Proto::Player* pProto) override;
 
 private:
 	std::string _account{ "" };

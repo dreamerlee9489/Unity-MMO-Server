@@ -9,7 +9,7 @@ using pb = global::Google.Protobuf;
 using pbc = global::Google.Protobuf.Collections;
 using pbr = global::Google.Protobuf.Reflection;
 using scg = global::System.Collections.Generic;
-namespace Net {
+namespace Proto {
 
   /// <summary>Holder for reflection information generated from db.proto</summary>
   public static partial class DbReflection {
@@ -24,25 +24,25 @@ namespace Net {
     static DbReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CghkYi5wcm90bxIDTmV0IisKCFZlY3RvcjNEEgkKAXgYASABKAISCQoBeRgC",
-            "IAEoAhIJCgF6GAMgASgCIjgKClBsYXllckJhc2USGwoGZ2VuZGVyGAEgASgO",
-            "MgsuTmV0LkdlbmRlchINCgVsZXZlbBgCIAEoBSJQCglMYXN0V29ybGQSEAoI",
-            "d29ybGRfaWQYASABKAUSEAoId29ybGRfc24YAiABKAMSHwoIcG9zaXRpb24Y",
-            "AyABKAsyDS5OZXQuVmVjdG9yM0QibgoKUGxheWVyTWlzYxIiCgpsYXN0X3dv",
-            "cmxkGAEgASgLMg4uTmV0Lkxhc3RXb3JsZBIkCgxsYXN0X2R1bmdlb24YAiAB",
-            "KAsyDi5OZXQuTGFzdFdvcmxkEhYKDm9ubGluZV92ZXJzaW9uGAMgASgFImAK",
-            "BlBsYXllchIKCgJzbhgBIAEoBBIMCgRuYW1lGAIgASgJEh0KBGJhc2UYAyAB",
-            "KAsyDy5OZXQuUGxheWVyQmFzZRIdCgRtaXNjGAQgASgLMg8uTmV0LlBsYXll",
-            "ck1pc2MqKAoGR2VuZGVyEggKBG5vbmUQABIICgRtYWxlEAESCgoGZmVtYWxl",
-            "EAJiBnByb3RvMw=="));
+            "CghkYi5wcm90bxIFUHJvdG8iKwoIVmVjdG9yM0QSCQoBeBgBIAEoAhIJCgF5",
+            "GAIgASgCEgkKAXoYAyABKAIiOgoKUGxheWVyQmFzZRIdCgZnZW5kZXIYASAB",
+            "KA4yDS5Qcm90by5HZW5kZXISDQoFbGV2ZWwYAiABKAUiUgoJTGFzdFdvcmxk",
+            "EhAKCHdvcmxkX2lkGAEgASgFEhAKCHdvcmxkX3NuGAIgASgDEiEKCHBvc2l0",
+            "aW9uGAMgASgLMg8uUHJvdG8uVmVjdG9yM0QicgoKUGxheWVyTWlzYxIkCgps",
+            "YXN0X3dvcmxkGAEgASgLMhAuUHJvdG8uTGFzdFdvcmxkEiYKDGxhc3RfZHVu",
+            "Z2VvbhgCIAEoCzIQLlByb3RvLkxhc3RXb3JsZBIWCg5vbmxpbmVfdmVyc2lv",
+            "bhgDIAEoBSJkCgZQbGF5ZXISCgoCc24YASABKAQSDAoEbmFtZRgCIAEoCRIf",
+            "CgRiYXNlGAMgASgLMhEuUHJvdG8uUGxheWVyQmFzZRIfCgRtaXNjGAQgASgL",
+            "MhEuUHJvdG8uUGxheWVyTWlzYyooCgZHZW5kZXISCAoEbm9uZRAAEggKBG1h",
+            "bGUQARIKCgZmZW1hbGUQAmIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
-          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Net.Gender), }, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Net.Vector3D), global::Net.Vector3D.Parser, new[]{ "X", "Y", "Z" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Net.PlayerBase), global::Net.PlayerBase.Parser, new[]{ "Gender", "Level" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Net.LastWorld), global::Net.LastWorld.Parser, new[]{ "WorldId", "WorldSn", "Position" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Net.PlayerMisc), global::Net.PlayerMisc.Parser, new[]{ "LastWorld", "LastDungeon", "OnlineVersion" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Net.Player), global::Net.Player.Parser, new[]{ "Sn", "Name", "Base", "Misc" }, null, null, null, null)
+          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Proto.Gender), }, null, new pbr::GeneratedClrTypeInfo[] {
+            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.Vector3D), global::Proto.Vector3D.Parser, new[]{ "X", "Y", "Z" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.PlayerBase), global::Proto.PlayerBase.Parser, new[]{ "Gender", "Level" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.LastWorld), global::Proto.LastWorld.Parser, new[]{ "WorldId", "WorldSn", "Position" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.PlayerMisc), global::Proto.PlayerMisc.Parser, new[]{ "LastWorld", "LastDungeon", "OnlineVersion" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.Player), global::Proto.Player.Parser, new[]{ "Sn", "Name", "Base", "Misc" }, null, null, null, null)
           }));
     }
     #endregion
@@ -66,7 +66,7 @@ namespace Net {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Net.DbReflection.Descriptor.MessageTypes[0]; }
+      get { return global::Proto.DbReflection.Descriptor.MessageTypes[0]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -251,7 +251,7 @@ namespace Net {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Net.DbReflection.Descriptor.MessageTypes[1]; }
+      get { return global::Proto.DbReflection.Descriptor.MessageTypes[1]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -280,9 +280,9 @@ namespace Net {
 
     /// <summary>Field number for the "gender" field.</summary>
     public const int GenderFieldNumber = 1;
-    private global::Net.Gender gender_ = global::Net.Gender.None;
+    private global::Proto.Gender gender_ = global::Proto.Gender.None;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Net.Gender Gender {
+    public global::Proto.Gender Gender {
       get { return gender_; }
       set {
         gender_ = value;
@@ -321,7 +321,7 @@ namespace Net {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (Gender != global::Net.Gender.None) hash ^= Gender.GetHashCode();
+      if (Gender != global::Proto.Gender.None) hash ^= Gender.GetHashCode();
       if (Level != 0) hash ^= Level.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -336,7 +336,7 @@ namespace Net {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (Gender != global::Net.Gender.None) {
+      if (Gender != global::Proto.Gender.None) {
         output.WriteRawTag(8);
         output.WriteEnum((int) Gender);
       }
@@ -352,7 +352,7 @@ namespace Net {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (Gender != global::Net.Gender.None) {
+      if (Gender != global::Proto.Gender.None) {
         size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Gender);
       }
       if (Level != 0) {
@@ -369,7 +369,7 @@ namespace Net {
       if (other == null) {
         return;
       }
-      if (other.Gender != global::Net.Gender.None) {
+      if (other.Gender != global::Proto.Gender.None) {
         Gender = other.Gender;
       }
       if (other.Level != 0) {
@@ -387,7 +387,7 @@ namespace Net {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 8: {
-            Gender = (global::Net.Gender) input.ReadEnum();
+            Gender = (global::Proto.Gender) input.ReadEnum();
             break;
           }
           case 16: {
@@ -413,7 +413,7 @@ namespace Net {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Net.DbReflection.Descriptor.MessageTypes[2]; }
+      get { return global::Proto.DbReflection.Descriptor.MessageTypes[2]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -465,9 +465,9 @@ namespace Net {
 
     /// <summary>Field number for the "position" field.</summary>
     public const int PositionFieldNumber = 3;
-    private global::Net.Vector3D position_;
+    private global::Proto.Vector3D position_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Net.Vector3D Position {
+    public global::Proto.Vector3D Position {
       get { return position_; }
       set {
         position_ = value;
@@ -560,7 +560,7 @@ namespace Net {
       }
       if (other.position_ != null) {
         if (position_ == null) {
-          Position = new global::Net.Vector3D();
+          Position = new global::Proto.Vector3D();
         }
         Position.MergeFrom(other.Position);
       }
@@ -585,7 +585,7 @@ namespace Net {
           }
           case 26: {
             if (position_ == null) {
-              Position = new global::Net.Vector3D();
+              Position = new global::Proto.Vector3D();
             }
             input.ReadMessage(Position);
             break;
@@ -604,7 +604,7 @@ namespace Net {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Net.DbReflection.Descriptor.MessageTypes[3]; }
+      get { return global::Proto.DbReflection.Descriptor.MessageTypes[3]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -634,12 +634,12 @@ namespace Net {
 
     /// <summary>Field number for the "last_world" field.</summary>
     public const int LastWorldFieldNumber = 1;
-    private global::Net.LastWorld lastWorld_;
+    private global::Proto.LastWorld lastWorld_;
     /// <summary>
     /// 公共地图
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Net.LastWorld LastWorld {
+    public global::Proto.LastWorld LastWorld {
       get { return lastWorld_; }
       set {
         lastWorld_ = value;
@@ -648,12 +648,12 @@ namespace Net {
 
     /// <summary>Field number for the "last_dungeon" field.</summary>
     public const int LastDungeonFieldNumber = 2;
-    private global::Net.LastWorld lastDungeon_;
+    private global::Proto.LastWorld lastDungeon_;
     /// <summary>
     /// 副本地图
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Net.LastWorld LastDungeon {
+    public global::Proto.LastWorld LastDungeon {
       get { return lastDungeon_; }
       set {
         lastDungeon_ = value;
@@ -754,13 +754,13 @@ namespace Net {
       }
       if (other.lastWorld_ != null) {
         if (lastWorld_ == null) {
-          LastWorld = new global::Net.LastWorld();
+          LastWorld = new global::Proto.LastWorld();
         }
         LastWorld.MergeFrom(other.LastWorld);
       }
       if (other.lastDungeon_ != null) {
         if (lastDungeon_ == null) {
-          LastDungeon = new global::Net.LastWorld();
+          LastDungeon = new global::Proto.LastWorld();
         }
         LastDungeon.MergeFrom(other.LastDungeon);
       }
@@ -780,14 +780,14 @@ namespace Net {
             break;
           case 10: {
             if (lastWorld_ == null) {
-              LastWorld = new global::Net.LastWorld();
+              LastWorld = new global::Proto.LastWorld();
             }
             input.ReadMessage(LastWorld);
             break;
           }
           case 18: {
             if (lastDungeon_ == null) {
-              LastDungeon = new global::Net.LastWorld();
+              LastDungeon = new global::Proto.LastWorld();
             }
             input.ReadMessage(LastDungeon);
             break;
@@ -810,7 +810,7 @@ namespace Net {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Net.DbReflection.Descriptor.MessageTypes[4]; }
+      get { return global::Proto.DbReflection.Descriptor.MessageTypes[4]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -863,9 +863,9 @@ namespace Net {
 
     /// <summary>Field number for the "base" field.</summary>
     public const int BaseFieldNumber = 3;
-    private global::Net.PlayerBase base_;
+    private global::Proto.PlayerBase base_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Net.PlayerBase Base {
+    public global::Proto.PlayerBase Base {
       get { return base_; }
       set {
         base_ = value;
@@ -874,9 +874,9 @@ namespace Net {
 
     /// <summary>Field number for the "misc" field.</summary>
     public const int MiscFieldNumber = 4;
-    private global::Net.PlayerMisc misc_;
+    private global::Proto.PlayerMisc misc_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Net.PlayerMisc Misc {
+    public global::Proto.PlayerMisc Misc {
       get { return misc_; }
       set {
         misc_ = value;
@@ -978,13 +978,13 @@ namespace Net {
       }
       if (other.base_ != null) {
         if (base_ == null) {
-          Base = new global::Net.PlayerBase();
+          Base = new global::Proto.PlayerBase();
         }
         Base.MergeFrom(other.Base);
       }
       if (other.misc_ != null) {
         if (misc_ == null) {
-          Misc = new global::Net.PlayerMisc();
+          Misc = new global::Proto.PlayerMisc();
         }
         Misc.MergeFrom(other.Misc);
       }
@@ -1009,14 +1009,14 @@ namespace Net {
           }
           case 26: {
             if (base_ == null) {
-              Base = new global::Net.PlayerBase();
+              Base = new global::Proto.PlayerBase();
             }
             input.ReadMessage(Base);
             break;
           }
           case 34: {
             if (misc_ == null) {
-              Misc = new global::Net.PlayerMisc();
+              Misc = new global::Proto.PlayerMisc();
             }
             input.ReadMessage(Misc);
             break;

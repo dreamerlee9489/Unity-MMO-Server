@@ -18,7 +18,7 @@ Packet::~Packet()
     delete[] _buffer;
 }
 
-void Packet::Awake(Net::MsgId msgId, NetIdentify* pIdentify)
+void Packet::Awake(Proto::MsgId msgId, NetIdentify* pIdentify)
 {
     if (pIdentify != nullptr)
     {
@@ -44,7 +44,7 @@ void Packet::Awake(Net::MsgId msgId, NetIdentify* pIdentify)
 
 void Packet::BackToPool()
 {
-    _msgId = Net::MsgId::None;
+    _msgId = Proto::MsgId::None;
     _socketKey.Clear();
     _tagKey.Clear();
 
@@ -102,7 +102,7 @@ void Packet::RemoveRef()
     --_ref;
     if (_ref < 0)
     {
-        const google::protobuf::EnumDescriptor* descriptor = Net::MsgId_descriptor();
+        const google::protobuf::EnumDescriptor* descriptor = Proto::MsgId_descriptor();
         const auto name = descriptor->FindValueByNumber(_msgId)->name();
         LOG_ERROR("packet ref < 0. ref:" << _ref << " msgId:" << name.c_str());
     }

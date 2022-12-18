@@ -10,7 +10,7 @@ void PlayerComponentProtoList::BackToPool()
     _protos.clear();
 }
 
-void PlayerComponentProtoList::Parse(Net::PlayerList& proto)
+void PlayerComponentProtoList::Parse(Proto::PlayerList& proto)
 {
     const int size = proto.player_size();
     for (int i = 0; i < size; i++)

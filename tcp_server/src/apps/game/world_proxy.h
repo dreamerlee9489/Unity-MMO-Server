@@ -17,11 +17,11 @@ public:
 	/// <summary>
 	/// 向World实例发送player数据
 	/// </summary>
-	void SendPacketToWorld(const Net::MsgId msgId, ::google::protobuf::Message& proto, Player* pPlayer) const;
+	void SendPacketToWorld(const Proto::MsgId msgId, ::google::protobuf::Message& proto, Player* pPlayer) const;
 	/// <summary>
 	/// 向World实例发送player数据
 	/// </summary>
-	void SendPacketToWorld(const Net::MsgId msgId, Player* pPlayer) const;
+	void SendPacketToWorld(const Proto::MsgId msgId, Player* pPlayer) const;
 	/// <summary>
 	/// 将数据包拷贝发送到space进程
 	/// </summary>

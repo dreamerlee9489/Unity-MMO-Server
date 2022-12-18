@@ -55,7 +55,7 @@ struct TableStruct_proto_5fid_2eproto {
 extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_proto_5fid_2eproto;
 PROTOBUF_NAMESPACE_OPEN
 PROTOBUF_NAMESPACE_CLOSE
-namespace Net {
+namespace Proto {
 
 enum MsgId : int {
   None = 0,
@@ -186,14 +186,14 @@ inline bool MsgId_Parse(
 
 // @@protoc_insertion_point(namespace_scope)
 
-}  // namespace Net
+}  // namespace Proto
 
 PROTOBUF_NAMESPACE_OPEN
 
-template <> struct is_proto_enum< ::Net::MsgId> : ::std::true_type {};
+template <> struct is_proto_enum< ::Proto::MsgId> : ::std::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::Net::MsgId>() {
-  return ::Net::MsgId_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::Proto::MsgId>() {
+  return ::Proto::MsgId_descriptor();
 }
 
 PROTOBUF_NAMESPACE_CLOSE

@@ -8,11 +8,11 @@
 class AISystem : public ISystem<AISystem>
 {
 private:
-	timeutil::Time _lastTime;
+	timeutil::Time _lastTime, _currTime, _timeElapsed;
 	ComponentCollections* _pCollections{ nullptr };
 
 public:
-	AISystem() { _lastTime = Global::GetInstance()->TimeTick; }
+	AISystem();
 
 	void Update(EntitySystem* pEntities) override;
 };

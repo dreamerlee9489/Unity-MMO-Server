@@ -1,5 +1,5 @@
 syntax = "proto3";
-package Net;
+package Proto;
 
 // 本文件中的所有结构，都是会存在DB中的
 

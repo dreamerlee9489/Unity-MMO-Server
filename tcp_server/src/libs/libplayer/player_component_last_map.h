@@ -16,9 +16,9 @@ struct LastWorld
 
 	LastWorld(const int worldId, const uint64 worldSn, const Vector3 pos);
 
-	LastWorld(Net::LastWorld proto);
+	LastWorld(Proto::LastWorld proto);
 
-	void SerializeToProto(Net::LastWorld* pProto) const;
+	void SerializeToProto(Proto::LastWorld* pProto) const;
 };
 
 /// <summary>
@@ -30,8 +30,8 @@ public:
 	void Awake() override;
 	void BackToPool() override;
 
-	void ParserFromProto(const Net::Player& proto) override;
-	void SerializeToProto(Net::Player* pProto) override;
+	void ParserFromProto(const Proto::Player& proto) override;
+	void SerializeToProto(Proto::Player* pProto) override;
 
 	LastWorld* GetLastPublicMap() const;
 	LastWorld* GetLastDungeon() const;

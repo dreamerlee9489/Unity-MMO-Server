@@ -1,6 +1,6 @@
 syntax = "proto3";
 import "db.proto";
-package Net;
+package Proto;
 
 ///////////////////////////////////////////////////////////////
 

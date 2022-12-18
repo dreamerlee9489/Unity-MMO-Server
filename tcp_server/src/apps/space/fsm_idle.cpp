@@ -24,10 +24,10 @@ void Idle::Execute()
 		{
 			Player* player = _owner->GetWorld()->GetNearestPlayer(_owner->GetCurrPos());
 			_owner->SetLinkPlayer(player);
-			Net::RequestLinkPlayer proto;
+			Proto::RequestLinkPlayer proto;
 			proto.set_enemy_id(_owner->GetID());
 			proto.set_islinker(true);
-			MessageSystemHelp::SendPacket(Net::MsgId::S2C_RequestLinkPlayer, proto, player);
+			MessageSystemHelp::SendPacket(Proto::MsgId::S2C_RequestLinkPlayer, proto, player);
 		}
 		if (_timeElapsed >= 2000)
 		{
@@ -54,20 +54,20 @@ void Idle::Exit()
 
 void Idle::BroadcastState()
 {
-	Net::FsmSyncState proto;
+	Proto::FsmSyncState proto;
 	proto.set_state((int)FsmStateType::Idle);
 	proto.set_code(0);
 	proto.set_enemy_id(_owner->GetID());
 	proto.set_player_sn(0);
-	_owner->GetWorld()->BroadcastPacket(Net::MsgId::S2C_FsmSyncState, proto);
+	_owner->GetWorld()->BroadcastPacket(Proto::MsgId::S2C_FsmSyncState, proto);
 }
 
 void Idle::SendState(Player* pPlayer)
 {
-	Net::FsmSyncState proto;
+	Proto::FsmSyncState proto;
 	proto.set_state((int)FsmStateType::Idle);
 	proto.set_code(0);
 	proto.set_enemy_id(_owner->GetID());
 	proto.set_player_sn(0);
-	MessageSystemHelp::SendPacket(Net::MsgId::S2C_FsmSyncState, proto, pPlayer);
+	MessageSystemHelp::SendPacket(Proto::MsgId::S2C_FsmSyncState, proto, pPlayer);
 }

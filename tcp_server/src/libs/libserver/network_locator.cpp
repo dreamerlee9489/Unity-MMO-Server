@@ -20,8 +20,8 @@ void NetworkLocator::Awake()
     auto pMsgSystem = GetSystemManager()->GetMessageSystem();
 
     // http
-    pMsgSystem->RegisterFunction(this, Net::MsgId::MI_AppRegister, BindFunP1(this, &NetworkLocator::HandleAppRegister));
-    pMsgSystem->RegisterFunction(this, Net::MsgId::MI_NetworkDisconnect, BindFunP1(this, &NetworkLocator::HandleNetworkDisconnect));
+    pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_AppRegister, BindFunP1(this, &NetworkLocator::HandleAppRegister));
+    pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_NetworkDisconnect, BindFunP1(this, &NetworkLocator::HandleNetworkDisconnect));
 }
 
 void NetworkLocator::BackToPool()
@@ -65,10 +65,10 @@ void NetworkLocator::AddNetworkIdentify(SocketKey* pSocket, uint64 appKey)
         if (((appType & APP_APPMGR) != 0) || ((appType & APP_SPACE) != 0) || ((appType & APP_GAME) != 0))
         {
             // 发送一个注册协议
-            Net::AppRegister proto;
+            Proto::AppRegister proto;
             proto.set_type(pGlobal->GetCurAppType());
             proto.set_id(pGlobal->GetCurAppId());
-            MessageSystemHelp::SendPacket(Net::MsgId::MI_AppRegister, proto, appType, appId);
+            MessageSystemHelp::SendPacket(Proto::MsgId::MI_AppRegister, proto, appType, appId);
         }
     }
 }
@@ -143,7 +143,7 @@ void NetworkLocator::HandleAppRegister(Packet* pPacket)
 {
     std::lock_guard<std::mutex> guard(_lock);
 
-    const auto proto = pPacket->ParseToProto<Net::AppRegister>();
+    const auto proto = pPacket->ParseToProto<Proto::AppRegister>();
     const uint64 appKey = GetAppKey(proto.type(), proto.id());
 
     const auto iter = _netIdentify.find(appKey);
@@ -157,7 +157,7 @@ void NetworkLocator::HandleAppRegister(Packet* pPacket)
         LOG_DEBUG("connected appType:" << GetAppName(GetTypeFromAppKey(appKey)) << " appId:" << GetIdFromAppKey(appKey) << " " << &netIdentify);
 
         // 修改网络底层的标识
-        MessageSystemHelp::DispatchPacket(Net::MsgId::MI_NetworkListenKey, &netIdentify);
+        MessageSystemHelp::DispatchPacket(Proto::MsgId::MI_NetworkListenKey, &netIdentify);
     } 
     else
     {

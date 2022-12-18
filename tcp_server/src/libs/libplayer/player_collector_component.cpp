@@ -72,7 +72,7 @@ void PlayerCollectorComponent::RemoveAllPlayerAndCloseConnect()
     {
         auto iter = _players.begin();
         const auto pPlayer = iter->second;
-        MessageSystemHelp::DispatchPacket(Net::MsgId::MI_NetworkRequestDisconnect, pPlayer);
+        MessageSystemHelp::DispatchPacket(Proto::MsgId::MI_NetworkRequestDisconnect, pPlayer);
         RemovePlayer(pPlayer);
     }    
 }

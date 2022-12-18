@@ -29,10 +29,10 @@ void EfficiencyThreadComponent::UpdateTime(const uint64 disTime)
 void EfficiencyThreadComponent::Sync() const
 {
 	// –ß¬ ≤‚ ‘
-	Net::Efficiency protoTest;
+	Proto::Efficiency protoTest;
     protoTest.set_time(_efficiencyUpdateTime);
     protoTest.set_thread_type((int)_threadType);
     protoTest.set_thread_id(_threadId);
 
-    MessageSystemHelp::DispatchPacket(Net::MI_Efficiency, protoTest, nullptr);
+    MessageSystemHelp::DispatchPacket(Proto::MI_Efficiency, protoTest, nullptr);
 }

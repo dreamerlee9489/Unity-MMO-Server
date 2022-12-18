@@ -9,7 +9,7 @@ class World;
 class AIEnemy : public Entity<AIEnemy>, public IAwakeFromPoolSystem<int, Vector3>
 {
 	int _id = 0;
-	float _viewDist = 6.0f, _atkDist = 1.5f;
+	float _viewDist = 8.0f, _atkDist = 1.5f;
 	Vector3 _initPos;
 	Vector3 _currPos;
 	Vector3 _nextPos;

@@ -5,8 +5,8 @@ void ConsoleEfficiencyComponent::Awake()
 {
     auto pMsgSystem = GetSystemManager()->GetMessageSystem();
 
-    pMsgSystem->RegisterFunction(this, Net::MsgId::MI_Efficiency, BindFunP1(this, &ConsoleEfficiencyComponent::HandleEfficiency));
-    pMsgSystem->RegisterFunction(this, Net::MsgId::MI_CmdEfficiency, BindFunP1(this, &ConsoleEfficiencyComponent::HandleCmdEfficiency));
+    pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_Efficiency, BindFunP1(this, &ConsoleEfficiencyComponent::HandleEfficiency));
+    pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_CmdEfficiency, BindFunP1(this, &ConsoleEfficiencyComponent::HandleCmdEfficiency));
 }
 
 void ConsoleEfficiencyComponent::BackToPool()
@@ -16,7 +16,7 @@ void ConsoleEfficiencyComponent::BackToPool()
 
 void ConsoleEfficiencyComponent::HandleEfficiency(Packet* pPacket)
 {
-    auto proto = pPacket->ParseToProto<Net::Efficiency>();
+    auto proto = pPacket->ParseToProto<Proto::Efficiency>();
     auto threadId = proto.thread_id();
     auto iter = _threads.find(threadId);
     if (iter == _threads.end())

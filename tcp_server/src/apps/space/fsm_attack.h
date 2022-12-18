@@ -4,8 +4,6 @@
 
 class Attack : public FsmState
 {
-	PlayerComponentLastMap* _lastMap = nullptr;
-
 public:
 	Attack(AIEnemy* owner, Player* target = nullptr);
 

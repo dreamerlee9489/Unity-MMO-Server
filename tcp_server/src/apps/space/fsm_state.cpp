@@ -13,23 +13,17 @@ FsmState::FsmState(AIEnemy* owner, Player* target) : _owner(owner), _target(targ
 
 FsmState* FsmState::GenFsmState(FsmStateType type, AIEnemy* owner, Player* target)
 {
-	FsmState* state = nullptr;
 	switch (type)
 	{
 	case FsmStateType::Idle:
-		state = new Idle(owner, nullptr);
-		break;
+		return new Idle(owner);
 	case FsmStateType::Patrol:
-		state = new Patrol(owner, nullptr);
-		break;
+		return new Patrol(owner);
 	case FsmStateType::Pursuit:
-		state = new Pursuit(owner, target);
-		break;
+		return new Pursuit(owner, target);
 	case FsmStateType::Attack:
-		state = new Attack(owner, target);
-		break;
+		return new Attack(owner, target);
 	default:
-		break;
+		return nullptr;
 	}
-	return state;
 }

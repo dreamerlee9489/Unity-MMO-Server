@@ -13,7 +13,7 @@ LastWorld::LastWorld(const int worldId, const uint64 worldSn, const Vector3 pos)
 	//LOG_DEBUG("Init. LastWorld. id:" << this->WorldId << " sn:" << this->WorldSn << this->Position);
 }
 
-LastWorld::LastWorld(Net::LastWorld proto)
+LastWorld::LastWorld(Proto::LastWorld proto)
 {
 	this->WorldId = proto.world_id();
 	this->WorldSn = proto.world_sn();
@@ -22,7 +22,7 @@ LastWorld::LastWorld(Net::LastWorld proto)
 	//LOG_DEBUG("ParserFromProto. LastWorld. id:" << this->WorldId << " sn:" << this->WorldSn << this->Position);
 }
 
-void LastWorld::SerializeToProto(Net::LastWorld* pProto) const
+void LastWorld::SerializeToProto(Proto::LastWorld* pProto) const
 {
 	pProto->set_world_id(WorldId);
 	pProto->set_world_sn(WorldSn);
@@ -37,7 +37,7 @@ void PlayerComponentLastMap::Awake()
 	ParserFromProto(pPlayer->GetPlayerProto());
 }
 
-void PlayerComponentLastMap::ParserFromProto(const Net::Player& proto)
+void PlayerComponentLastMap::ParserFromProto(const Proto::Player& proto)
 {
 	// 公共地图
 	auto protoMap = proto.misc().last_world();
@@ -64,7 +64,7 @@ void PlayerComponentLastMap::ParserFromProto(const Net::Player& proto)
 	}
 }
 
-void PlayerComponentLastMap::SerializeToProto(Net::Player* pProto)
+void PlayerComponentLastMap::SerializeToProto(Proto::Player* pProto)
 {
 	if (_pPublic != nullptr)
 	{

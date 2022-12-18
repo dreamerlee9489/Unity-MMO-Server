@@ -14,16 +14,16 @@ void WorldProxyComponentGather::Awake()
 
 void WorldProxyComponentGather::BackToPool()
 {
-    Net::WorldProxySyncToGather proto;
+    Proto::WorldProxySyncToGather proto;
     proto.set_world_sn(_worldSn);
     proto.set_is_remove(true);
 
-    MessageSystemHelp::DispatchPacket(Net::MsgId::MI_WorldProxySyncToGather, proto, nullptr);
+    MessageSystemHelp::DispatchPacket(Proto::MsgId::MI_WorldProxySyncToGather, proto, nullptr);
 }
 
 void WorldProxyComponentGather::SyncWorldInfoToGather()
 {
-    Net::WorldProxySyncToGather proto;
+    Proto::WorldProxySyncToGather proto;
     proto.set_world_sn(_worldSn);
     proto.set_is_remove(false);
     proto.set_world_id(_worldId);
@@ -31,5 +31,5 @@ void WorldProxyComponentGather::SyncWorldInfoToGather()
     const int online = _parent->GetComponent<PlayerCollectorComponent>()->OnlineSize();
     proto.set_online(online);
 
-    MessageSystemHelp::DispatchPacket(Net::MsgId::MI_WorldProxySyncToGather, proto, nullptr);
+    MessageSystemHelp::DispatchPacket(Proto::MsgId::MI_WorldProxySyncToGather, proto, nullptr);
 }
