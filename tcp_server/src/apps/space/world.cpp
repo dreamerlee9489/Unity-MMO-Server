@@ -320,14 +320,11 @@ void World::HandleRequestSyncEnemy(Player* pPlayer, Packet* pPacket)
 {
 	Net::RequestSyncEnemy proto = pPacket->ParseToProto<Net::RequestSyncEnemy>();
 	google::protobuf::int32 id = proto.enemy_id();
-	if (!_enemies.empty())
-	{
-		Net::Enemy protoEnemy;
-		protoEnemy.set_id(id);
-		_enemies[id]->GetCurrPos().SerializeToProto(protoEnemy.mutable_pos());
-		_enemies[id]->GetComponent<FsmComponent>()->GetCurrState()->SendState(pPlayer);
-		MessageSystemHelp::SendPacket(Net::MsgId::S2C_Enemy, protoEnemy, pPlayer);
-	}
+	Net::Enemy protoEnemy;
+	protoEnemy.set_id(id);
+	_enemies[id]->GetCurrPos().SerializeToProto(protoEnemy.mutable_pos());
+	MessageSystemHelp::SendPacket(Net::MsgId::S2C_Enemy, protoEnemy, pPlayer);
+	_enemies[id]->GetComponent<FsmComponent>()->GetCurrState()->SendState(pPlayer);
 }
 
 void World::HandleFsmSyncState(Packet* pPacket)
