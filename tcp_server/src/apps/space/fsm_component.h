@@ -12,10 +12,11 @@ class AIEnemy;
 class FsmState;
 class FsmComponent :public Component<FsmComponent>, public IAwakeFromPoolSystem<>
 {
-	timeutil::Time _lastTime;
 	AIEnemy* _parent = nullptr;
 	FsmState* _prevState = nullptr;
 	FsmState* _currState = nullptr;
+	bool _started = false;
+	void Start();
 
 public:
 	~FsmComponent();

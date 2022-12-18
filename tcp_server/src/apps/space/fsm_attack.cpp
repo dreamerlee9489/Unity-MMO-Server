@@ -23,6 +23,10 @@ void Attack::Enter()
 
 void Attack::Execute()
 {
+	if (!_owner->CanAttack(_target))
+		_owner->GetComponent<FsmComponent>()->ChangeState(new Pursuit(_owner, _target));
+	else if (!_owner->CanSee(_target))
+		_owner->GetComponent<FsmComponent>()->ChangeState(new Idle(_owner));
 }
 
 void Attack::Exit()

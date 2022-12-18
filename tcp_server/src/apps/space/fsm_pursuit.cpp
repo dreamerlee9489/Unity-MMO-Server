@@ -1,5 +1,6 @@
 ﻿#include "fsm_pursuit.h"
 #include "fsm_attack.h"
+#include "fsm_idle.h"
 
 Pursuit::Pursuit(AIEnemy* owner, Player* target) : FsmState(owner, target)
 {
@@ -23,6 +24,10 @@ void Pursuit::Enter()
 
 void Pursuit::Execute()
 {
+	if (_owner->CanAttack(_target))
+		_owner->GetComponent<FsmComponent>()->ChangeState(new Attack(_owner, _target));
+	else if (!_owner->CanSee(_target))
+		_owner->GetComponent<FsmComponent>()->ChangeState(new Idle(_owner));
 }
 
 void Pursuit::Exit()

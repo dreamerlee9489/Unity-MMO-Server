@@ -24,9 +24,9 @@ void World::Awake(int worldId)
 
 	ResourceWorld* worldCfg = ResourceHelp::GetResourceManager()->Worlds->GetResource(_worldId);
 	std::vector<ResourceEnemy> _enemyCfgs = worldCfg->GetEnemies();
-	for (auto cfg : _enemyCfgs)
+	for (auto& cfg : _enemyCfgs)
 	{
-		AIEnemy* enemy = GetSystemManager()->GetEntitySystem()->AddComponent<AIEnemy>(cfg.id, cfg.initHp, cfg.initPos);
+		AIEnemy* enemy = GetSystemManager()->GetEntitySystem()->AddComponent<AIEnemy>(cfg.id, cfg.initPos);
 		enemy->SetWorld(this);
 		enemy->SetAllPlayer(_playerManager->GetAll());
 		enemy->AddComponent<FsmComponent>();
@@ -200,9 +200,9 @@ void World::HandleSyncPlayer(Packet* pPacket)
 	pPlayer->ParserFromProto(playerSn, proto.player());
 	pPlayer->AddComponent<PlayerComponentDetail>();
 
-	const auto pComponentLastMap = pPlayer->AddComponent<PlayerComponentLastMap>();
-	pComponentLastMap->EnterWorld(_worldId, _sn);
-	const auto pLastMap = pComponentLastMap->GetCur();
+	pPlayer->lastMap = pPlayer->AddComponent<PlayerComponentLastMap>();
+	pPlayer->lastMap->EnterWorld(_worldId, _sn);
+	const auto pLastMap = pPlayer->lastMap->GetCur();
 
 	//LOG_DEBUG("world. recv teleport. map id:" << _worldId << " world sn:" << GetSN() << " playerSn:" << pPlayer->GetPlayerSN());
 

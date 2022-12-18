@@ -1,9 +1,8 @@
 ﻿#include "ai_enemy.h"
 
-void AIEnemy::Awake(int id, int hp, Vector3 pos)
+void AIEnemy::Awake(int id, Vector3 pos)
 {
 	_id = id;
-	_hp = hp;
 	_initPos = pos;
 	_currPos = pos;
 	_nextPos = pos;
@@ -12,7 +11,6 @@ void AIEnemy::Awake(int id, int hp, Vector3 pos)
 void AIEnemy::BackToPool()
 {
 	_id = 0;
-	_hp = 0;
 	_nextPos = { 0, 0, 0 };
 }
 
@@ -63,4 +61,18 @@ void AIEnemy::SetPatrolPoint(int index)
 		_nextPos.Z = _initPos.Z + 5;
 		break;
 	}
+}
+
+bool AIEnemy::CanSee(Player* player)
+{
+	if (_currPos.GetDistance(player->GetCurrPos()) <= _viewDist)
+		return true;
+	return false;
+}
+
+bool AIEnemy::CanAttack(Player* player)
+{
+	if (_currPos.GetDistance(player->GetCurrPos()) <= _atkDist)
+		return true;
+	return false;
 }

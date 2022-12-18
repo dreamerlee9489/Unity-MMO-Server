@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include <climits>
 #include "protobuf/proto_id.pb.h"
@@ -61,12 +61,12 @@ typedef unsigned __int32	uint32;
 #define BindFunP0(_self, _f) std::bind ( _f, _self)
 
 
-// ´ò¿ª¸ú×ÙÊı¾İ
+// æ‰“å¼€è·Ÿè¸ªæ•°æ®
 #if false
 #define LOG_TRACE_COMPONENT_OPEN 1
 #endif
 
-// ´ò¿ªĞ§ÂÊ²âÊÔ
+// æ‰“å¼€æ•ˆç‡æµ‹è¯•
 #if true
 #define LOG_EFFICIENCY_COMPONENT_OPEN 1
 #endif

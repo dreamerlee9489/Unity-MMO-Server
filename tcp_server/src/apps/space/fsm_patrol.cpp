@@ -17,9 +17,28 @@ void Patrol::Enter()
 
 void Patrol::Execute()
 {
-	float dist = _owner->GetCurrPos().GetDistance(_owner->GetNextPos());
-	if (dist <= 1)
+	if (!_owner->GetLinkPlayer())
+	{
+		Player* player = _owner->GetWorld()->GetNearestPlayer(_owner->GetCurrPos());
+		_owner->SetLinkPlayer(player);
+		Net::RequestLinkPlayer proto;
+		proto.set_enemy_id(_owner->GetID());
+		proto.set_islinker(true);
+		MessageSystemHelp::SendPacket(Net::MsgId::S2C_RequestLinkPlayer, proto, player);
+	}
+	if (_owner->GetCurrPos().GetDistance(_owner->GetNextPos()) <= 1)
 		_owner->GetComponent<FsmComponent>()->ChangeState(new Idle(_owner));
+	else
+	{
+		for (auto& pair : *_owner->GetAllPlayer())
+		{
+			if (_owner->CanSee(pair.second))
+			{
+				_owner->GetComponent<FsmComponent>()->ChangeState(new Pursuit(_owner, pair.second));
+				break;
+			}
+		}
+	}
 }
 
 void Patrol::Exit()

@@ -12,8 +12,13 @@ void FsmComponent::Awake()
 {
 	_parent = (AIEnemy*)GetParent();
 	_currState = new Idle(_parent);
+	AddTimer(1, 2, false, 0, BindFunP0(this, &FsmComponent::Start));
+}
+
+void FsmComponent::Start()
+{
+	_started = true;
 	_currState->Enter();
-	_lastTime = Global::GetInstance()->TimeTick;
 }
 
 void FsmComponent::BackToPool()
@@ -22,7 +27,7 @@ void FsmComponent::BackToPool()
 
 void FsmComponent::Update(AIEnemy* pEnemy)
 {
-	if (_currState != nullptr)
+	if (_started)
 		_currState->Execute();
 }
 

@@ -1,5 +1,6 @@
 ﻿#include "fsm_idle.h"
 #include "fsm_patrol.h"
+#include "fsm_pursuit.h"
 
 Idle::Idle(AIEnemy* owner, Player* target) : FsmState(owner, target)
 {
@@ -19,18 +20,29 @@ void Idle::Execute()
 	else
 	{
 		_timeElapsed = _currTime - _lastTime;
+		if (!_owner->GetLinkPlayer())
+		{
+			Player* player = _owner->GetWorld()->GetNearestPlayer(_owner->GetCurrPos());
+			_owner->SetLinkPlayer(player);
+			Net::RequestLinkPlayer proto;
+			proto.set_enemy_id(_owner->GetID());
+			proto.set_islinker(true);
+			MessageSystemHelp::SendPacket(Net::MsgId::S2C_RequestLinkPlayer, proto, player);
+		}
 		if (_timeElapsed >= 2000)
 		{
 			_lastTime = _currTime;
 			_owner->GetComponent<FsmComponent>()->ChangeState(new Patrol(_owner));
-			if (!_owner->GetLinkPlayer())
+		}
+		else
+		{
+			for (auto& pair : *_owner->GetAllPlayer())
 			{
-				Player* player = _owner->GetWorld()->GetNearestPlayer(_owner->GetCurrPos());
-				_owner->SetLinkPlayer(player);
-				Net::RequestLinkPlayer proto;
-				proto.set_enemy_id(_owner->GetID());
-				proto.set_islinker(true);
-				MessageSystemHelp::SendPacket(Net::MsgId::S2C_RequestLinkPlayer, proto, player);
+				if (_owner->CanSee(pair.second))
+				{
+					_owner->GetComponent<FsmComponent>()->ChangeState(new Pursuit(_owner, pair.second));
+					break;
+				}
 			}
 		}
 	}

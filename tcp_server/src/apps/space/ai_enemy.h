@@ -6,10 +6,10 @@
 #include "world.h"
 
 class World;
-class AIEnemy : public Entity<AIEnemy>, public IAwakeFromPoolSystem<int, int, Vector3>
+class AIEnemy : public Entity<AIEnemy>, public IAwakeFromPoolSystem<int, Vector3>
 {
 	int _id = 0;
-	int _hp = 0;
+	float _viewDist = 6.0f, _atkDist = 1.5f;
 	Vector3 _initPos;
 	Vector3 _currPos;
 	Vector3 _nextPos;
@@ -18,7 +18,7 @@ class AIEnemy : public Entity<AIEnemy>, public IAwakeFromPoolSystem<int, int, Ve
 	std::map<uint64, Player*>* _players = nullptr;
 
 public:
-	void Awake(int id, int hp, Vector3 pos) override;
+	void Awake(int id, Vector3 pos) override;
 
 	void BackToPool() override;
 
@@ -34,9 +34,11 @@ public:
 
 	int GetID() const { return _id; }
 
-	int GetHP() const { return _hp; }
-
 	void SetAllPlayer(std::map<uint64, Player*>* players) { _players = players; }
+
+	bool CanSee(Player* player);
+
+	bool CanAttack(Player* player);
 
 	Vector3& GetInitPos() { return _initPos; }
 

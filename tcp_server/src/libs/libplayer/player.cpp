@@ -80,7 +80,7 @@ void Player::ParserFromProto(const uint64 playerSn, const Net::Player& proto)
 	_name = _player.name();
 
 	// 内存中修改数据
-	for (auto pair : _components)
+	for (auto& pair : _components)
 	{
 		auto pPlayerComponent = dynamic_cast<PlayerComponent*>(pair.second);
 		if (pPlayerComponent == nullptr)
@@ -96,7 +96,7 @@ void Player::SerializeToProto(Net::Player* pProto) const
 	pProto->CopyFrom(_player);
 
 	// 内存中修改数据
-	for (auto pair : _components)
+	for (auto& pair : _components)
 	{
 		auto pPlayerComponent = dynamic_cast<PlayerComponent*>(pair.second);
 		if (pPlayerComponent == nullptr)
