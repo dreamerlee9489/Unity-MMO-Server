@@ -28,7 +28,8 @@ void FsmComponent::Update(AIEnemy* pEnemy)
 
 void FsmComponent::ResetState()
 {
-	ChangeState(new Idle((AIEnemy*)GetParent()));
+	if (_currState->GetStateType() != FsmStateType::Patrol)
+		ChangeState(new Idle((AIEnemy*)GetParent()));
 }
 
 void FsmComponent::ChangeState(FsmState* newState)
