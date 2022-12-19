@@ -1,6 +1,5 @@
 ﻿#include "world.h"
 #include "fsm_state.h"
-#include <cfloat>
 
 void World::Awake(int worldId)
 {
@@ -296,11 +295,7 @@ void World::HandleMove(Player* pPlayer, Packet* pPacket)
 
 	std::queue<Vector3> pos;
 	for (auto index = 0; index < proto.position_size(); index++)
-	{
-		Vector3 v3(0, 0, 0);
-		v3.ParserFromProto(positions->Get(index));
-		pos.push(v3);
-	}
+		pos.push(Vector3(positions->Get(index)));
 	const auto pComponentLastMap = pPlayer->GetComponent<PlayerComponentLastMap>();
 	pMoveComponent->Update(pos, pComponentLastMap->GetCur()->Position);
 
@@ -319,7 +314,15 @@ void World::HandlePlayerSyncState(Player* pPlayer, Packet* pPacket)
 void World::HandleRequestSyncEnemy(Player* pPlayer, Packet* pPacket)
 {
 	Proto::RequestSyncEnemy proto = pPacket->ParseToProto<Proto::RequestSyncEnemy>();
-	google::protobuf::int32 id = proto.enemy_id();
+	int id = proto.enemy_id();
+	if (!_enemies[id]->GetLinkPlayer())
+	{
+		_enemies[id]->SetLinkPlayer(pPlayer);
+		Proto::RequestLinkPlayer proto;
+		proto.set_enemy_id(_enemies[id]->GetID());
+		proto.set_islinker(true);
+		MessageSystemHelp::SendPacket(Proto::MsgId::S2C_RequestLinkPlayer, proto, pPlayer);
+	}
 	Proto::Enemy protoEnemy;
 	protoEnemy.set_id(id);
 	_enemies[id]->GetCurrPos().SerializeToProto(protoEnemy.mutable_pos());
@@ -330,15 +333,12 @@ void World::HandleRequestSyncEnemy(Player* pPlayer, Packet* pPacket)
 void World::HandleFsmSyncState(Packet* pPacket)
 {
 	Proto::FsmSyncState proto = pPacket->ParseToProto<Proto::FsmSyncState>();
-	int enemyId = proto.enemy_id();
 	Player* player = _playerManager->GetPlayerBySn(proto.player_sn());
-	_enemies[enemyId]->GetComponent<FsmComponent>()->SyncState(proto, player);
+	_enemies[proto.enemy_id()]->GetComponent<FsmComponent>()->SyncState(proto, player);
 }
 
 void World::HandleEnemy(Packet* pPacket)
 {
 	Proto::Enemy proto = pPacket->ParseToProto<Proto::Enemy>();
-	Vector3 pos;
-	pos.ParserFromProto(proto.pos());
-	_enemies[proto.id()]->SetCurrPos(pos);
+	_enemies[proto.id()]->SetCurrPos(Vector3(proto.pos()));
 }

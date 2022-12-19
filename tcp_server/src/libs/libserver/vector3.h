@@ -35,7 +35,7 @@ struct Vector3
 
 	Vector3() { X = 0; Y = 0; Z = 0; }
 	Vector3(const float x, const float y, const float z) :X(x), Y(y), Z(z) {}
-	Vector3(Proto::Vector3D& postion) { ParserFromProto(postion); }
+	Vector3(const Proto::Vector3D& postion) { ParserFromProto(postion); }
 
 	static float SqrDistance(Vector3& src, Vector3& dst);
 	void ParserFromProto(const Proto::Vector3D& position);
