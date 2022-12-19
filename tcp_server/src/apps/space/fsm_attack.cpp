@@ -17,7 +17,7 @@ void Attack::Enter()
 		proto.set_islinker(true);
 		MessageSystemHelp::SendPacket(Proto::MsgId::S2C_RequestLinkPlayer, proto, _target);
 	}
-	BroadcastState();
+	Broadcast();
 }
 
 void Attack::Execute()
@@ -32,7 +32,7 @@ void Attack::Exit()
 {
 }
 
-void Attack::BroadcastState()
+void Attack::Broadcast()
 {
 	Proto::FsmSyncState proto;
 	proto.set_state((int)FsmStateType::Attack);
@@ -42,7 +42,7 @@ void Attack::BroadcastState()
 	_owner->GetWorld()->BroadcastPacket(Proto::MsgId::S2C_FsmSyncState, proto);
 }
 
-void Attack::SendState(Player* pPlayer)
+void Attack::Singlecast(Player* pPlayer)
 {
 	Proto::FsmSyncState proto;
 	proto.set_state((int)FsmStateType::Attack);

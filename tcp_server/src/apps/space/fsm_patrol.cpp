@@ -12,7 +12,7 @@ void Patrol::Enter()
 {
 	_index = _dis(_eng);
 	_owner->SetPatrolPoint(_index);
-	BroadcastState();
+	Broadcast();
 }
 
 void Patrol::Execute()
@@ -45,7 +45,7 @@ void Patrol::Exit()
 {
 }
 
-void Patrol::BroadcastState()
+void Patrol::Broadcast()
 {
 	Proto::FsmSyncState proto;
 	proto.set_state((int)FsmStateType::Patrol);
@@ -55,7 +55,7 @@ void Patrol::BroadcastState()
 	_owner->GetWorld()->BroadcastPacket(Proto::MsgId::S2C_FsmSyncState, proto);
 }
 
-void Patrol::SendState(Player* pPlayer)
+void Patrol::Singlecast(Player* pPlayer)
 {
 	Proto::FsmSyncState proto;
 	proto.set_state((int)FsmStateType::Patrol);

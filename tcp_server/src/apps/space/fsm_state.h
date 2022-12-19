@@ -27,8 +27,8 @@ public:
 	virtual void Enter() = 0;
 	virtual void Execute() = 0;
 	virtual void Exit() = 0;
-	virtual void BroadcastState() = 0;
-	virtual void SendState(Player* player) = 0;
+	virtual void Broadcast() = 0;
+	virtual void Singlecast(Player* player) = 0;
 
 	Player* GetTarget() { return _target; }
 	FsmStateType GetStateType() { return _type; }

@@ -17,9 +17,9 @@ public:
 
 	void Exit() override;
 
-	void BroadcastState() override;
+	void Broadcast() override;
 
-	void SendState(Player* pPlayer) override;
+	void Singlecast(Player* pPlayer) override;
 };
 
 #endif // !FSM_IDLE

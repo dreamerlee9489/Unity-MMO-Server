@@ -327,7 +327,7 @@ void World::HandleRequestSyncEnemy(Player* pPlayer, Packet* pPacket)
 	protoEnemy.set_id(id);
 	_enemies[id]->GetCurrPos().SerializeToProto(protoEnemy.mutable_pos());
 	MessageSystemHelp::SendPacket(Proto::MsgId::S2C_Enemy, protoEnemy, pPlayer);
-	_enemies[id]->GetComponent<FsmComponent>()->GetCurrState()->SendState(pPlayer);
+	_enemies[id]->GetComponent<FsmComponent>()->GetCurrState()->Singlecast(pPlayer);
 }
 
 void World::HandleFsmSyncState(Packet* pPacket)

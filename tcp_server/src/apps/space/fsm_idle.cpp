@@ -9,7 +9,7 @@ Idle::Idle(AIEnemy* owner, Player* target) : FsmState(owner, target)
 
 void Idle::Enter()
 {
-	BroadcastState();
+	Broadcast();
 }
 
 void Idle::Execute()
@@ -52,7 +52,7 @@ void Idle::Exit()
 {
 }
 
-void Idle::BroadcastState()
+void Idle::Broadcast()
 {
 	Proto::FsmSyncState proto;
 	proto.set_state((int)FsmStateType::Idle);
@@ -62,7 +62,7 @@ void Idle::BroadcastState()
 	_owner->GetWorld()->BroadcastPacket(Proto::MsgId::S2C_FsmSyncState, proto);
 }
 
-void Idle::SendState(Player* pPlayer)
+void Idle::Singlecast(Player* pPlayer)
 {
 	Proto::FsmSyncState proto;
 	proto.set_state((int)FsmStateType::Idle);

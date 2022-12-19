@@ -17,7 +17,7 @@ void Pursuit::Enter()
 		proto.set_islinker(true);
 		MessageSystemHelp::SendPacket(Proto::MsgId::S2C_RequestLinkPlayer, proto, _target);
 	}
-	BroadcastState();
+	Broadcast();
 }
 
 void Pursuit::Execute()
@@ -32,7 +32,7 @@ void Pursuit::Exit()
 {
 }
 
-void Pursuit::BroadcastState()
+void Pursuit::Broadcast()
 {
 	Proto::FsmSyncState proto;
 	proto.set_state((int)FsmStateType::Pursuit);
@@ -42,7 +42,7 @@ void Pursuit::BroadcastState()
 	_owner->GetWorld()->BroadcastPacket(Proto::MsgId::S2C_FsmSyncState, proto);
 }
 
-void Pursuit::SendState(Player* pPlayer)
+void Pursuit::Singlecast(Player* pPlayer)
 {
 	Proto::FsmSyncState proto;
 	proto.set_state((int)FsmStateType::Pursuit);
