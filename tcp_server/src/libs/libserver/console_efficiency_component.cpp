@@ -48,7 +48,7 @@ void ConsoleEfficiencyComponent::HandleCmdEfficiency(Packet* pPacket)
     log << "| log time";
     std::cout << log.str().c_str() << std::endl;
 
-    for (const auto pair : _threads)
+    for (const auto &pair : _threads)
     {
         log.clear();
         log.seekg(std::ios::beg);
