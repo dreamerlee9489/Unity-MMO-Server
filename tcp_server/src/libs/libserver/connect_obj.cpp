@@ -133,9 +133,9 @@ bool ConnectObj::Recv()
 				}
 			}
 
-			//const google::protobuf::EnumDescriptor* descriptor = Proto::MsgId_descriptor();
-			//auto& name = descriptor->FindValueByNumber(pPacket->GetMsgId())->name();
-			//LOG_DEBUG("Recv msgid: " << name.c_str());
+			const google::protobuf::EnumDescriptor* descriptor = Proto::MsgId_descriptor();
+			auto& name = descriptor->FindValueByNumber(pPacket->GetMsgId())->name();
+			LOG_DEBUG("Recv msgid: " << name.c_str());
 
 			const auto msgId = pPacket->GetMsgId();
 			const bool isTcp = NetworkHelp::IsTcp(iNetworkType);
@@ -186,9 +186,9 @@ bool ConnectObj::HasSendData() const
 
 void ConnectObj::SendPacket(Packet* pPacket) const
 {
-	//const google::protobuf::EnumDescriptor* descriptor = Proto::MsgId_descriptor();
-	//auto& name = descriptor->FindValueByNumber(pPacket->GetMsgId())->name();
-	//LOG_DEBUG("Send msgid: " << name.c_str());
+	const google::protobuf::EnumDescriptor* descriptor = Proto::MsgId_descriptor();
+	auto& name = descriptor->FindValueByNumber(pPacket->GetMsgId())->name();
+	LOG_DEBUG("Send msgid: " << name.c_str());
 
 	_sendBuffer->AddPacket(pPacket);
 	DynamicPacketPool::GetInstance()->FreeObject(pPacket);
