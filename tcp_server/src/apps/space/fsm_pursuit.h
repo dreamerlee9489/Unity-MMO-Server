@@ -5,7 +5,7 @@
 class Pursuit : public FsmState
 {
 public:
-	Pursuit(AIEnemy* owner, Player* target);
+	Pursuit(AIEnemy* owner, Player* target) : FsmState(owner, target) {}
 
 	~Pursuit() = default;
 
@@ -18,6 +18,8 @@ public:
 	void Broadcast() override;
 
 	void Singlecast(Player* pPlayer) override;
+
+	FsmStateType GetStateType() override { return FsmStateType::Pursuit; }
 };
 
 #endif // !FSM_PURSUIT

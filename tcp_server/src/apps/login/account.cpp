@@ -123,7 +123,7 @@ void Account::HandleNetworkConnected(Packet* pPacket)
 	std::map<std::string, std::string> params;
 	params["account"] = pPlayer->GetAccount();
 	params["password"] = pPlayerCAccount->GetPassword();
-	// HTTP check: 192.168.10.128:80/member_login_t.php
+	// HTTP check: 192.168.120.129:80/member_login_t.php
 	MessageSystemHelp::SendHttpRequest(&httpIndentify, _httpIp, _httpPort, _method, &params);
 }
 

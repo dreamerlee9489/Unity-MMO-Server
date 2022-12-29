@@ -2,11 +2,6 @@
 #include "fsm_attack.h"
 #include "fsm_idle.h"
 
-Pursuit::Pursuit(AIEnemy* owner, Player* target) : FsmState(owner, target)
-{
-	_type = FsmStateType::Pursuit;
-}
-
 void Pursuit::Enter()
 {
 	if (_target != _owner->GetLinkPlayer())

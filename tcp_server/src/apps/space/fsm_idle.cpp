@@ -2,11 +2,6 @@
 #include "fsm_patrol.h"
 #include "fsm_pursuit.h"
 
-Idle::Idle(AIEnemy* owner, Player* target) : FsmState(owner, target)
-{
-	_type = FsmStateType::Idle;
-}
-
 void Idle::Enter()
 {
 	Broadcast();

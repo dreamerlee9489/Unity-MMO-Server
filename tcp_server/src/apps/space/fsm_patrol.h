@@ -8,11 +8,11 @@ class Idle;
 class Patrol : public FsmState
 {
 	int _index = 0;
-	std::default_random_engine _eng;
-	std::uniform_int_distribution<int> _dis = std::uniform_int_distribution<int>(0, 3);
+	static std::default_random_engine _eng;
+	static std::uniform_int_distribution<int> _dis;
 
 public:
-	Patrol(AIEnemy* owner, Player* target = nullptr);
+	Patrol(AIEnemy* owner, Player* target = nullptr) : FsmState(owner, target) {}
 
 	~Patrol() = default;
 
@@ -25,6 +25,8 @@ public:
 	void Broadcast() override;
 
 	void Singlecast(Player* pPlayer) override;
+
+	FsmStateType GetStateType() override { return FsmStateType::Patrol; }
 };
 
 #endif // !FSM_PATROL

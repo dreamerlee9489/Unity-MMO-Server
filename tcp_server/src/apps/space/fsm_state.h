@@ -17,7 +17,6 @@ class FsmState
 protected:
 	AIEnemy* _owner = nullptr;
 	Player* _target = nullptr;
-	FsmStateType _type = FsmStateType::Idle;
 	timeutil::Time _lastTime, _currTime, _timeElapsed;
 
 	FsmState(AIEnemy* owner, Player* target = nullptr);
@@ -29,9 +28,9 @@ public:
 	virtual void Exit() = 0;
 	virtual void Broadcast() = 0;
 	virtual void Singlecast(Player* player) = 0;
+	virtual FsmStateType GetStateType() = 0;
 
 	Player* GetTarget() { return _target; }
-	FsmStateType GetStateType() { return _type; }
 	static FsmState* GenFsmState(FsmStateType type, AIEnemy* owner, Player* target);
 };
 

@@ -1,12 +1,8 @@
 ﻿#include "fsm_patrol.h"
 #include "fsm_pursuit.h"
 
-Patrol::Patrol(AIEnemy* owner, Player* target) : FsmState(owner, target)
-{
-	_currTime = Global::GetInstance()->TimeTick;
-	_type = FsmStateType::Patrol;
-	_eng = std::default_random_engine(_currTime % UINT32_MAX + _owner->GetID());
-}
+std::default_random_engine Patrol::_eng = std::default_random_engine();
+std::uniform_int_distribution<int> Patrol::_dis = std::uniform_int_distribution<int>(0, 3);
 
 void Patrol::Enter()
 {

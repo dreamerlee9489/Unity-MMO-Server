@@ -5,7 +5,7 @@
 class Attack : public FsmState
 {
 public:
-	Attack(AIEnemy* owner, Player* target = nullptr);
+	Attack(AIEnemy* owner, Player* target = nullptr) : FsmState(owner, target) {}
 
 	~Attack() = default;
 
@@ -18,5 +18,7 @@ public:
 	void Broadcast() override;
 
 	void Singlecast(Player* pPlayer) override;
+
+	FsmStateType GetStateType() override { return FsmStateType::Attack; }
 };
 #endif // !FSM_ATTACK

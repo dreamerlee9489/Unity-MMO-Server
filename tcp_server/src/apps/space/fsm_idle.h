@@ -7,7 +7,7 @@ class Patrol;
 class Idle : public FsmState
 {
 public:
-	Idle(AIEnemy* owner, Player* target = nullptr);
+	Idle(AIEnemy* owner, Player* target = nullptr) : FsmState(owner, target) {}
 
 	~Idle() = default;
 
@@ -20,6 +20,8 @@ public:
 	void Broadcast() override;
 
 	void Singlecast(Player* pPlayer) override;
+
+	FsmStateType GetStateType() override { return FsmStateType::Idle; }
 };
 
 #endif // !FSM_IDLE
