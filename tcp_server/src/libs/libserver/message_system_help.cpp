@@ -196,7 +196,7 @@ void MessageSystemHelp::CreateConnect(NetworkType iType, TagType tagType, TagVal
 	protoConn.set_ip(ip.c_str());
 	protoConn.set_port(port);
 	DispatchPacket(Proto::MsgId::MI_NetworkConnect, protoConn, nullptr);
-	// CreateConnect: NetworkType=HttpConnector TagType=Account KeyStr=test KeyInt=0 ip=192.168.120.129 port=80
+	// CreateConnect: NetworkType=HttpConnector TagType=Account KeyStr=test KeyInt=0 ip=192.168.120.128 port=80
 }
 
 void MessageSystemHelp::SendHttpResponseBase(NetIdentify* pIdentify, int status_code, const char* content, int size)
