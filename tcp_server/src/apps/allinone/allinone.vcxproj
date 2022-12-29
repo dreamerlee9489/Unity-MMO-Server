@@ -156,6 +156,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <Text Include="..\appmgr\CMakeLists.txt" />
+    <Text Include="..\dbmgr\CMakeLists.txt" />
+    <Text Include="..\game\CMakeLists.txt" />
+    <Text Include="..\login\CMakeLists.txt" />
+    <Text Include="..\space\CMakeLists.txt" />
     <Text Include="CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>

@@ -2,6 +2,21 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Text Include="CMakeLists.txt" />
+    <Text Include="..\appmgr\CMakeLists.txt">
+      <Filter>appmgr</Filter>
+    </Text>
+    <Text Include="..\dbmgr\CMakeLists.txt">
+      <Filter>dbmgr</Filter>
+    </Text>
+    <Text Include="..\game\CMakeLists.txt">
+      <Filter>game</Filter>
+    </Text>
+    <Text Include="..\login\CMakeLists.txt">
+      <Filter>login</Filter>
+    </Text>
+    <Text Include="..\space\CMakeLists.txt">
+      <Filter>space</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />

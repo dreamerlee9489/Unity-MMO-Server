@@ -35,19 +35,15 @@ void Yaml::Awake()
 
 void Yaml::BackToPool()
 {
-    for (auto pObj : _configs)
-    {
+    for (auto &pObj : _configs)
         delete pObj.second;
-    }
     _configs.clear();
 }
 
 YamlConfig* Yaml::GetConfig(const APP_TYPE appType)
 {
     if (_configs.find(appType) != _configs.end())
-    {
         return _configs[appType];
-    }
 
     std::cout << "load config failed. appType:" << GetAppName(appType) << std::endl;
     return nullptr;
@@ -57,12 +53,6 @@ void Yaml::LoadConfig(const APP_TYPE appType, YAML::Node& config)
 {
     std::string appTypeName = GetAppName(appType);
     YAML::Node node = config[appTypeName];
-    if (&node == nullptr)
-    {
-        std::cout << "load config failed." << appTypeName.c_str() << std::endl;
-        return;
-    }
-
     YamlConfig* pYamlConfig;
 
     switch (appType)
@@ -197,7 +187,6 @@ void Yaml::LoadAppList(AppListConfig* pConfig, YAML::Node node) const
     for (int i = 0; i < size; i++)
     {
         AppListForOneConfig one;
-
         one.Id = node_apps[i]["id"].as<int>();
         one.Ip = node_apps[i]["ip"].as<std::string>();
         one.Port = node_apps[i]["port"].as<int>();

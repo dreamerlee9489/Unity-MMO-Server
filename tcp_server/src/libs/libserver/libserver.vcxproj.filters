@@ -497,9 +497,6 @@
     <Filter Include="entity\console\efficienty">
       <UniqueIdentifier>{75f57b0b-2bc9-41d3-b7ab-8c24bb8c728f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="protobuf">
-      <UniqueIdentifier>{50fb89df-82fe-4eb3-aaa8-23563c34617c}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="protobuf\msg.proto">
