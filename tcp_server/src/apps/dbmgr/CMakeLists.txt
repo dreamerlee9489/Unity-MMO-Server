@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.8)
 
 if (CMAKE_BUILD_TYPE STREQUAL Release) 
 	set(MyProjectName dbmgr)
@@ -12,25 +12,23 @@ message(STATUS "CMAKE_BUILD_TYPE:${CMAKE_BUILD_TYPE}")
 message(STATUS "ProjectName:${MyProjectName}")
 
 project(${MyProjectName})
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "../../../bin")
+set(CMAKE_CXX_FLAGS "-Wall -std=c++14 -pthread -DEPOLL -Wno-unknown-pragmas")
+set(CMAKE_CXX_FLAGS_DEBUG "-D_DEBUG -O0 -g -ggdb")
+set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG")
+
+include_directories(../../libs)
+include_directories(../../../../include/common)
+include_directories(/usr/local/include)
+
+link_directories(${CMAKE_BINARY_DIR}/../../../libs)
+link_directories(${CMAKE_BINARY_DIR}/../../../../libs/linux)
 
 aux_source_directory(. SRCS)
 aux_source_directory(../../libs/libserver SRCS)
 aux_source_directory(../../libs/libserver/protobuf SRCS)
 aux_source_directory(../../libs/libserver/mongoose SRCS)
 
-include_directories(../../libs)
-include_directories(../../../../include/common)
-include_directories(/usr/local/include)
-
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "../../../bin")
-
-set(CMAKE_CXX_FLAGS "-Wall -std=c++14 -pthread -lprotobuf -lyaml-cpp -llog4cplus -lhiredis -luuid -DEPOLL -Wno-unknown-pragmas")
-set(CMAKE_CXX_FLAGS_DEBUG "-D_DEBUG -O0 -g -ggdb")
-set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG")
-
-link_directories(${CMAKE_BINARY_DIR}/../../../libs)
-link_directories(${CMAKE_BINARY_DIR}/../../../../libs/linux)
-
 add_executable(${MyProjectName} ${SRCS})
-target_link_libraries(${MyProjectName} -L/usr/lib64/mysql -lmysqlclient -lpthread -lz -lm -lssl -lcrypto -ldl) # mysql
-#target_link_libraries(${MyProjectName} libserverd.a)
+target_link_libraries(${MyProjectName} -L/usr/lib64/mysql -lmysqlclient -lz -lm -lssl -lcrypto -ldl
+										 -lprotobuf -lyaml-cpp -llog4cplus -lhiredis -luuid )

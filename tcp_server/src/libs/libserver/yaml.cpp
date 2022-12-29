@@ -57,7 +57,7 @@ void Yaml::LoadConfig(const APP_TYPE appType, YAML::Node& config)
 {
     std::string appTypeName = GetAppName(appType);
     YAML::Node node = config[appTypeName];
-    if (node == nullptr)
+    if (&node == nullptr)
     {
         std::cout << "load config failed." << appTypeName.c_str() << std::endl;
         return;
