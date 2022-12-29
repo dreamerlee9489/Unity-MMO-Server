@@ -14,6 +14,7 @@
 #include "fsm_component.h"
 #include "ai_enemy.h"
 #include <vector>
+#include <cfloat>
 
 class Player;
 class AIEnemy;
