@@ -47,14 +47,14 @@ void NetworkListen::Awake(std::string ip, int port, NetworkType iType)
 
 	if (::bind(_masterSocket, reinterpret_cast<sockaddr*>(&addr), sizeof(addr)) < 0)
 	{
-		LOG_ERROR("::bind failed. err:" << _sock_err());
+		LOG_ERROR("::bind failed. err:" << _sock_err() << " ip=" << ip.c_str() << " port=" << addr.sin_port);
 		return;
 	}
 
 	const int maxConn = 1024; // SOMAXCONN
 	if (::listen(_masterSocket, maxConn) < 0)
 	{
-		std::cout << "::listen failed." << _sock_err() << std::endl;
+		std::cout << "::listen failed." << _sock_err() << " ip=" << ip.c_str() << " port=" << addr.sin_port << std::endl;
 		return;
 	}
 
