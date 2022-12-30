@@ -22,7 +22,8 @@ struct AppConfig :public YamlConfig
 
 struct CommonConfig : public AppConfig
 {
-	std::string Ip{ "127.0.0.1" };
+	std::string IntraIp{ "127.0.0.1" };
+	std::string ExtraIp{ "127.0.0.1" };
 	int Port{ 6661 };
 	int HttpPort{ 5051 };
 };

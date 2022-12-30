@@ -9,7 +9,8 @@ struct AppInfo
 {
 	APP_TYPE AppType;
 	int AppId;
-	std::string Ip;
+	std::string intraIp;
+	std::string extraIp;
 	int Port;
 	int Online;
 	SOCKET Socket;

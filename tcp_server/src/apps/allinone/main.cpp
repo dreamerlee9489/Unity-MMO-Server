@@ -53,7 +53,7 @@ int main(int argc, char* argv[])
 	// http listen
 	const auto pYaml = ComponentHelp::GetYaml();
 	const auto pCommonConfig = pYaml->GetIPEndPoint(pGlobal->GetCurAppType(), pGlobal->GetCurAppId());
-	pThreadMgr->CreateComponent<NetworkListen>(ListenThread, false, pCommonConfig->Ip, static_cast<int>(pCommonConfig->HttpPort));
+	pThreadMgr->CreateComponent<NetworkListen>(ListenThread, false, pCommonConfig->IntraIp, static_cast<int>(pCommonConfig->HttpPort));
 
 	// for http connector
 	pThreadMgr->CreateComponent<NetworkConnector>(ConnectThread, false, static_cast<int>(NetworkType::HttpConnector), static_cast<int>(0));

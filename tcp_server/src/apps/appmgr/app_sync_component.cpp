@@ -44,7 +44,7 @@ void AppSyncComponent::HandleHttpRequestLogin(Packet* pPacket)
     else
     {
         responseObj["returncode"] = (int)Proto::LoginHttpReturnCode::LHRC_OK;
-        responseObj["ip"] = info.Ip;
+        responseObj["ip"] = info.extraIp;
         responseObj["port"] = info.Port;
     }
 

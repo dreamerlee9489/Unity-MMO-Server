@@ -186,6 +186,6 @@ void NetworkLocator::HandleNetworkDisconnect(Packet* pPacket)
     const auto pCommonConfig = pYaml->GetIPEndPoint(appType, appId);
 
     TagValue tagValue{ "", appKey };
-    MessageSystemHelp::CreateConnect(NetworkType::TcpConnector, TagType::App, tagValue, pCommonConfig->Ip, pCommonConfig->Port);
+    MessageSystemHelp::CreateConnect(NetworkType::TcpConnector, TagType::App, tagValue, pCommonConfig->IntraIp, pCommonConfig->Port);
 
 }

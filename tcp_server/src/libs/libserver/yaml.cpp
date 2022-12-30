@@ -112,7 +112,8 @@ void Yaml::LoadConfig(const APP_TYPE appType, YAML::Node& config)
     auto pCommon = dynamic_cast<CommonConfig*>(pYamlConfig);
     if (pCommon != nullptr)
     {
-        pCommon->Ip = node["ip"].as<std::string>();
+        pCommon->IntraIp = node["intraIp"].as<std::string>();
+        pCommon->ExtraIp = node["extraIp"].as<std::string>();
         pCommon->Port = node["port"].as<int>();
 
         if (node["http_port"])
@@ -188,7 +189,8 @@ void Yaml::LoadAppList(AppListConfig* pConfig, YAML::Node node) const
     {
         AppListForOneConfig one;
         one.Id = node_apps[i]["id"].as<int>();
-        one.Ip = node_apps[i]["ip"].as<std::string>();
+        one.IntraIp = node_apps[i]["intraIp"].as<std::string>();
+        one.ExtraIp = node_apps[i]["extraIp"].as<std::string>();
         one.Port = node_apps[i]["port"].as<int>();
         pConfig->Apps.push_back(one);
     }

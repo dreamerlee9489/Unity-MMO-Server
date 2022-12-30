@@ -43,14 +43,14 @@ void NetworkConnector::Awake(int iType, int mixConnectAppType)
         {
             appType = APP_APPMGR;
             const auto pCommonConfig = pYaml->GetIPEndPoint(appType, 0);
-            CreateConnector(appType, 0, pCommonConfig->Ip, pCommonConfig->Port);
+            CreateConnector(appType, 0, pCommonConfig->IntraIp, pCommonConfig->Port);
         }
 
         if ((mixConnectAppType & APP_DB_MGR) != 0)
         {
             appType = APP_DB_MGR;
             const auto pCommonConfig = pYaml->GetIPEndPoint(appType, 0);
-            CreateConnector(appType, 0, pCommonConfig->Ip, pCommonConfig->Port);
+            CreateConnector(appType, 0, pCommonConfig->IntraIp, pCommonConfig->Port);
         }
 
         if ((mixConnectAppType & APP_LOGIN) != 0)
@@ -59,7 +59,7 @@ void NetworkConnector::Awake(int iType, int mixConnectAppType)
             auto pLoginConfig = dynamic_cast<LoginConfig*>(pYaml->GetConfig(appType));
             for (auto one : pLoginConfig->Apps)
             {
-                CreateConnector(appType, one.Id, one.Ip, one.Port);
+                CreateConnector(appType, one.Id, one.IntraIp, one.Port);
             }
         }
 
@@ -67,9 +67,9 @@ void NetworkConnector::Awake(int iType, int mixConnectAppType)
         {
             appType = APP_SPACE;
             auto pLoginConfig = dynamic_cast<SpaceConfig*>(pYaml->GetConfig(appType));
-            for (auto one : pLoginConfig->Apps)
+            for (auto &one : pLoginConfig->Apps)
             {
-                CreateConnector(appType, one.Id, one.Ip, one.Port);
+                CreateConnector(appType, one.Id, one.IntraIp, one.Port);
             }
         }
     }

@@ -14,7 +14,8 @@ bool AppInfo::Parse(Proto::AppInfoSync proto)
 	if (pConfig == nullptr)
 		return false;
 
-	this->Ip = pConfig->Ip;
+	this->intraIp = pConfig->IntraIp;
+	this->extraIp = pConfig->ExtraIp;
 	this->Port = pConfig->Port;
 	return true;
 }
@@ -118,7 +119,7 @@ void SyncComponent::CmdShow()
 {
 	std::stringstream os;
 	os << "----" << GetAppName(Global::GetInstance()->GetCurAppType()) << "----\r\n";
-	for (auto pair : _apps)
+	for (auto &pair : _apps)
 	{
 		os << "appId:" << std::setw(4) << pair.first <<
 			" type:" << GetAppName(pair.second.AppType) <<

@@ -82,7 +82,7 @@ void Account::HandleAppInfoListSync(Packet* pPacket)
 {
 	_apps.clear();
 	auto proto = pPacket->ParseToProto<Proto::AppInfoListSync>();
-	for (auto one : proto.apps())
+	for (auto &one : proto.apps())
 	{
 		Parse(one, INVALID_SOCKET);
 	}
@@ -123,7 +123,7 @@ void Account::HandleNetworkConnected(Packet* pPacket)
 	std::map<std::string, std::string> params;
 	params["account"] = pPlayer->GetAccount();
 	params["password"] = pPlayerCAccount->GetPassword();
-	// HTTP check: 192.168.120.128:80/member_login_t.php
+	// HTTP check: 192.168.120.129:80/member_login_t.php
 	MessageSystemHelp::SendHttpRequest(&httpIndentify, _httpIp, _httpPort, _method, &params);
 }
 
@@ -467,7 +467,7 @@ void Account::HandleTokenToRedisRs(Packet* pPacket)
 	{
 		protoToken.set_return_code(Proto::GameToken_ReturnCode_GameToken_OK);
 
-		protoToken.set_ip(info.Ip.c_str());
+		protoToken.set_ip(info.extraIp.c_str());
 		protoToken.set_port(info.Port);
 		protoToken.set_token(token);
 	}

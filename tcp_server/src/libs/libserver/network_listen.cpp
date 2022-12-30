@@ -93,7 +93,7 @@ void NetworkListen::Awake(int appType, int appId)
 		return;
 	}
 
-	Awake(pCommonConfig->Ip, pCommonConfig->Port, NetworkType::TcpListen);
+	Awake(pCommonConfig->IntraIp, pCommonConfig->Port, NetworkType::TcpListen);
 }
 
 void NetworkListen::Awake(std::string ip, int port)
