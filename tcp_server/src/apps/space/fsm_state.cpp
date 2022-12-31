@@ -3,6 +3,7 @@
 #include "fsm_patrol.h"
 #include "fsm_pursuit.h"
 #include "fsm_attack.h"
+#include "fsm_death.h"
 
 FsmState::FsmState(AIEnemy* owner, Player* target) : _owner(owner), _target(target)
 {
@@ -23,6 +24,8 @@ FsmState* FsmState::GenFsmState(FsmStateType type, AIEnemy* owner, Player* targe
 		return new Pursuit(owner, target);
 	case FsmStateType::Attack:
 		return new Attack(owner, target);
+	case FsmStateType::Death:
+		return new Death(owner);
 	default:
 		return nullptr;
 	}

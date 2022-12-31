@@ -110,9 +110,11 @@ enum MsgId : int {
   S2C_EnterWorld = 1501,
   S2G_SyncPlayer = 1502,
   S2C_RoleAppear = 1503,
-  S2C_RoleDisAppear = 1504,
+  S2C_RoleDisappear = 1504,
   C2S_Move = 1505,
   S2C_Move = 1506,
+  S2C_PlayerItems = 1507,
+  C2S_PlayerItems = 1508,
   MI_BroadcastCreateWorld = 2001,
   MI_BroadcastCreateWorldProxy = 2002,
   MI_WorldSyncToGather = 3001,
@@ -141,17 +143,19 @@ enum MsgId : int {
   C2S_FsmSyncState = 30003,
   C2S_PlayerSyncState = 30004,
   S2C_PlayerSyncState = 30005,
-  C2S_Enemy = 30006,
-  S2C_Enemy = 30007,
+  C2S_EnemySyncPos = 30006,
+  S2C_EnemySyncPos = 30007,
   C2S_RequestSyncEnemy = 30008,
   S2C_RequestSyncEnemy = 30009,
   S2C_RequestLinkPlayer = 30010,
+  C2S_AtkAnimEvent = 30011,
+  S2C_AtkAnimEvent = 30012,
   MsgId_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
   MsgId_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
 };
 bool MsgId_IsValid(int value);
 constexpr MsgId MsgId_MIN = None;
-constexpr MsgId MsgId_MAX = S2C_RequestLinkPlayer;
+constexpr MsgId MsgId_MAX = S2C_AtkAnimEvent;
 constexpr int MsgId_ARRAYSIZE = MsgId_MAX + 1;
 
 const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* MsgId_descriptor();

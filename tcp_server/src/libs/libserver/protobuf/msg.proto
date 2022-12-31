@@ -402,16 +402,16 @@ message RoleAppear {
 	repeated Role role = 1;
 }
 
-message RoleDisAppear {
+message RoleDisappear {
 	uint64 sn = 1;
 }
 
 message Move {
 	uint64 player_sn = 1;
-	repeated Vector3D position = 3;
+	repeated Vector3D position = 2;
 }
 
-message Enemy {
+message EnemySyncPos {
 	int32 id = 1;
 	Vector3D pos = 2;
 }
@@ -419,8 +419,8 @@ message Enemy {
 message FsmSyncState {
 	int32 state = 1;
 	int32 code = 2;
-	int32 enemy_id = 5;
-	uint64 player_sn = 6;
+	int32 enemy_id = 3;
+	uint64 player_sn = 4;
 }
 
 message PlayerSyncState {
@@ -440,4 +440,11 @@ message RequestSyncEnemy {
 message RequestLinkPlayer {
 	int32 enemy_id = 1;
 	bool isLinker = 2;
+}
+
+message AtkAnimEvent {
+	uint64 player_sn = 1;
+	int32 enemy_id = 2;
+	int32 curr_hp = 3;
+	bool atkEnemy = 4;
 }

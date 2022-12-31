@@ -26,14 +26,15 @@ public:
 	void BroadcastPacket(Proto::MsgId msgId, google::protobuf::Message& proto);
 	void BroadcastPacket(Proto::MsgId msgId, google::protobuf::Message& proto, std::set<uint64> players);
 	Player* GetNearestPlayer(Vector3& pos);
-	PlayerManagerComponent* GetPlayerManager() const { return _playerManager; }
+	PlayerManagerComponent* GetPlayerManager() const { return _playerMgr; }
 
 protected:
 	Player* GetPlayer(NetIdentify* pIdentify);
 	void HandleNetworkDisconnect(Packet* pPacket);
 	void HandleSyncPlayer(Packet* pPacket);
 	void HandleFsmSyncState(Packet* pPacket);
-	void HandleEnemy(Packet* pPacket);
+	void HandleEnemySyncPos(Packet* pPacket);
+	void HandleAtkAnimEvent(Packet* pPacket);
 	void HandleRequestSyncPlayer(Player* pPlayer, Packet* pPacket);
 	void HandleG2SRemovePlayer(Player* pPlayer, Packet* pPacket);
 	void HandleMove(Player* pPlayer, Packet* pPacket);
@@ -45,8 +46,8 @@ private:
 	void SyncAppearTimer();
 
 	// 缓存1秒内增加或是删除的玩家
-	std::set<uint64> _addPlayer;
+	std::set<uint64> _adds;
 	std::vector<AIEnemy*> _enemies;
-	PlayerManagerComponent* _playerManager;
+	PlayerManagerComponent* _playerMgr;
 };
 

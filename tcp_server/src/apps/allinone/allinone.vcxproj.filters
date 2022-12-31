@@ -140,6 +140,9 @@
     <ClCompile Include="..\space\fsm_state.cpp">
       <Filter>space\ai</Filter>
     </ClCompile>
+    <ClCompile Include="..\space\fsm_death.cpp">
+      <Filter>space\ai</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="login">
@@ -352,6 +355,9 @@
       <Filter>space\ai</Filter>
     </ClInclude>
     <ClInclude Include="..\space\fsm_state.h">
+      <Filter>space\ai</Filter>
+    </ClInclude>
+    <ClInclude Include="..\space\fsm_death.h">
       <Filter>space\ai</Filter>
     </ClInclude>
   </ItemGroup>

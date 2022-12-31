@@ -1,11 +1,13 @@
 ﻿#include "ai_enemy.h"
+#include "fsm_death.h"
 
-void AIEnemy::Awake(int id, Vector3 pos)
+void AIEnemy::Awake(ResourceEnemy& cfg)
 {
-	_id = id;
-	_initPos = pos;
-	_currPos = pos;
-	_nextPos = pos;
+	_id = cfg.id;
+	_lv = cfg.level;
+	_hp = cfg.initHp;
+	_atk = cfg.initAtk;
+	_nextPos = _currPos = _initPos = cfg.initPos;
 }
 
 void AIEnemy::BackToPool()
@@ -75,4 +77,12 @@ bool AIEnemy::CanAttack(Player* player)
 	if (_currPos.GetDistance(player->GetCurrPos()) <= _atkDist)
 		return true;
 	return false;
+}
+
+int AIEnemy::GetDamage(int damage)
+{
+	_hp = max(_hp - damage, 0);
+	if (!_hp)
+		GetComponent<FsmComponent>()->ChangeState(new Death(this));
+	return _hp;
 }

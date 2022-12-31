@@ -193,6 +193,7 @@
     <ClCompile Include="..\space\console_cmd_world.cpp" />
     <ClCompile Include="..\space\fsm_attack.cpp" />
     <ClCompile Include="..\space\fsm_component.cpp" />
+    <ClCompile Include="..\space\fsm_death.cpp" />
     <ClCompile Include="..\space\fsm_idle.cpp" />
     <ClCompile Include="..\space\fsm_patrol.cpp" />
     <ClCompile Include="..\space\fsm_pursuit.cpp" />
@@ -235,6 +236,7 @@
     <ClInclude Include="..\space\console_cmd_world.h" />
     <ClInclude Include="..\space\fsm_attack.h" />
     <ClInclude Include="..\space\fsm_component.h" />
+    <ClInclude Include="..\space\fsm_death.h" />
     <ClInclude Include="..\space\fsm_idle.h" />
     <ClInclude Include="..\space\fsm_patrol.h" />
     <ClInclude Include="..\space\fsm_pursuit.h" />

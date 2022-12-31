@@ -20,6 +20,10 @@ public:
 	std::string GetAccount() const;
 	std::string GetName() const;
 	uint64 GetPlayerSN() const;
+	int GetLv() const { return _lv; }
+	int GetHp() const { return _hp; }
+	int GetAtk() const { return _atk; }
+	int GetDamage(int damage);
 	Vector3& GetCurrPos() { return lastMap->GetCur()->Position; }
 
 	Proto::Player& GetPlayerProto();
@@ -31,6 +35,7 @@ protected:
 	uint64 _playerSn{ 0 };
 	std::string _account{ "" };
 	std::string _name{ "" };
+	int _lv = 1, _hp = 1000, _atk = 10;
 	Proto::Player _player;
 };
 

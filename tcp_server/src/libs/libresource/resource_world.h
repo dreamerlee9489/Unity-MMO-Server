@@ -10,7 +10,9 @@ struct ResourceEnemy
 {
 	int id = 0;
 	std::string name = "";
+	int level = 0;
 	int initHp = 0;
+	int initAtk = 0;
 	Vector3 initPos{ 0, 0, 0 };
 };
 

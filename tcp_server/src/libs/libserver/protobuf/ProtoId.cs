@@ -24,7 +24,7 @@ namespace Proto {
     static ProtoIdReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "Cg5wcm90b19pZC5wcm90bxIFUHJvdG8q2BAKBU1zZ0lkEggKBE5vbmUQABIV",
+            "Cg5wcm90b19pZC5wcm90bxIFUHJvdG8qwhEKBU1zZ0lkEggKBE5vbmUQABIV",
             "ChFNSV9OZXR3b3JrQ29ubmVjdBABEhcKE01JX05ldHdvcmtDb25uZWN0ZWQQ",
             "AhIUChBNSV9OZXR3b3JrTGlzdGVuEAMSFwoTTUlfTmV0d29ya0xpc3Rlbktl",
             "eRAEEhgKFE1JX05ldHdvcmtEaXNjb25uZWN0EAoSGgoWTUlfTmV0d29ya0Rp",
@@ -52,27 +52,29 @@ namespace Proto {
             "X1JlbW92ZVBsYXllchDbCBITCg5DMkdfRW50ZXJXb3JsZBDcCBITCg5HMk1f",
             "UXVlcnlXb3JsZBDdCBIVChBHMk1fUXVlcnlXb3JsZFJzEN4IEhMKDlMyQ19F",
             "bnRlcldvcmxkEN0LEhMKDlMyR19TeW5jUGxheWVyEN4LEhMKDlMyQ19Sb2xl",
-            "QXBwZWFyEN8LEhYKEVMyQ19Sb2xlRGlzQXBwZWFyEOALEg0KCEMyU19Nb3Zl",
-            "EOELEg0KCFMyQ19Nb3ZlEOILEhwKF01JX0Jyb2FkY2FzdENyZWF0ZVdvcmxk",
-            "ENEPEiEKHE1JX0Jyb2FkY2FzdENyZWF0ZVdvcmxkUHJveHkQ0g8SGQoUTUlf",
-            "V29ybGRTeW5jVG9HYXRoZXIQuRcSHgoZTUlfV29ybGRQcm94eVN5bmNUb0dh",
-            "dGhlchC6FxIgChtNSV9BY2NvdW50U3luY09ubGluZVRvUmVkaXMQoR8SIgod",
-            "TUlfQWNjb3VudERlbGV0ZU9ubGluZVRvUmVkaXMQoh8SHwoaTUlfUGxheWVy",
-            "U3luY09ubGluZVRvUmVkaXMQox8SIQocTUlfUGxheWVyRGVsZXRlT25saW5l",
-            "VG9SZWRpcxCkHxIWChFNSV9Sb2JvdFN5bmNTdGF0ZRCJJxITCg5NSV9Sb2Jv",
-            "dENyZWF0ZRCKJxIRCgxNSV9IdHRwQmVnaW4QkE4SGQoUTUlfSHR0cElubmVy",
-            "UmVzcG9uc2UQkU4SFgoRTUlfSHR0cFJlcXVlc3RCYWQQkk4SGAoTTUlfSHR0",
-            "cFJlcXVlc3RMb2dpbhCTThIPCgpNSV9IdHRwRW5kEINSEhgKE01JX0h0dHBP",
-            "dXRlclJlcXVlc3QQhFISGQoUTUlfSHR0cE91dGVyUmVzcG9uc2UQhVISEgoM",
-            "TUlfQ21kVGhyZWFkEKGcARIPCglNSV9DbWRBcHAQopwBEhYKEE1JX0NtZFdv",
-            "cmxkUHJveHkQo5wBEhEKC01JX0NtZFdvcmxkEKScARISCgxNSV9DbWRDcmVh",
-            "dGUQpZwBEhYKEE1JX0NtZEVmZmljaWVuY3kQppwBEhMKDU1JX0VmZmljaWVu",
-            "Y3kQp5wBEhYKEFMyQ19Gc21TeW5jU3RhdGUQsuoBEhYKEEMyU19Gc21TeW5j",
-            "U3RhdGUQs+oBEhkKE0MyU19QbGF5ZXJTeW5jU3RhdGUQtOoBEhkKE1MyQ19Q",
-            "bGF5ZXJTeW5jU3RhdGUQteoBEg8KCUMyU19FbmVteRC26gESDwoJUzJDX0Vu",
-            "ZW15ELfqARIaChRDMlNfUmVxdWVzdFN5bmNFbmVteRC46gESGgoUUzJDX1Jl",
-            "cXVlc3RTeW5jRW5lbXkQueoBEhsKFVMyQ19SZXF1ZXN0TGlua1BsYXllchC6",
-            "6gFiBnByb3RvMw=="));
+            "QXBwZWFyEN8LEhYKEVMyQ19Sb2xlRGlzYXBwZWFyEOALEg0KCEMyU19Nb3Zl",
+            "EOELEg0KCFMyQ19Nb3ZlEOILEhQKD1MyQ19QbGF5ZXJJdGVtcxDjCxIUCg9D",
+            "MlNfUGxheWVySXRlbXMQ5AsSHAoXTUlfQnJvYWRjYXN0Q3JlYXRlV29ybGQQ",
+            "0Q8SIQocTUlfQnJvYWRjYXN0Q3JlYXRlV29ybGRQcm94eRDSDxIZChRNSV9X",
+            "b3JsZFN5bmNUb0dhdGhlchC5FxIeChlNSV9Xb3JsZFByb3h5U3luY1RvR2F0",
+            "aGVyELoXEiAKG01JX0FjY291bnRTeW5jT25saW5lVG9SZWRpcxChHxIiCh1N",
+            "SV9BY2NvdW50RGVsZXRlT25saW5lVG9SZWRpcxCiHxIfChpNSV9QbGF5ZXJT",
+            "eW5jT25saW5lVG9SZWRpcxCjHxIhChxNSV9QbGF5ZXJEZWxldGVPbmxpbmVU",
+            "b1JlZGlzEKQfEhYKEU1JX1JvYm90U3luY1N0YXRlEIknEhMKDk1JX1JvYm90",
+            "Q3JlYXRlEIonEhEKDE1JX0h0dHBCZWdpbhCQThIZChRNSV9IdHRwSW5uZXJS",
+            "ZXNwb25zZRCRThIWChFNSV9IdHRwUmVxdWVzdEJhZBCSThIYChNNSV9IdHRw",
+            "UmVxdWVzdExvZ2luEJNOEg8KCk1JX0h0dHBFbmQQg1ISGAoTTUlfSHR0cE91",
+            "dGVyUmVxdWVzdBCEUhIZChRNSV9IdHRwT3V0ZXJSZXNwb25zZRCFUhISCgxN",
+            "SV9DbWRUaHJlYWQQoZwBEg8KCU1JX0NtZEFwcBCinAESFgoQTUlfQ21kV29y",
+            "bGRQcm94eRCjnAESEQoLTUlfQ21kV29ybGQQpJwBEhIKDE1JX0NtZENyZWF0",
+            "ZRClnAESFgoQTUlfQ21kRWZmaWNpZW5jeRCmnAESEwoNTUlfRWZmaWNpZW5j",
+            "eRCnnAESFgoQUzJDX0ZzbVN5bmNTdGF0ZRCy6gESFgoQQzJTX0ZzbVN5bmNT",
+            "dGF0ZRCz6gESGQoTQzJTX1BsYXllclN5bmNTdGF0ZRC06gESGQoTUzJDX1Bs",
+            "YXllclN5bmNTdGF0ZRC16gESFgoQQzJTX0VuZW15U3luY1BvcxC26gESFgoQ",
+            "UzJDX0VuZW15U3luY1BvcxC36gESGgoUQzJTX1JlcXVlc3RTeW5jRW5lbXkQ",
+            "uOoBEhoKFFMyQ19SZXF1ZXN0U3luY0VuZW15ELnqARIbChVTMkNfUmVxdWVz",
+            "dExpbmtQbGF5ZXIQuuoBEhYKEEMyU19BdGtBbmltRXZlbnQQu+oBEhYKEFMy",
+            "Q19BdGtBbmltRXZlbnQQvOoBYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Proto.MsgId), }, null, null));
@@ -278,14 +280,16 @@ namespace Proto {
     /// <summary>
     /// 玩家消失
     /// </summary>
-    [pbr::OriginalName("S2C_RoleDisAppear")] S2CRoleDisAppear = 1504,
+    [pbr::OriginalName("S2C_RoleDisappear")] S2CRoleDisappear = 1504,
     /// <summary>
     /// 玩家移动
     /// </summary>
     [pbr::OriginalName("C2S_Move")] C2SMove = 1505,
     [pbr::OriginalName("S2C_Move")] S2CMove = 1506,
+    [pbr::OriginalName("S2C_PlayerItems")] S2CPlayerItems = 1507,
+    [pbr::OriginalName("C2S_PlayerItems")] C2SPlayerItems = 1508,
     /// <summary>
-    /// 
+    /// 进入地图，创建地图广播
     /// </summary>
     [pbr::OriginalName("MI_BroadcastCreateWorld")] MiBroadcastCreateWorld = 2001,
     /// <summary>
@@ -363,11 +367,13 @@ namespace Proto {
     [pbr::OriginalName("C2S_FsmSyncState")] C2SFsmSyncState = 30003,
     [pbr::OriginalName("C2S_PlayerSyncState")] C2SPlayerSyncState = 30004,
     [pbr::OriginalName("S2C_PlayerSyncState")] S2CPlayerSyncState = 30005,
-    [pbr::OriginalName("C2S_Enemy")] C2SEnemy = 30006,
-    [pbr::OriginalName("S2C_Enemy")] S2CEnemy = 30007,
+    [pbr::OriginalName("C2S_EnemySyncPos")] C2SEnemySyncPos = 30006,
+    [pbr::OriginalName("S2C_EnemySyncPos")] S2CEnemySyncPos = 30007,
     [pbr::OriginalName("C2S_RequestSyncEnemy")] C2SRequestSyncEnemy = 30008,
     [pbr::OriginalName("S2C_RequestSyncEnemy")] S2CRequestSyncEnemy = 30009,
     [pbr::OriginalName("S2C_RequestLinkPlayer")] S2CRequestLinkPlayer = 30010,
+    [pbr::OriginalName("C2S_AtkAnimEvent")] C2SAtkAnimEvent = 30011,
+    [pbr::OriginalName("S2C_AtkAnimEvent")] S2CAtkAnimEvent = 30012,
   }
 
   #endregion

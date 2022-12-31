@@ -18,6 +18,8 @@ enum Gender {
 message PlayerBase {
 	Gender gender = 1;
 	int32 level = 2;
+	int32 hp = 3;
+	int32 xp = 4;
 }
 
 // 登录上一次的地图，两种情况
@@ -40,4 +42,14 @@ message Player {
 	string name = 2;
 	PlayerBase base = 3;
 	PlayerMisc misc = 4;
+	PlayerItems items = 5;
+}
+
+message ItemData {
+	int32 id = 1;
+	int32 num = 2;
+}
+
+message PlayerItems {
+	repeated ItemData items = 1;
 }

@@ -27,7 +27,7 @@ void FsmComponent::BackToPool()
 
 void FsmComponent::Update(AIEnemy* pEnemy)
 {
-	if (_started)
+	if (_started && _currState)
 		_currState->Execute();
 }
 

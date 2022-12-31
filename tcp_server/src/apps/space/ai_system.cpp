@@ -26,8 +26,7 @@ void AISystem::Update(EntitySystem* pEntities)
 		for (auto iter = pMap->begin(); iter != pMap->end(); ++iter)
 		{
 			FsmComponent* pFsmComponent = (FsmComponent*)iter->second;
-			AIEnemy* pEnemy = pFsmComponent->GetParent<AIEnemy>();
-			pFsmComponent->Update(pEnemy);
+			pFsmComponent->Update(pFsmComponent->GetParent<AIEnemy>());
 		}
 	}
 }

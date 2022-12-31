@@ -8,7 +8,7 @@
 #include "libplayer/player.h"
 #include "ai_enemy.h"
 
-enum class FsmStateType { Idle, Patrol, Pursuit, Attack };
+enum class FsmStateType { Idle, Patrol, Pursuit, Attack, Death };
 
 class AIEnemy;
 class Player;

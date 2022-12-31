@@ -67,6 +67,11 @@ Proto::Player& Player::GetPlayerProto()
 	return _player;
 }
 
+int Player::GetDamage(int damage)
+{
+	return _hp = max(_hp - damage, 0);
+}
+
 void Player::ParseFromStream(const uint64 playerSn, std::stringstream* pOpStream)
 {
 	_playerSn = playerSn;

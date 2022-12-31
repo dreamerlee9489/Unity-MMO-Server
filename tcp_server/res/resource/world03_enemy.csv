@@ -1,4 +1,4 @@
-EnemyID,ResName,InitHp,InitPos
-0,Enemy_Soldier_01,100,(-15;0;15)
-1,Enemy_Soldier_01,100,(-15;0;25)
-2,Enemy_Soldier_01,100,(-20;0;20)
+EnemyID,ResName,Level,InitHp,InitAtk,InitPos
+0,Enemy_Soldier_01,1,100,10,(-15;0;15)
+1,Enemy_Soldier_01,1,100,10,(-15;0;25)
+2,Enemy_Soldier_01,1,100,10,(-20;0;20)

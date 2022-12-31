@@ -4,7 +4,6 @@
 
 ResourceWorld::ResourceWorld(std::map<std::string, int>& head) : ResourceBase(head)
 {
-
 }
 
 std::string ResourceWorld::GetName() const
@@ -86,8 +85,10 @@ bool ResourceWorld::ParseEnemyCSV()
 			ResourceEnemy enemy;
 			enemy.id = std::stoi(properties[0]);
 			enemy.name = properties[1];
-			enemy.initHp = std::stoi(properties[2]);
-			enemy.initPos = GetVector(properties[3]);
+			enemy.level = std::stoi(properties[2]);
+			enemy.initHp = std::stoi(properties[3]);
+			enemy.initAtk = std::stoi(properties[4]);
+			enemy.initPos = GetVector(properties[5]);
 			_enemies.push_back(enemy);
 		}
 	}

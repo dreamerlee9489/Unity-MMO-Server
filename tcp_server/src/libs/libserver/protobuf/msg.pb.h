@@ -49,7 +49,7 @@ struct TableStruct_msg_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxillaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[69]
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[70]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
@@ -84,6 +84,9 @@ extern AppInfoSyncDefaultTypeInternal _AppInfoSync_default_instance_;
 class AppRegister;
 class AppRegisterDefaultTypeInternal;
 extern AppRegisterDefaultTypeInternal _AppRegister_default_instance_;
+class AtkAnimEvent;
+class AtkAnimEventDefaultTypeInternal;
+extern AtkAnimEventDefaultTypeInternal _AtkAnimEvent_default_instance_;
 class BroadcastCreateWorld;
 class BroadcastCreateWorldDefaultTypeInternal;
 extern BroadcastCreateWorldDefaultTypeInternal _BroadcastCreateWorld_default_instance_;
@@ -123,9 +126,9 @@ extern CreateWorldDefaultTypeInternal _CreateWorld_default_instance_;
 class Efficiency;
 class EfficiencyDefaultTypeInternal;
 extern EfficiencyDefaultTypeInternal _Efficiency_default_instance_;
-class Enemy;
-class EnemyDefaultTypeInternal;
-extern EnemyDefaultTypeInternal _Enemy_default_instance_;
+class EnemySyncPos;
+class EnemySyncPosDefaultTypeInternal;
+extern EnemySyncPosDefaultTypeInternal _EnemySyncPos_default_instance_;
 class EnterWorld;
 class EnterWorldDefaultTypeInternal;
 extern EnterWorldDefaultTypeInternal _EnterWorld_default_instance_;
@@ -228,9 +231,9 @@ extern RoleDefaultTypeInternal _Role_default_instance_;
 class RoleAppear;
 class RoleAppearDefaultTypeInternal;
 extern RoleAppearDefaultTypeInternal _RoleAppear_default_instance_;
-class RoleDisAppear;
-class RoleDisAppearDefaultTypeInternal;
-extern RoleDisAppearDefaultTypeInternal _RoleDisAppear_default_instance_;
+class RoleDisappear;
+class RoleDisappearDefaultTypeInternal;
+extern RoleDisappearDefaultTypeInternal _RoleDisappear_default_instance_;
 class SavePlayer;
 class SavePlayerDefaultTypeInternal;
 extern SavePlayerDefaultTypeInternal _SavePlayer_default_instance_;
@@ -275,6 +278,7 @@ template<> ::Proto::AccountSyncOnlineToRedis* Arena::CreateMaybeMessage<::Proto:
 template<> ::Proto::AppInfoListSync* Arena::CreateMaybeMessage<::Proto::AppInfoListSync>(Arena*);
 template<> ::Proto::AppInfoSync* Arena::CreateMaybeMessage<::Proto::AppInfoSync>(Arena*);
 template<> ::Proto::AppRegister* Arena::CreateMaybeMessage<::Proto::AppRegister>(Arena*);
+template<> ::Proto::AtkAnimEvent* Arena::CreateMaybeMessage<::Proto::AtkAnimEvent>(Arena*);
 template<> ::Proto::BroadcastCreateWorld* Arena::CreateMaybeMessage<::Proto::BroadcastCreateWorld>(Arena*);
 template<> ::Proto::BroadcastCreateWorldProxy* Arena::CreateMaybeMessage<::Proto::BroadcastCreateWorldProxy>(Arena*);
 template<> ::Proto::CmdApp* Arena::CreateMaybeMessage<::Proto::CmdApp>(Arena*);
@@ -288,7 +292,7 @@ template<> ::Proto::CreatePlayerToDBRs* Arena::CreateMaybeMessage<::Proto::Creat
 template<> ::Proto::CreateSystem* Arena::CreateMaybeMessage<::Proto::CreateSystem>(Arena*);
 template<> ::Proto::CreateWorld* Arena::CreateMaybeMessage<::Proto::CreateWorld>(Arena*);
 template<> ::Proto::Efficiency* Arena::CreateMaybeMessage<::Proto::Efficiency>(Arena*);
-template<> ::Proto::Enemy* Arena::CreateMaybeMessage<::Proto::Enemy>(Arena*);
+template<> ::Proto::EnemySyncPos* Arena::CreateMaybeMessage<::Proto::EnemySyncPos>(Arena*);
 template<> ::Proto::EnterWorld* Arena::CreateMaybeMessage<::Proto::EnterWorld>(Arena*);
 template<> ::Proto::FsmSyncState* Arena::CreateMaybeMessage<::Proto::FsmSyncState>(Arena*);
 template<> ::Proto::GameToken* Arena::CreateMaybeMessage<::Proto::GameToken>(Arena*);
@@ -323,7 +327,7 @@ template<> ::Proto::RobotState* Arena::CreateMaybeMessage<::Proto::RobotState>(A
 template<> ::Proto::RobotSyncState* Arena::CreateMaybeMessage<::Proto::RobotSyncState>(Arena*);
 template<> ::Proto::Role* Arena::CreateMaybeMessage<::Proto::Role>(Arena*);
 template<> ::Proto::RoleAppear* Arena::CreateMaybeMessage<::Proto::RoleAppear>(Arena*);
-template<> ::Proto::RoleDisAppear* Arena::CreateMaybeMessage<::Proto::RoleDisAppear>(Arena*);
+template<> ::Proto::RoleDisappear* Arena::CreateMaybeMessage<::Proto::RoleDisappear>(Arena*);
 template<> ::Proto::SavePlayer* Arena::CreateMaybeMessage<::Proto::SavePlayer>(Arena*);
 template<> ::Proto::SelectPlayer* Arena::CreateMaybeMessage<::Proto::SelectPlayer>(Arena*);
 template<> ::Proto::SelectPlayerRs* Arena::CreateMaybeMessage<::Proto::SelectPlayerRs>(Arena*);
@@ -9765,23 +9769,23 @@ class RoleAppear :
 };
 // -------------------------------------------------------------------
 
-class RoleDisAppear :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Proto.RoleDisAppear) */ {
+class RoleDisappear :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Proto.RoleDisappear) */ {
  public:
-  RoleDisAppear();
-  virtual ~RoleDisAppear();
+  RoleDisappear();
+  virtual ~RoleDisappear();
 
-  RoleDisAppear(const RoleDisAppear& from);
-  RoleDisAppear(RoleDisAppear&& from) noexcept
-    : RoleDisAppear() {
+  RoleDisappear(const RoleDisappear& from);
+  RoleDisappear(RoleDisappear&& from) noexcept
+    : RoleDisappear() {
     *this = ::std::move(from);
   }
 
-  inline RoleDisAppear& operator=(const RoleDisAppear& from) {
+  inline RoleDisappear& operator=(const RoleDisappear& from) {
     CopyFrom(from);
     return *this;
   }
-  inline RoleDisAppear& operator=(RoleDisAppear&& from) noexcept {
+  inline RoleDisappear& operator=(RoleDisappear&& from) noexcept {
     if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
       if (this != &from) InternalSwap(&from);
     } else {
@@ -9799,37 +9803,37 @@ class RoleDisAppear :
   static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
     return GetMetadataStatic().reflection;
   }
-  static const RoleDisAppear& default_instance();
+  static const RoleDisappear& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const RoleDisAppear* internal_default_instance() {
-    return reinterpret_cast<const RoleDisAppear*>(
-               &_RoleDisAppear_default_instance_);
+  static inline const RoleDisappear* internal_default_instance() {
+    return reinterpret_cast<const RoleDisappear*>(
+               &_RoleDisappear_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
     62;
 
-  friend void swap(RoleDisAppear& a, RoleDisAppear& b) {
+  friend void swap(RoleDisappear& a, RoleDisappear& b) {
     a.Swap(&b);
   }
-  inline void Swap(RoleDisAppear* other) {
+  inline void Swap(RoleDisappear* other) {
     if (other == this) return;
     InternalSwap(other);
   }
 
   // implements Message ----------------------------------------------
 
-  inline RoleDisAppear* New() const final {
-    return CreateMaybeMessage<RoleDisAppear>(nullptr);
+  inline RoleDisappear* New() const final {
+    return CreateMaybeMessage<RoleDisappear>(nullptr);
   }
 
-  RoleDisAppear* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
-    return CreateMaybeMessage<RoleDisAppear>(arena);
+  RoleDisappear* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<RoleDisappear>(arena);
   }
   void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
   void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-  void CopyFrom(const RoleDisAppear& from);
-  void MergeFrom(const RoleDisAppear& from);
+  void CopyFrom(const RoleDisappear& from);
+  void MergeFrom(const RoleDisappear& from);
   PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
   bool IsInitialized() const final;
 
@@ -9850,10 +9854,10 @@ class RoleDisAppear :
   inline void SharedCtor();
   inline void SharedDtor();
   void SetCachedSize(int size) const final;
-  void InternalSwap(RoleDisAppear* other);
+  void InternalSwap(RoleDisappear* other);
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "Proto.RoleDisAppear";
+    return "Proto.RoleDisappear";
   }
   private:
   inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
@@ -9885,7 +9889,7 @@ class RoleDisAppear :
   ::PROTOBUF_NAMESPACE_ID::uint64 sn() const;
   void set_sn(::PROTOBUF_NAMESPACE_ID::uint64 value);
 
-  // @@protoc_insertion_point(class_scope:Proto.RoleDisAppear)
+  // @@protoc_insertion_point(class_scope:Proto.RoleDisappear)
  private:
   class _Internal;
 
@@ -10009,10 +10013,10 @@ class Move :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kPositionFieldNumber = 3,
+    kPositionFieldNumber = 2,
     kPlayerSnFieldNumber = 1,
   };
-  // repeated .Proto.Vector3D position = 3;
+  // repeated .Proto.Vector3D position = 2;
   int position_size() const;
   void clear_position();
   ::Proto::Vector3D* mutable_position(int index);
@@ -10040,23 +10044,23 @@ class Move :
 };
 // -------------------------------------------------------------------
 
-class Enemy :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Proto.Enemy) */ {
+class EnemySyncPos :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Proto.EnemySyncPos) */ {
  public:
-  Enemy();
-  virtual ~Enemy();
+  EnemySyncPos();
+  virtual ~EnemySyncPos();
 
-  Enemy(const Enemy& from);
-  Enemy(Enemy&& from) noexcept
-    : Enemy() {
+  EnemySyncPos(const EnemySyncPos& from);
+  EnemySyncPos(EnemySyncPos&& from) noexcept
+    : EnemySyncPos() {
     *this = ::std::move(from);
   }
 
-  inline Enemy& operator=(const Enemy& from) {
+  inline EnemySyncPos& operator=(const EnemySyncPos& from) {
     CopyFrom(from);
     return *this;
   }
-  inline Enemy& operator=(Enemy&& from) noexcept {
+  inline EnemySyncPos& operator=(EnemySyncPos&& from) noexcept {
     if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
       if (this != &from) InternalSwap(&from);
     } else {
@@ -10074,37 +10078,37 @@ class Enemy :
   static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
     return GetMetadataStatic().reflection;
   }
-  static const Enemy& default_instance();
+  static const EnemySyncPos& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const Enemy* internal_default_instance() {
-    return reinterpret_cast<const Enemy*>(
-               &_Enemy_default_instance_);
+  static inline const EnemySyncPos* internal_default_instance() {
+    return reinterpret_cast<const EnemySyncPos*>(
+               &_EnemySyncPos_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
     64;
 
-  friend void swap(Enemy& a, Enemy& b) {
+  friend void swap(EnemySyncPos& a, EnemySyncPos& b) {
     a.Swap(&b);
   }
-  inline void Swap(Enemy* other) {
+  inline void Swap(EnemySyncPos* other) {
     if (other == this) return;
     InternalSwap(other);
   }
 
   // implements Message ----------------------------------------------
 
-  inline Enemy* New() const final {
-    return CreateMaybeMessage<Enemy>(nullptr);
+  inline EnemySyncPos* New() const final {
+    return CreateMaybeMessage<EnemySyncPos>(nullptr);
   }
 
-  Enemy* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
-    return CreateMaybeMessage<Enemy>(arena);
+  EnemySyncPos* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<EnemySyncPos>(arena);
   }
   void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
   void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-  void CopyFrom(const Enemy& from);
-  void MergeFrom(const Enemy& from);
+  void CopyFrom(const EnemySyncPos& from);
+  void MergeFrom(const EnemySyncPos& from);
   PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
   bool IsInitialized() const final;
 
@@ -10125,10 +10129,10 @@ class Enemy :
   inline void SharedCtor();
   inline void SharedDtor();
   void SetCachedSize(int size) const final;
-  void InternalSwap(Enemy* other);
+  void InternalSwap(EnemySyncPos* other);
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "Proto.Enemy";
+    return "Proto.EnemySyncPos";
   }
   private:
   inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
@@ -10169,7 +10173,7 @@ class Enemy :
   ::PROTOBUF_NAMESPACE_ID::int32 id() const;
   void set_id(::PROTOBUF_NAMESPACE_ID::int32 value);
 
-  // @@protoc_insertion_point(class_scope:Proto.Enemy)
+  // @@protoc_insertion_point(class_scope:Proto.EnemySyncPos)
  private:
   class _Internal;
 
@@ -10296,8 +10300,8 @@ class FsmSyncState :
   enum : int {
     kStateFieldNumber = 1,
     kCodeFieldNumber = 2,
-    kEnemyIdFieldNumber = 5,
-    kPlayerSnFieldNumber = 6,
+    kPlayerSnFieldNumber = 4,
+    kEnemyIdFieldNumber = 3,
   };
   // int32 state = 1;
   void clear_state();
@@ -10309,15 +10313,15 @@ class FsmSyncState :
   ::PROTOBUF_NAMESPACE_ID::int32 code() const;
   void set_code(::PROTOBUF_NAMESPACE_ID::int32 value);
 
-  // int32 enemy_id = 5;
-  void clear_enemy_id();
-  ::PROTOBUF_NAMESPACE_ID::int32 enemy_id() const;
-  void set_enemy_id(::PROTOBUF_NAMESPACE_ID::int32 value);
-
-  // uint64 player_sn = 6;
+  // uint64 player_sn = 4;
   void clear_player_sn();
   ::PROTOBUF_NAMESPACE_ID::uint64 player_sn() const;
   void set_player_sn(::PROTOBUF_NAMESPACE_ID::uint64 value);
+
+  // int32 enemy_id = 3;
+  void clear_enemy_id();
+  ::PROTOBUF_NAMESPACE_ID::int32 enemy_id() const;
+  void set_enemy_id(::PROTOBUF_NAMESPACE_ID::int32 value);
 
   // @@protoc_insertion_point(class_scope:Proto.FsmSyncState)
  private:
@@ -10326,8 +10330,8 @@ class FsmSyncState :
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
   ::PROTOBUF_NAMESPACE_ID::int32 state_;
   ::PROTOBUF_NAMESPACE_ID::int32 code_;
-  ::PROTOBUF_NAMESPACE_ID::int32 enemy_id_;
   ::PROTOBUF_NAMESPACE_ID::uint64 player_sn_;
+  ::PROTOBUF_NAMESPACE_ID::int32 enemy_id_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_msg_2eproto;
 };
@@ -10776,6 +10780,158 @@ class RequestLinkPlayer :
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
   ::PROTOBUF_NAMESPACE_ID::int32 enemy_id_;
   bool islinker_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_msg_2eproto;
+};
+// -------------------------------------------------------------------
+
+class AtkAnimEvent :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Proto.AtkAnimEvent) */ {
+ public:
+  AtkAnimEvent();
+  virtual ~AtkAnimEvent();
+
+  AtkAnimEvent(const AtkAnimEvent& from);
+  AtkAnimEvent(AtkAnimEvent&& from) noexcept
+    : AtkAnimEvent() {
+    *this = ::std::move(from);
+  }
+
+  inline AtkAnimEvent& operator=(const AtkAnimEvent& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline AtkAnimEvent& operator=(AtkAnimEvent&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const AtkAnimEvent& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const AtkAnimEvent* internal_default_instance() {
+    return reinterpret_cast<const AtkAnimEvent*>(
+               &_AtkAnimEvent_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    69;
+
+  friend void swap(AtkAnimEvent& a, AtkAnimEvent& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(AtkAnimEvent* other) {
+    if (other == this) return;
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline AtkAnimEvent* New() const final {
+    return CreateMaybeMessage<AtkAnimEvent>(nullptr);
+  }
+
+  AtkAnimEvent* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<AtkAnimEvent>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const AtkAnimEvent& from);
+  void MergeFrom(const AtkAnimEvent& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  #else
+  bool MergePartialFromCodedStream(
+      ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) final;
+  #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  void SerializeWithCachedSizes(
+      ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(AtkAnimEvent* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "Proto.AtkAnimEvent";
+  }
+  private:
+  inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_msg_2eproto);
+    return ::descriptor_table_msg_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kPlayerSnFieldNumber = 1,
+    kEnemyIdFieldNumber = 2,
+    kCurrHpFieldNumber = 3,
+    kAtkEnemyFieldNumber = 4,
+  };
+  // uint64 player_sn = 1;
+  void clear_player_sn();
+  ::PROTOBUF_NAMESPACE_ID::uint64 player_sn() const;
+  void set_player_sn(::PROTOBUF_NAMESPACE_ID::uint64 value);
+
+  // int32 enemy_id = 2;
+  void clear_enemy_id();
+  ::PROTOBUF_NAMESPACE_ID::int32 enemy_id() const;
+  void set_enemy_id(::PROTOBUF_NAMESPACE_ID::int32 value);
+
+  // int32 curr_hp = 3;
+  void clear_curr_hp();
+  ::PROTOBUF_NAMESPACE_ID::int32 curr_hp() const;
+  void set_curr_hp(::PROTOBUF_NAMESPACE_ID::int32 value);
+
+  // bool atkEnemy = 4;
+  void clear_atkenemy();
+  bool atkenemy() const;
+  void set_atkenemy(bool value);
+
+  // @@protoc_insertion_point(class_scope:Proto.AtkAnimEvent)
+ private:
+  class _Internal;
+
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::uint64 player_sn_;
+  ::PROTOBUF_NAMESPACE_ID::int32 enemy_id_;
+  ::PROTOBUF_NAMESPACE_ID::int32 curr_hp_;
+  bool atkenemy_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_msg_2eproto;
 };
@@ -14653,20 +14809,20 @@ RoleAppear::role() const {
 
 // -------------------------------------------------------------------
 
-// RoleDisAppear
+// RoleDisappear
 
 // uint64 sn = 1;
-inline void RoleDisAppear::clear_sn() {
+inline void RoleDisappear::clear_sn() {
   sn_ = PROTOBUF_ULONGLONG(0);
 }
-inline ::PROTOBUF_NAMESPACE_ID::uint64 RoleDisAppear::sn() const {
-  // @@protoc_insertion_point(field_get:Proto.RoleDisAppear.sn)
+inline ::PROTOBUF_NAMESPACE_ID::uint64 RoleDisappear::sn() const {
+  // @@protoc_insertion_point(field_get:Proto.RoleDisappear.sn)
   return sn_;
 }
-inline void RoleDisAppear::set_sn(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+inline void RoleDisappear::set_sn(::PROTOBUF_NAMESPACE_ID::uint64 value) {
   
   sn_ = value;
-  // @@protoc_insertion_point(field_set:Proto.RoleDisAppear.sn)
+  // @@protoc_insertion_point(field_set:Proto.RoleDisappear.sn)
 }
 
 // -------------------------------------------------------------------
@@ -14687,7 +14843,7 @@ inline void Move::set_player_sn(::PROTOBUF_NAMESPACE_ID::uint64 value) {
   // @@protoc_insertion_point(field_set:Proto.Move.player_sn)
 }
 
-// repeated .Proto.Vector3D position = 3;
+// repeated .Proto.Vector3D position = 2;
 inline int Move::position_size() const {
   return position_.size();
 }
@@ -14716,49 +14872,49 @@ Move::position() const {
 
 // -------------------------------------------------------------------
 
-// Enemy
+// EnemySyncPos
 
 // int32 id = 1;
-inline void Enemy::clear_id() {
+inline void EnemySyncPos::clear_id() {
   id_ = 0;
 }
-inline ::PROTOBUF_NAMESPACE_ID::int32 Enemy::id() const {
-  // @@protoc_insertion_point(field_get:Proto.Enemy.id)
+inline ::PROTOBUF_NAMESPACE_ID::int32 EnemySyncPos::id() const {
+  // @@protoc_insertion_point(field_get:Proto.EnemySyncPos.id)
   return id_;
 }
-inline void Enemy::set_id(::PROTOBUF_NAMESPACE_ID::int32 value) {
+inline void EnemySyncPos::set_id(::PROTOBUF_NAMESPACE_ID::int32 value) {
   
   id_ = value;
-  // @@protoc_insertion_point(field_set:Proto.Enemy.id)
+  // @@protoc_insertion_point(field_set:Proto.EnemySyncPos.id)
 }
 
 // .Proto.Vector3D pos = 2;
-inline bool Enemy::has_pos() const {
+inline bool EnemySyncPos::has_pos() const {
   return this != internal_default_instance() && pos_ != nullptr;
 }
-inline const ::Proto::Vector3D& Enemy::pos() const {
+inline const ::Proto::Vector3D& EnemySyncPos::pos() const {
   const ::Proto::Vector3D* p = pos_;
-  // @@protoc_insertion_point(field_get:Proto.Enemy.pos)
+  // @@protoc_insertion_point(field_get:Proto.EnemySyncPos.pos)
   return p != nullptr ? *p : *reinterpret_cast<const ::Proto::Vector3D*>(
       &::Proto::_Vector3D_default_instance_);
 }
-inline ::Proto::Vector3D* Enemy::release_pos() {
-  // @@protoc_insertion_point(field_release:Proto.Enemy.pos)
+inline ::Proto::Vector3D* EnemySyncPos::release_pos() {
+  // @@protoc_insertion_point(field_release:Proto.EnemySyncPos.pos)
   
   ::Proto::Vector3D* temp = pos_;
   pos_ = nullptr;
   return temp;
 }
-inline ::Proto::Vector3D* Enemy::mutable_pos() {
+inline ::Proto::Vector3D* EnemySyncPos::mutable_pos() {
   
   if (pos_ == nullptr) {
     auto* p = CreateMaybeMessage<::Proto::Vector3D>(GetArenaNoVirtual());
     pos_ = p;
   }
-  // @@protoc_insertion_point(field_mutable:Proto.Enemy.pos)
+  // @@protoc_insertion_point(field_mutable:Proto.EnemySyncPos.pos)
   return pos_;
 }
-inline void Enemy::set_allocated_pos(::Proto::Vector3D* pos) {
+inline void EnemySyncPos::set_allocated_pos(::Proto::Vector3D* pos) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaNoVirtual();
   if (message_arena == nullptr) {
     delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(pos_);
@@ -14774,7 +14930,7 @@ inline void Enemy::set_allocated_pos(::Proto::Vector3D* pos) {
     
   }
   pos_ = pos;
-  // @@protoc_insertion_point(field_set_allocated:Proto.Enemy.pos)
+  // @@protoc_insertion_point(field_set_allocated:Proto.EnemySyncPos.pos)
 }
 
 // -------------------------------------------------------------------
@@ -14809,7 +14965,7 @@ inline void FsmSyncState::set_code(::PROTOBUF_NAMESPACE_ID::int32 value) {
   // @@protoc_insertion_point(field_set:Proto.FsmSyncState.code)
 }
 
-// int32 enemy_id = 5;
+// int32 enemy_id = 3;
 inline void FsmSyncState::clear_enemy_id() {
   enemy_id_ = 0;
 }
@@ -14823,7 +14979,7 @@ inline void FsmSyncState::set_enemy_id(::PROTOBUF_NAMESPACE_ID::int32 value) {
   // @@protoc_insertion_point(field_set:Proto.FsmSyncState.enemy_id)
 }
 
-// uint64 player_sn = 6;
+// uint64 player_sn = 4;
 inline void FsmSyncState::clear_player_sn() {
   player_sn_ = PROTOBUF_ULONGLONG(0);
 }
@@ -15051,9 +15207,71 @@ inline void RequestLinkPlayer::set_islinker(bool value) {
   // @@protoc_insertion_point(field_set:Proto.RequestLinkPlayer.isLinker)
 }
 
+// -------------------------------------------------------------------
+
+// AtkAnimEvent
+
+// uint64 player_sn = 1;
+inline void AtkAnimEvent::clear_player_sn() {
+  player_sn_ = PROTOBUF_ULONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint64 AtkAnimEvent::player_sn() const {
+  // @@protoc_insertion_point(field_get:Proto.AtkAnimEvent.player_sn)
+  return player_sn_;
+}
+inline void AtkAnimEvent::set_player_sn(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+  
+  player_sn_ = value;
+  // @@protoc_insertion_point(field_set:Proto.AtkAnimEvent.player_sn)
+}
+
+// int32 enemy_id = 2;
+inline void AtkAnimEvent::clear_enemy_id() {
+  enemy_id_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 AtkAnimEvent::enemy_id() const {
+  // @@protoc_insertion_point(field_get:Proto.AtkAnimEvent.enemy_id)
+  return enemy_id_;
+}
+inline void AtkAnimEvent::set_enemy_id(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  enemy_id_ = value;
+  // @@protoc_insertion_point(field_set:Proto.AtkAnimEvent.enemy_id)
+}
+
+// int32 curr_hp = 3;
+inline void AtkAnimEvent::clear_curr_hp() {
+  curr_hp_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 AtkAnimEvent::curr_hp() const {
+  // @@protoc_insertion_point(field_get:Proto.AtkAnimEvent.curr_hp)
+  return curr_hp_;
+}
+inline void AtkAnimEvent::set_curr_hp(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  curr_hp_ = value;
+  // @@protoc_insertion_point(field_set:Proto.AtkAnimEvent.curr_hp)
+}
+
+// bool atkEnemy = 4;
+inline void AtkAnimEvent::clear_atkenemy() {
+  atkenemy_ = false;
+}
+inline bool AtkAnimEvent::atkenemy() const {
+  // @@protoc_insertion_point(field_get:Proto.AtkAnimEvent.atkEnemy)
+  return atkenemy_;
+}
+inline void AtkAnimEvent::set_atkenemy(bool value) {
+  
+  atkenemy_ = value;
+  // @@protoc_insertion_point(field_set:Proto.AtkAnimEvent.atkEnemy)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

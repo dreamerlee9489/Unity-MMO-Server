@@ -37,6 +37,9 @@
     <ClCompile Include="player_component_proto_list.cpp" />
     <ClCompile Include="world_base.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{147C8467-FDD9-42DD-AEBE-010AAFD5A198}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
