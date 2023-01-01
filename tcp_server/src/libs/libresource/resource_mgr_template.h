@@ -3,7 +3,6 @@
 #include "libserver/log4_help.h"
 #include "libserver/res_path.h"
 #include "libserver/global.h"
-
 #include "resource_base.h"
 
 /// <summary>

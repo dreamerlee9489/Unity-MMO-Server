@@ -24,7 +24,7 @@ namespace Proto {
     static ProtoIdReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "Cg5wcm90b19pZC5wcm90bxIFUHJvdG8qwhEKBU1zZ0lkEggKBE5vbmUQABIV",
+            "Cg5wcm90b19pZC5wcm90bxIFUHJvdG8q2REKBU1zZ0lkEggKBE5vbmUQABIV",
             "ChFNSV9OZXR3b3JrQ29ubmVjdBABEhcKE01JX05ldHdvcmtDb25uZWN0ZWQQ",
             "AhIUChBNSV9OZXR3b3JrTGlzdGVuEAMSFwoTTUlfTmV0d29ya0xpc3Rlbktl",
             "eRAEEhgKFE1JX05ldHdvcmtEaXNjb25uZWN0EAoSGgoWTUlfTmV0d29ya0Rp",
@@ -51,30 +51,31 @@ namespace Proto {
             "ZXN0U3luY1BsYXllchDZCBIUCg9HMkRCX1NhdmVQbGF5ZXIQ2ggSFQoQRzJT",
             "X1JlbW92ZVBsYXllchDbCBITCg5DMkdfRW50ZXJXb3JsZBDcCBITCg5HMk1f",
             "UXVlcnlXb3JsZBDdCBIVChBHMk1fUXVlcnlXb3JsZFJzEN4IEhMKDlMyQ19F",
-            "bnRlcldvcmxkEN0LEhMKDlMyR19TeW5jUGxheWVyEN4LEhMKDlMyQ19Sb2xl",
-            "QXBwZWFyEN8LEhYKEVMyQ19Sb2xlRGlzYXBwZWFyEOALEg0KCEMyU19Nb3Zl",
-            "EOELEg0KCFMyQ19Nb3ZlEOILEhQKD1MyQ19QbGF5ZXJJdGVtcxDjCxIUCg9D",
-            "MlNfUGxheWVySXRlbXMQ5AsSHAoXTUlfQnJvYWRjYXN0Q3JlYXRlV29ybGQQ",
-            "0Q8SIQocTUlfQnJvYWRjYXN0Q3JlYXRlV29ybGRQcm94eRDSDxIZChRNSV9X",
-            "b3JsZFN5bmNUb0dhdGhlchC5FxIeChlNSV9Xb3JsZFByb3h5U3luY1RvR2F0",
-            "aGVyELoXEiAKG01JX0FjY291bnRTeW5jT25saW5lVG9SZWRpcxChHxIiCh1N",
-            "SV9BY2NvdW50RGVsZXRlT25saW5lVG9SZWRpcxCiHxIfChpNSV9QbGF5ZXJT",
-            "eW5jT25saW5lVG9SZWRpcxCjHxIhChxNSV9QbGF5ZXJEZWxldGVPbmxpbmVU",
-            "b1JlZGlzEKQfEhYKEU1JX1JvYm90U3luY1N0YXRlEIknEhMKDk1JX1JvYm90",
-            "Q3JlYXRlEIonEhEKDE1JX0h0dHBCZWdpbhCQThIZChRNSV9IdHRwSW5uZXJS",
-            "ZXNwb25zZRCRThIWChFNSV9IdHRwUmVxdWVzdEJhZBCSThIYChNNSV9IdHRw",
-            "UmVxdWVzdExvZ2luEJNOEg8KCk1JX0h0dHBFbmQQg1ISGAoTTUlfSHR0cE91",
-            "dGVyUmVxdWVzdBCEUhIZChRNSV9IdHRwT3V0ZXJSZXNwb25zZRCFUhISCgxN",
-            "SV9DbWRUaHJlYWQQoZwBEg8KCU1JX0NtZEFwcBCinAESFgoQTUlfQ21kV29y",
-            "bGRQcm94eRCjnAESEQoLTUlfQ21kV29ybGQQpJwBEhIKDE1JX0NtZENyZWF0",
-            "ZRClnAESFgoQTUlfQ21kRWZmaWNpZW5jeRCmnAESEwoNTUlfRWZmaWNpZW5j",
-            "eRCnnAESFgoQUzJDX0ZzbVN5bmNTdGF0ZRCy6gESFgoQQzJTX0ZzbVN5bmNT",
-            "dGF0ZRCz6gESGQoTQzJTX1BsYXllclN5bmNTdGF0ZRC06gESGQoTUzJDX1Bs",
-            "YXllclN5bmNTdGF0ZRC16gESFgoQQzJTX0VuZW15U3luY1BvcxC26gESFgoQ",
-            "UzJDX0VuZW15U3luY1BvcxC36gESGgoUQzJTX1JlcXVlc3RTeW5jRW5lbXkQ",
-            "uOoBEhoKFFMyQ19SZXF1ZXN0U3luY0VuZW15ELnqARIbChVTMkNfUmVxdWVz",
-            "dExpbmtQbGF5ZXIQuuoBEhYKEEMyU19BdGtBbmltRXZlbnQQu+oBEhYKEFMy",
-            "Q19BdGtBbmltRXZlbnQQvOoBYgZwcm90bzM="));
+            "bnRlcldvcmxkEN0LEhMKDlMyR19TeW5jUGxheWVyEN4LEhYKEVMyQ19BbGxS",
+            "b2xlQXBwZWFyEN8LEhYKEVMyQ19Sb2xlRGlzYXBwZWFyEOALEg0KCEMyU19N",
+            "b3ZlEOELEg0KCFMyQ19Nb3ZlEOILEhQKD1MyQ19QbGF5ZXJJdGVtcxDjCxIU",
+            "Cg9DMlNfUGxheWVySXRlbXMQ5AsSHAoXTUlfQnJvYWRjYXN0Q3JlYXRlV29y",
+            "bGQQ0Q8SIQocTUlfQnJvYWRjYXN0Q3JlYXRlV29ybGRQcm94eRDSDxIZChRN",
+            "SV9Xb3JsZFN5bmNUb0dhdGhlchC5FxIeChlNSV9Xb3JsZFByb3h5U3luY1Rv",
+            "R2F0aGVyELoXEiAKG01JX0FjY291bnRTeW5jT25saW5lVG9SZWRpcxChHxIi",
+            "Ch1NSV9BY2NvdW50RGVsZXRlT25saW5lVG9SZWRpcxCiHxIfChpNSV9QbGF5",
+            "ZXJTeW5jT25saW5lVG9SZWRpcxCjHxIhChxNSV9QbGF5ZXJEZWxldGVPbmxp",
+            "bmVUb1JlZGlzEKQfEhYKEU1JX1JvYm90U3luY1N0YXRlEIknEhMKDk1JX1Jv",
+            "Ym90Q3JlYXRlEIonEhEKDE1JX0h0dHBCZWdpbhCQThIZChRNSV9IdHRwSW5u",
+            "ZXJSZXNwb25zZRCRThIWChFNSV9IdHRwUmVxdWVzdEJhZBCSThIYChNNSV9I",
+            "dHRwUmVxdWVzdExvZ2luEJNOEg8KCk1JX0h0dHBFbmQQg1ISGAoTTUlfSHR0",
+            "cE91dGVyUmVxdWVzdBCEUhIZChRNSV9IdHRwT3V0ZXJSZXNwb25zZRCFUhIS",
+            "CgxNSV9DbWRUaHJlYWQQoZwBEg8KCU1JX0NtZEFwcBCinAESFgoQTUlfQ21k",
+            "V29ybGRQcm94eRCjnAESEQoLTUlfQ21kV29ybGQQpJwBEhIKDE1JX0NtZENy",
+            "ZWF0ZRClnAESFgoQTUlfQ21kRWZmaWNpZW5jeRCmnAESEwoNTUlfRWZmaWNp",
+            "ZW5jeRCnnAESFgoQUzJDX0ZzbVN5bmNTdGF0ZRCy6gESFgoQQzJTX0ZzbVN5",
+            "bmNTdGF0ZRCz6gESGQoTQzJTX1BsYXllclN5bmNTdGF0ZRC06gESGQoTUzJD",
+            "X1BsYXllclN5bmNTdGF0ZRC16gESFgoQQzJTX0VuZW15U3luY1BvcxC26gES",
+            "FgoQUzJDX0VuZW15U3luY1BvcxC36gESGgoUQzJTX1JlcXVlc3RTeW5jRW5l",
+            "bXkQuOoBEhoKFFMyQ19SZXF1ZXN0U3luY0VuZW15ELnqARIbChVTMkNfUmVx",
+            "dWVzdExpbmtQbGF5ZXIQuuoBEhYKEEMyU19BdGtBbmltRXZlbnQQu+oBEhYK",
+            "EFMyQ19BdGtBbmltRXZlbnQQvOoBEhIKDFMyQ19JdGVtTGlzdBC96gFiBnBy",
+            "b3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Proto.MsgId), }, null, null));
@@ -276,7 +277,7 @@ namespace Proto {
     /// <summary>
     /// 玩家出现
     /// </summary>
-    [pbr::OriginalName("S2C_RoleAppear")] S2CRoleAppear = 1503,
+    [pbr::OriginalName("S2C_AllRoleAppear")] S2CAllRoleAppear = 1503,
     /// <summary>
     /// 玩家消失
     /// </summary>
@@ -374,6 +375,7 @@ namespace Proto {
     [pbr::OriginalName("S2C_RequestLinkPlayer")] S2CRequestLinkPlayer = 30010,
     [pbr::OriginalName("C2S_AtkAnimEvent")] C2SAtkAnimEvent = 30011,
     [pbr::OriginalName("S2C_AtkAnimEvent")] S2CAtkAnimEvent = 30012,
+    [pbr::OriginalName("S2C_ItemList")] S2CItemList = 30013,
   }
 
   #endregion

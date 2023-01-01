@@ -48,8 +48,8 @@ void MysqlConnector::QueryPlayerList(std::string account, NetIdentify* pIdentify
 
             GetBlob(row, 2, tempStr);
             protoBase.ParseFromString(tempStr);
-            pProtoPlayer->set_level(protoBase.level());
             pProtoPlayer->set_gender(protoBase.gender());
+            pProtoPlayer->set_level(protoBase.level());
 
             GetBlob(row, 4, tempStr);
             protoMisc.ParseFromString(tempStr);
@@ -98,6 +98,9 @@ void MysqlConnector::HandleQueryPlayer(Packet* pPacket)
             GetBlob(row, 3, tempStr);
             pProtoPlayer->mutable_base()->ParseFromString(tempStr);
 
+            GetBlob(row, 4, tempStr);
+            pProtoPlayer->mutable_pack()->ParseFromString(tempStr);
+
             GetBlob(row, 5, tempStr);
             pProtoPlayer->mutable_misc()->ParseFromString(tempStr);
         }
@@ -111,7 +114,7 @@ void MysqlConnector::HandleCreatePlayer(Packet* pPacket)
 {
     auto protoCreate = pPacket->ParseToProto<Proto::CreatePlayerToDB>();
 
-    auto protoPlayer = protoCreate.player();
+    auto &protoPlayer = protoCreate.player();
 
     // todo 是否有重名
     const auto stmt = GetStmt(DatabaseStmtKey::Create);
@@ -166,7 +169,7 @@ void MysqlConnector::HandleSavePlayer(Packet* pPacket)
     OnSavePlayer(stmt, protoPlayer);
 }
 
-bool MysqlConnector::OnSavePlayer(DatabaseStmt* stmtSave, Proto::Player& protoPlayer)
+bool MysqlConnector::OnSavePlayer(DatabaseStmt* stmtSave, const Proto::Player& protoPlayer)
 {
     ClearStmtParam(stmtSave);
 

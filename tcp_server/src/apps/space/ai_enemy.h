@@ -5,12 +5,31 @@
 #include "libserver/vector3.h"
 #include "libresource/resource_world.h"
 #include "world.h"
+#include <vector>
+#include <random>
+constexpr int DROP_EXPR = -1;
+constexpr int DROP_GOLD = -2;
+
+enum struct ItemType { None, Potion, Weapon };
+
+struct DropItem
+{
+	int id, num;
+	ItemType type;
+
+	DropItem(ItemType type, int id, int num)
+	{
+		this->type = type;
+		this->id = id;
+		this->num = num;
+	}
+};
 
 class World;
-class FsmComponent;
+class Player;
 class AIEnemy : public Entity<AIEnemy>, public IAwakeFromPoolSystem<ResourceEnemy&>
 {
-	int _id = 0, _lv = 0, _hp = 0, _atk = 0;
+	int _id = 0;
 	float _viewDist = 8.0f, _atkDist = 1.5f;
 	Vector3 _initPos;
 	Vector3 _currPos;
@@ -19,7 +38,14 @@ class AIEnemy : public Entity<AIEnemy>, public IAwakeFromPoolSystem<ResourceEnem
 	Player* _linkPlayer = nullptr;
 	std::map<uint64, Player*>* _players = nullptr;
 
+	std::default_random_engine _intEng;
+	std::uniform_int_distribution<int> _idDis, _numDis;
+	static std::default_random_engine _realEng;
+	static std::uniform_real_distribution<double> _realDis;
+
 public:
+	int lv = 0, hp = 0, atk = 0, def = 0;
+
 	void Awake(ResourceEnemy& cfg) override;
 
 	void BackToPool() override;
@@ -34,19 +60,17 @@ public:
 
 	void SetPatrolPoint(int index);
 
-	int GetID() const { return _id; }
-
-	int GetHp() const { return _hp; }
-
-	int GetAtk() const { return _atk; }
-
 	void SetAllPlayer(std::map<uint64, Player*>* players) { _players = players; }
 
 	bool CanSee(Player* player);
 
 	bool CanAttack(Player* player);
 
-	int GetDamage(int damage);
+	int GetDamage(Player* attacker);
+
+	int GetID() { return _id; }
+
+	std::vector<DropItem>* GetDropList();
 
 	Vector3& GetInitPos() { return _initPos; }
 

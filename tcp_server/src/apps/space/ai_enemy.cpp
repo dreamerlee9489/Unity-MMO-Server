@@ -1,12 +1,15 @@
 ﻿#include "ai_enemy.h"
 #include "fsm_death.h"
 
+std::default_random_engine AIEnemy::_realEng = std::default_random_engine();
+std::uniform_real_distribution<double> AIEnemy::_realDis = std::uniform_real_distribution<double>(0.0, 1.0);
+
 void AIEnemy::Awake(ResourceEnemy& cfg)
 {
+	lv = cfg.level;
+	hp = cfg.initHp;
+	atk = cfg.initAtk;
 	_id = cfg.id;
-	_lv = cfg.level;
-	_hp = cfg.initHp;
-	_atk = cfg.initAtk;
 	_nextPos = _currPos = _initPos = cfg.initPos;
 }
 
@@ -79,10 +82,30 @@ bool AIEnemy::CanAttack(Player* player)
 	return false;
 }
 
-int AIEnemy::GetDamage(int damage)
+int AIEnemy::GetDamage(Player* attacker)
 {
-	_hp = max(_hp - damage, 0);
-	if (!_hp)
-		GetComponent<FsmComponent>()->ChangeState(new Death(this));
-	return _hp;
+	hp = max(hp - attacker->detail->atk, 0);
+	if (!hp)
+		GetComponent<FsmComponent>()->ChangeState(new Death(this, attacker));
+	return hp;
+}
+
+std::vector<DropItem>* AIEnemy::GetDropList()
+{
+	std::vector<DropItem>* items = new std::vector<DropItem>();
+	items->emplace_back(ItemType::None, DROP_EXPR, (atk + lv) * 5);
+	items->emplace_back(ItemType::None, DROP_GOLD, (atk + lv) * 10);
+	double val1 = _realDis(_realEng), val2 = _realDis(_realEng);
+	if (val1 < 0.5)
+	{
+		_idDis = std::uniform_int_distribution<int>(1, _world->potions->size());
+		_numDis = std::uniform_int_distribution<int>(1, 3);
+		items->emplace_back(ItemType::Potion, _idDis(_intEng), _numDis(_intEng));
+	}
+	if (val2 < 0.5)
+	{
+		_idDis = std::uniform_int_distribution<int>(1, _world->weapons->size());
+		items->emplace_back(ItemType::Weapon, _idDis(_intEng), 1);
+	}
+	return items;
 }

@@ -5,7 +5,7 @@ void World::Awake(int worldId)
 {
 	//LOG_DEBUG("create world. id:" << worldId << " sn:" << _sn << " space app id:" << Global::GetAppIdFromSN(_sn));
 	_worldId = worldId;
-	_playerMgr = AddComponent<PlayerManagerComponent>();
+	playerMgr = AddComponent<PlayerManagerComponent>();
 	AddTimer(0, 10, false, 0, BindFunP0(this, &World::SyncWorldToGather));
 	AddTimer(0, 1, false, 0, BindFunP0(this, &World::SyncAppearTimer));
 
@@ -23,14 +23,16 @@ void World::Awake(int worldId)
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_RequestSyncEnemy, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleRequestSyncEnemy));
 
 	ResourceWorld* worldCfg = ResourceHelp::GetResourceManager()->Worlds->GetResource(_worldId);
-	std::vector<ResourceEnemy> _enemyCfgs = worldCfg->GetEnemies();
-	for (auto& cfg : _enemyCfgs)
+	std::vector<ResourceEnemy>* _enemyCfgs = worldCfg->GetEnemies();
+	potions = worldCfg->GetPotions();
+	weapons = worldCfg->GetWeapons();
+	for (auto& cfg : *_enemyCfgs)
 	{
 		AIEnemy* enemy = GetSystemManager()->GetEntitySystem()->AddComponent<AIEnemy>(cfg);
 		enemy->SetWorld(this);
-		enemy->SetAllPlayer(_playerMgr->GetAll());
+		enemy->SetAllPlayer(playerMgr->GetAll());
 		enemy->AddComponent<FsmComponent>();
-		_enemies.push_back(enemy);
+		enemies.push_back(enemy);
 	}
 }
 
@@ -82,7 +84,7 @@ void World::HandleNetworkDisconnect(Packet* pPacket)
 		BroadcastPacket(Proto::MsgId::S2C_RoleDisappear, protoDis);
 		pPlayerMgr->RemovePlayerBySn(pTagPlayer->KeyInt64);
 
-		for (auto& enemy : _enemies)
+		for (auto& enemy : enemies)
 		{
 			if (enemy->GetLinkPlayer() == pPlayer)
 			{
@@ -123,11 +125,17 @@ void World::SyncWorldToGather()
 	MessageSystemHelp::DispatchPacket(Proto::MsgId::MI_WorldSyncToGather, proto, nullptr);
 }
 
-inline void CreateProtoRoleAppear(Player* pPlayer, Proto::RoleAppear& protoAppear)
+inline void AddToAllRoleAppear(Player* pPlayer, Proto::AllRoleAppear& protoAppear)
 {
-	auto proto = protoAppear.add_role();
+	Proto::Role* proto = protoAppear.add_roles();
 	proto->set_name(pPlayer->GetName().c_str());
 	proto->set_sn(pPlayer->GetPlayerSN());
+	proto->set_level(pPlayer->detail->lv);
+	proto->set_xp(pPlayer->detail->xp);
+	proto->set_hp(pPlayer->detail->hp);
+	proto->set_mp(pPlayer->detail->mp);
+	proto->set_atk(pPlayer->detail->atk);
+	proto->set_def(pPlayer->detail->def);
 
 	const auto pBaseInfo = pPlayer->GetComponent<PlayerComponentDetail>();
 	proto->set_gender(pBaseInfo->GetGender());
@@ -144,7 +152,7 @@ void World::SyncAppearTimer()
 	if (!_adds.empty())
 	{
 		// 1.新增的数据，同步到全地图
-		Proto::RoleAppear protoNewAppear;
+		Proto::AllRoleAppear protoNewAppear;
 		for (auto& id : _adds)
 		{
 			// 有可能瞬间已下线
@@ -152,15 +160,14 @@ void World::SyncAppearTimer()
 			if (pPlayer == nullptr)
 				continue;
 
-
-			CreateProtoRoleAppear(pPlayer, protoNewAppear);
+			AddToAllRoleAppear(pPlayer, protoNewAppear);
 		}
 
-		if (protoNewAppear.role_size() > 0)
-			BroadcastPacket(Proto::MsgId::S2C_RoleAppear, protoNewAppear);
+		if (protoNewAppear.roles_size() > 0)
+			BroadcastPacket(Proto::MsgId::S2C_AllRoleAppear, protoNewAppear);
 
 		// 2.原始玩家的数据，同步给新增的玩家
-		Proto::RoleAppear protoOther;
+		Proto::AllRoleAppear protoOther;
 		const auto players = pPlayerMgr->GetAll();
 		for (const auto& one : *players)
 		{
@@ -169,11 +176,11 @@ void World::SyncAppearTimer()
 				continue;
 
 			const auto role = one.second;
-			CreateProtoRoleAppear(role, protoOther);
+			AddToAllRoleAppear(role, protoOther);
 		}
 
-		if (protoOther.role_size() > 0)
-			BroadcastPacket(Proto::MsgId::S2C_RoleAppear, protoOther, _adds);
+		if (protoOther.roles_size() > 0)
+			BroadcastPacket(Proto::MsgId::S2C_AllRoleAppear, protoOther, _adds);
 
 		_adds.clear();
 	}
@@ -198,7 +205,7 @@ void World::HandleSyncPlayer(Packet* pPacket)
 	}
 
 	pPlayer->ParserFromProto(playerSn, proto.player());
-	pPlayer->AddComponent<PlayerComponentDetail>();
+	pPlayer->detail = pPlayer->AddComponent<PlayerComponentDetail>();
 
 	pPlayer->lastMap = pPlayer->AddComponent<PlayerComponentLastMap>();
 	pPlayer->lastMap->EnterWorld(_worldId, _sn);
@@ -241,7 +248,7 @@ void World::BroadcastPacket(Proto::MsgId msgId, google::protobuf::Message& proto
 
 Player* World::GetNearestPlayer(Vector3& pos)
 {
-	auto players = _playerMgr->GetAll();
+	auto players = playerMgr->GetAll();
 	float dist = FLT_MAX;
 	Player* player = nullptr;
 	for (const auto& pair : *players)
@@ -316,47 +323,53 @@ void World::HandleRequestSyncEnemy(Player* pPlayer, Packet* pPacket)
 {
 	Proto::RequestSyncEnemy proto = pPacket->ParseToProto<Proto::RequestSyncEnemy>();
 	int id = proto.enemy_id();
-	if (!_enemies[id]->GetLinkPlayer())
+	if (!enemies[id]->GetLinkPlayer())
 	{
-		_enemies[id]->SetLinkPlayer(pPlayer);
+		enemies[id]->SetLinkPlayer(pPlayer);
 		Proto::RequestLinkPlayer proto;
-		proto.set_enemy_id(_enemies[id]->GetID());
+		proto.set_enemy_id(enemies[id]->GetID());
 		proto.set_islinker(true);
 		MessageSystemHelp::SendPacket(Proto::MsgId::S2C_RequestLinkPlayer, proto, pPlayer);
 	}
 	Proto::EnemySyncPos protoEnemy;
 	protoEnemy.set_id(id);
-	_enemies[id]->GetCurrPos().SerializeToProto(protoEnemy.mutable_pos());
+	enemies[id]->GetCurrPos().SerializeToProto(protoEnemy.mutable_pos());
 	MessageSystemHelp::SendPacket(Proto::MsgId::S2C_EnemySyncPos, protoEnemy, pPlayer);
-	_enemies[id]->GetComponent<FsmComponent>()->GetCurrState()->Singlecast(pPlayer);
+	enemies[id]->GetComponent<FsmComponent>()->GetCurrState()->Singlecast(pPlayer);
 }
 
 void World::HandleFsmSyncState(Packet* pPacket)
 {
 	Proto::FsmSyncState proto = pPacket->ParseToProto<Proto::FsmSyncState>();
-	Player* player = _playerMgr->GetPlayerBySn(proto.player_sn());
-	_enemies[proto.enemy_id()]->GetComponent<FsmComponent>()->SyncState(proto, player);
+	Player* player = playerMgr->GetPlayerBySn(proto.player_sn());
+	enemies[proto.enemy_id()]->GetComponent<FsmComponent>()->SyncState(proto, player);
 }
 
 void World::HandleEnemySyncPos(Packet* pPacket)
 {
 	Proto::EnemySyncPos proto = pPacket->ParseToProto<Proto::EnemySyncPos>();
-	_enemies[proto.id()]->SetCurrPos(Vector3(proto.pos()));
+	enemies[proto.id()]->SetCurrPos(Vector3(proto.pos()));
 }
 
 void World::HandleAtkAnimEvent(Packet* pPacket)
 {
 	Proto::AtkAnimEvent proto = pPacket->ParseToProto<Proto::AtkAnimEvent>();
-	Player* player = _playerMgr->GetPlayerBySn(proto.player_sn());
-	AIEnemy* enemy = _enemies[proto.enemy_id()];
+	Player* player = playerMgr->GetPlayerBySn(proto.player_sn());
+	if (proto.enemy_id() == -1)
+	{
+		proto.set_curr_hp(player->detail->hp = 1000);
+		BroadcastPacket(Proto::MsgId::S2C_AtkAnimEvent, proto);
+		return;
+	}
+	AIEnemy* enemy = enemies[proto.enemy_id()];
 	if (proto.atkenemy())
 	{
-		proto.set_curr_hp(enemy->GetDamage(player->GetAtk()));
+		proto.set_curr_hp(enemy->GetDamage(player));
 		BroadcastPacket(Proto::MsgId::S2C_AtkAnimEvent, proto);
 	}
 	else
 	{
-		proto.set_curr_hp(player->GetDamage(enemy->GetAtk()));
+		proto.set_curr_hp(player->GetDamage(enemy));
 		BroadcastPacket(Proto::MsgId::S2C_AtkAnimEvent, proto);
 	}
 }

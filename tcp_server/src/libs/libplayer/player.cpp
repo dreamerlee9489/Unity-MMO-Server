@@ -67,9 +67,9 @@ Proto::Player& Player::GetPlayerProto()
 	return _player;
 }
 
-int Player::GetDamage(int damage)
+int Player::GetDamage(AIEnemy* enemy)
 {
-	return _hp = max(_hp - damage, 0);
+	return detail->hp = max(detail->hp - enemy->atk, 0);
 }
 
 void Player::ParseFromStream(const uint64 playerSn, std::stringstream* pOpStream)
@@ -95,7 +95,7 @@ void Player::ParserFromProto(const uint64 playerSn, const Proto::Player& proto)
 	}
 }
 
-void Player::SerializeToProto(Proto::Player* pProto) const
+void Player::SerializeToProto(Proto::Player* pProto)
 {
 	// 基础数据
 	pProto->CopyFrom(_player);

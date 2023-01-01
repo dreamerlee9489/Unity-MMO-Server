@@ -92,7 +92,7 @@ enum MsgId {
 	S2C_EnterWorld					= 1501;  // 通知客户端，进入某地图
 	S2G_SyncPlayer					= 1502;  // 同步数据给Game    	
 
-	S2C_RoleAppear					= 1503;		// 玩家出现
+	S2C_AllRoleAppear				= 1503;		// 玩家出现
 	S2C_RoleDisappear				= 1504;		// 玩家消失
 
 	C2S_Move						= 1505;	// 玩家移动
@@ -152,4 +152,5 @@ enum MsgId {
 	S2C_RequestLinkPlayer	= 30010;
 	C2S_AtkAnimEvent		= 30011;
 	S2C_AtkAnimEvent		= 30012;
+	S2C_ItemList			= 30013;
 }

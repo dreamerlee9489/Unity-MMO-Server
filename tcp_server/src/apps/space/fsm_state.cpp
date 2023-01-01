@@ -25,7 +25,7 @@ FsmState* FsmState::GenFsmState(FsmStateType type, AIEnemy* owner, Player* targe
 	case FsmStateType::Attack:
 		return new Attack(owner, target);
 	case FsmStateType::Death:
-		return new Death(owner);
+		return new Death(owner, target);
 	default:
 		return nullptr;
 	}

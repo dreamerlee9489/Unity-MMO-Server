@@ -396,10 +396,16 @@ message Role {
 	uint64 sn = 2;
 	Gender gender = 3;
 	Vector3D position = 4;
+	int32 level = 5;
+	int32 xp = 6;
+	int32 hp = 7;
+	int32 mp = 8;
+	int32 atk = 9;
+	int32 def = 10;
 }
 
-message RoleAppear {
-	repeated Role role = 1;
+message AllRoleAppear {
+	repeated Role roles = 1;
 }
 
 message RoleDisappear {
@@ -447,4 +453,9 @@ message AtkAnimEvent {
 	int32 enemy_id = 2;
 	int32 curr_hp = 3;
 	bool atkEnemy = 4;
+}
+
+message ItemList {
+	int32 enemy_id = 1;
+	repeated ItemData items = 2;
 }

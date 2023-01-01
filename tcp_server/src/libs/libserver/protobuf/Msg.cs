@@ -121,33 +121,36 @@ namespace Proto {
             "KAQSDwoHYWNjb3VudBgDIAEoCRIdCgZwbGF5ZXIYBCABKAsyDS5Qcm90by5Q",
             "bGF5ZXIiIgoNVGVsZXBvcnRBZnRlchIRCglwbGF5ZXJfc24YASABKAQiIQoM",
             "UmVtb3ZlUGxheWVyEhEKCXBsYXllcl9zbhgBIAEoBCImChFSZXF1ZXN0U3lu",
-            "Y1BsYXllchIRCglwbGF5ZXJfc24YASABKAQiYgoEUm9sZRIMCgRuYW1lGAEg",
-            "ASgJEgoKAnNuGAIgASgEEh0KBmdlbmRlchgDIAEoDjINLlByb3RvLkdlbmRl",
-            "chIhCghwb3NpdGlvbhgEIAEoCzIPLlByb3RvLlZlY3RvcjNEIicKClJvbGVB",
-            "cHBlYXISGQoEcm9sZRgBIAMoCzILLlByb3RvLlJvbGUiGwoNUm9sZURpc2Fw",
-            "cGVhchIKCgJzbhgBIAEoBCI8CgRNb3ZlEhEKCXBsYXllcl9zbhgBIAEoBBIh",
-            "Cghwb3NpdGlvbhgCIAMoCzIPLlByb3RvLlZlY3RvcjNEIjgKDEVuZW15U3lu",
-            "Y1BvcxIKCgJpZBgBIAEoBRIcCgNwb3MYAiABKAsyDy5Qcm90by5WZWN0b3Iz",
-            "RCJQCgxGc21TeW5jU3RhdGUSDQoFc3RhdGUYASABKAUSDAoEY29kZRgCIAEo",
-            "BRIQCghlbmVteV9pZBgDIAEoBRIRCglwbGF5ZXJfc24YBCABKAQilQEKD1Bs",
-            "YXllclN5bmNTdGF0ZRINCgVzdGF0ZRgBIAEoBRIMCgRjb2RlGAIgASgFEh8K",
-            "BmN1clBvcxgDIAEoCzIPLlByb3RvLlZlY3RvcjNEEh8KBmhpdFBvcxgEIAEo",
-            "CzIPLlByb3RvLlZlY3RvcjNEEhEKCXBsYXllcl9zbhgFIAEoBBIQCghlbmVt",
-            "eV9pZBgGIAEoBSI3ChBSZXF1ZXN0U3luY0VuZW15EhEKCXBsYXllcl9zbhgB",
-            "IAEoBBIQCghlbmVteV9pZBgCIAEoBSI3ChFSZXF1ZXN0TGlua1BsYXllchIQ",
-            "CghlbmVteV9pZBgBIAEoBRIQCghpc0xpbmtlchgCIAEoCCJWCgxBdGtBbmlt",
-            "RXZlbnQSEQoJcGxheWVyX3NuGAEgASgEEhAKCGVuZW15X2lkGAIgASgFEg8K",
-            "B2N1cnJfaHAYAyABKAUSEAoIYXRrRW5lbXkYBCABKAgqeAoHVGFnVHlwZRIP",
-            "CgtUYWdUeXBlTm9uZRAAEhIKDlRhZ1R5cGVBY2NvdW50EAESDgoKVGFnVHlw",
-            "ZUFwcBACEhEKDVRhZ1R5cGVFbnRpdHkQAxISCg5UYWdUeXBlVG9Xb3JsZBAE",
-            "EhEKDVRhZ1R5cGVQbGF5ZXIQBSqaAQoWQWNjb3VudENoZWNrUmV0dXJuQ29k",
-            "ZRIKCgZBUkNfT0sQABIPCgtBUkNfVU5LT05XThABEhkKFUFSQ19OT1RfRk9V",
-            "TkRfQUNDT1VOVBACEhYKEkFSQ19QQVNTV09SRF9XUk9ORxADEg8KC0FSQ19M",
-            "T0dHSU5HEAQSDwoLQVJDX1RJTUVPVVQQBRIOCgpBUkNfT05MSU5FEAYqRwoT",
-            "TG9naW5IdHRwUmV0dXJuQ29kZRILCgdMSFJDX09LEAASEAoMTEhSQ19USU1F",
-            "T1VUEAESEQoNTEhSQ19OT1RGT1VORBACKkwKFkNyZWF0ZVBsYXllclJldHVy",
-            "bkNvZGUSEQoNQ1BSX0NyZWF0ZV9PSxAAEg8KC0NQUl9VbmtvbnduEAESDgoK",
-            "Q1BSX1JlbmFtZRACYgZwcm90bzM="));
+            "Y1BsYXllchIRCglwbGF5ZXJfc24YASABKAQirwEKBFJvbGUSDAoEbmFtZRgB",
+            "IAEoCRIKCgJzbhgCIAEoBBIdCgZnZW5kZXIYAyABKA4yDS5Qcm90by5HZW5k",
+            "ZXISIQoIcG9zaXRpb24YBCABKAsyDy5Qcm90by5WZWN0b3IzRBINCgVsZXZl",
+            "bBgFIAEoBRIKCgJ4cBgGIAEoBRIKCgJocBgHIAEoBRIKCgJtcBgIIAEoBRIL",
+            "CgNhdGsYCSABKAUSCwoDZGVmGAogASgFIisKDUFsbFJvbGVBcHBlYXISGgoF",
+            "cm9sZXMYASADKAsyCy5Qcm90by5Sb2xlIhsKDVJvbGVEaXNhcHBlYXISCgoC",
+            "c24YASABKAQiPAoETW92ZRIRCglwbGF5ZXJfc24YASABKAQSIQoIcG9zaXRp",
+            "b24YAiADKAsyDy5Qcm90by5WZWN0b3IzRCI4CgxFbmVteVN5bmNQb3MSCgoC",
+            "aWQYASABKAUSHAoDcG9zGAIgASgLMg8uUHJvdG8uVmVjdG9yM0QiUAoMRnNt",
+            "U3luY1N0YXRlEg0KBXN0YXRlGAEgASgFEgwKBGNvZGUYAiABKAUSEAoIZW5l",
+            "bXlfaWQYAyABKAUSEQoJcGxheWVyX3NuGAQgASgEIpUBCg9QbGF5ZXJTeW5j",
+            "U3RhdGUSDQoFc3RhdGUYASABKAUSDAoEY29kZRgCIAEoBRIfCgZjdXJQb3MY",
+            "AyABKAsyDy5Qcm90by5WZWN0b3IzRBIfCgZoaXRQb3MYBCABKAsyDy5Qcm90",
+            "by5WZWN0b3IzRBIRCglwbGF5ZXJfc24YBSABKAQSEAoIZW5lbXlfaWQYBiAB",
+            "KAUiNwoQUmVxdWVzdFN5bmNFbmVteRIRCglwbGF5ZXJfc24YASABKAQSEAoI",
+            "ZW5lbXlfaWQYAiABKAUiNwoRUmVxdWVzdExpbmtQbGF5ZXISEAoIZW5lbXlf",
+            "aWQYASABKAUSEAoIaXNMaW5rZXIYAiABKAgiVgoMQXRrQW5pbUV2ZW50EhEK",
+            "CXBsYXllcl9zbhgBIAEoBBIQCghlbmVteV9pZBgCIAEoBRIPCgdjdXJyX2hw",
+            "GAMgASgFEhAKCGF0a0VuZW15GAQgASgIIjwKCEl0ZW1MaXN0EhAKCGVuZW15",
+            "X2lkGAEgASgFEh4KBWl0ZW1zGAIgAygLMg8uUHJvdG8uSXRlbURhdGEqeAoH",
+            "VGFnVHlwZRIPCgtUYWdUeXBlTm9uZRAAEhIKDlRhZ1R5cGVBY2NvdW50EAES",
+            "DgoKVGFnVHlwZUFwcBACEhEKDVRhZ1R5cGVFbnRpdHkQAxISCg5UYWdUeXBl",
+            "VG9Xb3JsZBAEEhEKDVRhZ1R5cGVQbGF5ZXIQBSqaAQoWQWNjb3VudENoZWNr",
+            "UmV0dXJuQ29kZRIKCgZBUkNfT0sQABIPCgtBUkNfVU5LT05XThABEhkKFUFS",
+            "Q19OT1RfRk9VTkRfQUNDT1VOVBACEhYKEkFSQ19QQVNTV09SRF9XUk9ORxAD",
+            "Eg8KC0FSQ19MT0dHSU5HEAQSDwoLQVJDX1RJTUVPVVQQBRIOCgpBUkNfT05M",
+            "SU5FEAYqRwoTTG9naW5IdHRwUmV0dXJuQ29kZRILCgdMSFJDX09LEAASEAoM",
+            "TEhSQ19USU1FT1VUEAESEQoNTEhSQ19OT1RGT1VORBACKkwKFkNyZWF0ZVBs",
+            "YXllclJldHVybkNvZGUSEQoNQ1BSX0NyZWF0ZV9PSxAAEg8KC0NQUl9Vbmtv",
+            "bnduEAESDgoKQ1BSX1JlbmFtZRACYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Proto.DbReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Proto.TagType), typeof(global::Proto.AccountCheckReturnCode), typeof(global::Proto.LoginHttpReturnCode), typeof(global::Proto.CreatePlayerReturnCode), }, null, new pbr::GeneratedClrTypeInfo[] {
@@ -211,8 +214,8 @@ namespace Proto {
             new pbr::GeneratedClrTypeInfo(typeof(global::Proto.TeleportAfter), global::Proto.TeleportAfter.Parser, new[]{ "PlayerSn" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Proto.RemovePlayer), global::Proto.RemovePlayer.Parser, new[]{ "PlayerSn" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Proto.RequestSyncPlayer), global::Proto.RequestSyncPlayer.Parser, new[]{ "PlayerSn" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.Role), global::Proto.Role.Parser, new[]{ "Name", "Sn", "Gender", "Position" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.RoleAppear), global::Proto.RoleAppear.Parser, new[]{ "Role" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.Role), global::Proto.Role.Parser, new[]{ "Name", "Sn", "Gender", "Position", "Level", "Xp", "Hp", "Mp", "Atk", "Def" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.AllRoleAppear), global::Proto.AllRoleAppear.Parser, new[]{ "Roles" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Proto.RoleDisappear), global::Proto.RoleDisappear.Parser, new[]{ "Sn" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Proto.Move), global::Proto.Move.Parser, new[]{ "PlayerSn", "Position" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Proto.EnemySyncPos), global::Proto.EnemySyncPos.Parser, new[]{ "Id", "Pos" }, null, null, null, null),
@@ -220,7 +223,8 @@ namespace Proto {
             new pbr::GeneratedClrTypeInfo(typeof(global::Proto.PlayerSyncState), global::Proto.PlayerSyncState.Parser, new[]{ "State", "Code", "CurPos", "HitPos", "PlayerSn", "EnemyId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Proto.RequestSyncEnemy), global::Proto.RequestSyncEnemy.Parser, new[]{ "PlayerSn", "EnemyId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Proto.RequestLinkPlayer), global::Proto.RequestLinkPlayer.Parser, new[]{ "EnemyId", "IsLinker" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.AtkAnimEvent), global::Proto.AtkAnimEvent.Parser, new[]{ "PlayerSn", "EnemyId", "CurrHp", "AtkEnemy" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.AtkAnimEvent), global::Proto.AtkAnimEvent.Parser, new[]{ "PlayerSn", "EnemyId", "CurrHp", "AtkEnemy" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.ItemList), global::Proto.ItemList.Parser, new[]{ "EnemyId", "Items" }, null, null, null, null)
           }));
     }
     #endregion
@@ -9929,6 +9933,12 @@ namespace Proto {
       sn_ = other.sn_;
       gender_ = other.gender_;
       position_ = other.position_ != null ? other.position_.Clone() : null;
+      level_ = other.level_;
+      xp_ = other.xp_;
+      hp_ = other.hp_;
+      mp_ = other.mp_;
+      atk_ = other.atk_;
+      def_ = other.def_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -9981,6 +9991,72 @@ namespace Proto {
       }
     }
 
+    /// <summary>Field number for the "level" field.</summary>
+    public const int LevelFieldNumber = 5;
+    private int level_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Level {
+      get { return level_; }
+      set {
+        level_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "xp" field.</summary>
+    public const int XpFieldNumber = 6;
+    private int xp_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Xp {
+      get { return xp_; }
+      set {
+        xp_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "hp" field.</summary>
+    public const int HpFieldNumber = 7;
+    private int hp_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Hp {
+      get { return hp_; }
+      set {
+        hp_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "mp" field.</summary>
+    public const int MpFieldNumber = 8;
+    private int mp_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Mp {
+      get { return mp_; }
+      set {
+        mp_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "atk" field.</summary>
+    public const int AtkFieldNumber = 9;
+    private int atk_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Atk {
+      get { return atk_; }
+      set {
+        atk_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "def" field.</summary>
+    public const int DefFieldNumber = 10;
+    private int def_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Def {
+      get { return def_; }
+      set {
+        def_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as Role);
@@ -9998,6 +10074,12 @@ namespace Proto {
       if (Sn != other.Sn) return false;
       if (Gender != other.Gender) return false;
       if (!object.Equals(Position, other.Position)) return false;
+      if (Level != other.Level) return false;
+      if (Xp != other.Xp) return false;
+      if (Hp != other.Hp) return false;
+      if (Mp != other.Mp) return false;
+      if (Atk != other.Atk) return false;
+      if (Def != other.Def) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -10008,6 +10090,12 @@ namespace Proto {
       if (Sn != 0UL) hash ^= Sn.GetHashCode();
       if (Gender != global::Proto.Gender.None) hash ^= Gender.GetHashCode();
       if (position_ != null) hash ^= Position.GetHashCode();
+      if (Level != 0) hash ^= Level.GetHashCode();
+      if (Xp != 0) hash ^= Xp.GetHashCode();
+      if (Hp != 0) hash ^= Hp.GetHashCode();
+      if (Mp != 0) hash ^= Mp.GetHashCode();
+      if (Atk != 0) hash ^= Atk.GetHashCode();
+      if (Def != 0) hash ^= Def.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -10037,6 +10125,30 @@ namespace Proto {
         output.WriteRawTag(34);
         output.WriteMessage(Position);
       }
+      if (Level != 0) {
+        output.WriteRawTag(40);
+        output.WriteInt32(Level);
+      }
+      if (Xp != 0) {
+        output.WriteRawTag(48);
+        output.WriteInt32(Xp);
+      }
+      if (Hp != 0) {
+        output.WriteRawTag(56);
+        output.WriteInt32(Hp);
+      }
+      if (Mp != 0) {
+        output.WriteRawTag(64);
+        output.WriteInt32(Mp);
+      }
+      if (Atk != 0) {
+        output.WriteRawTag(72);
+        output.WriteInt32(Atk);
+      }
+      if (Def != 0) {
+        output.WriteRawTag(80);
+        output.WriteInt32(Def);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -10056,6 +10168,24 @@ namespace Proto {
       }
       if (position_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Position);
+      }
+      if (Level != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Level);
+      }
+      if (Xp != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Xp);
+      }
+      if (Hp != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Hp);
+      }
+      if (Mp != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Mp);
+      }
+      if (Atk != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Atk);
+      }
+      if (Def != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Def);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -10082,6 +10212,24 @@ namespace Proto {
           Position = new global::Proto.Vector3D();
         }
         Position.MergeFrom(other.Position);
+      }
+      if (other.Level != 0) {
+        Level = other.Level;
+      }
+      if (other.Xp != 0) {
+        Xp = other.Xp;
+      }
+      if (other.Hp != 0) {
+        Hp = other.Hp;
+      }
+      if (other.Mp != 0) {
+        Mp = other.Mp;
+      }
+      if (other.Atk != 0) {
+        Atk = other.Atk;
+      }
+      if (other.Def != 0) {
+        Def = other.Def;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -10113,17 +10261,41 @@ namespace Proto {
             input.ReadMessage(Position);
             break;
           }
+          case 40: {
+            Level = input.ReadInt32();
+            break;
+          }
+          case 48: {
+            Xp = input.ReadInt32();
+            break;
+          }
+          case 56: {
+            Hp = input.ReadInt32();
+            break;
+          }
+          case 64: {
+            Mp = input.ReadInt32();
+            break;
+          }
+          case 72: {
+            Atk = input.ReadInt32();
+            break;
+          }
+          case 80: {
+            Def = input.ReadInt32();
+            break;
+          }
         }
       }
     }
 
   }
 
-  public sealed partial class RoleAppear : pb::IMessage<RoleAppear> {
-    private static readonly pb::MessageParser<RoleAppear> _parser = new pb::MessageParser<RoleAppear>(() => new RoleAppear());
+  public sealed partial class AllRoleAppear : pb::IMessage<AllRoleAppear> {
+    private static readonly pb::MessageParser<AllRoleAppear> _parser = new pb::MessageParser<AllRoleAppear>(() => new AllRoleAppear());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<RoleAppear> Parser { get { return _parser; } }
+    public static pb::MessageParser<AllRoleAppear> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -10136,54 +10308,54 @@ namespace Proto {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public RoleAppear() {
+    public AllRoleAppear() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public RoleAppear(RoleAppear other) : this() {
-      role_ = other.role_.Clone();
+    public AllRoleAppear(AllRoleAppear other) : this() {
+      roles_ = other.roles_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public RoleAppear Clone() {
-      return new RoleAppear(this);
+    public AllRoleAppear Clone() {
+      return new AllRoleAppear(this);
     }
 
-    /// <summary>Field number for the "role" field.</summary>
-    public const int RoleFieldNumber = 1;
-    private static readonly pb::FieldCodec<global::Proto.Role> _repeated_role_codec
+    /// <summary>Field number for the "roles" field.</summary>
+    public const int RolesFieldNumber = 1;
+    private static readonly pb::FieldCodec<global::Proto.Role> _repeated_roles_codec
         = pb::FieldCodec.ForMessage(10, global::Proto.Role.Parser);
-    private readonly pbc::RepeatedField<global::Proto.Role> role_ = new pbc::RepeatedField<global::Proto.Role>();
+    private readonly pbc::RepeatedField<global::Proto.Role> roles_ = new pbc::RepeatedField<global::Proto.Role>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::Proto.Role> Role {
-      get { return role_; }
+    public pbc::RepeatedField<global::Proto.Role> Roles {
+      get { return roles_; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as RoleAppear);
+      return Equals(other as AllRoleAppear);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(RoleAppear other) {
+    public bool Equals(AllRoleAppear other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if(!role_.Equals(other.role_)) return false;
+      if(!roles_.Equals(other.roles_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      hash ^= role_.GetHashCode();
+      hash ^= roles_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -10197,7 +10369,7 @@ namespace Proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      role_.WriteTo(output, _repeated_role_codec);
+      roles_.WriteTo(output, _repeated_roles_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -10206,7 +10378,7 @@ namespace Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      size += role_.CalculateSize(_repeated_role_codec);
+      size += roles_.CalculateSize(_repeated_roles_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -10214,11 +10386,11 @@ namespace Proto {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(RoleAppear other) {
+    public void MergeFrom(AllRoleAppear other) {
       if (other == null) {
         return;
       }
-      role_.Add(other.role_);
+      roles_.Add(other.roles_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -10231,7 +10403,7 @@ namespace Proto {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
-            role_.AddEntriesFrom(input, _repeated_role_codec);
+            roles_.AddEntriesFrom(input, _repeated_roles_codec);
             break;
           }
         }
@@ -11694,6 +11866,155 @@ namespace Proto {
           }
           case 32: {
             AtkEnemy = input.ReadBool();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class ItemList : pb::IMessage<ItemList> {
+    private static readonly pb::MessageParser<ItemList> _parser = new pb::MessageParser<ItemList>(() => new ItemList());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ItemList> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Proto.MsgReflection.Descriptor.MessageTypes[70]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ItemList() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ItemList(ItemList other) : this() {
+      enemyId_ = other.enemyId_;
+      items_ = other.items_.Clone();
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ItemList Clone() {
+      return new ItemList(this);
+    }
+
+    /// <summary>Field number for the "enemy_id" field.</summary>
+    public const int EnemyIdFieldNumber = 1;
+    private int enemyId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int EnemyId {
+      get { return enemyId_; }
+      set {
+        enemyId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "items" field.</summary>
+    public const int ItemsFieldNumber = 2;
+    private static readonly pb::FieldCodec<global::Proto.ItemData> _repeated_items_codec
+        = pb::FieldCodec.ForMessage(18, global::Proto.ItemData.Parser);
+    private readonly pbc::RepeatedField<global::Proto.ItemData> items_ = new pbc::RepeatedField<global::Proto.ItemData>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::Proto.ItemData> Items {
+      get { return items_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ItemList);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ItemList other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (EnemyId != other.EnemyId) return false;
+      if(!items_.Equals(other.items_)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (EnemyId != 0) hash ^= EnemyId.GetHashCode();
+      hash ^= items_.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (EnemyId != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(EnemyId);
+      }
+      items_.WriteTo(output, _repeated_items_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (EnemyId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(EnemyId);
+      }
+      size += items_.CalculateSize(_repeated_items_codec);
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ItemList other) {
+      if (other == null) {
+        return;
+      }
+      if (other.EnemyId != 0) {
+        EnemyId = other.EnemyId;
+      }
+      items_.Add(other.items_);
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            EnemyId = input.ReadInt32();
+            break;
+          }
+          case 18: {
+            items_.AddEntriesFrom(input, _repeated_items_codec);
             break;
           }
         }

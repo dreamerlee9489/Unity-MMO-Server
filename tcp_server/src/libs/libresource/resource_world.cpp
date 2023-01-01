@@ -6,6 +6,13 @@ ResourceWorld::ResourceWorld(std::map<std::string, int>& head) : ResourceBase(he
 {
 }
 
+ResourceWorld::~ResourceWorld()
+{
+	delete& _enemies;
+	delete& _potions;
+	delete& _weapons;
+}
+
 std::string ResourceWorld::GetName() const
 {
 	return _name;
@@ -32,11 +39,6 @@ Vector3 ResourceWorld::GetInitPosition() const
 	return _initPosition;
 }
 
-std::vector<ResourceEnemy> ResourceWorld::GetEnemies() const
-{
-	return _enemies;
-}
-
 void ResourceWorld::GenStruct()
 {
 	_name = GetString("name");
@@ -54,9 +56,10 @@ void ResourceWorld::GenStruct()
 	}
 	if (_enemyPath != "null")
 		ParseEnemyCSV();
+	ParseItemsCSV();
 }
 
-bool ResourceWorld::ParseEnemyCSV()
+void ResourceWorld::ParseEnemyCSV()
 {
 	//LOG_DEBUG("ResourceWorld::GenStruct _enemyPath=" << _enemyPath.c_str());
 	const auto pResPath = ComponentHelp::GetResPath();
@@ -66,12 +69,12 @@ bool ResourceWorld::ParseEnemyCSV()
 	if (!reader)
 	{
 		LOG_ERROR("cant open file. " << path.c_str());
-		return false;
+		return;
 	}
 	if (reader.eof())
 	{
 		LOG_ERROR("read head failed. stream is eof.");
-		return false;
+		return;
 	}
 
 	std::string line;
@@ -92,17 +95,52 @@ bool ResourceWorld::ParseEnemyCSV()
 			_enemies.push_back(enemy);
 		}
 	}
-	return true;
 }
 
-bool ResourceWorld::Check()
+void ResourceWorld::ParseItemsCSV()
 {
-	return true;
-}
+	const auto pResPath = ComponentHelp::GetResPath();
+	std::string path = pResPath->FindResPath("/resource");
+	std::string line;
+	path = strutil::format("%s/ItemPotions.csv", path.c_str());
+	std::ifstream reader(path.c_str(), std::ios::in);
+	if (!reader || reader.eof())
+	{
+		LOG_ERROR("cant open file. " << path.c_str());
+		return;
+	}
+	std::getline(reader, line);
+	while (!reader.eof())
+	{
+		std::getline(reader, line);
+		if (!line.empty())
+		{
+			std::vector<std::string> properties = ParserLine(line);
+			_potions.push_back(std::stoi(properties[0]));
+		}
+	}
 
+	path = pResPath->FindResPath("/resource");
+	path = strutil::format("%s/ItemWeapons.csv", path.c_str());
+	reader = std::ifstream(path.c_str(), std::ios::in);
+	if (!reader || reader.eof())
+	{
+		LOG_ERROR("cant open file. " << path.c_str());
+		return;
+	}
+	std::getline(reader, line);
+	while (!reader.eof())
+	{
+		std::getline(reader, line);
+		if (!line.empty())
+		{
+			std::vector<std::string> properties = ParserLine(line);
+			_weapons.push_back(std::stoi(properties[0]));
+		}
+	}
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
-
 
 /// <summary>
 /// 遍历_refs，初始化_initMapId、_rolesMapId

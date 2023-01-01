@@ -1,11 +1,12 @@
 #ifndef FSM_DEATH
 #define FSM_DEATH
 #include "fsm_state.h"
+#include <vector>
 
 class Death : public FsmState
 {
 public:
-	Death(AIEnemy* owner, Player* target = nullptr) : FsmState(owner, target) {}
+	Death(AIEnemy* owner, Player* target) : FsmState(owner, target) {}
 
 	~Death() = default;
 

@@ -3,16 +3,13 @@
 
 void PlayerManagerComponent::Awake()
 {
-
 }
 
 void PlayerManagerComponent::BackToPool()
 {
 	// 当一个Mgr被销毁的时候，它不应该有任何玩家
 	if (!_players.empty())
-	{
 		LOG_ERROR("called PlayerManagerComponent BackToPool. but it has player.");
-	}
 
 	_players.clear();
 }

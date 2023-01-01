@@ -31,14 +31,17 @@ class ResourceWorld : public ResourceBase
 {
 public:
 	explicit ResourceWorld(std::map<std::string, int>& head);
-	bool Check() override;
+	~ResourceWorld();
+	bool Check() override { return true; }
 
 	std::string GetName() const;
 	ResourceWorldType GetType() const;
 	bool IsType(ResourceWorldType iType) const;
 	bool IsInitMap() const;
 	Vector3 GetInitPosition() const;
-	std::vector<ResourceEnemy> GetEnemies() const;
+	std::vector<ResourceEnemy>* GetEnemies() { return &_enemies; }
+	std::vector<int>* GetPotions() { return &_potions; }
+	std::vector<int>* GetWeapons() { return &_weapons; }
 
 protected:
 	/// <summary>
@@ -46,11 +49,13 @@ protected:
 	/// </summary>
 	void GenStruct() override;
 	/// <summary>
-	/// 解析敌人表标题行
+	/// 解析敌人表
 	/// </summary>
-	/// <param name="line"></param>
-	/// <returns></returns>
-	bool ParseEnemyCSV();
+	void ParseEnemyCSV();
+	/// <summary>
+	/// 解析道具表
+	/// </summary>
+	void ParseItemsCSV();
 
 private:
 	/// <summary>
@@ -74,6 +79,7 @@ private:
 	/// </summary>
 	Vector3 _initPosition{ 0,0,0 };
 	std::vector<ResourceEnemy> _enemies;
+	std::vector<int> _potions, _weapons;
 };
 
 class ResourceWorldMgr :public ResourceManagerTemplate<ResourceWorld>

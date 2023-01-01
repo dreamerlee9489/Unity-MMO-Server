@@ -68,12 +68,12 @@ extern PlayerDefaultTypeInternal _Player_default_instance_;
 class PlayerBase;
 class PlayerBaseDefaultTypeInternal;
 extern PlayerBaseDefaultTypeInternal _PlayerBase_default_instance_;
-class PlayerItems;
-class PlayerItemsDefaultTypeInternal;
-extern PlayerItemsDefaultTypeInternal _PlayerItems_default_instance_;
 class PlayerMisc;
 class PlayerMiscDefaultTypeInternal;
 extern PlayerMiscDefaultTypeInternal _PlayerMisc_default_instance_;
+class PlayerPack;
+class PlayerPackDefaultTypeInternal;
+extern PlayerPackDefaultTypeInternal _PlayerPack_default_instance_;
 class Vector3D;
 class Vector3DDefaultTypeInternal;
 extern Vector3DDefaultTypeInternal _Vector3D_default_instance_;
@@ -83,12 +83,38 @@ template<> ::Proto::ItemData* Arena::CreateMaybeMessage<::Proto::ItemData>(Arena
 template<> ::Proto::LastWorld* Arena::CreateMaybeMessage<::Proto::LastWorld>(Arena*);
 template<> ::Proto::Player* Arena::CreateMaybeMessage<::Proto::Player>(Arena*);
 template<> ::Proto::PlayerBase* Arena::CreateMaybeMessage<::Proto::PlayerBase>(Arena*);
-template<> ::Proto::PlayerItems* Arena::CreateMaybeMessage<::Proto::PlayerItems>(Arena*);
 template<> ::Proto::PlayerMisc* Arena::CreateMaybeMessage<::Proto::PlayerMisc>(Arena*);
+template<> ::Proto::PlayerPack* Arena::CreateMaybeMessage<::Proto::PlayerPack>(Arena*);
 template<> ::Proto::Vector3D* Arena::CreateMaybeMessage<::Proto::Vector3D>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
 namespace Proto {
 
+enum ItemData_ItemType : int {
+  ItemData_ItemType_None = 0,
+  ItemData_ItemType_Potion = 1,
+  ItemData_ItemType_Weapon = 2,
+  ItemData_ItemType_ItemData_ItemType_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
+  ItemData_ItemType_ItemData_ItemType_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
+};
+bool ItemData_ItemType_IsValid(int value);
+constexpr ItemData_ItemType ItemData_ItemType_ItemType_MIN = ItemData_ItemType_None;
+constexpr ItemData_ItemType ItemData_ItemType_ItemType_MAX = ItemData_ItemType_Weapon;
+constexpr int ItemData_ItemType_ItemType_ARRAYSIZE = ItemData_ItemType_ItemType_MAX + 1;
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ItemData_ItemType_descriptor();
+template<typename T>
+inline const std::string& ItemData_ItemType_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, ItemData_ItemType>::value ||
+    ::std::is_integral<T>::value,
+    "Incorrect type passed to function ItemData_ItemType_Name.");
+  return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
+    ItemData_ItemType_descriptor(), enum_t_value);
+}
+inline bool ItemData_ItemType_Parse(
+    const std::string& name, ItemData_ItemType* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<ItemData_ItemType>(
+    ItemData_ItemType_descriptor(), name, value);
+}
 enum Gender : int {
   none = 0,
   male = 1,
@@ -377,8 +403,11 @@ class PlayerBase :
   enum : int {
     kGenderFieldNumber = 1,
     kLevelFieldNumber = 2,
-    kHpFieldNumber = 3,
-    kXpFieldNumber = 4,
+    kXpFieldNumber = 3,
+    kHpFieldNumber = 4,
+    kMpFieldNumber = 5,
+    kAtkFieldNumber = 6,
+    kDefFieldNumber = 7,
   };
   // .Proto.Gender gender = 1;
   void clear_gender();
@@ -390,15 +419,30 @@ class PlayerBase :
   ::PROTOBUF_NAMESPACE_ID::int32 level() const;
   void set_level(::PROTOBUF_NAMESPACE_ID::int32 value);
 
-  // int32 hp = 3;
+  // int32 xp = 3;
+  void clear_xp();
+  ::PROTOBUF_NAMESPACE_ID::int32 xp() const;
+  void set_xp(::PROTOBUF_NAMESPACE_ID::int32 value);
+
+  // int32 hp = 4;
   void clear_hp();
   ::PROTOBUF_NAMESPACE_ID::int32 hp() const;
   void set_hp(::PROTOBUF_NAMESPACE_ID::int32 value);
 
-  // int32 xp = 4;
-  void clear_xp();
-  ::PROTOBUF_NAMESPACE_ID::int32 xp() const;
-  void set_xp(::PROTOBUF_NAMESPACE_ID::int32 value);
+  // int32 mp = 5;
+  void clear_mp();
+  ::PROTOBUF_NAMESPACE_ID::int32 mp() const;
+  void set_mp(::PROTOBUF_NAMESPACE_ID::int32 value);
+
+  // int32 atk = 6;
+  void clear_atk();
+  ::PROTOBUF_NAMESPACE_ID::int32 atk() const;
+  void set_atk(::PROTOBUF_NAMESPACE_ID::int32 value);
+
+  // int32 def = 7;
+  void clear_def();
+  ::PROTOBUF_NAMESPACE_ID::int32 def() const;
+  void set_def(::PROTOBUF_NAMESPACE_ID::int32 value);
 
   // @@protoc_insertion_point(class_scope:Proto.PlayerBase)
  private:
@@ -407,8 +451,11 @@ class PlayerBase :
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
   int gender_;
   ::PROTOBUF_NAMESPACE_ID::int32 level_;
-  ::PROTOBUF_NAMESPACE_ID::int32 hp_;
   ::PROTOBUF_NAMESPACE_ID::int32 xp_;
+  ::PROTOBUF_NAMESPACE_ID::int32 hp_;
+  ::PROTOBUF_NAMESPACE_ID::int32 mp_;
+  ::PROTOBUF_NAMESPACE_ID::int32 atk_;
+  ::PROTOBUF_NAMESPACE_ID::int32 def_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_db_2eproto;
 };
@@ -828,8 +875,8 @@ class Player :
   enum : int {
     kNameFieldNumber = 2,
     kBaseFieldNumber = 3,
-    kMiscFieldNumber = 4,
-    kItemsFieldNumber = 5,
+    kPackFieldNumber = 4,
+    kMiscFieldNumber = 5,
     kSnFieldNumber = 1,
   };
   // string name = 2;
@@ -851,21 +898,21 @@ class Player :
   ::Proto::PlayerBase* mutable_base();
   void set_allocated_base(::Proto::PlayerBase* base);
 
-  // .Proto.PlayerMisc misc = 4;
+  // .Proto.PlayerPack pack = 4;
+  bool has_pack() const;
+  void clear_pack();
+  const ::Proto::PlayerPack& pack() const;
+  ::Proto::PlayerPack* release_pack();
+  ::Proto::PlayerPack* mutable_pack();
+  void set_allocated_pack(::Proto::PlayerPack* pack);
+
+  // .Proto.PlayerMisc misc = 5;
   bool has_misc() const;
   void clear_misc();
   const ::Proto::PlayerMisc& misc() const;
   ::Proto::PlayerMisc* release_misc();
   ::Proto::PlayerMisc* mutable_misc();
   void set_allocated_misc(::Proto::PlayerMisc* misc);
-
-  // .Proto.PlayerItems items = 5;
-  bool has_items() const;
-  void clear_items();
-  const ::Proto::PlayerItems& items() const;
-  ::Proto::PlayerItems* release_items();
-  ::Proto::PlayerItems* mutable_items();
-  void set_allocated_items(::Proto::PlayerItems* items);
 
   // uint64 sn = 1;
   void clear_sn();
@@ -879,8 +926,8 @@ class Player :
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr name_;
   ::Proto::PlayerBase* base_;
+  ::Proto::PlayerPack* pack_;
   ::Proto::PlayerMisc* misc_;
-  ::Proto::PlayerItems* items_;
   ::PROTOBUF_NAMESPACE_ID::uint64 sn_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_db_2eproto;
@@ -997,18 +1044,56 @@ class ItemData :
 
   // nested types ----------------------------------------------------
 
+  typedef ItemData_ItemType ItemType;
+  static constexpr ItemType None =
+    ItemData_ItemType_None;
+  static constexpr ItemType Potion =
+    ItemData_ItemType_Potion;
+  static constexpr ItemType Weapon =
+    ItemData_ItemType_Weapon;
+  static inline bool ItemType_IsValid(int value) {
+    return ItemData_ItemType_IsValid(value);
+  }
+  static constexpr ItemType ItemType_MIN =
+    ItemData_ItemType_ItemType_MIN;
+  static constexpr ItemType ItemType_MAX =
+    ItemData_ItemType_ItemType_MAX;
+  static constexpr int ItemType_ARRAYSIZE =
+    ItemData_ItemType_ItemType_ARRAYSIZE;
+  static inline const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor*
+  ItemType_descriptor() {
+    return ItemData_ItemType_descriptor();
+  }
+  template<typename T>
+  static inline const std::string& ItemType_Name(T enum_t_value) {
+    static_assert(::std::is_same<T, ItemType>::value ||
+      ::std::is_integral<T>::value,
+      "Incorrect type passed to function ItemType_Name.");
+    return ItemData_ItemType_Name(enum_t_value);
+  }
+  static inline bool ItemType_Parse(const std::string& name,
+      ItemType* value) {
+    return ItemData_ItemType_Parse(name, value);
+  }
+
   // accessors -------------------------------------------------------
 
   enum : int {
-    kIdFieldNumber = 1,
-    kNumFieldNumber = 2,
+    kTypeFieldNumber = 1,
+    kIdFieldNumber = 2,
+    kNumFieldNumber = 3,
   };
-  // int32 id = 1;
+  // .Proto.ItemData.ItemType type = 1;
+  void clear_type();
+  ::Proto::ItemData_ItemType type() const;
+  void set_type(::Proto::ItemData_ItemType value);
+
+  // int32 id = 2;
   void clear_id();
   ::PROTOBUF_NAMESPACE_ID::int32 id() const;
   void set_id(::PROTOBUF_NAMESPACE_ID::int32 value);
 
-  // int32 num = 2;
+  // int32 num = 3;
   void clear_num();
   ::PROTOBUF_NAMESPACE_ID::int32 num() const;
   void set_num(::PROTOBUF_NAMESPACE_ID::int32 value);
@@ -1018,6 +1103,7 @@ class ItemData :
   class _Internal;
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
+  int type_;
   ::PROTOBUF_NAMESPACE_ID::int32 id_;
   ::PROTOBUF_NAMESPACE_ID::int32 num_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
@@ -1025,23 +1111,23 @@ class ItemData :
 };
 // -------------------------------------------------------------------
 
-class PlayerItems :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Proto.PlayerItems) */ {
+class PlayerPack :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Proto.PlayerPack) */ {
  public:
-  PlayerItems();
-  virtual ~PlayerItems();
+  PlayerPack();
+  virtual ~PlayerPack();
 
-  PlayerItems(const PlayerItems& from);
-  PlayerItems(PlayerItems&& from) noexcept
-    : PlayerItems() {
+  PlayerPack(const PlayerPack& from);
+  PlayerPack(PlayerPack&& from) noexcept
+    : PlayerPack() {
     *this = ::std::move(from);
   }
 
-  inline PlayerItems& operator=(const PlayerItems& from) {
+  inline PlayerPack& operator=(const PlayerPack& from) {
     CopyFrom(from);
     return *this;
   }
-  inline PlayerItems& operator=(PlayerItems&& from) noexcept {
+  inline PlayerPack& operator=(PlayerPack&& from) noexcept {
     if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
       if (this != &from) InternalSwap(&from);
     } else {
@@ -1059,37 +1145,37 @@ class PlayerItems :
   static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
     return GetMetadataStatic().reflection;
   }
-  static const PlayerItems& default_instance();
+  static const PlayerPack& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const PlayerItems* internal_default_instance() {
-    return reinterpret_cast<const PlayerItems*>(
-               &_PlayerItems_default_instance_);
+  static inline const PlayerPack* internal_default_instance() {
+    return reinterpret_cast<const PlayerPack*>(
+               &_PlayerPack_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
     6;
 
-  friend void swap(PlayerItems& a, PlayerItems& b) {
+  friend void swap(PlayerPack& a, PlayerPack& b) {
     a.Swap(&b);
   }
-  inline void Swap(PlayerItems* other) {
+  inline void Swap(PlayerPack* other) {
     if (other == this) return;
     InternalSwap(other);
   }
 
   // implements Message ----------------------------------------------
 
-  inline PlayerItems* New() const final {
-    return CreateMaybeMessage<PlayerItems>(nullptr);
+  inline PlayerPack* New() const final {
+    return CreateMaybeMessage<PlayerPack>(nullptr);
   }
 
-  PlayerItems* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
-    return CreateMaybeMessage<PlayerItems>(arena);
+  PlayerPack* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<PlayerPack>(arena);
   }
   void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
   void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-  void CopyFrom(const PlayerItems& from);
-  void MergeFrom(const PlayerItems& from);
+  void CopyFrom(const PlayerPack& from);
+  void MergeFrom(const PlayerPack& from);
   PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
   bool IsInitialized() const final;
 
@@ -1110,10 +1196,10 @@ class PlayerItems :
   inline void SharedCtor();
   inline void SharedDtor();
   void SetCachedSize(int size) const final;
-  void InternalSwap(PlayerItems* other);
+  void InternalSwap(PlayerPack* other);
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "Proto.PlayerItems";
+    return "Proto.PlayerPack";
   }
   private:
   inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
@@ -1138,9 +1224,10 @@ class PlayerItems :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kItemsFieldNumber = 1,
+    kItemsFieldNumber = 2,
+    kGoldFieldNumber = 1,
   };
-  // repeated .Proto.ItemData items = 1;
+  // repeated .Proto.ItemData items = 2;
   int items_size() const;
   void clear_items();
   ::Proto::ItemData* mutable_items(int index);
@@ -1151,12 +1238,18 @@ class PlayerItems :
   const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::ItemData >&
       items() const;
 
-  // @@protoc_insertion_point(class_scope:Proto.PlayerItems)
+  // int32 gold = 1;
+  void clear_gold();
+  ::PROTOBUF_NAMESPACE_ID::int32 gold() const;
+  void set_gold(::PROTOBUF_NAMESPACE_ID::int32 value);
+
+  // @@protoc_insertion_point(class_scope:Proto.PlayerPack)
  private:
   class _Internal;
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
   ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::ItemData > items_;
+  ::PROTOBUF_NAMESPACE_ID::int32 gold_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_db_2eproto;
 };
@@ -1245,7 +1338,21 @@ inline void PlayerBase::set_level(::PROTOBUF_NAMESPACE_ID::int32 value) {
   // @@protoc_insertion_point(field_set:Proto.PlayerBase.level)
 }
 
-// int32 hp = 3;
+// int32 xp = 3;
+inline void PlayerBase::clear_xp() {
+  xp_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 PlayerBase::xp() const {
+  // @@protoc_insertion_point(field_get:Proto.PlayerBase.xp)
+  return xp_;
+}
+inline void PlayerBase::set_xp(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  xp_ = value;
+  // @@protoc_insertion_point(field_set:Proto.PlayerBase.xp)
+}
+
+// int32 hp = 4;
 inline void PlayerBase::clear_hp() {
   hp_ = 0;
 }
@@ -1259,18 +1366,46 @@ inline void PlayerBase::set_hp(::PROTOBUF_NAMESPACE_ID::int32 value) {
   // @@protoc_insertion_point(field_set:Proto.PlayerBase.hp)
 }
 
-// int32 xp = 4;
-inline void PlayerBase::clear_xp() {
-  xp_ = 0;
+// int32 mp = 5;
+inline void PlayerBase::clear_mp() {
+  mp_ = 0;
 }
-inline ::PROTOBUF_NAMESPACE_ID::int32 PlayerBase::xp() const {
-  // @@protoc_insertion_point(field_get:Proto.PlayerBase.xp)
-  return xp_;
+inline ::PROTOBUF_NAMESPACE_ID::int32 PlayerBase::mp() const {
+  // @@protoc_insertion_point(field_get:Proto.PlayerBase.mp)
+  return mp_;
 }
-inline void PlayerBase::set_xp(::PROTOBUF_NAMESPACE_ID::int32 value) {
+inline void PlayerBase::set_mp(::PROTOBUF_NAMESPACE_ID::int32 value) {
   
-  xp_ = value;
-  // @@protoc_insertion_point(field_set:Proto.PlayerBase.xp)
+  mp_ = value;
+  // @@protoc_insertion_point(field_set:Proto.PlayerBase.mp)
+}
+
+// int32 atk = 6;
+inline void PlayerBase::clear_atk() {
+  atk_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 PlayerBase::atk() const {
+  // @@protoc_insertion_point(field_get:Proto.PlayerBase.atk)
+  return atk_;
+}
+inline void PlayerBase::set_atk(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  atk_ = value;
+  // @@protoc_insertion_point(field_set:Proto.PlayerBase.atk)
+}
+
+// int32 def = 7;
+inline void PlayerBase::clear_def() {
+  def_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 PlayerBase::def() const {
+  // @@protoc_insertion_point(field_get:Proto.PlayerBase.def)
+  return def_;
+}
+inline void PlayerBase::set_def(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  def_ = value;
+  // @@protoc_insertion_point(field_set:Proto.PlayerBase.def)
 }
 
 // -------------------------------------------------------------------
@@ -1596,7 +1731,58 @@ inline void Player::set_allocated_base(::Proto::PlayerBase* base) {
   // @@protoc_insertion_point(field_set_allocated:Proto.Player.base)
 }
 
-// .Proto.PlayerMisc misc = 4;
+// .Proto.PlayerPack pack = 4;
+inline bool Player::has_pack() const {
+  return this != internal_default_instance() && pack_ != nullptr;
+}
+inline void Player::clear_pack() {
+  if (GetArenaNoVirtual() == nullptr && pack_ != nullptr) {
+    delete pack_;
+  }
+  pack_ = nullptr;
+}
+inline const ::Proto::PlayerPack& Player::pack() const {
+  const ::Proto::PlayerPack* p = pack_;
+  // @@protoc_insertion_point(field_get:Proto.Player.pack)
+  return p != nullptr ? *p : *reinterpret_cast<const ::Proto::PlayerPack*>(
+      &::Proto::_PlayerPack_default_instance_);
+}
+inline ::Proto::PlayerPack* Player::release_pack() {
+  // @@protoc_insertion_point(field_release:Proto.Player.pack)
+  
+  ::Proto::PlayerPack* temp = pack_;
+  pack_ = nullptr;
+  return temp;
+}
+inline ::Proto::PlayerPack* Player::mutable_pack() {
+  
+  if (pack_ == nullptr) {
+    auto* p = CreateMaybeMessage<::Proto::PlayerPack>(GetArenaNoVirtual());
+    pack_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:Proto.Player.pack)
+  return pack_;
+}
+inline void Player::set_allocated_pack(::Proto::PlayerPack* pack) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == nullptr) {
+    delete pack_;
+  }
+  if (pack) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena = nullptr;
+    if (message_arena != submessage_arena) {
+      pack = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, pack, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  pack_ = pack;
+  // @@protoc_insertion_point(field_set_allocated:Proto.Player.pack)
+}
+
+// .Proto.PlayerMisc misc = 5;
 inline bool Player::has_misc() const {
   return this != internal_default_instance() && misc_ != nullptr;
 }
@@ -1647,62 +1833,25 @@ inline void Player::set_allocated_misc(::Proto::PlayerMisc* misc) {
   // @@protoc_insertion_point(field_set_allocated:Proto.Player.misc)
 }
 
-// .Proto.PlayerItems items = 5;
-inline bool Player::has_items() const {
-  return this != internal_default_instance() && items_ != nullptr;
-}
-inline void Player::clear_items() {
-  if (GetArenaNoVirtual() == nullptr && items_ != nullptr) {
-    delete items_;
-  }
-  items_ = nullptr;
-}
-inline const ::Proto::PlayerItems& Player::items() const {
-  const ::Proto::PlayerItems* p = items_;
-  // @@protoc_insertion_point(field_get:Proto.Player.items)
-  return p != nullptr ? *p : *reinterpret_cast<const ::Proto::PlayerItems*>(
-      &::Proto::_PlayerItems_default_instance_);
-}
-inline ::Proto::PlayerItems* Player::release_items() {
-  // @@protoc_insertion_point(field_release:Proto.Player.items)
-  
-  ::Proto::PlayerItems* temp = items_;
-  items_ = nullptr;
-  return temp;
-}
-inline ::Proto::PlayerItems* Player::mutable_items() {
-  
-  if (items_ == nullptr) {
-    auto* p = CreateMaybeMessage<::Proto::PlayerItems>(GetArenaNoVirtual());
-    items_ = p;
-  }
-  // @@protoc_insertion_point(field_mutable:Proto.Player.items)
-  return items_;
-}
-inline void Player::set_allocated_items(::Proto::PlayerItems* items) {
-  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == nullptr) {
-    delete items_;
-  }
-  if (items) {
-    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena = nullptr;
-    if (message_arena != submessage_arena) {
-      items = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
-          message_arena, items, submessage_arena);
-    }
-    
-  } else {
-    
-  }
-  items_ = items;
-  // @@protoc_insertion_point(field_set_allocated:Proto.Player.items)
-}
-
 // -------------------------------------------------------------------
 
 // ItemData
 
-// int32 id = 1;
+// .Proto.ItemData.ItemType type = 1;
+inline void ItemData::clear_type() {
+  type_ = 0;
+}
+inline ::Proto::ItemData_ItemType ItemData::type() const {
+  // @@protoc_insertion_point(field_get:Proto.ItemData.type)
+  return static_cast< ::Proto::ItemData_ItemType >(type_);
+}
+inline void ItemData::set_type(::Proto::ItemData_ItemType value) {
+  
+  type_ = value;
+  // @@protoc_insertion_point(field_set:Proto.ItemData.type)
+}
+
+// int32 id = 2;
 inline void ItemData::clear_id() {
   id_ = 0;
 }
@@ -1716,7 +1865,7 @@ inline void ItemData::set_id(::PROTOBUF_NAMESPACE_ID::int32 value) {
   // @@protoc_insertion_point(field_set:Proto.ItemData.id)
 }
 
-// int32 num = 2;
+// int32 num = 3;
 inline void ItemData::clear_num() {
   num_ = 0;
 }
@@ -1732,35 +1881,49 @@ inline void ItemData::set_num(::PROTOBUF_NAMESPACE_ID::int32 value) {
 
 // -------------------------------------------------------------------
 
-// PlayerItems
+// PlayerPack
 
-// repeated .Proto.ItemData items = 1;
-inline int PlayerItems::items_size() const {
+// int32 gold = 1;
+inline void PlayerPack::clear_gold() {
+  gold_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 PlayerPack::gold() const {
+  // @@protoc_insertion_point(field_get:Proto.PlayerPack.gold)
+  return gold_;
+}
+inline void PlayerPack::set_gold(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  gold_ = value;
+  // @@protoc_insertion_point(field_set:Proto.PlayerPack.gold)
+}
+
+// repeated .Proto.ItemData items = 2;
+inline int PlayerPack::items_size() const {
   return items_.size();
 }
-inline void PlayerItems::clear_items() {
+inline void PlayerPack::clear_items() {
   items_.Clear();
 }
-inline ::Proto::ItemData* PlayerItems::mutable_items(int index) {
-  // @@protoc_insertion_point(field_mutable:Proto.PlayerItems.items)
+inline ::Proto::ItemData* PlayerPack::mutable_items(int index) {
+  // @@protoc_insertion_point(field_mutable:Proto.PlayerPack.items)
   return items_.Mutable(index);
 }
 inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::ItemData >*
-PlayerItems::mutable_items() {
-  // @@protoc_insertion_point(field_mutable_list:Proto.PlayerItems.items)
+PlayerPack::mutable_items() {
+  // @@protoc_insertion_point(field_mutable_list:Proto.PlayerPack.items)
   return &items_;
 }
-inline const ::Proto::ItemData& PlayerItems::items(int index) const {
-  // @@protoc_insertion_point(field_get:Proto.PlayerItems.items)
+inline const ::Proto::ItemData& PlayerPack::items(int index) const {
+  // @@protoc_insertion_point(field_get:Proto.PlayerPack.items)
   return items_.Get(index);
 }
-inline ::Proto::ItemData* PlayerItems::add_items() {
-  // @@protoc_insertion_point(field_add:Proto.PlayerItems.items)
+inline ::Proto::ItemData* PlayerPack::add_items() {
+  // @@protoc_insertion_point(field_add:Proto.PlayerPack.items)
   return items_.Add();
 }
 inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::ItemData >&
-PlayerItems::items() const {
-  // @@protoc_insertion_point(field_list:Proto.PlayerItems.items)
+PlayerPack::items() const {
+  // @@protoc_insertion_point(field_list:Proto.PlayerPack.items)
   return items_;
 }
 
@@ -1786,6 +1949,11 @@ PlayerItems::items() const {
 
 PROTOBUF_NAMESPACE_OPEN
 
+template <> struct is_proto_enum< ::Proto::ItemData_ItemType> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::Proto::ItemData_ItemType>() {
+  return ::Proto::ItemData_ItemType_descriptor();
+}
 template <> struct is_proto_enum< ::Proto::Gender> : ::std::true_type {};
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::Proto::Gender>() {

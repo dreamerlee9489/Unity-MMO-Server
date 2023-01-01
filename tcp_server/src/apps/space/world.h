@@ -18,15 +18,21 @@
 
 class Player;
 class AIEnemy;
+class PlayerManagerComponent;
 class World :public Entity<World>, public IWorld, public IAwakeFromPoolSystem<int>
 {
 public:
+	std::vector<int>* potions;
+	std::vector<int>* weapons;
+	std::vector<AIEnemy*> enemies;
+	PlayerManagerComponent* playerMgr;
+
 	void Awake(int worldId) override;
 	void BackToPool() override;
 	void BroadcastPacket(Proto::MsgId msgId, google::protobuf::Message& proto);
 	void BroadcastPacket(Proto::MsgId msgId, google::protobuf::Message& proto, std::set<uint64> players);
 	Player* GetNearestPlayer(Vector3& pos);
-	PlayerManagerComponent* GetPlayerManager() const { return _playerMgr; }
+	PlayerManagerComponent* GetPlayerManager() const { return playerMgr; }
 
 protected:
 	Player* GetPlayer(NetIdentify* pIdentify);
@@ -47,7 +53,5 @@ private:
 
 	// 缓存1秒内增加或是删除的玩家
 	std::set<uint64> _adds;
-	std::vector<AIEnemy*> _enemies;
-	PlayerManagerComponent* _playerMgr;
 };
 

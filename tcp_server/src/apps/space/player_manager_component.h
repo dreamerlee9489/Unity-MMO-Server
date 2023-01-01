@@ -1,8 +1,8 @@
 ﻿#pragma once
 #include "libserver/entity.h"
-
 #include "libplayer/player.h"
 
+class Player;
 class PlayerManagerComponent :public Entity<PlayerManagerComponent>, public IAwakeFromPoolSystem<>
 {
 public:

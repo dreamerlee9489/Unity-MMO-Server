@@ -49,7 +49,7 @@ struct TableStruct_msg_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxillaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[70]
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[71]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
@@ -75,6 +75,9 @@ extern AccountQueryOnlineToRedisRsDefaultTypeInternal _AccountQueryOnlineToRedis
 class AccountSyncOnlineToRedis;
 class AccountSyncOnlineToRedisDefaultTypeInternal;
 extern AccountSyncOnlineToRedisDefaultTypeInternal _AccountSyncOnlineToRedis_default_instance_;
+class AllRoleAppear;
+class AllRoleAppearDefaultTypeInternal;
+extern AllRoleAppearDefaultTypeInternal _AllRoleAppear_default_instance_;
 class AppInfoListSync;
 class AppInfoListSyncDefaultTypeInternal;
 extern AppInfoListSyncDefaultTypeInternal _AppInfoListSync_default_instance_;
@@ -147,6 +150,9 @@ extern GameTokenToRedisRsDefaultTypeInternal _GameTokenToRedisRs_default_instanc
 class Http;
 class HttpDefaultTypeInternal;
 extern HttpDefaultTypeInternal _Http_default_instance_;
+class ItemList;
+class ItemListDefaultTypeInternal;
+extern ItemListDefaultTypeInternal _ItemList_default_instance_;
 class LoginByToken;
 class LoginByTokenDefaultTypeInternal;
 extern LoginByTokenDefaultTypeInternal _LoginByToken_default_instance_;
@@ -228,9 +234,6 @@ extern RobotSyncStateDefaultTypeInternal _RobotSyncState_default_instance_;
 class Role;
 class RoleDefaultTypeInternal;
 extern RoleDefaultTypeInternal _Role_default_instance_;
-class RoleAppear;
-class RoleAppearDefaultTypeInternal;
-extern RoleAppearDefaultTypeInternal _RoleAppear_default_instance_;
 class RoleDisappear;
 class RoleDisappearDefaultTypeInternal;
 extern RoleDisappearDefaultTypeInternal _RoleDisappear_default_instance_;
@@ -275,6 +278,7 @@ template<> ::Proto::AccountDeleteOnlineToRedis* Arena::CreateMaybeMessage<::Prot
 template<> ::Proto::AccountQueryOnlineToRedis* Arena::CreateMaybeMessage<::Proto::AccountQueryOnlineToRedis>(Arena*);
 template<> ::Proto::AccountQueryOnlineToRedisRs* Arena::CreateMaybeMessage<::Proto::AccountQueryOnlineToRedisRs>(Arena*);
 template<> ::Proto::AccountSyncOnlineToRedis* Arena::CreateMaybeMessage<::Proto::AccountSyncOnlineToRedis>(Arena*);
+template<> ::Proto::AllRoleAppear* Arena::CreateMaybeMessage<::Proto::AllRoleAppear>(Arena*);
 template<> ::Proto::AppInfoListSync* Arena::CreateMaybeMessage<::Proto::AppInfoListSync>(Arena*);
 template<> ::Proto::AppInfoSync* Arena::CreateMaybeMessage<::Proto::AppInfoSync>(Arena*);
 template<> ::Proto::AppRegister* Arena::CreateMaybeMessage<::Proto::AppRegister>(Arena*);
@@ -299,6 +303,7 @@ template<> ::Proto::GameToken* Arena::CreateMaybeMessage<::Proto::GameToken>(Are
 template<> ::Proto::GameTokenToRedis* Arena::CreateMaybeMessage<::Proto::GameTokenToRedis>(Arena*);
 template<> ::Proto::GameTokenToRedisRs* Arena::CreateMaybeMessage<::Proto::GameTokenToRedisRs>(Arena*);
 template<> ::Proto::Http* Arena::CreateMaybeMessage<::Proto::Http>(Arena*);
+template<> ::Proto::ItemList* Arena::CreateMaybeMessage<::Proto::ItemList>(Arena*);
 template<> ::Proto::LoginByToken* Arena::CreateMaybeMessage<::Proto::LoginByToken>(Arena*);
 template<> ::Proto::LoginByTokenRs* Arena::CreateMaybeMessage<::Proto::LoginByTokenRs>(Arena*);
 template<> ::Proto::LoginTokenToRedis* Arena::CreateMaybeMessage<::Proto::LoginTokenToRedis>(Arena*);
@@ -326,7 +331,6 @@ template<> ::Proto::RobotCreate* Arena::CreateMaybeMessage<::Proto::RobotCreate>
 template<> ::Proto::RobotState* Arena::CreateMaybeMessage<::Proto::RobotState>(Arena*);
 template<> ::Proto::RobotSyncState* Arena::CreateMaybeMessage<::Proto::RobotSyncState>(Arena*);
 template<> ::Proto::Role* Arena::CreateMaybeMessage<::Proto::Role>(Arena*);
-template<> ::Proto::RoleAppear* Arena::CreateMaybeMessage<::Proto::RoleAppear>(Arena*);
 template<> ::Proto::RoleDisappear* Arena::CreateMaybeMessage<::Proto::RoleDisappear>(Arena*);
 template<> ::Proto::SavePlayer* Arena::CreateMaybeMessage<::Proto::SavePlayer>(Arena*);
 template<> ::Proto::SelectPlayer* Arena::CreateMaybeMessage<::Proto::SelectPlayer>(Arena*);
@@ -9588,6 +9592,12 @@ class Role :
     kPositionFieldNumber = 4,
     kSnFieldNumber = 2,
     kGenderFieldNumber = 3,
+    kLevelFieldNumber = 5,
+    kXpFieldNumber = 6,
+    kHpFieldNumber = 7,
+    kMpFieldNumber = 8,
+    kAtkFieldNumber = 9,
+    kDefFieldNumber = 10,
   };
   // string name = 1;
   void clear_name();
@@ -9618,6 +9628,36 @@ class Role :
   ::Proto::Gender gender() const;
   void set_gender(::Proto::Gender value);
 
+  // int32 level = 5;
+  void clear_level();
+  ::PROTOBUF_NAMESPACE_ID::int32 level() const;
+  void set_level(::PROTOBUF_NAMESPACE_ID::int32 value);
+
+  // int32 xp = 6;
+  void clear_xp();
+  ::PROTOBUF_NAMESPACE_ID::int32 xp() const;
+  void set_xp(::PROTOBUF_NAMESPACE_ID::int32 value);
+
+  // int32 hp = 7;
+  void clear_hp();
+  ::PROTOBUF_NAMESPACE_ID::int32 hp() const;
+  void set_hp(::PROTOBUF_NAMESPACE_ID::int32 value);
+
+  // int32 mp = 8;
+  void clear_mp();
+  ::PROTOBUF_NAMESPACE_ID::int32 mp() const;
+  void set_mp(::PROTOBUF_NAMESPACE_ID::int32 value);
+
+  // int32 atk = 9;
+  void clear_atk();
+  ::PROTOBUF_NAMESPACE_ID::int32 atk() const;
+  void set_atk(::PROTOBUF_NAMESPACE_ID::int32 value);
+
+  // int32 def = 10;
+  void clear_def();
+  ::PROTOBUF_NAMESPACE_ID::int32 def() const;
+  void set_def(::PROTOBUF_NAMESPACE_ID::int32 value);
+
   // @@protoc_insertion_point(class_scope:Proto.Role)
  private:
   class _Internal;
@@ -9627,28 +9667,34 @@ class Role :
   ::Proto::Vector3D* position_;
   ::PROTOBUF_NAMESPACE_ID::uint64 sn_;
   int gender_;
+  ::PROTOBUF_NAMESPACE_ID::int32 level_;
+  ::PROTOBUF_NAMESPACE_ID::int32 xp_;
+  ::PROTOBUF_NAMESPACE_ID::int32 hp_;
+  ::PROTOBUF_NAMESPACE_ID::int32 mp_;
+  ::PROTOBUF_NAMESPACE_ID::int32 atk_;
+  ::PROTOBUF_NAMESPACE_ID::int32 def_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_msg_2eproto;
 };
 // -------------------------------------------------------------------
 
-class RoleAppear :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Proto.RoleAppear) */ {
+class AllRoleAppear :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Proto.AllRoleAppear) */ {
  public:
-  RoleAppear();
-  virtual ~RoleAppear();
+  AllRoleAppear();
+  virtual ~AllRoleAppear();
 
-  RoleAppear(const RoleAppear& from);
-  RoleAppear(RoleAppear&& from) noexcept
-    : RoleAppear() {
+  AllRoleAppear(const AllRoleAppear& from);
+  AllRoleAppear(AllRoleAppear&& from) noexcept
+    : AllRoleAppear() {
     *this = ::std::move(from);
   }
 
-  inline RoleAppear& operator=(const RoleAppear& from) {
+  inline AllRoleAppear& operator=(const AllRoleAppear& from) {
     CopyFrom(from);
     return *this;
   }
-  inline RoleAppear& operator=(RoleAppear&& from) noexcept {
+  inline AllRoleAppear& operator=(AllRoleAppear&& from) noexcept {
     if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
       if (this != &from) InternalSwap(&from);
     } else {
@@ -9666,37 +9712,37 @@ class RoleAppear :
   static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
     return GetMetadataStatic().reflection;
   }
-  static const RoleAppear& default_instance();
+  static const AllRoleAppear& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const RoleAppear* internal_default_instance() {
-    return reinterpret_cast<const RoleAppear*>(
-               &_RoleAppear_default_instance_);
+  static inline const AllRoleAppear* internal_default_instance() {
+    return reinterpret_cast<const AllRoleAppear*>(
+               &_AllRoleAppear_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
     61;
 
-  friend void swap(RoleAppear& a, RoleAppear& b) {
+  friend void swap(AllRoleAppear& a, AllRoleAppear& b) {
     a.Swap(&b);
   }
-  inline void Swap(RoleAppear* other) {
+  inline void Swap(AllRoleAppear* other) {
     if (other == this) return;
     InternalSwap(other);
   }
 
   // implements Message ----------------------------------------------
 
-  inline RoleAppear* New() const final {
-    return CreateMaybeMessage<RoleAppear>(nullptr);
+  inline AllRoleAppear* New() const final {
+    return CreateMaybeMessage<AllRoleAppear>(nullptr);
   }
 
-  RoleAppear* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
-    return CreateMaybeMessage<RoleAppear>(arena);
+  AllRoleAppear* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<AllRoleAppear>(arena);
   }
   void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
   void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-  void CopyFrom(const RoleAppear& from);
-  void MergeFrom(const RoleAppear& from);
+  void CopyFrom(const AllRoleAppear& from);
+  void MergeFrom(const AllRoleAppear& from);
   PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
   bool IsInitialized() const final;
 
@@ -9717,10 +9763,10 @@ class RoleAppear :
   inline void SharedCtor();
   inline void SharedDtor();
   void SetCachedSize(int size) const final;
-  void InternalSwap(RoleAppear* other);
+  void InternalSwap(AllRoleAppear* other);
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "Proto.RoleAppear";
+    return "Proto.AllRoleAppear";
   }
   private:
   inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
@@ -9745,25 +9791,25 @@ class RoleAppear :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kRoleFieldNumber = 1,
+    kRolesFieldNumber = 1,
   };
-  // repeated .Proto.Role role = 1;
-  int role_size() const;
-  void clear_role();
-  ::Proto::Role* mutable_role(int index);
+  // repeated .Proto.Role roles = 1;
+  int roles_size() const;
+  void clear_roles();
+  ::Proto::Role* mutable_roles(int index);
   ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::Role >*
-      mutable_role();
-  const ::Proto::Role& role(int index) const;
-  ::Proto::Role* add_role();
+      mutable_roles();
+  const ::Proto::Role& roles(int index) const;
+  ::Proto::Role* add_roles();
   const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::Role >&
-      role() const;
+      roles() const;
 
-  // @@protoc_insertion_point(class_scope:Proto.RoleAppear)
+  // @@protoc_insertion_point(class_scope:Proto.AllRoleAppear)
  private:
   class _Internal;
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::Role > role_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::Role > roles_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_msg_2eproto;
 };
@@ -10932,6 +10978,150 @@ class AtkAnimEvent :
   ::PROTOBUF_NAMESPACE_ID::int32 enemy_id_;
   ::PROTOBUF_NAMESPACE_ID::int32 curr_hp_;
   bool atkenemy_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_msg_2eproto;
+};
+// -------------------------------------------------------------------
+
+class ItemList :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Proto.ItemList) */ {
+ public:
+  ItemList();
+  virtual ~ItemList();
+
+  ItemList(const ItemList& from);
+  ItemList(ItemList&& from) noexcept
+    : ItemList() {
+    *this = ::std::move(from);
+  }
+
+  inline ItemList& operator=(const ItemList& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline ItemList& operator=(ItemList&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const ItemList& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const ItemList* internal_default_instance() {
+    return reinterpret_cast<const ItemList*>(
+               &_ItemList_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    70;
+
+  friend void swap(ItemList& a, ItemList& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(ItemList* other) {
+    if (other == this) return;
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline ItemList* New() const final {
+    return CreateMaybeMessage<ItemList>(nullptr);
+  }
+
+  ItemList* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<ItemList>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const ItemList& from);
+  void MergeFrom(const ItemList& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  #else
+  bool MergePartialFromCodedStream(
+      ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) final;
+  #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  void SerializeWithCachedSizes(
+      ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(ItemList* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "Proto.ItemList";
+  }
+  private:
+  inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_msg_2eproto);
+    return ::descriptor_table_msg_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kItemsFieldNumber = 2,
+    kEnemyIdFieldNumber = 1,
+  };
+  // repeated .Proto.ItemData items = 2;
+  int items_size() const;
+  void clear_items();
+  ::Proto::ItemData* mutable_items(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::ItemData >*
+      mutable_items();
+  const ::Proto::ItemData& items(int index) const;
+  ::Proto::ItemData* add_items();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::ItemData >&
+      items() const;
+
+  // int32 enemy_id = 1;
+  void clear_enemy_id();
+  ::PROTOBUF_NAMESPACE_ID::int32 enemy_id() const;
+  void set_enemy_id(::PROTOBUF_NAMESPACE_ID::int32 value);
+
+  // @@protoc_insertion_point(class_scope:Proto.ItemList)
+ private:
+  class _Internal;
+
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::ItemData > items_;
+  ::PROTOBUF_NAMESPACE_ID::int32 enemy_id_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_msg_2eproto;
 };
@@ -14773,38 +14963,122 @@ inline void Role::set_allocated_position(::Proto::Vector3D* position) {
   // @@protoc_insertion_point(field_set_allocated:Proto.Role.position)
 }
 
+// int32 level = 5;
+inline void Role::clear_level() {
+  level_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 Role::level() const {
+  // @@protoc_insertion_point(field_get:Proto.Role.level)
+  return level_;
+}
+inline void Role::set_level(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  level_ = value;
+  // @@protoc_insertion_point(field_set:Proto.Role.level)
+}
+
+// int32 xp = 6;
+inline void Role::clear_xp() {
+  xp_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 Role::xp() const {
+  // @@protoc_insertion_point(field_get:Proto.Role.xp)
+  return xp_;
+}
+inline void Role::set_xp(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  xp_ = value;
+  // @@protoc_insertion_point(field_set:Proto.Role.xp)
+}
+
+// int32 hp = 7;
+inline void Role::clear_hp() {
+  hp_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 Role::hp() const {
+  // @@protoc_insertion_point(field_get:Proto.Role.hp)
+  return hp_;
+}
+inline void Role::set_hp(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  hp_ = value;
+  // @@protoc_insertion_point(field_set:Proto.Role.hp)
+}
+
+// int32 mp = 8;
+inline void Role::clear_mp() {
+  mp_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 Role::mp() const {
+  // @@protoc_insertion_point(field_get:Proto.Role.mp)
+  return mp_;
+}
+inline void Role::set_mp(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  mp_ = value;
+  // @@protoc_insertion_point(field_set:Proto.Role.mp)
+}
+
+// int32 atk = 9;
+inline void Role::clear_atk() {
+  atk_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 Role::atk() const {
+  // @@protoc_insertion_point(field_get:Proto.Role.atk)
+  return atk_;
+}
+inline void Role::set_atk(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  atk_ = value;
+  // @@protoc_insertion_point(field_set:Proto.Role.atk)
+}
+
+// int32 def = 10;
+inline void Role::clear_def() {
+  def_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 Role::def() const {
+  // @@protoc_insertion_point(field_get:Proto.Role.def)
+  return def_;
+}
+inline void Role::set_def(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  def_ = value;
+  // @@protoc_insertion_point(field_set:Proto.Role.def)
+}
+
 // -------------------------------------------------------------------
 
-// RoleAppear
+// AllRoleAppear
 
-// repeated .Proto.Role role = 1;
-inline int RoleAppear::role_size() const {
-  return role_.size();
+// repeated .Proto.Role roles = 1;
+inline int AllRoleAppear::roles_size() const {
+  return roles_.size();
 }
-inline void RoleAppear::clear_role() {
-  role_.Clear();
+inline void AllRoleAppear::clear_roles() {
+  roles_.Clear();
 }
-inline ::Proto::Role* RoleAppear::mutable_role(int index) {
-  // @@protoc_insertion_point(field_mutable:Proto.RoleAppear.role)
-  return role_.Mutable(index);
+inline ::Proto::Role* AllRoleAppear::mutable_roles(int index) {
+  // @@protoc_insertion_point(field_mutable:Proto.AllRoleAppear.roles)
+  return roles_.Mutable(index);
 }
 inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::Role >*
-RoleAppear::mutable_role() {
-  // @@protoc_insertion_point(field_mutable_list:Proto.RoleAppear.role)
-  return &role_;
+AllRoleAppear::mutable_roles() {
+  // @@protoc_insertion_point(field_mutable_list:Proto.AllRoleAppear.roles)
+  return &roles_;
 }
-inline const ::Proto::Role& RoleAppear::role(int index) const {
-  // @@protoc_insertion_point(field_get:Proto.RoleAppear.role)
-  return role_.Get(index);
+inline const ::Proto::Role& AllRoleAppear::roles(int index) const {
+  // @@protoc_insertion_point(field_get:Proto.AllRoleAppear.roles)
+  return roles_.Get(index);
 }
-inline ::Proto::Role* RoleAppear::add_role() {
-  // @@protoc_insertion_point(field_add:Proto.RoleAppear.role)
-  return role_.Add();
+inline ::Proto::Role* AllRoleAppear::add_roles() {
+  // @@protoc_insertion_point(field_add:Proto.AllRoleAppear.roles)
+  return roles_.Add();
 }
 inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::Role >&
-RoleAppear::role() const {
-  // @@protoc_insertion_point(field_list:Proto.RoleAppear.role)
-  return role_;
+AllRoleAppear::roles() const {
+  // @@protoc_insertion_point(field_list:Proto.AllRoleAppear.roles)
+  return roles_;
 }
 
 // -------------------------------------------------------------------
@@ -15267,9 +15541,56 @@ inline void AtkAnimEvent::set_atkenemy(bool value) {
   // @@protoc_insertion_point(field_set:Proto.AtkAnimEvent.atkEnemy)
 }
 
+// -------------------------------------------------------------------
+
+// ItemList
+
+// int32 enemy_id = 1;
+inline void ItemList::clear_enemy_id() {
+  enemy_id_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 ItemList::enemy_id() const {
+  // @@protoc_insertion_point(field_get:Proto.ItemList.enemy_id)
+  return enemy_id_;
+}
+inline void ItemList::set_enemy_id(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  enemy_id_ = value;
+  // @@protoc_insertion_point(field_set:Proto.ItemList.enemy_id)
+}
+
+// repeated .Proto.ItemData items = 2;
+inline int ItemList::items_size() const {
+  return items_.size();
+}
+inline ::Proto::ItemData* ItemList::mutable_items(int index) {
+  // @@protoc_insertion_point(field_mutable:Proto.ItemList.items)
+  return items_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::ItemData >*
+ItemList::mutable_items() {
+  // @@protoc_insertion_point(field_mutable_list:Proto.ItemList.items)
+  return &items_;
+}
+inline const ::Proto::ItemData& ItemList::items(int index) const {
+  // @@protoc_insertion_point(field_get:Proto.ItemList.items)
+  return items_.Get(index);
+}
+inline ::Proto::ItemData* ItemList::add_items() {
+  // @@protoc_insertion_point(field_add:Proto.ItemList.items)
+  return items_.Add();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::ItemData >&
+ItemList::items() const {
+  // @@protoc_insertion_point(field_list:Proto.ItemList.items)
+  return items_;
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------
