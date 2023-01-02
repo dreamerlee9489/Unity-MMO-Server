@@ -24,7 +24,7 @@ namespace Proto {
     static ProtoIdReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "Cg5wcm90b19pZC5wcm90bxIFUHJvdG8q2REKBU1zZ0lkEggKBE5vbmUQABIV",
+            "Cg5wcm90b19pZC5wcm90bxIFUHJvdG8qhxIKBU1zZ0lkEggKBE5vbmUQABIV",
             "ChFNSV9OZXR3b3JrQ29ubmVjdBABEhcKE01JX05ldHdvcmtDb25uZWN0ZWQQ",
             "AhIUChBNSV9OZXR3b3JrTGlzdGVuEAMSFwoTTUlfTmV0d29ya0xpc3Rlbktl",
             "eRAEEhgKFE1JX05ldHdvcmtEaXNjb25uZWN0EAoSGgoWTUlfTmV0d29ya0Rp",
@@ -68,14 +68,15 @@ namespace Proto {
             "CgxNSV9DbWRUaHJlYWQQoZwBEg8KCU1JX0NtZEFwcBCinAESFgoQTUlfQ21k",
             "V29ybGRQcm94eRCjnAESEQoLTUlfQ21kV29ybGQQpJwBEhIKDE1JX0NtZENy",
             "ZWF0ZRClnAESFgoQTUlfQ21kRWZmaWNpZW5jeRCmnAESEwoNTUlfRWZmaWNp",
-            "ZW5jeRCnnAESFgoQUzJDX0ZzbVN5bmNTdGF0ZRCy6gESFgoQQzJTX0ZzbVN5",
-            "bmNTdGF0ZRCz6gESGQoTQzJTX1BsYXllclN5bmNTdGF0ZRC06gESGQoTUzJD",
-            "X1BsYXllclN5bmNTdGF0ZRC16gESFgoQQzJTX0VuZW15U3luY1BvcxC26gES",
-            "FgoQUzJDX0VuZW15U3luY1BvcxC36gESGgoUQzJTX1JlcXVlc3RTeW5jRW5l",
-            "bXkQuOoBEhoKFFMyQ19SZXF1ZXN0U3luY0VuZW15ELnqARIbChVTMkNfUmVx",
-            "dWVzdExpbmtQbGF5ZXIQuuoBEhYKEEMyU19BdGtBbmltRXZlbnQQu+oBEhYK",
-            "EFMyQ19BdGtBbmltRXZlbnQQvOoBEhIKDFMyQ19JdGVtTGlzdBC96gFiBnBy",
-            "b3RvMw=="));
+            "ZW5jeRCnnAESFwoRQzJTX1BsYXllclN5bmNQb3MQseoBEhcKEVMyQ19QbGF5",
+            "ZXJTeW5jUG9zELLqARIXChFDMlNfUGxheWVyU3luY0NtZBCz6gESFwoRUzJD",
+            "X1BsYXllclN5bmNDbWQQtOoBEhYKEEMyU19FbmVteVN5bmNQb3MQteoBEhYK",
+            "EFMyQ19FbmVteVN5bmNQb3MQtuoBEhYKEFMyQ19Gc21TeW5jU3RhdGUQt+oB",
+            "EhYKEEMyU19Gc21TeW5jU3RhdGUQuOoBEhoKFEMyU19SZXF1ZXN0U3luY0Vu",
+            "ZW15ELnqARIaChRTMkNfUmVxdWVzdFN5bmNFbmVteRC66gESGwoVUzJDX1Jl",
+            "cXVlc3RMaW5rUGxheWVyELvqARIWChBDMlNfQXRrQW5pbUV2ZW50ELzqARIW",
+            "ChBTMkNfQXRrQW5pbUV2ZW50EL3qARISCgxTMkNfSXRlbUxpc3QQvuoBYgZw",
+            "cm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Proto.MsgId), }, null, null));
@@ -364,18 +365,20 @@ namespace Proto {
     /// <summary>
     /// AI
     /// </summary>
-    [pbr::OriginalName("S2C_FsmSyncState")] S2CFsmSyncState = 30002,
-    [pbr::OriginalName("C2S_FsmSyncState")] C2SFsmSyncState = 30003,
-    [pbr::OriginalName("C2S_PlayerSyncState")] C2SPlayerSyncState = 30004,
-    [pbr::OriginalName("S2C_PlayerSyncState")] S2CPlayerSyncState = 30005,
-    [pbr::OriginalName("C2S_EnemySyncPos")] C2SEnemySyncPos = 30006,
-    [pbr::OriginalName("S2C_EnemySyncPos")] S2CEnemySyncPos = 30007,
-    [pbr::OriginalName("C2S_RequestSyncEnemy")] C2SRequestSyncEnemy = 30008,
-    [pbr::OriginalName("S2C_RequestSyncEnemy")] S2CRequestSyncEnemy = 30009,
-    [pbr::OriginalName("S2C_RequestLinkPlayer")] S2CRequestLinkPlayer = 30010,
-    [pbr::OriginalName("C2S_AtkAnimEvent")] C2SAtkAnimEvent = 30011,
-    [pbr::OriginalName("S2C_AtkAnimEvent")] S2CAtkAnimEvent = 30012,
-    [pbr::OriginalName("S2C_ItemList")] S2CItemList = 30013,
+    [pbr::OriginalName("C2S_PlayerSyncPos")] C2SPlayerSyncPos = 30001,
+    [pbr::OriginalName("S2C_PlayerSyncPos")] S2CPlayerSyncPos = 30002,
+    [pbr::OriginalName("C2S_PlayerSyncCmd")] C2SPlayerSyncCmd = 30003,
+    [pbr::OriginalName("S2C_PlayerSyncCmd")] S2CPlayerSyncCmd = 30004,
+    [pbr::OriginalName("C2S_EnemySyncPos")] C2SEnemySyncPos = 30005,
+    [pbr::OriginalName("S2C_EnemySyncPos")] S2CEnemySyncPos = 30006,
+    [pbr::OriginalName("S2C_FsmSyncState")] S2CFsmSyncState = 30007,
+    [pbr::OriginalName("C2S_FsmSyncState")] C2SFsmSyncState = 30008,
+    [pbr::OriginalName("C2S_RequestSyncEnemy")] C2SRequestSyncEnemy = 30009,
+    [pbr::OriginalName("S2C_RequestSyncEnemy")] S2CRequestSyncEnemy = 30010,
+    [pbr::OriginalName("S2C_RequestLinkPlayer")] S2CRequestLinkPlayer = 30011,
+    [pbr::OriginalName("C2S_AtkAnimEvent")] C2SAtkAnimEvent = 30012,
+    [pbr::OriginalName("S2C_AtkAnimEvent")] S2CAtkAnimEvent = 30013,
+    [pbr::OriginalName("S2C_ItemList")] S2CItemList = 30014,
   }
 
   #endregion

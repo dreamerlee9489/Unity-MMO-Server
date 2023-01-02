@@ -25,7 +25,7 @@ void AIEnemy::SetLinkPlayer(Player* player)
 	{
 		Proto::RequestLinkPlayer proto;
 		proto.set_enemy_id(_id);
-		proto.set_islinker(false);
+		proto.set_linker(false);
 		MessageSystemHelp::SendPacket(Proto::MsgId::S2C_RequestLinkPlayer, proto, _linkPlayer);
 	}
 	_linkPlayer = player;

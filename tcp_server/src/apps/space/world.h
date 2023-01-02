@@ -38,14 +38,15 @@ protected:
 	Player* GetPlayer(NetIdentify* pIdentify);
 	void HandleNetworkDisconnect(Packet* pPacket);
 	void HandleSyncPlayer(Packet* pPacket);
-	void HandleFsmSyncState(Packet* pPacket);
 	void HandleEnemySyncPos(Packet* pPacket);
+	void HandleFsmSyncState(Packet* pPacket);
 	void HandleAtkAnimEvent(Packet* pPacket);
 	void HandleRequestSyncPlayer(Player* pPlayer, Packet* pPacket);
 	void HandleG2SRemovePlayer(Player* pPlayer, Packet* pPacket);
 	void HandleMove(Player* pPlayer, Packet* pPacket);
-	void HandlePlayerSyncState(Player* pPlayer, Packet* pPacket);
 	void HandleRequestSyncEnemy(Player* pPlayer, Packet* pPacket);
+	void HandlePlayerSyncPos(Player* pPlayer, Packet* pPacket);
+	void HandlePlayerSyncCmd(Packet* pPacket);
 
 private:
 	void SyncWorldToGather();

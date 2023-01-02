@@ -9,7 +9,7 @@ void Pursuit::Enter()
 		_owner->SetLinkPlayer(_target);
 		Proto::RequestLinkPlayer proto;
 		proto.set_enemy_id(_owner->GetID());
-		proto.set_islinker(true);
+		proto.set_linker(true);
 		MessageSystemHelp::SendPacket(Proto::MsgId::S2C_RequestLinkPlayer, proto, _target);
 	}
 	Broadcast();

@@ -19,7 +19,7 @@ void Patrol::Execute()
 		_owner->SetLinkPlayer(player);
 		Proto::RequestLinkPlayer proto;
 		proto.set_enemy_id(_owner->GetID());
-		proto.set_islinker(true);
+		proto.set_linker(true);
 		MessageSystemHelp::SendPacket(Proto::MsgId::S2C_RequestLinkPlayer, proto, player);
 	}
 	if (_owner->GetCurrPos().GetDistance(_owner->GetNextPos()) <= 1)

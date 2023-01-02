@@ -429,23 +429,24 @@ message FsmSyncState {
 	uint64 player_sn = 4;
 }
 
-message PlayerSyncState {
-	int32 state = 1;
-	int32 code = 2;
-	Vector3D curPos = 3;
-	Vector3D hitPos = 4;
-	uint64 player_sn = 5;
-	int32 enemy_id = 6;
+message PlayerSyncPos {
+	Vector3D pos = 1;
+}
+
+message PlayerSyncCmd {
+	int32 type = 1;
+	Vector3D point = 2;	
+	uint64 player_sn = 3;
+	int32 target_id = 4;
 }
 
 message RequestSyncEnemy {
-	uint64 player_sn = 1;
-	int32 enemy_id = 2;
+	int32 enemy_id = 1;
 }
 
 message RequestLinkPlayer {
 	int32 enemy_id = 1;
-	bool isLinker = 2;
+	bool linker = 2;
 }
 
 message AtkAnimEvent {

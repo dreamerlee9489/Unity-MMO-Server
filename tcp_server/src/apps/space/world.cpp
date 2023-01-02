@@ -16,10 +16,11 @@ void World::Awake(int worldId)
 	pMsgSystem->RegisterFunction(this, Proto::MsgId::C2S_FsmSyncState, BindFunP1(this, &World::HandleFsmSyncState));
 	pMsgSystem->RegisterFunction(this, Proto::MsgId::C2S_EnemySyncPos, BindFunP1(this, &World::HandleEnemySyncPos));
 	pMsgSystem->RegisterFunction(this, Proto::MsgId::C2S_AtkAnimEvent, BindFunP1(this, &World::HandleAtkAnimEvent));
+	pMsgSystem->RegisterFunction(this, Proto::MsgId::C2S_PlayerSyncCmd, BindFunP1(this, &World::HandlePlayerSyncCmd));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::G2S_RequestSyncPlayer, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleRequestSyncPlayer));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::G2S_RemovePlayer, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleG2SRemovePlayer));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_Move, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleMove));
-	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_PlayerSyncState, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandlePlayerSyncState));
+	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_PlayerSyncPos, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandlePlayerSyncPos));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_RequestSyncEnemy, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleRequestSyncEnemy));
 
 	ResourceWorld* worldCfg = ResourceHelp::GetResourceManager()->Worlds->GetResource(_worldId);
@@ -95,7 +96,7 @@ void World::HandleNetworkDisconnect(Packet* pPacket)
 				{
 					Proto::RequestLinkPlayer proto;
 					proto.set_enemy_id(enemy->GetID());
-					proto.set_islinker(true);
+					proto.set_linker(true);
 					MessageSystemHelp::SendPacket(Proto::MsgId::S2C_RequestLinkPlayer, proto, target);
 				}
 			}
@@ -310,13 +311,16 @@ void World::HandleMove(Player* pPlayer, Packet* pPacket)
 	BroadcastPacket(Proto::MsgId::S2C_Move, proto);
 }
 
-void World::HandlePlayerSyncState(Player* pPlayer, Packet* pPacket)
+void World::HandlePlayerSyncPos(Player* pPlayer, Packet* pPacket)
 {
-	Proto::PlayerSyncState proto = pPacket->ParseToProto<Proto::PlayerSyncState>();
-	proto.set_player_sn(pPlayer->GetPlayerSN());
-	const auto pComponentLastMap = pPlayer->GetComponent<PlayerComponentLastMap>();
-	pComponentLastMap->GetCur()->Position.ParserFromProto(proto.curpos());
-	BroadcastPacket(Proto::MsgId::S2C_PlayerSyncState, proto);
+	Proto::PlayerSyncPos proto = pPacket->ParseToProto<Proto::PlayerSyncPos>();
+	pPlayer->lastMap->GetCur()->Position.ParserFromProto(proto.pos());
+}
+
+void World::HandlePlayerSyncCmd(Packet* pPacket)
+{
+	Proto::PlayerSyncCmd proto = pPacket->ParseToProto<Proto::PlayerSyncCmd>();
+	BroadcastPacket(Proto::MsgId::S2C_PlayerSyncCmd, proto);
 }
 
 void World::HandleRequestSyncEnemy(Player* pPlayer, Packet* pPacket)
@@ -328,7 +332,7 @@ void World::HandleRequestSyncEnemy(Player* pPlayer, Packet* pPacket)
 		enemies[id]->SetLinkPlayer(pPlayer);
 		Proto::RequestLinkPlayer proto;
 		proto.set_enemy_id(enemies[id]->GetID());
-		proto.set_islinker(true);
+		proto.set_linker(true);
 		MessageSystemHelp::SendPacket(Proto::MsgId::S2C_RequestLinkPlayer, proto, pPlayer);
 	}
 	Proto::EnemySyncPos protoEnemy;
@@ -338,17 +342,17 @@ void World::HandleRequestSyncEnemy(Player* pPlayer, Packet* pPacket)
 	enemies[id]->GetComponent<FsmComponent>()->GetCurrState()->Singlecast(pPlayer);
 }
 
+void World::HandleEnemySyncPos(Packet* pPacket)
+{
+	Proto::EnemySyncPos proto = pPacket->ParseToProto<Proto::EnemySyncPos>();
+	enemies[proto.id()]->SetCurrPos(Vector3(proto.pos()));
+}
+
 void World::HandleFsmSyncState(Packet* pPacket)
 {
 	Proto::FsmSyncState proto = pPacket->ParseToProto<Proto::FsmSyncState>();
 	Player* player = playerMgr->GetPlayerBySn(proto.player_sn());
 	enemies[proto.enemy_id()]->GetComponent<FsmComponent>()->SyncState(proto, player);
-}
-
-void World::HandleEnemySyncPos(Packet* pPacket)
-{
-	Proto::EnemySyncPos proto = pPacket->ParseToProto<Proto::EnemySyncPos>();
-	enemies[proto.id()]->SetCurrPos(Vector3(proto.pos()));
 }
 
 void World::HandleAtkAnimEvent(Packet* pPacket)
