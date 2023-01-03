@@ -263,11 +263,11 @@ void Account::HandleCreatePlayer(Packet* pPacket)
 	pProtoPlayer->mutable_base()->set_gender(protoCreate.gender());
 	pProtoPlayer->mutable_base()->set_level(1);
 	pProtoPlayer->mutable_base()->set_xp(0);
-	pProtoPlayer->mutable_base()->set_hp(1000);
-	pProtoPlayer->mutable_base()->set_mp(1000);
+	pProtoPlayer->mutable_base()->set_hp(999);
+	pProtoPlayer->mutable_base()->set_mp(999);
 	pProtoPlayer->mutable_base()->set_atk(10);
 	pProtoPlayer->mutable_base()->set_def(0);
-	pProtoPlayer->mutable_pack()->set_gold(500);
+	pProtoPlayer->mutable_knap()->set_gold(500);
 	MessageSystemHelp::SendPacket(Proto::MsgId::L2DB_CreatePlayer, proto2Db, APP_DB_MGR);
 }
 

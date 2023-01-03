@@ -44,7 +44,7 @@ message Player {
 	uint64 sn = 1;
 	string name = 2;
 	PlayerBase base = 3;
-	PlayerPack pack = 4;
+	PlayerKnap knap = 4;
 	PlayerMisc misc = 5;
 }
 
@@ -59,7 +59,11 @@ message ItemData {
 	int32 num = 3;
 }
 
-message PlayerPack {
+message PlayerKnap {
 	int32 gold = 1;
 	repeated ItemData items = 2;
+}
+
+message AddItemToKnap {
+	ItemData item = 1;
 }

@@ -90,22 +90,28 @@ int AIEnemy::GetDamage(Player* attacker)
 	return hp;
 }
 
-std::vector<DropItem>* AIEnemy::GetDropList()
+std::vector<DropItem>* AIEnemy::GetDropList(Player* player)
 {
 	std::vector<DropItem>* items = new std::vector<DropItem>();
-	items->emplace_back(ItemType::None, DROP_EXPR, (atk + lv) * 5);
-	items->emplace_back(ItemType::None, DROP_GOLD, (atk + lv) * 10);
+	int exp = (atk + lv) * 5, gold = (atk + lv) * 10;
+	player->detail->xp += exp;
+	player->detail->gold += gold;
+	items->emplace_back(ItemType::None, DROP_EXPR, exp);
+	items->emplace_back(ItemType::None, DROP_GOLD, gold);
 	double val1 = _realDis(_realEng), val2 = _realDis(_realEng);
+	_intEng = std::default_random_engine(Global::GetInstance()->TimeTick);
 	if (val1 < 0.5)
 	{
 		_idDis = std::uniform_int_distribution<int>(1, _world->potions->size());
 		_numDis = std::uniform_int_distribution<int>(1, 3);
 		items->emplace_back(ItemType::Potion, _idDis(_intEng), _numDis(_intEng));
+		LOG_DEBUG("potion: id=" << items->back().id << ", num=" << items->back().num);
 	}
 	if (val2 < 0.5)
 	{
 		_idDis = std::uniform_int_distribution<int>(1, _world->weapons->size());
 		items->emplace_back(ItemType::Weapon, _idDis(_intEng), 1);
+		LOG_DEBUG("weapon: id=" << items->back().id << ", num=" << items->back().num);
 	}
 	return items;
 }

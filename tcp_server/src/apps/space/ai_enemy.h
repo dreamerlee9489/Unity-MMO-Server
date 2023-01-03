@@ -17,6 +17,13 @@ struct DropItem
 	int id, num;
 	ItemType type;
 
+	DropItem()
+	{
+		type = ItemType::None;
+		id = 0;
+		num = 0;
+	}
+
 	DropItem(ItemType type, int id, int num)
 	{
 		this->type = type;
@@ -38,6 +45,7 @@ class AIEnemy : public Entity<AIEnemy>, public IAwakeFromPoolSystem<ResourceEnem
 	Player* _linkPlayer = nullptr;
 	std::map<uint64, Player*>* _players = nullptr;
 
+	timeutil::Time _currTime;
 	std::default_random_engine _intEng;
 	std::uniform_int_distribution<int> _idDis, _numDis;
 	static std::default_random_engine _realEng;
@@ -70,7 +78,7 @@ public:
 
 	int GetID() { return _id; }
 
-	std::vector<DropItem>* GetDropList();
+	std::vector<DropItem>* GetDropList(Player* player);
 
 	Vector3& GetInitPos() { return _initPos; }
 

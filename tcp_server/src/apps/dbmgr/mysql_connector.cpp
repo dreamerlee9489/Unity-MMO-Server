@@ -71,7 +71,7 @@ bool MysqlConnector::Connect()
         return false;
     }
 
-    // 不需要关闭自动提交，底层会START TRANSACTION之后再COMMIT
+    // 涓嶉渶瑕佸叧闂嚜鍔ㄦ彁浜わ紝搴曞眰浼歋TART TRANSACTION涔嬪悗鍐岰OMMIT
     // mysql_autocommit(mysql(), 0);
 
     mysql_ping(_pMysql);
@@ -130,7 +130,7 @@ void MysqlConnector::InitStmts()
     DatabaseStmt* stmt = CreateStmt("insert into player ( sn, account, name, savetime, createtime ) value ( ?, ?, ?, now(), now() )");
     _mapStmt.insert(std::make_pair(DatabaseStmtKey::Create, stmt));
 
-    stmt = CreateStmt("update player set base=?, misc=?, savetime=now() where sn = ?");
+    stmt = CreateStmt("update player set base=?, item=?, misc=?, savetime=now() where sn = ?");
     _mapStmt.insert(std::make_pair(DatabaseStmtKey::Save, stmt));
 
     LOG_DEBUG("\tMysqlConnector::InitStmts successfully!");
@@ -138,7 +138,7 @@ void MysqlConnector::InitStmts()
 
 void MysqlConnector::CleanStmts()
 {
-    for (auto one : _mapStmt)
+    for (auto &one : _mapStmt)
     {
         one.second->Close();
         delete one.second;

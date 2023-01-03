@@ -126,12 +126,15 @@ extern CreateSystemDefaultTypeInternal _CreateSystem_default_instance_;
 class CreateWorld;
 class CreateWorldDefaultTypeInternal;
 extern CreateWorldDefaultTypeInternal _CreateWorld_default_instance_;
+class DropItemList;
+class DropItemListDefaultTypeInternal;
+extern DropItemListDefaultTypeInternal _DropItemList_default_instance_;
 class Efficiency;
 class EfficiencyDefaultTypeInternal;
 extern EfficiencyDefaultTypeInternal _Efficiency_default_instance_;
-class EnemySyncPos;
-class EnemySyncPosDefaultTypeInternal;
-extern EnemySyncPosDefaultTypeInternal _EnemySyncPos_default_instance_;
+class EnemyPushPos;
+class EnemyPushPosDefaultTypeInternal;
+extern EnemyPushPosDefaultTypeInternal _EnemyPushPos_default_instance_;
 class EnterWorld;
 class EnterWorldDefaultTypeInternal;
 extern EnterWorldDefaultTypeInternal _EnterWorld_default_instance_;
@@ -150,9 +153,6 @@ extern GameTokenToRedisRsDefaultTypeInternal _GameTokenToRedisRs_default_instanc
 class Http;
 class HttpDefaultTypeInternal;
 extern HttpDefaultTypeInternal _Http_default_instance_;
-class ItemList;
-class ItemListDefaultTypeInternal;
-extern ItemListDefaultTypeInternal _ItemList_default_instance_;
 class LoginByToken;
 class LoginByTokenDefaultTypeInternal;
 extern LoginByTokenDefaultTypeInternal _LoginByToken_default_instance_;
@@ -183,15 +183,15 @@ extern PlayerListDefaultTypeInternal _PlayerList_default_instance_;
 class PlayerLittle;
 class PlayerLittleDefaultTypeInternal;
 extern PlayerLittleDefaultTypeInternal _PlayerLittle_default_instance_;
+class PlayerPushPos;
+class PlayerPushPosDefaultTypeInternal;
+extern PlayerPushPosDefaultTypeInternal _PlayerPushPos_default_instance_;
 class PlayerSyncCmd;
 class PlayerSyncCmdDefaultTypeInternal;
 extern PlayerSyncCmdDefaultTypeInternal _PlayerSyncCmd_default_instance_;
 class PlayerSyncOnlineToRedis;
 class PlayerSyncOnlineToRedisDefaultTypeInternal;
 extern PlayerSyncOnlineToRedisDefaultTypeInternal _PlayerSyncOnlineToRedis_default_instance_;
-class PlayerSyncPos;
-class PlayerSyncPosDefaultTypeInternal;
-extern PlayerSyncPosDefaultTypeInternal _PlayerSyncPos_default_instance_;
 class QueryPlayer;
 class QueryPlayerDefaultTypeInternal;
 extern QueryPlayerDefaultTypeInternal _QueryPlayer_default_instance_;
@@ -298,15 +298,15 @@ template<> ::Proto::CreatePlayerToDB* Arena::CreateMaybeMessage<::Proto::CreateP
 template<> ::Proto::CreatePlayerToDBRs* Arena::CreateMaybeMessage<::Proto::CreatePlayerToDBRs>(Arena*);
 template<> ::Proto::CreateSystem* Arena::CreateMaybeMessage<::Proto::CreateSystem>(Arena*);
 template<> ::Proto::CreateWorld* Arena::CreateMaybeMessage<::Proto::CreateWorld>(Arena*);
+template<> ::Proto::DropItemList* Arena::CreateMaybeMessage<::Proto::DropItemList>(Arena*);
 template<> ::Proto::Efficiency* Arena::CreateMaybeMessage<::Proto::Efficiency>(Arena*);
-template<> ::Proto::EnemySyncPos* Arena::CreateMaybeMessage<::Proto::EnemySyncPos>(Arena*);
+template<> ::Proto::EnemyPushPos* Arena::CreateMaybeMessage<::Proto::EnemyPushPos>(Arena*);
 template<> ::Proto::EnterWorld* Arena::CreateMaybeMessage<::Proto::EnterWorld>(Arena*);
 template<> ::Proto::FsmSyncState* Arena::CreateMaybeMessage<::Proto::FsmSyncState>(Arena*);
 template<> ::Proto::GameToken* Arena::CreateMaybeMessage<::Proto::GameToken>(Arena*);
 template<> ::Proto::GameTokenToRedis* Arena::CreateMaybeMessage<::Proto::GameTokenToRedis>(Arena*);
 template<> ::Proto::GameTokenToRedisRs* Arena::CreateMaybeMessage<::Proto::GameTokenToRedisRs>(Arena*);
 template<> ::Proto::Http* Arena::CreateMaybeMessage<::Proto::Http>(Arena*);
-template<> ::Proto::ItemList* Arena::CreateMaybeMessage<::Proto::ItemList>(Arena*);
 template<> ::Proto::LoginByToken* Arena::CreateMaybeMessage<::Proto::LoginByToken>(Arena*);
 template<> ::Proto::LoginByTokenRs* Arena::CreateMaybeMessage<::Proto::LoginByTokenRs>(Arena*);
 template<> ::Proto::LoginTokenToRedis* Arena::CreateMaybeMessage<::Proto::LoginTokenToRedis>(Arena*);
@@ -317,9 +317,9 @@ template<> ::Proto::NetworkDisconnect* Arena::CreateMaybeMessage<::Proto::Networ
 template<> ::Proto::PlayerDeleteOnlineToRedis* Arena::CreateMaybeMessage<::Proto::PlayerDeleteOnlineToRedis>(Arena*);
 template<> ::Proto::PlayerList* Arena::CreateMaybeMessage<::Proto::PlayerList>(Arena*);
 template<> ::Proto::PlayerLittle* Arena::CreateMaybeMessage<::Proto::PlayerLittle>(Arena*);
+template<> ::Proto::PlayerPushPos* Arena::CreateMaybeMessage<::Proto::PlayerPushPos>(Arena*);
 template<> ::Proto::PlayerSyncCmd* Arena::CreateMaybeMessage<::Proto::PlayerSyncCmd>(Arena*);
 template<> ::Proto::PlayerSyncOnlineToRedis* Arena::CreateMaybeMessage<::Proto::PlayerSyncOnlineToRedis>(Arena*);
-template<> ::Proto::PlayerSyncPos* Arena::CreateMaybeMessage<::Proto::PlayerSyncPos>(Arena*);
 template<> ::Proto::QueryPlayer* Arena::CreateMaybeMessage<::Proto::QueryPlayer>(Arena*);
 template<> ::Proto::QueryPlayerList* Arena::CreateMaybeMessage<::Proto::QueryPlayerList>(Arena*);
 template<> ::Proto::QueryPlayerRs* Arena::CreateMaybeMessage<::Proto::QueryPlayerRs>(Arena*);
@@ -10094,23 +10094,23 @@ class Move :
 };
 // -------------------------------------------------------------------
 
-class EnemySyncPos :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Proto.EnemySyncPos) */ {
+class EnemyPushPos :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Proto.EnemyPushPos) */ {
  public:
-  EnemySyncPos();
-  virtual ~EnemySyncPos();
+  EnemyPushPos();
+  virtual ~EnemyPushPos();
 
-  EnemySyncPos(const EnemySyncPos& from);
-  EnemySyncPos(EnemySyncPos&& from) noexcept
-    : EnemySyncPos() {
+  EnemyPushPos(const EnemyPushPos& from);
+  EnemyPushPos(EnemyPushPos&& from) noexcept
+    : EnemyPushPos() {
     *this = ::std::move(from);
   }
 
-  inline EnemySyncPos& operator=(const EnemySyncPos& from) {
+  inline EnemyPushPos& operator=(const EnemyPushPos& from) {
     CopyFrom(from);
     return *this;
   }
-  inline EnemySyncPos& operator=(EnemySyncPos&& from) noexcept {
+  inline EnemyPushPos& operator=(EnemyPushPos&& from) noexcept {
     if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
       if (this != &from) InternalSwap(&from);
     } else {
@@ -10128,37 +10128,37 @@ class EnemySyncPos :
   static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
     return GetMetadataStatic().reflection;
   }
-  static const EnemySyncPos& default_instance();
+  static const EnemyPushPos& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const EnemySyncPos* internal_default_instance() {
-    return reinterpret_cast<const EnemySyncPos*>(
-               &_EnemySyncPos_default_instance_);
+  static inline const EnemyPushPos* internal_default_instance() {
+    return reinterpret_cast<const EnemyPushPos*>(
+               &_EnemyPushPos_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
     64;
 
-  friend void swap(EnemySyncPos& a, EnemySyncPos& b) {
+  friend void swap(EnemyPushPos& a, EnemyPushPos& b) {
     a.Swap(&b);
   }
-  inline void Swap(EnemySyncPos* other) {
+  inline void Swap(EnemyPushPos* other) {
     if (other == this) return;
     InternalSwap(other);
   }
 
   // implements Message ----------------------------------------------
 
-  inline EnemySyncPos* New() const final {
-    return CreateMaybeMessage<EnemySyncPos>(nullptr);
+  inline EnemyPushPos* New() const final {
+    return CreateMaybeMessage<EnemyPushPos>(nullptr);
   }
 
-  EnemySyncPos* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
-    return CreateMaybeMessage<EnemySyncPos>(arena);
+  EnemyPushPos* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<EnemyPushPos>(arena);
   }
   void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
   void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-  void CopyFrom(const EnemySyncPos& from);
-  void MergeFrom(const EnemySyncPos& from);
+  void CopyFrom(const EnemyPushPos& from);
+  void MergeFrom(const EnemyPushPos& from);
   PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
   bool IsInitialized() const final;
 
@@ -10179,10 +10179,10 @@ class EnemySyncPos :
   inline void SharedCtor();
   inline void SharedDtor();
   void SetCachedSize(int size) const final;
-  void InternalSwap(EnemySyncPos* other);
+  void InternalSwap(EnemyPushPos* other);
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "Proto.EnemySyncPos";
+    return "Proto.EnemyPushPos";
   }
   private:
   inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
@@ -10223,7 +10223,7 @@ class EnemySyncPos :
   ::PROTOBUF_NAMESPACE_ID::int32 id() const;
   void set_id(::PROTOBUF_NAMESPACE_ID::int32 value);
 
-  // @@protoc_insertion_point(class_scope:Proto.EnemySyncPos)
+  // @@protoc_insertion_point(class_scope:Proto.EnemyPushPos)
  private:
   class _Internal;
 
@@ -10387,23 +10387,23 @@ class FsmSyncState :
 };
 // -------------------------------------------------------------------
 
-class PlayerSyncPos :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Proto.PlayerSyncPos) */ {
+class PlayerPushPos :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Proto.PlayerPushPos) */ {
  public:
-  PlayerSyncPos();
-  virtual ~PlayerSyncPos();
+  PlayerPushPos();
+  virtual ~PlayerPushPos();
 
-  PlayerSyncPos(const PlayerSyncPos& from);
-  PlayerSyncPos(PlayerSyncPos&& from) noexcept
-    : PlayerSyncPos() {
+  PlayerPushPos(const PlayerPushPos& from);
+  PlayerPushPos(PlayerPushPos&& from) noexcept
+    : PlayerPushPos() {
     *this = ::std::move(from);
   }
 
-  inline PlayerSyncPos& operator=(const PlayerSyncPos& from) {
+  inline PlayerPushPos& operator=(const PlayerPushPos& from) {
     CopyFrom(from);
     return *this;
   }
-  inline PlayerSyncPos& operator=(PlayerSyncPos&& from) noexcept {
+  inline PlayerPushPos& operator=(PlayerPushPos&& from) noexcept {
     if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
       if (this != &from) InternalSwap(&from);
     } else {
@@ -10421,37 +10421,37 @@ class PlayerSyncPos :
   static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
     return GetMetadataStatic().reflection;
   }
-  static const PlayerSyncPos& default_instance();
+  static const PlayerPushPos& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const PlayerSyncPos* internal_default_instance() {
-    return reinterpret_cast<const PlayerSyncPos*>(
-               &_PlayerSyncPos_default_instance_);
+  static inline const PlayerPushPos* internal_default_instance() {
+    return reinterpret_cast<const PlayerPushPos*>(
+               &_PlayerPushPos_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
     66;
 
-  friend void swap(PlayerSyncPos& a, PlayerSyncPos& b) {
+  friend void swap(PlayerPushPos& a, PlayerPushPos& b) {
     a.Swap(&b);
   }
-  inline void Swap(PlayerSyncPos* other) {
+  inline void Swap(PlayerPushPos* other) {
     if (other == this) return;
     InternalSwap(other);
   }
 
   // implements Message ----------------------------------------------
 
-  inline PlayerSyncPos* New() const final {
-    return CreateMaybeMessage<PlayerSyncPos>(nullptr);
+  inline PlayerPushPos* New() const final {
+    return CreateMaybeMessage<PlayerPushPos>(nullptr);
   }
 
-  PlayerSyncPos* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
-    return CreateMaybeMessage<PlayerSyncPos>(arena);
+  PlayerPushPos* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<PlayerPushPos>(arena);
   }
   void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
   void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-  void CopyFrom(const PlayerSyncPos& from);
-  void MergeFrom(const PlayerSyncPos& from);
+  void CopyFrom(const PlayerPushPos& from);
+  void MergeFrom(const PlayerPushPos& from);
   PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
   bool IsInitialized() const final;
 
@@ -10472,10 +10472,10 @@ class PlayerSyncPos :
   inline void SharedCtor();
   inline void SharedDtor();
   void SetCachedSize(int size) const final;
-  void InternalSwap(PlayerSyncPos* other);
+  void InternalSwap(PlayerPushPos* other);
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "Proto.PlayerSyncPos";
+    return "Proto.PlayerPushPos";
   }
   private:
   inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
@@ -10510,7 +10510,7 @@ class PlayerSyncPos :
   ::Proto::Vector3D* mutable_pos();
   void set_allocated_pos(::Proto::Vector3D* pos);
 
-  // @@protoc_insertion_point(class_scope:Proto.PlayerSyncPos)
+  // @@protoc_insertion_point(class_scope:Proto.PlayerPushPos)
  private:
   class _Internal;
 
@@ -11097,23 +11097,23 @@ class AtkAnimEvent :
 };
 // -------------------------------------------------------------------
 
-class ItemList :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Proto.ItemList) */ {
+class DropItemList :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Proto.DropItemList) */ {
  public:
-  ItemList();
-  virtual ~ItemList();
+  DropItemList();
+  virtual ~DropItemList();
 
-  ItemList(const ItemList& from);
-  ItemList(ItemList&& from) noexcept
-    : ItemList() {
+  DropItemList(const DropItemList& from);
+  DropItemList(DropItemList&& from) noexcept
+    : DropItemList() {
     *this = ::std::move(from);
   }
 
-  inline ItemList& operator=(const ItemList& from) {
+  inline DropItemList& operator=(const DropItemList& from) {
     CopyFrom(from);
     return *this;
   }
-  inline ItemList& operator=(ItemList&& from) noexcept {
+  inline DropItemList& operator=(DropItemList&& from) noexcept {
     if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
       if (this != &from) InternalSwap(&from);
     } else {
@@ -11131,37 +11131,37 @@ class ItemList :
   static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
     return GetMetadataStatic().reflection;
   }
-  static const ItemList& default_instance();
+  static const DropItemList& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const ItemList* internal_default_instance() {
-    return reinterpret_cast<const ItemList*>(
-               &_ItemList_default_instance_);
+  static inline const DropItemList* internal_default_instance() {
+    return reinterpret_cast<const DropItemList*>(
+               &_DropItemList_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
     71;
 
-  friend void swap(ItemList& a, ItemList& b) {
+  friend void swap(DropItemList& a, DropItemList& b) {
     a.Swap(&b);
   }
-  inline void Swap(ItemList* other) {
+  inline void Swap(DropItemList* other) {
     if (other == this) return;
     InternalSwap(other);
   }
 
   // implements Message ----------------------------------------------
 
-  inline ItemList* New() const final {
-    return CreateMaybeMessage<ItemList>(nullptr);
+  inline DropItemList* New() const final {
+    return CreateMaybeMessage<DropItemList>(nullptr);
   }
 
-  ItemList* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
-    return CreateMaybeMessage<ItemList>(arena);
+  DropItemList* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<DropItemList>(arena);
   }
   void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
   void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-  void CopyFrom(const ItemList& from);
-  void MergeFrom(const ItemList& from);
+  void CopyFrom(const DropItemList& from);
+  void MergeFrom(const DropItemList& from);
   PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
   bool IsInitialized() const final;
 
@@ -11182,10 +11182,10 @@ class ItemList :
   inline void SharedCtor();
   inline void SharedDtor();
   void SetCachedSize(int size) const final;
-  void InternalSwap(ItemList* other);
+  void InternalSwap(DropItemList* other);
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "Proto.ItemList";
+    return "Proto.DropItemList";
   }
   private:
   inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
@@ -11229,7 +11229,7 @@ class ItemList :
   ::PROTOBUF_NAMESPACE_ID::int32 enemy_id() const;
   void set_enemy_id(::PROTOBUF_NAMESPACE_ID::int32 value);
 
-  // @@protoc_insertion_point(class_scope:Proto.ItemList)
+  // @@protoc_insertion_point(class_scope:Proto.DropItemList)
  private:
   class _Internal;
 
@@ -15260,49 +15260,49 @@ Move::position() const {
 
 // -------------------------------------------------------------------
 
-// EnemySyncPos
+// EnemyPushPos
 
 // int32 id = 1;
-inline void EnemySyncPos::clear_id() {
+inline void EnemyPushPos::clear_id() {
   id_ = 0;
 }
-inline ::PROTOBUF_NAMESPACE_ID::int32 EnemySyncPos::id() const {
-  // @@protoc_insertion_point(field_get:Proto.EnemySyncPos.id)
+inline ::PROTOBUF_NAMESPACE_ID::int32 EnemyPushPos::id() const {
+  // @@protoc_insertion_point(field_get:Proto.EnemyPushPos.id)
   return id_;
 }
-inline void EnemySyncPos::set_id(::PROTOBUF_NAMESPACE_ID::int32 value) {
+inline void EnemyPushPos::set_id(::PROTOBUF_NAMESPACE_ID::int32 value) {
   
   id_ = value;
-  // @@protoc_insertion_point(field_set:Proto.EnemySyncPos.id)
+  // @@protoc_insertion_point(field_set:Proto.EnemyPushPos.id)
 }
 
 // .Proto.Vector3D pos = 2;
-inline bool EnemySyncPos::has_pos() const {
+inline bool EnemyPushPos::has_pos() const {
   return this != internal_default_instance() && pos_ != nullptr;
 }
-inline const ::Proto::Vector3D& EnemySyncPos::pos() const {
+inline const ::Proto::Vector3D& EnemyPushPos::pos() const {
   const ::Proto::Vector3D* p = pos_;
-  // @@protoc_insertion_point(field_get:Proto.EnemySyncPos.pos)
+  // @@protoc_insertion_point(field_get:Proto.EnemyPushPos.pos)
   return p != nullptr ? *p : *reinterpret_cast<const ::Proto::Vector3D*>(
       &::Proto::_Vector3D_default_instance_);
 }
-inline ::Proto::Vector3D* EnemySyncPos::release_pos() {
-  // @@protoc_insertion_point(field_release:Proto.EnemySyncPos.pos)
+inline ::Proto::Vector3D* EnemyPushPos::release_pos() {
+  // @@protoc_insertion_point(field_release:Proto.EnemyPushPos.pos)
   
   ::Proto::Vector3D* temp = pos_;
   pos_ = nullptr;
   return temp;
 }
-inline ::Proto::Vector3D* EnemySyncPos::mutable_pos() {
+inline ::Proto::Vector3D* EnemyPushPos::mutable_pos() {
   
   if (pos_ == nullptr) {
     auto* p = CreateMaybeMessage<::Proto::Vector3D>(GetArenaNoVirtual());
     pos_ = p;
   }
-  // @@protoc_insertion_point(field_mutable:Proto.EnemySyncPos.pos)
+  // @@protoc_insertion_point(field_mutable:Proto.EnemyPushPos.pos)
   return pos_;
 }
-inline void EnemySyncPos::set_allocated_pos(::Proto::Vector3D* pos) {
+inline void EnemyPushPos::set_allocated_pos(::Proto::Vector3D* pos) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaNoVirtual();
   if (message_arena == nullptr) {
     delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(pos_);
@@ -15318,7 +15318,7 @@ inline void EnemySyncPos::set_allocated_pos(::Proto::Vector3D* pos) {
     
   }
   pos_ = pos;
-  // @@protoc_insertion_point(field_set_allocated:Proto.EnemySyncPos.pos)
+  // @@protoc_insertion_point(field_set_allocated:Proto.EnemyPushPos.pos)
 }
 
 // -------------------------------------------------------------------
@@ -15383,35 +15383,35 @@ inline void FsmSyncState::set_player_sn(::PROTOBUF_NAMESPACE_ID::uint64 value) {
 
 // -------------------------------------------------------------------
 
-// PlayerSyncPos
+// PlayerPushPos
 
 // .Proto.Vector3D pos = 1;
-inline bool PlayerSyncPos::has_pos() const {
+inline bool PlayerPushPos::has_pos() const {
   return this != internal_default_instance() && pos_ != nullptr;
 }
-inline const ::Proto::Vector3D& PlayerSyncPos::pos() const {
+inline const ::Proto::Vector3D& PlayerPushPos::pos() const {
   const ::Proto::Vector3D* p = pos_;
-  // @@protoc_insertion_point(field_get:Proto.PlayerSyncPos.pos)
+  // @@protoc_insertion_point(field_get:Proto.PlayerPushPos.pos)
   return p != nullptr ? *p : *reinterpret_cast<const ::Proto::Vector3D*>(
       &::Proto::_Vector3D_default_instance_);
 }
-inline ::Proto::Vector3D* PlayerSyncPos::release_pos() {
-  // @@protoc_insertion_point(field_release:Proto.PlayerSyncPos.pos)
+inline ::Proto::Vector3D* PlayerPushPos::release_pos() {
+  // @@protoc_insertion_point(field_release:Proto.PlayerPushPos.pos)
   
   ::Proto::Vector3D* temp = pos_;
   pos_ = nullptr;
   return temp;
 }
-inline ::Proto::Vector3D* PlayerSyncPos::mutable_pos() {
+inline ::Proto::Vector3D* PlayerPushPos::mutable_pos() {
   
   if (pos_ == nullptr) {
     auto* p = CreateMaybeMessage<::Proto::Vector3D>(GetArenaNoVirtual());
     pos_ = p;
   }
-  // @@protoc_insertion_point(field_mutable:Proto.PlayerSyncPos.pos)
+  // @@protoc_insertion_point(field_mutable:Proto.PlayerPushPos.pos)
   return pos_;
 }
-inline void PlayerSyncPos::set_allocated_pos(::Proto::Vector3D* pos) {
+inline void PlayerPushPos::set_allocated_pos(::Proto::Vector3D* pos) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaNoVirtual();
   if (message_arena == nullptr) {
     delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(pos_);
@@ -15427,7 +15427,7 @@ inline void PlayerSyncPos::set_allocated_pos(::Proto::Vector3D* pos) {
     
   }
   pos_ = pos;
-  // @@protoc_insertion_point(field_set_allocated:Proto.PlayerSyncPos.pos)
+  // @@protoc_insertion_point(field_set_allocated:Proto.PlayerPushPos.pos)
 }
 
 // -------------------------------------------------------------------
@@ -15633,46 +15633,46 @@ inline void AtkAnimEvent::set_atkenemy(bool value) {
 
 // -------------------------------------------------------------------
 
-// ItemList
+// DropItemList
 
 // int32 enemy_id = 1;
-inline void ItemList::clear_enemy_id() {
+inline void DropItemList::clear_enemy_id() {
   enemy_id_ = 0;
 }
-inline ::PROTOBUF_NAMESPACE_ID::int32 ItemList::enemy_id() const {
-  // @@protoc_insertion_point(field_get:Proto.ItemList.enemy_id)
+inline ::PROTOBUF_NAMESPACE_ID::int32 DropItemList::enemy_id() const {
+  // @@protoc_insertion_point(field_get:Proto.DropItemList.enemy_id)
   return enemy_id_;
 }
-inline void ItemList::set_enemy_id(::PROTOBUF_NAMESPACE_ID::int32 value) {
+inline void DropItemList::set_enemy_id(::PROTOBUF_NAMESPACE_ID::int32 value) {
   
   enemy_id_ = value;
-  // @@protoc_insertion_point(field_set:Proto.ItemList.enemy_id)
+  // @@protoc_insertion_point(field_set:Proto.DropItemList.enemy_id)
 }
 
 // repeated .Proto.ItemData items = 2;
-inline int ItemList::items_size() const {
+inline int DropItemList::items_size() const {
   return items_.size();
 }
-inline ::Proto::ItemData* ItemList::mutable_items(int index) {
-  // @@protoc_insertion_point(field_mutable:Proto.ItemList.items)
+inline ::Proto::ItemData* DropItemList::mutable_items(int index) {
+  // @@protoc_insertion_point(field_mutable:Proto.DropItemList.items)
   return items_.Mutable(index);
 }
 inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::ItemData >*
-ItemList::mutable_items() {
-  // @@protoc_insertion_point(field_mutable_list:Proto.ItemList.items)
+DropItemList::mutable_items() {
+  // @@protoc_insertion_point(field_mutable_list:Proto.DropItemList.items)
   return &items_;
 }
-inline const ::Proto::ItemData& ItemList::items(int index) const {
-  // @@protoc_insertion_point(field_get:Proto.ItemList.items)
+inline const ::Proto::ItemData& DropItemList::items(int index) const {
+  // @@protoc_insertion_point(field_get:Proto.DropItemList.items)
   return items_.Get(index);
 }
-inline ::Proto::ItemData* ItemList::add_items() {
-  // @@protoc_insertion_point(field_add:Proto.ItemList.items)
+inline ::Proto::ItemData* DropItemList::add_items() {
+  // @@protoc_insertion_point(field_add:Proto.DropItemList.items)
   return items_.Add();
 }
 inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::ItemData >&
-ItemList::items() const {
-  // @@protoc_insertion_point(field_list:Proto.ItemList.items)
+DropItemList::items() const {
+  // @@protoc_insertion_point(field_list:Proto.DropItemList.items)
   return items_;
 }
 

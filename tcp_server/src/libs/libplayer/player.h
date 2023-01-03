@@ -9,6 +9,8 @@
 #include "../../apps/space/ai_enemy.h"
 
 class AIEnemy;
+class PlayerComponentLastMap;
+class PlayerComponentDetail;
 class Player : public Entity<Player>, public NetIdentify,
 	virtual public IAwakeFromPoolSystem<NetIdentify*, std::string>,
 	virtual public IAwakeFromPoolSystem<NetIdentify*, uint64, uint64>

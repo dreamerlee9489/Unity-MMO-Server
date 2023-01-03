@@ -99,7 +99,7 @@ void MysqlConnector::HandleQueryPlayer(Packet* pPacket)
             pProtoPlayer->mutable_base()->ParseFromString(tempStr);
 
             GetBlob(row, 4, tempStr);
-            pProtoPlayer->mutable_pack()->ParseFromString(tempStr);
+            pProtoPlayer->mutable_knap()->ParseFromString(tempStr);
 
             GetBlob(row, 5, tempStr);
             pProtoPlayer->mutable_misc()->ParseFromString(tempStr);
@@ -176,6 +176,10 @@ bool MysqlConnector::OnSavePlayer(DatabaseStmt* stmtSave, const Proto::Player& p
     std::string baseStr;
     protoPlayer.base().SerializeToString(&baseStr);
     AddParamBlob(stmtSave, (void*)baseStr.c_str(), (int)baseStr.size());
+
+    std::string knapStr;
+    protoPlayer.knap().SerializeToString(&knapStr);
+    AddParamBlob(stmtSave, (void*)knapStr.c_str(), (int)knapStr.size());
 
     std::string miscStr;
     protoPlayer.misc().SerializeToString(&miscStr);

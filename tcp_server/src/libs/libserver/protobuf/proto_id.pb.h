@@ -139,12 +139,12 @@ enum MsgId : int {
   MI_CmdCreate = 20005,
   MI_CmdEfficiency = 20006,
   MI_Efficiency = 20007,
-  C2S_PlayerSyncPos = 30001,
-  S2C_PlayerSyncPos = 30002,
+  C2S_PlayerPushPos = 30001,
+  S2C_PlayerPushPos = 30002,
   C2S_PlayerSyncCmd = 30003,
   S2C_PlayerSyncCmd = 30004,
-  C2S_EnemySyncPos = 30005,
-  S2C_EnemySyncPos = 30006,
+  C2S_EnemyPushPos = 30005,
+  S2C_EnemyPushPos = 30006,
   S2C_FsmSyncState = 30007,
   C2S_FsmSyncState = 30008,
   C2S_RequestSyncEnemy = 30009,
@@ -152,13 +152,16 @@ enum MsgId : int {
   S2C_RequestLinkPlayer = 30011,
   C2S_AtkAnimEvent = 30012,
   S2C_AtkAnimEvent = 30013,
-  S2C_ItemList = 30014,
+  S2C_DropItemList = 30014,
+  C2S_AddItemToKnap = 40001,
+  C2S_GetPlayerKnap = 40002,
+  S2C_GetPlayerKnap = 40003,
   MsgId_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
   MsgId_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
 };
 bool MsgId_IsValid(int value);
 constexpr MsgId MsgId_MIN = None;
-constexpr MsgId MsgId_MAX = S2C_ItemList;
+constexpr MsgId MsgId_MAX = S2C_GetPlayerKnap;
 constexpr int MsgId_ARRAYSIZE = MsgId_MAX + 1;
 
 const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* MsgId_descriptor();

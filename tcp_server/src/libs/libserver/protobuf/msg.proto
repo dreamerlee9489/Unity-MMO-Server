@@ -417,7 +417,7 @@ message Move {
 	repeated Vector3D position = 2;
 }
 
-message EnemySyncPos {
+message EnemyPushPos {
 	int32 id = 1;
 	Vector3D pos = 2;
 }
@@ -429,7 +429,7 @@ message FsmSyncState {
 	uint64 player_sn = 4;
 }
 
-message PlayerSyncPos {
+message PlayerPushPos {
 	Vector3D pos = 1;
 }
 
@@ -456,7 +456,7 @@ message AtkAnimEvent {
 	bool atkEnemy = 4;
 }
 
-message ItemList {
+message DropItemList {
 	int32 enemy_id = 1;
 	repeated ItemData items = 2;
 }

@@ -26,8 +26,8 @@ void Death::Broadcast()
 
 void Death::Singlecast(Player* pPlayer)
 {
-	std::vector<DropItem>* items = _owner->GetDropList();
-	Proto::ItemList proto;
+	std::vector<DropItem>* items = _owner->GetDropList(pPlayer);
+	Proto::DropItemList proto;
 	proto.set_enemy_id(_owner->GetID());
 	for (DropItem& item : *items)
 	{
@@ -49,6 +49,6 @@ void Death::Singlecast(Player* pPlayer)
 			break;
 		}
 	}
-	MessageSystemHelp::SendPacket(Proto::MsgId::S2C_ItemList, proto, pPlayer);
+	MessageSystemHelp::SendPacket(Proto::MsgId::S2C_DropItemList, proto, pPlayer);
 	delete items;
 }
