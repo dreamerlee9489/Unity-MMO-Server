@@ -1086,6 +1086,8 @@ class ItemData :
     kTypeFieldNumber = 1,
     kIdFieldNumber = 2,
     kNumFieldNumber = 3,
+    kIndexFieldNumber = 4,
+    kHashFieldNumber = 5,
   };
   // .Proto.ItemData.ItemType type = 1;
   void clear_type();
@@ -1102,6 +1104,16 @@ class ItemData :
   ::PROTOBUF_NAMESPACE_ID::int32 num() const;
   void set_num(::PROTOBUF_NAMESPACE_ID::int32 value);
 
+  // int32 index = 4;
+  void clear_index();
+  ::PROTOBUF_NAMESPACE_ID::int32 index() const;
+  void set_index(::PROTOBUF_NAMESPACE_ID::int32 value);
+
+  // int32 hash = 5;
+  void clear_hash();
+  ::PROTOBUF_NAMESPACE_ID::int32 hash() const;
+  void set_hash(::PROTOBUF_NAMESPACE_ID::int32 value);
+
   // @@protoc_insertion_point(class_scope:Proto.ItemData)
  private:
   class _Internal;
@@ -1110,6 +1122,8 @@ class ItemData :
   int type_;
   ::PROTOBUF_NAMESPACE_ID::int32 id_;
   ::PROTOBUF_NAMESPACE_ID::int32 num_;
+  ::PROTOBUF_NAMESPACE_ID::int32 index_;
+  ::PROTOBUF_NAMESPACE_ID::int32 hash_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_db_2eproto;
 };
@@ -1228,19 +1242,43 @@ class PlayerKnap :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kItemsFieldNumber = 2,
+    kItemsInBagFieldNumber = 2,
+    kItemsInActFieldNumber = 3,
+    kItemsInEquFieldNumber = 4,
     kGoldFieldNumber = 1,
   };
-  // repeated .Proto.ItemData items = 2;
-  int items_size() const;
-  void clear_items();
-  ::Proto::ItemData* mutable_items(int index);
+  // repeated .Proto.ItemData itemsInBag = 2;
+  int itemsinbag_size() const;
+  void clear_itemsinbag();
+  ::Proto::ItemData* mutable_itemsinbag(int index);
   ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::ItemData >*
-      mutable_items();
-  const ::Proto::ItemData& items(int index) const;
-  ::Proto::ItemData* add_items();
+      mutable_itemsinbag();
+  const ::Proto::ItemData& itemsinbag(int index) const;
+  ::Proto::ItemData* add_itemsinbag();
   const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::ItemData >&
-      items() const;
+      itemsinbag() const;
+
+  // repeated .Proto.ItemData itemsInAct = 3;
+  int itemsinact_size() const;
+  void clear_itemsinact();
+  ::Proto::ItemData* mutable_itemsinact(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::ItemData >*
+      mutable_itemsinact();
+  const ::Proto::ItemData& itemsinact(int index) const;
+  ::Proto::ItemData* add_itemsinact();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::ItemData >&
+      itemsinact() const;
+
+  // repeated .Proto.ItemData itemsInEqu = 4;
+  int itemsinequ_size() const;
+  void clear_itemsinequ();
+  ::Proto::ItemData* mutable_itemsinequ(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::ItemData >*
+      mutable_itemsinequ();
+  const ::Proto::ItemData& itemsinequ(int index) const;
+  ::Proto::ItemData* add_itemsinequ();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::ItemData >&
+      itemsinequ() const;
 
   // int32 gold = 1;
   void clear_gold();
@@ -1252,7 +1290,9 @@ class PlayerKnap :
   class _Internal;
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::ItemData > items_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::ItemData > itemsinbag_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::ItemData > itemsinact_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::ItemData > itemsinequ_;
   ::PROTOBUF_NAMESPACE_ID::int32 gold_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_db_2eproto;
@@ -2017,6 +2057,34 @@ inline void ItemData::set_num(::PROTOBUF_NAMESPACE_ID::int32 value) {
   // @@protoc_insertion_point(field_set:Proto.ItemData.num)
 }
 
+// int32 index = 4;
+inline void ItemData::clear_index() {
+  index_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 ItemData::index() const {
+  // @@protoc_insertion_point(field_get:Proto.ItemData.index)
+  return index_;
+}
+inline void ItemData::set_index(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  index_ = value;
+  // @@protoc_insertion_point(field_set:Proto.ItemData.index)
+}
+
+// int32 hash = 5;
+inline void ItemData::clear_hash() {
+  hash_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 ItemData::hash() const {
+  // @@protoc_insertion_point(field_get:Proto.ItemData.hash)
+  return hash_;
+}
+inline void ItemData::set_hash(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  hash_ = value;
+  // @@protoc_insertion_point(field_set:Proto.ItemData.hash)
+}
+
 // -------------------------------------------------------------------
 
 // PlayerKnap
@@ -2035,34 +2103,94 @@ inline void PlayerKnap::set_gold(::PROTOBUF_NAMESPACE_ID::int32 value) {
   // @@protoc_insertion_point(field_set:Proto.PlayerKnap.gold)
 }
 
-// repeated .Proto.ItemData items = 2;
-inline int PlayerKnap::items_size() const {
-  return items_.size();
+// repeated .Proto.ItemData itemsInBag = 2;
+inline int PlayerKnap::itemsinbag_size() const {
+  return itemsinbag_.size();
 }
-inline void PlayerKnap::clear_items() {
-  items_.Clear();
+inline void PlayerKnap::clear_itemsinbag() {
+  itemsinbag_.Clear();
 }
-inline ::Proto::ItemData* PlayerKnap::mutable_items(int index) {
-  // @@protoc_insertion_point(field_mutable:Proto.PlayerKnap.items)
-  return items_.Mutable(index);
+inline ::Proto::ItemData* PlayerKnap::mutable_itemsinbag(int index) {
+  // @@protoc_insertion_point(field_mutable:Proto.PlayerKnap.itemsInBag)
+  return itemsinbag_.Mutable(index);
 }
 inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::ItemData >*
-PlayerKnap::mutable_items() {
-  // @@protoc_insertion_point(field_mutable_list:Proto.PlayerKnap.items)
-  return &items_;
+PlayerKnap::mutable_itemsinbag() {
+  // @@protoc_insertion_point(field_mutable_list:Proto.PlayerKnap.itemsInBag)
+  return &itemsinbag_;
 }
-inline const ::Proto::ItemData& PlayerKnap::items(int index) const {
-  // @@protoc_insertion_point(field_get:Proto.PlayerKnap.items)
-  return items_.Get(index);
+inline const ::Proto::ItemData& PlayerKnap::itemsinbag(int index) const {
+  // @@protoc_insertion_point(field_get:Proto.PlayerKnap.itemsInBag)
+  return itemsinbag_.Get(index);
 }
-inline ::Proto::ItemData* PlayerKnap::add_items() {
-  // @@protoc_insertion_point(field_add:Proto.PlayerKnap.items)
-  return items_.Add();
+inline ::Proto::ItemData* PlayerKnap::add_itemsinbag() {
+  // @@protoc_insertion_point(field_add:Proto.PlayerKnap.itemsInBag)
+  return itemsinbag_.Add();
 }
 inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::ItemData >&
-PlayerKnap::items() const {
-  // @@protoc_insertion_point(field_list:Proto.PlayerKnap.items)
-  return items_;
+PlayerKnap::itemsinbag() const {
+  // @@protoc_insertion_point(field_list:Proto.PlayerKnap.itemsInBag)
+  return itemsinbag_;
+}
+
+// repeated .Proto.ItemData itemsInAct = 3;
+inline int PlayerKnap::itemsinact_size() const {
+  return itemsinact_.size();
+}
+inline void PlayerKnap::clear_itemsinact() {
+  itemsinact_.Clear();
+}
+inline ::Proto::ItemData* PlayerKnap::mutable_itemsinact(int index) {
+  // @@protoc_insertion_point(field_mutable:Proto.PlayerKnap.itemsInAct)
+  return itemsinact_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::ItemData >*
+PlayerKnap::mutable_itemsinact() {
+  // @@protoc_insertion_point(field_mutable_list:Proto.PlayerKnap.itemsInAct)
+  return &itemsinact_;
+}
+inline const ::Proto::ItemData& PlayerKnap::itemsinact(int index) const {
+  // @@protoc_insertion_point(field_get:Proto.PlayerKnap.itemsInAct)
+  return itemsinact_.Get(index);
+}
+inline ::Proto::ItemData* PlayerKnap::add_itemsinact() {
+  // @@protoc_insertion_point(field_add:Proto.PlayerKnap.itemsInAct)
+  return itemsinact_.Add();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::ItemData >&
+PlayerKnap::itemsinact() const {
+  // @@protoc_insertion_point(field_list:Proto.PlayerKnap.itemsInAct)
+  return itemsinact_;
+}
+
+// repeated .Proto.ItemData itemsInEqu = 4;
+inline int PlayerKnap::itemsinequ_size() const {
+  return itemsinequ_.size();
+}
+inline void PlayerKnap::clear_itemsinequ() {
+  itemsinequ_.Clear();
+}
+inline ::Proto::ItemData* PlayerKnap::mutable_itemsinequ(int index) {
+  // @@protoc_insertion_point(field_mutable:Proto.PlayerKnap.itemsInEqu)
+  return itemsinequ_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::ItemData >*
+PlayerKnap::mutable_itemsinequ() {
+  // @@protoc_insertion_point(field_mutable_list:Proto.PlayerKnap.itemsInEqu)
+  return &itemsinequ_;
+}
+inline const ::Proto::ItemData& PlayerKnap::itemsinequ(int index) const {
+  // @@protoc_insertion_point(field_get:Proto.PlayerKnap.itemsInEqu)
+  return itemsinequ_.Get(index);
+}
+inline ::Proto::ItemData* PlayerKnap::add_itemsinequ() {
+  // @@protoc_insertion_point(field_add:Proto.PlayerKnap.itemsInEqu)
+  return itemsinequ_.Add();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::ItemData >&
+PlayerKnap::itemsinequ() const {
+  // @@protoc_insertion_point(field_list:Proto.PlayerKnap.itemsInEqu)
+  return itemsinequ_;
 }
 
 // -------------------------------------------------------------------

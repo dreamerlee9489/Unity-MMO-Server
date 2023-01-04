@@ -26,15 +26,15 @@ void PlayerComponentDetail::ParserFromProto(const Proto::Player& proto)
 	atk = protoBase.atk();
 	def = protoBase.def();
 	gold = protoKnap.gold();
-	for (auto &item : protoKnap.items())
+	for (auto &item : protoKnap.itemsinbag())
 	{
 		switch (item.type())
 		{
 		case Proto::ItemData_ItemType_Potion:
-			pKnap->emplace_back(DropItem(ItemType::Potion, item.id(), item.num()));
+			pKnap->emplace_back(ItemType::Potion, item.id(), item.num(), item.index(), item.hash());
 			break;
 		case Proto::ItemData_ItemType_Weapon:
-			pKnap->emplace_back(DropItem(ItemType::Weapon, item.id(), item.num()));
+			pKnap->emplace_back(ItemType::Weapon, item.id(), item.num(), item.index(), item.hash());
 			break;
 		default:
 			break;
@@ -51,24 +51,27 @@ void PlayerComponentDetail::SerializeToProto(Proto::Player* pProto)
 	pProto->mutable_base()->set_atk(atk);
 	pProto->mutable_base()->set_def(def);
 	pProto->mutable_knap()->set_gold(gold);
-	auto& oldItems = *pProto->mutable_knap()->mutable_items();
+	auto& oldItems = *pProto->mutable_knap()->mutable_itemsinbag();
 	for (auto& item : oldItems)
 	{
 		for (auto& iter = pKnap->begin(); iter != pKnap->end(); ++iter)
 		{
-			if ((int)(*iter).type == item.type() && (*iter).id == item.id())
+			if ((*iter).hash == item.hash())
 			{
 				item.set_num((*iter).num);
-				(*pKnap).erase(iter);
+				item.set_index((*iter).index);
+				pKnap->erase(iter);
 				break;
 			}
 		}
 	}
 	for (auto& item : *pKnap)
 	{
-		Proto::ItemData* itemData = pProto->mutable_knap()->add_items();
+		Proto::ItemData* itemData = pProto->mutable_knap()->add_itemsinbag();
 		itemData->set_id(item.id);
 		itemData->set_num(item.num);
+		itemData->set_index(item.index);
+		itemData->set_hash(item.hash);
 		switch (item.type)
 		{
 		case ItemType::Potion:

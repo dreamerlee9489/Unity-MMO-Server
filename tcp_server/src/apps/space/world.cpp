@@ -22,8 +22,8 @@ void World::Awake(int worldId)
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_Move, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleMove));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_PlayerPushPos, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandlePlayerPushPos));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_RequestSyncEnemy, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleRequestSyncEnemy));
-	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_GetPlayerKnap, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleGetPlayerKnap));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_AddItemToKnap, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleAddItemToKnap));
+	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_GetPlayerKnap, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleGetPlayerKnap));
 
 	ResourceWorld* worldCfg = ResourceHelp::GetResourceManager()->Worlds->GetResource(_worldId);
 	std::vector<ResourceEnemy>* _enemyCfgs = worldCfg->GetEnemies();
@@ -332,10 +332,11 @@ void World::HandleAddItemToKnap(Player* pPlayer, Packet* pPacket)
 	bool inKnap = false;
 	for (auto& iter = pKnap->begin(); iter != pKnap->end(); ++iter)
 	{
-		if ((int)(*iter).type == item.type() && (*iter).id == item.id())
+		if ((*iter).hash == item.hash())
 		{
 			inKnap = true;
 			(*iter).num += item.num();
+			(*iter).index = item.index();
 			break;
 		}
 	}
@@ -344,10 +345,10 @@ void World::HandleAddItemToKnap(Player* pPlayer, Packet* pPacket)
 		switch (item.type())
 		{
 		case Proto::ItemData_ItemType_Potion:
-			pKnap->emplace_back(DropItem(ItemType::Potion, item.id(), item.num()));
+			pKnap->emplace_back(ItemType::Potion, item.id(), item.num(), item.index(), item.hash());
 			break;
 		case Proto::ItemData_ItemType_Weapon:
-			pKnap->emplace_back(DropItem(ItemType::Weapon, item.id(), item.num()));
+			pKnap->emplace_back(ItemType::Weapon, item.id(), item.num(), item.index(), item.hash());
 			break;
 		default:
 			break;
@@ -362,9 +363,11 @@ void World::HandleGetPlayerKnap(Player* pPlayer, Packet* pPacket)
 	auto& knap = *pPlayer->detail->pKnap;
 	for (auto& item : knap)
 	{
-		Proto::ItemData* itemData = proto.add_items();
+		Proto::ItemData* itemData = proto.add_itemsinbag();
 		itemData->set_id(item.id);
 		itemData->set_num(item.num);
+		itemData->set_index(item.index);
+		itemData->set_hash(item.hash);
 		switch (item.type)
 		{
 		case ItemType::Potion:

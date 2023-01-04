@@ -4,7 +4,6 @@
 #include "libplayer/player_component.h"
 #include "ai_enemy.h"
 #include <list>
-#include <unordered_map>
 #include <string>
 
 struct DropItem;

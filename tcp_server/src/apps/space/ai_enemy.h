@@ -14,21 +14,16 @@ enum struct ItemType { None, Potion, Weapon };
 
 struct DropItem
 {
-	int id, num;
-	ItemType type;
+	ItemType type = ItemType::None;
+	int id = 0, num = 0, index = 0, hash = 0;
 
-	DropItem()
-	{
-		type = ItemType::None;
-		id = 0;
-		num = 0;
-	}
-
-	DropItem(ItemType type, int id, int num)
+	DropItem(ItemType type, int id, int num, int index, int hash = 0)
 	{
 		this->type = type;
 		this->id = id;
 		this->num = num;
+		this->index = index;
+		this->hash = hash;
 	}
 };
 

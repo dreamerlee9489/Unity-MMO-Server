@@ -233,13 +233,17 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_db_2eproto::offsets[] PROTOBUF
   PROTOBUF_FIELD_OFFSET(::Proto::ItemData, type_),
   PROTOBUF_FIELD_OFFSET(::Proto::ItemData, id_),
   PROTOBUF_FIELD_OFFSET(::Proto::ItemData, num_),
+  PROTOBUF_FIELD_OFFSET(::Proto::ItemData, index_),
+  PROTOBUF_FIELD_OFFSET(::Proto::ItemData, hash_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::Proto::PlayerKnap, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   PROTOBUF_FIELD_OFFSET(::Proto::PlayerKnap, gold_),
-  PROTOBUF_FIELD_OFFSET(::Proto::PlayerKnap, items_),
+  PROTOBUF_FIELD_OFFSET(::Proto::PlayerKnap, itemsinbag_),
+  PROTOBUF_FIELD_OFFSET(::Proto::PlayerKnap, itemsinact_),
+  PROTOBUF_FIELD_OFFSET(::Proto::PlayerKnap, itemsinequ_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::Proto::AddItemToKnap, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -254,8 +258,8 @@ static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOB
   { 28, -1, sizeof(::Proto::PlayerMisc)},
   { 36, -1, sizeof(::Proto::Player)},
   { 46, -1, sizeof(::Proto::ItemData)},
-  { 54, -1, sizeof(::Proto::PlayerKnap)},
-  { 61, -1, sizeof(::Proto::AddItemToKnap)},
+  { 56, -1, sizeof(::Proto::PlayerKnap)},
+  { 65, -1, sizeof(::Proto::AddItemToKnap)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
@@ -283,14 +287,16 @@ const char descriptor_table_protodef_db_2eproto[] PROTOBUF_SECTION_VARIABLE(prot
   "n\030\001 \001(\004\022\014\n\004name\030\002 \001(\t\022\037\n\004base\030\003 \001(\0132\021.Pr"
   "oto.PlayerBase\022\037\n\004knap\030\004 \001(\0132\021.Proto.Pla"
   "yerKnap\022\037\n\004misc\030\005 \001(\0132\021.Proto.PlayerMisc"
-  "\"y\n\010ItemData\022&\n\004type\030\001 \001(\0162\030.Proto.ItemD"
-  "ata.ItemType\022\n\n\002id\030\002 \001(\005\022\013\n\003num\030\003 \001(\005\",\n"
-  "\010ItemType\022\010\n\004None\020\000\022\n\n\006Potion\020\001\022\n\n\006Weapo"
-  "n\020\002\":\n\nPlayerKnap\022\014\n\004gold\030\001 \001(\005\022\036\n\005items"
-  "\030\002 \003(\0132\017.Proto.ItemData\".\n\rAddItemToKnap"
-  "\022\035\n\004item\030\001 \001(\0132\017.Proto.ItemData*(\n\006Gende"
-  "r\022\010\n\004none\020\000\022\010\n\004male\020\001\022\n\n\006female\020\002b\006proto"
-  "3"
+  "\"\226\001\n\010ItemData\022&\n\004type\030\001 \001(\0162\030.Proto.Item"
+  "Data.ItemType\022\n\n\002id\030\002 \001(\005\022\013\n\003num\030\003 \001(\005\022\r"
+  "\n\005index\030\004 \001(\005\022\014\n\004hash\030\005 \001(\005\",\n\010ItemType\022"
+  "\010\n\004None\020\000\022\n\n\006Potion\020\001\022\n\n\006Weapon\020\002\"\211\001\n\nPl"
+  "ayerKnap\022\014\n\004gold\030\001 \001(\005\022#\n\nitemsInBag\030\002 \003"
+  "(\0132\017.Proto.ItemData\022#\n\nitemsInAct\030\003 \003(\0132"
+  "\017.Proto.ItemData\022#\n\nitemsInEqu\030\004 \003(\0132\017.P"
+  "roto.ItemData\".\n\rAddItemToKnap\022\035\n\004item\030\001"
+  " \001(\0132\017.Proto.ItemData*(\n\006Gender\022\010\n\004none\020"
+  "\000\022\010\n\004male\020\001\022\n\n\006female\020\002b\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_db_2eproto_deps[1] = {
 };
@@ -307,7 +313,7 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_db_
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_db_2eproto_once;
 static bool descriptor_table_db_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_db_2eproto = {
-  &descriptor_table_db_2eproto_initialized, descriptor_table_protodef_db_2eproto, "db.proto", 801,
+  &descriptor_table_db_2eproto_initialized, descriptor_table_protodef_db_2eproto, "db.proto", 911,
   &descriptor_table_db_2eproto_once, descriptor_table_db_2eproto_sccs, descriptor_table_db_2eproto_deps, 8, 0,
   schemas, file_default_instances, TableStruct_db_2eproto::offsets,
   file_level_metadata_db_2eproto, 8, file_level_enum_descriptors_db_2eproto, file_level_service_descriptors_db_2eproto,
@@ -2426,15 +2432,15 @@ ItemData::ItemData(const ItemData& from)
       _internal_metadata_(nullptr) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::memcpy(&type_, &from.type_,
-    static_cast<size_t>(reinterpret_cast<char*>(&num_) -
-    reinterpret_cast<char*>(&type_)) + sizeof(num_));
+    static_cast<size_t>(reinterpret_cast<char*>(&hash_) -
+    reinterpret_cast<char*>(&type_)) + sizeof(hash_));
   // @@protoc_insertion_point(copy_constructor:Proto.ItemData)
 }
 
 void ItemData::SharedCtor() {
   ::memset(&type_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&num_) -
-      reinterpret_cast<char*>(&type_)) + sizeof(num_));
+      reinterpret_cast<char*>(&hash_) -
+      reinterpret_cast<char*>(&type_)) + sizeof(hash_));
 }
 
 ItemData::~ItemData() {
@@ -2461,8 +2467,8 @@ void ItemData::Clear() {
   (void) cached_has_bits;
 
   ::memset(&type_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&num_) -
-      reinterpret_cast<char*>(&type_)) + sizeof(num_));
+      reinterpret_cast<char*>(&hash_) -
+      reinterpret_cast<char*>(&type_)) + sizeof(hash_));
   _internal_metadata_.Clear();
 }
 
@@ -2493,6 +2499,20 @@ const char* ItemData::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::i
       case 3:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 24)) {
           num_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // int32 index = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 32)) {
+          index_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // int32 hash = 5;
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 40)) {
+          hash_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -2566,6 +2586,32 @@ bool ItemData::MergePartialFromCodedStream(
         break;
       }
 
+      // int32 index = 4;
+      case 4: {
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (32 & 0xFF)) {
+
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   ::PROTOBUF_NAMESPACE_ID::int32, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32>(
+                 input, &index_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // int32 hash = 5;
+      case 5: {
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (40 & 0xFF)) {
+
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   ::PROTOBUF_NAMESPACE_ID::int32, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32>(
+                 input, &hash_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       default: {
       handle_unusual:
         if (tag == 0) {
@@ -2609,6 +2655,16 @@ void ItemData::SerializeWithCachedSizes(
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32(3, this->num(), output);
   }
 
+  // int32 index = 4;
+  if (this->index() != 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32(4, this->index(), output);
+  }
+
+  // int32 hash = 5;
+  if (this->hash() != 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32(5, this->hash(), output);
+  }
+
   if (_internal_metadata_.have_unknown_fields()) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFields(
         _internal_metadata_.unknown_fields(), output);
@@ -2636,6 +2692,16 @@ void ItemData::SerializeWithCachedSizes(
   // int32 num = 3;
   if (this->num() != 0) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(3, this->num(), target);
+  }
+
+  // int32 index = 4;
+  if (this->index() != 0) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(4, this->index(), target);
+  }
+
+  // int32 hash = 5;
+  if (this->hash() != 0) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(5, this->hash(), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -2679,6 +2745,20 @@ size_t ItemData::ByteSizeLong() const {
         this->num());
   }
 
+  // int32 index = 4;
+  if (this->index() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
+        this->index());
+  }
+
+  // int32 hash = 5;
+  if (this->hash() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
+        this->hash());
+  }
+
   int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
@@ -2715,6 +2795,12 @@ void ItemData::MergeFrom(const ItemData& from) {
   if (from.num() != 0) {
     set_num(from.num());
   }
+  if (from.index() != 0) {
+    set_index(from.index());
+  }
+  if (from.hash() != 0) {
+    set_hash(from.hash());
+  }
 }
 
 void ItemData::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
@@ -2741,6 +2827,8 @@ void ItemData::InternalSwap(ItemData* other) {
   swap(type_, other->type_);
   swap(id_, other->id_);
   swap(num_, other->num_);
+  swap(index_, other->index_);
+  swap(hash_, other->hash_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata ItemData::GetMetadata() const {
@@ -2764,7 +2852,9 @@ PlayerKnap::PlayerKnap()
 PlayerKnap::PlayerKnap(const PlayerKnap& from)
   : ::PROTOBUF_NAMESPACE_ID::Message(),
       _internal_metadata_(nullptr),
-      items_(from.items_) {
+      itemsinbag_(from.itemsinbag_),
+      itemsinact_(from.itemsinact_),
+      itemsinequ_(from.itemsinequ_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   gold_ = from.gold_;
   // @@protoc_insertion_point(copy_constructor:Proto.PlayerKnap)
@@ -2798,7 +2888,9 @@ void PlayerKnap::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  items_.Clear();
+  itemsinbag_.Clear();
+  itemsinact_.Clear();
+  itemsinequ_.Clear();
   gold_ = 0;
   _internal_metadata_.Clear();
 }
@@ -2818,16 +2910,40 @@ const char* PlayerKnap::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID:
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // repeated .Proto.ItemData items = 2;
+      // repeated .Proto.ItemData itemsInBag = 2;
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
           ptr -= 1;
           do {
             ptr += 1;
-            ptr = ctx->ParseMessage(add_items(), ptr);
+            ptr = ctx->ParseMessage(add_itemsinbag(), ptr);
             CHK_(ptr);
             if (!ctx->DataAvailable(ptr)) break;
           } while (::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::uint8>(ptr) == 18);
+        } else goto handle_unusual;
+        continue;
+      // repeated .Proto.ItemData itemsInAct = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(add_itemsinact(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::uint8>(ptr) == 26);
+        } else goto handle_unusual;
+        continue;
+      // repeated .Proto.ItemData itemsInEqu = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 34)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(add_itemsinequ(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::uint8>(ptr) == 34);
         } else goto handle_unusual;
         continue;
       default: {
@@ -2873,11 +2989,33 @@ bool PlayerKnap::MergePartialFromCodedStream(
         break;
       }
 
-      // repeated .Proto.ItemData items = 2;
+      // repeated .Proto.ItemData itemsInBag = 2;
       case 2: {
         if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (18 & 0xFF)) {
           DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-                input, add_items()));
+                input, add_itemsinbag()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // repeated .Proto.ItemData itemsInAct = 3;
+      case 3: {
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (26 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
+                input, add_itemsinact()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // repeated .Proto.ItemData itemsInEqu = 4;
+      case 4: {
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (34 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
+                input, add_itemsinequ()));
         } else {
           goto handle_unusual;
         }
@@ -2916,12 +3054,30 @@ void PlayerKnap::SerializeWithCachedSizes(
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32(1, this->gold(), output);
   }
 
-  // repeated .Proto.ItemData items = 2;
+  // repeated .Proto.ItemData itemsInBag = 2;
   for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->items_size()); i < n; i++) {
+      n = static_cast<unsigned int>(this->itemsinbag_size()); i < n; i++) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
       2,
-      this->items(static_cast<int>(i)),
+      this->itemsinbag(static_cast<int>(i)),
+      output);
+  }
+
+  // repeated .Proto.ItemData itemsInAct = 3;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->itemsinact_size()); i < n; i++) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
+      3,
+      this->itemsinact(static_cast<int>(i)),
+      output);
+  }
+
+  // repeated .Proto.ItemData itemsInEqu = 4;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->itemsinequ_size()); i < n; i++) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
+      4,
+      this->itemsinequ(static_cast<int>(i)),
       output);
   }
 
@@ -2943,12 +3099,28 @@ void PlayerKnap::SerializeWithCachedSizes(
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(1, this->gold(), target);
   }
 
-  // repeated .Proto.ItemData items = 2;
+  // repeated .Proto.ItemData itemsInBag = 2;
   for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->items_size()); i < n; i++) {
+      n = static_cast<unsigned int>(this->itemsinbag_size()); i < n; i++) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        2, this->items(static_cast<int>(i)), target);
+        2, this->itemsinbag(static_cast<int>(i)), target);
+  }
+
+  // repeated .Proto.ItemData itemsInAct = 3;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->itemsinact_size()); i < n; i++) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        3, this->itemsinact(static_cast<int>(i)), target);
+  }
+
+  // repeated .Proto.ItemData itemsInEqu = 4;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->itemsinequ_size()); i < n; i++) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        4, this->itemsinequ(static_cast<int>(i)), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -2972,14 +3144,36 @@ size_t PlayerKnap::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated .Proto.ItemData items = 2;
+  // repeated .Proto.ItemData itemsInBag = 2;
   {
-    unsigned int count = static_cast<unsigned int>(this->items_size());
+    unsigned int count = static_cast<unsigned int>(this->itemsinbag_size());
     total_size += 1UL * count;
     for (unsigned int i = 0; i < count; i++) {
       total_size +=
         ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-          this->items(static_cast<int>(i)));
+          this->itemsinbag(static_cast<int>(i)));
+    }
+  }
+
+  // repeated .Proto.ItemData itemsInAct = 3;
+  {
+    unsigned int count = static_cast<unsigned int>(this->itemsinact_size());
+    total_size += 1UL * count;
+    for (unsigned int i = 0; i < count; i++) {
+      total_size +=
+        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+          this->itemsinact(static_cast<int>(i)));
+    }
+  }
+
+  // repeated .Proto.ItemData itemsInEqu = 4;
+  {
+    unsigned int count = static_cast<unsigned int>(this->itemsinequ_size());
+    total_size += 1UL * count;
+    for (unsigned int i = 0; i < count; i++) {
+      total_size +=
+        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+          this->itemsinequ(static_cast<int>(i)));
     }
   }
 
@@ -3017,7 +3211,9 @@ void PlayerKnap::MergeFrom(const PlayerKnap& from) {
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  items_.MergeFrom(from.items_);
+  itemsinbag_.MergeFrom(from.itemsinbag_);
+  itemsinact_.MergeFrom(from.itemsinact_);
+  itemsinequ_.MergeFrom(from.itemsinequ_);
   if (from.gold() != 0) {
     set_gold(from.gold());
   }
@@ -3044,7 +3240,9 @@ bool PlayerKnap::IsInitialized() const {
 void PlayerKnap::InternalSwap(PlayerKnap* other) {
   using std::swap;
   _internal_metadata_.Swap(&other->_internal_metadata_);
-  CastToBase(&items_)->InternalSwap(CastToBase(&other->items_));
+  CastToBase(&itemsinbag_)->InternalSwap(CastToBase(&other->itemsinbag_));
+  CastToBase(&itemsinact_)->InternalSwap(CastToBase(&other->itemsinact_));
+  CastToBase(&itemsinequ_)->InternalSwap(CastToBase(&other->itemsinequ_));
   swap(gold_, other->gold_);
 }
 
