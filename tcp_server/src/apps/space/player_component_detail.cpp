@@ -31,10 +31,10 @@ void PlayerComponentDetail::ParserFromProto(const Proto::Player& proto)
 		switch (item.type())
 		{
 		case Proto::ItemData_ItemType_Potion:
-			pKnap->emplace_back(ItemType::Potion, item.id(), item.num(), item.index(), item.hash());
+			pKnap->emplace_back(ItemType::Potion, item.id(), item.num(), item.index(), item.key());
 			break;
 		case Proto::ItemData_ItemType_Weapon:
-			pKnap->emplace_back(ItemType::Weapon, item.id(), item.num(), item.index(), item.hash());
+			pKnap->emplace_back(ItemType::Weapon, item.id(), item.num(), item.index(), item.key());
 			break;
 		default:
 			break;
@@ -56,7 +56,7 @@ void PlayerComponentDetail::SerializeToProto(Proto::Player* pProto)
 	{
 		for (auto& iter = pKnap->begin(); iter != pKnap->end(); ++iter)
 		{
-			if ((*iter).hash == item.hash())
+			if ((*iter).key == item.key())
 			{
 				item.set_num((*iter).num);
 				item.set_index((*iter).index);
@@ -71,7 +71,7 @@ void PlayerComponentDetail::SerializeToProto(Proto::Player* pProto)
 		itemData->set_id(item.id);
 		itemData->set_num(item.num);
 		itemData->set_index(item.index);
-		itemData->set_hash(item.hash);
+		itemData->set_key(item.key);
 		switch (item.type)
 		{
 		case ItemType::Potion:

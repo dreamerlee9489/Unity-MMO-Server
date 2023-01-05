@@ -103,7 +103,7 @@ void Packet::RemoveRef()
     if (_ref < 0)
     {
         const google::protobuf::EnumDescriptor* descriptor = Proto::MsgId_descriptor();
-        const auto name = descriptor->FindValueByNumber(_msgId)->name();
+        const auto &name = descriptor->FindValueByNumber(_msgId)->name();
         LOG_ERROR("packet ref < 0. ref:" << _ref << " msgId:" << name.c_str());
     }
 }

@@ -1087,7 +1087,7 @@ class ItemData :
     kIdFieldNumber = 2,
     kNumFieldNumber = 3,
     kIndexFieldNumber = 4,
-    kHashFieldNumber = 5,
+    kKeyFieldNumber = 5,
   };
   // .Proto.ItemData.ItemType type = 1;
   void clear_type();
@@ -1109,10 +1109,10 @@ class ItemData :
   ::PROTOBUF_NAMESPACE_ID::int32 index() const;
   void set_index(::PROTOBUF_NAMESPACE_ID::int32 value);
 
-  // int32 hash = 5;
-  void clear_hash();
-  ::PROTOBUF_NAMESPACE_ID::int32 hash() const;
-  void set_hash(::PROTOBUF_NAMESPACE_ID::int32 value);
+  // int32 key = 5;
+  void clear_key();
+  ::PROTOBUF_NAMESPACE_ID::int32 key() const;
+  void set_key(::PROTOBUF_NAMESPACE_ID::int32 value);
 
   // @@protoc_insertion_point(class_scope:Proto.ItemData)
  private:
@@ -1123,7 +1123,7 @@ class ItemData :
   ::PROTOBUF_NAMESPACE_ID::int32 id_;
   ::PROTOBUF_NAMESPACE_ID::int32 num_;
   ::PROTOBUF_NAMESPACE_ID::int32 index_;
-  ::PROTOBUF_NAMESPACE_ID::int32 hash_;
+  ::PROTOBUF_NAMESPACE_ID::int32 key_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_db_2eproto;
 };
@@ -2071,18 +2071,18 @@ inline void ItemData::set_index(::PROTOBUF_NAMESPACE_ID::int32 value) {
   // @@protoc_insertion_point(field_set:Proto.ItemData.index)
 }
 
-// int32 hash = 5;
-inline void ItemData::clear_hash() {
-  hash_ = 0;
+// int32 key = 5;
+inline void ItemData::clear_key() {
+  key_ = 0;
 }
-inline ::PROTOBUF_NAMESPACE_ID::int32 ItemData::hash() const {
-  // @@protoc_insertion_point(field_get:Proto.ItemData.hash)
-  return hash_;
+inline ::PROTOBUF_NAMESPACE_ID::int32 ItemData::key() const {
+  // @@protoc_insertion_point(field_get:Proto.ItemData.key)
+  return key_;
 }
-inline void ItemData::set_hash(::PROTOBUF_NAMESPACE_ID::int32 value) {
+inline void ItemData::set_key(::PROTOBUF_NAMESPACE_ID::int32 value) {
   
-  hash_ = value;
-  // @@protoc_insertion_point(field_set:Proto.ItemData.hash)
+  key_ = value;
+  // @@protoc_insertion_point(field_set:Proto.ItemData.key)
 }
 
 // -------------------------------------------------------------------

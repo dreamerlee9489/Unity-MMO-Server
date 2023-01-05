@@ -229,7 +229,7 @@ void World::BroadcastPacket(Proto::MsgId msgId, google::protobuf::Message& proto
 	const auto players = pPlayerMgr->GetAll();
 	for (const auto& pair : *players)
 	{
-		//LOG_DEBUG("broadcast msgId:" << Log4Help::GetMsgIdName(msgId).c_str() << " player sn:" << pair.second->GetPlayerSN());
+		//LOG_DEBUG("broadcast msgId:" << Log4Help::GetMsgIdName(msgId).c_str() << " player sn:" << pair.second->GetPlayerSN() << " " << (*players).size());
 		MessageSystemHelp::SendPacket(msgId, proto, pair.second);
 	}
 }
@@ -332,7 +332,7 @@ void World::HandleAddItemToKnap(Player* pPlayer, Packet* pPacket)
 	bool inKnap = false;
 	for (auto& iter = pKnap->begin(); iter != pKnap->end(); ++iter)
 	{
-		if ((*iter).hash == item.hash())
+		if ((*iter).key == item.key())
 		{
 			inKnap = true;
 			(*iter).num += item.num();
@@ -345,10 +345,10 @@ void World::HandleAddItemToKnap(Player* pPlayer, Packet* pPacket)
 		switch (item.type())
 		{
 		case Proto::ItemData_ItemType_Potion:
-			pKnap->emplace_back(ItemType::Potion, item.id(), item.num(), item.index(), item.hash());
+			pKnap->emplace_back(ItemType::Potion, item.id(), item.num(), item.index(), item.key());
 			break;
 		case Proto::ItemData_ItemType_Weapon:
-			pKnap->emplace_back(ItemType::Weapon, item.id(), item.num(), item.index(), item.hash());
+			pKnap->emplace_back(ItemType::Weapon, item.id(), item.num(), item.index(), item.key());
 			break;
 		default:
 			break;
@@ -367,7 +367,7 @@ void World::HandleGetPlayerKnap(Player* pPlayer, Packet* pPacket)
 		itemData->set_id(item.id);
 		itemData->set_num(item.num);
 		itemData->set_index(item.index);
-		itemData->set_hash(item.hash);
+		itemData->set_key(item.key);
 		switch (item.type)
 		{
 		case ItemType::Potion:

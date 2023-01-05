@@ -234,7 +234,7 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_db_2eproto::offsets[] PROTOBUF
   PROTOBUF_FIELD_OFFSET(::Proto::ItemData, id_),
   PROTOBUF_FIELD_OFFSET(::Proto::ItemData, num_),
   PROTOBUF_FIELD_OFFSET(::Proto::ItemData, index_),
-  PROTOBUF_FIELD_OFFSET(::Proto::ItemData, hash_),
+  PROTOBUF_FIELD_OFFSET(::Proto::ItemData, key_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::Proto::PlayerKnap, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -287,16 +287,16 @@ const char descriptor_table_protodef_db_2eproto[] PROTOBUF_SECTION_VARIABLE(prot
   "n\030\001 \001(\004\022\014\n\004name\030\002 \001(\t\022\037\n\004base\030\003 \001(\0132\021.Pr"
   "oto.PlayerBase\022\037\n\004knap\030\004 \001(\0132\021.Proto.Pla"
   "yerKnap\022\037\n\004misc\030\005 \001(\0132\021.Proto.PlayerMisc"
-  "\"\226\001\n\010ItemData\022&\n\004type\030\001 \001(\0162\030.Proto.Item"
+  "\"\225\001\n\010ItemData\022&\n\004type\030\001 \001(\0162\030.Proto.Item"
   "Data.ItemType\022\n\n\002id\030\002 \001(\005\022\013\n\003num\030\003 \001(\005\022\r"
-  "\n\005index\030\004 \001(\005\022\014\n\004hash\030\005 \001(\005\",\n\010ItemType\022"
-  "\010\n\004None\020\000\022\n\n\006Potion\020\001\022\n\n\006Weapon\020\002\"\211\001\n\nPl"
-  "ayerKnap\022\014\n\004gold\030\001 \001(\005\022#\n\nitemsInBag\030\002 \003"
-  "(\0132\017.Proto.ItemData\022#\n\nitemsInAct\030\003 \003(\0132"
-  "\017.Proto.ItemData\022#\n\nitemsInEqu\030\004 \003(\0132\017.P"
-  "roto.ItemData\".\n\rAddItemToKnap\022\035\n\004item\030\001"
-  " \001(\0132\017.Proto.ItemData*(\n\006Gender\022\010\n\004none\020"
-  "\000\022\010\n\004male\020\001\022\n\n\006female\020\002b\006proto3"
+  "\n\005index\030\004 \001(\005\022\013\n\003key\030\005 \001(\005\",\n\010ItemType\022\010"
+  "\n\004None\020\000\022\n\n\006Potion\020\001\022\n\n\006Weapon\020\002\"\211\001\n\nPla"
+  "yerKnap\022\014\n\004gold\030\001 \001(\005\022#\n\nitemsInBag\030\002 \003("
+  "\0132\017.Proto.ItemData\022#\n\nitemsInAct\030\003 \003(\0132\017"
+  ".Proto.ItemData\022#\n\nitemsInEqu\030\004 \003(\0132\017.Pr"
+  "oto.ItemData\".\n\rAddItemToKnap\022\035\n\004item\030\001 "
+  "\001(\0132\017.Proto.ItemData*(\n\006Gender\022\010\n\004none\020\000"
+  "\022\010\n\004male\020\001\022\n\n\006female\020\002b\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_db_2eproto_deps[1] = {
 };
@@ -313,7 +313,7 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_db_
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_db_2eproto_once;
 static bool descriptor_table_db_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_db_2eproto = {
-  &descriptor_table_db_2eproto_initialized, descriptor_table_protodef_db_2eproto, "db.proto", 911,
+  &descriptor_table_db_2eproto_initialized, descriptor_table_protodef_db_2eproto, "db.proto", 910,
   &descriptor_table_db_2eproto_once, descriptor_table_db_2eproto_sccs, descriptor_table_db_2eproto_deps, 8, 0,
   schemas, file_default_instances, TableStruct_db_2eproto::offsets,
   file_level_metadata_db_2eproto, 8, file_level_enum_descriptors_db_2eproto, file_level_service_descriptors_db_2eproto,
@@ -2432,15 +2432,15 @@ ItemData::ItemData(const ItemData& from)
       _internal_metadata_(nullptr) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::memcpy(&type_, &from.type_,
-    static_cast<size_t>(reinterpret_cast<char*>(&hash_) -
-    reinterpret_cast<char*>(&type_)) + sizeof(hash_));
+    static_cast<size_t>(reinterpret_cast<char*>(&key_) -
+    reinterpret_cast<char*>(&type_)) + sizeof(key_));
   // @@protoc_insertion_point(copy_constructor:Proto.ItemData)
 }
 
 void ItemData::SharedCtor() {
   ::memset(&type_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&hash_) -
-      reinterpret_cast<char*>(&type_)) + sizeof(hash_));
+      reinterpret_cast<char*>(&key_) -
+      reinterpret_cast<char*>(&type_)) + sizeof(key_));
 }
 
 ItemData::~ItemData() {
@@ -2467,8 +2467,8 @@ void ItemData::Clear() {
   (void) cached_has_bits;
 
   ::memset(&type_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&hash_) -
-      reinterpret_cast<char*>(&type_)) + sizeof(hash_));
+      reinterpret_cast<char*>(&key_) -
+      reinterpret_cast<char*>(&type_)) + sizeof(key_));
   _internal_metadata_.Clear();
 }
 
@@ -2509,10 +2509,10 @@ const char* ItemData::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::i
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // int32 hash = 5;
+      // int32 key = 5;
       case 5:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 40)) {
-          hash_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          key_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -2599,13 +2599,13 @@ bool ItemData::MergePartialFromCodedStream(
         break;
       }
 
-      // int32 hash = 5;
+      // int32 key = 5;
       case 5: {
         if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (40 & 0xFF)) {
 
           DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
                    ::PROTOBUF_NAMESPACE_ID::int32, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32>(
-                 input, &hash_)));
+                 input, &key_)));
         } else {
           goto handle_unusual;
         }
@@ -2660,9 +2660,9 @@ void ItemData::SerializeWithCachedSizes(
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32(4, this->index(), output);
   }
 
-  // int32 hash = 5;
-  if (this->hash() != 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32(5, this->hash(), output);
+  // int32 key = 5;
+  if (this->key() != 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32(5, this->key(), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -2699,9 +2699,9 @@ void ItemData::SerializeWithCachedSizes(
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(4, this->index(), target);
   }
 
-  // int32 hash = 5;
-  if (this->hash() != 0) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(5, this->hash(), target);
+  // int32 key = 5;
+  if (this->key() != 0) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(5, this->key(), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -2752,11 +2752,11 @@ size_t ItemData::ByteSizeLong() const {
         this->index());
   }
 
-  // int32 hash = 5;
-  if (this->hash() != 0) {
+  // int32 key = 5;
+  if (this->key() != 0) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->hash());
+        this->key());
   }
 
   int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
@@ -2798,8 +2798,8 @@ void ItemData::MergeFrom(const ItemData& from) {
   if (from.index() != 0) {
     set_index(from.index());
   }
-  if (from.hash() != 0) {
-    set_hash(from.hash());
+  if (from.key() != 0) {
+    set_key(from.key());
   }
 }
 
@@ -2828,7 +2828,7 @@ void ItemData::InternalSwap(ItemData* other) {
   swap(id_, other->id_);
   swap(num_, other->num_);
   swap(index_, other->index_);
-  swap(hash_, other->hash_);
+  swap(key_, other->key_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata ItemData::GetMetadata() const {

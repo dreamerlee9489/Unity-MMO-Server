@@ -15,15 +15,15 @@ enum struct ItemType { None, Potion, Weapon };
 struct DropItem
 {
 	ItemType type = ItemType::None;
-	int id = 0, num = 0, index = 0, hash = 0;
+	int id = 0, num = 0, index = 0, key = 0;
 
-	DropItem(ItemType type, int id, int num, int index, int hash = 0)
+	DropItem(ItemType type, int id, int num, int index, int key = 0)
 	{
 		this->type = type;
 		this->id = id;
 		this->num = num;
 		this->index = index;
-		this->hash = hash;
+		this->key = key;
 	}
 };
 

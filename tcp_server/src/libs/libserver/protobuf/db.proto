@@ -58,7 +58,7 @@ message ItemData {
 	int32 id = 2;
 	int32 num = 3;
 	int32 index = 4;
-	int32 hash = 5;
+	int32 key = 5;
 }
 
 message PlayerKnap {

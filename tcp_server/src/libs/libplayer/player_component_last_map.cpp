@@ -10,7 +10,7 @@ LastWorld::LastWorld(const int worldId, const uint64 worldSn, const Vector3 pos)
 	this->WorldSn = worldSn;
 	this->Position = pos;
 
-	//LOG_DEBUG("Init. LastWorld. id:" << this->WorldId << " sn:" << this->WorldSn << this->Position);
+	//LOG_DEBUG("Init. LastWorld. id:" << this->WorldId << " sn:" << this->WorldSn << " " << this->Position);
 }
 
 LastWorld::LastWorld(Proto::LastWorld proto)
@@ -55,7 +55,7 @@ void PlayerComponentLastMap::ParserFromProto(const Proto::Player& proto)
 	}
 
 	// 副本
-	auto protoDungeon = proto.misc().last_dungeon();
+	auto &protoDungeon = proto.misc().last_dungeon();
 	worldId = protoDungeon.world_id();
 	pMap = pResMgr->Worlds->GetResource(worldId);
 	if (pMap != nullptr)
@@ -133,9 +133,7 @@ void PlayerComponentLastMap::SetCurWorld(int worldId)
 void PlayerComponentLastMap::EnterDungeon(const int worldId, const uint64 worldSn, const Vector3 position)
 {
 	if (_pDungeon == nullptr)
-	{
 		_pDungeon = new LastWorld(worldId, worldSn, position);
-	}
 
 	if (_pDungeon->WorldSn != worldSn)
 	{

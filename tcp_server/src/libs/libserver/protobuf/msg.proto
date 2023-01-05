@@ -213,7 +213,6 @@ message SelectPlayer {
 }
 
 message SelectPlayerRs {
-
 	enum SelectPlayerReturnCode {
 		SPRC_OK = 0;
 		SPRC_NotFound = 1;
