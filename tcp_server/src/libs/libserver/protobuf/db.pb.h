@@ -56,9 +56,6 @@ struct TableStruct_db_2eproto {
 };
 extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_db_2eproto;
 namespace Proto {
-class AddItemToKnap;
-class AddItemToKnapDefaultTypeInternal;
-extern AddItemToKnapDefaultTypeInternal _AddItemToKnap_default_instance_;
 class ItemData;
 class ItemDataDefaultTypeInternal;
 extern ItemDataDefaultTypeInternal _ItemData_default_instance_;
@@ -77,18 +74,21 @@ extern PlayerKnapDefaultTypeInternal _PlayerKnap_default_instance_;
 class PlayerMisc;
 class PlayerMiscDefaultTypeInternal;
 extern PlayerMiscDefaultTypeInternal _PlayerMisc_default_instance_;
+class UpdateKnapItem;
+class UpdateKnapItemDefaultTypeInternal;
+extern UpdateKnapItemDefaultTypeInternal _UpdateKnapItem_default_instance_;
 class Vector3D;
 class Vector3DDefaultTypeInternal;
 extern Vector3DDefaultTypeInternal _Vector3D_default_instance_;
 }  // namespace Proto
 PROTOBUF_NAMESPACE_OPEN
-template<> ::Proto::AddItemToKnap* Arena::CreateMaybeMessage<::Proto::AddItemToKnap>(Arena*);
 template<> ::Proto::ItemData* Arena::CreateMaybeMessage<::Proto::ItemData>(Arena*);
 template<> ::Proto::LastWorld* Arena::CreateMaybeMessage<::Proto::LastWorld>(Arena*);
 template<> ::Proto::Player* Arena::CreateMaybeMessage<::Proto::Player>(Arena*);
 template<> ::Proto::PlayerBase* Arena::CreateMaybeMessage<::Proto::PlayerBase>(Arena*);
 template<> ::Proto::PlayerKnap* Arena::CreateMaybeMessage<::Proto::PlayerKnap>(Arena*);
 template<> ::Proto::PlayerMisc* Arena::CreateMaybeMessage<::Proto::PlayerMisc>(Arena*);
+template<> ::Proto::UpdateKnapItem* Arena::CreateMaybeMessage<::Proto::UpdateKnapItem>(Arena*);
 template<> ::Proto::Vector3D* Arena::CreateMaybeMessage<::Proto::Vector3D>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
 namespace Proto {
@@ -1083,12 +1083,23 @@ class ItemData :
   // accessors -------------------------------------------------------
 
   enum : int {
+    kKeyFieldNumber = 5,
     kTypeFieldNumber = 1,
     kIdFieldNumber = 2,
     kNumFieldNumber = 3,
     kIndexFieldNumber = 4,
-    kKeyFieldNumber = 5,
   };
+  // string key = 5;
+  void clear_key();
+  const std::string& key() const;
+  void set_key(const std::string& value);
+  void set_key(std::string&& value);
+  void set_key(const char* value);
+  void set_key(const char* value, size_t size);
+  std::string* mutable_key();
+  std::string* release_key();
+  void set_allocated_key(std::string* key);
+
   // .Proto.ItemData.ItemType type = 1;
   void clear_type();
   ::Proto::ItemData_ItemType type() const;
@@ -1109,21 +1120,16 @@ class ItemData :
   ::PROTOBUF_NAMESPACE_ID::int32 index() const;
   void set_index(::PROTOBUF_NAMESPACE_ID::int32 value);
 
-  // int32 key = 5;
-  void clear_key();
-  ::PROTOBUF_NAMESPACE_ID::int32 key() const;
-  void set_key(::PROTOBUF_NAMESPACE_ID::int32 value);
-
   // @@protoc_insertion_point(class_scope:Proto.ItemData)
  private:
   class _Internal;
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr key_;
   int type_;
   ::PROTOBUF_NAMESPACE_ID::int32 id_;
   ::PROTOBUF_NAMESPACE_ID::int32 num_;
   ::PROTOBUF_NAMESPACE_ID::int32 index_;
-  ::PROTOBUF_NAMESPACE_ID::int32 key_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_db_2eproto;
 };
@@ -1299,23 +1305,23 @@ class PlayerKnap :
 };
 // -------------------------------------------------------------------
 
-class AddItemToKnap :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Proto.AddItemToKnap) */ {
+class UpdateKnapItem :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Proto.UpdateKnapItem) */ {
  public:
-  AddItemToKnap();
-  virtual ~AddItemToKnap();
+  UpdateKnapItem();
+  virtual ~UpdateKnapItem();
 
-  AddItemToKnap(const AddItemToKnap& from);
-  AddItemToKnap(AddItemToKnap&& from) noexcept
-    : AddItemToKnap() {
+  UpdateKnapItem(const UpdateKnapItem& from);
+  UpdateKnapItem(UpdateKnapItem&& from) noexcept
+    : UpdateKnapItem() {
     *this = ::std::move(from);
   }
 
-  inline AddItemToKnap& operator=(const AddItemToKnap& from) {
+  inline UpdateKnapItem& operator=(const UpdateKnapItem& from) {
     CopyFrom(from);
     return *this;
   }
-  inline AddItemToKnap& operator=(AddItemToKnap&& from) noexcept {
+  inline UpdateKnapItem& operator=(UpdateKnapItem&& from) noexcept {
     if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
       if (this != &from) InternalSwap(&from);
     } else {
@@ -1333,37 +1339,37 @@ class AddItemToKnap :
   static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
     return GetMetadataStatic().reflection;
   }
-  static const AddItemToKnap& default_instance();
+  static const UpdateKnapItem& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const AddItemToKnap* internal_default_instance() {
-    return reinterpret_cast<const AddItemToKnap*>(
-               &_AddItemToKnap_default_instance_);
+  static inline const UpdateKnapItem* internal_default_instance() {
+    return reinterpret_cast<const UpdateKnapItem*>(
+               &_UpdateKnapItem_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
     7;
 
-  friend void swap(AddItemToKnap& a, AddItemToKnap& b) {
+  friend void swap(UpdateKnapItem& a, UpdateKnapItem& b) {
     a.Swap(&b);
   }
-  inline void Swap(AddItemToKnap* other) {
+  inline void Swap(UpdateKnapItem* other) {
     if (other == this) return;
     InternalSwap(other);
   }
 
   // implements Message ----------------------------------------------
 
-  inline AddItemToKnap* New() const final {
-    return CreateMaybeMessage<AddItemToKnap>(nullptr);
+  inline UpdateKnapItem* New() const final {
+    return CreateMaybeMessage<UpdateKnapItem>(nullptr);
   }
 
-  AddItemToKnap* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
-    return CreateMaybeMessage<AddItemToKnap>(arena);
+  UpdateKnapItem* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<UpdateKnapItem>(arena);
   }
   void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
   void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-  void CopyFrom(const AddItemToKnap& from);
-  void MergeFrom(const AddItemToKnap& from);
+  void CopyFrom(const UpdateKnapItem& from);
+  void MergeFrom(const UpdateKnapItem& from);
   PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
   bool IsInitialized() const final;
 
@@ -1384,10 +1390,10 @@ class AddItemToKnap :
   inline void SharedCtor();
   inline void SharedDtor();
   void SetCachedSize(int size) const final;
-  void InternalSwap(AddItemToKnap* other);
+  void InternalSwap(UpdateKnapItem* other);
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "Proto.AddItemToKnap";
+    return "Proto.UpdateKnapItem";
   }
   private:
   inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
@@ -1422,7 +1428,7 @@ class AddItemToKnap :
   ::Proto::ItemData* mutable_item();
   void set_allocated_item(::Proto::ItemData* item);
 
-  // @@protoc_insertion_point(class_scope:Proto.AddItemToKnap)
+  // @@protoc_insertion_point(class_scope:Proto.UpdateKnapItem)
  private:
   class _Internal;
 
@@ -2071,18 +2077,55 @@ inline void ItemData::set_index(::PROTOBUF_NAMESPACE_ID::int32 value) {
   // @@protoc_insertion_point(field_set:Proto.ItemData.index)
 }
 
-// int32 key = 5;
+// string key = 5;
 inline void ItemData::clear_key() {
-  key_ = 0;
+  key_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
-inline ::PROTOBUF_NAMESPACE_ID::int32 ItemData::key() const {
+inline const std::string& ItemData::key() const {
   // @@protoc_insertion_point(field_get:Proto.ItemData.key)
-  return key_;
+  return key_.GetNoArena();
 }
-inline void ItemData::set_key(::PROTOBUF_NAMESPACE_ID::int32 value) {
+inline void ItemData::set_key(const std::string& value) {
   
-  key_ = value;
+  key_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:Proto.ItemData.key)
+}
+inline void ItemData::set_key(std::string&& value) {
+  
+  key_.SetNoArena(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:Proto.ItemData.key)
+}
+inline void ItemData::set_key(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  key_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:Proto.ItemData.key)
+}
+inline void ItemData::set_key(const char* value, size_t size) {
+  
+  key_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:Proto.ItemData.key)
+}
+inline std::string* ItemData::mutable_key() {
+  
+  // @@protoc_insertion_point(field_mutable:Proto.ItemData.key)
+  return key_.MutableNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline std::string* ItemData::release_key() {
+  // @@protoc_insertion_point(field_release:Proto.ItemData.key)
+  
+  return key_.ReleaseNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline void ItemData::set_allocated_key(std::string* key) {
+  if (key != nullptr) {
+    
+  } else {
+    
+  }
+  key_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), key);
+  // @@protoc_insertion_point(field_set_allocated:Proto.ItemData.key)
 }
 
 // -------------------------------------------------------------------
@@ -2195,41 +2238,41 @@ PlayerKnap::itemsinequ() const {
 
 // -------------------------------------------------------------------
 
-// AddItemToKnap
+// UpdateKnapItem
 
 // .Proto.ItemData item = 1;
-inline bool AddItemToKnap::has_item() const {
+inline bool UpdateKnapItem::has_item() const {
   return this != internal_default_instance() && item_ != nullptr;
 }
-inline void AddItemToKnap::clear_item() {
+inline void UpdateKnapItem::clear_item() {
   if (GetArenaNoVirtual() == nullptr && item_ != nullptr) {
     delete item_;
   }
   item_ = nullptr;
 }
-inline const ::Proto::ItemData& AddItemToKnap::item() const {
+inline const ::Proto::ItemData& UpdateKnapItem::item() const {
   const ::Proto::ItemData* p = item_;
-  // @@protoc_insertion_point(field_get:Proto.AddItemToKnap.item)
+  // @@protoc_insertion_point(field_get:Proto.UpdateKnapItem.item)
   return p != nullptr ? *p : *reinterpret_cast<const ::Proto::ItemData*>(
       &::Proto::_ItemData_default_instance_);
 }
-inline ::Proto::ItemData* AddItemToKnap::release_item() {
-  // @@protoc_insertion_point(field_release:Proto.AddItemToKnap.item)
+inline ::Proto::ItemData* UpdateKnapItem::release_item() {
+  // @@protoc_insertion_point(field_release:Proto.UpdateKnapItem.item)
   
   ::Proto::ItemData* temp = item_;
   item_ = nullptr;
   return temp;
 }
-inline ::Proto::ItemData* AddItemToKnap::mutable_item() {
+inline ::Proto::ItemData* UpdateKnapItem::mutable_item() {
   
   if (item_ == nullptr) {
     auto* p = CreateMaybeMessage<::Proto::ItemData>(GetArenaNoVirtual());
     item_ = p;
   }
-  // @@protoc_insertion_point(field_mutable:Proto.AddItemToKnap.item)
+  // @@protoc_insertion_point(field_mutable:Proto.UpdateKnapItem.item)
   return item_;
 }
-inline void AddItemToKnap::set_allocated_item(::Proto::ItemData* item) {
+inline void UpdateKnapItem::set_allocated_item(::Proto::ItemData* item) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaNoVirtual();
   if (message_arena == nullptr) {
     delete item_;
@@ -2245,7 +2288,7 @@ inline void AddItemToKnap::set_allocated_item(::Proto::ItemData* item) {
     
   }
   item_ = item;
-  // @@protoc_insertion_point(field_set_allocated:Proto.AddItemToKnap.item)
+  // @@protoc_insertion_point(field_set_allocated:Proto.UpdateKnapItem.item)
 }
 
 #ifdef __GNUC__

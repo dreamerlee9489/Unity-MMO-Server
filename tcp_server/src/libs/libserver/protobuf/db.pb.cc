@@ -50,26 +50,11 @@ class PlayerKnapDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<PlayerKnap> _instance;
 } _PlayerKnap_default_instance_;
-class AddItemToKnapDefaultTypeInternal {
+class UpdateKnapItemDefaultTypeInternal {
  public:
-  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<AddItemToKnap> _instance;
-} _AddItemToKnap_default_instance_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<UpdateKnapItem> _instance;
+} _UpdateKnapItem_default_instance_;
 }  // namespace Proto
-static void InitDefaultsscc_info_AddItemToKnap_db_2eproto() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::Proto::_AddItemToKnap_default_instance_;
-    new (ptr) ::Proto::AddItemToKnap();
-    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::Proto::AddItemToKnap::InitAsDefaultInstance();
-}
-
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_AddItemToKnap_db_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsscc_info_AddItemToKnap_db_2eproto}, {
-      &scc_info_ItemData_db_2eproto.base,}};
-
 static void InitDefaultsscc_info_ItemData_db_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
@@ -160,6 +145,21 @@ static void InitDefaultsscc_info_PlayerMisc_db_2eproto() {
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsscc_info_PlayerMisc_db_2eproto}, {
       &scc_info_LastWorld_db_2eproto.base,}};
 
+static void InitDefaultsscc_info_UpdateKnapItem_db_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::Proto::_UpdateKnapItem_default_instance_;
+    new (ptr) ::Proto::UpdateKnapItem();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::Proto::UpdateKnapItem::InitAsDefaultInstance();
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_UpdateKnapItem_db_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsscc_info_UpdateKnapItem_db_2eproto}, {
+      &scc_info_ItemData_db_2eproto.base,}};
+
 static void InitDefaultsscc_info_Vector3D_db_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
@@ -245,11 +245,11 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_db_2eproto::offsets[] PROTOBUF
   PROTOBUF_FIELD_OFFSET(::Proto::PlayerKnap, itemsinact_),
   PROTOBUF_FIELD_OFFSET(::Proto::PlayerKnap, itemsinequ_),
   ~0u,  // no _has_bits_
-  PROTOBUF_FIELD_OFFSET(::Proto::AddItemToKnap, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::Proto::UpdateKnapItem, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  PROTOBUF_FIELD_OFFSET(::Proto::AddItemToKnap, item_),
+  PROTOBUF_FIELD_OFFSET(::Proto::UpdateKnapItem, item_),
 };
 static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(::Proto::Vector3D)},
@@ -259,7 +259,7 @@ static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOB
   { 36, -1, sizeof(::Proto::Player)},
   { 46, -1, sizeof(::Proto::ItemData)},
   { 56, -1, sizeof(::Proto::PlayerKnap)},
-  { 65, -1, sizeof(::Proto::AddItemToKnap)},
+  { 65, -1, sizeof(::Proto::UpdateKnapItem)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
@@ -270,7 +270,7 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::Proto::_Player_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::Proto::_ItemData_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::Proto::_PlayerKnap_default_instance_),
-  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::Proto::_AddItemToKnap_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::Proto::_UpdateKnapItem_default_instance_),
 };
 
 const char descriptor_table_protodef_db_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
@@ -289,31 +289,31 @@ const char descriptor_table_protodef_db_2eproto[] PROTOBUF_SECTION_VARIABLE(prot
   "yerKnap\022\037\n\004misc\030\005 \001(\0132\021.Proto.PlayerMisc"
   "\"\225\001\n\010ItemData\022&\n\004type\030\001 \001(\0162\030.Proto.Item"
   "Data.ItemType\022\n\n\002id\030\002 \001(\005\022\013\n\003num\030\003 \001(\005\022\r"
-  "\n\005index\030\004 \001(\005\022\013\n\003key\030\005 \001(\005\",\n\010ItemType\022\010"
+  "\n\005index\030\004 \001(\005\022\013\n\003key\030\005 \001(\t\",\n\010ItemType\022\010"
   "\n\004None\020\000\022\n\n\006Potion\020\001\022\n\n\006Weapon\020\002\"\211\001\n\nPla"
   "yerKnap\022\014\n\004gold\030\001 \001(\005\022#\n\nitemsInBag\030\002 \003("
   "\0132\017.Proto.ItemData\022#\n\nitemsInAct\030\003 \003(\0132\017"
   ".Proto.ItemData\022#\n\nitemsInEqu\030\004 \003(\0132\017.Pr"
-  "oto.ItemData\".\n\rAddItemToKnap\022\035\n\004item\030\001 "
-  "\001(\0132\017.Proto.ItemData*(\n\006Gender\022\010\n\004none\020\000"
-  "\022\010\n\004male\020\001\022\n\n\006female\020\002b\006proto3"
+  "oto.ItemData\"/\n\016UpdateKnapItem\022\035\n\004item\030\001"
+  " \001(\0132\017.Proto.ItemData*(\n\006Gender\022\010\n\004none\020"
+  "\000\022\010\n\004male\020\001\022\n\n\006female\020\002b\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_db_2eproto_deps[1] = {
 };
 static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_db_2eproto_sccs[8] = {
-  &scc_info_AddItemToKnap_db_2eproto.base,
   &scc_info_ItemData_db_2eproto.base,
   &scc_info_LastWorld_db_2eproto.base,
   &scc_info_Player_db_2eproto.base,
   &scc_info_PlayerBase_db_2eproto.base,
   &scc_info_PlayerKnap_db_2eproto.base,
   &scc_info_PlayerMisc_db_2eproto.base,
+  &scc_info_UpdateKnapItem_db_2eproto.base,
   &scc_info_Vector3D_db_2eproto.base,
 };
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_db_2eproto_once;
 static bool descriptor_table_db_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_db_2eproto = {
-  &descriptor_table_db_2eproto_initialized, descriptor_table_protodef_db_2eproto, "db.proto", 910,
+  &descriptor_table_db_2eproto_initialized, descriptor_table_protodef_db_2eproto, "db.proto", 911,
   &descriptor_table_db_2eproto_once, descriptor_table_db_2eproto_sccs, descriptor_table_db_2eproto_deps, 8, 0,
   schemas, file_default_instances, TableStruct_db_2eproto::offsets,
   file_level_metadata_db_2eproto, 8, file_level_enum_descriptors_db_2eproto, file_level_service_descriptors_db_2eproto,
@@ -2431,16 +2431,22 @@ ItemData::ItemData(const ItemData& from)
   : ::PROTOBUF_NAMESPACE_ID::Message(),
       _internal_metadata_(nullptr) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
+  key_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from.key().empty()) {
+    key_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.key_);
+  }
   ::memcpy(&type_, &from.type_,
-    static_cast<size_t>(reinterpret_cast<char*>(&key_) -
-    reinterpret_cast<char*>(&type_)) + sizeof(key_));
+    static_cast<size_t>(reinterpret_cast<char*>(&index_) -
+    reinterpret_cast<char*>(&type_)) + sizeof(index_));
   // @@protoc_insertion_point(copy_constructor:Proto.ItemData)
 }
 
 void ItemData::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_ItemData_db_2eproto.base);
+  key_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   ::memset(&type_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&key_) -
-      reinterpret_cast<char*>(&type_)) + sizeof(key_));
+      reinterpret_cast<char*>(&index_) -
+      reinterpret_cast<char*>(&type_)) + sizeof(index_));
 }
 
 ItemData::~ItemData() {
@@ -2449,6 +2455,7 @@ ItemData::~ItemData() {
 }
 
 void ItemData::SharedDtor() {
+  key_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 void ItemData::SetCachedSize(int size) const {
@@ -2466,9 +2473,10 @@ void ItemData::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
+  key_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   ::memset(&type_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&key_) -
-      reinterpret_cast<char*>(&type_)) + sizeof(key_));
+      reinterpret_cast<char*>(&index_) -
+      reinterpret_cast<char*>(&type_)) + sizeof(index_));
   _internal_metadata_.Clear();
 }
 
@@ -2509,10 +2517,10 @@ const char* ItemData::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::i
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // int32 key = 5;
+      // string key = 5;
       case 5:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 40)) {
-          key_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 42)) {
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8(mutable_key(), ptr, ctx, "Proto.ItemData.key");
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -2599,13 +2607,15 @@ bool ItemData::MergePartialFromCodedStream(
         break;
       }
 
-      // int32 key = 5;
+      // string key = 5;
       case 5: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (40 & 0xFF)) {
-
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   ::PROTOBUF_NAMESPACE_ID::int32, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32>(
-                 input, &key_)));
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (42 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadString(
+                input, this->mutable_key()));
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+            this->key().data(), static_cast<int>(this->key().length()),
+            ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::PARSE,
+            "Proto.ItemData.key"));
         } else {
           goto handle_unusual;
         }
@@ -2660,9 +2670,14 @@ void ItemData::SerializeWithCachedSizes(
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32(4, this->index(), output);
   }
 
-  // int32 key = 5;
-  if (this->key() != 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32(5, this->key(), output);
+  // string key = 5;
+  if (this->key().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->key().data(), static_cast<int>(this->key().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "Proto.ItemData.key");
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringMaybeAliased(
+      5, this->key(), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -2699,9 +2714,15 @@ void ItemData::SerializeWithCachedSizes(
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(4, this->index(), target);
   }
 
-  // int32 key = 5;
-  if (this->key() != 0) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(5, this->key(), target);
+  // string key = 5;
+  if (this->key().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->key().data(), static_cast<int>(this->key().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "Proto.ItemData.key");
+    target =
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringToArray(
+        5, this->key(), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -2724,6 +2745,13 @@ size_t ItemData::ByteSizeLong() const {
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
+
+  // string key = 5;
+  if (this->key().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->key());
+  }
 
   // .Proto.ItemData.ItemType type = 1;
   if (this->type() != 0) {
@@ -2750,13 +2778,6 @@ size_t ItemData::ByteSizeLong() const {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
         this->index());
-  }
-
-  // int32 key = 5;
-  if (this->key() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->key());
   }
 
   int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
@@ -2786,6 +2807,10 @@ void ItemData::MergeFrom(const ItemData& from) {
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
+  if (from.key().size() > 0) {
+
+    key_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.key_);
+  }
   if (from.type() != 0) {
     set_type(from.type());
   }
@@ -2797,9 +2822,6 @@ void ItemData::MergeFrom(const ItemData& from) {
   }
   if (from.index() != 0) {
     set_index(from.index());
-  }
-  if (from.key() != 0) {
-    set_key(from.key());
   }
 }
 
@@ -2824,11 +2846,12 @@ bool ItemData::IsInitialized() const {
 void ItemData::InternalSwap(ItemData* other) {
   using std::swap;
   _internal_metadata_.Swap(&other->_internal_metadata_);
+  key_.Swap(&other->key_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
   swap(type_, other->type_);
   swap(id_, other->id_);
   swap(num_, other->num_);
   swap(index_, other->index_);
-  swap(key_, other->key_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata ItemData::GetMetadata() const {
@@ -3253,25 +3276,25 @@ void PlayerKnap::InternalSwap(PlayerKnap* other) {
 
 // ===================================================================
 
-void AddItemToKnap::InitAsDefaultInstance() {
-  ::Proto::_AddItemToKnap_default_instance_._instance.get_mutable()->item_ = const_cast< ::Proto::ItemData*>(
+void UpdateKnapItem::InitAsDefaultInstance() {
+  ::Proto::_UpdateKnapItem_default_instance_._instance.get_mutable()->item_ = const_cast< ::Proto::ItemData*>(
       ::Proto::ItemData::internal_default_instance());
 }
-class AddItemToKnap::_Internal {
+class UpdateKnapItem::_Internal {
  public:
-  static const ::Proto::ItemData& item(const AddItemToKnap* msg);
+  static const ::Proto::ItemData& item(const UpdateKnapItem* msg);
 };
 
 const ::Proto::ItemData&
-AddItemToKnap::_Internal::item(const AddItemToKnap* msg) {
+UpdateKnapItem::_Internal::item(const UpdateKnapItem* msg) {
   return *msg->item_;
 }
-AddItemToKnap::AddItemToKnap()
+UpdateKnapItem::UpdateKnapItem()
   : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:Proto.AddItemToKnap)
+  // @@protoc_insertion_point(constructor:Proto.UpdateKnapItem)
 }
-AddItemToKnap::AddItemToKnap(const AddItemToKnap& from)
+UpdateKnapItem::UpdateKnapItem(const UpdateKnapItem& from)
   : ::PROTOBUF_NAMESPACE_ID::Message(),
       _internal_metadata_(nullptr) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
@@ -3280,34 +3303,34 @@ AddItemToKnap::AddItemToKnap(const AddItemToKnap& from)
   } else {
     item_ = nullptr;
   }
-  // @@protoc_insertion_point(copy_constructor:Proto.AddItemToKnap)
+  // @@protoc_insertion_point(copy_constructor:Proto.UpdateKnapItem)
 }
 
-void AddItemToKnap::SharedCtor() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_AddItemToKnap_db_2eproto.base);
+void UpdateKnapItem::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_UpdateKnapItem_db_2eproto.base);
   item_ = nullptr;
 }
 
-AddItemToKnap::~AddItemToKnap() {
-  // @@protoc_insertion_point(destructor:Proto.AddItemToKnap)
+UpdateKnapItem::~UpdateKnapItem() {
+  // @@protoc_insertion_point(destructor:Proto.UpdateKnapItem)
   SharedDtor();
 }
 
-void AddItemToKnap::SharedDtor() {
+void UpdateKnapItem::SharedDtor() {
   if (this != internal_default_instance()) delete item_;
 }
 
-void AddItemToKnap::SetCachedSize(int size) const {
+void UpdateKnapItem::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const AddItemToKnap& AddItemToKnap::default_instance() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_AddItemToKnap_db_2eproto.base);
+const UpdateKnapItem& UpdateKnapItem::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_UpdateKnapItem_db_2eproto.base);
   return *internal_default_instance();
 }
 
 
-void AddItemToKnap::Clear() {
-// @@protoc_insertion_point(message_clear_start:Proto.AddItemToKnap)
+void UpdateKnapItem::Clear() {
+// @@protoc_insertion_point(message_clear_start:Proto.UpdateKnapItem)
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
@@ -3320,7 +3343,7 @@ void AddItemToKnap::Clear() {
 }
 
 #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-const char* AddItemToKnap::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+const char* UpdateKnapItem::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
   while (!ctx->Done(&ptr)) {
     ::PROTOBUF_NAMESPACE_ID::uint32 tag;
@@ -3354,11 +3377,11 @@ failure:
 #undef CHK_
 }
 #else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-bool AddItemToKnap::MergePartialFromCodedStream(
+bool UpdateKnapItem::MergePartialFromCodedStream(
     ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
   ::PROTOBUF_NAMESPACE_ID::uint32 tag;
-  // @@protoc_insertion_point(parse_start:Proto.AddItemToKnap)
+  // @@protoc_insertion_point(parse_start:Proto.UpdateKnapItem)
   for (;;) {
     ::std::pair<::PROTOBUF_NAMESPACE_ID::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
@@ -3387,18 +3410,18 @@ bool AddItemToKnap::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:Proto.AddItemToKnap)
+  // @@protoc_insertion_point(parse_success:Proto.UpdateKnapItem)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:Proto.AddItemToKnap)
+  // @@protoc_insertion_point(parse_failure:Proto.UpdateKnapItem)
   return false;
 #undef DO_
 }
 #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
 
-void AddItemToKnap::SerializeWithCachedSizes(
+void UpdateKnapItem::SerializeWithCachedSizes(
     ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:Proto.AddItemToKnap)
+  // @@protoc_insertion_point(serialize_start:Proto.UpdateKnapItem)
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -3412,12 +3435,12 @@ void AddItemToKnap::SerializeWithCachedSizes(
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFields(
         _internal_metadata_.unknown_fields(), output);
   }
-  // @@protoc_insertion_point(serialize_end:Proto.AddItemToKnap)
+  // @@protoc_insertion_point(serialize_end:Proto.UpdateKnapItem)
 }
 
-::PROTOBUF_NAMESPACE_ID::uint8* AddItemToKnap::InternalSerializeWithCachedSizesToArray(
+::PROTOBUF_NAMESPACE_ID::uint8* UpdateKnapItem::InternalSerializeWithCachedSizesToArray(
     ::PROTOBUF_NAMESPACE_ID::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:Proto.AddItemToKnap)
+  // @@protoc_insertion_point(serialize_to_array_start:Proto.UpdateKnapItem)
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -3432,12 +3455,12 @@ void AddItemToKnap::SerializeWithCachedSizes(
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields(), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:Proto.AddItemToKnap)
+  // @@protoc_insertion_point(serialize_to_array_end:Proto.UpdateKnapItem)
   return target;
 }
 
-size_t AddItemToKnap::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:Proto.AddItemToKnap)
+size_t UpdateKnapItem::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:Proto.UpdateKnapItem)
   size_t total_size = 0;
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -3461,23 +3484,23 @@ size_t AddItemToKnap::ByteSizeLong() const {
   return total_size;
 }
 
-void AddItemToKnap::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:Proto.AddItemToKnap)
+void UpdateKnapItem::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:Proto.UpdateKnapItem)
   GOOGLE_DCHECK_NE(&from, this);
-  const AddItemToKnap* source =
-      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<AddItemToKnap>(
+  const UpdateKnapItem* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<UpdateKnapItem>(
           &from);
   if (source == nullptr) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:Proto.AddItemToKnap)
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:Proto.UpdateKnapItem)
     ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
   } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:Proto.AddItemToKnap)
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:Proto.UpdateKnapItem)
     MergeFrom(*source);
   }
 }
 
-void AddItemToKnap::MergeFrom(const AddItemToKnap& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:Proto.AddItemToKnap)
+void UpdateKnapItem::MergeFrom(const UpdateKnapItem& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:Proto.UpdateKnapItem)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
@@ -3488,31 +3511,31 @@ void AddItemToKnap::MergeFrom(const AddItemToKnap& from) {
   }
 }
 
-void AddItemToKnap::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:Proto.AddItemToKnap)
+void UpdateKnapItem::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:Proto.UpdateKnapItem)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void AddItemToKnap::CopyFrom(const AddItemToKnap& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:Proto.AddItemToKnap)
+void UpdateKnapItem::CopyFrom(const UpdateKnapItem& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:Proto.UpdateKnapItem)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool AddItemToKnap::IsInitialized() const {
+bool UpdateKnapItem::IsInitialized() const {
   return true;
 }
 
-void AddItemToKnap::InternalSwap(AddItemToKnap* other) {
+void UpdateKnapItem::InternalSwap(UpdateKnapItem* other) {
   using std::swap;
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(item_, other->item_);
 }
 
-::PROTOBUF_NAMESPACE_ID::Metadata AddItemToKnap::GetMetadata() const {
+::PROTOBUF_NAMESPACE_ID::Metadata UpdateKnapItem::GetMetadata() const {
   return GetMetadataStatic();
 }
 
@@ -3541,8 +3564,8 @@ template<> PROTOBUF_NOINLINE ::Proto::ItemData* Arena::CreateMaybeMessage< ::Pro
 template<> PROTOBUF_NOINLINE ::Proto::PlayerKnap* Arena::CreateMaybeMessage< ::Proto::PlayerKnap >(Arena* arena) {
   return Arena::CreateInternal< ::Proto::PlayerKnap >(arena);
 }
-template<> PROTOBUF_NOINLINE ::Proto::AddItemToKnap* Arena::CreateMaybeMessage< ::Proto::AddItemToKnap >(Arena* arena) {
-  return Arena::CreateInternal< ::Proto::AddItemToKnap >(arena);
+template<> PROTOBUF_NOINLINE ::Proto::UpdateKnapItem* Arena::CreateMaybeMessage< ::Proto::UpdateKnapItem >(Arena* arena) {
+  return Arena::CreateInternal< ::Proto::UpdateKnapItem >(arena);
 }
 PROTOBUF_NAMESPACE_CLOSE
 

@@ -32,7 +32,7 @@ public:
 
 	void ChangeState(FsmState* newState);
 
-	void SyncState(Proto::FsmSyncState& proto, Player* pPlayer);
+	void SyncState(Proto::SyncFsmState& proto, Player* pPlayer);
 
 	FsmState* GetCurrState() { return _currState; }
 };

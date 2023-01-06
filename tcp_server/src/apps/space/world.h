@@ -30,7 +30,7 @@ public:
 	void Awake(int worldId) override;
 	void BackToPool() override;
 	void BroadcastPacket(Proto::MsgId msgId, google::protobuf::Message& proto);
-	void BroadcastPacket(Proto::MsgId msgId, google::protobuf::Message& proto, std::set<uint64> players);
+	void BroadcastPacket(Proto::MsgId msgId, google::protobuf::Message& proto, std::set<uint64>& players);
 	Player* GetNearestPlayer(Vector3& pos);
 	PlayerManagerComponent* GetPlayerManager() const { return playerMgr; }
 
@@ -38,16 +38,16 @@ protected:
 	Player* GetPlayer(NetIdentify* pIdentify);
 	void HandleNetworkDisconnect(Packet* pPacket);
 	void HandleSyncPlayer(Packet* pPacket);
-	void HandleEnemyPushPos(Packet* pPacket);
-	void HandleFsmSyncState(Packet* pPacket);
+	void HandlePushEnemyPos(Packet* pPacket);
+	void HandleSyncFsmState(Packet* pPacket);
 	void HandleAtkAnimEvent(Packet* pPacket);
 	void HandleRequestSyncPlayer(Player* pPlayer, Packet* pPacket);
 	void HandleG2SRemovePlayer(Player* pPlayer, Packet* pPacket);
 	void HandleMove(Player* pPlayer, Packet* pPacket);
 	void HandleRequestSyncEnemy(Player* pPlayer, Packet* pPacket);
-	void HandlePlayerPushPos(Player* pPlayer, Packet* pPacket);
-	void HandlePlayerSyncCmd(Packet* pPacket);
-	void HandleAddItemToKnap(Player* pPlayer, Packet* pPacket);
+	void HandlePushPlayerPos(Player* pPlayer, Packet* pPacket);
+	void HandleSyncPlayerCmd(Player* pPlayer, Packet* pPacket);
+	void HandleUpdateKnapItem(Player* pPlayer, Packet* pPacket);
 	void HandleGetPlayerKnap(Player* pPlayer, Packet* pPacket);
 
 private:

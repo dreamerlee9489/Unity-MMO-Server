@@ -416,27 +416,27 @@ message Move {
 	repeated Vector3D position = 2;
 }
 
-message EnemyPushPos {
+message PushEnemyPos {
 	int32 id = 1;
 	Vector3D pos = 2;
 }
 
-message FsmSyncState {
+message SyncFsmState {
 	int32 state = 1;
 	int32 code = 2;
 	int32 enemy_id = 3;
 	uint64 player_sn = 4;
 }
 
-message PlayerPushPos {
+message PushPlayerPos {
 	Vector3D pos = 1;
 }
 
-message PlayerSyncCmd {
+message SyncPlayerCmd {
 	int32 type = 1;
 	Vector3D point = 2;	
 	uint64 player_sn = 3;
-	int32 target_id = 4;
+	string target_id = 4;
 }
 
 message RequestSyncEnemy {

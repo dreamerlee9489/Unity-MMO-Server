@@ -29,20 +29,20 @@ void Attack::Exit()
 
 void Attack::Broadcast()
 {
-	Proto::FsmSyncState proto;
+	Proto::SyncFsmState proto;
 	proto.set_state((int)FsmStateType::Attack);
 	proto.set_code(0);
 	proto.set_enemy_id(_owner->GetID());
 	proto.set_player_sn(_target->GetPlayerSN());
-	_owner->GetWorld()->BroadcastPacket(Proto::MsgId::S2C_FsmSyncState, proto);
+	_owner->GetWorld()->BroadcastPacket(Proto::MsgId::S2C_SyncFsmState, proto);
 }
 
 void Attack::Singlecast(Player* pPlayer)
 {
-	Proto::FsmSyncState proto;
+	Proto::SyncFsmState proto;
 	proto.set_state((int)FsmStateType::Attack);
 	proto.set_code(0);
 	proto.set_enemy_id(_owner->GetID());
 	proto.set_player_sn(_target->GetPlayerSN());
-	MessageSystemHelp::SendPacket(Proto::MsgId::S2C_FsmSyncState, proto, pPlayer);
+	MessageSystemHelp::SendPacket(Proto::MsgId::S2C_SyncFsmState, proto, pPlayer);
 }

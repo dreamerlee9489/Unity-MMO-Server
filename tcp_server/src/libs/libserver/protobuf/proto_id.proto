@@ -141,14 +141,14 @@ enum MsgId {
 	MI_Efficiency		= 20007;
 
 	// AI
-	C2S_PlayerPushPos		= 30001;
-	S2C_PlayerPushPos		= 30002;
-	C2S_PlayerSyncCmd	 	= 30003;
-	S2C_PlayerSyncCmd 		= 30004;
-	C2S_EnemyPushPos		= 30005;
-	S2C_EnemyPushPos		= 30006;	
-	S2C_FsmSyncState		= 30007;
-	C2S_FsmSyncState		= 30008;
+	C2S_PushPlayerPos		= 30001;
+	S2C_PushPlayerPos		= 30002;
+	C2S_SyncPlayerCmd	 	= 30003;
+	S2C_SyncPlayerCmd 		= 30004;
+	C2S_PushEnemyPos		= 30005;
+	S2C_PushEnemyPos		= 30006;	
+	S2C_SyncFsmState		= 30007;
+	C2S_SyncFsmState		= 30008;
 	C2S_RequestSyncEnemy	= 30009;
 	S2C_RequestSyncEnemy	= 30010;	
 	S2C_RequestLinkPlayer	= 30011;
@@ -156,7 +156,7 @@ enum MsgId {
 	S2C_AtkAnimEvent		= 30013;
 	S2C_DropItemList		= 30014;
 
-	C2S_AddItemToKnap		= 40001;
+	C2S_UpdateKnapItem		= 40001;
 	C2S_GetPlayerKnap		= 40002;
 	S2C_GetPlayerKnap		= 40003;
 }

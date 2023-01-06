@@ -49,20 +49,20 @@ void Idle::Exit()
 
 void Idle::Broadcast()
 {
-	Proto::FsmSyncState proto;
+	Proto::SyncFsmState proto;
 	proto.set_state((int)FsmStateType::Idle);
 	proto.set_code(0);
 	proto.set_enemy_id(_owner->GetID());
 	proto.set_player_sn(0);
-	_owner->GetWorld()->BroadcastPacket(Proto::MsgId::S2C_FsmSyncState, proto);
+	_owner->GetWorld()->BroadcastPacket(Proto::MsgId::S2C_SyncFsmState, proto);
 }
 
 void Idle::Singlecast(Player* pPlayer)
 {
-	Proto::FsmSyncState proto;
+	Proto::SyncFsmState proto;
 	proto.set_state((int)FsmStateType::Idle);
 	proto.set_code(0);
 	proto.set_enemy_id(_owner->GetID());
 	proto.set_player_sn(0);
-	MessageSystemHelp::SendPacket(Proto::MsgId::S2C_FsmSyncState, proto, pPlayer);
+	MessageSystemHelp::SendPacket(Proto::MsgId::S2C_SyncFsmState, proto, pPlayer);
 }

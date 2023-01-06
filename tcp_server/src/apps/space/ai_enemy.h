@@ -14,16 +14,17 @@ enum struct ItemType { None, Potion, Weapon };
 
 struct DropItem
 {
+	int id = 0, num = 0, index = 0;
+	std::string key;
 	ItemType type = ItemType::None;
-	int id = 0, num = 0, index = 0, key = 0;
 
-	DropItem(ItemType type, int id, int num, int index, int key = 0)
+	DropItem(ItemType type, int id, int num, int index, std::string key = "")
 	{
 		this->type = type;
 		this->id = id;
 		this->num = num;
 		this->index = index;
-		this->key = key;
+		this->key = std::move(key);
 	}
 };
 

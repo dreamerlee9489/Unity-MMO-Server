@@ -58,7 +58,7 @@ message ItemData {
 	int32 id = 2;
 	int32 num = 3;
 	int32 index = 4;
-	int32 key = 5;
+	string key = 5;
 }
 
 message PlayerKnap {
@@ -68,6 +68,6 @@ message PlayerKnap {
 	repeated ItemData itemsInEqu = 4;
 }
 
-message AddItemToKnap {
+message UpdateKnapItem {
 	ItemData item = 1;
 }

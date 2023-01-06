@@ -43,20 +43,20 @@ void Patrol::Exit()
 
 void Patrol::Broadcast()
 {
-	Proto::FsmSyncState proto;
+	Proto::SyncFsmState proto;
 	proto.set_state((int)FsmStateType::Patrol);
 	proto.set_code(_index);
 	proto.set_enemy_id(_owner->GetID());
 	proto.set_player_sn(0);
-	_owner->GetWorld()->BroadcastPacket(Proto::MsgId::S2C_FsmSyncState, proto);
+	_owner->GetWorld()->BroadcastPacket(Proto::MsgId::S2C_SyncFsmState, proto);
 }
 
 void Patrol::Singlecast(Player* pPlayer)
 {
-	Proto::FsmSyncState proto;
+	Proto::SyncFsmState proto;
 	proto.set_state((int)FsmStateType::Patrol);
 	proto.set_code(_index);
 	proto.set_enemy_id(_owner->GetID());
 	proto.set_player_sn(0);
-	MessageSystemHelp::SendPacket(Proto::MsgId::S2C_FsmSyncState, proto, pPlayer);
+	MessageSystemHelp::SendPacket(Proto::MsgId::S2C_SyncFsmState, proto, pPlayer);
 }
