@@ -5,14 +5,14 @@
 #include "fsm_attack.h"
 #include "fsm_death.h"
 
-FsmState::FsmState(AIEnemy* owner, Player* target) : _owner(owner), _target(target)
+FsmState::FsmState(Npc* owner, Player* target) : _owner(owner), _target(target)
 {
 	_lastTime = Global::GetInstance()->TimeTick;
 	_currTime = _lastTime;
 	_timeElapsed = 0;
 }
 
-FsmState* FsmState::GenFsmState(FsmStateType type, AIEnemy* owner, Player* target)
+FsmState* FsmState::GenFsmState(FsmStateType type, Npc* owner, Player* target)
 {
 	switch (type)
 	{

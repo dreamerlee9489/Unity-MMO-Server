@@ -19,36 +19,27 @@ void Death::Broadcast()
 	Proto::SyncFsmState proto;
 	proto.set_state((int)FsmStateType::Death);
 	proto.set_code(0);
-	proto.set_enemy_id(_owner->GetID());
+	proto.set_npc_sn(_owner->GetSN());
 	proto.set_player_sn(0);
 	_owner->GetWorld()->BroadcastPacket(Proto::MsgId::S2C_SyncFsmState, proto);
 }
 
 void Death::Singlecast(Player* pPlayer)
 {
-	std::vector<DropItem>* items = _owner->GetDropList(pPlayer);
-	Proto::DropItemList proto;
-	proto.set_enemy_id(_owner->GetID());
-	for (DropItem& item : *items)
-	{
-		Proto::ItemData* data = proto.add_items();
-		data->set_id(item.id);
-		data->set_num(item.num);
-		switch (item.type)
-		{
-		case ItemType::None:
-			data->set_type(Proto::ItemData_ItemType_None);
-			break;
-		case ItemType::Potion:
-			data->set_type(Proto::ItemData_ItemType_Potion);
-			break;
-		case ItemType::Weapon:
-			data->set_type(Proto::ItemData_ItemType_Weapon);
-			break;
-		default:
-			break;
-		}
-	}
-	MessageSystemHelp::SendPacket(Proto::MsgId::S2C_DropItemList, proto, pPlayer);
+	Proto::SyncPlayerCmd cmd;
+	cmd.set_type(0);
+	cmd.set_player_sn(pPlayer->GetPlayerSN());
+	_owner->GetWorld()->BroadcastPacket(Proto::MsgId::S2C_SyncPlayerCmd, cmd);
+	int exp = (_owner->atk + _owner->lv) * 5, gold = (_owner->atk + _owner->lv) * 10;
+	pPlayer->detail->xp += exp;
+	pPlayer->detail->gold += gold;
+	std::vector<ItemData>* items = _owner->GetDropList(pPlayer);
+	Proto::DropItemList list;
+	list.set_npc_sn(_owner->GetSN());
+	list.set_exp(exp);
+	list.set_gold(gold);
+	for (ItemData& item : *items)
+		item.SerializeToProto(list.add_items());
+	MessageSystemHelp::SendPacket(Proto::MsgId::S2C_DropItemList, list, pPlayer);
 	delete items;
 }

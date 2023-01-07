@@ -7,7 +7,7 @@ class Patrol;
 class Idle : public FsmState
 {
 public:
-	Idle(AIEnemy* owner, Player* target = nullptr) : FsmState(owner, target) {}
+	Idle(Npc* owner, Player* target = nullptr) : FsmState(owner, target) {}
 
 	~Idle() = default;
 

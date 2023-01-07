@@ -12,27 +12,63 @@ constexpr int DROP_GOLD = -2;
 
 enum struct ItemType { None, Potion, Weapon };
 
-struct DropItem
+struct ItemData
 {
-	int id = 0, num = 0, index = 0;
-	std::string key;
+	uint64 sn = 0;
 	ItemType type = ItemType::None;
+	int id = 0, index = 0;
 
-	DropItem(ItemType type, int id, int num, int index, std::string key = "")
+	ItemData(ItemType type, int id, int index = 0, uint64 sn = 0)
 	{
+		this->sn = sn == 0 ? Global::GetInstance()->GenerateSN() : sn;
 		this->type = type;
 		this->id = id;
-		this->num = num;
 		this->index = index;
-		this->key = std::move(key);
+	}
+
+	void SerializeToProto(Proto::ItemData* proto)
+	{
+		switch (type)
+		{
+		case ItemType::Potion:
+			proto->set_type(Proto::ItemData_ItemType_Potion);
+			break;
+		case ItemType::Weapon:
+			proto->set_type(Proto::ItemData_ItemType_Weapon);
+			break;
+		default:
+			proto->set_type(Proto::ItemData_ItemType_None);
+			break;
+		}
+		proto->set_sn(sn);
+		proto->set_id(id);
+		proto->set_index(index);
+	}
+
+	void ParserFromProto(const Proto::ItemData& proto)
+	{
+		switch ((Proto::ItemData_ItemType)proto.type())
+		{
+		case Proto::ItemData_ItemType_Potion:
+			type = ItemType::Potion;
+			break;
+		case Proto::ItemData_ItemType_Weapon:
+			type = ItemType::Weapon;
+			break;
+		default:
+			type = ItemType::None;
+			break;
+		}
+		sn = proto.sn();
+		id = proto.id();
+		index = proto.index();
 	}
 };
 
 class World;
 class Player;
-class AIEnemy : public Entity<AIEnemy>, public IAwakeFromPoolSystem<ResourceEnemy&>
+class Npc : public Entity<Npc>, public IAwakeFromPoolSystem<ResourceNpc&>
 {
-	int _id = 0;
 	float _viewDist = 8.0f, _atkDist = 1.5f;
 	Vector3 _initPos;
 	Vector3 _currPos;
@@ -48,9 +84,9 @@ class AIEnemy : public Entity<AIEnemy>, public IAwakeFromPoolSystem<ResourceEnem
 	static std::uniform_real_distribution<double> _realDis;
 
 public:
-	int lv = 0, hp = 0, atk = 0, def = 0;
+	int id = 0, type = 0, lv = 0, hp = 0, atk = 0, def = 0;
 
-	void Awake(ResourceEnemy& cfg) override;
+	void Awake(ResourceNpc& cfg) override;
 
 	void BackToPool() override;
 
@@ -70,11 +106,9 @@ public:
 
 	bool CanAttack(Player* player);
 
-	int GetDamage(Player* attacker);
+	void GetDamage(Player* attacker);
 
-	int GetID() { return _id; }
-
-	std::vector<DropItem>* GetDropList(Player* player);
+	const int GetID() const { return id; }
 
 	Vector3& GetInitPos() { return _initPos; }
 
@@ -87,6 +121,8 @@ public:
 	Player* GetLinkPlayer() const { return _linkPlayer; }
 
 	std::map<uint64, Player*>* GetAllPlayer() { return _players; }
+
+	std::vector<ItemData>* GetDropList(Player* player);
 };
 
 #endif // !AIENEMY

@@ -6,20 +6,20 @@
 #include <stdexcept>
 #include "libplayer/player_component_last_map.h"
 #include "libplayer/player.h"
-#include "ai_enemy.h"
+#include "npc.h"
 
 enum class FsmStateType { Idle, Patrol, Pursuit, Attack, Death };
 
-class AIEnemy;
+class Npc;
 class Player;
 class FsmState
 {
 protected:
-	AIEnemy* _owner = nullptr;
+	Npc* _owner = nullptr;
 	Player* _target = nullptr;
 	timeutil::Time _lastTime, _currTime, _timeElapsed;
 
-	FsmState(AIEnemy* owner, Player* target = nullptr);
+	FsmState(Npc* owner, Player* target = nullptr);
 
 public:
 	virtual ~FsmState() = default;
@@ -31,7 +31,7 @@ public:
 	virtual FsmStateType GetStateType() = 0;
 
 	Player* GetTarget() { return _target; }
-	static FsmState* GenFsmState(FsmStateType type, AIEnemy* owner, Player* target);
+	static FsmState* GenFsmState(FsmStateType type, Npc* owner, Player* target);
 };
 
 #endif // !FSM_STATE

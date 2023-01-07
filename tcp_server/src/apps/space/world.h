@@ -12,19 +12,21 @@
 #include "player_component_detail.h"
 #include "move_component.h"
 #include "fsm_component.h"
-#include "ai_enemy.h"
-#include <vector>
+#include "npc.h"
 #include <cfloat>
+#include <vector>
+#include <unordered_map>
 
 class Player;
-class AIEnemy;
+class Npc;
 class PlayerManagerComponent;
 class World :public Entity<World>, public IWorld, public IAwakeFromPoolSystem<int>
 {
 public:
-	std::vector<int>* potions;
-	std::vector<int>* weapons;
-	std::vector<AIEnemy*> enemies;
+	std::vector<int>* potionCfgs;
+	std::vector<int>* weaponCfgs;
+	std::vector<Npc*> npcs;
+	std::unordered_map<uint64, int> npcMap;
 	PlayerManagerComponent* playerMgr;
 
 	void Awake(int worldId) override;
@@ -38,14 +40,14 @@ protected:
 	Player* GetPlayer(NetIdentify* pIdentify);
 	void HandleNetworkDisconnect(Packet* pPacket);
 	void HandleSyncPlayer(Packet* pPacket);
-	void HandlePushEnemyPos(Packet* pPacket);
-	void HandleSyncFsmState(Packet* pPacket);
-	void HandleAtkAnimEvent(Packet* pPacket);
+	void HandleSyncNpcPos(Packet* pPacket);
+	void HandlePlayerAtkEvent(Packet* pPacket);
+	void HandleNpcAtkEvent(Packet* pPacket);
 	void HandleRequestSyncPlayer(Player* pPlayer, Packet* pPacket);
 	void HandleG2SRemovePlayer(Player* pPlayer, Packet* pPacket);
 	void HandleMove(Player* pPlayer, Packet* pPacket);
-	void HandleRequestSyncEnemy(Player* pPlayer, Packet* pPacket);
-	void HandlePushPlayerPos(Player* pPlayer, Packet* pPacket);
+	void HandleReqSyncNpc(Player* pPlayer, Packet* pPacket);
+	void HandleSyncPlayerPos(Player* pPlayer, Packet* pPacket);
 	void HandleSyncPlayerCmd(Player* pPlayer, Packet* pPacket);
 	void HandleUpdateKnapItem(Player* pPlayer, Packet* pPacket);
 	void HandleGetPlayerKnap(Player* pPlayer, Packet* pPacket);

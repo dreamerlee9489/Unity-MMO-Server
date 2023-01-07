@@ -5,7 +5,7 @@
 class Attack : public FsmState
 {
 public:
-	Attack(AIEnemy* owner, Player* target = nullptr) : FsmState(owner, target) {}
+	Attack(Npc* owner, Player* target = nullptr) : FsmState(owner, target) {}
 
 	~Attack() = default;
 

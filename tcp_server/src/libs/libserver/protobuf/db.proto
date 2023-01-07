@@ -54,18 +54,17 @@ message ItemData {
 		Potion = 1;
 		Weapon = 2;
 	}
-	ItemType type = 1;
-	int32 id = 2;
-	int32 num = 3;
+	uint64 sn = 1;
+	ItemType type = 2;
+	int32 id = 3;
 	int32 index = 4;
-	string key = 5;
 }
 
 message PlayerKnap {
 	int32 gold = 1;
-	repeated ItemData itemsInBag = 2;
-	repeated ItemData itemsInAct = 3;
-	repeated ItemData itemsInEqu = 4;
+	repeated ItemData bag_items = 2;
+	repeated ItemData act_items = 3;
+	repeated ItemData equ_items = 4;
 }
 
 message UpdateKnapItem {

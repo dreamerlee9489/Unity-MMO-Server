@@ -416,19 +416,24 @@ message Move {
 	repeated Vector3D position = 2;
 }
 
-message PushEnemyPos {
-	int32 id = 1;
+message SyncEntityStatus {
+	uint64 sn = 1;
+	int32 hp = 2;
+}
+
+message SyncNpcPos {
+	uint64 npc_sn = 1;
 	Vector3D pos = 2;
 }
 
 message SyncFsmState {
 	int32 state = 1;
 	int32 code = 2;
-	int32 enemy_id = 3;
+	uint64 npc_sn = 3;
 	uint64 player_sn = 4;
 }
 
-message PushPlayerPos {
+message SyncPlayerPos {
 	Vector3D pos = 1;
 }
 
@@ -436,26 +441,33 @@ message SyncPlayerCmd {
 	int32 type = 1;
 	Vector3D point = 2;	
 	uint64 player_sn = 3;
-	string target_id = 4;
+	uint64 target_sn = 4;
 }
 
-message RequestSyncEnemy {
-	int32 enemy_id = 1;
+message ReqSyncNpc {
+	int32 npc_id = 1;
+	uint64 npc_sn = 2;
 }
 
-message RequestLinkPlayer {
-	int32 enemy_id = 1;
-	bool linker = 2;
+message ReqLinkPlayer {
+	int32 npc_id = 1;
+	uint64 npc_sn = 2;
+	bool linker = 3;
 }
 
-message AtkAnimEvent {
+message NpcAtkEvent {
+	uint64 npc_sn = 1;
+	uint64 target_sn = 2;
+}
+
+message PlayerAtkEvent {
 	uint64 player_sn = 1;
-	int32 enemy_id = 2;
-	int32 curr_hp = 3;
-	bool atkEnemy = 4;
+	uint64 target_sn = 2;
 }
 
 message DropItemList {
-	int32 enemy_id = 1;
-	repeated ItemData items = 2;
+	uint64 npc_sn = 1;
+	int32 exp = 2;
+	int32 gold = 3;
+	repeated ItemData items = 4;
 }

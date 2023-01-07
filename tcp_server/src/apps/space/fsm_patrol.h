@@ -12,7 +12,7 @@ class Patrol : public FsmState
 	static std::uniform_int_distribution<int> _dis;
 
 public:
-	Patrol(AIEnemy* owner, Player* target = nullptr) : FsmState(owner, target) {}
+	Patrol(Npc* owner, Player* target = nullptr) : FsmState(owner, target) {}
 
 	~Patrol() = default;
 

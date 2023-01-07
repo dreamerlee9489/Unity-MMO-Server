@@ -188,7 +188,7 @@
     <ClCompile Include="..\login\player_component_account.cpp" />
     <ClCompile Include="..\login\player_component_onlineinlogin.cpp" />
     <ClCompile Include="..\login\redis_login.cpp" />
-    <ClCompile Include="..\space\ai_enemy.cpp" />
+    <ClCompile Include="..\space\npc.cpp" />
     <ClCompile Include="..\space\ai_system.cpp" />
     <ClCompile Include="..\space\console_cmd_world.cpp" />
     <ClCompile Include="..\space\fsm_attack.cpp" />
@@ -231,7 +231,7 @@
     <ClInclude Include="..\login\player_component_account.h" />
     <ClInclude Include="..\login\player_component_onlineinlogin.h" />
     <ClInclude Include="..\login\redis_login.h" />
-    <ClInclude Include="..\space\ai_enemy.h" />
+    <ClInclude Include="..\space\npc.h" />
     <ClInclude Include="..\space\ai_system.h" />
     <ClInclude Include="..\space\console_cmd_world.h" />
     <ClInclude Include="..\space\fsm_attack.h" />

@@ -116,7 +116,7 @@
     <ClCompile Include="..\game\world_proxy_locator.cpp">
       <Filter>game\world\proxy</Filter>
     </ClCompile>
-    <ClCompile Include="..\space\ai_enemy.cpp">
+    <ClCompile Include="..\space\npc.cpp">
       <Filter>space\system\ai</Filter>
     </ClCompile>
     <ClCompile Include="..\space\ai_system.cpp">
@@ -333,7 +333,7 @@
     <ClInclude Include="..\game\world_proxy_locator.h">
       <Filter>game\world\proxy</Filter>
     </ClInclude>
-    <ClInclude Include="..\space\ai_enemy.h">
+    <ClInclude Include="..\space\npc.h">
       <Filter>space\system\ai</Filter>
     </ClInclude>
     <ClInclude Include="..\space\ai_system.h">

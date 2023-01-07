@@ -5,7 +5,7 @@
 class Pursuit : public FsmState
 {
 public:
-	Pursuit(AIEnemy* owner, Player* target) : FsmState(owner, target) {}
+	Pursuit(Npc* owner, Player* target) : FsmState(owner, target) {}
 
 	~Pursuit() = default;
 

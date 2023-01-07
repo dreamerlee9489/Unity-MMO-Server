@@ -54,7 +54,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "resource", "resource", "{19
 		res\resource\ItemPotions.csv = res\resource\ItemPotions.csv
 		res\resource\ItemWeapons.csv = res\resource\ItemWeapons.csv
 		res\resource\world.csv = res\resource\world.csv
-		res\resource\world03_enemy.csv = res\resource\world03_enemy.csv
+		res\resource\world03_npcs.csv = res\resource\world03_npcs.csv
+		res\resource\world04_npcs.csv = res\resource\world04_npcs.csv
 	EndProjectSection
 EndProject
 Global

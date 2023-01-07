@@ -6,13 +6,13 @@
 #include "resource_mgr_template.h"
 #include "libserver/vector3.h"
 
-struct ResourceEnemy
+struct ResourceNpc
 {
 	int id = 0;
-	std::string name = "";
 	int level = 0;
 	int initHp = 0;
 	int initAtk = 0;
+	std::string name = "";
 	Vector3 initPos{ 0, 0, 0 };
 };
 
@@ -39,9 +39,9 @@ public:
 	bool IsType(ResourceWorldType iType) const;
 	bool IsInitMap() const;
 	Vector3 GetInitPosition() const;
-	std::vector<ResourceEnemy>* GetEnemies() { return &_enemies; }
-	std::vector<int>* GetPotions() { return &_potions; }
-	std::vector<int>* GetWeapons() { return &_weapons; }
+	std::vector<ResourceNpc>* GetNpcCfgs() { return &_npcCfgs; }
+	std::vector<int>* GetPotionCfgs() { return &_potionCfgs; }
+	std::vector<int>* GetWeaponCfgs() { return &_weaponCfgs; }
 
 protected:
 	/// <summary>
@@ -78,8 +78,8 @@ private:
 	/// 出生点
 	/// </summary>
 	Vector3 _initPosition{ 0,0,0 };
-	std::vector<ResourceEnemy> _enemies;
-	std::vector<int> _potions, _weapons;
+	std::vector<ResourceNpc> _npcCfgs;
+	std::vector<int> _potionCfgs, _weaponCfgs;
 };
 
 class ResourceWorldMgr :public ResourceManagerTemplate<ResourceWorld>

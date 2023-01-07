@@ -10,7 +10,7 @@ FsmComponent::~FsmComponent()
 
 void FsmComponent::Awake()
 {
-	_parent = (AIEnemy*)GetParent();
+	_parent = (Npc*)GetParent();
 	_currState = new Idle(_parent);
 	AddTimer(1, 2, false, 0, BindFunP0(this, &FsmComponent::Start));
 }
@@ -25,7 +25,7 @@ void FsmComponent::BackToPool()
 {
 }
 
-void FsmComponent::Update(AIEnemy* pEnemy)
+void FsmComponent::Update(Npc* pEnemy)
 {
 	if (_started && _currState)
 		_currState->Execute();
@@ -34,7 +34,7 @@ void FsmComponent::Update(AIEnemy* pEnemy)
 void FsmComponent::ResetState()
 {
 	if (_currState->GetStateType() != FsmStateType::Patrol)
-		ChangeState(new Idle((AIEnemy*)GetParent()));
+		ChangeState(new Idle((Npc*)GetParent()));
 }
 
 void FsmComponent::ChangeState(FsmState* newState)

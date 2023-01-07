@@ -8,9 +8,9 @@ ResourceWorld::ResourceWorld(std::map<std::string, int>& head) : ResourceBase(he
 
 ResourceWorld::~ResourceWorld()
 {
-	delete& _enemies;
-	delete& _potions;
-	delete& _weapons;
+	delete& _npcCfgs;
+	delete& _potionCfgs;
+	delete& _weaponCfgs;
 }
 
 std::string ResourceWorld::GetName() const
@@ -85,14 +85,13 @@ void ResourceWorld::ParseEnemyCSV()
 		if (!line.empty())
 		{
 			std::vector<std::string> properties = ParserLine(line);
-			ResourceEnemy enemy;
-			enemy.id = std::stoi(properties[0]);
-			enemy.name = properties[1];
-			enemy.level = std::stoi(properties[2]);
-			enemy.initHp = std::stoi(properties[3]);
-			enemy.initAtk = std::stoi(properties[4]);
-			enemy.initPos = GetVector(properties[5]);
-			_enemies.push_back(enemy);
+			ResourceNpc npc;
+			npc.id = std::stoi(properties[0]);
+			npc.level = std::stoi(properties[2]);
+			npc.initHp = std::stoi(properties[3]);
+			npc.initAtk = std::stoi(properties[4]);
+			npc.initPos = GetVector(properties[5]);
+			_npcCfgs.push_back(npc);
 		}
 	}
 }
@@ -116,7 +115,7 @@ void ResourceWorld::ParseItemsCSV()
 		if (!line.empty())
 		{
 			std::vector<std::string> properties = ParserLine(line);
-			_potions.push_back(std::stoi(properties[0]));
+			_potionCfgs.push_back(std::stoi(properties[0]));
 		}
 	}
 
@@ -135,7 +134,7 @@ void ResourceWorld::ParseItemsCSV()
 		if (!line.empty())
 		{
 			std::vector<std::string> properties = ParserLine(line);
-			_weapons.push_back(std::stoi(properties[0]));
+			_weaponCfgs.push_back(std::stoi(properties[0]));
 		}
 	}
 }

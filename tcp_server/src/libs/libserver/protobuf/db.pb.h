@@ -1083,37 +1083,25 @@ class ItemData :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kKeyFieldNumber = 5,
-    kTypeFieldNumber = 1,
-    kIdFieldNumber = 2,
-    kNumFieldNumber = 3,
+    kSnFieldNumber = 1,
+    kTypeFieldNumber = 2,
+    kIdFieldNumber = 3,
     kIndexFieldNumber = 4,
   };
-  // string key = 5;
-  void clear_key();
-  const std::string& key() const;
-  void set_key(const std::string& value);
-  void set_key(std::string&& value);
-  void set_key(const char* value);
-  void set_key(const char* value, size_t size);
-  std::string* mutable_key();
-  std::string* release_key();
-  void set_allocated_key(std::string* key);
+  // uint64 sn = 1;
+  void clear_sn();
+  ::PROTOBUF_NAMESPACE_ID::uint64 sn() const;
+  void set_sn(::PROTOBUF_NAMESPACE_ID::uint64 value);
 
-  // .Proto.ItemData.ItemType type = 1;
+  // .Proto.ItemData.ItemType type = 2;
   void clear_type();
   ::Proto::ItemData_ItemType type() const;
   void set_type(::Proto::ItemData_ItemType value);
 
-  // int32 id = 2;
+  // int32 id = 3;
   void clear_id();
   ::PROTOBUF_NAMESPACE_ID::int32 id() const;
   void set_id(::PROTOBUF_NAMESPACE_ID::int32 value);
-
-  // int32 num = 3;
-  void clear_num();
-  ::PROTOBUF_NAMESPACE_ID::int32 num() const;
-  void set_num(::PROTOBUF_NAMESPACE_ID::int32 value);
 
   // int32 index = 4;
   void clear_index();
@@ -1125,10 +1113,9 @@ class ItemData :
   class _Internal;
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr key_;
+  ::PROTOBUF_NAMESPACE_ID::uint64 sn_;
   int type_;
   ::PROTOBUF_NAMESPACE_ID::int32 id_;
-  ::PROTOBUF_NAMESPACE_ID::int32 num_;
   ::PROTOBUF_NAMESPACE_ID::int32 index_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_db_2eproto;
@@ -1248,43 +1235,43 @@ class PlayerKnap :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kItemsInBagFieldNumber = 2,
-    kItemsInActFieldNumber = 3,
-    kItemsInEquFieldNumber = 4,
+    kBagItemsFieldNumber = 2,
+    kActItemsFieldNumber = 3,
+    kEquItemsFieldNumber = 4,
     kGoldFieldNumber = 1,
   };
-  // repeated .Proto.ItemData itemsInBag = 2;
-  int itemsinbag_size() const;
-  void clear_itemsinbag();
-  ::Proto::ItemData* mutable_itemsinbag(int index);
+  // repeated .Proto.ItemData bag_items = 2;
+  int bag_items_size() const;
+  void clear_bag_items();
+  ::Proto::ItemData* mutable_bag_items(int index);
   ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::ItemData >*
-      mutable_itemsinbag();
-  const ::Proto::ItemData& itemsinbag(int index) const;
-  ::Proto::ItemData* add_itemsinbag();
+      mutable_bag_items();
+  const ::Proto::ItemData& bag_items(int index) const;
+  ::Proto::ItemData* add_bag_items();
   const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::ItemData >&
-      itemsinbag() const;
+      bag_items() const;
 
-  // repeated .Proto.ItemData itemsInAct = 3;
-  int itemsinact_size() const;
-  void clear_itemsinact();
-  ::Proto::ItemData* mutable_itemsinact(int index);
+  // repeated .Proto.ItemData act_items = 3;
+  int act_items_size() const;
+  void clear_act_items();
+  ::Proto::ItemData* mutable_act_items(int index);
   ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::ItemData >*
-      mutable_itemsinact();
-  const ::Proto::ItemData& itemsinact(int index) const;
-  ::Proto::ItemData* add_itemsinact();
+      mutable_act_items();
+  const ::Proto::ItemData& act_items(int index) const;
+  ::Proto::ItemData* add_act_items();
   const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::ItemData >&
-      itemsinact() const;
+      act_items() const;
 
-  // repeated .Proto.ItemData itemsInEqu = 4;
-  int itemsinequ_size() const;
-  void clear_itemsinequ();
-  ::Proto::ItemData* mutable_itemsinequ(int index);
+  // repeated .Proto.ItemData equ_items = 4;
+  int equ_items_size() const;
+  void clear_equ_items();
+  ::Proto::ItemData* mutable_equ_items(int index);
   ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::ItemData >*
-      mutable_itemsinequ();
-  const ::Proto::ItemData& itemsinequ(int index) const;
-  ::Proto::ItemData* add_itemsinequ();
+      mutable_equ_items();
+  const ::Proto::ItemData& equ_items(int index) const;
+  ::Proto::ItemData* add_equ_items();
   const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::ItemData >&
-      itemsinequ() const;
+      equ_items() const;
 
   // int32 gold = 1;
   void clear_gold();
@@ -1296,9 +1283,9 @@ class PlayerKnap :
   class _Internal;
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::ItemData > itemsinbag_;
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::ItemData > itemsinact_;
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::ItemData > itemsinequ_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::ItemData > bag_items_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::ItemData > act_items_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::ItemData > equ_items_;
   ::PROTOBUF_NAMESPACE_ID::int32 gold_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_db_2eproto;
@@ -2021,7 +2008,21 @@ inline void Player::set_allocated_misc(::Proto::PlayerMisc* misc) {
 
 // ItemData
 
-// .Proto.ItemData.ItemType type = 1;
+// uint64 sn = 1;
+inline void ItemData::clear_sn() {
+  sn_ = PROTOBUF_ULONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint64 ItemData::sn() const {
+  // @@protoc_insertion_point(field_get:Proto.ItemData.sn)
+  return sn_;
+}
+inline void ItemData::set_sn(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+  
+  sn_ = value;
+  // @@protoc_insertion_point(field_set:Proto.ItemData.sn)
+}
+
+// .Proto.ItemData.ItemType type = 2;
 inline void ItemData::clear_type() {
   type_ = 0;
 }
@@ -2035,7 +2036,7 @@ inline void ItemData::set_type(::Proto::ItemData_ItemType value) {
   // @@protoc_insertion_point(field_set:Proto.ItemData.type)
 }
 
-// int32 id = 2;
+// int32 id = 3;
 inline void ItemData::clear_id() {
   id_ = 0;
 }
@@ -2047,20 +2048,6 @@ inline void ItemData::set_id(::PROTOBUF_NAMESPACE_ID::int32 value) {
   
   id_ = value;
   // @@protoc_insertion_point(field_set:Proto.ItemData.id)
-}
-
-// int32 num = 3;
-inline void ItemData::clear_num() {
-  num_ = 0;
-}
-inline ::PROTOBUF_NAMESPACE_ID::int32 ItemData::num() const {
-  // @@protoc_insertion_point(field_get:Proto.ItemData.num)
-  return num_;
-}
-inline void ItemData::set_num(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  
-  num_ = value;
-  // @@protoc_insertion_point(field_set:Proto.ItemData.num)
 }
 
 // int32 index = 4;
@@ -2075,57 +2062,6 @@ inline void ItemData::set_index(::PROTOBUF_NAMESPACE_ID::int32 value) {
   
   index_ = value;
   // @@protoc_insertion_point(field_set:Proto.ItemData.index)
-}
-
-// string key = 5;
-inline void ItemData::clear_key() {
-  key_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-}
-inline const std::string& ItemData::key() const {
-  // @@protoc_insertion_point(field_get:Proto.ItemData.key)
-  return key_.GetNoArena();
-}
-inline void ItemData::set_key(const std::string& value) {
-  
-  key_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:Proto.ItemData.key)
-}
-inline void ItemData::set_key(std::string&& value) {
-  
-  key_.SetNoArena(
-    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:Proto.ItemData.key)
-}
-inline void ItemData::set_key(const char* value) {
-  GOOGLE_DCHECK(value != nullptr);
-  
-  key_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:Proto.ItemData.key)
-}
-inline void ItemData::set_key(const char* value, size_t size) {
-  
-  key_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:Proto.ItemData.key)
-}
-inline std::string* ItemData::mutable_key() {
-  
-  // @@protoc_insertion_point(field_mutable:Proto.ItemData.key)
-  return key_.MutableNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-}
-inline std::string* ItemData::release_key() {
-  // @@protoc_insertion_point(field_release:Proto.ItemData.key)
-  
-  return key_.ReleaseNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-}
-inline void ItemData::set_allocated_key(std::string* key) {
-  if (key != nullptr) {
-    
-  } else {
-    
-  }
-  key_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), key);
-  // @@protoc_insertion_point(field_set_allocated:Proto.ItemData.key)
 }
 
 // -------------------------------------------------------------------
@@ -2146,94 +2082,94 @@ inline void PlayerKnap::set_gold(::PROTOBUF_NAMESPACE_ID::int32 value) {
   // @@protoc_insertion_point(field_set:Proto.PlayerKnap.gold)
 }
 
-// repeated .Proto.ItemData itemsInBag = 2;
-inline int PlayerKnap::itemsinbag_size() const {
-  return itemsinbag_.size();
+// repeated .Proto.ItemData bag_items = 2;
+inline int PlayerKnap::bag_items_size() const {
+  return bag_items_.size();
 }
-inline void PlayerKnap::clear_itemsinbag() {
-  itemsinbag_.Clear();
+inline void PlayerKnap::clear_bag_items() {
+  bag_items_.Clear();
 }
-inline ::Proto::ItemData* PlayerKnap::mutable_itemsinbag(int index) {
-  // @@protoc_insertion_point(field_mutable:Proto.PlayerKnap.itemsInBag)
-  return itemsinbag_.Mutable(index);
+inline ::Proto::ItemData* PlayerKnap::mutable_bag_items(int index) {
+  // @@protoc_insertion_point(field_mutable:Proto.PlayerKnap.bag_items)
+  return bag_items_.Mutable(index);
 }
 inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::ItemData >*
-PlayerKnap::mutable_itemsinbag() {
-  // @@protoc_insertion_point(field_mutable_list:Proto.PlayerKnap.itemsInBag)
-  return &itemsinbag_;
+PlayerKnap::mutable_bag_items() {
+  // @@protoc_insertion_point(field_mutable_list:Proto.PlayerKnap.bag_items)
+  return &bag_items_;
 }
-inline const ::Proto::ItemData& PlayerKnap::itemsinbag(int index) const {
-  // @@protoc_insertion_point(field_get:Proto.PlayerKnap.itemsInBag)
-  return itemsinbag_.Get(index);
+inline const ::Proto::ItemData& PlayerKnap::bag_items(int index) const {
+  // @@protoc_insertion_point(field_get:Proto.PlayerKnap.bag_items)
+  return bag_items_.Get(index);
 }
-inline ::Proto::ItemData* PlayerKnap::add_itemsinbag() {
-  // @@protoc_insertion_point(field_add:Proto.PlayerKnap.itemsInBag)
-  return itemsinbag_.Add();
+inline ::Proto::ItemData* PlayerKnap::add_bag_items() {
+  // @@protoc_insertion_point(field_add:Proto.PlayerKnap.bag_items)
+  return bag_items_.Add();
 }
 inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::ItemData >&
-PlayerKnap::itemsinbag() const {
-  // @@protoc_insertion_point(field_list:Proto.PlayerKnap.itemsInBag)
-  return itemsinbag_;
+PlayerKnap::bag_items() const {
+  // @@protoc_insertion_point(field_list:Proto.PlayerKnap.bag_items)
+  return bag_items_;
 }
 
-// repeated .Proto.ItemData itemsInAct = 3;
-inline int PlayerKnap::itemsinact_size() const {
-  return itemsinact_.size();
+// repeated .Proto.ItemData act_items = 3;
+inline int PlayerKnap::act_items_size() const {
+  return act_items_.size();
 }
-inline void PlayerKnap::clear_itemsinact() {
-  itemsinact_.Clear();
+inline void PlayerKnap::clear_act_items() {
+  act_items_.Clear();
 }
-inline ::Proto::ItemData* PlayerKnap::mutable_itemsinact(int index) {
-  // @@protoc_insertion_point(field_mutable:Proto.PlayerKnap.itemsInAct)
-  return itemsinact_.Mutable(index);
+inline ::Proto::ItemData* PlayerKnap::mutable_act_items(int index) {
+  // @@protoc_insertion_point(field_mutable:Proto.PlayerKnap.act_items)
+  return act_items_.Mutable(index);
 }
 inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::ItemData >*
-PlayerKnap::mutable_itemsinact() {
-  // @@protoc_insertion_point(field_mutable_list:Proto.PlayerKnap.itemsInAct)
-  return &itemsinact_;
+PlayerKnap::mutable_act_items() {
+  // @@protoc_insertion_point(field_mutable_list:Proto.PlayerKnap.act_items)
+  return &act_items_;
 }
-inline const ::Proto::ItemData& PlayerKnap::itemsinact(int index) const {
-  // @@protoc_insertion_point(field_get:Proto.PlayerKnap.itemsInAct)
-  return itemsinact_.Get(index);
+inline const ::Proto::ItemData& PlayerKnap::act_items(int index) const {
+  // @@protoc_insertion_point(field_get:Proto.PlayerKnap.act_items)
+  return act_items_.Get(index);
 }
-inline ::Proto::ItemData* PlayerKnap::add_itemsinact() {
-  // @@protoc_insertion_point(field_add:Proto.PlayerKnap.itemsInAct)
-  return itemsinact_.Add();
+inline ::Proto::ItemData* PlayerKnap::add_act_items() {
+  // @@protoc_insertion_point(field_add:Proto.PlayerKnap.act_items)
+  return act_items_.Add();
 }
 inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::ItemData >&
-PlayerKnap::itemsinact() const {
-  // @@protoc_insertion_point(field_list:Proto.PlayerKnap.itemsInAct)
-  return itemsinact_;
+PlayerKnap::act_items() const {
+  // @@protoc_insertion_point(field_list:Proto.PlayerKnap.act_items)
+  return act_items_;
 }
 
-// repeated .Proto.ItemData itemsInEqu = 4;
-inline int PlayerKnap::itemsinequ_size() const {
-  return itemsinequ_.size();
+// repeated .Proto.ItemData equ_items = 4;
+inline int PlayerKnap::equ_items_size() const {
+  return equ_items_.size();
 }
-inline void PlayerKnap::clear_itemsinequ() {
-  itemsinequ_.Clear();
+inline void PlayerKnap::clear_equ_items() {
+  equ_items_.Clear();
 }
-inline ::Proto::ItemData* PlayerKnap::mutable_itemsinequ(int index) {
-  // @@protoc_insertion_point(field_mutable:Proto.PlayerKnap.itemsInEqu)
-  return itemsinequ_.Mutable(index);
+inline ::Proto::ItemData* PlayerKnap::mutable_equ_items(int index) {
+  // @@protoc_insertion_point(field_mutable:Proto.PlayerKnap.equ_items)
+  return equ_items_.Mutable(index);
 }
 inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::ItemData >*
-PlayerKnap::mutable_itemsinequ() {
-  // @@protoc_insertion_point(field_mutable_list:Proto.PlayerKnap.itemsInEqu)
-  return &itemsinequ_;
+PlayerKnap::mutable_equ_items() {
+  // @@protoc_insertion_point(field_mutable_list:Proto.PlayerKnap.equ_items)
+  return &equ_items_;
 }
-inline const ::Proto::ItemData& PlayerKnap::itemsinequ(int index) const {
-  // @@protoc_insertion_point(field_get:Proto.PlayerKnap.itemsInEqu)
-  return itemsinequ_.Get(index);
+inline const ::Proto::ItemData& PlayerKnap::equ_items(int index) const {
+  // @@protoc_insertion_point(field_get:Proto.PlayerKnap.equ_items)
+  return equ_items_.Get(index);
 }
-inline ::Proto::ItemData* PlayerKnap::add_itemsinequ() {
-  // @@protoc_insertion_point(field_add:Proto.PlayerKnap.itemsInEqu)
-  return itemsinequ_.Add();
+inline ::Proto::ItemData* PlayerKnap::add_equ_items() {
+  // @@protoc_insertion_point(field_add:Proto.PlayerKnap.equ_items)
+  return equ_items_.Add();
 }
 inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::ItemData >&
-PlayerKnap::itemsinequ() const {
-  // @@protoc_insertion_point(field_list:Proto.PlayerKnap.itemsInEqu)
-  return itemsinequ_;
+PlayerKnap::equ_items() const {
+  // @@protoc_insertion_point(field_list:Proto.PlayerKnap.equ_items)
+  return equ_items_;
 }
 
 // -------------------------------------------------------------------

@@ -13,35 +13,38 @@ void World::Awake(int worldId)
 	auto pMsgSystem = GetSystemManager()->GetMessageSystem();
 	pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_NetworkDisconnect, BindFunP1(this, &World::HandleNetworkDisconnect));
 	pMsgSystem->RegisterFunction(this, Proto::MsgId::G2S_SyncPlayer, BindFunP1(this, &World::HandleSyncPlayer));
-	pMsgSystem->RegisterFunction(this, Proto::MsgId::C2S_SyncFsmState, BindFunP1(this, &World::HandleSyncFsmState));
-	pMsgSystem->RegisterFunction(this, Proto::MsgId::C2S_PushEnemyPos, BindFunP1(this, &World::HandlePushEnemyPos));
-	pMsgSystem->RegisterFunction(this, Proto::MsgId::C2S_AtkAnimEvent, BindFunP1(this, &World::HandleAtkAnimEvent));
+	pMsgSystem->RegisterFunction(this, Proto::MsgId::C2S_SyncNpcPos, BindFunP1(this, &World::HandleSyncNpcPos));
+	pMsgSystem->RegisterFunction(this, Proto::MsgId::C2S_PlayerAtkEvent, BindFunP1(this, &World::HandlePlayerAtkEvent));
+	pMsgSystem->RegisterFunction(this, Proto::MsgId::C2S_NpcAtkEvent, BindFunP1(this, &World::HandleNpcAtkEvent));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::G2S_RequestSyncPlayer, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleRequestSyncPlayer));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::G2S_RemovePlayer, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleG2SRemovePlayer));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_Move, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleMove));
-	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_PushPlayerPos, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandlePushPlayerPos));
+	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_SyncPlayerPos, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleSyncPlayerPos));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_SyncPlayerCmd, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleSyncPlayerCmd));
-	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_RequestSyncEnemy, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleRequestSyncEnemy));
+	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_ReqSyncNpc, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleReqSyncNpc));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_UpdateKnapItem, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleUpdateKnapItem));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_GetPlayerKnap, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleGetPlayerKnap));
 
 	ResourceWorld* worldCfg = ResourceHelp::GetResourceManager()->Worlds->GetResource(_worldId);
-	std::vector<ResourceEnemy>* _enemyCfgs = worldCfg->GetEnemies();
-	potions = worldCfg->GetPotions();
-	weapons = worldCfg->GetWeapons();
-	for (auto& cfg : *_enemyCfgs)
+	std::vector<ResourceNpc>& npcCfgs = *worldCfg->GetNpcCfgs();
+	potionCfgs = worldCfg->GetPotionCfgs();
+	weaponCfgs = worldCfg->GetWeaponCfgs();
+	for (auto& cfg : npcCfgs)
 	{
-		AIEnemy* enemy = GetSystemManager()->GetEntitySystem()->AddComponent<AIEnemy>(cfg);
-		enemy->SetWorld(this);
-		enemy->SetAllPlayer(playerMgr->GetAll());
-		enemy->AddComponent<FsmComponent>();
-		enemies.push_back(enemy);
+		Npc* npc = GetSystemManager()->GetEntitySystem()->AddComponent<Npc>(cfg);
+		npc->SetWorld(this);
+		npc->SetAllPlayer(playerMgr->GetAll());
+		npc->AddComponent<FsmComponent>();
+		npcMap.emplace(npc->GetSN(), npcs.size());
+		npcs.push_back(npc);
 	}
 }
 
 void World::BackToPool()
 {
 	_adds.clear();
+	npcs.clear();
+	npcMap.clear();
 }
 
 /// <summary>
@@ -87,7 +90,7 @@ void World::HandleNetworkDisconnect(Packet* pPacket)
 		BroadcastPacket(Proto::MsgId::S2C_RoleDisappear, protoDis);
 		pPlayerMgr->RemovePlayerBySn(pTagPlayer->KeyInt64);
 
-		for (auto& enemy : enemies)
+		for (auto& enemy : npcs)
 		{
 			if (enemy->GetLinkPlayer() == pPlayer)
 			{
@@ -96,10 +99,11 @@ void World::HandleNetworkDisconnect(Packet* pPacket)
 				enemy->SetLinkPlayer(target);
 				if (target)
 				{
-					Proto::RequestLinkPlayer proto;
-					proto.set_enemy_id(enemy->GetID());
+					Proto::ReqLinkPlayer proto;
+					proto.set_npc_id(enemy->GetID());
+					proto.set_npc_sn(enemy->GetSN());
 					proto.set_linker(true);
-					MessageSystemHelp::SendPacket(Proto::MsgId::S2C_RequestLinkPlayer, proto, target);
+					MessageSystemHelp::SendPacket(Proto::MsgId::S2C_ReqLinkPlayer, proto, target);
 				}
 			}
 		}
@@ -211,6 +215,7 @@ void World::HandleSyncPlayer(Packet* pPacket)
 	pPlayer->detail = pPlayer->AddComponent<PlayerComponentDetail>();
 	pPlayer->lastMap = pPlayer->AddComponent<PlayerComponentLastMap>();
 	pPlayer->lastMap->EnterWorld(_worldId, _sn);
+	pPlayer->currWorld = this;
 	const auto pLastMap = pPlayer->lastMap->GetCur();
 
 	//LOG_DEBUG("world. recv teleport. map id:" << _worldId << " world sn:" << GetSN() << " playerSn:" << pPlayer->GetPlayerSN());
@@ -269,7 +274,6 @@ void World::HandleRequestSyncPlayer(Player* pPlayer, Packet* pPacket)
 	Proto::SyncPlayer protoSync;
 	protoSync.set_account(pPlayer->GetAccount().c_str());
 	pPlayer->SerializeToProto(protoSync.mutable_player());
-
 	MessageSystemHelp::SendPacket(Proto::MsgId::S2G_SyncPlayer, protoSync, pPlayer);
 }
 
@@ -311,9 +315,9 @@ void World::HandleMove(Player* pPlayer, Packet* pPacket)
 	BroadcastPacket(Proto::MsgId::S2C_Move, proto);
 }
 
-void World::HandlePushPlayerPos(Player* pPlayer, Packet* pPacket)
+void World::HandleSyncPlayerPos(Player* pPlayer, Packet* pPacket)
 {
-	Proto::PushPlayerPos proto = pPacket->ParseToProto<Proto::PushPlayerPos>();
+	Proto::SyncPlayerPos proto = pPacket->ParseToProto<Proto::SyncPlayerPos>();
 	pPlayer->lastMap->GetCur()->Position.ParserFromProto(proto.pos());
 }
 
@@ -328,27 +332,20 @@ void World::HandleUpdateKnapItem(Player* pPlayer, Packet* pPacket)
 {
 	Proto::UpdateKnapItem proto = pPacket->ParseToProto<Proto::UpdateKnapItem>();
 	Proto::ItemData item = proto.item();
-	auto* pKnap = pPlayer->detail->pKnap;
-	bool inKnap = false;
-	for (auto& iter = pKnap->begin(); iter != pKnap->end(); ++iter)
+	auto& knap = *pPlayer->detail->pKnap;
+	auto& idxMap = *pPlayer->detail->pIdxMap;
+	if (idxMap.find(item.sn()) != idxMap.end())
+		knap[idxMap[item.sn()]].index = item.index();
+	else
 	{
-		if ((*iter).key == item.key())
-		{
-			inKnap = true;
-			(*iter).num += item.num();
-			(*iter).index = item.index();
-			break;
-		}
-	}
-	if (!inKnap)
-	{
+		idxMap.emplace(item.sn(), knap.size());
 		switch (item.type())
 		{
 		case Proto::ItemData_ItemType_Potion:
-			pKnap->emplace_back(ItemType::Potion, item.id(), item.num(), item.index(), item.key());
+			knap.emplace_back(ItemType::Potion, item.id(), item.index(), item.sn());
 			break;
 		case Proto::ItemData_ItemType_Weapon:
-			pKnap->emplace_back(ItemType::Weapon, item.id(), item.num(), item.index(), item.key());
+			knap.emplace_back(ItemType::Weapon, item.id(), item.index(), item.sn());
 			break;
 		default:
 			break;
@@ -362,78 +359,54 @@ void World::HandleGetPlayerKnap(Player* pPlayer, Packet* pPacket)
 	proto.set_gold(pPlayer->detail->gold);
 	auto& knap = *pPlayer->detail->pKnap;
 	for (auto& item : knap)
-	{
-		Proto::ItemData* itemData = proto.add_itemsinbag();
-		itemData->set_id(item.id);
-		itemData->set_num(item.num);
-		itemData->set_index(item.index);
-		itemData->set_key(item.key);
-		switch (item.type)
-		{
-		case ItemType::Potion:
-			itemData->set_type(Proto::ItemData_ItemType_Potion);
-			break;
-		case ItemType::Weapon:
-			itemData->set_type(Proto::ItemData_ItemType_Weapon);
-			break;
-		default:
-			break;
-		}
-	}
+		item.SerializeToProto(proto.add_bag_items());
 	MessageSystemHelp::SendPacket(Proto::MsgId::S2C_GetPlayerKnap, proto, pPlayer);
 }
 
-void World::HandleRequestSyncEnemy(Player* pPlayer, Packet* pPacket)
+void World::HandleReqSyncNpc(Player* pPlayer, Packet* pPacket)
 {
-	Proto::RequestSyncEnemy proto = pPacket->ParseToProto<Proto::RequestSyncEnemy>();
-	int id = proto.enemy_id();
-	if (!enemies[id]->GetLinkPlayer())
+	Proto::ReqSyncNpc syncNpc = pPacket->ParseToProto<Proto::ReqSyncNpc>();
+	int id = syncNpc.npc_id();
+	uint64 sn = sn = npcs[id]->GetSN();
+	syncNpc.set_npc_sn(sn);
+	MessageSystemHelp::SendPacket(Proto::MsgId::S2C_ReqSyncNpc, syncNpc, pPlayer);
+	Proto::SyncNpcPos syncPos;
+	syncPos.set_npc_sn(sn);
+	npcs[id]->GetCurrPos().SerializeToProto(syncPos.mutable_pos());
+	MessageSystemHelp::SendPacket(Proto::MsgId::S2C_SyncNpcPos, syncPos, pPlayer);
+	npcs[id]->GetComponent<FsmComponent>()->GetCurrState()->Singlecast(pPlayer);
+	if (!npcs[id]->GetLinkPlayer())
 	{
-		enemies[id]->SetLinkPlayer(pPlayer);
-		Proto::RequestLinkPlayer proto;
-		proto.set_enemy_id(enemies[id]->GetID());
+		npcs[id]->SetLinkPlayer(pPlayer);
+		Proto::ReqLinkPlayer proto;
+		proto.set_npc_id(npcs[id]->GetID());
+		proto.set_npc_sn(npcs[id]->GetSN());
 		proto.set_linker(true);
-		MessageSystemHelp::SendPacket(Proto::MsgId::S2C_RequestLinkPlayer, proto, pPlayer);
+		MessageSystemHelp::SendPacket(Proto::MsgId::S2C_ReqLinkPlayer, proto, pPlayer);
 	}
-	Proto::PushEnemyPos protoEnemy;
-	protoEnemy.set_id(id);
-	enemies[id]->GetCurrPos().SerializeToProto(protoEnemy.mutable_pos());
-	MessageSystemHelp::SendPacket(Proto::MsgId::S2C_PushEnemyPos, protoEnemy, pPlayer);
-	enemies[id]->GetComponent<FsmComponent>()->GetCurrState()->Singlecast(pPlayer);
 }
 
-void World::HandlePushEnemyPos(Packet* pPacket)
+void World::HandleSyncNpcPos(Packet* pPacket)
 {
-	Proto::PushEnemyPos proto = pPacket->ParseToProto<Proto::PushEnemyPos>();
-	enemies[proto.id()]->SetCurrPos(Vector3(proto.pos()));
+	Proto::SyncNpcPos proto = pPacket->ParseToProto<Proto::SyncNpcPos>();
+	npcs[npcMap[proto.npc_sn()]]->SetCurrPos(Vector3(proto.pos()));
 }
 
-void World::HandleSyncFsmState(Packet* pPacket)
+void World::HandlePlayerAtkEvent(Packet* pPacket)
 {
-	Proto::SyncFsmState proto = pPacket->ParseToProto<Proto::SyncFsmState>();
+	Proto::PlayerAtkEvent proto = pPacket->ParseToProto<Proto::PlayerAtkEvent>();
 	Player* player = playerMgr->GetPlayerBySn(proto.player_sn());
-	enemies[proto.enemy_id()]->GetComponent<FsmComponent>()->SyncState(proto, player);
-}
-
-void World::HandleAtkAnimEvent(Packet* pPacket)
-{
-	Proto::AtkAnimEvent proto = pPacket->ParseToProto<Proto::AtkAnimEvent>();
-	Player* player = playerMgr->GetPlayerBySn(proto.player_sn());
-	if (proto.enemy_id() == -1)
+	if (proto.target_sn() == 0)
 	{
-		proto.set_curr_hp(player->detail->hp = 1000);
-		BroadcastPacket(Proto::MsgId::S2C_AtkAnimEvent, proto);
+		player->GetDamage(nullptr);
 		return;
 	}
-	AIEnemy* enemy = enemies[proto.enemy_id()];
-	if (proto.atkenemy())
-	{
-		proto.set_curr_hp(enemy->GetDamage(player));
-		BroadcastPacket(Proto::MsgId::S2C_AtkAnimEvent, proto);
-	}
-	else
-	{
-		proto.set_curr_hp(player->GetDamage(enemy));
-		BroadcastPacket(Proto::MsgId::S2C_AtkAnimEvent, proto);
-	}
+	npcs[npcMap[proto.target_sn()]]->GetDamage(player);
+}
+
+void World::HandleNpcAtkEvent(Packet* pPacket)
+{
+	Proto::NpcAtkEvent proto = pPacket->ParseToProto<Proto::NpcAtkEvent>();
+	Player* player = playerMgr->GetPlayerBySn(proto.target_sn());
+	player->GetDamage(npcs[npcMap[proto.npc_sn()]]);
 }

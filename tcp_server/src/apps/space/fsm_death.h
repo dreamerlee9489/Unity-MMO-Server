@@ -6,7 +6,7 @@
 class Death : public FsmState
 {
 public:
-	Death(AIEnemy* owner, Player* target) : FsmState(owner, target) {}
+	Death(Npc* owner, Player* target) : FsmState(owner, target) {}
 
 	~Death() = default;
 

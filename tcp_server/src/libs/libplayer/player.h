@@ -6,9 +6,11 @@
 #include "libserver/vector3.h"
 #include "player_component_last_map.h"
 #include "../../apps/space/player_component_detail.h"
-#include "../../apps/space/ai_enemy.h"
+#include "../../apps/space/npc.h"
+#include "../../apps/space/world.h"
 
-class AIEnemy;
+class World;
+class Npc;
 class PlayerComponentLastMap;
 class PlayerComponentDetail;
 class Player : public Entity<Player>, public NetIdentify,
@@ -18,6 +20,7 @@ class Player : public Entity<Player>, public NetIdentify,
 public:
 	PlayerComponentLastMap* lastMap;
 	PlayerComponentDetail* detail;
+	World* currWorld;
 
 	void Awake(NetIdentify* pIdentify, std::string account) override;
 	void Awake(NetIdentify* pIdentify, uint64 playerSn, uint64 worldSn) override;
@@ -26,7 +29,7 @@ public:
 	std::string GetAccount() const;
 	std::string GetName() const;
 	uint64 GetPlayerSN() const;
-	int GetDamage(AIEnemy* enemy);
+	void GetDamage(Npc* enemy);
 	Vector3& GetCurrPos() { return lastMap->GetCur()->Position; }
 
 	Proto::Player& GetPlayerProto();

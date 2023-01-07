@@ -1,5 +1,5 @@
 ﻿#include "ai_system.h"
-#include "ai_enemy.h"
+#include "npc.h"
 #include "fsm_component.h"
 
 AISystem::AISystem()
@@ -26,7 +26,7 @@ void AISystem::Update(EntitySystem* pEntities)
 		for (auto iter = pMap->begin(); iter != pMap->end(); ++iter)
 		{
 			FsmComponent* pFsmComponent = (FsmComponent*)iter->second;
-			pFsmComponent->Update(pFsmComponent->GetParent<AIEnemy>());
+			pFsmComponent->Update(pFsmComponent->GetParent<Npc>());
 		}
 	}
 }
