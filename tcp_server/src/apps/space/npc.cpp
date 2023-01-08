@@ -84,7 +84,7 @@ bool Npc::CanAttack(Player* player)
 
 void Npc::GetDamage(Player* attacker)
 {
-	hp = max(hp - attacker->detail->atk, 0);
+	hp = (std::max)(hp - attacker->detail->atk, 0);
 	Proto::SyncEntityStatus status;
 	status.set_sn(_sn);
 	status.set_hp(hp);

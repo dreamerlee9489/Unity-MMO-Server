@@ -27,7 +27,7 @@ int main(int argc, char* argv[])
 	// http listen
 	const auto pYaml = ComponentHelp::GetYaml();
 	const auto pCommonConfig = pYaml->GetIPEndPoint(pGlobal->GetCurAppType(), pGlobal->GetCurAppId());
-	pThreadMgr->CreateComponent<NetworkListen>(ListenThread, false, pCommonConfig->Ip, (int)pCommonConfig->HttpPort);
+	pThreadMgr->CreateComponent<NetworkListen>(ListenThread, false, pCommonConfig->IntraIp, (int)pCommonConfig->HttpPort);
 
 	app.Run();
 	app.Dispose();

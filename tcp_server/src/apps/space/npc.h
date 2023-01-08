@@ -7,6 +7,7 @@
 #include "world.h"
 #include <vector>
 #include <random>
+#include <algorithm>
 constexpr int DROP_EXPR = -1;
 constexpr int DROP_GOLD = -2;
 

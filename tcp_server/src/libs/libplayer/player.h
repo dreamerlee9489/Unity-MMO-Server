@@ -8,6 +8,7 @@
 #include "../../apps/space/player_component_detail.h"
 #include "../../apps/space/npc.h"
 #include "../../apps/space/world.h"
+#include <algorithm>
 
 class World;
 class Npc;

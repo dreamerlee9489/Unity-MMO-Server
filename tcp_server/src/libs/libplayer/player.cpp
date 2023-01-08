@@ -78,7 +78,7 @@ void Player::GetDamage(Npc* enemy)
 		currWorld->BroadcastPacket(Proto::MsgId::S2C_SyncEntityStatus, proto);
 		return;
 	}
-	detail->hp = max(detail->hp - enemy->atk, 0);
+	detail->hp = (std::max)(detail->hp - enemy->atk, 0);
 	Proto::SyncEntityStatus proto;
 	proto.set_sn(_playerSn);
 	proto.set_hp(detail->hp);
