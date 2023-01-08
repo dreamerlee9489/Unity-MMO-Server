@@ -7,7 +7,6 @@
 #include "player_component_last_map.h"
 #include "../../apps/space/player_component_detail.h"
 #include "../../apps/space/npc.h"
-#include "../../apps/space/world.h"
 #include <algorithm>
 
 class World;

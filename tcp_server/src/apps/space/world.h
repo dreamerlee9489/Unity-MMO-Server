@@ -26,7 +26,7 @@ public:
 	std::vector<int>* potionCfgs;
 	std::vector<int>* weaponCfgs;
 	std::vector<Npc*> npcs;
-	std::unordered_map<uint64, int> npcMap;
+	std::unordered_map<uint64, int> npcIdxMap;
 	PlayerManagerComponent* playerMgr;
 
 	void Awake(int worldId) override;

@@ -1,6 +1,7 @@
 ﻿#include "player.h"
 #include "player_component.h"
 #include "libserver/message_system_help.h"
+#include "../../apps/space/world.h"
 
 void Player::Awake(NetIdentify* pIdentify, std::string account)
 {
@@ -69,20 +70,8 @@ Proto::Player& Player::GetPlayerProto()
 
 void Player::GetDamage(Npc* enemy)
 {
-	if (enemy == nullptr)
-	{
-		detail->hp = 1000;
-		Proto::SyncEntityStatus proto;
-		proto.set_sn(_playerSn);
-		proto.set_hp(detail->hp);
-		currWorld->BroadcastPacket(Proto::MsgId::S2C_SyncEntityStatus, proto);
-		return;
-	}
+	LOG_DEBUG("player: " << detail->hp << " - " << enemy->atk);
 	detail->hp = (std::max)(detail->hp - enemy->atk, 0);
-	Proto::SyncEntityStatus proto;
-	proto.set_sn(_playerSn);
-	proto.set_hp(detail->hp);
-	currWorld->BroadcastPacket(Proto::MsgId::S2C_SyncEntityStatus, proto);
 }
 
 void Player::ParseFromStream(const uint64 playerSn, std::stringstream* pOpStream)

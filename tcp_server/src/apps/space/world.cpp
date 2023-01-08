@@ -35,7 +35,7 @@ void World::Awake(int worldId)
 		npc->SetWorld(this);
 		npc->SetAllPlayer(playerMgr->GetAll());
 		npc->AddComponent<FsmComponent>();
-		npcMap.emplace(npc->GetSN(), npcs.size());
+		npcIdxMap.emplace(npc->GetSN(), npcs.size());
 		npcs.push_back(npc);
 	}
 }
@@ -44,7 +44,7 @@ void World::BackToPool()
 {
 	_adds.clear();
 	npcs.clear();
-	npcMap.clear();
+	npcIdxMap.clear();
 }
 
 /// <summary>
@@ -389,7 +389,7 @@ void World::HandleReqSyncNpc(Player* pPlayer, Packet* pPacket)
 void World::HandleSyncNpcPos(Packet* pPacket)
 {
 	Proto::SyncNpcPos proto = pPacket->ParseToProto<Proto::SyncNpcPos>();
-	npcs[npcMap[proto.npc_sn()]]->SetCurrPos(Vector3(proto.pos()));
+	npcs[npcIdxMap[proto.npc_sn()]]->SetCurrPos(Vector3(proto.pos()));
 }
 
 void World::HandlePlayerAtkEvent(Packet* pPacket)
@@ -398,15 +398,30 @@ void World::HandlePlayerAtkEvent(Packet* pPacket)
 	Player* player = playerMgr->GetPlayerBySn(proto.player_sn());
 	if (proto.target_sn() == 0)
 	{
-		player->GetDamage(nullptr);
-		return;
+		player->detail->hp = 1000;
+		Proto::SyncEntityStatus status;
+		status.set_sn(player->GetPlayerSN());
+		status.set_hp(player->detail->hp);
+		BroadcastPacket(Proto::MsgId::S2C_SyncEntityStatus, status);
 	}
-	npcs[npcMap[proto.target_sn()]]->GetDamage(player);
+	else
+	{
+		Npc* npc = npcs[npcIdxMap[proto.target_sn()]];
+		npc->GetDamage(player);
+		Proto::SyncEntityStatus status;
+		status.set_sn(npc->GetSN());
+		status.set_hp(npc->hp);
+		BroadcastPacket(Proto::MsgId::S2C_SyncEntityStatus, status);
+	}
 }
 
 void World::HandleNpcAtkEvent(Packet* pPacket)
 {
 	Proto::NpcAtkEvent proto = pPacket->ParseToProto<Proto::NpcAtkEvent>();
 	Player* player = playerMgr->GetPlayerBySn(proto.target_sn());
-	player->GetDamage(npcs[npcMap[proto.npc_sn()]]);
+	player->GetDamage(npcs[npcIdxMap[proto.npc_sn()]]);
+	Proto::SyncEntityStatus status;
+	status.set_sn(player->GetPlayerSN());
+	status.set_hp(player->detail->hp);
+	BroadcastPacket(Proto::MsgId::S2C_SyncEntityStatus, status);
 }

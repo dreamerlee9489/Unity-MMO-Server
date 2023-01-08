@@ -68,7 +68,7 @@ struct ItemData
 
 class World;
 class Player;
-class Npc : public Entity<Npc>, public IAwakeFromPoolSystem<ResourceNpc&>
+class Npc : public Entity<Npc>, public IAwakeFromPoolSystem<ResourceNpc>
 {
 	float _viewDist = 8.0f, _atkDist = 1.5f;
 	Vector3 _initPos;
@@ -87,7 +87,7 @@ class Npc : public Entity<Npc>, public IAwakeFromPoolSystem<ResourceNpc&>
 public:
 	int id = 0, type = 0, lv = 0, hp = 0, atk = 0, def = 0;
 
-	void Awake(ResourceNpc& cfg) override;
+	void Awake(ResourceNpc cfg) override;
 
 	void BackToPool() override;
 

@@ -4,7 +4,7 @@
 std::default_random_engine Npc::_realEng = std::default_random_engine();
 std::uniform_real_distribution<double> Npc::_realDis = std::uniform_real_distribution<double>(0.0, 1.0);
 
-void Npc::Awake(ResourceNpc& cfg)
+void Npc::Awake(ResourceNpc cfg)
 {
 	id = cfg.id;
 	lv = cfg.level;
@@ -85,12 +85,8 @@ bool Npc::CanAttack(Player* player)
 void Npc::GetDamage(Player* attacker)
 {
 	hp = (std::max)(hp - attacker->detail->atk, 0);
-	Proto::SyncEntityStatus status;
-	status.set_sn(_sn);
-	status.set_hp(hp);
-	_world->BroadcastPacket(Proto::MsgId::S2C_SyncEntityStatus, status);
-	if (!hp)
-		GetComponent<FsmComponent>()->ChangeState(new Death(this, attacker));		
+	if (hp == 0)
+		GetComponent<FsmComponent>()->ChangeState(new Death(this, attacker));
 }
 
 std::vector<ItemData>* Npc::GetDropList(Player* player)

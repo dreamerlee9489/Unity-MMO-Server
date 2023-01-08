@@ -8,9 +8,6 @@ ResourceWorld::ResourceWorld(std::map<std::string, int>& head) : ResourceBase(he
 
 ResourceWorld::~ResourceWorld()
 {
-	delete& _npcCfgs;
-	delete& _potionCfgs;
-	delete& _weaponCfgs;
 }
 
 std::string ResourceWorld::GetName() const
