@@ -8,6 +8,7 @@
 #include "../../apps/space/player_component_detail.h"
 #include "../../apps/space/npc.h"
 #include <algorithm>
+#include <list>
 
 class World;
 class Npc;
@@ -20,7 +21,7 @@ class Player : public Entity<Player>, public NetIdentify,
 public:
 	PlayerComponentLastMap* lastMap;
 	PlayerComponentDetail* detail;
-	World* currWorld;
+	std::list<Player*> team;
 
 	void Awake(NetIdentify* pIdentify, std::string account) override;
 	void Awake(NetIdentify* pIdentify, uint64 playerSn, uint64 worldSn) override;
@@ -29,8 +30,8 @@ public:
 	std::string GetAccount() const;
 	std::string GetName() const;
 	uint64 GetPlayerSN() const;
-	void GetDamage(Npc* enemy);
 	Vector3& GetCurrPos() { return lastMap->GetCur()->Position; }
+	void GetDamage(Npc* enemy);
 
 	Proto::Player& GetPlayerProto();
 	void ParseFromStream(uint64 playerSn, std::stringstream* pOpStream);

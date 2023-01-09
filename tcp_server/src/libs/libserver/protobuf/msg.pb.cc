@@ -25,6 +25,7 @@ extern PROTOBUF_INTERNAL_EXPORT_msg_2eproto ::PROTOBUF_NAMESPACE_ID::internal::S
 extern PROTOBUF_INTERNAL_EXPORT_msg_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_Role_msg_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_msg_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_Tag_msg_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_msg_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_TagValue_msg_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_msg_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_TeamMember_msg_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_msg_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_TokenInfo_msg_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_db_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Vector3D_db_2eproto;
 namespace Proto {
@@ -324,6 +325,18 @@ class DropItemListDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<DropItemList> _instance;
 } _DropItemList_default_instance_;
+class TeamMemberDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<TeamMember> _instance;
+} _TeamMember_default_instance_;
+class ReqJoinTeamDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<ReqJoinTeam> _instance;
+} _ReqJoinTeam_default_instance_;
+class JoinTeamResDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<JoinTeamRes> _instance;
+} _JoinTeamRes_default_instance_;
 }  // namespace Proto
 static void InitDefaultsscc_info_AccountCheck_msg_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -738,6 +751,21 @@ static void InitDefaultsscc_info_Http_msg_2eproto() {
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Http_msg_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsscc_info_Http_msg_2eproto}, {}};
 
+static void InitDefaultsscc_info_JoinTeamRes_msg_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::Proto::_JoinTeamRes_default_instance_;
+    new (ptr) ::Proto::JoinTeamRes();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::Proto::JoinTeamRes::InitAsDefaultInstance();
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_JoinTeamRes_msg_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsscc_info_JoinTeamRes_msg_2eproto}, {
+      &scc_info_TeamMember_msg_2eproto.base,}};
+
 static void InitDefaultsscc_info_LoginByToken_msg_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
@@ -1022,6 +1050,20 @@ static void InitDefaultsscc_info_RemovePlayer_msg_2eproto() {
 
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_RemovePlayer_msg_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsscc_info_RemovePlayer_msg_2eproto}, {}};
+
+static void InitDefaultsscc_info_ReqJoinTeam_msg_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::Proto::_ReqJoinTeam_default_instance_;
+    new (ptr) ::Proto::ReqJoinTeam();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::Proto::ReqJoinTeam::InitAsDefaultInstance();
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ReqJoinTeam_msg_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsscc_info_ReqJoinTeam_msg_2eproto}, {}};
 
 static void InitDefaultsscc_info_ReqLinkPlayer_msg_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -1311,6 +1353,20 @@ static void InitDefaultsscc_info_TagValue_msg_2eproto() {
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_TagValue_msg_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsscc_info_TagValue_msg_2eproto}, {}};
 
+static void InitDefaultsscc_info_TeamMember_msg_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::Proto::_TeamMember_default_instance_;
+    new (ptr) ::Proto::TeamMember();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::Proto::TeamMember::InitAsDefaultInstance();
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_TeamMember_msg_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsscc_info_TeamMember_msg_2eproto}, {}};
+
 static void InitDefaultsscc_info_Teleport_msg_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
@@ -1382,7 +1438,7 @@ static void InitDefaultsscc_info_WorldSyncToGather_msg_2eproto() {
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_WorldSyncToGather_msg_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsscc_info_WorldSyncToGather_msg_2eproto}, {}};
 
-static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_msg_2eproto[74];
+static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_msg_2eproto[77];
 static const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* file_level_enum_descriptors_msg_2eproto[12];
 static constexpr ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor const** file_level_service_descriptors_msg_2eproto = nullptr;
 
@@ -1919,6 +1975,28 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_msg_2eproto::offsets[] PROTOBU
   PROTOBUF_FIELD_OFFSET(::Proto::DropItemList, exp_),
   PROTOBUF_FIELD_OFFSET(::Proto::DropItemList, gold_),
   PROTOBUF_FIELD_OFFSET(::Proto::DropItemList, items_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::Proto::TeamMember, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::Proto::TeamMember, member_sn_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::Proto::ReqJoinTeam, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::Proto::ReqJoinTeam, applicant_),
+  PROTOBUF_FIELD_OFFSET(::Proto::ReqJoinTeam, responder_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::Proto::JoinTeamRes, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::Proto::JoinTeamRes, agree_),
+  PROTOBUF_FIELD_OFFSET(::Proto::JoinTeamRes, applicant_),
+  PROTOBUF_FIELD_OFFSET(::Proto::JoinTeamRes, responder_),
+  PROTOBUF_FIELD_OFFSET(::Proto::JoinTeamRes, members_),
 };
 static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(::Proto::CmdThread)},
@@ -1995,6 +2073,9 @@ static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOB
   { 509, -1, sizeof(::Proto::NpcAtkEvent)},
   { 516, -1, sizeof(::Proto::PlayerAtkEvent)},
   { 523, -1, sizeof(::Proto::DropItemList)},
+  { 532, -1, sizeof(::Proto::TeamMember)},
+  { 538, -1, sizeof(::Proto::ReqJoinTeam)},
+  { 545, -1, sizeof(::Proto::JoinTeamRes)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
@@ -2072,6 +2153,9 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::Proto::_NpcAtkEvent_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::Proto::_PlayerAtkEvent_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::Proto::_DropItemList_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::Proto::_TeamMember_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::Proto::_ReqJoinTeam_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::Proto::_JoinTeamRes_default_instance_),
 };
 
 const char descriptor_table_protodef_msg_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
@@ -2208,23 +2292,28 @@ const char descriptor_table_protodef_msg_2eproto[] PROTOBUF_SECTION_VARIABLE(pro
   "\n\016PlayerAtkEvent\022\021\n\tplayer_sn\030\001 \001(\004\022\021\n\tt"
   "arget_sn\030\002 \001(\004\"Y\n\014DropItemList\022\016\n\006npc_sn"
   "\030\001 \001(\004\022\013\n\003exp\030\002 \001(\005\022\014\n\004gold\030\003 \001(\005\022\036\n\005ite"
-  "ms\030\004 \003(\0132\017.Proto.ItemData*x\n\007TagType\022\017\n\013"
-  "TagTypeNone\020\000\022\022\n\016TagTypeAccount\020\001\022\016\n\nTag"
-  "TypeApp\020\002\022\021\n\rTagTypeEntity\020\003\022\022\n\016TagTypeT"
-  "oWorld\020\004\022\021\n\rTagTypePlayer\020\005*\232\001\n\026AccountC"
-  "heckReturnCode\022\n\n\006ARC_OK\020\000\022\017\n\013ARC_UNKONW"
-  "N\020\001\022\031\n\025ARC_NOT_FOUND_ACCOUNT\020\002\022\026\n\022ARC_PA"
-  "SSWORD_WRONG\020\003\022\017\n\013ARC_LOGGING\020\004\022\017\n\013ARC_T"
-  "IMEOUT\020\005\022\016\n\nARC_ONLINE\020\006*G\n\023LoginHttpRet"
-  "urnCode\022\013\n\007LHRC_OK\020\000\022\020\n\014LHRC_TIMEOUT\020\001\022\021"
-  "\n\rLHRC_NOTFOUND\020\002*L\n\026CreatePlayerReturnC"
-  "ode\022\021\n\rCPR_Create_OK\020\000\022\017\n\013CPR_Unkonwn\020\001\022"
-  "\016\n\nCPR_Rename\020\002b\006proto3"
+  "ms\030\004 \003(\0132\017.Proto.ItemData\"\037\n\nTeamMember\022"
+  "\021\n\tmember_sn\030\001 \001(\004\"3\n\013ReqJoinTeam\022\021\n\tapp"
+  "licant\030\001 \001(\004\022\021\n\tresponder\030\002 \001(\004\"f\n\013JoinT"
+  "eamRes\022\r\n\005agree\030\001 \001(\010\022\021\n\tapplicant\030\002 \001(\004"
+  "\022\021\n\tresponder\030\003 \001(\004\022\"\n\007members\030\004 \003(\0132\021.P"
+  "roto.TeamMember*x\n\007TagType\022\017\n\013TagTypeNon"
+  "e\020\000\022\022\n\016TagTypeAccount\020\001\022\016\n\nTagTypeApp\020\002\022"
+  "\021\n\rTagTypeEntity\020\003\022\022\n\016TagTypeToWorld\020\004\022\021"
+  "\n\rTagTypePlayer\020\005*\232\001\n\026AccountCheckReturn"
+  "Code\022\n\n\006ARC_OK\020\000\022\017\n\013ARC_UNKONWN\020\001\022\031\n\025ARC"
+  "_NOT_FOUND_ACCOUNT\020\002\022\026\n\022ARC_PASSWORD_WRO"
+  "NG\020\003\022\017\n\013ARC_LOGGING\020\004\022\017\n\013ARC_TIMEOUT\020\005\022\016"
+  "\n\nARC_ONLINE\020\006*G\n\023LoginHttpReturnCode\022\013\n"
+  "\007LHRC_OK\020\000\022\020\n\014LHRC_TIMEOUT\020\001\022\021\n\rLHRC_NOT"
+  "FOUND\020\002*L\n\026CreatePlayerReturnCode\022\021\n\rCPR"
+  "_Create_OK\020\000\022\017\n\013CPR_Unkonwn\020\001\022\016\n\nCPR_Ren"
+  "ame\020\002b\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_msg_2eproto_deps[1] = {
   &::descriptor_table_db_2eproto,
 };
-static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_msg_2eproto_sccs[74] = {
+static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_msg_2eproto_sccs[77] = {
   &scc_info_AccountCheck_msg_2eproto.base,
   &scc_info_AccountCheckRs_msg_2eproto.base,
   &scc_info_AccountDeleteOnlineToRedis_msg_2eproto.base,
@@ -2254,6 +2343,7 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_msg
   &scc_info_GameTokenToRedis_msg_2eproto.base,
   &scc_info_GameTokenToRedisRs_msg_2eproto.base,
   &scc_info_Http_msg_2eproto.base,
+  &scc_info_JoinTeamRes_msg_2eproto.base,
   &scc_info_LoginByToken_msg_2eproto.base,
   &scc_info_LoginByTokenRs_msg_2eproto.base,
   &scc_info_LoginTokenToRedis_msg_2eproto.base,
@@ -2274,6 +2364,7 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_msg
   &scc_info_QueryWorldRs_msg_2eproto.base,
   &scc_info_RemoveComponent_msg_2eproto.base,
   &scc_info_RemovePlayer_msg_2eproto.base,
+  &scc_info_ReqJoinTeam_msg_2eproto.base,
   &scc_info_ReqLinkPlayer_msg_2eproto.base,
   &scc_info_ReqSyncNpc_msg_2eproto.base,
   &scc_info_RequestSyncPlayer_msg_2eproto.base,
@@ -2294,6 +2385,7 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_msg
   &scc_info_SyncPlayerPos_msg_2eproto.base,
   &scc_info_Tag_msg_2eproto.base,
   &scc_info_TagValue_msg_2eproto.base,
+  &scc_info_TeamMember_msg_2eproto.base,
   &scc_info_Teleport_msg_2eproto.base,
   &scc_info_TeleportAfter_msg_2eproto.base,
   &scc_info_TokenInfo_msg_2eproto.base,
@@ -2303,10 +2395,10 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_msg
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_msg_2eproto_once;
 static bool descriptor_table_msg_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_msg_2eproto = {
-  &descriptor_table_msg_2eproto_initialized, descriptor_table_protodef_msg_2eproto, "msg.proto", 5783,
-  &descriptor_table_msg_2eproto_once, descriptor_table_msg_2eproto_sccs, descriptor_table_msg_2eproto_deps, 74, 1,
+  &descriptor_table_msg_2eproto_initialized, descriptor_table_protodef_msg_2eproto, "msg.proto", 5973,
+  &descriptor_table_msg_2eproto_once, descriptor_table_msg_2eproto_sccs, descriptor_table_msg_2eproto_deps, 77, 1,
   schemas, file_default_instances, TableStruct_msg_2eproto::offsets,
-  file_level_metadata_msg_2eproto, 74, file_level_enum_descriptors_msg_2eproto, file_level_service_descriptors_msg_2eproto,
+  file_level_metadata_msg_2eproto, 77, file_level_enum_descriptors_msg_2eproto, file_level_service_descriptors_msg_2eproto,
 };
 
 // Force running AddDescriptors() at dynamic initialization time.
@@ -26048,6 +26140,942 @@ void DropItemList::InternalSwap(DropItemList* other) {
 }
 
 
+// ===================================================================
+
+void TeamMember::InitAsDefaultInstance() {
+}
+class TeamMember::_Internal {
+ public:
+};
+
+TeamMember::TeamMember()
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:Proto.TeamMember)
+}
+TeamMember::TeamMember(const TeamMember& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  member_sn_ = from.member_sn_;
+  // @@protoc_insertion_point(copy_constructor:Proto.TeamMember)
+}
+
+void TeamMember::SharedCtor() {
+  member_sn_ = PROTOBUF_ULONGLONG(0);
+}
+
+TeamMember::~TeamMember() {
+  // @@protoc_insertion_point(destructor:Proto.TeamMember)
+  SharedDtor();
+}
+
+void TeamMember::SharedDtor() {
+}
+
+void TeamMember::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const TeamMember& TeamMember::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_TeamMember_msg_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void TeamMember::Clear() {
+// @@protoc_insertion_point(message_clear_start:Proto.TeamMember)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  member_sn_ = PROTOBUF_ULONGLONG(0);
+  _internal_metadata_.Clear();
+}
+
+#if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+const char* TeamMember::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // uint64 member_sn = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
+          member_sn_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+#else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+bool TeamMember::MergePartialFromCodedStream(
+    ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+  // @@protoc_insertion_point(parse_start:Proto.TeamMember)
+  for (;;) {
+    ::std::pair<::PROTOBUF_NAMESPACE_ID::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // uint64 member_sn = 1;
+      case 1: {
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (8 & 0xFF)) {
+
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   ::PROTOBUF_NAMESPACE_ID::uint64, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_UINT64>(
+                 input, &member_sn_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:Proto.TeamMember)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:Proto.TeamMember)
+  return false;
+#undef DO_
+}
+#endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+
+void TeamMember::SerializeWithCachedSizes(
+    ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:Proto.TeamMember)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // uint64 member_sn = 1;
+  if (this->member_sn() != 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64(1, this->member_sn(), output);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFields(
+        _internal_metadata_.unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:Proto.TeamMember)
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* TeamMember::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:Proto.TeamMember)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // uint64 member_sn = 1;
+  if (this->member_sn() != 0) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64ToArray(1, this->member_sn(), target);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:Proto.TeamMember)
+  return target;
+}
+
+size_t TeamMember::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:Proto.TeamMember)
+  size_t total_size = 0;
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::ComputeUnknownFieldsSize(
+        _internal_metadata_.unknown_fields());
+  }
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // uint64 member_sn = 1;
+  if (this->member_sn() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt64Size(
+        this->member_sn());
+  }
+
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void TeamMember::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:Proto.TeamMember)
+  GOOGLE_DCHECK_NE(&from, this);
+  const TeamMember* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<TeamMember>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:Proto.TeamMember)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:Proto.TeamMember)
+    MergeFrom(*source);
+  }
+}
+
+void TeamMember::MergeFrom(const TeamMember& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:Proto.TeamMember)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.member_sn() != 0) {
+    set_member_sn(from.member_sn());
+  }
+}
+
+void TeamMember::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:Proto.TeamMember)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void TeamMember::CopyFrom(const TeamMember& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:Proto.TeamMember)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool TeamMember::IsInitialized() const {
+  return true;
+}
+
+void TeamMember::InternalSwap(TeamMember* other) {
+  using std::swap;
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  swap(member_sn_, other->member_sn_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata TeamMember::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
+// ===================================================================
+
+void ReqJoinTeam::InitAsDefaultInstance() {
+}
+class ReqJoinTeam::_Internal {
+ public:
+};
+
+ReqJoinTeam::ReqJoinTeam()
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:Proto.ReqJoinTeam)
+}
+ReqJoinTeam::ReqJoinTeam(const ReqJoinTeam& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::memcpy(&applicant_, &from.applicant_,
+    static_cast<size_t>(reinterpret_cast<char*>(&responder_) -
+    reinterpret_cast<char*>(&applicant_)) + sizeof(responder_));
+  // @@protoc_insertion_point(copy_constructor:Proto.ReqJoinTeam)
+}
+
+void ReqJoinTeam::SharedCtor() {
+  ::memset(&applicant_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&responder_) -
+      reinterpret_cast<char*>(&applicant_)) + sizeof(responder_));
+}
+
+ReqJoinTeam::~ReqJoinTeam() {
+  // @@protoc_insertion_point(destructor:Proto.ReqJoinTeam)
+  SharedDtor();
+}
+
+void ReqJoinTeam::SharedDtor() {
+}
+
+void ReqJoinTeam::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const ReqJoinTeam& ReqJoinTeam::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_ReqJoinTeam_msg_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void ReqJoinTeam::Clear() {
+// @@protoc_insertion_point(message_clear_start:Proto.ReqJoinTeam)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  ::memset(&applicant_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&responder_) -
+      reinterpret_cast<char*>(&applicant_)) + sizeof(responder_));
+  _internal_metadata_.Clear();
+}
+
+#if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+const char* ReqJoinTeam::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // uint64 applicant = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
+          applicant_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // uint64 responder = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
+          responder_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+#else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+bool ReqJoinTeam::MergePartialFromCodedStream(
+    ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+  // @@protoc_insertion_point(parse_start:Proto.ReqJoinTeam)
+  for (;;) {
+    ::std::pair<::PROTOBUF_NAMESPACE_ID::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // uint64 applicant = 1;
+      case 1: {
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (8 & 0xFF)) {
+
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   ::PROTOBUF_NAMESPACE_ID::uint64, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_UINT64>(
+                 input, &applicant_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // uint64 responder = 2;
+      case 2: {
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (16 & 0xFF)) {
+
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   ::PROTOBUF_NAMESPACE_ID::uint64, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_UINT64>(
+                 input, &responder_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:Proto.ReqJoinTeam)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:Proto.ReqJoinTeam)
+  return false;
+#undef DO_
+}
+#endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+
+void ReqJoinTeam::SerializeWithCachedSizes(
+    ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:Proto.ReqJoinTeam)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // uint64 applicant = 1;
+  if (this->applicant() != 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64(1, this->applicant(), output);
+  }
+
+  // uint64 responder = 2;
+  if (this->responder() != 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64(2, this->responder(), output);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFields(
+        _internal_metadata_.unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:Proto.ReqJoinTeam)
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* ReqJoinTeam::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:Proto.ReqJoinTeam)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // uint64 applicant = 1;
+  if (this->applicant() != 0) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64ToArray(1, this->applicant(), target);
+  }
+
+  // uint64 responder = 2;
+  if (this->responder() != 0) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64ToArray(2, this->responder(), target);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:Proto.ReqJoinTeam)
+  return target;
+}
+
+size_t ReqJoinTeam::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:Proto.ReqJoinTeam)
+  size_t total_size = 0;
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::ComputeUnknownFieldsSize(
+        _internal_metadata_.unknown_fields());
+  }
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // uint64 applicant = 1;
+  if (this->applicant() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt64Size(
+        this->applicant());
+  }
+
+  // uint64 responder = 2;
+  if (this->responder() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt64Size(
+        this->responder());
+  }
+
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void ReqJoinTeam::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:Proto.ReqJoinTeam)
+  GOOGLE_DCHECK_NE(&from, this);
+  const ReqJoinTeam* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<ReqJoinTeam>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:Proto.ReqJoinTeam)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:Proto.ReqJoinTeam)
+    MergeFrom(*source);
+  }
+}
+
+void ReqJoinTeam::MergeFrom(const ReqJoinTeam& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:Proto.ReqJoinTeam)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.applicant() != 0) {
+    set_applicant(from.applicant());
+  }
+  if (from.responder() != 0) {
+    set_responder(from.responder());
+  }
+}
+
+void ReqJoinTeam::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:Proto.ReqJoinTeam)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void ReqJoinTeam::CopyFrom(const ReqJoinTeam& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:Proto.ReqJoinTeam)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ReqJoinTeam::IsInitialized() const {
+  return true;
+}
+
+void ReqJoinTeam::InternalSwap(ReqJoinTeam* other) {
+  using std::swap;
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  swap(applicant_, other->applicant_);
+  swap(responder_, other->responder_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata ReqJoinTeam::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
+// ===================================================================
+
+void JoinTeamRes::InitAsDefaultInstance() {
+}
+class JoinTeamRes::_Internal {
+ public:
+};
+
+JoinTeamRes::JoinTeamRes()
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:Proto.JoinTeamRes)
+}
+JoinTeamRes::JoinTeamRes(const JoinTeamRes& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr),
+      members_(from.members_) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::memcpy(&applicant_, &from.applicant_,
+    static_cast<size_t>(reinterpret_cast<char*>(&agree_) -
+    reinterpret_cast<char*>(&applicant_)) + sizeof(agree_));
+  // @@protoc_insertion_point(copy_constructor:Proto.JoinTeamRes)
+}
+
+void JoinTeamRes::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_JoinTeamRes_msg_2eproto.base);
+  ::memset(&applicant_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&agree_) -
+      reinterpret_cast<char*>(&applicant_)) + sizeof(agree_));
+}
+
+JoinTeamRes::~JoinTeamRes() {
+  // @@protoc_insertion_point(destructor:Proto.JoinTeamRes)
+  SharedDtor();
+}
+
+void JoinTeamRes::SharedDtor() {
+}
+
+void JoinTeamRes::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const JoinTeamRes& JoinTeamRes::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_JoinTeamRes_msg_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void JoinTeamRes::Clear() {
+// @@protoc_insertion_point(message_clear_start:Proto.JoinTeamRes)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  members_.Clear();
+  ::memset(&applicant_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&agree_) -
+      reinterpret_cast<char*>(&applicant_)) + sizeof(agree_));
+  _internal_metadata_.Clear();
+}
+
+#if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+const char* JoinTeamRes::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // bool agree = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
+          agree_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // uint64 applicant = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
+          applicant_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // uint64 responder = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 24)) {
+          responder_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // repeated .Proto.TeamMember members = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 34)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(add_members(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::uint8>(ptr) == 34);
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+#else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+bool JoinTeamRes::MergePartialFromCodedStream(
+    ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+  // @@protoc_insertion_point(parse_start:Proto.JoinTeamRes)
+  for (;;) {
+    ::std::pair<::PROTOBUF_NAMESPACE_ID::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // bool agree = 1;
+      case 1: {
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (8 & 0xFF)) {
+
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &agree_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // uint64 applicant = 2;
+      case 2: {
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (16 & 0xFF)) {
+
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   ::PROTOBUF_NAMESPACE_ID::uint64, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_UINT64>(
+                 input, &applicant_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // uint64 responder = 3;
+      case 3: {
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (24 & 0xFF)) {
+
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   ::PROTOBUF_NAMESPACE_ID::uint64, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_UINT64>(
+                 input, &responder_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // repeated .Proto.TeamMember members = 4;
+      case 4: {
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (34 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
+                input, add_members()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:Proto.JoinTeamRes)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:Proto.JoinTeamRes)
+  return false;
+#undef DO_
+}
+#endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+
+void JoinTeamRes::SerializeWithCachedSizes(
+    ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:Proto.JoinTeamRes)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // bool agree = 1;
+  if (this->agree() != 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBool(1, this->agree(), output);
+  }
+
+  // uint64 applicant = 2;
+  if (this->applicant() != 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64(2, this->applicant(), output);
+  }
+
+  // uint64 responder = 3;
+  if (this->responder() != 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64(3, this->responder(), output);
+  }
+
+  // repeated .Proto.TeamMember members = 4;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->members_size()); i < n; i++) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
+      4,
+      this->members(static_cast<int>(i)),
+      output);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFields(
+        _internal_metadata_.unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:Proto.JoinTeamRes)
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* JoinTeamRes::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:Proto.JoinTeamRes)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // bool agree = 1;
+  if (this->agree() != 0) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(1, this->agree(), target);
+  }
+
+  // uint64 applicant = 2;
+  if (this->applicant() != 0) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64ToArray(2, this->applicant(), target);
+  }
+
+  // uint64 responder = 3;
+  if (this->responder() != 0) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64ToArray(3, this->responder(), target);
+  }
+
+  // repeated .Proto.TeamMember members = 4;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->members_size()); i < n; i++) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        4, this->members(static_cast<int>(i)), target);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:Proto.JoinTeamRes)
+  return target;
+}
+
+size_t JoinTeamRes::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:Proto.JoinTeamRes)
+  size_t total_size = 0;
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::ComputeUnknownFieldsSize(
+        _internal_metadata_.unknown_fields());
+  }
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // repeated .Proto.TeamMember members = 4;
+  {
+    unsigned int count = static_cast<unsigned int>(this->members_size());
+    total_size += 1UL * count;
+    for (unsigned int i = 0; i < count; i++) {
+      total_size +=
+        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+          this->members(static_cast<int>(i)));
+    }
+  }
+
+  // uint64 applicant = 2;
+  if (this->applicant() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt64Size(
+        this->applicant());
+  }
+
+  // uint64 responder = 3;
+  if (this->responder() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt64Size(
+        this->responder());
+  }
+
+  // bool agree = 1;
+  if (this->agree() != 0) {
+    total_size += 1 + 1;
+  }
+
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void JoinTeamRes::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:Proto.JoinTeamRes)
+  GOOGLE_DCHECK_NE(&from, this);
+  const JoinTeamRes* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<JoinTeamRes>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:Proto.JoinTeamRes)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:Proto.JoinTeamRes)
+    MergeFrom(*source);
+  }
+}
+
+void JoinTeamRes::MergeFrom(const JoinTeamRes& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:Proto.JoinTeamRes)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  members_.MergeFrom(from.members_);
+  if (from.applicant() != 0) {
+    set_applicant(from.applicant());
+  }
+  if (from.responder() != 0) {
+    set_responder(from.responder());
+  }
+  if (from.agree() != 0) {
+    set_agree(from.agree());
+  }
+}
+
+void JoinTeamRes::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:Proto.JoinTeamRes)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void JoinTeamRes::CopyFrom(const JoinTeamRes& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:Proto.JoinTeamRes)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool JoinTeamRes::IsInitialized() const {
+  return true;
+}
+
+void JoinTeamRes::InternalSwap(JoinTeamRes* other) {
+  using std::swap;
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  CastToBase(&members_)->InternalSwap(CastToBase(&other->members_));
+  swap(applicant_, other->applicant_);
+  swap(responder_, other->responder_);
+  swap(agree_, other->agree_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata JoinTeamRes::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace Proto
 PROTOBUF_NAMESPACE_OPEN
@@ -26272,6 +27300,15 @@ template<> PROTOBUF_NOINLINE ::Proto::PlayerAtkEvent* Arena::CreateMaybeMessage<
 }
 template<> PROTOBUF_NOINLINE ::Proto::DropItemList* Arena::CreateMaybeMessage< ::Proto::DropItemList >(Arena* arena) {
   return Arena::CreateInternal< ::Proto::DropItemList >(arena);
+}
+template<> PROTOBUF_NOINLINE ::Proto::TeamMember* Arena::CreateMaybeMessage< ::Proto::TeamMember >(Arena* arena) {
+  return Arena::CreateInternal< ::Proto::TeamMember >(arena);
+}
+template<> PROTOBUF_NOINLINE ::Proto::ReqJoinTeam* Arena::CreateMaybeMessage< ::Proto::ReqJoinTeam >(Arena* arena) {
+  return Arena::CreateInternal< ::Proto::ReqJoinTeam >(arena);
+}
+template<> PROTOBUF_NOINLINE ::Proto::JoinTeamRes* Arena::CreateMaybeMessage< ::Proto::JoinTeamRes >(Arena* arena) {
+  return Arena::CreateInternal< ::Proto::JoinTeamRes >(arena);
 }
 PROTOBUF_NAMESPACE_CLOSE
 

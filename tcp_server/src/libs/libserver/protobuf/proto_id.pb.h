@@ -159,12 +159,14 @@ enum MsgId : int {
   C2S_UpdateKnapItem = 40001,
   C2S_GetPlayerKnap = 40002,
   S2C_GetPlayerKnap = 40003,
+  C2C_ReqJoinTeam = 50001,
+  C2C_JoinTeamRes = 50002,
   MsgId_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
   MsgId_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
 };
 bool MsgId_IsValid(int value);
 constexpr MsgId MsgId_MIN = None;
-constexpr MsgId MsgId_MAX = S2C_GetPlayerKnap;
+constexpr MsgId MsgId_MAX = C2C_JoinTeamRes;
 constexpr int MsgId_ARRAYSIZE = MsgId_MAX + 1;
 
 const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* MsgId_descriptor();

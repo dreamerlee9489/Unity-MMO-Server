@@ -24,6 +24,8 @@ void World::Awake(int worldId)
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_ReqSyncNpc, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleReqSyncNpc));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_UpdateKnapItem, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleUpdateKnapItem));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_GetPlayerKnap, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleGetPlayerKnap));
+	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2C_ReqJoinTeam, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleReqJoinTeam));
+	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2C_JoinTeamRes, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleJoinTeamRes));
 
 	ResourceWorld* worldCfg = ResourceHelp::GetResourceManager()->Worlds->GetResource(_worldId);
 	std::vector<ResourceNpc>& npcCfgs = *worldCfg->GetNpcCfgs();
@@ -132,7 +134,7 @@ void World::SyncWorldToGather()
 	MessageSystemHelp::DispatchPacket(Proto::MsgId::MI_WorldSyncToGather, proto, nullptr);
 }
 
-inline void AddToAllRoleAppear(Player* pPlayer, Proto::AllRoleAppear& protoAppear)
+inline void AddRoleToAppear(Player* pPlayer, Proto::AllRoleAppear& protoAppear)
 {
 	Proto::Role* proto = protoAppear.add_roles();
 	proto->set_name(pPlayer->GetName().c_str());
@@ -167,7 +169,7 @@ void World::SyncAppearTimer()
 			if (pPlayer == nullptr)
 				continue;
 
-			AddToAllRoleAppear(pPlayer, protoNewAppear);
+			AddRoleToAppear(pPlayer, protoNewAppear);
 		}
 
 		if (protoNewAppear.roles_size() > 0)
@@ -183,7 +185,7 @@ void World::SyncAppearTimer()
 				continue;
 
 			const auto role = one.second;
-			AddToAllRoleAppear(role, protoOther);
+			AddRoleToAppear(role, protoOther);
 		}
 
 		if (protoOther.roles_size() > 0)
@@ -215,7 +217,6 @@ void World::HandleSyncPlayer(Packet* pPacket)
 	pPlayer->detail = pPlayer->AddComponent<PlayerComponentDetail>();
 	pPlayer->lastMap = pPlayer->AddComponent<PlayerComponentLastMap>();
 	pPlayer->lastMap->EnterWorld(_worldId, _sn);
-	pPlayer->currWorld = this;
 	const auto pLastMap = pPlayer->lastMap->GetCur();
 
 	//LOG_DEBUG("world. recv teleport. map id:" << _worldId << " world sn:" << GetSN() << " playerSn:" << pPlayer->GetPlayerSN());
@@ -363,11 +364,31 @@ void World::HandleGetPlayerKnap(Player* pPlayer, Packet* pPacket)
 	MessageSystemHelp::SendPacket(Proto::MsgId::S2C_GetPlayerKnap, proto, pPlayer);
 }
 
+void World::HandleReqJoinTeam(Player* pPlayer, Packet* pPacket)
+{
+	Proto::ReqJoinTeam proto = pPacket->ParseToProto<Proto::ReqJoinTeam>();
+	if (pPlayer->GetPlayerSN() == proto.applicant())
+	{
+		Player* target = playerMgr->GetPlayerBySn(proto.responder());
+		MessageSystemHelp::SendPacket(Proto::MsgId::C2C_ReqJoinTeam, proto, target);
+	}
+}
+
+void World::HandleJoinTeamRes(Player* pPlayer, Packet* pPacket)
+{
+	Proto::JoinTeamRes proto = pPacket->ParseToProto<Proto::JoinTeamRes>();
+	if (pPlayer->GetPlayerSN() == proto.responder())
+	{
+		Player* target = playerMgr->GetPlayerBySn(proto.applicant());
+		MessageSystemHelp::SendPacket(Proto::MsgId::C2C_JoinTeamRes, proto, target);
+	}
+}
+
 void World::HandleReqSyncNpc(Player* pPlayer, Packet* pPacket)
 {
 	Proto::ReqSyncNpc syncNpc = pPacket->ParseToProto<Proto::ReqSyncNpc>();
 	int id = syncNpc.npc_id();
-	uint64 sn = sn = npcs[id]->GetSN();
+	uint64 sn = npcs[id]->GetSN();
 	syncNpc.set_npc_sn(sn);
 	MessageSystemHelp::SendPacket(Proto::MsgId::S2C_ReqSyncNpc, syncNpc, pPlayer);
 	Proto::SyncNpcPos syncPos;

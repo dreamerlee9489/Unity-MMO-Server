@@ -471,3 +471,19 @@ message DropItemList {
 	int32 gold = 3;
 	repeated ItemData items = 4;
 }
+
+message TeamMember {
+	uint64 member_sn = 1;
+}
+
+message ReqJoinTeam {
+	uint64 applicant = 1;
+	uint64 responder = 2;
+}
+
+message JoinTeamRes {
+	bool agree = 1;
+	uint64 applicant = 2;
+	uint64 responder = 3;
+	repeated TeamMember members = 4; 
+}

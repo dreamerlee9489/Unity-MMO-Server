@@ -70,7 +70,6 @@ Proto::Player& Player::GetPlayerProto()
 
 void Player::GetDamage(Npc* enemy)
 {
-	LOG_DEBUG("player: " << detail->hp << " - " << enemy->atk);
 	detail->hp = (std::max)(detail->hp - enemy->atk, 0);
 }
 

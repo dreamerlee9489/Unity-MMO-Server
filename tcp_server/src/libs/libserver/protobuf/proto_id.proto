@@ -162,4 +162,7 @@ enum MsgId {
 	C2S_UpdateKnapItem		= 40001;
 	C2S_GetPlayerKnap		= 40002;
 	S2C_GetPlayerKnap		= 40003;
+
+	C2C_ReqJoinTeam			= 50001;
+	C2C_JoinTeamRes		= 50002;
 }

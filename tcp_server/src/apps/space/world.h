@@ -51,6 +51,8 @@ protected:
 	void HandleSyncPlayerCmd(Player* pPlayer, Packet* pPacket);
 	void HandleUpdateKnapItem(Player* pPlayer, Packet* pPacket);
 	void HandleGetPlayerKnap(Player* pPlayer, Packet* pPacket);
+	void HandleReqJoinTeam(Player* pPlayer, Packet* pPacket);
+	void HandleJoinTeamRes(Player* pPlayer, Packet* pPacket);
 
 private:
 	void SyncWorldToGather();
