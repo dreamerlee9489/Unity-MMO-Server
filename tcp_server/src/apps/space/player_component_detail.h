@@ -13,6 +13,7 @@ public:
 	int lv = 1, xp = 0, hp = 999, mp = 999, atk = 10, def = 0, gold = 500;
 	std::vector<ItemData>* pKnap = nullptr;
 	std::unordered_map<uint64, int>* pIdxMap = nullptr;
+	std::list<uint64> team;
 
 	void Awake() override;
 	void BackToPool() override;

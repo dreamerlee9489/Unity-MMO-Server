@@ -86,7 +86,25 @@ void Npc::GetDamage(Player* attacker)
 {
 	hp = (std::max)(hp - attacker->detail->atk, 0);
 	if (hp == 0)
+	{
+		Proto::SyncPlayerCmd cmd;
+		cmd.set_type(0);
+		cmd.set_player_sn(attacker->GetPlayerSN());
+		_world->BroadcastPacket(Proto::MsgId::S2C_SyncPlayerCmd, cmd);
 		GetComponent<FsmComponent>()->ChangeState(new Death(this, attacker));
+		int exp = (atk + lv) * 5, gold = (atk + lv) * 10;
+		attacker->detail->xp += exp;
+		attacker->detail->gold += gold;
+		std::vector<ItemData>* items = GetDropList(attacker);
+		Proto::DropItemList list;
+		list.set_npc_sn(_sn);
+		list.set_exp(exp);
+		list.set_gold(gold);
+		for (ItemData& item : *items)
+			item.SerializeToProto(list.add_items());
+		MessageSystemHelp::SendPacket(Proto::MsgId::S2C_DropItemList, list, attacker);
+		delete items;
+	}
 }
 
 std::vector<ItemData>* Npc::GetDropList(Player* player)

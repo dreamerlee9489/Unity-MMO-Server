@@ -148,10 +148,11 @@ enum MsgId {
 	C2S_SyncNpcPos			= 30005;
 	S2C_SyncNpcPos			= 30006;
 	S2C_SyncEntityStatus	= 30007;	
-	S2C_SyncFsmState		= 30009;
-	C2S_SyncFsmState		= 30010;
-	C2S_ReqSyncNpc			= 30011;
-	S2C_ReqSyncNpc			= 30012;	
+	S2C_SyncFsmState		= 30008;
+	C2S_SyncFsmState		= 30009;
+	C2S_ReqSyncNpc			= 30010;
+	S2C_ReqSyncNpc			= 30011;	
+	C2S_ReqSyncPlayer		= 30012;	
 	S2C_ReqLinkPlayer		= 30013;
 	C2S_PlayerAtkEvent		= 30014;
 	S2C_PlayerAtkEvent		= 30015;
@@ -164,5 +165,5 @@ enum MsgId {
 	S2C_GetPlayerKnap		= 40003;
 
 	C2C_ReqJoinTeam			= 50001;
-	C2C_JoinTeamRes		= 50002;
+	C2C_JoinTeamRes			= 50002;
 }

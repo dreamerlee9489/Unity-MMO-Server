@@ -21,6 +21,7 @@ void World::Awake(int worldId)
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_Move, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleMove));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_SyncPlayerPos, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleSyncPlayerPos));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_SyncPlayerCmd, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleSyncPlayerCmd));
+	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_ReqSyncPlayer, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleReqSyncPlayer));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_ReqSyncNpc, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleReqSyncNpc));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_UpdateKnapItem, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleUpdateKnapItem));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_GetPlayerKnap, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleGetPlayerKnap));
@@ -168,7 +169,6 @@ void World::SyncAppearTimer()
 			const auto pPlayer = pPlayerMgr->GetPlayerBySn(id);
 			if (pPlayer == nullptr)
 				continue;
-
 			AddRoleToAppear(pPlayer, protoNewAppear);
 		}
 
@@ -183,14 +183,12 @@ void World::SyncAppearTimer()
 			// 排除新玩家
 			if (_adds.find(one.first) != _adds.end())
 				continue;
-
 			const auto role = one.second;
 			AddRoleToAppear(role, protoOther);
 		}
 
 		if (protoOther.roles_size() > 0)
 			BroadcastPacket(Proto::MsgId::S2C_AllRoleAppear, protoOther, _adds);
-
 		_adds.clear();
 	}
 }
@@ -198,7 +196,6 @@ void World::SyncAppearTimer()
 /// <summary>
 /// 将player添加到world实例中, 通知客户端加载地图
 /// </summary>
-/// <param name="pPacket"></param>
 void World::HandleSyncPlayer(Packet* pPacket)
 {
 	auto proto = pPacket->ParseToProto<Proto::SyncPlayer>();
@@ -218,7 +215,6 @@ void World::HandleSyncPlayer(Packet* pPacket)
 	pPlayer->lastMap = pPlayer->AddComponent<PlayerComponentLastMap>();
 	pPlayer->lastMap->EnterWorld(_worldId, _sn);
 	const auto pLastMap = pPlayer->lastMap->GetCur();
-
 	//LOG_DEBUG("world. recv teleport. map id:" << _worldId << " world sn:" << GetSN() << " playerSn:" << pPlayer->GetPlayerSN());
 
 	//通知客户端进入地图
@@ -325,6 +321,9 @@ void World::HandleSyncPlayerPos(Player* pPlayer, Packet* pPacket)
 void World::HandleSyncPlayerCmd(Player* pPlayer, Packet* pPacket)
 {
 	Proto::SyncPlayerCmd proto = pPacket->ParseToProto<Proto::SyncPlayerCmd>();
+	pPlayer->cmd.type = proto.type();
+	pPlayer->cmd.target_sn = proto.target_sn();
+	pPlayer->cmd.point.ParserFromProto(proto.point());
 	proto.set_player_sn(pPlayer->GetPlayerSN());
 	BroadcastPacket(Proto::MsgId::S2C_SyncPlayerCmd, proto);
 }
@@ -377,10 +376,26 @@ void World::HandleReqJoinTeam(Player* pPlayer, Packet* pPacket)
 void World::HandleJoinTeamRes(Player* pPlayer, Packet* pPacket)
 {
 	Proto::JoinTeamRes proto = pPacket->ParseToProto<Proto::JoinTeamRes>();
-	if (pPlayer->GetPlayerSN() == proto.responder())
+	Player* responder = playerMgr->GetPlayerBySn(proto.responder());
+	Player* applicant = playerMgr->GetPlayerBySn(proto.applicant());
+	if (pPlayer == responder)
 	{
-		Player* target = playerMgr->GetPlayerBySn(proto.applicant());
-		MessageSystemHelp::SendPacket(Proto::MsgId::C2C_JoinTeamRes, proto, target);
+		if (!proto.agree())
+			MessageSystemHelp::SendPacket(Proto::MsgId::C2C_JoinTeamRes, proto, applicant);
+		else
+		{
+			if (responder->detail->team.empty())
+				responder->detail->team.emplace_back(responder->GetPlayerSN());
+			responder->detail->team.emplace_back(applicant->GetPlayerSN());
+			for (uint64 sn : responder->detail->team)
+			{
+				Proto::TeamMember* member = proto.add_members();
+				member->set_member_sn(sn);
+			}
+			for (uint64 sn : responder->detail->team)
+				if(sn != responder->GetPlayerSN())
+					MessageSystemHelp::SendPacket(Proto::MsgId::C2C_JoinTeamRes, proto, playerMgr->GetPlayerBySn(sn));
+		}
 	}
 }
 
@@ -405,6 +420,18 @@ void World::HandleReqSyncNpc(Player* pPlayer, Packet* pPacket)
 		proto.set_linker(true);
 		MessageSystemHelp::SendPacket(Proto::MsgId::S2C_ReqLinkPlayer, proto, pPlayer);
 	}
+}
+
+void World::HandleReqSyncPlayer(Player* pPlayer, Packet* pPacket)
+{
+	Proto::ReqSyncPlayer proto = pPacket->ParseToProto<Proto::ReqSyncPlayer>();
+	Player* player = playerMgr->GetPlayerBySn(proto.player_sn());
+	Proto::SyncPlayerCmd cmd;
+	cmd.set_type(player->cmd.type);
+	cmd.set_player_sn(player->GetPlayerSN());
+	cmd.set_target_sn(player->cmd.target_sn);
+	player->cmd.point.SerializeToProto(cmd.mutable_point());
+	MessageSystemHelp::SendPacket(Proto::MsgId::S2C_SyncPlayerCmd, cmd, pPlayer);
 }
 
 void World::HandleSyncNpcPos(Packet* pPacket)

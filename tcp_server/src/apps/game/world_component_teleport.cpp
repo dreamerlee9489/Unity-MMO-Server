@@ -55,7 +55,7 @@ void WorldComponentTeleport::CreateTeleportObject(int worldId, Player* pPlayer)
 
 void WorldComponentTeleport::CreateWorldFlag(WorldProxy* pWorldProxy, int targetWorldId, TeleportObject* pObj)
 {
-    // ´´½¨µØÍ¼
+    // åˆ›å»ºåœ°å›¾
     const auto pResMgr = ResourceHelp::GetResourceManager();
     const auto pWorldRes = pResMgr->Worlds->GetResource(targetWorldId);
 
@@ -65,7 +65,7 @@ void WorldComponentTeleport::CreateWorldFlag(WorldProxy* pWorldProxy, int target
         const auto worldSn = pWorldLocator->GetWorldSnById(targetWorldId);
         if (worldSn == static_cast<uint64>(INVALID_ID))
         {
-            // ÏòappmgrÉêÇë´´½¨µØÍ¼
+            // å‘appmgrç”³è¯·åˆ›å»ºåœ°å›¾
             Proto::RequestWorld protoToMgr;
             protoToMgr.set_world_id(targetWorldId);
             MessageSystemHelp::SendPacket(Proto::MsgId::G2M_RequestWorld, protoToMgr, APP_APPMGR);
@@ -79,7 +79,7 @@ void WorldComponentTeleport::CreateWorldFlag(WorldProxy* pWorldProxy, int target
     }
     else if (pWorldRes->IsType(ResourceWorldType::Dungeon))
     {
-        // ÂíÉÏ´´½¨Ò»¸ö¸±±¾
+        // é©¬ä¸Šåˆ›å»ºä¸€ä¸ªå‰¯æœ¬
 
         auto pSpaceSyncHandler = ComponentHelp::GetGlobalEntitySystem()->GetComponent<SpaceSyncHandler>();
         AppInfo info;
@@ -121,7 +121,7 @@ void WorldComponentTeleport::HandleBroadcastCreateWorldProxy(const int worldId, 
     const auto pWorldRes = pResMgr->Worlds->GetResource(worldId);
     if (pWorldRes->IsType(ResourceWorldType::Public))
     {
-        // ¹«¹²µØÍ¼:ËùÓĞµÈ´ıÖĞµÄÍæ¼Ò£¬È«¶¼Ìø¹ıÈ¥
+        // å…¬å…±åœ°å›¾:æ‰€æœ‰ç­‰å¾…ä¸­çš„ç©å®¶ï¼Œå…¨éƒ½è·³è¿‡å»
         do
         {
             auto iter = std::find_if(_objects.begin(), _objects.end(), [&worldId](auto pair)
@@ -140,22 +140,26 @@ void WorldComponentTeleport::HandleBroadcastCreateWorldProxy(const int worldId, 
     }
     else if (pWorldRes->IsType(ResourceWorldType::Dungeon))
     {
-        // ·Ç¹«¹²µØÍ¼£¬Ò»´ÎÖ»ÌøÒ»¸öÍæ¼Ò¹ıÈ¥
-        auto iter = std::find_if(_objects.begin(), _objects.end(), [&worldId](auto pair)
-            {
-                return (pair.second->GetTargetWorldId() == worldId);
-            });
-
-        // ¸±±¾ÊÇ¶¨ÏòĞ­Òé£¬Èç¹ûÃ»ÓĞÕÒµ½£¬Ò»¶¨ÓĞBUG
-        if (iter == _objects.end())
+        // éå…¬å…±åœ°å›¾ï¼Œä¸€æ¬¡åªè·³ä¸€ä¸ªç©å®¶è¿‡å»
+        do
         {
-            LOG_ERROR("BroadcastCreateWorldProxy, can't find teleport object. create world id:" << worldId << " cur world id:" << GetParent<WorldProxy>()->GetWorldId());
-            return;
-        }
+            auto iter = std::find_if(_objects.begin(), _objects.end(), [&worldId](auto pair)
+                {
+                    return (pair.second->GetTargetWorldId() == worldId);
+                });
 
-        auto pObj = iter->second;
-        pObj->FlagWorld.SetValue(worldSn);
-        Check(pObj);
+            // å‰¯æœ¬æ˜¯å®šå‘åè®®ï¼Œå¦‚æœæ²¡æœ‰æ‰¾åˆ°ï¼Œä¸€å®šæœ‰BUG
+            if (iter == _objects.end())
+            {
+                LOG_ERROR("BroadcastCreateWorldProxy, can't find teleport object. create world id:" << worldId << " cur world id:" << GetParent<WorldProxy>()->GetWorldId());
+                return;
+            }
+
+            auto pObj = iter->second;
+            pObj->FlagWorld.SetValue(worldSn);
+            Check(pObj);
+
+        } while (true);
     }
 }
 
@@ -182,7 +186,7 @@ bool WorldComponentTeleport::Check(TeleportObject* pObj)
     if (!pObj->FlagPlayerSync.IsCompleted() || !pObj->FlagWorld.IsCompleted())
         return false;
 
-    //ËùÓĞ×¼±¸¹¤×÷ÒÑÍê³É
+    //æ‰€æœ‰å‡†å¤‡å·¥ä½œå·²å®Œæˆ
     auto pPlayerMgr = _parent->GetComponent<PlayerCollectorComponent>();
     const auto pPlayer = pPlayerMgr->GetPlayerBySn(pObj->GetPlayerSN());
 
@@ -195,7 +199,7 @@ bool WorldComponentTeleport::Check(TeleportObject* pObj)
     // teleport
     WorldProxyHelp::Teleport(pPlayer, pWorldProxy->GetSN(), pObj->FlagWorld.GetValue());
 
-    // ÇåÀíÊı¾İ
+    // æ¸…ç†æ•°æ®
     _objects.erase(pPlayer->GetPlayerSN());
     GetSystemManager()->GetEntitySystem()->RemoveComponent(pObj);
     return true;

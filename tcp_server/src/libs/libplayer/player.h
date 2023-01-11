@@ -10,6 +10,13 @@
 #include <algorithm>
 #include <list>
 
+struct Command
+{
+	int type = 0;
+	uint64 target_sn = 0;
+	Vector3 point{0, 0, 0};
+};
+
 class World;
 class Npc;
 class PlayerComponentLastMap;
@@ -21,7 +28,7 @@ class Player : public Entity<Player>, public NetIdentify,
 public:
 	PlayerComponentLastMap* lastMap;
 	PlayerComponentDetail* detail;
-	std::list<Player*> team;
+	Command cmd{};
 
 	void Awake(NetIdentify* pIdentify, std::string account) override;
 	void Awake(NetIdentify* pIdentify, uint64 playerSn, uint64 worldSn) override;

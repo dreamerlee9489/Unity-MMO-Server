@@ -289,6 +289,15 @@ void WorldProxy::HandleC2GEnterWorld(Player* pPlayer, Packet* pPacket)
 
 	// create teleport object
 	GetComponent<WorldComponentTeleport>()->CreateTeleportObject(worldId, pPlayer);
+	auto pPlayerMgr = this->GetComponent<PlayerCollectorComponent>();
+	for (uint64 sn : proto.team())
+	{
+		if (sn != pPlayer->GetPlayerSN())
+		{
+			Player* player = pPlayerMgr->GetPlayerBySn(sn);
+			GetComponent<WorldComponentTeleport>()->CreateTeleportObject(worldId, player);
+		}
+	}
 }
 
 void WorldProxy::HandleS2GSyncPlayer(Player* pPlayer, Packet* pPacket)

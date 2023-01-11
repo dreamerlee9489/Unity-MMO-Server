@@ -49,7 +49,7 @@ struct TableStruct_msg_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxillaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[77]
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[78]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
@@ -216,6 +216,9 @@ extern ReqLinkPlayerDefaultTypeInternal _ReqLinkPlayer_default_instance_;
 class ReqSyncNpc;
 class ReqSyncNpcDefaultTypeInternal;
 extern ReqSyncNpcDefaultTypeInternal _ReqSyncNpc_default_instance_;
+class ReqSyncPlayer;
+class ReqSyncPlayerDefaultTypeInternal;
+extern ReqSyncPlayerDefaultTypeInternal _ReqSyncPlayer_default_instance_;
 class RequestSyncPlayer;
 class RequestSyncPlayerDefaultTypeInternal;
 extern RequestSyncPlayerDefaultTypeInternal _RequestSyncPlayer_default_instance_;
@@ -343,6 +346,7 @@ template<> ::Proto::RemovePlayer* Arena::CreateMaybeMessage<::Proto::RemovePlaye
 template<> ::Proto::ReqJoinTeam* Arena::CreateMaybeMessage<::Proto::ReqJoinTeam>(Arena*);
 template<> ::Proto::ReqLinkPlayer* Arena::CreateMaybeMessage<::Proto::ReqLinkPlayer>(Arena*);
 template<> ::Proto::ReqSyncNpc* Arena::CreateMaybeMessage<::Proto::ReqSyncNpc>(Arena*);
+template<> ::Proto::ReqSyncPlayer* Arena::CreateMaybeMessage<::Proto::ReqSyncPlayer>(Arena*);
 template<> ::Proto::RequestSyncPlayer* Arena::CreateMaybeMessage<::Proto::RequestSyncPlayer>(Arena*);
 template<> ::Proto::RequestWorld* Arena::CreateMaybeMessage<::Proto::RequestWorld>(Arena*);
 template<> ::Proto::RobotCreate* Arena::CreateMaybeMessage<::Proto::RobotCreate>(Arena*);
@@ -8052,9 +8056,21 @@ class EnterWorld :
   // accessors -------------------------------------------------------
 
   enum : int {
+    kTeamFieldNumber = 3,
     kPositionFieldNumber = 2,
     kWorldIdFieldNumber = 1,
   };
+  // repeated uint64 team = 3;
+  int team_size() const;
+  void clear_team();
+  ::PROTOBUF_NAMESPACE_ID::uint64 team(int index) const;
+  void set_team(int index, ::PROTOBUF_NAMESPACE_ID::uint64 value);
+  void add_team(::PROTOBUF_NAMESPACE_ID::uint64 value);
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::uint64 >&
+      team() const;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::uint64 >*
+      mutable_team();
+
   // .Proto.Vector3D position = 2;
   bool has_position() const;
   void clear_position();
@@ -8073,6 +8089,8 @@ class EnterWorld :
   class _Internal;
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::uint64 > team_;
+  mutable std::atomic<int> _team_cached_byte_size_;
   ::Proto::Vector3D* position_;
   ::PROTOBUF_NAMESPACE_ID::int32 world_id_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
@@ -10834,6 +10852,137 @@ class SyncPlayerCmd :
 };
 // -------------------------------------------------------------------
 
+class ReqSyncPlayer :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Proto.ReqSyncPlayer) */ {
+ public:
+  ReqSyncPlayer();
+  virtual ~ReqSyncPlayer();
+
+  ReqSyncPlayer(const ReqSyncPlayer& from);
+  ReqSyncPlayer(ReqSyncPlayer&& from) noexcept
+    : ReqSyncPlayer() {
+    *this = ::std::move(from);
+  }
+
+  inline ReqSyncPlayer& operator=(const ReqSyncPlayer& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline ReqSyncPlayer& operator=(ReqSyncPlayer&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const ReqSyncPlayer& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const ReqSyncPlayer* internal_default_instance() {
+    return reinterpret_cast<const ReqSyncPlayer*>(
+               &_ReqSyncPlayer_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    69;
+
+  friend void swap(ReqSyncPlayer& a, ReqSyncPlayer& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(ReqSyncPlayer* other) {
+    if (other == this) return;
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline ReqSyncPlayer* New() const final {
+    return CreateMaybeMessage<ReqSyncPlayer>(nullptr);
+  }
+
+  ReqSyncPlayer* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<ReqSyncPlayer>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const ReqSyncPlayer& from);
+  void MergeFrom(const ReqSyncPlayer& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  #else
+  bool MergePartialFromCodedStream(
+      ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) final;
+  #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  void SerializeWithCachedSizes(
+      ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(ReqSyncPlayer* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "Proto.ReqSyncPlayer";
+  }
+  private:
+  inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_msg_2eproto);
+    return ::descriptor_table_msg_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kPlayerSnFieldNumber = 1,
+  };
+  // uint64 player_sn = 1;
+  void clear_player_sn();
+  ::PROTOBUF_NAMESPACE_ID::uint64 player_sn() const;
+  void set_player_sn(::PROTOBUF_NAMESPACE_ID::uint64 value);
+
+  // @@protoc_insertion_point(class_scope:Proto.ReqSyncPlayer)
+ private:
+  class _Internal;
+
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::uint64 player_sn_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_msg_2eproto;
+};
+// -------------------------------------------------------------------
+
 class ReqSyncNpc :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Proto.ReqSyncNpc) */ {
  public:
@@ -10876,7 +11025,7 @@ class ReqSyncNpc :
                &_ReqSyncNpc_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    69;
+    70;
 
   friend void swap(ReqSyncNpc& a, ReqSyncNpc& b) {
     a.Swap(&b);
@@ -11014,7 +11163,7 @@ class ReqLinkPlayer :
                &_ReqLinkPlayer_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    70;
+    71;
 
   friend void swap(ReqLinkPlayer& a, ReqLinkPlayer& b) {
     a.Swap(&b);
@@ -11159,7 +11308,7 @@ class NpcAtkEvent :
                &_NpcAtkEvent_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    71;
+    72;
 
   friend void swap(NpcAtkEvent& a, NpcAtkEvent& b) {
     a.Swap(&b);
@@ -11297,7 +11446,7 @@ class PlayerAtkEvent :
                &_PlayerAtkEvent_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    72;
+    73;
 
   friend void swap(PlayerAtkEvent& a, PlayerAtkEvent& b) {
     a.Swap(&b);
@@ -11435,7 +11584,7 @@ class DropItemList :
                &_DropItemList_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    73;
+    74;
 
   friend void swap(DropItemList& a, DropItemList& b) {
     a.Swap(&b);
@@ -11593,7 +11742,7 @@ class TeamMember :
                &_TeamMember_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    74;
+    75;
 
   friend void swap(TeamMember& a, TeamMember& b) {
     a.Swap(&b);
@@ -11724,7 +11873,7 @@ class ReqJoinTeam :
                &_ReqJoinTeam_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    75;
+    76;
 
   friend void swap(ReqJoinTeam& a, ReqJoinTeam& b) {
     a.Swap(&b);
@@ -11862,7 +12011,7 @@ class JoinTeamRes :
                &_JoinTeamRes_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    76;
+    77;
 
   friend void swap(JoinTeamRes& a, JoinTeamRes& b) {
     a.Swap(&b);
@@ -15298,6 +15447,36 @@ inline void EnterWorld::set_allocated_position(::Proto::Vector3D* position) {
   // @@protoc_insertion_point(field_set_allocated:Proto.EnterWorld.position)
 }
 
+// repeated uint64 team = 3;
+inline int EnterWorld::team_size() const {
+  return team_.size();
+}
+inline void EnterWorld::clear_team() {
+  team_.Clear();
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint64 EnterWorld::team(int index) const {
+  // @@protoc_insertion_point(field_get:Proto.EnterWorld.team)
+  return team_.Get(index);
+}
+inline void EnterWorld::set_team(int index, ::PROTOBUF_NAMESPACE_ID::uint64 value) {
+  team_.Set(index, value);
+  // @@protoc_insertion_point(field_set:Proto.EnterWorld.team)
+}
+inline void EnterWorld::add_team(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+  team_.Add(value);
+  // @@protoc_insertion_point(field_add:Proto.EnterWorld.team)
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::uint64 >&
+EnterWorld::team() const {
+  // @@protoc_insertion_point(field_list:Proto.EnterWorld.team)
+  return team_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::uint64 >*
+EnterWorld::mutable_team() {
+  // @@protoc_insertion_point(field_mutable_list:Proto.EnterWorld.team)
+  return &team_;
+}
+
 // -------------------------------------------------------------------
 
 // RequestWorld
@@ -16292,6 +16471,24 @@ inline void SyncPlayerCmd::set_target_sn(::PROTOBUF_NAMESPACE_ID::uint64 value) 
 
 // -------------------------------------------------------------------
 
+// ReqSyncPlayer
+
+// uint64 player_sn = 1;
+inline void ReqSyncPlayer::clear_player_sn() {
+  player_sn_ = PROTOBUF_ULONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint64 ReqSyncPlayer::player_sn() const {
+  // @@protoc_insertion_point(field_get:Proto.ReqSyncPlayer.player_sn)
+  return player_sn_;
+}
+inline void ReqSyncPlayer::set_player_sn(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+  
+  player_sn_ = value;
+  // @@protoc_insertion_point(field_set:Proto.ReqSyncPlayer.player_sn)
+}
+
+// -------------------------------------------------------------------
+
 // ReqSyncNpc
 
 // int32 npc_id = 1;
@@ -16634,6 +16831,8 @@ JoinTeamRes::members() const {
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

@@ -78,9 +78,7 @@ bool ConnectObj::Recv()
 	{
 		// 总空间数据不足一个头的大小，扩容
 		if (_recvBuffer->GetEmptySize() < (sizeof(PacketHeadS2S) + sizeof(TotalSizeType) * 2))
-		{
 			_recvBuffer->ReAllocBuffer();
-		}
 
 		const int emptySize = _recvBuffer->GetBuffer(pBuffer);
 		const int dataSize = ::recv(_socketKey.Socket, pBuffer, emptySize, 0);

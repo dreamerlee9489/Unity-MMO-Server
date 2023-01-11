@@ -333,6 +333,7 @@ message SyncPlayer {
 message EnterWorld {
 	int32 world_id = 1;
 	Vector3D position = 2;
+	repeated uint64 team = 3;
 }
 
 message RequestWorld {
@@ -442,6 +443,10 @@ message SyncPlayerCmd {
 	Vector3D point = 2;	
 	uint64 player_sn = 3;
 	uint64 target_sn = 4;
+}
+
+message ReqSyncPlayer {
+	uint64 player_sn = 1; 
 }
 
 message ReqSyncNpc {
