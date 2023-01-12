@@ -27,6 +27,7 @@
     <ClInclude Include="player_collector_component.h" />
     <ClInclude Include="player_component_last_map.h" />
     <ClInclude Include="player_component_proto_list.h" />
+    <ClInclude Include="team.h" />
     <ClInclude Include="world_base.h" />
   </ItemGroup>
   <ItemGroup>
@@ -91,7 +92,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)libs\$(Configuration)\</OutDir>
-    <IncludePath>$(SolutionDir)..\include\common;$(SolutionDir)..\include\windows;..\;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)..\include\common;$(SolutionDir)..\include\windows;..\tcp_server\src\apps\space;..\;$(IncludePath)</IncludePath>
     <LibraryPath>$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

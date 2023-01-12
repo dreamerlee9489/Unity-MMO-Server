@@ -25,8 +25,6 @@ void World::Awake(int worldId)
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_ReqSyncNpc, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleReqSyncNpc));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_UpdateKnapItem, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleUpdateKnapItem));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_GetPlayerKnap, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleGetPlayerKnap));
-	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2C_ReqJoinTeam, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleReqJoinTeam));
-	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2C_JoinTeamRes, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleJoinTeamRes));
 
 	ResourceWorld* worldCfg = ResourceHelp::GetResourceManager()->Worlds->GetResource(_worldId);
 	std::vector<ResourceNpc>& npcCfgs = *worldCfg->GetNpcCfgs();
@@ -92,24 +90,7 @@ void World::HandleNetworkDisconnect(Packet* pPacket)
 		protoDis.set_sn(pPlayer->GetPlayerSN());
 		BroadcastPacket(Proto::MsgId::S2C_RoleDisappear, protoDis);
 		pPlayerMgr->RemovePlayerBySn(pTagPlayer->KeyInt64);
-
-		for (auto& enemy : npcs)
-		{
-			if (enemy->GetLinkPlayer() == pPlayer)
-			{
-				enemy->GetComponent<FsmComponent>()->ResetState();
-				Player* target = GetNearestPlayer(enemy->GetCurrPos());
-				enemy->SetLinkPlayer(target);
-				if (target)
-				{
-					Proto::ReqLinkPlayer proto;
-					proto.set_npc_id(enemy->GetID());
-					proto.set_npc_sn(enemy->GetSN());
-					proto.set_linker(true);
-					MessageSystemHelp::SendPacket(Proto::MsgId::S2C_ReqLinkPlayer, proto, target);
-				}
-			}
-		}
+		PlayerDisappear(pPlayer);
 	}
 	else
 	{
@@ -193,6 +174,27 @@ void World::SyncAppearTimer()
 	}
 }
 
+void World::PlayerDisappear(Player* pPlayer)
+{
+	for (auto& enemy : npcs)
+	{
+		if (enemy->GetLinkPlayer() == pPlayer)
+		{
+			enemy->GetComponent<FsmComponent>()->ResetState();
+			Player* target = GetNearestPlayer(enemy->GetCurrPos());
+			enemy->SetLinkPlayer(target);
+			if (target)
+			{
+				Proto::ReqLinkPlayer proto;
+				proto.set_npc_id(enemy->GetID());
+				proto.set_npc_sn(enemy->GetSN());
+				proto.set_linker(true);
+				MessageSystemHelp::SendPacket(Proto::MsgId::S2C_ReqLinkPlayer, proto, target);
+			}
+		}
+	}
+}
+
 /// <summary>
 /// 将player添加到world实例中, 通知客户端加载地图
 /// </summary>
@@ -214,6 +216,7 @@ void World::HandleSyncPlayer(Packet* pPacket)
 	pPlayer->detail = pPlayer->AddComponent<PlayerComponentDetail>();
 	pPlayer->lastMap = pPlayer->AddComponent<PlayerComponentLastMap>();
 	pPlayer->lastMap->EnterWorld(_worldId, _sn);
+	pPlayer->curWorld = this;
 	const auto pLastMap = pPlayer->lastMap->GetCur();
 	//LOG_DEBUG("world. recv teleport. map id:" << _worldId << " world sn:" << GetSN() << " playerSn:" << pPlayer->GetPlayerSN());
 
@@ -286,7 +289,9 @@ void World::HandleG2SRemovePlayer(Player* pPlayer, Packet* pPacket)
 	auto pPlayerMgr = GetComponent<PlayerManagerComponent>();
 	pPlayerMgr->RemovePlayerBySn(pPlayer->GetPlayerSN());
 
-	// 通知其他玩家
+	// 通知其他玩家	
+	pPlayer->ResetCmd();
+	PlayerDisappear(pPlayer);
 	Proto::RoleDisappear disAppear;
 	disAppear.set_sn(pPlayer->GetPlayerSN());
 	BroadcastPacket(Proto::MsgId::S2C_RoleDisappear, disAppear);
@@ -361,42 +366,6 @@ void World::HandleGetPlayerKnap(Player* pPlayer, Packet* pPacket)
 	for (auto& item : knap)
 		item.SerializeToProto(proto.add_bag_items());
 	MessageSystemHelp::SendPacket(Proto::MsgId::S2C_GetPlayerKnap, proto, pPlayer);
-}
-
-void World::HandleReqJoinTeam(Player* pPlayer, Packet* pPacket)
-{
-	Proto::ReqJoinTeam proto = pPacket->ParseToProto<Proto::ReqJoinTeam>();
-	if (pPlayer->GetPlayerSN() == proto.applicant())
-	{
-		Player* target = playerMgr->GetPlayerBySn(proto.responder());
-		MessageSystemHelp::SendPacket(Proto::MsgId::C2C_ReqJoinTeam, proto, target);
-	}
-}
-
-void World::HandleJoinTeamRes(Player* pPlayer, Packet* pPacket)
-{
-	Proto::JoinTeamRes proto = pPacket->ParseToProto<Proto::JoinTeamRes>();
-	Player* responder = playerMgr->GetPlayerBySn(proto.responder());
-	Player* applicant = playerMgr->GetPlayerBySn(proto.applicant());
-	if (pPlayer == responder)
-	{
-		if (!proto.agree())
-			MessageSystemHelp::SendPacket(Proto::MsgId::C2C_JoinTeamRes, proto, applicant);
-		else
-		{
-			if (responder->detail->team.empty())
-				responder->detail->team.emplace_back(responder->GetPlayerSN());
-			responder->detail->team.emplace_back(applicant->GetPlayerSN());
-			for (uint64 sn : responder->detail->team)
-			{
-				Proto::TeamMember* member = proto.add_members();
-				member->set_member_sn(sn);
-			}
-			for (uint64 sn : responder->detail->team)
-				if(sn != responder->GetPlayerSN())
-					MessageSystemHelp::SendPacket(Proto::MsgId::C2C_JoinTeamRes, proto, playerMgr->GetPlayerBySn(sn));
-		}
-	}
 }
 
 void World::HandleReqSyncNpc(Player* pPlayer, Packet* pPacket)

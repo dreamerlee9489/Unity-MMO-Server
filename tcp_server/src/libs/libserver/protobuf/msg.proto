@@ -333,7 +333,6 @@ message SyncPlayer {
 message EnterWorld {
 	int32 world_id = 1;
 	Vector3D position = 2;
-	repeated uint64 team = 3;
 }
 
 message RequestWorld {

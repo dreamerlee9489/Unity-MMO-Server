@@ -23,32 +23,26 @@ void WorldComponentTeleport::Awake()
 void WorldComponentTeleport::BackToPool()
 {
     if (!_objects.empty())
-    {
         LOG_WARN("not completed to teleport. WorldComponentTeleport be destroyed.");
-    }
 
-    for(const auto pair:_objects)
-    {
-        GetSystemManager()->GetEntitySystem()->RemoveComponent(pair.second);
-    }
+    for(const auto& pair : _objects)
+        GetSystemManager()->GetEntitySystem()->RemoveComponent(pair.second._pObj);
     _objects.clear();
 }
 
 bool WorldComponentTeleport::IsTeleporting(Player* pPlayer)
 {
-    return _objects.find(pPlayer->GetPlayerSN()) != _objects.end();
+    return false;
 }
 
-void WorldComponentTeleport::CreateTeleportObject(int worldId, Player* pPlayer)
-{
-    const auto pObj = GetSystemManager()->GetEntitySystem()->AddComponent<TeleportObject>(worldId, pPlayer->GetPlayerSN());
-    _objects.insert(std::make_pair(pPlayer->GetPlayerSN(), pObj));
+void WorldComponentTeleport::CreateTeleportObject(int worldId, Player* pPlayer, bool isPublic)
+{   
+    const auto pObj = GetSystemManager()->GetEntitySystem()->AddComponent<TeleportObject>(worldId, pPlayer->GetPlayerSN(), isPublic);
+    _objects.emplace(std::make_pair(pPlayer->GetPlayerSN(), TeleportStruct(pObj, GetParent<WorldProxy>())));
 
     const auto pWorldProxy = GetParent<WorldProxy>();
-
     // World
     CreateWorldFlag(pWorldProxy, worldId, pObj);
-
     // Sync
     CreateSyncFlag(pWorldProxy, pObj);
 }
@@ -69,7 +63,6 @@ void WorldComponentTeleport::CreateWorldFlag(WorldProxy* pWorldProxy, int target
             Proto::RequestWorld protoToMgr;
             protoToMgr.set_world_id(targetWorldId);
             MessageSystemHelp::SendPacket(Proto::MsgId::G2M_RequestWorld, protoToMgr, APP_APPMGR);
-
             pObj->FlagWorld.Flag = TeleportFlagType::Waiting;
         }
         else
@@ -80,7 +73,6 @@ void WorldComponentTeleport::CreateWorldFlag(WorldProxy* pWorldProxy, int target
     else if (pWorldRes->IsType(ResourceWorldType::Dungeon))
     {
         // 马上创建一个副本
-
         auto pSpaceSyncHandler = ComponentHelp::GetGlobalEntitySystem()->GetComponent<SpaceSyncHandler>();
         AppInfo info;
         if (!pSpaceSyncHandler->GetSpaceApp(&info))
@@ -94,7 +86,6 @@ void WorldComponentTeleport::CreateWorldFlag(WorldProxy* pWorldProxy, int target
         protoCreate.set_last_world_sn(pWorldProxy->GetSN());
         protoCreate.set_game_app_id(Global::GetInstance()->GetCurAppId());
         MessageSystemHelp::SendPacket(Proto::MsgId::G2S_CreateWorld, protoCreate, APP_SPACE, info.AppId);
-
         pObj->FlagWorld.Flag = TeleportFlagType::Waiting;
     }
     else
@@ -111,7 +102,6 @@ void WorldComponentTeleport::CreateSyncFlag(WorldProxy* pWorldProxy, TeleportObj
     Proto::RequestSyncPlayer protoSync;
     protoSync.set_player_sn(pObj->GetPlayerSN());
     pWorldProxy->SendPacketToWorld(Proto::MsgId::G2S_RequestSyncPlayer, protoSync, pPlayer);
-
     pObj->FlagPlayerSync.Flag = TeleportFlagType::Waiting;
 }
 
@@ -124,42 +114,37 @@ void WorldComponentTeleport::HandleBroadcastCreateWorldProxy(const int worldId, 
         // 公共地图:所有等待中的玩家，全都跳过去
         do
         {
-            auto iter = std::find_if(_objects.begin(), _objects.end(), [&worldId](auto pair)
+            auto iter = std::find_if(_objects.begin(), _objects.end(), [&worldId](auto& pair)
                 {
-                    return (pair.second->GetTargetWorldId() == worldId);
+                    return (pair.second._pObj->GetTargetWorldId() == worldId);
                 });
 
             if (iter == _objects.end())
                 break;
 
-            auto pObj = iter->second;
+            auto pObj = iter->second._pObj;
             pObj->FlagWorld.SetValue(worldSn);
             Check(pObj);
-
         } while (true);
     }
     else if (pWorldRes->IsType(ResourceWorldType::Dungeon))
     {
         // 非公共地图，一次只跳一个玩家过去
-        do
-        {
-            auto iter = std::find_if(_objects.begin(), _objects.end(), [&worldId](auto pair)
-                {
-                    return (pair.second->GetTargetWorldId() == worldId);
-                });
-
-            // 副本是定向协议，如果没有找到，一定有BUG
-            if (iter == _objects.end())
+        auto iter = std::find_if(_objects.begin(), _objects.end(), [&worldId](auto& pair)
             {
-                LOG_ERROR("BroadcastCreateWorldProxy, can't find teleport object. create world id:" << worldId << " cur world id:" << GetParent<WorldProxy>()->GetWorldId());
-                return;
-            }
+                return (pair.second._pObj->GetTargetWorldId() == worldId);
+            });
 
-            auto pObj = iter->second;
-            pObj->FlagWorld.SetValue(worldSn);
-            Check(pObj);
+        // 副本是定向协议，如果没有找到，一定有BUG
+        if (iter == _objects.end())
+        {
+            LOG_ERROR("BroadcastCreateWorldProxy, can't find teleport object. create world id:" << worldId << " cur world id:" << GetParent<WorldProxy>()->GetWorldId());
+            return;
+        }
 
-        } while (true);
+        auto pObj = iter->second._pObj;
+        pObj->FlagWorld.SetValue(worldSn);
+        Check(pObj);
     }
 }
 
@@ -167,15 +152,22 @@ void WorldComponentTeleport::BroadcastSyncPlayer(uint64 playerSn)
 {
     auto iter = std::find_if(_objects.begin(), _objects.end(), [&playerSn](auto pair)
         {
-            return pair.second->GetPlayerSN() == playerSn;
+            return pair.second._pObj->GetPlayerSN() == playerSn;
         });
 
     if (iter == _objects.end())
         return;
 
-    auto pObj = iter->second;
+    auto pObj = iter->second._pObj;
     pObj->FlagPlayerSync.SetValue(true);
     Check(pObj);
+}
+
+void WorldComponentTeleport::Teleport(WorldProxy* pWorldProxy, TeleportObject* pObj, Player* pPlayer)
+{
+    WorldProxyHelp::Teleport(pPlayer, pWorldProxy->GetSN(), pObj->FlagWorld.GetValue());
+    GetSystemManager()->GetEntitySystem()->RemoveComponent(pObj);
+    _objects.erase(pPlayer->GetPlayerSN());
 }
 
 bool WorldComponentTeleport::Check(TeleportObject* pObj)
@@ -200,7 +192,7 @@ bool WorldComponentTeleport::Check(TeleportObject* pObj)
     WorldProxyHelp::Teleport(pPlayer, pWorldProxy->GetSN(), pObj->FlagWorld.GetValue());
 
     // 清理数据
-    _objects.erase(pPlayer->GetPlayerSN());
     GetSystemManager()->GetEntitySystem()->RemoveComponent(pObj);
+    _objects.erase(pPlayer->GetPlayerSN());
     return true;
 }

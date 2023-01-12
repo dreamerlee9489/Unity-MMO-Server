@@ -1,15 +1,17 @@
 ﻿#pragma once
 #include "libserver/entity.h"
 #include "libserver/socket_object.h"
-
 #include "libplayer/world_base.h"
 
 class Player;
+class PlayerCollectorComponent;
+class WorldProxyComponentGather;
+class WorldComponentTeleport;
 
 /// <summary>
 /// 主要解决跳转地图切换网络连接的开销以及space线程的耦合
 /// </summary>
-class WorldProxy :public IWorld, public Entity<WorldProxy>, public IAwakeFromPoolSystem<int, uint64>
+class WorldProxy : public IWorld, public Entity<WorldProxy>, public IAwakeFromPoolSystem<int, uint64>
 {
 public:
 	void Awake(int worldId, uint64 lastWorldSn) override;
@@ -38,6 +40,8 @@ private:
 	void HandleTeleport(Packet* pPacket);
 	void HandleTeleportAfter(Player* pPlayer, Packet* pPacket);
 	void HandleBroadcastCreateWorldProxy(Packet* pPacket);
+	void HandleReqJoinTeam(Player* pPlayer, Packet* pPacket);
+	void HandleJoinTeamRes(Player* pPlayer, Packet* pPacket);
 	void HandleC2GEnterWorld(Player* pPlayer, Packet* pPacket);
 	void HandleS2GSyncPlayer(Player* pPlayer, Packet* pPacket);
 	/// <summary>
@@ -45,7 +49,9 @@ private:
 	/// </summary>
 	void HandleDefaultFunction(Packet* pPacket);
 
-private:
 	int _spaceAppId{ 0 };
+	PlayerCollectorComponent* _playerMgr = nullptr;
+	WorldProxyComponentGather* _gatherMgr = nullptr;
+	WorldComponentTeleport* _teleportMgr = nullptr;
 };
 

@@ -7,14 +7,14 @@ void Player::Awake(NetIdentify* pIdentify, std::string account)
 {
 	_account = account;
 	_playerSn = 0;
-	_player.Clear();
+	_player.Clear();		
 
 	if (pIdentify != nullptr)
 		_socketKey.CopyFrom(pIdentify->GetSocketKey());
 
 	_tagKey.Clear();
 	_tagKey.AddTag(TagType::Account, _account);
-
+	
 	// 登录成功，修改网络底层的标识
 	MessageSystemHelp::DispatchPacket(Proto::MsgId::MI_NetworkListenKey, this);
 }
@@ -73,6 +73,18 @@ void Player::GetDamage(Npc* enemy)
 	detail->hp = (std::max)(detail->hp - enemy->atk, 0);
 }
 
+void Player::ResetCmd()
+{
+	cmd.type = 0;
+	cmd.target_sn = 0;
+	cmd.point = {0, 0, 0};
+	Proto::SyncPlayerCmd protoCmd;
+	protoCmd.set_type(0);
+	protoCmd.set_player_sn(_playerSn);
+	curWorld->BroadcastPacket(Proto::MsgId::S2C_SyncPlayerCmd, protoCmd);
+	//Broadcast(Proto::MsgId::S2C_SyncPlayerCmd, protoCmd, *curWorld->playerMgr->GetAll());
+}
+
 void Player::ParseFromStream(const uint64 playerSn, std::stringstream* pOpStream)
 {
 	_playerSn = playerSn;
@@ -84,7 +96,7 @@ void Player::ParserFromProto(const uint64 playerSn, const Proto::Player& proto)
 	_playerSn = playerSn;
 	_player.CopyFrom(proto);
 	_name = _player.name();
-
+	
 	// 内存中修改数据
 	for (auto& pair : _components)
 	{
@@ -110,4 +122,15 @@ void Player::SerializeToProto(Proto::Player* pProto)
 
 		pPlayerComponent->SerializeToProto(pProto);
 	}
+}
+
+void Player::Singlecast(Proto::MsgId msgId, google::protobuf::Message& proto, Player* pPlayer)
+{
+	MessageSystemHelp::SendPacket(msgId, proto, pPlayer);
+}
+
+void Player::Broadcast(Proto::MsgId msgId, google::protobuf::Message& proto, std::map<uint64, Player*>& playerMap)
+{
+	for (auto& pair : playerMap)
+		MessageSystemHelp::SendPacket(msgId, proto, pair.second);
 }

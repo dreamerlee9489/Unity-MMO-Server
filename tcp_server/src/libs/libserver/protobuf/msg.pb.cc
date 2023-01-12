@@ -1813,7 +1813,6 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_msg_2eproto::offsets[] PROTOBU
   ~0u,  // no _weak_field_map_
   PROTOBUF_FIELD_OFFSET(::Proto::EnterWorld, world_id_),
   PROTOBUF_FIELD_OFFSET(::Proto::EnterWorld, position_),
-  PROTOBUF_FIELD_OFFSET(::Proto::EnterWorld, team_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::Proto::RequestWorld, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -2074,34 +2073,34 @@ static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOB
   { 330, -1, sizeof(::Proto::GameTokenToRedisRs)},
   { 337, -1, sizeof(::Proto::SyncPlayer)},
   { 345, -1, sizeof(::Proto::EnterWorld)},
-  { 353, -1, sizeof(::Proto::RequestWorld)},
-  { 359, -1, sizeof(::Proto::CreateWorld)},
-  { 367, -1, sizeof(::Proto::BroadcastCreateWorld)},
-  { 375, -1, sizeof(::Proto::BroadcastCreateWorldProxy)},
-  { 382, -1, sizeof(::Proto::QueryWorld)},
-  { 389, -1, sizeof(::Proto::QueryWorldRs)},
-  { 396, -1, sizeof(::Proto::Teleport)},
-  { 405, -1, sizeof(::Proto::TeleportAfter)},
-  { 411, -1, sizeof(::Proto::RemovePlayer)},
-  { 417, -1, sizeof(::Proto::RequestSyncPlayer)},
-  { 423, -1, sizeof(::Proto::Role)},
-  { 438, -1, sizeof(::Proto::AllRoleAppear)},
-  { 444, -1, sizeof(::Proto::RoleDisappear)},
-  { 450, -1, sizeof(::Proto::Move)},
-  { 457, -1, sizeof(::Proto::SyncEntityStatus)},
-  { 464, -1, sizeof(::Proto::SyncNpcPos)},
-  { 471, -1, sizeof(::Proto::SyncFsmState)},
-  { 480, -1, sizeof(::Proto::SyncPlayerPos)},
-  { 486, -1, sizeof(::Proto::SyncPlayerCmd)},
-  { 495, -1, sizeof(::Proto::ReqSyncPlayer)},
-  { 501, -1, sizeof(::Proto::ReqSyncNpc)},
-  { 508, -1, sizeof(::Proto::ReqLinkPlayer)},
-  { 516, -1, sizeof(::Proto::NpcAtkEvent)},
-  { 523, -1, sizeof(::Proto::PlayerAtkEvent)},
-  { 530, -1, sizeof(::Proto::DropItemList)},
-  { 539, -1, sizeof(::Proto::TeamMember)},
-  { 545, -1, sizeof(::Proto::ReqJoinTeam)},
-  { 552, -1, sizeof(::Proto::JoinTeamRes)},
+  { 352, -1, sizeof(::Proto::RequestWorld)},
+  { 358, -1, sizeof(::Proto::CreateWorld)},
+  { 366, -1, sizeof(::Proto::BroadcastCreateWorld)},
+  { 374, -1, sizeof(::Proto::BroadcastCreateWorldProxy)},
+  { 381, -1, sizeof(::Proto::QueryWorld)},
+  { 388, -1, sizeof(::Proto::QueryWorldRs)},
+  { 395, -1, sizeof(::Proto::Teleport)},
+  { 404, -1, sizeof(::Proto::TeleportAfter)},
+  { 410, -1, sizeof(::Proto::RemovePlayer)},
+  { 416, -1, sizeof(::Proto::RequestSyncPlayer)},
+  { 422, -1, sizeof(::Proto::Role)},
+  { 437, -1, sizeof(::Proto::AllRoleAppear)},
+  { 443, -1, sizeof(::Proto::RoleDisappear)},
+  { 449, -1, sizeof(::Proto::Move)},
+  { 456, -1, sizeof(::Proto::SyncEntityStatus)},
+  { 463, -1, sizeof(::Proto::SyncNpcPos)},
+  { 470, -1, sizeof(::Proto::SyncFsmState)},
+  { 479, -1, sizeof(::Proto::SyncPlayerPos)},
+  { 485, -1, sizeof(::Proto::SyncPlayerCmd)},
+  { 494, -1, sizeof(::Proto::ReqSyncPlayer)},
+  { 500, -1, sizeof(::Proto::ReqSyncNpc)},
+  { 507, -1, sizeof(::Proto::ReqLinkPlayer)},
+  { 515, -1, sizeof(::Proto::NpcAtkEvent)},
+  { 522, -1, sizeof(::Proto::PlayerAtkEvent)},
+  { 529, -1, sizeof(::Proto::DropItemList)},
+  { 538, -1, sizeof(::Proto::TeamMember)},
+  { 544, -1, sizeof(::Proto::ReqJoinTeam)},
+  { 551, -1, sizeof(::Proto::JoinTeamRes)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
@@ -2277,66 +2276,66 @@ const char descriptor_table_protodef_msg_2eproto[] PROTOBUF_SECTION_VARIABLE(pro
   "\022\017\n\007account\030\001 \001(\t\022$\n\ntoken_info\030\002 \001(\0132\020."
   "Proto.TokenInfo\"L\n\nSyncPlayer\022\016\n\006app_id\030"
   "\001 \001(\005\022\017\n\007account\030\002 \001(\t\022\035\n\006player\030\003 \001(\0132\r"
-  ".Proto.Player\"O\n\nEnterWorld\022\020\n\010world_id\030"
+  ".Proto.Player\"A\n\nEnterWorld\022\020\n\010world_id\030"
   "\001 \001(\005\022!\n\010position\030\002 \001(\0132\017.Proto.Vector3D"
-  "\022\014\n\004team\030\003 \003(\004\" \n\014RequestWorld\022\020\n\010world_"
-  "id\030\001 \001(\005\"K\n\013CreateWorld\022\020\n\010world_id\030\001 \001("
-  "\005\022\025\n\rlast_world_sn\030\002 \001(\004\022\023\n\013game_app_id\030"
-  "\003 \001(\005\"Q\n\024BroadcastCreateWorld\022\020\n\010world_i"
-  "d\030\001 \001(\005\022\020\n\010world_sn\030\002 \001(\004\022\025\n\rlast_world_"
-  "sn\030\003 \001(\004\"\?\n\031BroadcastCreateWorldProxy\022\020\n"
-  "\010world_id\030\001 \001(\005\022\020\n\010world_sn\030\002 \001(\004\"5\n\nQue"
-  "ryWorld\022\020\n\010world_sn\030\001 \001(\004\022\025\n\rlast_world_"
-  "sn\030\002 \001(\004\"\215\001\n\014QueryWorldRs\022\020\n\010world_sn\030\001 "
-  "\001(\004\0223\n\013return_code\030\002 \001(\0162\036.Proto.QueryWo"
-  "rldRs.ReturnCode\"6\n\nReturnCode\022\021\n\rQueryW"
-  "orld_OK\020\000\022\025\n\021QueryWorld_Failed\020\001\"d\n\010Tele"
-  "port\022\025\n\rlast_world_sn\030\001 \001(\004\022\021\n\tplayer_sn"
-  "\030\002 \001(\004\022\017\n\007account\030\003 \001(\t\022\035\n\006player\030\004 \001(\0132"
-  "\r.Proto.Player\"\"\n\rTeleportAfter\022\021\n\tplaye"
-  "r_sn\030\001 \001(\004\"!\n\014RemovePlayer\022\021\n\tplayer_sn\030"
-  "\001 \001(\004\"&\n\021RequestSyncPlayer\022\021\n\tplayer_sn\030"
-  "\001 \001(\004\"\257\001\n\004Role\022\014\n\004name\030\001 \001(\t\022\n\n\002sn\030\002 \001(\004"
-  "\022\035\n\006gender\030\003 \001(\0162\r.Proto.Gender\022!\n\010posit"
-  "ion\030\004 \001(\0132\017.Proto.Vector3D\022\r\n\005level\030\005 \001("
-  "\005\022\n\n\002xp\030\006 \001(\005\022\n\n\002hp\030\007 \001(\005\022\n\n\002mp\030\010 \001(\005\022\013\n"
-  "\003atk\030\t \001(\005\022\013\n\003def\030\n \001(\005\"+\n\rAllRoleAppear"
-  "\022\032\n\005roles\030\001 \003(\0132\013.Proto.Role\"\033\n\rRoleDisa"
-  "ppear\022\n\n\002sn\030\001 \001(\004\"<\n\004Move\022\021\n\tplayer_sn\030\001"
-  " \001(\004\022!\n\010position\030\002 \003(\0132\017.Proto.Vector3D\""
-  "*\n\020SyncEntityStatus\022\n\n\002sn\030\001 \001(\004\022\n\n\002hp\030\002 "
-  "\001(\005\":\n\nSyncNpcPos\022\016\n\006npc_sn\030\001 \001(\004\022\034\n\003pos"
-  "\030\002 \001(\0132\017.Proto.Vector3D\"N\n\014SyncFsmState\022"
-  "\r\n\005state\030\001 \001(\005\022\014\n\004code\030\002 \001(\005\022\016\n\006npc_sn\030\003"
-  " \001(\004\022\021\n\tplayer_sn\030\004 \001(\004\"-\n\rSyncPlayerPos"
-  "\022\034\n\003pos\030\001 \001(\0132\017.Proto.Vector3D\"c\n\rSyncPl"
-  "ayerCmd\022\014\n\004type\030\001 \001(\005\022\036\n\005point\030\002 \001(\0132\017.P"
-  "roto.Vector3D\022\021\n\tplayer_sn\030\003 \001(\004\022\021\n\ttarg"
-  "et_sn\030\004 \001(\004\"\"\n\rReqSyncPlayer\022\021\n\tplayer_s"
-  "n\030\001 \001(\004\",\n\nReqSyncNpc\022\016\n\006npc_id\030\001 \001(\005\022\016\n"
-  "\006npc_sn\030\002 \001(\004\"\?\n\rReqLinkPlayer\022\016\n\006npc_id"
-  "\030\001 \001(\005\022\016\n\006npc_sn\030\002 \001(\004\022\016\n\006linker\030\003 \001(\010\"0"
-  "\n\013NpcAtkEvent\022\016\n\006npc_sn\030\001 \001(\004\022\021\n\ttarget_"
-  "sn\030\002 \001(\004\"6\n\016PlayerAtkEvent\022\021\n\tplayer_sn\030"
-  "\001 \001(\004\022\021\n\ttarget_sn\030\002 \001(\004\"Y\n\014DropItemList"
-  "\022\016\n\006npc_sn\030\001 \001(\004\022\013\n\003exp\030\002 \001(\005\022\014\n\004gold\030\003 "
-  "\001(\005\022\036\n\005items\030\004 \003(\0132\017.Proto.ItemData\"\037\n\nT"
-  "eamMember\022\021\n\tmember_sn\030\001 \001(\004\"3\n\013ReqJoinT"
-  "eam\022\021\n\tapplicant\030\001 \001(\004\022\021\n\tresponder\030\002 \001("
-  "\004\"f\n\013JoinTeamRes\022\r\n\005agree\030\001 \001(\010\022\021\n\tappli"
-  "cant\030\002 \001(\004\022\021\n\tresponder\030\003 \001(\004\022\"\n\007members"
-  "\030\004 \003(\0132\021.Proto.TeamMember*x\n\007TagType\022\017\n\013"
-  "TagTypeNone\020\000\022\022\n\016TagTypeAccount\020\001\022\016\n\nTag"
-  "TypeApp\020\002\022\021\n\rTagTypeEntity\020\003\022\022\n\016TagTypeT"
-  "oWorld\020\004\022\021\n\rTagTypePlayer\020\005*\232\001\n\026AccountC"
-  "heckReturnCode\022\n\n\006ARC_OK\020\000\022\017\n\013ARC_UNKONW"
-  "N\020\001\022\031\n\025ARC_NOT_FOUND_ACCOUNT\020\002\022\026\n\022ARC_PA"
-  "SSWORD_WRONG\020\003\022\017\n\013ARC_LOGGING\020\004\022\017\n\013ARC_T"
-  "IMEOUT\020\005\022\016\n\nARC_ONLINE\020\006*G\n\023LoginHttpRet"
-  "urnCode\022\013\n\007LHRC_OK\020\000\022\020\n\014LHRC_TIMEOUT\020\001\022\021"
-  "\n\rLHRC_NOTFOUND\020\002*L\n\026CreatePlayerReturnC"
-  "ode\022\021\n\rCPR_Create_OK\020\000\022\017\n\013CPR_Unkonwn\020\001\022"
-  "\016\n\nCPR_Rename\020\002b\006proto3"
+  "\" \n\014RequestWorld\022\020\n\010world_id\030\001 \001(\005\"K\n\013Cr"
+  "eateWorld\022\020\n\010world_id\030\001 \001(\005\022\025\n\rlast_worl"
+  "d_sn\030\002 \001(\004\022\023\n\013game_app_id\030\003 \001(\005\"Q\n\024Broad"
+  "castCreateWorld\022\020\n\010world_id\030\001 \001(\005\022\020\n\010wor"
+  "ld_sn\030\002 \001(\004\022\025\n\rlast_world_sn\030\003 \001(\004\"\?\n\031Br"
+  "oadcastCreateWorldProxy\022\020\n\010world_id\030\001 \001("
+  "\005\022\020\n\010world_sn\030\002 \001(\004\"5\n\nQueryWorld\022\020\n\010wor"
+  "ld_sn\030\001 \001(\004\022\025\n\rlast_world_sn\030\002 \001(\004\"\215\001\n\014Q"
+  "ueryWorldRs\022\020\n\010world_sn\030\001 \001(\004\0223\n\013return_"
+  "code\030\002 \001(\0162\036.Proto.QueryWorldRs.ReturnCo"
+  "de\"6\n\nReturnCode\022\021\n\rQueryWorld_OK\020\000\022\025\n\021Q"
+  "ueryWorld_Failed\020\001\"d\n\010Teleport\022\025\n\rlast_w"
+  "orld_sn\030\001 \001(\004\022\021\n\tplayer_sn\030\002 \001(\004\022\017\n\007acco"
+  "unt\030\003 \001(\t\022\035\n\006player\030\004 \001(\0132\r.Proto.Player"
+  "\"\"\n\rTeleportAfter\022\021\n\tplayer_sn\030\001 \001(\004\"!\n\014"
+  "RemovePlayer\022\021\n\tplayer_sn\030\001 \001(\004\"&\n\021Reque"
+  "stSyncPlayer\022\021\n\tplayer_sn\030\001 \001(\004\"\257\001\n\004Role"
+  "\022\014\n\004name\030\001 \001(\t\022\n\n\002sn\030\002 \001(\004\022\035\n\006gender\030\003 \001"
+  "(\0162\r.Proto.Gender\022!\n\010position\030\004 \001(\0132\017.Pr"
+  "oto.Vector3D\022\r\n\005level\030\005 \001(\005\022\n\n\002xp\030\006 \001(\005\022"
+  "\n\n\002hp\030\007 \001(\005\022\n\n\002mp\030\010 \001(\005\022\013\n\003atk\030\t \001(\005\022\013\n\003"
+  "def\030\n \001(\005\"+\n\rAllRoleAppear\022\032\n\005roles\030\001 \003("
+  "\0132\013.Proto.Role\"\033\n\rRoleDisappear\022\n\n\002sn\030\001 "
+  "\001(\004\"<\n\004Move\022\021\n\tplayer_sn\030\001 \001(\004\022!\n\010positi"
+  "on\030\002 \003(\0132\017.Proto.Vector3D\"*\n\020SyncEntityS"
+  "tatus\022\n\n\002sn\030\001 \001(\004\022\n\n\002hp\030\002 \001(\005\":\n\nSyncNpc"
+  "Pos\022\016\n\006npc_sn\030\001 \001(\004\022\034\n\003pos\030\002 \001(\0132\017.Proto"
+  ".Vector3D\"N\n\014SyncFsmState\022\r\n\005state\030\001 \001(\005"
+  "\022\014\n\004code\030\002 \001(\005\022\016\n\006npc_sn\030\003 \001(\004\022\021\n\tplayer"
+  "_sn\030\004 \001(\004\"-\n\rSyncPlayerPos\022\034\n\003pos\030\001 \001(\0132"
+  "\017.Proto.Vector3D\"c\n\rSyncPlayerCmd\022\014\n\004typ"
+  "e\030\001 \001(\005\022\036\n\005point\030\002 \001(\0132\017.Proto.Vector3D\022"
+  "\021\n\tplayer_sn\030\003 \001(\004\022\021\n\ttarget_sn\030\004 \001(\004\"\"\n"
+  "\rReqSyncPlayer\022\021\n\tplayer_sn\030\001 \001(\004\",\n\nReq"
+  "SyncNpc\022\016\n\006npc_id\030\001 \001(\005\022\016\n\006npc_sn\030\002 \001(\004\""
+  "\?\n\rReqLinkPlayer\022\016\n\006npc_id\030\001 \001(\005\022\016\n\006npc_"
+  "sn\030\002 \001(\004\022\016\n\006linker\030\003 \001(\010\"0\n\013NpcAtkEvent\022"
+  "\016\n\006npc_sn\030\001 \001(\004\022\021\n\ttarget_sn\030\002 \001(\004\"6\n\016Pl"
+  "ayerAtkEvent\022\021\n\tplayer_sn\030\001 \001(\004\022\021\n\ttarge"
+  "t_sn\030\002 \001(\004\"Y\n\014DropItemList\022\016\n\006npc_sn\030\001 \001"
+  "(\004\022\013\n\003exp\030\002 \001(\005\022\014\n\004gold\030\003 \001(\005\022\036\n\005items\030\004"
+  " \003(\0132\017.Proto.ItemData\"\037\n\nTeamMember\022\021\n\tm"
+  "ember_sn\030\001 \001(\004\"3\n\013ReqJoinTeam\022\021\n\tapplica"
+  "nt\030\001 \001(\004\022\021\n\tresponder\030\002 \001(\004\"f\n\013JoinTeamR"
+  "es\022\r\n\005agree\030\001 \001(\010\022\021\n\tapplicant\030\002 \001(\004\022\021\n\t"
+  "responder\030\003 \001(\004\022\"\n\007members\030\004 \003(\0132\021.Proto"
+  ".TeamMember*x\n\007TagType\022\017\n\013TagTypeNone\020\000\022"
+  "\022\n\016TagTypeAccount\020\001\022\016\n\nTagTypeApp\020\002\022\021\n\rT"
+  "agTypeEntity\020\003\022\022\n\016TagTypeToWorld\020\004\022\021\n\rTa"
+  "gTypePlayer\020\005*\232\001\n\026AccountCheckReturnCode"
+  "\022\n\n\006ARC_OK\020\000\022\017\n\013ARC_UNKONWN\020\001\022\031\n\025ARC_NOT"
+  "_FOUND_ACCOUNT\020\002\022\026\n\022ARC_PASSWORD_WRONG\020\003"
+  "\022\017\n\013ARC_LOGGING\020\004\022\017\n\013ARC_TIMEOUT\020\005\022\016\n\nAR"
+  "C_ONLINE\020\006*G\n\023LoginHttpReturnCode\022\013\n\007LHR"
+  "C_OK\020\000\022\020\n\014LHRC_TIMEOUT\020\001\022\021\n\rLHRC_NOTFOUN"
+  "D\020\002*L\n\026CreatePlayerReturnCode\022\021\n\rCPR_Cre"
+  "ate_OK\020\000\022\017\n\013CPR_Unkonwn\020\001\022\016\n\nCPR_Rename\020"
+  "\002b\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_msg_2eproto_deps[1] = {
   &::descriptor_table_db_2eproto,
@@ -2424,7 +2423,7 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_msg
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_msg_2eproto_once;
 static bool descriptor_table_msg_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_msg_2eproto = {
-  &descriptor_table_msg_2eproto_initialized, descriptor_table_protodef_msg_2eproto, "msg.proto", 6023,
+  &descriptor_table_msg_2eproto_initialized, descriptor_table_protodef_msg_2eproto, "msg.proto", 6009,
   &descriptor_table_msg_2eproto_once, descriptor_table_msg_2eproto_sccs, descriptor_table_msg_2eproto_deps, 78, 1,
   schemas, file_default_instances, TableStruct_msg_2eproto::offsets,
   file_level_metadata_msg_2eproto, 78, file_level_enum_descriptors_msg_2eproto, file_level_service_descriptors_msg_2eproto,
@@ -18117,8 +18116,7 @@ EnterWorld::EnterWorld()
 }
 EnterWorld::EnterWorld(const EnterWorld& from)
   : ::PROTOBUF_NAMESPACE_ID::Message(),
-      _internal_metadata_(nullptr),
-      team_(from.team_) {
+      _internal_metadata_(nullptr) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   if (from.has_position()) {
     position_ = new ::Proto::Vector3D(*from.position_);
@@ -18160,7 +18158,6 @@ void EnterWorld::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  team_.Clear();
   if (GetArenaNoVirtual() == nullptr && position_ != nullptr) {
     delete position_;
   }
@@ -18188,16 +18185,6 @@ const char* EnterWorld::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID:
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
           ptr = ctx->ParseMessage(mutable_position(), ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // repeated uint64 team = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::PackedUInt64Parser(mutable_team(), ptr, ctx);
-          CHK_(ptr);
-        } else if (static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 24) {
-          add_team(::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr));
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -18255,22 +18242,6 @@ bool EnterWorld::MergePartialFromCodedStream(
         break;
       }
 
-      // repeated uint64 team = 3;
-      case 3: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (26 & 0xFF)) {
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPackedPrimitive<
-                   ::PROTOBUF_NAMESPACE_ID::uint64, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_UINT64>(
-                 input, this->mutable_team())));
-        } else if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (24 & 0xFF)) {
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadRepeatedPrimitiveNoInline<
-                   ::PROTOBUF_NAMESPACE_ID::uint64, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_UINT64>(
-                 1, 26u, input, this->mutable_team())));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
       default: {
       handle_unusual:
         if (tag == 0) {
@@ -18309,17 +18280,6 @@ void EnterWorld::SerializeWithCachedSizes(
       2, _Internal::position(this), output);
   }
 
-  // repeated uint64 team = 3;
-  if (this->team_size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteTag(3, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED, output);
-    output->WriteVarint32(_team_cached_byte_size_.load(
-        std::memory_order_relaxed));
-  }
-  for (int i = 0, n = this->team_size(); i < n; i++) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64NoTag(
-      this->team(i), output);
-  }
-
   if (_internal_metadata_.have_unknown_fields()) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFields(
         _internal_metadata_.unknown_fields(), output);
@@ -18345,19 +18305,6 @@ void EnterWorld::SerializeWithCachedSizes(
         2, _Internal::position(this), target);
   }
 
-  // repeated uint64 team = 3;
-  if (this->team_size() > 0) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteTagToArray(
-      3,
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED,
-      target);
-    target = ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream::WriteVarint32ToArray(
-        _team_cached_byte_size_.load(std::memory_order_relaxed),
-         target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      WriteUInt64NoTagToArray(this->team_, target);
-  }
-
   if (_internal_metadata_.have_unknown_fields()) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields(), target);
@@ -18378,21 +18325,6 @@ size_t EnterWorld::ByteSizeLong() const {
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
-
-  // repeated uint64 team = 3;
-  {
-    size_t data_size = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      UInt64Size(this->team_);
-    if (data_size > 0) {
-      total_size += 1 +
-        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-            static_cast<::PROTOBUF_NAMESPACE_ID::int32>(data_size));
-    }
-    int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(data_size);
-    _team_cached_byte_size_.store(cached_size,
-                                    std::memory_order_relaxed);
-    total_size += data_size;
-  }
 
   // .Proto.Vector3D position = 2;
   if (this->has_position()) {
@@ -18435,7 +18367,6 @@ void EnterWorld::MergeFrom(const EnterWorld& from) {
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  team_.MergeFrom(from.team_);
   if (from.has_position()) {
     mutable_position()->::Proto::Vector3D::MergeFrom(from.position());
   }
@@ -18465,7 +18396,6 @@ bool EnterWorld::IsInitialized() const {
 void EnterWorld::InternalSwap(EnterWorld* other) {
   using std::swap;
   _internal_metadata_.Swap(&other->_internal_metadata_);
-  team_.InternalSwap(&other->team_);
   swap(position_, other->position_);
   swap(world_id_, other->world_id_);
 }

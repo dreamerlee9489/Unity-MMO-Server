@@ -28,8 +28,6 @@ void PlayerComponentDetail::ParserFromProto(const Proto::Player& proto)
 	mp = protoBase.mp();
 	atk = protoBase.atk();
 	def = protoBase.def();
-	//for (uint64 sn : protoMisc.team())
-	//	team.emplace_back(sn);
 	gold = protoKnap.gold();
 	for (auto &item : protoKnap.bag_items())
 	{
@@ -56,9 +54,6 @@ void PlayerComponentDetail::SerializeToProto(Proto::Player* pProto)
 	pProto->mutable_base()->set_mp(mp);
 	pProto->mutable_base()->set_atk(atk);
 	pProto->mutable_base()->set_def(def);
-	//pProto->mutable_misc()->clear_team();
-	//for (uint64 sn : team)
-	//	pProto->mutable_misc()->add_team(sn);
 	pProto->mutable_knap()->set_gold(gold);
 	auto& oldItems = *pProto->mutable_knap()->mutable_bag_items();
 	for (auto& item : oldItems)

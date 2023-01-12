@@ -20,13 +20,12 @@
 void WorldProxy::Awake(int worldId, uint64 lastWorldSn)
 {
 	_worldId = worldId;
-
 	_spaceAppId = Global::GetAppIdFromSN(_sn);
 	//LOG_DEBUG("create world proxy. world id:" << worldId << " sn:" << _sn << " space app id:" << _spaceAppId);
 
-	AddComponent<PlayerCollectorComponent>();
-	AddComponent<WorldProxyComponentGather>();
-	AddComponent<WorldComponentTeleport>();
+	_playerMgr = AddComponent<PlayerCollectorComponent>();
+	_gatherMgr = AddComponent<WorldProxyComponentGather>();
+	_teleportMgr = AddComponent<WorldComponentTeleport>();
 
 	auto pProxyLocator = ComponentHelp::GetGlobalEntitySystem()->GetComponent<WorldProxyLocator>();
 	pProxyLocator->RegisterToLocator(_worldId, GetSN());
@@ -57,6 +56,8 @@ void WorldProxy::Awake(int worldId, uint64 lastWorldSn)
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::S2G_SyncPlayer, BindFunP1(this, &WorldProxy::GetPlayer), BindFunP2(this, &WorldProxy::HandleS2GSyncPlayer));
 
 	// 客户端发送来的协议
+	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2C_ReqJoinTeam, BindFunP1(this, &WorldProxy::GetPlayer), BindFunP2(this, &WorldProxy::HandleReqJoinTeam));
+	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2C_JoinTeamRes, BindFunP1(this, &WorldProxy::GetPlayer), BindFunP2(this, &WorldProxy::HandleJoinTeamRes));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2G_EnterWorld, BindFunP1(this, &WorldProxy::GetPlayer), BindFunP2(this, &WorldProxy::HandleC2GEnterWorld));
 
 	// 默认协议处理函数
@@ -73,9 +74,7 @@ void WorldProxy::SendPacketToWorld(const Proto::MsgId msgId, ::google::protobuf:
 	tagKey.AddTag(TagType::Player, pPlayer->GetPlayerSN());
 	tagKey.AddTag(TagType::Entity, _sn);
 	if (Global::GetInstance()->GetCurAppType() == APP_ALLINONE)
-	{
 		tagKey.AddTag(TagType::ToWorld, _sn);
-	}
 	MessageSystemHelp::SendPacket(msgId, proto, &tagKey, APP_SPACE, _spaceAppId);
 }
 
@@ -85,9 +84,7 @@ void WorldProxy::SendPacketToWorld(const Proto::MsgId msgId, Player* pPlayer) co
 	tagKey.AddTag(TagType::Player, pPlayer->GetPlayerSN());
 	tagKey.AddTag(TagType::Entity, _sn);
 	if (Global::GetInstance()->GetCurAppType() == APP_ALLINONE)
-	{
 		tagKey.AddTag(TagType::ToWorld, _sn);
-	}
 	MessageSystemHelp::SendPacket(msgId, &tagKey, APP_SPACE, _spaceAppId);
 }
 
@@ -273,6 +270,31 @@ void WorldProxy::HandleTeleportAfter(Player* pPlayer, Packet* pPacket)
 	SendPacketToWorld(Proto::MsgId::G2S_RemovePlayer, protoRs, pPlayer);
 }
 
+void WorldProxy::HandleReqJoinTeam(Player* pPlayer, Packet* pPacket)
+{
+	Proto::ReqJoinTeam proto = pPacket->ParseToProto<Proto::ReqJoinTeam>();
+	if (pPlayer->GetPlayerSN() == proto.applicant())
+	{
+		Player* target = _playerMgr->GetPlayerBySn(proto.responder());
+		MessageSystemHelp::SendPacket(Proto::MsgId::C2C_ReqJoinTeam, proto, target);
+	}
+}
+
+void WorldProxy::HandleJoinTeamRes(Player* pPlayer, Packet* pPacket)
+{
+	Proto::JoinTeamRes proto = pPacket->ParseToProto<Proto::JoinTeamRes>();
+	Player* responder = _playerMgr->GetPlayerBySn(proto.responder());
+	Player* applicant = _playerMgr->GetPlayerBySn(proto.applicant());
+	if (pPlayer == responder)
+	{
+		if (!proto.agree())
+			MessageSystemHelp::SendPacket(Proto::MsgId::C2C_JoinTeamRes, proto, applicant);
+		else
+		{
+		}
+	}
+}
+
 void WorldProxy::HandleC2GEnterWorld(Player* pPlayer, Packet* pPacket)
 {
 	auto proto = pPacket->ParseToProto<Proto::EnterWorld>();
@@ -288,16 +310,7 @@ void WorldProxy::HandleC2GEnterWorld(Player* pPlayer, Packet* pPacket)
 		return;
 
 	// create teleport object
-	GetComponent<WorldComponentTeleport>()->CreateTeleportObject(worldId, pPlayer);
-	auto pPlayerMgr = this->GetComponent<PlayerCollectorComponent>();
-	for (uint64 sn : proto.team())
-	{
-		if (sn != pPlayer->GetPlayerSN())
-		{
-			Player* player = pPlayerMgr->GetPlayerBySn(sn);
-			GetComponent<WorldComponentTeleport>()->CreateTeleportObject(worldId, player);
-		}
-	}
+	pTeleportComponent->CreateTeleportObject(worldId, pPlayer, pWorldRes->IsType(ResourceWorldType::Public));
 }
 
 void WorldProxy::HandleS2GSyncPlayer(Player* pPlayer, Packet* pPacket)

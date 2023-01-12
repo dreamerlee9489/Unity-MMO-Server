@@ -46,6 +46,7 @@ message Player {
 	PlayerBase base = 3;
 	PlayerKnap knap = 4;
 	PlayerMisc misc = 5;
+	repeated uint64 team = 6;
 }
 
 message ItemData {

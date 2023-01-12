@@ -87,10 +87,7 @@ void Npc::GetDamage(Player* attacker)
 	hp = (std::max)(hp - attacker->detail->atk, 0);
 	if (hp == 0)
 	{
-		Proto::SyncPlayerCmd cmd;
-		cmd.set_type(0);
-		cmd.set_player_sn(attacker->GetPlayerSN());
-		_world->BroadcastPacket(Proto::MsgId::S2C_SyncPlayerCmd, cmd);
+		attacker->ResetCmd();
 		GetComponent<FsmComponent>()->ChangeState(new Death(this, attacker));
 		int exp = (atk + lv) * 5, gold = (atk + lv) * 10;
 		attacker->detail->xp += exp;

@@ -52,12 +52,11 @@ protected:
 	void HandleSyncPlayerCmd(Player* pPlayer, Packet* pPacket);
 	void HandleUpdateKnapItem(Player* pPlayer, Packet* pPacket);
 	void HandleGetPlayerKnap(Player* pPlayer, Packet* pPacket);
-	void HandleReqJoinTeam(Player* pPlayer, Packet* pPacket);
-	void HandleJoinTeamRes(Player* pPlayer, Packet* pPacket);
 
 private:
 	void SyncWorldToGather();
 	void SyncAppearTimer();
+	void PlayerDisappear(Player* pPlayer);
 
 	// 缓存1秒内增加或是删除的玩家
 	std::set<uint64> _adds;

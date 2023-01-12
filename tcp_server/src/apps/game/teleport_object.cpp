@@ -1,6 +1,6 @@
 #include "teleport_object.h"
 
-void TeleportObject::Awake(const int worldId, const uint64 playerSn)
+void TeleportObject::Awake(const int worldId, const uint64 playerSn, bool isPublic)
 {
 	FlagWorld.Flag = TeleportFlagType::None;
 	FlagWorld.Value = 0;
@@ -10,6 +10,7 @@ void TeleportObject::Awake(const int worldId, const uint64 playerSn)
 
 	_targetWorldId = worldId;
 	_playerSn = playerSn;
+	this->isPublic = isPublic;
 }
 
 void TeleportObject::BackToPool()

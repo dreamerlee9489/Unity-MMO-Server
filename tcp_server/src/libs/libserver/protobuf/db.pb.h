@@ -877,12 +877,24 @@ class Player :
   // accessors -------------------------------------------------------
 
   enum : int {
+    kTeamFieldNumber = 6,
     kNameFieldNumber = 2,
     kBaseFieldNumber = 3,
     kKnapFieldNumber = 4,
     kMiscFieldNumber = 5,
     kSnFieldNumber = 1,
   };
+  // repeated uint64 team = 6;
+  int team_size() const;
+  void clear_team();
+  ::PROTOBUF_NAMESPACE_ID::uint64 team(int index) const;
+  void set_team(int index, ::PROTOBUF_NAMESPACE_ID::uint64 value);
+  void add_team(::PROTOBUF_NAMESPACE_ID::uint64 value);
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::uint64 >&
+      team() const;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::uint64 >*
+      mutable_team();
+
   // string name = 2;
   void clear_name();
   const std::string& name() const;
@@ -928,6 +940,8 @@ class Player :
   class _Internal;
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::uint64 > team_;
+  mutable std::atomic<int> _team_cached_byte_size_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr name_;
   ::Proto::PlayerBase* base_;
   ::Proto::PlayerKnap* knap_;
@@ -2002,6 +2016,36 @@ inline void Player::set_allocated_misc(::Proto::PlayerMisc* misc) {
   }
   misc_ = misc;
   // @@protoc_insertion_point(field_set_allocated:Proto.Player.misc)
+}
+
+// repeated uint64 team = 6;
+inline int Player::team_size() const {
+  return team_.size();
+}
+inline void Player::clear_team() {
+  team_.Clear();
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint64 Player::team(int index) const {
+  // @@protoc_insertion_point(field_get:Proto.Player.team)
+  return team_.Get(index);
+}
+inline void Player::set_team(int index, ::PROTOBUF_NAMESPACE_ID::uint64 value) {
+  team_.Set(index, value);
+  // @@protoc_insertion_point(field_set:Proto.Player.team)
+}
+inline void Player::add_team(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+  team_.Add(value);
+  // @@protoc_insertion_point(field_add:Proto.Player.team)
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::uint64 >&
+Player::team() const {
+  // @@protoc_insertion_point(field_list:Proto.Player.team)
+  return team_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::uint64 >*
+Player::mutable_team() {
+  // @@protoc_insertion_point(field_mutable_list:Proto.Player.team)
+  return &team_;
 }
 
 // -------------------------------------------------------------------

@@ -7,8 +7,10 @@
 #include "player_component_last_map.h"
 #include "../../apps/space/player_component_detail.h"
 #include "../../apps/space/npc.h"
+#include "team.h"
 #include <algorithm>
 #include <list>
+#include <map>
 
 struct Command
 {
@@ -26,8 +28,9 @@ class Player : public Entity<Player>, public NetIdentify,
 	virtual public IAwakeFromPoolSystem<NetIdentify*, uint64, uint64>
 {
 public:
-	PlayerComponentLastMap* lastMap;
-	PlayerComponentDetail* detail;
+	PlayerComponentLastMap* lastMap = nullptr;
+	PlayerComponentDetail* detail = nullptr;
+	World* curWorld = nullptr;
 	Command cmd{};
 
 	void Awake(NetIdentify* pIdentify, std::string account) override;
@@ -39,16 +42,20 @@ public:
 	uint64 GetPlayerSN() const;
 	Vector3& GetCurrPos() { return lastMap->GetCur()->Position; }
 	void GetDamage(Npc* enemy);
+	void ResetCmd();
 
 	Proto::Player& GetPlayerProto();
 	void ParseFromStream(uint64 playerSn, std::stringstream* pOpStream);
 	void ParserFromProto(uint64 playerSn, const Proto::Player& proto);
 	void SerializeToProto(Proto::Player* pProto);
+	void Singlecast(Proto::MsgId msgId, google::protobuf::Message& proto, Player* pPlayer);
+	void Broadcast(Proto::MsgId msgId, google::protobuf::Message& proto, std::map<uint64, Player*>& playerMap);
 
 protected:
 	uint64 _playerSn{ 0 };
 	std::string _account{ "" };
 	std::string _name{ "" };
 	Proto::Player _player;
+	Team* pTeam = nullptr;
 };
 

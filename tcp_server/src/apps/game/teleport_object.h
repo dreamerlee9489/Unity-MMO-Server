@@ -40,10 +40,12 @@ private:
 	T Value;
 };
 
-class TeleportObject :public Component<TeleportObject>, public IAwakeFromPoolSystem<int, uint64>
+class TeleportObject :public Component<TeleportObject>, public IAwakeFromPoolSystem<int, uint64, bool>
 {
 public:
-	void Awake(int worldId, uint64 playerSn) override;
+	bool isPublic = true;
+
+	void Awake(int worldId, uint64 playerSn, bool isPublic) override;
 	void BackToPool() override;
 
 	TeleportFlag<uint64> FlagWorld;

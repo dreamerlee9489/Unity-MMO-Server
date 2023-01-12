@@ -8056,21 +8056,9 @@ class EnterWorld :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kTeamFieldNumber = 3,
     kPositionFieldNumber = 2,
     kWorldIdFieldNumber = 1,
   };
-  // repeated uint64 team = 3;
-  int team_size() const;
-  void clear_team();
-  ::PROTOBUF_NAMESPACE_ID::uint64 team(int index) const;
-  void set_team(int index, ::PROTOBUF_NAMESPACE_ID::uint64 value);
-  void add_team(::PROTOBUF_NAMESPACE_ID::uint64 value);
-  const ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::uint64 >&
-      team() const;
-  ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::uint64 >*
-      mutable_team();
-
   // .Proto.Vector3D position = 2;
   bool has_position() const;
   void clear_position();
@@ -8089,8 +8077,6 @@ class EnterWorld :
   class _Internal;
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
-  ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::uint64 > team_;
-  mutable std::atomic<int> _team_cached_byte_size_;
   ::Proto::Vector3D* position_;
   ::PROTOBUF_NAMESPACE_ID::int32 world_id_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
@@ -15445,36 +15431,6 @@ inline void EnterWorld::set_allocated_position(::Proto::Vector3D* position) {
   }
   position_ = position;
   // @@protoc_insertion_point(field_set_allocated:Proto.EnterWorld.position)
-}
-
-// repeated uint64 team = 3;
-inline int EnterWorld::team_size() const {
-  return team_.size();
-}
-inline void EnterWorld::clear_team() {
-  team_.Clear();
-}
-inline ::PROTOBUF_NAMESPACE_ID::uint64 EnterWorld::team(int index) const {
-  // @@protoc_insertion_point(field_get:Proto.EnterWorld.team)
-  return team_.Get(index);
-}
-inline void EnterWorld::set_team(int index, ::PROTOBUF_NAMESPACE_ID::uint64 value) {
-  team_.Set(index, value);
-  // @@protoc_insertion_point(field_set:Proto.EnterWorld.team)
-}
-inline void EnterWorld::add_team(::PROTOBUF_NAMESPACE_ID::uint64 value) {
-  team_.Add(value);
-  // @@protoc_insertion_point(field_add:Proto.EnterWorld.team)
-}
-inline const ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::uint64 >&
-EnterWorld::team() const {
-  // @@protoc_insertion_point(field_list:Proto.EnterWorld.team)
-  return team_;
-}
-inline ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::uint64 >*
-EnterWorld::mutable_team() {
-  // @@protoc_insertion_point(field_mutable_list:Proto.EnterWorld.team)
-  return &team_;
 }
 
 // -------------------------------------------------------------------
