@@ -1,17 +1,19 @@
 #ifndef TEAM_H
 #define TEAM_H
-#include "../../apps/game/world_proxy.h"
-#include "player.h"
+#include "world_proxy.h"
+#include "world_component_teleport.h"
+#include "libplayer/player.h"
 #include <list>
 
 class Team
 {
 public:
-	Team(uint64 captain) 
-	{
-		_captain = captain;
-		_members.emplace_back(captain); 
-	}
+	int dungeonId = 0;
+	uint64 dungeonSn = 0;
+
+	Team() {}
+
+	Team(uint64 captain) { _captain = captain; }
 
 	~Team() {}
 
@@ -27,6 +29,8 @@ public:
 				break;
 			}
 		}
+		if (_members.size() >= 1)
+			_captain = _members.front();
 	}
 
 	void Clear() { _members.clear(); }
@@ -37,13 +41,10 @@ public:
 
 	uint64 GetCaptain() { return _captain; }
 
-	void SetProxy(WorldProxy* proxy) { _proxy = proxy; }
-
-	WorldProxy* GetProxy() { return _proxy; }
+	std::list<uint64>& GetMembers() { return _members; }
 
 private:
-	uint64 _captain = 0;
-	WorldProxy* _proxy = nullptr;
+	uint64 _captain = 0;	
 	std::list<uint64> _members{};
 };
 

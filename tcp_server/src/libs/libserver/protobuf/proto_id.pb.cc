@@ -25,7 +25,7 @@ static constexpr ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema* schemas = n
 static constexpr ::PROTOBUF_NAMESPACE_ID::Message* const* file_default_instances = nullptr;
 
 const char descriptor_table_protodef_proto_5fid_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\016proto_id.proto\022\005Proto*\330\023\n\005MsgId\022\010\n\004Non"
+  "\n\016proto_id.proto\022\005Proto*\222\024\n\005MsgId\022\010\n\004Non"
   "e\020\000\022\025\n\021MI_NetworkConnect\020\001\022\027\n\023MI_Network"
   "Connected\020\002\022\024\n\020MI_NetworkListen\020\003\022\027\n\023MI_"
   "NetworkListenKey\020\004\022\030\n\024MI_NetworkDisconne"
@@ -55,40 +55,42 @@ const char descriptor_table_protodef_proto_5fid_2eproto[] PROTOBUF_SECTION_VARIA
   "estSyncPlayer\020\331\010\022\024\n\017G2DB_SavePlayer\020\332\010\022\025"
   "\n\020G2S_RemovePlayer\020\333\010\022\023\n\016C2G_EnterWorld\020"
   "\334\010\022\023\n\016G2M_QueryWorld\020\335\010\022\025\n\020G2M_QueryWorl"
-  "dRs\020\336\010\022\023\n\016S2C_EnterWorld\020\335\013\022\023\n\016S2G_SyncP"
-  "layer\020\336\013\022\026\n\021S2C_AllRoleAppear\020\337\013\022\026\n\021S2C_"
-  "RoleDisappear\020\340\013\022\r\n\010C2S_Move\020\341\013\022\r\n\010S2C_M"
-  "ove\020\342\013\022\024\n\017S2C_PlayerItems\020\343\013\022\024\n\017C2S_Play"
-  "erItems\020\344\013\022\034\n\027MI_BroadcastCreateWorld\020\321\017"
-  "\022!\n\034MI_BroadcastCreateWorldProxy\020\322\017\022\031\n\024M"
-  "I_WorldSyncToGather\020\271\027\022\036\n\031MI_WorldProxyS"
-  "yncToGather\020\272\027\022 \n\033MI_AccountSyncOnlineTo"
-  "Redis\020\241\037\022\"\n\035MI_AccountDeleteOnlineToRedi"
-  "s\020\242\037\022\037\n\032MI_PlayerSyncOnlineToRedis\020\243\037\022!\n"
-  "\034MI_PlayerDeleteOnlineToRedis\020\244\037\022\026\n\021MI_R"
-  "obotSyncState\020\211\'\022\023\n\016MI_RobotCreate\020\212\'\022\021\n"
-  "\014MI_HttpBegin\020\220N\022\031\n\024MI_HttpInnerResponse"
-  "\020\221N\022\026\n\021MI_HttpRequestBad\020\222N\022\030\n\023MI_HttpRe"
-  "questLogin\020\223N\022\017\n\nMI_HttpEnd\020\203R\022\030\n\023MI_Htt"
-  "pOuterRequest\020\204R\022\031\n\024MI_HttpOuterResponse"
-  "\020\205R\022\022\n\014MI_CmdThread\020\241\234\001\022\017\n\tMI_CmdApp\020\242\234\001"
-  "\022\026\n\020MI_CmdWorldProxy\020\243\234\001\022\021\n\013MI_CmdWorld\020"
-  "\244\234\001\022\022\n\014MI_CmdCreate\020\245\234\001\022\026\n\020MI_CmdEfficie"
-  "ncy\020\246\234\001\022\023\n\rMI_Efficiency\020\247\234\001\022\027\n\021C2S_Sync"
-  "PlayerPos\020\261\352\001\022\027\n\021S2C_SyncPlayerPos\020\262\352\001\022\027"
-  "\n\021C2S_SyncPlayerCmd\020\263\352\001\022\027\n\021S2C_SyncPlaye"
-  "rCmd\020\264\352\001\022\024\n\016C2S_SyncNpcPos\020\265\352\001\022\024\n\016S2C_Sy"
-  "ncNpcPos\020\266\352\001\022\032\n\024S2C_SyncEntityStatus\020\267\352\001"
-  "\022\026\n\020S2C_SyncFsmState\020\270\352\001\022\026\n\020C2S_SyncFsmS"
-  "tate\020\271\352\001\022\024\n\016C2S_ReqSyncNpc\020\272\352\001\022\024\n\016S2C_Re"
-  "qSyncNpc\020\273\352\001\022\027\n\021C2S_ReqSyncPlayer\020\274\352\001\022\027\n"
-  "\021S2C_ReqLinkPlayer\020\275\352\001\022\030\n\022C2S_PlayerAtkE"
-  "vent\020\276\352\001\022\030\n\022S2C_PlayerAtkEvent\020\277\352\001\022\025\n\017C2"
-  "S_NpcAtkEvent\020\300\352\001\022\025\n\017S2C_NpcAtkEvent\020\301\352\001"
-  "\022\026\n\020S2C_DropItemList\020\302\352\001\022\030\n\022C2S_UpdateKn"
-  "apItem\020\301\270\002\022\027\n\021C2S_GetPlayerKnap\020\302\270\002\022\027\n\021S"
-  "2C_GetPlayerKnap\020\303\270\002\022\025\n\017C2C_ReqJoinTeam\020"
-  "\321\206\003\022\025\n\017C2C_JoinTeamRes\020\322\206\003b\006proto3"
+  "dRs\020\336\010\022\022\n\rMI_CreateTeam\020\261\t\022\022\n\rMI_GlobalC"
+  "hat\020\262\t\022\020\n\013MI_TeamChat\020\263\t\022\023\n\016S2C_EnterWor"
+  "ld\020\335\013\022\023\n\016S2G_SyncPlayer\020\336\013\022\026\n\021S2C_AllRol"
+  "eAppear\020\337\013\022\026\n\021S2C_RoleDisappear\020\340\013\022\r\n\010C2"
+  "S_Move\020\341\013\022\r\n\010S2C_Move\020\342\013\022\024\n\017S2C_PlayerIt"
+  "ems\020\343\013\022\024\n\017C2S_PlayerItems\020\344\013\022\034\n\027MI_Broad"
+  "castCreateWorld\020\321\017\022!\n\034MI_BroadcastCreate"
+  "WorldProxy\020\322\017\022\031\n\024MI_WorldSyncToGather\020\271\027"
+  "\022\036\n\031MI_WorldProxySyncToGather\020\272\027\022 \n\033MI_A"
+  "ccountSyncOnlineToRedis\020\241\037\022\"\n\035MI_Account"
+  "DeleteOnlineToRedis\020\242\037\022\037\n\032MI_PlayerSyncO"
+  "nlineToRedis\020\243\037\022!\n\034MI_PlayerDeleteOnline"
+  "ToRedis\020\244\037\022\026\n\021MI_RobotSyncState\020\211\'\022\023\n\016MI"
+  "_RobotCreate\020\212\'\022\021\n\014MI_HttpBegin\020\220N\022\031\n\024MI"
+  "_HttpInnerResponse\020\221N\022\026\n\021MI_HttpRequestB"
+  "ad\020\222N\022\030\n\023MI_HttpRequestLogin\020\223N\022\017\n\nMI_Ht"
+  "tpEnd\020\203R\022\030\n\023MI_HttpOuterRequest\020\204R\022\031\n\024MI"
+  "_HttpOuterResponse\020\205R\022\022\n\014MI_CmdThread\020\241\234"
+  "\001\022\017\n\tMI_CmdApp\020\242\234\001\022\026\n\020MI_CmdWorldProxy\020\243"
+  "\234\001\022\021\n\013MI_CmdWorld\020\244\234\001\022\022\n\014MI_CmdCreate\020\245\234"
+  "\001\022\026\n\020MI_CmdEfficiency\020\246\234\001\022\023\n\rMI_Efficien"
+  "cy\020\247\234\001\022\027\n\021C2S_SyncPlayerPos\020\261\352\001\022\027\n\021S2C_S"
+  "yncPlayerPos\020\262\352\001\022\027\n\021C2S_SyncPlayerCmd\020\263\352"
+  "\001\022\027\n\021S2C_SyncPlayerCmd\020\264\352\001\022\024\n\016C2S_SyncNp"
+  "cPos\020\265\352\001\022\024\n\016S2C_SyncNpcPos\020\266\352\001\022\032\n\024S2C_Sy"
+  "ncEntityStatus\020\267\352\001\022\026\n\020S2C_SyncFsmState\020\270"
+  "\352\001\022\026\n\020C2S_SyncFsmState\020\271\352\001\022\024\n\016C2S_ReqSyn"
+  "cNpc\020\272\352\001\022\024\n\016S2C_ReqSyncNpc\020\273\352\001\022\027\n\021C2S_Re"
+  "qSyncPlayer\020\274\352\001\022\027\n\021S2C_ReqLinkPlayer\020\275\352\001"
+  "\022\030\n\022C2S_PlayerAtkEvent\020\276\352\001\022\030\n\022S2C_Player"
+  "AtkEvent\020\277\352\001\022\025\n\017C2S_NpcAtkEvent\020\300\352\001\022\025\n\017S"
+  "2C_NpcAtkEvent\020\301\352\001\022\026\n\020S2C_DropItemList\020\302"
+  "\352\001\022\030\n\022C2S_UpdateKnapItem\020\301\270\002\022\027\n\021C2S_GetP"
+  "layerKnap\020\302\270\002\022\027\n\021S2C_GetPlayerKnap\020\303\270\002\022\025"
+  "\n\017C2C_ReqJoinTeam\020\321\206\003\022\025\n\017C2C_JoinTeamRes"
+  "\020\322\206\003b\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_proto_5fid_2eproto_deps[1] = {
 };
@@ -97,7 +99,7 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_pro
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_proto_5fid_2eproto_once;
 static bool descriptor_table_proto_5fid_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_proto_5fid_2eproto = {
-  &descriptor_table_proto_5fid_2eproto_initialized, descriptor_table_protodef_proto_5fid_2eproto, "proto_id.proto", 2554,
+  &descriptor_table_proto_5fid_2eproto_initialized, descriptor_table_protodef_proto_5fid_2eproto, "proto_id.proto", 2612,
   &descriptor_table_proto_5fid_2eproto_once, descriptor_table_proto_5fid_2eproto_sccs, descriptor_table_proto_5fid_2eproto_deps, 0, 0,
   schemas, file_default_instances, TableStruct_proto_5fid_2eproto::offsets,
   file_level_metadata_proto_5fid_2eproto, 0, file_level_enum_descriptors_proto_5fid_2eproto, file_level_service_descriptors_proto_5fid_2eproto,
@@ -161,6 +163,9 @@ bool MsgId_IsValid(int value) {
     case 1116:
     case 1117:
     case 1118:
+    case 1201:
+    case 1202:
+    case 1203:
     case 1501:
     case 1502:
     case 1503:

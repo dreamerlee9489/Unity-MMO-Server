@@ -40,13 +40,18 @@ message PlayerMisc {
 	int32 online_version = 3;	// 在线版本（乐观锁）
 }
 
+message Team {
+	uint64 captain = 1;
+	repeated uint64 members = 2;
+}
+
 message Player {
 	uint64 sn = 1;
 	string name = 2;
 	PlayerBase base = 3;
 	PlayerKnap knap = 4;
 	PlayerMisc misc = 5;
-	repeated uint64 team = 6;
+	Team team = 6;
 }
 
 message ItemData {

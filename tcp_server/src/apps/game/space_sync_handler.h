@@ -13,6 +13,5 @@ public:
 
 protected:
 	void HandleAppInfoSync(Packet* pPacket);
-
 };
 

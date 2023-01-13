@@ -27,7 +27,6 @@
     <ClInclude Include="player_collector_component.h" />
     <ClInclude Include="player_component_last_map.h" />
     <ClInclude Include="player_component_proto_list.h" />
-    <ClInclude Include="team.h" />
     <ClInclude Include="world_base.h" />
   </ItemGroup>
   <ItemGroup>

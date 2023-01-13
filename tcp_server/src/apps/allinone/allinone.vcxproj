@@ -220,6 +220,7 @@
     <ClInclude Include="..\game\player_component_token.h" />
     <ClInclude Include="..\game\redis_game.h" />
     <ClInclude Include="..\game\space_sync_handler.h" />
+    <ClInclude Include="..\game\team.h" />
     <ClInclude Include="..\game\teleport_object.h" />
     <ClInclude Include="..\game\world_component_teleport.h" />
     <ClInclude Include="..\game\world_proxy.h" />

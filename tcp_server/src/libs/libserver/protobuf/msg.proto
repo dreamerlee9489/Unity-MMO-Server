@@ -476,18 +476,25 @@ message DropItemList {
 	repeated ItemData items = 4;
 }
 
-message TeamMember {
-	uint64 member_sn = 1;
-}
-
-message ReqJoinTeam {
-	uint64 applicant = 1;
-	uint64 responder = 2;
-}
-
-message JoinTeamRes {
+message JoinTeam {
 	bool agree = 1;
 	uint64 applicant = 2;
 	uint64 responder = 3;
-	repeated TeamMember members = 4; 
+}
+
+message GlobalChat {
+	uint64 sender = 1;
+	string account = 2;
+	string content = 3;
+}
+
+message TeamChat {
+	uint64 sender = 1;
+	string account = 2;
+	string content = 3;
+}
+
+message CreateTeam {
+	uint64 captain = 1;
+	repeated uint64 members = 2;
 }

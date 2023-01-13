@@ -1,7 +1,5 @@
 ﻿#include "world_proxy_locator.h"
-
 #include "libresource/resource_manager.h"
-
 #include "libserver/thread_mgr.h"
 #include "libserver/component_help.h"
 #include "libresource/resource_help.h"

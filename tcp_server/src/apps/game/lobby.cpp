@@ -36,9 +36,8 @@ void Lobby::Awake()
 	pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_GameTokenToRedisRs, BindFunP1(this, &Lobby::HandleGameTokenToRedisRs));
 	pMsgSystem->RegisterFunction(this, Proto::MsgId::G2DB_QueryPlayerRs, BindFunP1(this, &Lobby::HandleQueryPlayerRs));
 	pMsgSystem->RegisterFunction(this, Proto::MsgId::G2M_QueryWorldRs, BindFunP1(this, &Lobby::HandleQueryWorldRs));
-
 	pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_BroadcastCreateWorldProxy, BindFunP1(this, &Lobby::HandleBroadcastCreateWorldProxy));
-	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::MI_TeleportAfter, BindFunP1(this, &Lobby::GetPlayer), BindFunP2(this, &Lobby::HandleTeleportAfter));
+	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::MI_TeleportAfter, BindFunP1(this, &Lobby::GetPlayer), BindFunP2(this, &Lobby::HandleTeleportAfter));	
 }
 
 void Lobby::BackToPool()
@@ -78,7 +77,6 @@ void Lobby::HandleLoginByToken(Packet* pPacket)
 		MessageSystemHelp::DispatchPacket(Proto::MsgId::MI_NetworkRequestDisconnect, pPacket);
 		return;
 	}
-
 	pPlayer->AddComponent<PlayerComponentToken>(proto.token());
 	pPlayer->AddComponent<PlayerComponentOnlineInGame>(pPlayer->GetAccount(), 1);
 
@@ -145,7 +143,7 @@ void Lobby::HandleQueryPlayerRs(Packet* pPacket)
 	pPlayer->ParserFromProto(playerSn, protoPlayer);
 	const auto pPlayerLastMap = pPlayer->AddComponent<PlayerComponentLastMap>();
 	auto pWorldLocator = ComponentHelp::GetGlobalEntitySystem()->GetComponent<WorldProxyLocator>();
-
+	//LOG_DEBUG("Lobby::HandleQueryPlayerRs " << pPlayer->GetName().c_str() << " " << pPlayer->GetPlayerSN());
 	// 进入副本
 	auto pLastMap = pPlayerLastMap->GetLastDungeon();
 	if (pLastMap != nullptr)
@@ -314,4 +312,5 @@ void Lobby::HandleTeleportAfter(Player* pPlayer, Packet* pPacket)
 	auto pPlayerMgr = GetComponent<PlayerCollectorComponent>();
 	pPlayerMgr->RemovePlayerBySocket(pPlayer->GetSocketKey()->Socket);
 }
+
 

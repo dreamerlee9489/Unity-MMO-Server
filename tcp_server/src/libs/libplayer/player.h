@@ -7,7 +7,7 @@
 #include "player_component_last_map.h"
 #include "../../apps/space/player_component_detail.h"
 #include "../../apps/space/npc.h"
-#include "team.h"
+#include "../../apps/game/team.h"
 #include <algorithm>
 #include <list>
 #include <map>
@@ -31,6 +31,7 @@ public:
 	PlayerComponentLastMap* lastMap = nullptr;
 	PlayerComponentDetail* detail = nullptr;
 	World* curWorld = nullptr;
+	Team* pTeam = nullptr;
 	Command cmd{};
 
 	void Awake(NetIdentify* pIdentify, std::string account) override;
@@ -56,6 +57,5 @@ protected:
 	std::string _account{ "" };
 	std::string _name{ "" };
 	Proto::Player _player;
-	Team* pTeam = nullptr;
 };
 

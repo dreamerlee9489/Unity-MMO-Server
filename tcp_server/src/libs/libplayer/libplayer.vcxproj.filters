@@ -33,9 +33,6 @@
     <ClInclude Include="player_component_last_map.h">
       <Filter>player\component</Filter>
     </ClInclude>
-    <ClInclude Include="team.h">
-      <Filter>player</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="player.cpp">

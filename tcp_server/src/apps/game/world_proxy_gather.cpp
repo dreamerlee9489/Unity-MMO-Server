@@ -11,16 +11,25 @@
 void WorldProxyGather::Awake()
 {
     AddTimer(0, 10, true, 2, BindFunP0(this, &WorldProxyGather::SyncGameInfo));
-
+    playerMgr = AddComponent<PlayerCollectorComponent>();
     // message
     auto pMsgSystem = GetSystemManager()->GetMessageSystem();
+
+    pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_NetworkDisconnect, BindFunP1(this, &WorldProxyGather::HandleNetworkDisconnect));
     pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_WorldProxySyncToGather, BindFunP1(this, &WorldProxyGather::HandleWorldProxySyncToGather));
     pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_CmdWorldProxy, BindFunP1(this, &WorldProxyGather::HandleCmdWorldProxy));
+    pMsgSystem->RegisterFunction(this, Proto::MsgId::C2G_LoginByToken, BindFunP1(this, &WorldProxyGather::HandleLoginByToken));
+    pMsgSystem->RegisterFunction(this, Proto::MsgId::G2DB_QueryPlayerRs, BindFunP1(this, &WorldProxyGather::HandleQueryPlayerRs));
+    pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_CreateTeam, BindFunP1(this, &WorldProxyGather::HandleCreateTeam));
+    pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_GlobalChat, BindFunP1(this, &WorldProxyGather::HandleGlobalChat));
+    pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_TeamChat, BindFunP1(this, &WorldProxyGather::HandleTeamChat));
 }
 
 void WorldProxyGather::BackToPool()
 {
     _maps.clear();
+    for (auto& pair : teamMap)
+        delete pair.second;
 }
 
 void WorldProxyGather::SyncGameInfo()
@@ -45,7 +54,7 @@ void WorldProxyGather::HandleCmdWorldProxy(Packet* pPacket)
     LOG_DEBUG("**** world proxy gather ****");
 
     const auto pResMgr = ResourceHelp::GetResourceManager();
-    for (auto one : _maps)
+    for (auto &one : _maps)
     {
         const auto pWorldRes = pResMgr->Worlds->GetResource(one.second.WorldId);
         LOG_DEBUG("sn:" << one.first
@@ -80,5 +89,86 @@ void WorldProxyGather::HandleWorldProxySyncToGather(Packet* pPacket)
     else
     {
         _maps.erase(worldSn);
+    }
+}
+
+void WorldProxyGather::HandleNetworkDisconnect(Packet* pPacket)
+{
+    auto pTagValue = pPacket->GetTagKey()->GetTagValue(TagType::Account);
+    const auto pPlayer = playerMgr->GetPlayerBySocket(pPacket->GetSocketKey()->Socket);
+    if (pTagValue == nullptr || pPlayer == nullptr)
+        return;
+    Proto::CreateTeam proto;
+    Team* pTeam = teamMap[pPlayer->GetPlayerSN()];
+    pTeam->RemoveMember(pPlayer->GetPlayerSN());
+    proto.set_captain(pTeam->GetCaptain());
+    for (uint64 sn : pTeam->GetMembers())
+        proto.add_members(sn);
+    for (uint64 sn : pTeam->GetMembers())
+    {
+        Player* tmp = playerMgr->GetPlayerBySn(sn);
+        MessageSystemHelp::SendPacket(Proto::MsgId::MI_CreateTeam, proto, tmp);
+    }
+    GetComponent<PlayerCollectorComponent>()->RemovePlayerBySocket(pPacket->GetSocketKey()->Socket);
+}
+
+void WorldProxyGather::HandleLoginByToken(Packet* pPacket)
+{
+    auto pPlayerCollector = GetComponent<PlayerCollectorComponent>();
+
+    auto proto = pPacket->ParseToProto<Proto::LoginByToken>();
+    auto pPlayer = pPlayerCollector->AddPlayer(pPacket, proto.account());
+    if (pPlayer == nullptr)
+    {
+        MessageSystemHelp::DispatchPacket(Proto::MsgId::MI_NetworkRequestDisconnect, pPacket);
+        return;
+    }
+}
+
+void WorldProxyGather::HandleQueryPlayerRs(Packet* pPacket)
+{
+    //从数据库中读取到player数据
+    auto& protoRs = pPacket->ParseToProto<Proto::QueryPlayerRs>();
+    auto& account = protoRs.account();
+    auto pPlayer = GetComponent<PlayerCollectorComponent>()->GetPlayerByAccount(account);
+    if (pPlayer == nullptr)
+    {
+        LOG_ERROR("HandleQueryPlayer. pPlayer == nullptr. account:" << account.c_str());
+        return;
+    }
+    auto& protoPlayer = protoRs.player();
+    const auto& playerSn = protoPlayer.sn();
+    pPlayer->ParserFromProto(playerSn, protoPlayer);
+}
+
+void WorldProxyGather::HandleGlobalChat(Packet* pPacket)
+{
+    Proto::GlobalChat proto = pPacket->ParseToProto<Proto::GlobalChat>();
+    for (auto& pair : playerMgr->GetAll())
+        MessageSystemHelp::SendPacket(Proto::MI_GlobalChat, proto, pair.second);
+}
+
+void WorldProxyGather::HandleTeamChat(Packet* pPacket)
+{
+    Proto::TeamChat proto = pPacket->ParseToProto<Proto::TeamChat>();
+    Team* pTeam = teamMap[proto.sender()];
+    for (uint64 sn : pTeam->GetMembers())
+    {
+        Player* tmp = playerMgr->GetPlayerBySn(sn);
+        MessageSystemHelp::SendPacket(Proto::MI_TeamChat, proto, tmp);
+    }
+}
+
+void WorldProxyGather::HandleCreateTeam(Packet* pPacket)
+{
+    Proto::CreateTeam proto = pPacket->ParseToProto<Proto::CreateTeam>();
+    Team* pTeam = new Team(proto.captain());
+    for (uint64 sn : proto.members())
+    {
+        pTeam->AddMember(sn);
+        teamMap.emplace(std::make_pair(sn, pTeam));
+        Player* tmp = playerMgr->GetPlayerBySn(sn);
+        tmp->pTeam = pTeam;
+        MessageSystemHelp::SendPacket(Proto::MsgId::MI_CreateTeam, proto, tmp);
     }
 }

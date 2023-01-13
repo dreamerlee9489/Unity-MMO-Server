@@ -6,13 +6,11 @@
 
 class Packet;
 class Player;
-
 class Lobby : public Entity<Lobby>, public IWorld, public IAwakeSystem<>
 {
 public:
 	void Awake() override;
 	void BackToPool() override;
-
 
 private:
 	Player* GetPlayer(NetIdentify* pIdentify);

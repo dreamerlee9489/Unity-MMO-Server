@@ -360,5 +360,8 @@
     <ClInclude Include="..\space\fsm_state.h">
       <Filter>space\system\ai</Filter>
     </ClInclude>
+    <ClInclude Include="..\game\team.h">
+      <Filter>game\gather</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

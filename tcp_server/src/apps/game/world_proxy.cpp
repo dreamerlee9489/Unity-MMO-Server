@@ -1,17 +1,13 @@
 ﻿#include "world_proxy.h"
 #include "world_proxy_locator.h"
 #include "player_component_onlinegame.h"
-
 #include "libserver/component_help.h"
 #include "libserver/message_system_help.h"
 #include "libserver/message_system.h"
-
 #include "libplayer/player_collector_component.h"
 #include "libplayer/player.h"
-
 #include "libserver/log4.h"
 #include "libserver/network_help.h"
-
 #include "world_proxy_component_gather.h"
 #include "world_component_teleport.h"
 #include "libresource/resource_help.h"
@@ -23,12 +19,12 @@ void WorldProxy::Awake(int worldId, uint64 lastWorldSn)
 	_spaceAppId = Global::GetAppIdFromSN(_sn);
 	//LOG_DEBUG("create world proxy. world id:" << worldId << " sn:" << _sn << " space app id:" << _spaceAppId);
 
+	AddComponent<WorldProxyComponentGather>();
 	_playerMgr = AddComponent<PlayerCollectorComponent>();
-	_gatherMgr = AddComponent<WorldProxyComponentGather>();
 	_teleportMgr = AddComponent<WorldComponentTeleport>();
-
-	auto pProxyLocator = ComponentHelp::GetGlobalEntitySystem()->GetComponent<WorldProxyLocator>();
-	pProxyLocator->RegisterToLocator(_worldId, GetSN());
+	proxyMgr = ComponentHelp::GetGlobalEntitySystem()->GetComponent<WorldProxyGather>();
+	proxyLocator = ComponentHelp::GetGlobalEntitySystem()->GetComponent<WorldProxyLocator>();
+	proxyLocator->RegisterToLocator(_worldId, GetSN());
 
 	// 广播给所有进程
 	Proto::BroadcastCreateWorldProxy protoCreate;
@@ -56,9 +52,11 @@ void WorldProxy::Awake(int worldId, uint64 lastWorldSn)
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::S2G_SyncPlayer, BindFunP1(this, &WorldProxy::GetPlayer), BindFunP2(this, &WorldProxy::HandleS2GSyncPlayer));
 
 	// 客户端发送来的协议
+	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2G_EnterWorld, BindFunP1(this, &WorldProxy::GetPlayer), BindFunP2(this, &WorldProxy::HandleC2GEnterWorld));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2C_ReqJoinTeam, BindFunP1(this, &WorldProxy::GetPlayer), BindFunP2(this, &WorldProxy::HandleReqJoinTeam));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2C_JoinTeamRes, BindFunP1(this, &WorldProxy::GetPlayer), BindFunP2(this, &WorldProxy::HandleJoinTeamRes));
-	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2G_EnterWorld, BindFunP1(this, &WorldProxy::GetPlayer), BindFunP2(this, &WorldProxy::HandleC2GEnterWorld));
+	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::MI_GlobalChat, BindFunP1(this, &WorldProxy::GetPlayer), BindFunP2(this, &WorldProxy::HandleGlobalChat));
+	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::MI_TeamChat, BindFunP1(this, &WorldProxy::GetPlayer), BindFunP2(this, &WorldProxy::HandleTeamChat));
 
 	// 默认协议处理函数
 	pMsgSystem->RegisterDefaultFunction(this, BindFunP1(this, &WorldProxy::HandleDefaultFunction));
@@ -96,10 +94,7 @@ void WorldProxy::CopyPacketToWorld(Player* pPlayer, Packet* pPacket) const
 	pTagKey->AddTag(TagType::Player, pPlayer->GetPlayerSN());
 	pTagKey->AddTag(TagType::Entity, _sn);
 	if (Global::GetInstance()->GetCurAppType() == APP_ALLINONE)
-	{
 		pTagKey->AddTag(TagType::ToWorld, _sn);
-	}
-
 	MessageSystemHelp::SendPacket(pPacketCopy, APP_SPACE, _spaceAppId);
 }
 
@@ -184,10 +179,10 @@ void WorldProxy::HandleNetworkDisconnect(Packet* pPacket)
 			return;
 
 		//LOG_DEBUG("world proxy 2. disconnect." << pPacket);
-
 		auto pCollector = GetComponent<PlayerCollectorComponent>();
 		pCollector->RemovePlayerBySocket(pPacket->GetSocketKey()->Socket);
 
+		
 		SendPacketToWorld(Proto::MsgId::MI_NetworkDisconnect, pPlayer);
 	}
 	else
@@ -235,7 +230,8 @@ void WorldProxy::HandleTeleport(Packet* pPacket)
 
 	pPlayer->ParserFromProto(playerSn, proto.player());
 	pPlayer->AddComponent<PlayerComponentOnlineInGame>(pPlayer->GetAccount());
-
+	if (proxyMgr->teamMap.find(pPlayer->GetPlayerSN()) != proxyMgr->teamMap.end())
+		pPlayer->pTeam = proxyMgr->teamMap[pPlayer->GetPlayerSN()];
 	//LOG_DEBUG("world proxy. recv teleport. map id:" << _worldId << " world sn:" << GetSN() << " account:" << pPlayer->GetAccount().c_str());
 
 	// 将数据转给真实的world
@@ -272,7 +268,7 @@ void WorldProxy::HandleTeleportAfter(Player* pPlayer, Packet* pPacket)
 
 void WorldProxy::HandleReqJoinTeam(Player* pPlayer, Packet* pPacket)
 {
-	Proto::ReqJoinTeam proto = pPacket->ParseToProto<Proto::ReqJoinTeam>();
+	Proto::JoinTeam proto = pPacket->ParseToProto<Proto::JoinTeam>();
 	if (pPlayer->GetPlayerSN() == proto.applicant())
 	{
 		Player* target = _playerMgr->GetPlayerBySn(proto.responder());
@@ -282,7 +278,7 @@ void WorldProxy::HandleReqJoinTeam(Player* pPlayer, Packet* pPacket)
 
 void WorldProxy::HandleJoinTeamRes(Player* pPlayer, Packet* pPacket)
 {
-	Proto::JoinTeamRes proto = pPacket->ParseToProto<Proto::JoinTeamRes>();
+	Proto::JoinTeam proto = pPacket->ParseToProto<Proto::JoinTeam>();
 	Player* responder = _playerMgr->GetPlayerBySn(proto.responder());
 	Player* applicant = _playerMgr->GetPlayerBySn(proto.applicant());
 	if (pPlayer == responder)
@@ -291,6 +287,11 @@ void WorldProxy::HandleJoinTeamRes(Player* pPlayer, Packet* pPacket)
 			MessageSystemHelp::SendPacket(Proto::MsgId::C2C_JoinTeamRes, proto, applicant);
 		else
 		{
+			Proto::CreateTeam teamProto;
+			teamProto.set_captain(proto.responder());
+			teamProto.add_members(proto.responder());
+			teamProto.add_members(proto.applicant());
+			MessageSystemHelp::DispatchPacket(Proto::MsgId::MI_CreateTeam, teamProto, &NetIdentify());
 		}
 	}
 }
@@ -300,7 +301,7 @@ void WorldProxy::HandleC2GEnterWorld(Player* pPlayer, Packet* pPacket)
 	auto proto = pPacket->ParseToProto<Proto::EnterWorld>();
 	auto worldId = proto.world_id();
 	const auto pResMgr = ResourceHelp::GetResourceManager();
-	const auto pWorldRes = pResMgr->Worlds->GetResource(worldId);
+	const auto pWorldRes = pResMgr->Worlds->GetResource(worldId);	
 
 	if (pWorldRes == nullptr)
 		return;
@@ -310,7 +311,13 @@ void WorldProxy::HandleC2GEnterWorld(Player* pPlayer, Packet* pPacket)
 		return;
 
 	// create teleport object
-	pTeleportComponent->CreateTeleportObject(worldId, pPlayer, pWorldRes->IsType(ResourceWorldType::Public));
+	Team* pTeam = nullptr;
+	if (proxyMgr->teamMap.find(pPlayer->GetPlayerSN()) != proxyMgr->teamMap.end())
+		pTeam = proxyMgr->teamMap[pPlayer->GetPlayerSN()];
+	if (pTeam && worldId == pTeam->dungeonId && proxyLocator->IsExistDungeon(pTeam->dungeonSn))
+		WorldProxyHelp::Teleport(pPlayer, GetSN(), pTeam->dungeonSn);
+	else
+		pTeleportComponent->CreateTeleportObject(worldId, pPlayer);
 }
 
 void WorldProxy::HandleS2GSyncPlayer(Player* pPlayer, Packet* pPacket)
@@ -324,4 +331,16 @@ void WorldProxy::HandleBroadcastCreateWorldProxy(Packet* pPacket)
 {
 	auto proto = pPacket->ParseToProto<Proto::BroadcastCreateWorldProxy>();
 	GetComponent<WorldComponentTeleport>()->HandleBroadcastCreateWorldProxy(proto.world_id(), proto.world_sn());
+}
+
+void WorldProxy::HandleGlobalChat(Player* pPlayer, Packet* pPacket)
+{
+	Proto::GlobalChat proto = pPacket->ParseToProto<Proto::GlobalChat>();
+	MessageSystemHelp::DispatchPacket(Proto::MsgId::MI_GlobalChat, proto, &NetIdentify());
+}
+
+void WorldProxy::HandleTeamChat(Player* pPlayer, Packet* pPacket)
+{
+	Proto::TeamChat proto = pPacket->ParseToProto<Proto::TeamChat>();
+	MessageSystemHelp::DispatchPacket(Proto::MsgId::MI_TeamChat, proto, &NetIdentify());
 }

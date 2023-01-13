@@ -20,6 +20,7 @@ extern PROTOBUF_INTERNAL_EXPORT_db_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SC
 extern PROTOBUF_INTERNAL_EXPORT_db_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_PlayerBase_db_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_db_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_PlayerKnap_db_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_db_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_PlayerMisc_db_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_db_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Team_db_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_db_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Vector3D_db_2eproto;
 namespace Proto {
 class Vector3DDefaultTypeInternal {
@@ -38,6 +39,10 @@ class PlayerMiscDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<PlayerMisc> _instance;
 } _PlayerMisc_default_instance_;
+class TeamDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<Team> _instance;
+} _Team_default_instance_;
 class PlayerDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<Player> _instance;
@@ -95,11 +100,12 @@ static void InitDefaultsscc_info_Player_db_2eproto() {
   ::Proto::Player::InitAsDefaultInstance();
 }
 
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<3> scc_info_Player_db_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 3, InitDefaultsscc_info_Player_db_2eproto}, {
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<4> scc_info_Player_db_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 4, InitDefaultsscc_info_Player_db_2eproto}, {
       &scc_info_PlayerBase_db_2eproto.base,
       &scc_info_PlayerKnap_db_2eproto.base,
-      &scc_info_PlayerMisc_db_2eproto.base,}};
+      &scc_info_PlayerMisc_db_2eproto.base,
+      &scc_info_Team_db_2eproto.base,}};
 
 static void InitDefaultsscc_info_PlayerBase_db_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -145,6 +151,20 @@ static void InitDefaultsscc_info_PlayerMisc_db_2eproto() {
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsscc_info_PlayerMisc_db_2eproto}, {
       &scc_info_LastWorld_db_2eproto.base,}};
 
+static void InitDefaultsscc_info_Team_db_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::Proto::_Team_default_instance_;
+    new (ptr) ::Proto::Team();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::Proto::Team::InitAsDefaultInstance();
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Team_db_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsscc_info_Team_db_2eproto}, {}};
+
 static void InitDefaultsscc_info_UpdateKnapItem_db_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
@@ -174,7 +194,7 @@ static void InitDefaultsscc_info_Vector3D_db_2eproto() {
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Vector3D_db_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsscc_info_Vector3D_db_2eproto}, {}};
 
-static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_db_2eproto[8];
+static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_db_2eproto[9];
 static const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* file_level_enum_descriptors_db_2eproto[2];
 static constexpr ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor const** file_level_service_descriptors_db_2eproto = nullptr;
 
@@ -216,6 +236,13 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_db_2eproto::offsets[] PROTOBUF
   PROTOBUF_FIELD_OFFSET(::Proto::PlayerMisc, last_dungeon_),
   PROTOBUF_FIELD_OFFSET(::Proto::PlayerMisc, online_version_),
   ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::Proto::Team, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::Proto::Team, captain_),
+  PROTOBUF_FIELD_OFFSET(::Proto::Team, members_),
+  ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::Proto::Player, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
@@ -256,10 +283,11 @@ static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOB
   { 8, -1, sizeof(::Proto::PlayerBase)},
   { 20, -1, sizeof(::Proto::LastWorld)},
   { 28, -1, sizeof(::Proto::PlayerMisc)},
-  { 36, -1, sizeof(::Proto::Player)},
-  { 47, -1, sizeof(::Proto::ItemData)},
-  { 56, -1, sizeof(::Proto::PlayerKnap)},
-  { 65, -1, sizeof(::Proto::UpdateKnapItem)},
+  { 36, -1, sizeof(::Proto::Team)},
+  { 43, -1, sizeof(::Proto::Player)},
+  { 54, -1, sizeof(::Proto::ItemData)},
+  { 63, -1, sizeof(::Proto::PlayerKnap)},
+  { 72, -1, sizeof(::Proto::UpdateKnapItem)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
@@ -267,6 +295,7 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::Proto::_PlayerBase_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::Proto::_LastWorld_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::Proto::_PlayerMisc_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::Proto::_Team_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::Proto::_Player_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::Proto::_ItemData_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::Proto::_PlayerKnap_default_instance_),
@@ -283,40 +312,43 @@ const char descriptor_table_protodef_db_2eproto[] PROTOBUF_SECTION_VARIABLE(prot
   "ition\030\003 \001(\0132\017.Proto.Vector3D\"r\n\nPlayerMi"
   "sc\022$\n\nlast_world\030\001 \001(\0132\020.Proto.LastWorld"
   "\022&\n\014last_dungeon\030\002 \001(\0132\020.Proto.LastWorld"
-  "\022\026\n\016online_version\030\003 \001(\005\"\223\001\n\006Player\022\n\n\002s"
-  "n\030\001 \001(\004\022\014\n\004name\030\002 \001(\t\022\037\n\004base\030\003 \001(\0132\021.Pr"
-  "oto.PlayerBase\022\037\n\004knap\030\004 \001(\0132\021.Proto.Pla"
-  "yerKnap\022\037\n\004misc\030\005 \001(\0132\021.Proto.PlayerMisc"
-  "\022\014\n\004team\030\006 \003(\004\"\207\001\n\010ItemData\022\n\n\002sn\030\001 \001(\004\022"
-  "&\n\004type\030\002 \001(\0162\030.Proto.ItemData.ItemType\022"
-  "\n\n\002id\030\003 \001(\005\022\r\n\005index\030\004 \001(\005\",\n\010ItemType\022\010"
-  "\n\004None\020\000\022\n\n\006Potion\020\001\022\n\n\006Weapon\020\002\"\206\001\n\nPla"
-  "yerKnap\022\014\n\004gold\030\001 \001(\005\022\"\n\tbag_items\030\002 \003(\013"
-  "2\017.Proto.ItemData\022\"\n\tact_items\030\003 \003(\0132\017.P"
-  "roto.ItemData\022\"\n\tequ_items\030\004 \003(\0132\017.Proto"
-  ".ItemData\"/\n\016UpdateKnapItem\022\035\n\004item\030\001 \001("
-  "\0132\017.Proto.ItemData*(\n\006Gender\022\010\n\004none\020\000\022\010"
-  "\n\004male\020\001\022\n\n\006female\020\002b\006proto3"
+  "\022\026\n\016online_version\030\003 \001(\005\"(\n\004Team\022\017\n\007capt"
+  "ain\030\001 \001(\004\022\017\n\007members\030\002 \003(\004\"\240\001\n\006Player\022\n\n"
+  "\002sn\030\001 \001(\004\022\014\n\004name\030\002 \001(\t\022\037\n\004base\030\003 \001(\0132\021."
+  "Proto.PlayerBase\022\037\n\004knap\030\004 \001(\0132\021.Proto.P"
+  "layerKnap\022\037\n\004misc\030\005 \001(\0132\021.Proto.PlayerMi"
+  "sc\022\031\n\004team\030\006 \001(\0132\013.Proto.Team\"\207\001\n\010ItemDa"
+  "ta\022\n\n\002sn\030\001 \001(\004\022&\n\004type\030\002 \001(\0162\030.Proto.Ite"
+  "mData.ItemType\022\n\n\002id\030\003 \001(\005\022\r\n\005index\030\004 \001("
+  "\005\",\n\010ItemType\022\010\n\004None\020\000\022\n\n\006Potion\020\001\022\n\n\006W"
+  "eapon\020\002\"\206\001\n\nPlayerKnap\022\014\n\004gold\030\001 \001(\005\022\"\n\t"
+  "bag_items\030\002 \003(\0132\017.Proto.ItemData\022\"\n\tact_"
+  "items\030\003 \003(\0132\017.Proto.ItemData\022\"\n\tequ_item"
+  "s\030\004 \003(\0132\017.Proto.ItemData\"/\n\016UpdateKnapIt"
+  "em\022\035\n\004item\030\001 \001(\0132\017.Proto.ItemData*(\n\006Gen"
+  "der\022\010\n\004none\020\000\022\010\n\004male\020\001\022\n\n\006female\020\002b\006pro"
+  "to3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_db_2eproto_deps[1] = {
 };
-static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_db_2eproto_sccs[8] = {
+static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_db_2eproto_sccs[9] = {
   &scc_info_ItemData_db_2eproto.base,
   &scc_info_LastWorld_db_2eproto.base,
   &scc_info_Player_db_2eproto.base,
   &scc_info_PlayerBase_db_2eproto.base,
   &scc_info_PlayerKnap_db_2eproto.base,
   &scc_info_PlayerMisc_db_2eproto.base,
+  &scc_info_Team_db_2eproto.base,
   &scc_info_UpdateKnapItem_db_2eproto.base,
   &scc_info_Vector3D_db_2eproto.base,
 };
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_db_2eproto_once;
 static bool descriptor_table_db_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_db_2eproto = {
-  &descriptor_table_db_2eproto_initialized, descriptor_table_protodef_db_2eproto, "db.proto", 908,
-  &descriptor_table_db_2eproto_once, descriptor_table_db_2eproto_sccs, descriptor_table_db_2eproto_deps, 8, 0,
+  &descriptor_table_db_2eproto_initialized, descriptor_table_protodef_db_2eproto, "db.proto", 963,
+  &descriptor_table_db_2eproto_once, descriptor_table_db_2eproto_sccs, descriptor_table_db_2eproto_deps, 9, 0,
   schemas, file_default_instances, TableStruct_db_2eproto::offsets,
-  file_level_metadata_db_2eproto, 8, file_level_enum_descriptors_db_2eproto, file_level_service_descriptors_db_2eproto,
+  file_level_metadata_db_2eproto, 9, file_level_enum_descriptors_db_2eproto, file_level_service_descriptors_db_2eproto,
 };
 
 // Force running AddDescriptors() at dynamic initialization time.
@@ -1924,6 +1956,324 @@ void PlayerMisc::InternalSwap(PlayerMisc* other) {
 
 // ===================================================================
 
+void Team::InitAsDefaultInstance() {
+}
+class Team::_Internal {
+ public:
+};
+
+Team::Team()
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:Proto.Team)
+}
+Team::Team(const Team& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr),
+      members_(from.members_) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  captain_ = from.captain_;
+  // @@protoc_insertion_point(copy_constructor:Proto.Team)
+}
+
+void Team::SharedCtor() {
+  captain_ = PROTOBUF_ULONGLONG(0);
+}
+
+Team::~Team() {
+  // @@protoc_insertion_point(destructor:Proto.Team)
+  SharedDtor();
+}
+
+void Team::SharedDtor() {
+}
+
+void Team::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const Team& Team::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_Team_db_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void Team::Clear() {
+// @@protoc_insertion_point(message_clear_start:Proto.Team)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  members_.Clear();
+  captain_ = PROTOBUF_ULONGLONG(0);
+  _internal_metadata_.Clear();
+}
+
+#if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+const char* Team::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // uint64 captain = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
+          captain_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // repeated uint64 members = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::PackedUInt64Parser(mutable_members(), ptr, ctx);
+          CHK_(ptr);
+        } else if (static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16) {
+          add_members(::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr));
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+#else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+bool Team::MergePartialFromCodedStream(
+    ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+  // @@protoc_insertion_point(parse_start:Proto.Team)
+  for (;;) {
+    ::std::pair<::PROTOBUF_NAMESPACE_ID::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // uint64 captain = 1;
+      case 1: {
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (8 & 0xFF)) {
+
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   ::PROTOBUF_NAMESPACE_ID::uint64, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_UINT64>(
+                 input, &captain_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // repeated uint64 members = 2;
+      case 2: {
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (18 & 0xFF)) {
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPackedPrimitive<
+                   ::PROTOBUF_NAMESPACE_ID::uint64, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_UINT64>(
+                 input, this->mutable_members())));
+        } else if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (16 & 0xFF)) {
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadRepeatedPrimitiveNoInline<
+                   ::PROTOBUF_NAMESPACE_ID::uint64, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_UINT64>(
+                 1, 18u, input, this->mutable_members())));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:Proto.Team)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:Proto.Team)
+  return false;
+#undef DO_
+}
+#endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+
+void Team::SerializeWithCachedSizes(
+    ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:Proto.Team)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // uint64 captain = 1;
+  if (this->captain() != 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64(1, this->captain(), output);
+  }
+
+  // repeated uint64 members = 2;
+  if (this->members_size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteTag(2, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED, output);
+    output->WriteVarint32(_members_cached_byte_size_.load(
+        std::memory_order_relaxed));
+  }
+  for (int i = 0, n = this->members_size(); i < n; i++) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64NoTag(
+      this->members(i), output);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFields(
+        _internal_metadata_.unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:Proto.Team)
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* Team::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:Proto.Team)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // uint64 captain = 1;
+  if (this->captain() != 0) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64ToArray(1, this->captain(), target);
+  }
+
+  // repeated uint64 members = 2;
+  if (this->members_size() > 0) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteTagToArray(
+      2,
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED,
+      target);
+    target = ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream::WriteVarint32ToArray(
+        _members_cached_byte_size_.load(std::memory_order_relaxed),
+         target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      WriteUInt64NoTagToArray(this->members_, target);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:Proto.Team)
+  return target;
+}
+
+size_t Team::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:Proto.Team)
+  size_t total_size = 0;
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::ComputeUnknownFieldsSize(
+        _internal_metadata_.unknown_fields());
+  }
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // repeated uint64 members = 2;
+  {
+    size_t data_size = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      UInt64Size(this->members_);
+    if (data_size > 0) {
+      total_size += 1 +
+        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
+            static_cast<::PROTOBUF_NAMESPACE_ID::int32>(data_size));
+    }
+    int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(data_size);
+    _members_cached_byte_size_.store(cached_size,
+                                    std::memory_order_relaxed);
+    total_size += data_size;
+  }
+
+  // uint64 captain = 1;
+  if (this->captain() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt64Size(
+        this->captain());
+  }
+
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void Team::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:Proto.Team)
+  GOOGLE_DCHECK_NE(&from, this);
+  const Team* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<Team>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:Proto.Team)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:Proto.Team)
+    MergeFrom(*source);
+  }
+}
+
+void Team::MergeFrom(const Team& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:Proto.Team)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  members_.MergeFrom(from.members_);
+  if (from.captain() != 0) {
+    set_captain(from.captain());
+  }
+}
+
+void Team::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:Proto.Team)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void Team::CopyFrom(const Team& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:Proto.Team)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool Team::IsInitialized() const {
+  return true;
+}
+
+void Team::InternalSwap(Team* other) {
+  using std::swap;
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  members_.InternalSwap(&other->members_);
+  swap(captain_, other->captain_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata Team::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
+// ===================================================================
+
 void Player::InitAsDefaultInstance() {
   ::Proto::_Player_default_instance_._instance.get_mutable()->base_ = const_cast< ::Proto::PlayerBase*>(
       ::Proto::PlayerBase::internal_default_instance());
@@ -1931,12 +2281,15 @@ void Player::InitAsDefaultInstance() {
       ::Proto::PlayerKnap::internal_default_instance());
   ::Proto::_Player_default_instance_._instance.get_mutable()->misc_ = const_cast< ::Proto::PlayerMisc*>(
       ::Proto::PlayerMisc::internal_default_instance());
+  ::Proto::_Player_default_instance_._instance.get_mutable()->team_ = const_cast< ::Proto::Team*>(
+      ::Proto::Team::internal_default_instance());
 }
 class Player::_Internal {
  public:
   static const ::Proto::PlayerBase& base(const Player* msg);
   static const ::Proto::PlayerKnap& knap(const Player* msg);
   static const ::Proto::PlayerMisc& misc(const Player* msg);
+  static const ::Proto::Team& team(const Player* msg);
 };
 
 const ::Proto::PlayerBase&
@@ -1951,6 +2304,10 @@ const ::Proto::PlayerMisc&
 Player::_Internal::misc(const Player* msg) {
   return *msg->misc_;
 }
+const ::Proto::Team&
+Player::_Internal::team(const Player* msg) {
+  return *msg->team_;
+}
 Player::Player()
   : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
   SharedCtor();
@@ -1958,8 +2315,7 @@ Player::Player()
 }
 Player::Player(const Player& from)
   : ::PROTOBUF_NAMESPACE_ID::Message(),
-      _internal_metadata_(nullptr),
-      team_(from.team_) {
+      _internal_metadata_(nullptr) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (!from.name().empty()) {
@@ -1979,6 +2335,11 @@ Player::Player(const Player& from)
     misc_ = new ::Proto::PlayerMisc(*from.misc_);
   } else {
     misc_ = nullptr;
+  }
+  if (from.has_team()) {
+    team_ = new ::Proto::Team(*from.team_);
+  } else {
+    team_ = nullptr;
   }
   sn_ = from.sn_;
   // @@protoc_insertion_point(copy_constructor:Proto.Player)
@@ -2002,6 +2363,7 @@ void Player::SharedDtor() {
   if (this != internal_default_instance()) delete base_;
   if (this != internal_default_instance()) delete knap_;
   if (this != internal_default_instance()) delete misc_;
+  if (this != internal_default_instance()) delete team_;
 }
 
 void Player::SetCachedSize(int size) const {
@@ -2019,7 +2381,6 @@ void Player::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  team_.Clear();
   name_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (GetArenaNoVirtual() == nullptr && base_ != nullptr) {
     delete base_;
@@ -2033,6 +2394,10 @@ void Player::Clear() {
     delete misc_;
   }
   misc_ = nullptr;
+  if (GetArenaNoVirtual() == nullptr && team_ != nullptr) {
+    delete team_;
+  }
+  team_ = nullptr;
   sn_ = PROTOBUF_ULONGLONG(0);
   _internal_metadata_.Clear();
 }
@@ -2080,13 +2445,10 @@ const char* Player::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::int
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // repeated uint64 team = 6;
+      // .Proto.Team team = 6;
       case 6:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 50)) {
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::PackedUInt64Parser(mutable_team(), ptr, ctx);
-          CHK_(ptr);
-        } else if (static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 48) {
-          add_team(::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr));
+          ptr = ctx->ParseMessage(mutable_team(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -2181,16 +2543,11 @@ bool Player::MergePartialFromCodedStream(
         break;
       }
 
-      // repeated uint64 team = 6;
+      // .Proto.Team team = 6;
       case 6: {
         if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (50 & 0xFF)) {
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPackedPrimitive<
-                   ::PROTOBUF_NAMESPACE_ID::uint64, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_UINT64>(
-                 input, this->mutable_team())));
-        } else if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (48 & 0xFF)) {
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadRepeatedPrimitiveNoInline<
-                   ::PROTOBUF_NAMESPACE_ID::uint64, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_UINT64>(
-                 1, 50u, input, this->mutable_team())));
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
+               input, mutable_team()));
         } else {
           goto handle_unusual;
         }
@@ -2257,15 +2614,10 @@ void Player::SerializeWithCachedSizes(
       5, _Internal::misc(this), output);
   }
 
-  // repeated uint64 team = 6;
-  if (this->team_size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteTag(6, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED, output);
-    output->WriteVarint32(_team_cached_byte_size_.load(
-        std::memory_order_relaxed));
-  }
-  for (int i = 0, n = this->team_size(); i < n; i++) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64NoTag(
-      this->team(i), output);
+  // .Proto.Team team = 6;
+  if (this->has_team()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
+      6, _Internal::team(this), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -2318,17 +2670,11 @@ void Player::SerializeWithCachedSizes(
         5, _Internal::misc(this), target);
   }
 
-  // repeated uint64 team = 6;
-  if (this->team_size() > 0) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteTagToArray(
-      6,
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED,
-      target);
-    target = ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream::WriteVarint32ToArray(
-        _team_cached_byte_size_.load(std::memory_order_relaxed),
-         target);
+  // .Proto.Team team = 6;
+  if (this->has_team()) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      WriteUInt64NoTagToArray(this->team_, target);
+      InternalWriteMessageToArray(
+        6, _Internal::team(this), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -2351,21 +2697,6 @@ size_t Player::ByteSizeLong() const {
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
-
-  // repeated uint64 team = 6;
-  {
-    size_t data_size = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      UInt64Size(this->team_);
-    if (data_size > 0) {
-      total_size += 1 +
-        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-            static_cast<::PROTOBUF_NAMESPACE_ID::int32>(data_size));
-    }
-    int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(data_size);
-    _team_cached_byte_size_.store(cached_size,
-                                    std::memory_order_relaxed);
-    total_size += data_size;
-  }
 
   // string name = 2;
   if (this->name().size() > 0) {
@@ -2393,6 +2724,13 @@ size_t Player::ByteSizeLong() const {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *misc_);
+  }
+
+  // .Proto.Team team = 6;
+  if (this->has_team()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *team_);
   }
 
   // uint64 sn = 1;
@@ -2429,7 +2767,6 @@ void Player::MergeFrom(const Player& from) {
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  team_.MergeFrom(from.team_);
   if (from.name().size() > 0) {
 
     name_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.name_);
@@ -2442,6 +2779,9 @@ void Player::MergeFrom(const Player& from) {
   }
   if (from.has_misc()) {
     mutable_misc()->::Proto::PlayerMisc::MergeFrom(from.misc());
+  }
+  if (from.has_team()) {
+    mutable_team()->::Proto::Team::MergeFrom(from.team());
   }
   if (from.sn() != 0) {
     set_sn(from.sn());
@@ -2469,12 +2809,12 @@ bool Player::IsInitialized() const {
 void Player::InternalSwap(Player* other) {
   using std::swap;
   _internal_metadata_.Swap(&other->_internal_metadata_);
-  team_.InternalSwap(&other->team_);
   name_.Swap(&other->name_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   swap(base_, other->base_);
   swap(knap_, other->knap_);
   swap(misc_, other->misc_);
+  swap(team_, other->team_);
   swap(sn_, other->sn_);
 }
 
@@ -3559,6 +3899,9 @@ template<> PROTOBUF_NOINLINE ::Proto::LastWorld* Arena::CreateMaybeMessage< ::Pr
 }
 template<> PROTOBUF_NOINLINE ::Proto::PlayerMisc* Arena::CreateMaybeMessage< ::Proto::PlayerMisc >(Arena* arena) {
   return Arena::CreateInternal< ::Proto::PlayerMisc >(arena);
+}
+template<> PROTOBUF_NOINLINE ::Proto::Team* Arena::CreateMaybeMessage< ::Proto::Team >(Arena* arena) {
+  return Arena::CreateInternal< ::Proto::Team >(arena);
 }
 template<> PROTOBUF_NOINLINE ::Proto::Player* Arena::CreateMaybeMessage< ::Proto::Player >(Arena* arena) {
   return Arena::CreateInternal< ::Proto::Player >(arena);
