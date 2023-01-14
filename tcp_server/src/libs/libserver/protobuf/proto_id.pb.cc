@@ -25,7 +25,7 @@ static constexpr ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema* schemas = n
 static constexpr ::PROTOBUF_NAMESPACE_ID::Message* const* file_default_instances = nullptr;
 
 const char descriptor_table_protodef_proto_5fid_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\016proto_id.proto\022\005Proto*\222\024\n\005MsgId\022\010\n\004Non"
+  "\n\016proto_id.proto\022\005Proto*\224\025\n\005MsgId\022\010\n\004Non"
   "e\020\000\022\025\n\021MI_NetworkConnect\020\001\022\027\n\023MI_Network"
   "Connected\020\002\022\024\n\020MI_NetworkListen\020\003\022\027\n\023MI_"
   "NetworkListenKey\020\004\022\030\n\024MI_NetworkDisconne"
@@ -56,7 +56,8 @@ const char descriptor_table_protodef_proto_5fid_2eproto[] PROTOBUF_SECTION_VARIA
   "\n\020G2S_RemovePlayer\020\333\010\022\023\n\016C2G_EnterWorld\020"
   "\334\010\022\023\n\016G2M_QueryWorld\020\335\010\022\025\n\020G2M_QueryWorl"
   "dRs\020\336\010\022\022\n\rMI_CreateTeam\020\261\t\022\022\n\rMI_GlobalC"
-  "hat\020\262\t\022\020\n\013MI_TeamChat\020\263\t\022\023\n\016S2C_EnterWor"
+  "hat\020\262\t\022\021\n\014MI_WorldChat\020\263\t\022\020\n\013MI_TeamChat"
+  "\020\264\t\022\023\n\016MI_PrivateChat\020\265\t\022\023\n\016S2C_EnterWor"
   "ld\020\335\013\022\023\n\016S2G_SyncPlayer\020\336\013\022\026\n\021S2C_AllRol"
   "eAppear\020\337\013\022\026\n\021S2C_RoleDisappear\020\340\013\022\r\n\010C2"
   "S_Move\020\341\013\022\r\n\010S2C_Move\020\342\013\022\024\n\017S2C_PlayerIt"
@@ -90,7 +91,9 @@ const char descriptor_table_protodef_proto_5fid_2eproto[] PROTOBUF_SECTION_VARIA
   "\352\001\022\030\n\022C2S_UpdateKnapItem\020\301\270\002\022\027\n\021C2S_GetP"
   "layerKnap\020\302\270\002\022\027\n\021S2C_GetPlayerKnap\020\303\270\002\022\025"
   "\n\017C2C_ReqJoinTeam\020\321\206\003\022\025\n\017C2C_JoinTeamRes"
-  "\020\322\206\003b\006proto3"
+  "\020\322\206\003\022\031\n\023C2C_ReqEnterDungeon\020\323\206\003\022\031\n\023C2C_E"
+  "nterDungeonRes\020\324\206\003\022\020\n\nC2C_ReqPvp\020\325\206\003\022\020\n\n"
+  "C2C_PvpRes\020\326\206\003b\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_proto_5fid_2eproto_deps[1] = {
 };
@@ -99,7 +102,7 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_pro
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_proto_5fid_2eproto_once;
 static bool descriptor_table_proto_5fid_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_proto_5fid_2eproto = {
-  &descriptor_table_proto_5fid_2eproto_initialized, descriptor_table_protodef_proto_5fid_2eproto, "proto_id.proto", 2612,
+  &descriptor_table_proto_5fid_2eproto_initialized, descriptor_table_protodef_proto_5fid_2eproto, "proto_id.proto", 2742,
   &descriptor_table_proto_5fid_2eproto_once, descriptor_table_proto_5fid_2eproto_sccs, descriptor_table_proto_5fid_2eproto_deps, 0, 0,
   schemas, file_default_instances, TableStruct_proto_5fid_2eproto::offsets,
   file_level_metadata_proto_5fid_2eproto, 0, file_level_enum_descriptors_proto_5fid_2eproto, file_level_service_descriptors_proto_5fid_2eproto,
@@ -166,6 +169,8 @@ bool MsgId_IsValid(int value) {
     case 1201:
     case 1202:
     case 1203:
+    case 1204:
+    case 1205:
     case 1501:
     case 1502:
     case 1503:
@@ -221,6 +226,10 @@ bool MsgId_IsValid(int value) {
     case 40003:
     case 50001:
     case 50002:
+    case 50003:
+    case 50004:
+    case 50005:
+    case 50006:
       return true;
     default:
       return false;

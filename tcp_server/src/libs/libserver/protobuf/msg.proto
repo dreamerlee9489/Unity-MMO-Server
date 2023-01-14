@@ -482,19 +482,26 @@ message JoinTeam {
 	uint64 responder = 3;
 }
 
-message GlobalChat {
+message ChatMsg {
 	uint64 sender = 1;
-	string account = 2;
-	string content = 3;
-}
-
-message TeamChat {
-	uint64 sender = 1;
-	string account = 2;
+	string name = 2;
 	string content = 3;
 }
 
 message CreateTeam {
 	uint64 captain = 1;
 	repeated uint64 members = 2;
+}
+
+message EnterDungeon {
+	int32 world_id = 1;
+	uint64 world_sn = 2;
+	bool agree = 3;
+	string sender = 4;
+}
+
+message Pvp {
+	uint64 atker = 1;
+	uint64 defer = 2;
+	bool agree = 3;
 }

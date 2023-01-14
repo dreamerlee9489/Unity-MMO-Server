@@ -14,15 +14,12 @@ void WorldProxyGather::Awake()
     playerMgr = AddComponent<PlayerCollectorComponent>();
     // message
     auto pMsgSystem = GetSystemManager()->GetMessageSystem();
-
     pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_NetworkDisconnect, BindFunP1(this, &WorldProxyGather::HandleNetworkDisconnect));
     pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_WorldProxySyncToGather, BindFunP1(this, &WorldProxyGather::HandleWorldProxySyncToGather));
     pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_CmdWorldProxy, BindFunP1(this, &WorldProxyGather::HandleCmdWorldProxy));
     pMsgSystem->RegisterFunction(this, Proto::MsgId::C2G_LoginByToken, BindFunP1(this, &WorldProxyGather::HandleLoginByToken));
     pMsgSystem->RegisterFunction(this, Proto::MsgId::G2DB_QueryPlayerRs, BindFunP1(this, &WorldProxyGather::HandleQueryPlayerRs));
     pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_CreateTeam, BindFunP1(this, &WorldProxyGather::HandleCreateTeam));
-    pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_GlobalChat, BindFunP1(this, &WorldProxyGather::HandleGlobalChat));
-    pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_TeamChat, BindFunP1(this, &WorldProxyGather::HandleTeamChat));
 }
 
 void WorldProxyGather::BackToPool()
@@ -98,16 +95,19 @@ void WorldProxyGather::HandleNetworkDisconnect(Packet* pPacket)
     const auto pPlayer = playerMgr->GetPlayerBySocket(pPacket->GetSocketKey()->Socket);
     if (pTagValue == nullptr || pPlayer == nullptr)
         return;
-    Proto::CreateTeam proto;
-    Team* pTeam = teamMap[pPlayer->GetPlayerSN()];
-    pTeam->RemoveMember(pPlayer->GetPlayerSN());
-    proto.set_captain(pTeam->GetCaptain());
-    for (uint64 sn : pTeam->GetMembers())
-        proto.add_members(sn);
-    for (uint64 sn : pTeam->GetMembers())
+    if (pPlayer->pTeam)
     {
-        Player* tmp = playerMgr->GetPlayerBySn(sn);
-        MessageSystemHelp::SendPacket(Proto::MsgId::MI_CreateTeam, proto, tmp);
+        Proto::CreateTeam proto;
+        Team* pTeam = teamMap[pPlayer->GetPlayerSN()];
+        pTeam->RemoveMember(pPlayer->GetPlayerSN());
+        proto.set_captain(pTeam->GetCaptain());
+        for (uint64 sn : pTeam->GetMembers())
+            proto.add_members(sn);
+        for (uint64 sn : pTeam->GetMembers())
+        {
+            Player* tmp = playerMgr->GetPlayerBySn(sn);
+            MessageSystemHelp::SendPacket(Proto::MsgId::MI_CreateTeam, proto, tmp);
+        }
     }
     GetComponent<PlayerCollectorComponent>()->RemovePlayerBySocket(pPacket->GetSocketKey()->Socket);
 }
@@ -139,24 +139,6 @@ void WorldProxyGather::HandleQueryPlayerRs(Packet* pPacket)
     auto& protoPlayer = protoRs.player();
     const auto& playerSn = protoPlayer.sn();
     pPlayer->ParserFromProto(playerSn, protoPlayer);
-}
-
-void WorldProxyGather::HandleGlobalChat(Packet* pPacket)
-{
-    Proto::GlobalChat proto = pPacket->ParseToProto<Proto::GlobalChat>();
-    for (auto& pair : playerMgr->GetAll())
-        MessageSystemHelp::SendPacket(Proto::MI_GlobalChat, proto, pair.second);
-}
-
-void WorldProxyGather::HandleTeamChat(Packet* pPacket)
-{
-    Proto::TeamChat proto = pPacket->ParseToProto<Proto::TeamChat>();
-    Team* pTeam = teamMap[proto.sender()];
-    for (uint64 sn : pTeam->GetMembers())
-    {
-        Player* tmp = playerMgr->GetPlayerBySn(sn);
-        MessageSystemHelp::SendPacket(Proto::MI_TeamChat, proto, tmp);
-    }
 }
 
 void WorldProxyGather::HandleCreateTeam(Packet* pPacket)

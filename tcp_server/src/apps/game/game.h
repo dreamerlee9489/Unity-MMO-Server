@@ -11,7 +11,6 @@
 inline void InitializeComponentGame(ThreadMgr* pThreadMgr)
 {
     pThreadMgr->CreateComponent<Lobby>();
-    //pThreadMgr->CreateComponent<WorldProxyGather>();
     pThreadMgr->CreateComponent<RedisGame>();
 
     // 全局

@@ -184,6 +184,24 @@ bool WorldComponentTeleport::Check(TeleportObject* pObj)
     }
 
     WorldProxyHelp::Teleport(pPlayer, pWorldProxy->GetSN(), pObj->FlagWorld.GetValue());
+    if (pWorldProxy->proxyMgr->teamMap.find(pPlayer->GetPlayerSN()) != pWorldProxy->proxyMgr->teamMap.end())
+    {
+        Team* pTeam = pWorldProxy->proxyMgr->teamMap[pPlayer->GetPlayerSN()];
+        if (pTeam->dungeonId == worldId && pWorldProxy->proxyLoc->IsExistDungeon(pObj->FlagWorld.GetValue()))
+        {
+            for (uint64 sn : pTeam->GetMembers())
+            {
+                if (sn != pPlayer->GetPlayerSN())
+                {
+                    Proto::EnterDungeon proto;
+                    proto.set_world_id(worldId);
+                    proto.set_world_sn(pObj->FlagWorld.GetValue());
+                    proto.set_sender(pPlayer->GetName());
+                    MessageSystemHelp::SendPacket(Proto::MsgId::C2C_ReqEnterDungeon, proto, pWorldProxy->proxyMgr->playerMgr->GetPlayerBySn(sn));
+                }
+            }
+        }
+    }
 
     _objects.erase(pPlayer->GetPlayerSN());
     GetSystemManager()->GetEntitySystem()->RemoveComponent(pObj);  

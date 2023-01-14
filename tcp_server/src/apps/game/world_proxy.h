@@ -19,7 +19,7 @@ class WorldProxy : public IWorld, public Entity<WorldProxy>, public IAwakeFromPo
 {
 public:
 	WorldProxyGather* proxyMgr = nullptr;
-	WorldProxyLocator* proxyLocator = nullptr;
+	WorldProxyLocator* proxyLoc = nullptr;
 
 	void Awake(int worldId, uint64 lastWorldSn) override;
 	void BackToPool() override;
@@ -38,6 +38,10 @@ public:
 
 private:
 	Player* GetPlayer(NetIdentify* pIdentify);
+	/// <summary>
+	/// 不处理消息, 直接转发
+	/// </summary>
+	void HandleDefaultFunction(Packet* pPacket);
 	void HandleNetworkDisconnect(Packet* pPacket);
 	/// <summary>
 	/// 将player数据添加到代理并转发到World实例
@@ -51,11 +55,12 @@ private:
 	void HandleReqJoinTeam(Player* pPlayer, Packet* pPacket);
 	void HandleJoinTeamRes(Player* pPlayer, Packet* pPacket);
 	void HandleGlobalChat(Player* pPlayer, Packet* pPacket);
+	void HandleWorldChat(Player* pPlayer, Packet* pPacket);
 	void HandleTeamChat(Player* pPlayer, Packet* pPacket);
-	/// <summary>
-	/// 不处理消息, 直接转发
-	/// </summary>
-	void HandleDefaultFunction(Packet* pPacket);
+	void HandlePrivateChat(Player* pPlayer, Packet* pPacket);
+	void HandleEnterDungeonRes(Player* pPlayer, Packet* pPacket);
+	void HandleReqPvp(Player* pPlayer, Packet* pPacket);
+	void HandlePvpRes(Player* pPlayer, Packet* pPacket);
 
 	int _spaceAppId{ 0 };
 	PlayerCollectorComponent* _playerMgr = nullptr;

@@ -33,8 +33,6 @@ private:
 	void HandleLoginByToken(Packet* pPacket);
 	void HandleQueryPlayerRs(Packet* pPacket);
 	void HandleCreateTeam(Packet* pPacket);
-	void HandleGlobalChat(Packet* pPacket);
-	void HandleTeamChat(Packet* pPacket);
 
 private:
 	std::map<uint64, WorldProxyInfo> _maps;

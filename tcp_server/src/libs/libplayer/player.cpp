@@ -73,6 +73,23 @@ void Player::GetDamage(Npc* enemy)
 	detail->hp = (std::max)(detail->hp - enemy->atk, 0);
 }
 
+void Player::GetDamage(Player* atker)
+{
+	detail->hp = (std::max)(detail->hp - atker->detail->atk, 0);
+	if (detail->hp == 0)
+	{
+		atker->ResetCmd();
+		cmd.type = 6;
+		cmd.target_sn = atker->GetPlayerSN();
+		cmd.point = {0, 0, 0};
+		Proto::SyncPlayerCmd protoCmd;
+		protoCmd.set_type(6);
+		protoCmd.set_player_sn(_playerSn);
+		protoCmd.set_target_sn(cmd.target_sn);
+		curWorld->BroadcastPacket(Proto::MsgId::S2C_SyncPlayerCmd, protoCmd);
+	}
+}
+
 void Player::ResetCmd()
 {
 	cmd.type = 0;
@@ -82,7 +99,6 @@ void Player::ResetCmd()
 	protoCmd.set_type(0);
 	protoCmd.set_player_sn(_playerSn);
 	curWorld->BroadcastPacket(Proto::MsgId::S2C_SyncPlayerCmd, protoCmd);
-	//Broadcast(Proto::MsgId::S2C_SyncPlayerCmd, protoCmd, *curWorld->playerMgr->GetAll());
 }
 
 void Player::ParseFromStream(const uint64 playerSn, std::stringstream* pOpStream)

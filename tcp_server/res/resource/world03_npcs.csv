@@ -1,2 +1,2 @@
 EnemyID,ResName,Level,InitHp,InitAtk,InitPos
-0,Enemy_Soldier_01,1,1000,5,(-15;0;15)
+0,Enemy_Soldier_01,1,100,5,(-15;0;15)

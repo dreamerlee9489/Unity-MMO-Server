@@ -43,6 +43,7 @@ public:
 	uint64 GetPlayerSN() const;
 	Vector3& GetCurrPos() { return lastMap->GetCur()->Position; }
 	void GetDamage(Npc* enemy);
+	void GetDamage(Player* atker);
 	void ResetCmd();
 
 	Proto::Player& GetPlayerProto();

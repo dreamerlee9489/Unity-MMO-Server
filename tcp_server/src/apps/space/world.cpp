@@ -14,8 +14,6 @@ void World::Awake(int worldId)
 	pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_NetworkDisconnect, BindFunP1(this, &World::HandleNetworkDisconnect));
 	pMsgSystem->RegisterFunction(this, Proto::MsgId::G2S_SyncPlayer, BindFunP1(this, &World::HandleSyncPlayer));
 	pMsgSystem->RegisterFunction(this, Proto::MsgId::C2S_SyncNpcPos, BindFunP1(this, &World::HandleSyncNpcPos));
-	pMsgSystem->RegisterFunction(this, Proto::MsgId::C2S_PlayerAtkEvent, BindFunP1(this, &World::HandlePlayerAtkEvent));
-	pMsgSystem->RegisterFunction(this, Proto::MsgId::C2S_NpcAtkEvent, BindFunP1(this, &World::HandleNpcAtkEvent));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::G2S_RequestSyncPlayer, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleRequestSyncPlayer));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::G2S_RemovePlayer, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleG2SRemovePlayer));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_Move, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleMove));
@@ -25,6 +23,8 @@ void World::Awake(int worldId)
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_ReqSyncNpc, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleReqSyncNpc));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_UpdateKnapItem, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleUpdateKnapItem));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_GetPlayerKnap, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleGetPlayerKnap));
+	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_PlayerAtkEvent, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandlePlayerAtkEvent));
+	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_NpcAtkEvent, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleNpcAtkEvent));
 
 	ResourceWorld* worldCfg = ResourceHelp::GetResourceManager()->Worlds->GetResource(_worldId);
 	std::vector<ResourceNpc>& npcCfgs = *worldCfg->GetNpcCfgs();
@@ -409,36 +409,58 @@ void World::HandleSyncNpcPos(Packet* pPacket)
 	npcs[npcIdxMap[proto.npc_sn()]]->SetCurrPos(Vector3(proto.pos()));
 }
 
-void World::HandlePlayerAtkEvent(Packet* pPacket)
+void World::HandlePlayerAtkEvent(Player* pPlayer, Packet* pPacket)
 {
 	Proto::PlayerAtkEvent proto = pPacket->ParseToProto<Proto::PlayerAtkEvent>();
-	Player* player = playerMgr->GetPlayerBySn(proto.player_sn());
-	if (proto.target_sn() == 0)
+	if (pPlayer->GetPlayerSN() == proto.target_sn())
 	{
-		player->detail->hp = 1000;
+		Player* attacker = playerMgr->GetPlayerBySn(proto.player_sn());
+		pPlayer->GetDamage(attacker);
 		Proto::SyncEntityStatus status;
-		status.set_sn(player->GetPlayerSN());
-		status.set_hp(player->detail->hp);
+		status.set_sn(pPlayer->GetPlayerSN());
+		status.set_hp(pPlayer->detail->hp);
 		BroadcastPacket(Proto::MsgId::S2C_SyncEntityStatus, status);
 	}
-	else
+	else if (pPlayer->GetPlayerSN() == proto.player_sn())
 	{
-		Npc* npc = npcs[npcIdxMap[proto.target_sn()]];
-		npc->GetDamage(player);
-		Proto::SyncEntityStatus status;
-		status.set_sn(npc->GetSN());
-		status.set_hp(npc->hp);
-		BroadcastPacket(Proto::MsgId::S2C_SyncEntityStatus, status);
+		Player* defender = playerMgr->GetPlayerBySn(proto.target_sn());
+		if (!defender)
+		{
+			if (proto.target_sn() == 0)
+			{
+				pPlayer->detail->hp = 1000;
+				Proto::SyncEntityStatus status;
+				status.set_sn(pPlayer->GetPlayerSN());
+				status.set_hp(pPlayer->detail->hp);
+				BroadcastPacket(Proto::MsgId::S2C_SyncEntityStatus, status);
+			}
+			else if (npcIdxMap.find(proto.target_sn()) != npcIdxMap.end())
+			{
+				Npc* npc = npcs[npcIdxMap[proto.target_sn()]];
+				npc->GetDamage(pPlayer);
+				Proto::SyncEntityStatus status;
+				status.set_sn(npc->GetSN());
+				status.set_hp(npc->hp);
+				BroadcastPacket(Proto::MsgId::S2C_SyncEntityStatus, status);
+			}
+		}
+		else if(pPlayer->GetPlayerSN() != defender->GetPlayerSN())
+		{
+			defender->GetDamage(pPlayer);
+			Proto::SyncEntityStatus status;
+			status.set_sn(defender->GetPlayerSN());
+			status.set_hp(defender->detail->hp);
+			BroadcastPacket(Proto::MsgId::S2C_SyncEntityStatus, status);
+		}
 	}
 }
 
-void World::HandleNpcAtkEvent(Packet* pPacket)
+void World::HandleNpcAtkEvent(Player* pPlayer, Packet* pPacket)
 {
 	Proto::NpcAtkEvent proto = pPacket->ParseToProto<Proto::NpcAtkEvent>();
-	Player* player = playerMgr->GetPlayerBySn(proto.target_sn());
-	player->GetDamage(npcs[npcIdxMap[proto.npc_sn()]]);
+	pPlayer->GetDamage(npcs[npcIdxMap[proto.npc_sn()]]);
 	Proto::SyncEntityStatus status;
-	status.set_sn(player->GetPlayerSN());
-	status.set_hp(player->detail->hp);
+	status.set_sn(pPlayer->GetPlayerSN());
+	status.set_hp(pPlayer->detail->hp);
 	BroadcastPacket(Proto::MsgId::S2C_SyncEntityStatus, status);
 }

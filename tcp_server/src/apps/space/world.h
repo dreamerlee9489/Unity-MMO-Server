@@ -41,8 +41,8 @@ protected:
 	void HandleNetworkDisconnect(Packet* pPacket);
 	void HandleSyncPlayer(Packet* pPacket);
 	void HandleSyncNpcPos(Packet* pPacket);
-	void HandlePlayerAtkEvent(Packet* pPacket);
-	void HandleNpcAtkEvent(Packet* pPacket);
+	void HandlePlayerAtkEvent(Player* pPlayer, Packet* pPacket);
+	void HandleNpcAtkEvent(Player* pPlayer, Packet* pPacket);
 	void HandleRequestSyncPlayer(Player* pPlayer, Packet* pPacket);
 	void HandleG2SRemovePlayer(Player* pPlayer, Packet* pPacket);
 	void HandleMove(Player* pPlayer, Packet* pPacket);

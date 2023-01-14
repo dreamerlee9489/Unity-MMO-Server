@@ -19,6 +19,7 @@ public:
 
 	Player* GetPlayerBySocket(SOCKET socket);
 	Player* GetPlayerByAccount(std::string account);
+	Player* GetPlayerByName(std::string name);
 	Player* GetPlayerBySn(uint64 playerSn);
 
 	int OnlineSize() const;

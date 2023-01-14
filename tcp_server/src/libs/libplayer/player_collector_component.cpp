@@ -103,9 +103,22 @@ Player* PlayerCollectorComponent::GetPlayerByAccount(const std::string account)
 	return iterPlayer->second;
 }
 
+Player* PlayerCollectorComponent::GetPlayerByName(std::string name)
+{
+	auto iter = std::find_if(_players.begin(), _players.end(), [&name](auto& pair)
+		{
+			return pair.second->GetName() == name;
+		});
+
+	if (iter == _players.end())
+		return nullptr;
+
+	return iter->second;
+}
+
 Player* PlayerCollectorComponent::GetPlayerBySn(uint64 playerSn)
 {
-	auto iter = std::find_if(_players.begin(), _players.end(), [&playerSn](auto pair)
+	auto iter = std::find_if(_players.begin(), _players.end(), [&playerSn](auto& pair)
 	{
         return pair.second->GetPlayerSN() == playerSn;
 	});
