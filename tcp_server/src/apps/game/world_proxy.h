@@ -52,13 +52,13 @@ private:
 	void HandleBroadcastCreateWorldProxy(Packet* pPacket);
 	void HandleC2GEnterWorld(Player* pPlayer, Packet* pPacket);
 	void HandleS2GSyncPlayer(Player* pPlayer, Packet* pPacket);
-	void HandleReqJoinTeam(Player* pPlayer, Packet* pPacket);
-	void HandleJoinTeamRes(Player* pPlayer, Packet* pPacket);
 	void HandleGlobalChat(Player* pPlayer, Packet* pPacket);
 	void HandleWorldChat(Player* pPlayer, Packet* pPacket);
 	void HandleTeamChat(Player* pPlayer, Packet* pPacket);
 	void HandlePrivateChat(Player* pPlayer, Packet* pPacket);
 	void HandleEnterDungeonRes(Player* pPlayer, Packet* pPacket);
+	void HandleReqJoinTeam(Player* pPlayer, Packet* pPacket);
+	void HandleJoinTeamRes(Player* pPlayer, Packet* pPacket);
 	void HandleReqPvp(Player* pPlayer, Packet* pPacket);
 	void HandlePvpRes(Player* pPlayer, Packet* pPacket);
 

@@ -476,7 +476,7 @@ message DropItemList {
 	repeated ItemData items = 4;
 }
 
-message JoinTeam {
+message PlayerReq {
 	bool agree = 1;
 	uint64 applicant = 2;
 	uint64 responder = 3;
@@ -498,10 +498,4 @@ message EnterDungeon {
 	uint64 world_sn = 2;
 	bool agree = 3;
 	string sender = 4;
-}
-
-message Pvp {
-	uint64 atker = 1;
-	uint64 defer = 2;
-	bool agree = 3;
 }

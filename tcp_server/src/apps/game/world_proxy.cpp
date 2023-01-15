@@ -52,16 +52,16 @@ void WorldProxy::Awake(int worldId, uint64 lastWorldSn)
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::S2G_SyncPlayer, BindFunP1(this, &WorldProxy::GetPlayer), BindFunP2(this, &WorldProxy::HandleS2GSyncPlayer));
 
 	// 客户端发送来的协议
+	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::MI_GlobalChat, BindFunP1(this, &WorldProxy::GetPlayer), BindFunP2(this, &WorldProxy::HandleGlobalChat));
+	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::MI_WorldChat, BindFunP1(this, &WorldProxy::GetPlayer), BindFunP2(this, &WorldProxy::HandleWorldChat));
+	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::MI_TeamChat, BindFunP1(this, &WorldProxy::GetPlayer), BindFunP2(this, &WorldProxy::HandleTeamChat));
+	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::MI_PrivateChat, BindFunP1(this, &WorldProxy::GetPlayer), BindFunP2(this, &WorldProxy::HandlePrivateChat));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2G_EnterWorld, BindFunP1(this, &WorldProxy::GetPlayer), BindFunP2(this, &WorldProxy::HandleC2GEnterWorld));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2C_ReqJoinTeam, BindFunP1(this, &WorldProxy::GetPlayer), BindFunP2(this, &WorldProxy::HandleReqJoinTeam));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2C_JoinTeamRes, BindFunP1(this, &WorldProxy::GetPlayer), BindFunP2(this, &WorldProxy::HandleJoinTeamRes));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2C_EnterDungeonRes, BindFunP1(this, &WorldProxy::GetPlayer), BindFunP2(this, &WorldProxy::HandleEnterDungeonRes));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2C_ReqPvp, BindFunP1(this, &WorldProxy::GetPlayer), BindFunP2(this, &WorldProxy::HandleReqPvp));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2C_PvpRes, BindFunP1(this, &WorldProxy::GetPlayer), BindFunP2(this, &WorldProxy::HandlePvpRes));
-	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::MI_GlobalChat, BindFunP1(this, &WorldProxy::GetPlayer), BindFunP2(this, &WorldProxy::HandleGlobalChat));
-	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::MI_WorldChat, BindFunP1(this, &WorldProxy::GetPlayer), BindFunP2(this, &WorldProxy::HandleWorldChat));
-	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::MI_TeamChat, BindFunP1(this, &WorldProxy::GetPlayer), BindFunP2(this, &WorldProxy::HandleTeamChat));
-	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::MI_PrivateChat, BindFunP1(this, &WorldProxy::GetPlayer), BindFunP2(this, &WorldProxy::HandlePrivateChat));
 
 	// 默认协议处理函数
 	pMsgSystem->RegisterDefaultFunction(this, BindFunP1(this, &WorldProxy::HandleDefaultFunction));
@@ -273,7 +273,7 @@ void WorldProxy::HandleTeleportAfter(Player* pPlayer, Packet* pPacket)
 
 void WorldProxy::HandleReqJoinTeam(Player* pPlayer, Packet* pPacket)
 {
-	Proto::JoinTeam proto = pPacket->ParseToProto<Proto::JoinTeam>();
+	Proto::PlayerReq proto = pPacket->ParseToProto<Proto::PlayerReq>();
 	if (pPlayer->GetPlayerSN() == proto.applicant())
 	{
 		Player* target = _playerMgr->GetPlayerBySn(proto.responder());
@@ -283,7 +283,7 @@ void WorldProxy::HandleReqJoinTeam(Player* pPlayer, Packet* pPacket)
 
 void WorldProxy::HandleJoinTeamRes(Player* pPlayer, Packet* pPacket)
 {
-	Proto::JoinTeam proto = pPacket->ParseToProto<Proto::JoinTeam>();
+	Proto::PlayerReq proto = pPacket->ParseToProto<Proto::PlayerReq>();
 	Player* responder = _playerMgr->GetPlayerBySn(proto.responder());
 	Player* applicant = _playerMgr->GetPlayerBySn(proto.applicant());
 	if (pPlayer == responder)
@@ -392,16 +392,16 @@ void WorldProxy::HandleEnterDungeonRes(Player* pPlayer, Packet* pPacket)
 
 void WorldProxy::HandleReqPvp(Player* pPlayer, Packet* pPacket)
 {
-	Proto::Pvp proto = pPacket->ParseToProto<Proto::Pvp>();
-	MessageSystemHelp::SendPacket(Proto::MsgId::C2C_ReqPvp, proto, _playerMgr->GetPlayerBySn(proto.defer()));
+	Proto::PlayerReq proto = pPacket->ParseToProto<Proto::PlayerReq>();
+	MessageSystemHelp::SendPacket(Proto::MsgId::C2C_ReqPvp, proto, _playerMgr->GetPlayerBySn(proto.responder()));
 }
 
 void WorldProxy::HandlePvpRes(Player* pPlayer, Packet* pPacket)
 {
-	Proto::Pvp proto = pPacket->ParseToProto<Proto::Pvp>();
+	Proto::PlayerReq proto = pPacket->ParseToProto<Proto::PlayerReq>();
 	if (proto.agree())
 	{
-		MessageSystemHelp::SendPacket(Proto::MsgId::C2C_PvpRes, proto, _playerMgr->GetPlayerBySn(proto.atker()));
-		MessageSystemHelp::SendPacket(Proto::MsgId::C2C_PvpRes, proto, _playerMgr->GetPlayerBySn(proto.defer()));
+		MessageSystemHelp::SendPacket(Proto::MsgId::C2C_PvpRes, proto, _playerMgr->GetPlayerBySn(proto.applicant()));
+		MessageSystemHelp::SendPacket(Proto::MsgId::C2C_PvpRes, proto, _playerMgr->GetPlayerBySn(proto.responder()));
 	}
 }

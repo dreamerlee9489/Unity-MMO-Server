@@ -29,20 +29,10 @@ void PlayerComponentDetail::ParserFromProto(const Proto::Player& proto)
 	atk = protoBase.atk();
 	def = protoBase.def();
 	gold = protoKnap.gold();
-	for (auto &item : protoKnap.bag_items())
+	for (auto &item : protoKnap.items())
 	{
 		pIdxMap->emplace(item.sn(), pKnap->size());
-		switch (item.type())
-		{
-		case Proto::ItemData_ItemType_Potion:
-			pKnap->emplace_back(ItemType::Potion, item.id(), item.index(), item.sn());
-			break;
-		case Proto::ItemData_ItemType_Weapon:
-			pKnap->emplace_back(ItemType::Weapon, item.id(), item.index(), item.sn());
-			break;
-		default:
-			break;
-		}
+		pKnap->emplace_back(ItemData().ParserFromProto(item));
 	}
 }
 
@@ -55,19 +45,20 @@ void PlayerComponentDetail::SerializeToProto(Proto::Player* pProto)
 	pProto->mutable_base()->set_atk(atk);
 	pProto->mutable_base()->set_def(def);
 	pProto->mutable_knap()->set_gold(gold);
-	auto& oldItems = *pProto->mutable_knap()->mutable_bag_items();
+	auto& oldItems = *pProto->mutable_knap()->mutable_items();
 	for (auto& item : oldItems)
 	{
 		if (pIdxMap->find(item.sn()) != pIdxMap->end())
 		{
 			int idx = (*pIdxMap)[item.sn()];
+			item.set_knaptype((Proto::ItemData_KnapType)(*pKnap)[idx].knapType);
 			item.set_index((*pKnap)[idx].index);
 			(*pKnap)[idx].sn = 0;
 		}
 	}
 	for (auto& item : *pKnap)
 		if (item.sn != 0)
-			item.SerializeToProto(pProto->mutable_knap()->add_bag_items());
+			item.SerializeToProto(pProto->mutable_knap()->add_items());
 }
 
 Proto::Gender PlayerComponentDetail::GetGender() const

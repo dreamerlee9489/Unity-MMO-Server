@@ -17,14 +17,16 @@ void World::Awake(int worldId)
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::G2S_RequestSyncPlayer, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleRequestSyncPlayer));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::G2S_RemovePlayer, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleG2SRemovePlayer));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_Move, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleMove));
+	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_UpdateKnapItem, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleUpdateKnapItem));
+	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_GetPlayerKnap, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleGetPlayerKnap));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_SyncPlayerPos, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleSyncPlayerPos));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_SyncPlayerCmd, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleSyncPlayerCmd));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_ReqSyncPlayer, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleReqSyncPlayer));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_ReqSyncNpc, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleReqSyncNpc));
-	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_UpdateKnapItem, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleUpdateKnapItem));
-	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_GetPlayerKnap, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleGetPlayerKnap));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_PlayerAtkEvent, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandlePlayerAtkEvent));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_NpcAtkEvent, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleNpcAtkEvent));
+	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2C_ReqTrade, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleReqTrade));
+	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2C_TradeRes, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleTradeRes));
 
 	ResourceWorld* worldCfg = ResourceHelp::GetResourceManager()->Worlds->GetResource(_worldId);
 	std::vector<ResourceNpc>& npcCfgs = *worldCfg->GetNpcCfgs();
@@ -333,41 +335,6 @@ void World::HandleSyncPlayerCmd(Player* pPlayer, Packet* pPacket)
 	BroadcastPacket(Proto::MsgId::S2C_SyncPlayerCmd, proto);
 }
 
-void World::HandleUpdateKnapItem(Player* pPlayer, Packet* pPacket)
-{
-	Proto::UpdateKnapItem proto = pPacket->ParseToProto<Proto::UpdateKnapItem>();
-	Proto::ItemData item = proto.item();
-	auto& knap = *pPlayer->detail->pKnap;
-	auto& idxMap = *pPlayer->detail->pIdxMap;
-	if (idxMap.find(item.sn()) != idxMap.end())
-		knap[idxMap[item.sn()]].index = item.index();
-	else
-	{
-		idxMap.emplace(item.sn(), knap.size());
-		switch (item.type())
-		{
-		case Proto::ItemData_ItemType_Potion:
-			knap.emplace_back(ItemType::Potion, item.id(), item.index(), item.sn());
-			break;
-		case Proto::ItemData_ItemType_Weapon:
-			knap.emplace_back(ItemType::Weapon, item.id(), item.index(), item.sn());
-			break;
-		default:
-			break;
-		}
-	}
-}
-
-void World::HandleGetPlayerKnap(Player* pPlayer, Packet* pPacket)
-{
-	Proto::PlayerKnap proto;
-	proto.set_gold(pPlayer->detail->gold);
-	auto& knap = *pPlayer->detail->pKnap;
-	for (auto& item : knap)
-		item.SerializeToProto(proto.add_bag_items());
-	MessageSystemHelp::SendPacket(Proto::MsgId::S2C_GetPlayerKnap, proto, pPlayer);
-}
-
 void World::HandleReqSyncNpc(Player* pPlayer, Packet* pPacket)
 {
 	Proto::ReqSyncNpc syncNpc = pPacket->ParseToProto<Proto::ReqSyncNpc>();
@@ -463,4 +430,51 @@ void World::HandleNpcAtkEvent(Player* pPlayer, Packet* pPacket)
 	status.set_sn(pPlayer->GetPlayerSN());
 	status.set_hp(pPlayer->detail->hp);
 	BroadcastPacket(Proto::MsgId::S2C_SyncEntityStatus, status);
+}
+
+void World::HandleUpdateKnapItem(Player* pPlayer, Packet* pPacket)
+{
+	Proto::UpdateKnapItem proto = pPacket->ParseToProto<Proto::UpdateKnapItem>();
+	if((KnapType)proto.item().knaptype() != KnapType::Trade)
+		pPlayer->UpdateKnapItem(proto.item());
+	else
+	{
+		Player* target = nullptr;
+		if (pPlayer->GetPlayerSN() == tradeMap[pPlayer->GetPlayerSN()]->applicant)
+			target = playerMgr->GetPlayerBySn(tradeMap[pPlayer->GetPlayerSN()]->responder);
+		else
+			target = playerMgr->GetPlayerBySn(tradeMap[pPlayer->GetPlayerSN()]->applicant);
+		MessageSystemHelp::SendPacket(Proto::MsgId::S2C_UpdateKnapItem, proto, target);
+	}
+}
+
+void World::HandleGetPlayerKnap(Player* pPlayer, Packet* pPacket)
+{
+	pPlayer->GetPlayerKnap();
+}
+
+void World::HandleReqTrade(Player* pPlayer, Packet* pPacket)
+{
+	Proto::PlayerReq proto = pPacket->ParseToProto<Proto::PlayerReq>();
+	if (pPlayer->GetPlayerSN() == proto.applicant())
+		MessageSystemHelp::SendPacket(Proto::MsgId::C2C_ReqTrade, proto, playerMgr->GetPlayerBySn(proto.responder()));
+}
+
+void World::HandleTradeRes(Player* pPlayer, Packet* pPacket)
+{
+	Proto::PlayerReq proto = pPacket->ParseToProto<Proto::PlayerReq>();
+	if (proto.agree())
+	{
+		if (tradeMap.find(proto.applicant()) == tradeMap.end() && tradeMap.find(proto.responder()) == tradeMap.end())
+		{
+			Trade* pTrade = new Trade(proto.applicant(), proto.responder());
+			tradeMap.emplace(proto.responder(), pTrade);
+			tradeMap.emplace(proto.applicant(), pTrade);
+		}
+		if (pPlayer->GetPlayerSN() == proto.responder())
+			MessageSystemHelp::SendPacket(Proto::MsgId::C2C_TradeRes, proto, playerMgr->GetPlayerBySn(proto.applicant()));
+		else if (pPlayer->GetPlayerSN() == proto.applicant())
+			MessageSystemHelp::SendPacket(Proto::MsgId::C2C_TradeRes, proto, playerMgr->GetPlayerBySn(proto.responder()));
+		LOG_DEBUG("HandleTradeRes " << pPlayer->GetName().c_str());
+	}
 }

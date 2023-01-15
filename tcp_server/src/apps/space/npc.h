@@ -5,64 +5,50 @@
 #include "libserver/vector3.h"
 #include "libresource/resource_world.h"
 #include "world.h"
-#include <vector>
+#include <list>
 #include <random>
 #include <algorithm>
 constexpr int DROP_EXPR = -1;
 constexpr int DROP_GOLD = -2;
 
 enum struct ItemType { None, Potion, Weapon };
+enum struct KnapType { World, Bag, Equip, Action, Trade };
 
 struct ItemData
 {
 	uint64 sn = 0;
-	ItemType type = ItemType::None;
+	ItemType itemType = ItemType::None;
+	KnapType knapType = KnapType::World;
 	int id = 0, index = 0;
 
-	ItemData(ItemType type, int id, int index = 0, uint64 sn = 0)
+	ItemData() = default;
+
+	ItemData(ItemType itemType, int id, KnapType knapType, int index = 0, uint64 sn = 0)
 	{
-		this->sn = sn == 0 ? Global::GetInstance()->GenerateSN() : sn;
-		this->type = type;
+		this->itemType = itemType;
+		this->knapType = knapType;
 		this->id = id;
 		this->index = index;
+		this->sn = sn == 0 ? Global::GetInstance()->GenerateSN() : sn;
 	}
 
 	void SerializeToProto(Proto::ItemData* proto)
 	{
-		switch (type)
-		{
-		case ItemType::Potion:
-			proto->set_type(Proto::ItemData_ItemType_Potion);
-			break;
-		case ItemType::Weapon:
-			proto->set_type(Proto::ItemData_ItemType_Weapon);
-			break;
-		default:
-			proto->set_type(Proto::ItemData_ItemType_None);
-			break;
-		}
+		proto->set_itemtype((Proto::ItemData_ItemType)itemType);
+		proto->set_knaptype((Proto::ItemData_KnapType)knapType);
 		proto->set_sn(sn);
 		proto->set_id(id);
 		proto->set_index(index);
 	}
 
-	void ParserFromProto(const Proto::ItemData& proto)
+	const ItemData& ParserFromProto(const Proto::ItemData& proto)
 	{
-		switch ((Proto::ItemData_ItemType)proto.type())
-		{
-		case Proto::ItemData_ItemType_Potion:
-			type = ItemType::Potion;
-			break;
-		case Proto::ItemData_ItemType_Weapon:
-			type = ItemType::Weapon;
-			break;
-		default:
-			type = ItemType::None;
-			break;
-		}
+		itemType = (ItemType)proto.itemtype();
+		knapType = (KnapType)proto.knaptype();
 		sn = proto.sn();
 		id = proto.id();
 		index = proto.index();
+		return *this;
 	}
 };
 
@@ -123,7 +109,7 @@ public:
 
 	std::map<uint64, Player*>* GetAllPlayer() { return _players; }
 
-	std::vector<ItemData>* GetDropList(Player* player);
+	std::list<ItemData>* GetDropList(Player* player);
 };
 
 #endif // !AIENEMY

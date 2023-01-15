@@ -45,6 +45,8 @@ public:
 	void GetDamage(Npc* enemy);
 	void GetDamage(Player* atker);
 	void ResetCmd();
+	void UpdateKnapItem(const Proto::ItemData& itemData);
+	void GetPlayerKnap();
 
 	Proto::Player& GetPlayerProto();
 	void ParseFromStream(uint64 playerSn, std::stringstream* pOpStream);

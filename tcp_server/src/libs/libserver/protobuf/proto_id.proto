@@ -167,8 +167,9 @@ enum MsgId {
 	S2C_DropItemList		= 30018;
 
 	C2S_UpdateKnapItem		= 40001;
-	C2S_GetPlayerKnap		= 40002;
-	S2C_GetPlayerKnap		= 40003;
+	S2C_UpdateKnapItem		= 40002;
+	C2S_GetPlayerKnap		= 40003;
+	S2C_GetPlayerKnap		= 40004;
 
 	C2C_ReqJoinTeam			= 50001;
 	C2C_JoinTeamRes			= 50002;
@@ -176,4 +177,6 @@ enum MsgId {
 	C2C_EnterDungeonRes		= 50004;
 	C2C_ReqPvp				= 50005;
 	C2C_PvpRes				= 50006;
+	C2C_ReqTrade			= 50007;
+	C2C_TradeRes			= 50008;
 }

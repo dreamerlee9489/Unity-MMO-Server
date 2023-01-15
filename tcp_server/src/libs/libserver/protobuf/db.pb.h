@@ -123,6 +123,34 @@ inline bool ItemData_ItemType_Parse(
   return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<ItemData_ItemType>(
     ItemData_ItemType_descriptor(), name, value);
 }
+enum ItemData_KnapType : int {
+  ItemData_KnapType_World = 0,
+  ItemData_KnapType_Bag = 1,
+  ItemData_KnapType_Equip = 2,
+  ItemData_KnapType_Action = 3,
+  ItemData_KnapType_Trade = 4,
+  ItemData_KnapType_ItemData_KnapType_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
+  ItemData_KnapType_ItemData_KnapType_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
+};
+bool ItemData_KnapType_IsValid(int value);
+constexpr ItemData_KnapType ItemData_KnapType_KnapType_MIN = ItemData_KnapType_World;
+constexpr ItemData_KnapType ItemData_KnapType_KnapType_MAX = ItemData_KnapType_Trade;
+constexpr int ItemData_KnapType_KnapType_ARRAYSIZE = ItemData_KnapType_KnapType_MAX + 1;
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ItemData_KnapType_descriptor();
+template<typename T>
+inline const std::string& ItemData_KnapType_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, ItemData_KnapType>::value ||
+    ::std::is_integral<T>::value,
+    "Incorrect type passed to function ItemData_KnapType_Name.");
+  return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
+    ItemData_KnapType_descriptor(), enum_t_value);
+}
+inline bool ItemData_KnapType_Parse(
+    const std::string& name, ItemData_KnapType* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<ItemData_KnapType>(
+    ItemData_KnapType_descriptor(), name, value);
+}
 enum Gender : int {
   none = 0,
   male = 1,
@@ -1239,30 +1267,72 @@ class ItemData :
     return ItemData_ItemType_Parse(name, value);
   }
 
+  typedef ItemData_KnapType KnapType;
+  static constexpr KnapType World =
+    ItemData_KnapType_World;
+  static constexpr KnapType Bag =
+    ItemData_KnapType_Bag;
+  static constexpr KnapType Equip =
+    ItemData_KnapType_Equip;
+  static constexpr KnapType Action =
+    ItemData_KnapType_Action;
+  static constexpr KnapType Trade =
+    ItemData_KnapType_Trade;
+  static inline bool KnapType_IsValid(int value) {
+    return ItemData_KnapType_IsValid(value);
+  }
+  static constexpr KnapType KnapType_MIN =
+    ItemData_KnapType_KnapType_MIN;
+  static constexpr KnapType KnapType_MAX =
+    ItemData_KnapType_KnapType_MAX;
+  static constexpr int KnapType_ARRAYSIZE =
+    ItemData_KnapType_KnapType_ARRAYSIZE;
+  static inline const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor*
+  KnapType_descriptor() {
+    return ItemData_KnapType_descriptor();
+  }
+  template<typename T>
+  static inline const std::string& KnapType_Name(T enum_t_value) {
+    static_assert(::std::is_same<T, KnapType>::value ||
+      ::std::is_integral<T>::value,
+      "Incorrect type passed to function KnapType_Name.");
+    return ItemData_KnapType_Name(enum_t_value);
+  }
+  static inline bool KnapType_Parse(const std::string& name,
+      KnapType* value) {
+    return ItemData_KnapType_Parse(name, value);
+  }
+
   // accessors -------------------------------------------------------
 
   enum : int {
     kSnFieldNumber = 1,
-    kTypeFieldNumber = 2,
+    kItemTypeFieldNumber = 2,
     kIdFieldNumber = 3,
-    kIndexFieldNumber = 4,
+    kKnapTypeFieldNumber = 4,
+    kIndexFieldNumber = 5,
   };
   // uint64 sn = 1;
   void clear_sn();
   ::PROTOBUF_NAMESPACE_ID::uint64 sn() const;
   void set_sn(::PROTOBUF_NAMESPACE_ID::uint64 value);
 
-  // .Proto.ItemData.ItemType type = 2;
-  void clear_type();
-  ::Proto::ItemData_ItemType type() const;
-  void set_type(::Proto::ItemData_ItemType value);
+  // .Proto.ItemData.ItemType itemType = 2;
+  void clear_itemtype();
+  ::Proto::ItemData_ItemType itemtype() const;
+  void set_itemtype(::Proto::ItemData_ItemType value);
 
   // int32 id = 3;
   void clear_id();
   ::PROTOBUF_NAMESPACE_ID::int32 id() const;
   void set_id(::PROTOBUF_NAMESPACE_ID::int32 value);
 
-  // int32 index = 4;
+  // .Proto.ItemData.KnapType knapType = 4;
+  void clear_knaptype();
+  ::Proto::ItemData_KnapType knaptype() const;
+  void set_knaptype(::Proto::ItemData_KnapType value);
+
+  // int32 index = 5;
   void clear_index();
   ::PROTOBUF_NAMESPACE_ID::int32 index() const;
   void set_index(::PROTOBUF_NAMESPACE_ID::int32 value);
@@ -1273,8 +1343,9 @@ class ItemData :
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
   ::PROTOBUF_NAMESPACE_ID::uint64 sn_;
-  int type_;
+  int itemtype_;
   ::PROTOBUF_NAMESPACE_ID::int32 id_;
+  int knaptype_;
   ::PROTOBUF_NAMESPACE_ID::int32 index_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_db_2eproto;
@@ -1394,43 +1465,19 @@ class PlayerKnap :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kBagItemsFieldNumber = 2,
-    kActItemsFieldNumber = 3,
-    kEquItemsFieldNumber = 4,
+    kItemsFieldNumber = 2,
     kGoldFieldNumber = 1,
   };
-  // repeated .Proto.ItemData bag_items = 2;
-  int bag_items_size() const;
-  void clear_bag_items();
-  ::Proto::ItemData* mutable_bag_items(int index);
+  // repeated .Proto.ItemData items = 2;
+  int items_size() const;
+  void clear_items();
+  ::Proto::ItemData* mutable_items(int index);
   ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::ItemData >*
-      mutable_bag_items();
-  const ::Proto::ItemData& bag_items(int index) const;
-  ::Proto::ItemData* add_bag_items();
+      mutable_items();
+  const ::Proto::ItemData& items(int index) const;
+  ::Proto::ItemData* add_items();
   const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::ItemData >&
-      bag_items() const;
-
-  // repeated .Proto.ItemData act_items = 3;
-  int act_items_size() const;
-  void clear_act_items();
-  ::Proto::ItemData* mutable_act_items(int index);
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::ItemData >*
-      mutable_act_items();
-  const ::Proto::ItemData& act_items(int index) const;
-  ::Proto::ItemData* add_act_items();
-  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::ItemData >&
-      act_items() const;
-
-  // repeated .Proto.ItemData equ_items = 4;
-  int equ_items_size() const;
-  void clear_equ_items();
-  ::Proto::ItemData* mutable_equ_items(int index);
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::ItemData >*
-      mutable_equ_items();
-  const ::Proto::ItemData& equ_items(int index) const;
-  ::Proto::ItemData* add_equ_items();
-  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::ItemData >&
-      equ_items() const;
+      items() const;
 
   // int32 gold = 1;
   void clear_gold();
@@ -1442,9 +1489,7 @@ class PlayerKnap :
   class _Internal;
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::ItemData > bag_items_;
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::ItemData > act_items_;
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::ItemData > equ_items_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::ItemData > items_;
   ::PROTOBUF_NAMESPACE_ID::int32 gold_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_db_2eproto;
@@ -2280,18 +2325,18 @@ inline void ItemData::set_sn(::PROTOBUF_NAMESPACE_ID::uint64 value) {
   // @@protoc_insertion_point(field_set:Proto.ItemData.sn)
 }
 
-// .Proto.ItemData.ItemType type = 2;
-inline void ItemData::clear_type() {
-  type_ = 0;
+// .Proto.ItemData.ItemType itemType = 2;
+inline void ItemData::clear_itemtype() {
+  itemtype_ = 0;
 }
-inline ::Proto::ItemData_ItemType ItemData::type() const {
-  // @@protoc_insertion_point(field_get:Proto.ItemData.type)
-  return static_cast< ::Proto::ItemData_ItemType >(type_);
+inline ::Proto::ItemData_ItemType ItemData::itemtype() const {
+  // @@protoc_insertion_point(field_get:Proto.ItemData.itemType)
+  return static_cast< ::Proto::ItemData_ItemType >(itemtype_);
 }
-inline void ItemData::set_type(::Proto::ItemData_ItemType value) {
+inline void ItemData::set_itemtype(::Proto::ItemData_ItemType value) {
   
-  type_ = value;
-  // @@protoc_insertion_point(field_set:Proto.ItemData.type)
+  itemtype_ = value;
+  // @@protoc_insertion_point(field_set:Proto.ItemData.itemType)
 }
 
 // int32 id = 3;
@@ -2308,7 +2353,21 @@ inline void ItemData::set_id(::PROTOBUF_NAMESPACE_ID::int32 value) {
   // @@protoc_insertion_point(field_set:Proto.ItemData.id)
 }
 
-// int32 index = 4;
+// .Proto.ItemData.KnapType knapType = 4;
+inline void ItemData::clear_knaptype() {
+  knaptype_ = 0;
+}
+inline ::Proto::ItemData_KnapType ItemData::knaptype() const {
+  // @@protoc_insertion_point(field_get:Proto.ItemData.knapType)
+  return static_cast< ::Proto::ItemData_KnapType >(knaptype_);
+}
+inline void ItemData::set_knaptype(::Proto::ItemData_KnapType value) {
+  
+  knaptype_ = value;
+  // @@protoc_insertion_point(field_set:Proto.ItemData.knapType)
+}
+
+// int32 index = 5;
 inline void ItemData::clear_index() {
   index_ = 0;
 }
@@ -2340,94 +2399,34 @@ inline void PlayerKnap::set_gold(::PROTOBUF_NAMESPACE_ID::int32 value) {
   // @@protoc_insertion_point(field_set:Proto.PlayerKnap.gold)
 }
 
-// repeated .Proto.ItemData bag_items = 2;
-inline int PlayerKnap::bag_items_size() const {
-  return bag_items_.size();
+// repeated .Proto.ItemData items = 2;
+inline int PlayerKnap::items_size() const {
+  return items_.size();
 }
-inline void PlayerKnap::clear_bag_items() {
-  bag_items_.Clear();
+inline void PlayerKnap::clear_items() {
+  items_.Clear();
 }
-inline ::Proto::ItemData* PlayerKnap::mutable_bag_items(int index) {
-  // @@protoc_insertion_point(field_mutable:Proto.PlayerKnap.bag_items)
-  return bag_items_.Mutable(index);
-}
-inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::ItemData >*
-PlayerKnap::mutable_bag_items() {
-  // @@protoc_insertion_point(field_mutable_list:Proto.PlayerKnap.bag_items)
-  return &bag_items_;
-}
-inline const ::Proto::ItemData& PlayerKnap::bag_items(int index) const {
-  // @@protoc_insertion_point(field_get:Proto.PlayerKnap.bag_items)
-  return bag_items_.Get(index);
-}
-inline ::Proto::ItemData* PlayerKnap::add_bag_items() {
-  // @@protoc_insertion_point(field_add:Proto.PlayerKnap.bag_items)
-  return bag_items_.Add();
-}
-inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::ItemData >&
-PlayerKnap::bag_items() const {
-  // @@protoc_insertion_point(field_list:Proto.PlayerKnap.bag_items)
-  return bag_items_;
-}
-
-// repeated .Proto.ItemData act_items = 3;
-inline int PlayerKnap::act_items_size() const {
-  return act_items_.size();
-}
-inline void PlayerKnap::clear_act_items() {
-  act_items_.Clear();
-}
-inline ::Proto::ItemData* PlayerKnap::mutable_act_items(int index) {
-  // @@protoc_insertion_point(field_mutable:Proto.PlayerKnap.act_items)
-  return act_items_.Mutable(index);
+inline ::Proto::ItemData* PlayerKnap::mutable_items(int index) {
+  // @@protoc_insertion_point(field_mutable:Proto.PlayerKnap.items)
+  return items_.Mutable(index);
 }
 inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::ItemData >*
-PlayerKnap::mutable_act_items() {
-  // @@protoc_insertion_point(field_mutable_list:Proto.PlayerKnap.act_items)
-  return &act_items_;
+PlayerKnap::mutable_items() {
+  // @@protoc_insertion_point(field_mutable_list:Proto.PlayerKnap.items)
+  return &items_;
 }
-inline const ::Proto::ItemData& PlayerKnap::act_items(int index) const {
-  // @@protoc_insertion_point(field_get:Proto.PlayerKnap.act_items)
-  return act_items_.Get(index);
+inline const ::Proto::ItemData& PlayerKnap::items(int index) const {
+  // @@protoc_insertion_point(field_get:Proto.PlayerKnap.items)
+  return items_.Get(index);
 }
-inline ::Proto::ItemData* PlayerKnap::add_act_items() {
-  // @@protoc_insertion_point(field_add:Proto.PlayerKnap.act_items)
-  return act_items_.Add();
-}
-inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::ItemData >&
-PlayerKnap::act_items() const {
-  // @@protoc_insertion_point(field_list:Proto.PlayerKnap.act_items)
-  return act_items_;
-}
-
-// repeated .Proto.ItemData equ_items = 4;
-inline int PlayerKnap::equ_items_size() const {
-  return equ_items_.size();
-}
-inline void PlayerKnap::clear_equ_items() {
-  equ_items_.Clear();
-}
-inline ::Proto::ItemData* PlayerKnap::mutable_equ_items(int index) {
-  // @@protoc_insertion_point(field_mutable:Proto.PlayerKnap.equ_items)
-  return equ_items_.Mutable(index);
-}
-inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::ItemData >*
-PlayerKnap::mutable_equ_items() {
-  // @@protoc_insertion_point(field_mutable_list:Proto.PlayerKnap.equ_items)
-  return &equ_items_;
-}
-inline const ::Proto::ItemData& PlayerKnap::equ_items(int index) const {
-  // @@protoc_insertion_point(field_get:Proto.PlayerKnap.equ_items)
-  return equ_items_.Get(index);
-}
-inline ::Proto::ItemData* PlayerKnap::add_equ_items() {
-  // @@protoc_insertion_point(field_add:Proto.PlayerKnap.equ_items)
-  return equ_items_.Add();
+inline ::Proto::ItemData* PlayerKnap::add_items() {
+  // @@protoc_insertion_point(field_add:Proto.PlayerKnap.items)
+  return items_.Add();
 }
 inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::ItemData >&
-PlayerKnap::equ_items() const {
-  // @@protoc_insertion_point(field_list:Proto.PlayerKnap.equ_items)
-  return equ_items_;
+PlayerKnap::items() const {
+  // @@protoc_insertion_point(field_list:Proto.PlayerKnap.items)
+  return items_;
 }
 
 // -------------------------------------------------------------------
@@ -2515,6 +2514,11 @@ template <> struct is_proto_enum< ::Proto::ItemData_ItemType> : ::std::true_type
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::Proto::ItemData_ItemType>() {
   return ::Proto::ItemData_ItemType_descriptor();
+}
+template <> struct is_proto_enum< ::Proto::ItemData_KnapType> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::Proto::ItemData_KnapType>() {
+  return ::Proto::ItemData_KnapType_descriptor();
 }
 template <> struct is_proto_enum< ::Proto::Gender> : ::std::true_type {};
 template <>

@@ -246,6 +246,7 @@
     <ClInclude Include="..\space\move_system.h" />
     <ClInclude Include="..\space\player_component_detail.h" />
     <ClInclude Include="..\space\player_manager_component.h" />
+    <ClInclude Include="..\space\trade.h" />
     <ClInclude Include="..\space\world_operator_component.h" />
     <ClInclude Include="..\space\world.h" />
     <ClInclude Include="..\space\world_gather.h" />

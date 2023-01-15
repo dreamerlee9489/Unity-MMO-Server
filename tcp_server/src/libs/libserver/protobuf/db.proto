@@ -60,17 +60,23 @@ message ItemData {
 		Potion = 1;
 		Weapon = 2;
 	}
+	enum KnapType {
+		World = 0;
+		Bag = 1;
+		Equip = 2;
+		Action = 3;
+		Trade = 4;
+	}
 	uint64 sn = 1;
-	ItemType type = 2;
+	ItemType itemType = 2;
 	int32 id = 3;
-	int32 index = 4;
+	KnapType knapType = 4;
+	int32 index = 5;
 }
 
 message PlayerKnap {
 	int32 gold = 1;
-	repeated ItemData bag_items = 2;
-	repeated ItemData act_items = 3;
-	repeated ItemData equ_items = 4;
+	repeated ItemData items = 2;
 }
 
 message UpdateKnapItem {

@@ -363,5 +363,8 @@
     <ClInclude Include="..\game\team.h">
       <Filter>game\gather</Filter>
     </ClInclude>
+    <ClInclude Include="..\space\trade.h">
+      <Filter>space\world</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

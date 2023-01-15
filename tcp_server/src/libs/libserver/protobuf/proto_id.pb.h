@@ -163,20 +163,23 @@ enum MsgId : int {
   S2C_NpcAtkEvent = 30017,
   S2C_DropItemList = 30018,
   C2S_UpdateKnapItem = 40001,
-  C2S_GetPlayerKnap = 40002,
-  S2C_GetPlayerKnap = 40003,
+  S2C_UpdateKnapItem = 40002,
+  C2S_GetPlayerKnap = 40003,
+  S2C_GetPlayerKnap = 40004,
   C2C_ReqJoinTeam = 50001,
   C2C_JoinTeamRes = 50002,
   C2C_ReqEnterDungeon = 50003,
   C2C_EnterDungeonRes = 50004,
   C2C_ReqPvp = 50005,
   C2C_PvpRes = 50006,
+  C2C_ReqTrade = 50007,
+  C2C_TradeRes = 50008,
   MsgId_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
   MsgId_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
 };
 bool MsgId_IsValid(int value);
 constexpr MsgId MsgId_MIN = None;
-constexpr MsgId MsgId_MAX = C2C_PvpRes;
+constexpr MsgId MsgId_MAX = C2C_TradeRes;
 constexpr int MsgId_ARRAYSIZE = MsgId_MAX + 1;
 
 const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* MsgId_descriptor();

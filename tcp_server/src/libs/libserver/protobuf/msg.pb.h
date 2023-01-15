@@ -49,7 +49,7 @@ struct TableStruct_msg_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxillaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[80]
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[79]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
@@ -153,9 +153,6 @@ extern GameTokenToRedisRsDefaultTypeInternal _GameTokenToRedisRs_default_instanc
 class Http;
 class HttpDefaultTypeInternal;
 extern HttpDefaultTypeInternal _Http_default_instance_;
-class JoinTeam;
-class JoinTeamDefaultTypeInternal;
-extern JoinTeamDefaultTypeInternal _JoinTeam_default_instance_;
 class LoginByToken;
 class LoginByTokenDefaultTypeInternal;
 extern LoginByTokenDefaultTypeInternal _LoginByToken_default_instance_;
@@ -192,12 +189,12 @@ extern PlayerListDefaultTypeInternal _PlayerList_default_instance_;
 class PlayerLittle;
 class PlayerLittleDefaultTypeInternal;
 extern PlayerLittleDefaultTypeInternal _PlayerLittle_default_instance_;
+class PlayerReq;
+class PlayerReqDefaultTypeInternal;
+extern PlayerReqDefaultTypeInternal _PlayerReq_default_instance_;
 class PlayerSyncOnlineToRedis;
 class PlayerSyncOnlineToRedisDefaultTypeInternal;
 extern PlayerSyncOnlineToRedisDefaultTypeInternal _PlayerSyncOnlineToRedis_default_instance_;
-class Pvp;
-class PvpDefaultTypeInternal;
-extern PvpDefaultTypeInternal _Pvp_default_instance_;
 class QueryPlayer;
 class QueryPlayerDefaultTypeInternal;
 extern QueryPlayerDefaultTypeInternal _QueryPlayer_default_instance_;
@@ -331,7 +328,6 @@ template<> ::Proto::GameToken* Arena::CreateMaybeMessage<::Proto::GameToken>(Are
 template<> ::Proto::GameTokenToRedis* Arena::CreateMaybeMessage<::Proto::GameTokenToRedis>(Arena*);
 template<> ::Proto::GameTokenToRedisRs* Arena::CreateMaybeMessage<::Proto::GameTokenToRedisRs>(Arena*);
 template<> ::Proto::Http* Arena::CreateMaybeMessage<::Proto::Http>(Arena*);
-template<> ::Proto::JoinTeam* Arena::CreateMaybeMessage<::Proto::JoinTeam>(Arena*);
 template<> ::Proto::LoginByToken* Arena::CreateMaybeMessage<::Proto::LoginByToken>(Arena*);
 template<> ::Proto::LoginByTokenRs* Arena::CreateMaybeMessage<::Proto::LoginByTokenRs>(Arena*);
 template<> ::Proto::LoginTokenToRedis* Arena::CreateMaybeMessage<::Proto::LoginTokenToRedis>(Arena*);
@@ -344,8 +340,8 @@ template<> ::Proto::PlayerAtkEvent* Arena::CreateMaybeMessage<::Proto::PlayerAtk
 template<> ::Proto::PlayerDeleteOnlineToRedis* Arena::CreateMaybeMessage<::Proto::PlayerDeleteOnlineToRedis>(Arena*);
 template<> ::Proto::PlayerList* Arena::CreateMaybeMessage<::Proto::PlayerList>(Arena*);
 template<> ::Proto::PlayerLittle* Arena::CreateMaybeMessage<::Proto::PlayerLittle>(Arena*);
+template<> ::Proto::PlayerReq* Arena::CreateMaybeMessage<::Proto::PlayerReq>(Arena*);
 template<> ::Proto::PlayerSyncOnlineToRedis* Arena::CreateMaybeMessage<::Proto::PlayerSyncOnlineToRedis>(Arena*);
-template<> ::Proto::Pvp* Arena::CreateMaybeMessage<::Proto::Pvp>(Arena*);
 template<> ::Proto::QueryPlayer* Arena::CreateMaybeMessage<::Proto::QueryPlayer>(Arena*);
 template<> ::Proto::QueryPlayerList* Arena::CreateMaybeMessage<::Proto::QueryPlayerList>(Arena*);
 template<> ::Proto::QueryPlayerRs* Arena::CreateMaybeMessage<::Proto::QueryPlayerRs>(Arena*);
@@ -11694,23 +11690,23 @@ class DropItemList :
 };
 // -------------------------------------------------------------------
 
-class JoinTeam :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Proto.JoinTeam) */ {
+class PlayerReq :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Proto.PlayerReq) */ {
  public:
-  JoinTeam();
-  virtual ~JoinTeam();
+  PlayerReq();
+  virtual ~PlayerReq();
 
-  JoinTeam(const JoinTeam& from);
-  JoinTeam(JoinTeam&& from) noexcept
-    : JoinTeam() {
+  PlayerReq(const PlayerReq& from);
+  PlayerReq(PlayerReq&& from) noexcept
+    : PlayerReq() {
     *this = ::std::move(from);
   }
 
-  inline JoinTeam& operator=(const JoinTeam& from) {
+  inline PlayerReq& operator=(const PlayerReq& from) {
     CopyFrom(from);
     return *this;
   }
-  inline JoinTeam& operator=(JoinTeam&& from) noexcept {
+  inline PlayerReq& operator=(PlayerReq&& from) noexcept {
     if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
       if (this != &from) InternalSwap(&from);
     } else {
@@ -11728,37 +11724,37 @@ class JoinTeam :
   static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
     return GetMetadataStatic().reflection;
   }
-  static const JoinTeam& default_instance();
+  static const PlayerReq& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const JoinTeam* internal_default_instance() {
-    return reinterpret_cast<const JoinTeam*>(
-               &_JoinTeam_default_instance_);
+  static inline const PlayerReq* internal_default_instance() {
+    return reinterpret_cast<const PlayerReq*>(
+               &_PlayerReq_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
     75;
 
-  friend void swap(JoinTeam& a, JoinTeam& b) {
+  friend void swap(PlayerReq& a, PlayerReq& b) {
     a.Swap(&b);
   }
-  inline void Swap(JoinTeam* other) {
+  inline void Swap(PlayerReq* other) {
     if (other == this) return;
     InternalSwap(other);
   }
 
   // implements Message ----------------------------------------------
 
-  inline JoinTeam* New() const final {
-    return CreateMaybeMessage<JoinTeam>(nullptr);
+  inline PlayerReq* New() const final {
+    return CreateMaybeMessage<PlayerReq>(nullptr);
   }
 
-  JoinTeam* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
-    return CreateMaybeMessage<JoinTeam>(arena);
+  PlayerReq* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<PlayerReq>(arena);
   }
   void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
   void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-  void CopyFrom(const JoinTeam& from);
-  void MergeFrom(const JoinTeam& from);
+  void CopyFrom(const PlayerReq& from);
+  void MergeFrom(const PlayerReq& from);
   PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
   bool IsInitialized() const final;
 
@@ -11779,10 +11775,10 @@ class JoinTeam :
   inline void SharedCtor();
   inline void SharedDtor();
   void SetCachedSize(int size) const final;
-  void InternalSwap(JoinTeam* other);
+  void InternalSwap(PlayerReq* other);
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "Proto.JoinTeam";
+    return "Proto.PlayerReq";
   }
   private:
   inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
@@ -11826,7 +11822,7 @@ class JoinTeam :
   bool agree() const;
   void set_agree(bool value);
 
-  // @@protoc_insertion_point(class_scope:Proto.JoinTeam)
+  // @@protoc_insertion_point(class_scope:Proto.PlayerReq)
  private:
   class _Internal;
 
@@ -12293,151 +12289,6 @@ class EnterDungeon :
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr sender_;
   ::PROTOBUF_NAMESPACE_ID::uint64 world_sn_;
   ::PROTOBUF_NAMESPACE_ID::int32 world_id_;
-  bool agree_;
-  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
-  friend struct ::TableStruct_msg_2eproto;
-};
-// -------------------------------------------------------------------
-
-class Pvp :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Proto.Pvp) */ {
- public:
-  Pvp();
-  virtual ~Pvp();
-
-  Pvp(const Pvp& from);
-  Pvp(Pvp&& from) noexcept
-    : Pvp() {
-    *this = ::std::move(from);
-  }
-
-  inline Pvp& operator=(const Pvp& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  inline Pvp& operator=(Pvp&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
-    return GetDescriptor();
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
-    return GetMetadataStatic().descriptor;
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
-    return GetMetadataStatic().reflection;
-  }
-  static const Pvp& default_instance();
-
-  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const Pvp* internal_default_instance() {
-    return reinterpret_cast<const Pvp*>(
-               &_Pvp_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    79;
-
-  friend void swap(Pvp& a, Pvp& b) {
-    a.Swap(&b);
-  }
-  inline void Swap(Pvp* other) {
-    if (other == this) return;
-    InternalSwap(other);
-  }
-
-  // implements Message ----------------------------------------------
-
-  inline Pvp* New() const final {
-    return CreateMaybeMessage<Pvp>(nullptr);
-  }
-
-  Pvp* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
-    return CreateMaybeMessage<Pvp>(arena);
-  }
-  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-  void CopyFrom(const Pvp& from);
-  void MergeFrom(const Pvp& from);
-  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
-  bool IsInitialized() const final;
-
-  size_t ByteSizeLong() const final;
-  #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
-  #else
-  bool MergePartialFromCodedStream(
-      ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) final;
-  #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-  void SerializeWithCachedSizes(
-      ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
-  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
-      ::PROTOBUF_NAMESPACE_ID::uint8* target) const final;
-  int GetCachedSize() const final { return _cached_size_.Get(); }
-
-  private:
-  inline void SharedCtor();
-  inline void SharedDtor();
-  void SetCachedSize(int size) const final;
-  void InternalSwap(Pvp* other);
-  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
-  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "Proto.Pvp";
-  }
-  private:
-  inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
-    return nullptr;
-  }
-  inline void* MaybeArenaPtr() const {
-    return nullptr;
-  }
-  public:
-
-  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
-  private:
-  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
-    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_msg_2eproto);
-    return ::descriptor_table_msg_2eproto.file_level_metadata[kIndexInFileMessages];
-  }
-
-  public:
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  enum : int {
-    kAtkerFieldNumber = 1,
-    kDeferFieldNumber = 2,
-    kAgreeFieldNumber = 3,
-  };
-  // uint64 atker = 1;
-  void clear_atker();
-  ::PROTOBUF_NAMESPACE_ID::uint64 atker() const;
-  void set_atker(::PROTOBUF_NAMESPACE_ID::uint64 value);
-
-  // uint64 defer = 2;
-  void clear_defer();
-  ::PROTOBUF_NAMESPACE_ID::uint64 defer() const;
-  void set_defer(::PROTOBUF_NAMESPACE_ID::uint64 value);
-
-  // bool agree = 3;
-  void clear_agree();
-  bool agree() const;
-  void set_agree(bool value);
-
-  // @@protoc_insertion_point(class_scope:Proto.Pvp)
- private:
-  class _Internal;
-
-  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
-  ::PROTOBUF_NAMESPACE_ID::uint64 atker_;
-  ::PROTOBUF_NAMESPACE_ID::uint64 defer_;
   bool agree_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_msg_2eproto;
@@ -16991,48 +16842,48 @@ DropItemList::items() const {
 
 // -------------------------------------------------------------------
 
-// JoinTeam
+// PlayerReq
 
 // bool agree = 1;
-inline void JoinTeam::clear_agree() {
+inline void PlayerReq::clear_agree() {
   agree_ = false;
 }
-inline bool JoinTeam::agree() const {
-  // @@protoc_insertion_point(field_get:Proto.JoinTeam.agree)
+inline bool PlayerReq::agree() const {
+  // @@protoc_insertion_point(field_get:Proto.PlayerReq.agree)
   return agree_;
 }
-inline void JoinTeam::set_agree(bool value) {
+inline void PlayerReq::set_agree(bool value) {
   
   agree_ = value;
-  // @@protoc_insertion_point(field_set:Proto.JoinTeam.agree)
+  // @@protoc_insertion_point(field_set:Proto.PlayerReq.agree)
 }
 
 // uint64 applicant = 2;
-inline void JoinTeam::clear_applicant() {
+inline void PlayerReq::clear_applicant() {
   applicant_ = PROTOBUF_ULONGLONG(0);
 }
-inline ::PROTOBUF_NAMESPACE_ID::uint64 JoinTeam::applicant() const {
-  // @@protoc_insertion_point(field_get:Proto.JoinTeam.applicant)
+inline ::PROTOBUF_NAMESPACE_ID::uint64 PlayerReq::applicant() const {
+  // @@protoc_insertion_point(field_get:Proto.PlayerReq.applicant)
   return applicant_;
 }
-inline void JoinTeam::set_applicant(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+inline void PlayerReq::set_applicant(::PROTOBUF_NAMESPACE_ID::uint64 value) {
   
   applicant_ = value;
-  // @@protoc_insertion_point(field_set:Proto.JoinTeam.applicant)
+  // @@protoc_insertion_point(field_set:Proto.PlayerReq.applicant)
 }
 
 // uint64 responder = 3;
-inline void JoinTeam::clear_responder() {
+inline void PlayerReq::clear_responder() {
   responder_ = PROTOBUF_ULONGLONG(0);
 }
-inline ::PROTOBUF_NAMESPACE_ID::uint64 JoinTeam::responder() const {
-  // @@protoc_insertion_point(field_get:Proto.JoinTeam.responder)
+inline ::PROTOBUF_NAMESPACE_ID::uint64 PlayerReq::responder() const {
+  // @@protoc_insertion_point(field_get:Proto.PlayerReq.responder)
   return responder_;
 }
-inline void JoinTeam::set_responder(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+inline void PlayerReq::set_responder(::PROTOBUF_NAMESPACE_ID::uint64 value) {
   
   responder_ = value;
-  // @@protoc_insertion_point(field_set:Proto.JoinTeam.responder)
+  // @@protoc_insertion_point(field_set:Proto.PlayerReq.responder)
 }
 
 // -------------------------------------------------------------------
@@ -17300,57 +17151,9 @@ inline void EnterDungeon::set_allocated_sender(std::string* sender) {
   // @@protoc_insertion_point(field_set_allocated:Proto.EnterDungeon.sender)
 }
 
-// -------------------------------------------------------------------
-
-// Pvp
-
-// uint64 atker = 1;
-inline void Pvp::clear_atker() {
-  atker_ = PROTOBUF_ULONGLONG(0);
-}
-inline ::PROTOBUF_NAMESPACE_ID::uint64 Pvp::atker() const {
-  // @@protoc_insertion_point(field_get:Proto.Pvp.atker)
-  return atker_;
-}
-inline void Pvp::set_atker(::PROTOBUF_NAMESPACE_ID::uint64 value) {
-  
-  atker_ = value;
-  // @@protoc_insertion_point(field_set:Proto.Pvp.atker)
-}
-
-// uint64 defer = 2;
-inline void Pvp::clear_defer() {
-  defer_ = PROTOBUF_ULONGLONG(0);
-}
-inline ::PROTOBUF_NAMESPACE_ID::uint64 Pvp::defer() const {
-  // @@protoc_insertion_point(field_get:Proto.Pvp.defer)
-  return defer_;
-}
-inline void Pvp::set_defer(::PROTOBUF_NAMESPACE_ID::uint64 value) {
-  
-  defer_ = value;
-  // @@protoc_insertion_point(field_set:Proto.Pvp.defer)
-}
-
-// bool agree = 3;
-inline void Pvp::clear_agree() {
-  agree_ = false;
-}
-inline bool Pvp::agree() const {
-  // @@protoc_insertion_point(field_get:Proto.Pvp.agree)
-  return agree_;
-}
-inline void Pvp::set_agree(bool value) {
-  
-  agree_ = value;
-  // @@protoc_insertion_point(field_set:Proto.Pvp.agree)
-}
-
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
-// -------------------------------------------------------------------
-
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

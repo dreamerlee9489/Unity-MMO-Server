@@ -328,10 +328,10 @@ class DropItemListDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<DropItemList> _instance;
 } _DropItemList_default_instance_;
-class JoinTeamDefaultTypeInternal {
+class PlayerReqDefaultTypeInternal {
  public:
-  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<JoinTeam> _instance;
-} _JoinTeam_default_instance_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<PlayerReq> _instance;
+} _PlayerReq_default_instance_;
 class ChatMsgDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<ChatMsg> _instance;
@@ -344,10 +344,6 @@ class EnterDungeonDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<EnterDungeon> _instance;
 } _EnterDungeon_default_instance_;
-class PvpDefaultTypeInternal {
- public:
-  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<Pvp> _instance;
-} _Pvp_default_instance_;
 }  // namespace Proto
 static void InitDefaultsscc_info_AccountCheck_msg_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -804,20 +800,6 @@ static void InitDefaultsscc_info_Http_msg_2eproto() {
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Http_msg_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsscc_info_Http_msg_2eproto}, {}};
 
-static void InitDefaultsscc_info_JoinTeam_msg_2eproto() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::Proto::_JoinTeam_default_instance_;
-    new (ptr) ::Proto::JoinTeam();
-    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::Proto::JoinTeam::InitAsDefaultInstance();
-}
-
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_JoinTeam_msg_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsscc_info_JoinTeam_msg_2eproto}, {}};
-
 static void InitDefaultsscc_info_LoginByToken_msg_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
@@ -990,6 +972,20 @@ static void InitDefaultsscc_info_PlayerLittle_msg_2eproto() {
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsscc_info_PlayerLittle_msg_2eproto}, {
       &scc_info_LastWorld_db_2eproto.base,}};
 
+static void InitDefaultsscc_info_PlayerReq_msg_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::Proto::_PlayerReq_default_instance_;
+    new (ptr) ::Proto::PlayerReq();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::Proto::PlayerReq::InitAsDefaultInstance();
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_PlayerReq_msg_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsscc_info_PlayerReq_msg_2eproto}, {}};
+
 static void InitDefaultsscc_info_PlayerSyncOnlineToRedis_msg_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
@@ -1003,20 +999,6 @@ static void InitDefaultsscc_info_PlayerSyncOnlineToRedis_msg_2eproto() {
 
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_PlayerSyncOnlineToRedis_msg_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsscc_info_PlayerSyncOnlineToRedis_msg_2eproto}, {}};
-
-static void InitDefaultsscc_info_Pvp_msg_2eproto() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::Proto::_Pvp_default_instance_;
-    new (ptr) ::Proto::Pvp();
-    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::Proto::Pvp::InitAsDefaultInstance();
-}
-
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Pvp_msg_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsscc_info_Pvp_msg_2eproto}, {}};
 
 static void InitDefaultsscc_info_QueryPlayer_msg_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -1490,7 +1472,7 @@ static void InitDefaultsscc_info_WorldSyncToGather_msg_2eproto() {
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_WorldSyncToGather_msg_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsscc_info_WorldSyncToGather_msg_2eproto}, {}};
 
-static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_msg_2eproto[80];
+static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_msg_2eproto[79];
 static const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* file_level_enum_descriptors_msg_2eproto[12];
 static constexpr ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor const** file_level_service_descriptors_msg_2eproto = nullptr;
 
@@ -2034,13 +2016,13 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_msg_2eproto::offsets[] PROTOBU
   PROTOBUF_FIELD_OFFSET(::Proto::DropItemList, gold_),
   PROTOBUF_FIELD_OFFSET(::Proto::DropItemList, items_),
   ~0u,  // no _has_bits_
-  PROTOBUF_FIELD_OFFSET(::Proto::JoinTeam, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::Proto::PlayerReq, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  PROTOBUF_FIELD_OFFSET(::Proto::JoinTeam, agree_),
-  PROTOBUF_FIELD_OFFSET(::Proto::JoinTeam, applicant_),
-  PROTOBUF_FIELD_OFFSET(::Proto::JoinTeam, responder_),
+  PROTOBUF_FIELD_OFFSET(::Proto::PlayerReq, agree_),
+  PROTOBUF_FIELD_OFFSET(::Proto::PlayerReq, applicant_),
+  PROTOBUF_FIELD_OFFSET(::Proto::PlayerReq, responder_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::Proto::ChatMsg, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -2065,14 +2047,6 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_msg_2eproto::offsets[] PROTOBU
   PROTOBUF_FIELD_OFFSET(::Proto::EnterDungeon, world_sn_),
   PROTOBUF_FIELD_OFFSET(::Proto::EnterDungeon, agree_),
   PROTOBUF_FIELD_OFFSET(::Proto::EnterDungeon, sender_),
-  ~0u,  // no _has_bits_
-  PROTOBUF_FIELD_OFFSET(::Proto::Pvp, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  PROTOBUF_FIELD_OFFSET(::Proto::Pvp, atker_),
-  PROTOBUF_FIELD_OFFSET(::Proto::Pvp, defer_),
-  PROTOBUF_FIELD_OFFSET(::Proto::Pvp, agree_),
 };
 static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(::Proto::CmdThread)},
@@ -2150,11 +2124,10 @@ static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOB
   { 515, -1, sizeof(::Proto::NpcAtkEvent)},
   { 522, -1, sizeof(::Proto::PlayerAtkEvent)},
   { 529, -1, sizeof(::Proto::DropItemList)},
-  { 538, -1, sizeof(::Proto::JoinTeam)},
+  { 538, -1, sizeof(::Proto::PlayerReq)},
   { 546, -1, sizeof(::Proto::ChatMsg)},
   { 554, -1, sizeof(::Proto::CreateTeam)},
   { 561, -1, sizeof(::Proto::EnterDungeon)},
-  { 570, -1, sizeof(::Proto::Pvp)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
@@ -2233,11 +2206,10 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::Proto::_NpcAtkEvent_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::Proto::_PlayerAtkEvent_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::Proto::_DropItemList_default_instance_),
-  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::Proto::_JoinTeam_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::Proto::_PlayerReq_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::Proto::_ChatMsg_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::Proto::_CreateTeam_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::Proto::_EnterDungeon_default_instance_),
-  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::Proto::_Pvp_default_instance_),
 };
 
 const char descriptor_table_protodef_msg_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
@@ -2375,31 +2347,29 @@ const char descriptor_table_protodef_msg_2eproto[] PROTOBUF_SECTION_VARIABLE(pro
   "ayerAtkEvent\022\021\n\tplayer_sn\030\001 \001(\004\022\021\n\ttarge"
   "t_sn\030\002 \001(\004\"Y\n\014DropItemList\022\016\n\006npc_sn\030\001 \001"
   "(\004\022\013\n\003exp\030\002 \001(\005\022\014\n\004gold\030\003 \001(\005\022\036\n\005items\030\004"
-  " \003(\0132\017.Proto.ItemData\"\?\n\010JoinTeam\022\r\n\005agr"
-  "ee\030\001 \001(\010\022\021\n\tapplicant\030\002 \001(\004\022\021\n\tresponder"
-  "\030\003 \001(\004\"8\n\007ChatMsg\022\016\n\006sender\030\001 \001(\004\022\014\n\004nam"
-  "e\030\002 \001(\t\022\017\n\007content\030\003 \001(\t\".\n\nCreateTeam\022\017"
-  "\n\007captain\030\001 \001(\004\022\017\n\007members\030\002 \003(\004\"Q\n\014Ente"
-  "rDungeon\022\020\n\010world_id\030\001 \001(\005\022\020\n\010world_sn\030\002"
-  " \001(\004\022\r\n\005agree\030\003 \001(\010\022\016\n\006sender\030\004 \001(\t\"2\n\003P"
-  "vp\022\r\n\005atker\030\001 \001(\004\022\r\n\005defer\030\002 \001(\004\022\r\n\005agre"
-  "e\030\003 \001(\010*x\n\007TagType\022\017\n\013TagTypeNone\020\000\022\022\n\016T"
-  "agTypeAccount\020\001\022\016\n\nTagTypeApp\020\002\022\021\n\rTagTy"
-  "peEntity\020\003\022\022\n\016TagTypeToWorld\020\004\022\021\n\rTagTyp"
-  "ePlayer\020\005*\232\001\n\026AccountCheckReturnCode\022\n\n\006"
-  "ARC_OK\020\000\022\017\n\013ARC_UNKONWN\020\001\022\031\n\025ARC_NOT_FOU"
-  "ND_ACCOUNT\020\002\022\026\n\022ARC_PASSWORD_WRONG\020\003\022\017\n\013"
-  "ARC_LOGGING\020\004\022\017\n\013ARC_TIMEOUT\020\005\022\016\n\nARC_ON"
-  "LINE\020\006*G\n\023LoginHttpReturnCode\022\013\n\007LHRC_OK"
-  "\020\000\022\020\n\014LHRC_TIMEOUT\020\001\022\021\n\rLHRC_NOTFOUND\020\002*"
-  "L\n\026CreatePlayerReturnCode\022\021\n\rCPR_Create_"
-  "OK\020\000\022\017\n\013CPR_Unkonwn\020\001\022\016\n\nCPR_Rename\020\002b\006p"
-  "roto3"
+  " \003(\0132\017.Proto.ItemData\"@\n\tPlayerReq\022\r\n\005ag"
+  "ree\030\001 \001(\010\022\021\n\tapplicant\030\002 \001(\004\022\021\n\tresponde"
+  "r\030\003 \001(\004\"8\n\007ChatMsg\022\016\n\006sender\030\001 \001(\004\022\014\n\004na"
+  "me\030\002 \001(\t\022\017\n\007content\030\003 \001(\t\".\n\nCreateTeam\022"
+  "\017\n\007captain\030\001 \001(\004\022\017\n\007members\030\002 \003(\004\"Q\n\014Ent"
+  "erDungeon\022\020\n\010world_id\030\001 \001(\005\022\020\n\010world_sn\030"
+  "\002 \001(\004\022\r\n\005agree\030\003 \001(\010\022\016\n\006sender\030\004 \001(\t*x\n\007"
+  "TagType\022\017\n\013TagTypeNone\020\000\022\022\n\016TagTypeAccou"
+  "nt\020\001\022\016\n\nTagTypeApp\020\002\022\021\n\rTagTypeEntity\020\003\022"
+  "\022\n\016TagTypeToWorld\020\004\022\021\n\rTagTypePlayer\020\005*\232"
+  "\001\n\026AccountCheckReturnCode\022\n\n\006ARC_OK\020\000\022\017\n"
+  "\013ARC_UNKONWN\020\001\022\031\n\025ARC_NOT_FOUND_ACCOUNT\020"
+  "\002\022\026\n\022ARC_PASSWORD_WRONG\020\003\022\017\n\013ARC_LOGGING"
+  "\020\004\022\017\n\013ARC_TIMEOUT\020\005\022\016\n\nARC_ONLINE\020\006*G\n\023L"
+  "oginHttpReturnCode\022\013\n\007LHRC_OK\020\000\022\020\n\014LHRC_"
+  "TIMEOUT\020\001\022\021\n\rLHRC_NOTFOUND\020\002*L\n\026CreatePl"
+  "ayerReturnCode\022\021\n\rCPR_Create_OK\020\000\022\017\n\013CPR"
+  "_Unkonwn\020\001\022\016\n\nCPR_Rename\020\002b\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_msg_2eproto_deps[1] = {
   &::descriptor_table_db_2eproto,
 };
-static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_msg_2eproto_sccs[80] = {
+static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_msg_2eproto_sccs[79] = {
   &scc_info_AccountCheck_msg_2eproto.base,
   &scc_info_AccountCheckRs_msg_2eproto.base,
   &scc_info_AccountDeleteOnlineToRedis_msg_2eproto.base,
@@ -2432,7 +2402,6 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_msg
   &scc_info_GameTokenToRedis_msg_2eproto.base,
   &scc_info_GameTokenToRedisRs_msg_2eproto.base,
   &scc_info_Http_msg_2eproto.base,
-  &scc_info_JoinTeam_msg_2eproto.base,
   &scc_info_LoginByToken_msg_2eproto.base,
   &scc_info_LoginByTokenRs_msg_2eproto.base,
   &scc_info_LoginTokenToRedis_msg_2eproto.base,
@@ -2445,8 +2414,8 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_msg
   &scc_info_PlayerDeleteOnlineToRedis_msg_2eproto.base,
   &scc_info_PlayerList_msg_2eproto.base,
   &scc_info_PlayerLittle_msg_2eproto.base,
+  &scc_info_PlayerReq_msg_2eproto.base,
   &scc_info_PlayerSyncOnlineToRedis_msg_2eproto.base,
-  &scc_info_Pvp_msg_2eproto.base,
   &scc_info_QueryPlayer_msg_2eproto.base,
   &scc_info_QueryPlayerList_msg_2eproto.base,
   &scc_info_QueryPlayerRs_msg_2eproto.base,
@@ -2484,10 +2453,10 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_msg
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_msg_2eproto_once;
 static bool descriptor_table_msg_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_msg_2eproto = {
-  &descriptor_table_msg_2eproto_initialized, descriptor_table_protodef_msg_2eproto, "msg.proto", 6125,
-  &descriptor_table_msg_2eproto_once, descriptor_table_msg_2eproto_sccs, descriptor_table_msg_2eproto_deps, 80, 1,
+  &descriptor_table_msg_2eproto_initialized, descriptor_table_protodef_msg_2eproto, "msg.proto", 6074,
+  &descriptor_table_msg_2eproto_once, descriptor_table_msg_2eproto_sccs, descriptor_table_msg_2eproto_deps, 79, 1,
   schemas, file_default_instances, TableStruct_msg_2eproto::offsets,
-  file_level_metadata_msg_2eproto, 80, file_level_enum_descriptors_msg_2eproto, file_level_service_descriptors_msg_2eproto,
+  file_level_metadata_msg_2eproto, 79, file_level_enum_descriptors_msg_2eproto, file_level_service_descriptors_msg_2eproto,
 };
 
 // Force running AddDescriptors() at dynamic initialization time.
@@ -26480,52 +26449,52 @@ void DropItemList::InternalSwap(DropItemList* other) {
 
 // ===================================================================
 
-void JoinTeam::InitAsDefaultInstance() {
+void PlayerReq::InitAsDefaultInstance() {
 }
-class JoinTeam::_Internal {
+class PlayerReq::_Internal {
  public:
 };
 
-JoinTeam::JoinTeam()
+PlayerReq::PlayerReq()
   : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:Proto.JoinTeam)
+  // @@protoc_insertion_point(constructor:Proto.PlayerReq)
 }
-JoinTeam::JoinTeam(const JoinTeam& from)
+PlayerReq::PlayerReq(const PlayerReq& from)
   : ::PROTOBUF_NAMESPACE_ID::Message(),
       _internal_metadata_(nullptr) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::memcpy(&applicant_, &from.applicant_,
     static_cast<size_t>(reinterpret_cast<char*>(&agree_) -
     reinterpret_cast<char*>(&applicant_)) + sizeof(agree_));
-  // @@protoc_insertion_point(copy_constructor:Proto.JoinTeam)
+  // @@protoc_insertion_point(copy_constructor:Proto.PlayerReq)
 }
 
-void JoinTeam::SharedCtor() {
+void PlayerReq::SharedCtor() {
   ::memset(&applicant_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&agree_) -
       reinterpret_cast<char*>(&applicant_)) + sizeof(agree_));
 }
 
-JoinTeam::~JoinTeam() {
-  // @@protoc_insertion_point(destructor:Proto.JoinTeam)
+PlayerReq::~PlayerReq() {
+  // @@protoc_insertion_point(destructor:Proto.PlayerReq)
   SharedDtor();
 }
 
-void JoinTeam::SharedDtor() {
+void PlayerReq::SharedDtor() {
 }
 
-void JoinTeam::SetCachedSize(int size) const {
+void PlayerReq::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const JoinTeam& JoinTeam::default_instance() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_JoinTeam_msg_2eproto.base);
+const PlayerReq& PlayerReq::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_PlayerReq_msg_2eproto.base);
   return *internal_default_instance();
 }
 
 
-void JoinTeam::Clear() {
-// @@protoc_insertion_point(message_clear_start:Proto.JoinTeam)
+void PlayerReq::Clear() {
+// @@protoc_insertion_point(message_clear_start:Proto.PlayerReq)
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
@@ -26537,7 +26506,7 @@ void JoinTeam::Clear() {
 }
 
 #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-const char* JoinTeam::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+const char* PlayerReq::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
   while (!ctx->Done(&ptr)) {
     ::PROTOBUF_NAMESPACE_ID::uint32 tag;
@@ -26585,11 +26554,11 @@ failure:
 #undef CHK_
 }
 #else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-bool JoinTeam::MergePartialFromCodedStream(
+bool PlayerReq::MergePartialFromCodedStream(
     ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
   ::PROTOBUF_NAMESPACE_ID::uint32 tag;
-  // @@protoc_insertion_point(parse_start:Proto.JoinTeam)
+  // @@protoc_insertion_point(parse_start:Proto.PlayerReq)
   for (;;) {
     ::std::pair<::PROTOBUF_NAMESPACE_ID::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
@@ -26646,18 +26615,18 @@ bool JoinTeam::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:Proto.JoinTeam)
+  // @@protoc_insertion_point(parse_success:Proto.PlayerReq)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:Proto.JoinTeam)
+  // @@protoc_insertion_point(parse_failure:Proto.PlayerReq)
   return false;
 #undef DO_
 }
 #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
 
-void JoinTeam::SerializeWithCachedSizes(
+void PlayerReq::SerializeWithCachedSizes(
     ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:Proto.JoinTeam)
+  // @@protoc_insertion_point(serialize_start:Proto.PlayerReq)
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -26680,12 +26649,12 @@ void JoinTeam::SerializeWithCachedSizes(
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFields(
         _internal_metadata_.unknown_fields(), output);
   }
-  // @@protoc_insertion_point(serialize_end:Proto.JoinTeam)
+  // @@protoc_insertion_point(serialize_end:Proto.PlayerReq)
 }
 
-::PROTOBUF_NAMESPACE_ID::uint8* JoinTeam::InternalSerializeWithCachedSizesToArray(
+::PROTOBUF_NAMESPACE_ID::uint8* PlayerReq::InternalSerializeWithCachedSizesToArray(
     ::PROTOBUF_NAMESPACE_ID::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:Proto.JoinTeam)
+  // @@protoc_insertion_point(serialize_to_array_start:Proto.PlayerReq)
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -26708,12 +26677,12 @@ void JoinTeam::SerializeWithCachedSizes(
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields(), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:Proto.JoinTeam)
+  // @@protoc_insertion_point(serialize_to_array_end:Proto.PlayerReq)
   return target;
 }
 
-size_t JoinTeam::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:Proto.JoinTeam)
+size_t PlayerReq::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:Proto.PlayerReq)
   size_t total_size = 0;
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -26749,23 +26718,23 @@ size_t JoinTeam::ByteSizeLong() const {
   return total_size;
 }
 
-void JoinTeam::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:Proto.JoinTeam)
+void PlayerReq::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:Proto.PlayerReq)
   GOOGLE_DCHECK_NE(&from, this);
-  const JoinTeam* source =
-      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<JoinTeam>(
+  const PlayerReq* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<PlayerReq>(
           &from);
   if (source == nullptr) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:Proto.JoinTeam)
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:Proto.PlayerReq)
     ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
   } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:Proto.JoinTeam)
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:Proto.PlayerReq)
     MergeFrom(*source);
   }
 }
 
-void JoinTeam::MergeFrom(const JoinTeam& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:Proto.JoinTeam)
+void PlayerReq::MergeFrom(const PlayerReq& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:Proto.PlayerReq)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
@@ -26782,25 +26751,25 @@ void JoinTeam::MergeFrom(const JoinTeam& from) {
   }
 }
 
-void JoinTeam::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:Proto.JoinTeam)
+void PlayerReq::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:Proto.PlayerReq)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void JoinTeam::CopyFrom(const JoinTeam& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:Proto.JoinTeam)
+void PlayerReq::CopyFrom(const PlayerReq& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:Proto.PlayerReq)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool JoinTeam::IsInitialized() const {
+bool PlayerReq::IsInitialized() const {
   return true;
 }
 
-void JoinTeam::InternalSwap(JoinTeam* other) {
+void PlayerReq::InternalSwap(PlayerReq* other) {
   using std::swap;
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(applicant_, other->applicant_);
@@ -26808,7 +26777,7 @@ void JoinTeam::InternalSwap(JoinTeam* other) {
   swap(agree_, other->agree_);
 }
 
-::PROTOBUF_NAMESPACE_ID::Metadata JoinTeam::GetMetadata() const {
+::PROTOBUF_NAMESPACE_ID::Metadata PlayerReq::GetMetadata() const {
   return GetMetadataStatic();
 }
 
@@ -27906,341 +27875,6 @@ void EnterDungeon::InternalSwap(EnterDungeon* other) {
 }
 
 
-// ===================================================================
-
-void Pvp::InitAsDefaultInstance() {
-}
-class Pvp::_Internal {
- public:
-};
-
-Pvp::Pvp()
-  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:Proto.Pvp)
-}
-Pvp::Pvp(const Pvp& from)
-  : ::PROTOBUF_NAMESPACE_ID::Message(),
-      _internal_metadata_(nullptr) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::memcpy(&atker_, &from.atker_,
-    static_cast<size_t>(reinterpret_cast<char*>(&agree_) -
-    reinterpret_cast<char*>(&atker_)) + sizeof(agree_));
-  // @@protoc_insertion_point(copy_constructor:Proto.Pvp)
-}
-
-void Pvp::SharedCtor() {
-  ::memset(&atker_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&agree_) -
-      reinterpret_cast<char*>(&atker_)) + sizeof(agree_));
-}
-
-Pvp::~Pvp() {
-  // @@protoc_insertion_point(destructor:Proto.Pvp)
-  SharedDtor();
-}
-
-void Pvp::SharedDtor() {
-}
-
-void Pvp::SetCachedSize(int size) const {
-  _cached_size_.Set(size);
-}
-const Pvp& Pvp::default_instance() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_Pvp_msg_2eproto.base);
-  return *internal_default_instance();
-}
-
-
-void Pvp::Clear() {
-// @@protoc_insertion_point(message_clear_start:Proto.Pvp)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  ::memset(&atker_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&agree_) -
-      reinterpret_cast<char*>(&atker_)) + sizeof(agree_));
-  _internal_metadata_.Clear();
-}
-
-#if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-const char* Pvp::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
-#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  while (!ctx->Done(&ptr)) {
-    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
-    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
-    CHK_(ptr);
-    switch (tag >> 3) {
-      // uint64 atker = 1;
-      case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
-          atker_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // uint64 defer = 2;
-      case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
-          defer_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // bool agree = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 24)) {
-          agree_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      default: {
-      handle_unusual:
-        if ((tag & 7) == 4 || tag == 0) {
-          ctx->SetLastTag(tag);
-          goto success;
-        }
-        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
-        CHK_(ptr != nullptr);
-        continue;
-      }
-    }  // switch
-  }  // while
-success:
-  return ptr;
-failure:
-  ptr = nullptr;
-  goto success;
-#undef CHK_
-}
-#else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-bool Pvp::MergePartialFromCodedStream(
-    ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::PROTOBUF_NAMESPACE_ID::uint32 tag;
-  // @@protoc_insertion_point(parse_start:Proto.Pvp)
-  for (;;) {
-    ::std::pair<::PROTOBUF_NAMESPACE_ID::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // uint64 atker = 1;
-      case 1: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (8 & 0xFF)) {
-
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   ::PROTOBUF_NAMESPACE_ID::uint64, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_UINT64>(
-                 input, &atker_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // uint64 defer = 2;
-      case 2: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (16 & 0xFF)) {
-
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   ::PROTOBUF_NAMESPACE_ID::uint64, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_UINT64>(
-                 input, &defer_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // bool agree = 3;
-      case 3: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (24 & 0xFF)) {
-
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   bool, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_BOOL>(
-                 input, &agree_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0) {
-          goto success;
-        }
-        DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:Proto.Pvp)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:Proto.Pvp)
-  return false;
-#undef DO_
-}
-#endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-
-void Pvp::SerializeWithCachedSizes(
-    ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:Proto.Pvp)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // uint64 atker = 1;
-  if (this->atker() != 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64(1, this->atker(), output);
-  }
-
-  // uint64 defer = 2;
-  if (this->defer() != 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64(2, this->defer(), output);
-  }
-
-  // bool agree = 3;
-  if (this->agree() != 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBool(3, this->agree(), output);
-  }
-
-  if (_internal_metadata_.have_unknown_fields()) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFields(
-        _internal_metadata_.unknown_fields(), output);
-  }
-  // @@protoc_insertion_point(serialize_end:Proto.Pvp)
-}
-
-::PROTOBUF_NAMESPACE_ID::uint8* Pvp::InternalSerializeWithCachedSizesToArray(
-    ::PROTOBUF_NAMESPACE_ID::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:Proto.Pvp)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // uint64 atker = 1;
-  if (this->atker() != 0) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64ToArray(1, this->atker(), target);
-  }
-
-  // uint64 defer = 2;
-  if (this->defer() != 0) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64ToArray(2, this->defer(), target);
-  }
-
-  // bool agree = 3;
-  if (this->agree() != 0) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(3, this->agree(), target);
-  }
-
-  if (_internal_metadata_.have_unknown_fields()) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields(), target);
-  }
-  // @@protoc_insertion_point(serialize_to_array_end:Proto.Pvp)
-  return target;
-}
-
-size_t Pvp::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:Proto.Pvp)
-  size_t total_size = 0;
-
-  if (_internal_metadata_.have_unknown_fields()) {
-    total_size +=
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::ComputeUnknownFieldsSize(
-        _internal_metadata_.unknown_fields());
-  }
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  // uint64 atker = 1;
-  if (this->atker() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt64Size(
-        this->atker());
-  }
-
-  // uint64 defer = 2;
-  if (this->defer() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt64Size(
-        this->defer());
-  }
-
-  // bool agree = 3;
-  if (this->agree() != 0) {
-    total_size += 1 + 1;
-  }
-
-  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
-  SetCachedSize(cached_size);
-  return total_size;
-}
-
-void Pvp::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:Proto.Pvp)
-  GOOGLE_DCHECK_NE(&from, this);
-  const Pvp* source =
-      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<Pvp>(
-          &from);
-  if (source == nullptr) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:Proto.Pvp)
-    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:Proto.Pvp)
-    MergeFrom(*source);
-  }
-}
-
-void Pvp::MergeFrom(const Pvp& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:Proto.Pvp)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  if (from.atker() != 0) {
-    set_atker(from.atker());
-  }
-  if (from.defer() != 0) {
-    set_defer(from.defer());
-  }
-  if (from.agree() != 0) {
-    set_agree(from.agree());
-  }
-}
-
-void Pvp::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:Proto.Pvp)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void Pvp::CopyFrom(const Pvp& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:Proto.Pvp)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool Pvp::IsInitialized() const {
-  return true;
-}
-
-void Pvp::InternalSwap(Pvp* other) {
-  using std::swap;
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(atker_, other->atker_);
-  swap(defer_, other->defer_);
-  swap(agree_, other->agree_);
-}
-
-::PROTOBUF_NAMESPACE_ID::Metadata Pvp::GetMetadata() const {
-  return GetMetadataStatic();
-}
-
-
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace Proto
 PROTOBUF_NAMESPACE_OPEN
@@ -28469,8 +28103,8 @@ template<> PROTOBUF_NOINLINE ::Proto::PlayerAtkEvent* Arena::CreateMaybeMessage<
 template<> PROTOBUF_NOINLINE ::Proto::DropItemList* Arena::CreateMaybeMessage< ::Proto::DropItemList >(Arena* arena) {
   return Arena::CreateInternal< ::Proto::DropItemList >(arena);
 }
-template<> PROTOBUF_NOINLINE ::Proto::JoinTeam* Arena::CreateMaybeMessage< ::Proto::JoinTeam >(Arena* arena) {
-  return Arena::CreateInternal< ::Proto::JoinTeam >(arena);
+template<> PROTOBUF_NOINLINE ::Proto::PlayerReq* Arena::CreateMaybeMessage< ::Proto::PlayerReq >(Arena* arena) {
+  return Arena::CreateInternal< ::Proto::PlayerReq >(arena);
 }
 template<> PROTOBUF_NOINLINE ::Proto::ChatMsg* Arena::CreateMaybeMessage< ::Proto::ChatMsg >(Arena* arena) {
   return Arena::CreateInternal< ::Proto::ChatMsg >(arena);
@@ -28480,9 +28114,6 @@ template<> PROTOBUF_NOINLINE ::Proto::CreateTeam* Arena::CreateMaybeMessage< ::P
 }
 template<> PROTOBUF_NOINLINE ::Proto::EnterDungeon* Arena::CreateMaybeMessage< ::Proto::EnterDungeon >(Arena* arena) {
   return Arena::CreateInternal< ::Proto::EnterDungeon >(arena);
-}
-template<> PROTOBUF_NOINLINE ::Proto::Pvp* Arena::CreateMaybeMessage< ::Proto::Pvp >(Arena* arena) {
-  return Arena::CreateInternal< ::Proto::Pvp >(arena);
 }
 PROTOBUF_NAMESPACE_CLOSE
 

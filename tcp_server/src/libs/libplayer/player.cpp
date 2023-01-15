@@ -101,6 +101,32 @@ void Player::ResetCmd()
 	curWorld->BroadcastPacket(Proto::MsgId::S2C_SyncPlayerCmd, protoCmd);
 }
 
+void Player::UpdateKnapItem(const Proto::ItemData& item)
+{
+	auto& knap = *detail->pKnap;
+	auto& idxMap = *detail->pIdxMap;
+	if (idxMap.find(item.sn()) != idxMap.end())
+	{
+		knap[idxMap[item.sn()]].knapType = (KnapType)item.knaptype();
+		knap[idxMap[item.sn()]].index = item.index();
+	}
+	else
+	{
+		idxMap.emplace(item.sn(), knap.size());
+		knap.emplace_back(ItemData().ParserFromProto(item));
+	}
+}
+
+void Player::GetPlayerKnap()
+{
+	Proto::PlayerKnap proto;
+	proto.set_gold(detail->gold);
+	auto& knap = *detail->pKnap;
+	for (auto& item : knap)
+		item.SerializeToProto(proto.add_items());
+	MessageSystemHelp::SendPacket(Proto::MsgId::S2C_GetPlayerKnap, proto, this);
+}
+
 void Player::ParseFromStream(const uint64 playerSn, std::stringstream* pOpStream)
 {
 	_playerSn = playerSn;

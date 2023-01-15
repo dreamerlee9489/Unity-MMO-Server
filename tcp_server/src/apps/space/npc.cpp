@@ -92,7 +92,7 @@ void Npc::GetDamage(Player* attacker)
 		int exp = (atk + lv) * 5, gold = (atk + lv) * 10;
 		attacker->detail->xp += exp;
 		attacker->detail->gold += gold;
-		std::vector<ItemData>* items = GetDropList(attacker);
+		std::list<ItemData>* items = GetDropList(attacker);
 		Proto::DropItemList list;
 		list.set_npc_sn(_sn);
 		list.set_exp(exp);
@@ -104,9 +104,9 @@ void Npc::GetDamage(Player* attacker)
 	}
 }
 
-std::vector<ItemData>* Npc::GetDropList(Player* player)
+std::list<ItemData>* Npc::GetDropList(Player* player)
 {
-	std::vector<ItemData>* items = new std::vector<ItemData>();
+	std::list<ItemData>* items = new std::list<ItemData>();
 	double val1 = _realDis(_realEng), val2 = _realDis(_realEng);
 	_intEng = std::default_random_engine(Global::GetInstance()->TimeTick);
 	if (val1 < 0.5)
@@ -115,12 +115,12 @@ std::vector<ItemData>* Npc::GetDropList(Player* player)
 		_numDis = std::uniform_int_distribution<int>(1, 3);
 		int count = _numDis(_intEng);
 		for (int i = 0; i < count; i++)
-			items->emplace_back(ItemType::Potion, _idDis(_intEng));
+			items->emplace_back(ItemType::Potion, _idDis(_intEng), KnapType::World);
 	}
 	if (val2 < 0.5)
 	{
 		_idDis = std::uniform_int_distribution<int>(1, _world->weaponCfgs->size());
-		items->emplace_back(ItemType::Weapon, _idDis(_intEng));
+		items->emplace_back(ItemType::Weapon, _idDis(_intEng), KnapType::World);
 	}
 	return items;
 }
