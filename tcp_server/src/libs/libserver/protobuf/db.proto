@@ -82,3 +82,20 @@ message PlayerKnap {
 message UpdateKnapItem {
 	ItemData item = 1;
 }
+
+message UpdateTradeItem {
+	uint64 sender = 1;
+	uint64 recver = 2;
+	ItemData item = 3;
+	int32 gold = 4;
+	bool ack = 5;
+}
+
+message TradeOpen {
+	uint64 applicant = 1;
+	uint64 responder = 2;
+}
+
+message TradeClose {
+	bool success = 1;
+}

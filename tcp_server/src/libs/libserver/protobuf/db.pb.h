@@ -48,7 +48,7 @@ struct TableStruct_db_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxillaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[9]
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[12]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
@@ -77,9 +77,18 @@ extern PlayerMiscDefaultTypeInternal _PlayerMisc_default_instance_;
 class Team;
 class TeamDefaultTypeInternal;
 extern TeamDefaultTypeInternal _Team_default_instance_;
+class TradeClose;
+class TradeCloseDefaultTypeInternal;
+extern TradeCloseDefaultTypeInternal _TradeClose_default_instance_;
+class TradeOpen;
+class TradeOpenDefaultTypeInternal;
+extern TradeOpenDefaultTypeInternal _TradeOpen_default_instance_;
 class UpdateKnapItem;
 class UpdateKnapItemDefaultTypeInternal;
 extern UpdateKnapItemDefaultTypeInternal _UpdateKnapItem_default_instance_;
+class UpdateTradeItem;
+class UpdateTradeItemDefaultTypeInternal;
+extern UpdateTradeItemDefaultTypeInternal _UpdateTradeItem_default_instance_;
 class Vector3D;
 class Vector3DDefaultTypeInternal;
 extern Vector3DDefaultTypeInternal _Vector3D_default_instance_;
@@ -92,7 +101,10 @@ template<> ::Proto::PlayerBase* Arena::CreateMaybeMessage<::Proto::PlayerBase>(A
 template<> ::Proto::PlayerKnap* Arena::CreateMaybeMessage<::Proto::PlayerKnap>(Arena*);
 template<> ::Proto::PlayerMisc* Arena::CreateMaybeMessage<::Proto::PlayerMisc>(Arena*);
 template<> ::Proto::Team* Arena::CreateMaybeMessage<::Proto::Team>(Arena*);
+template<> ::Proto::TradeClose* Arena::CreateMaybeMessage<::Proto::TradeClose>(Arena*);
+template<> ::Proto::TradeOpen* Arena::CreateMaybeMessage<::Proto::TradeOpen>(Arena*);
 template<> ::Proto::UpdateKnapItem* Arena::CreateMaybeMessage<::Proto::UpdateKnapItem>(Arena*);
+template<> ::Proto::UpdateTradeItem* Arena::CreateMaybeMessage<::Proto::UpdateTradeItem>(Arena*);
 template<> ::Proto::Vector3D* Arena::CreateMaybeMessage<::Proto::Vector3D>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
 namespace Proto {
@@ -1628,6 +1640,437 @@ class UpdateKnapItem :
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_db_2eproto;
 };
+// -------------------------------------------------------------------
+
+class UpdateTradeItem :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Proto.UpdateTradeItem) */ {
+ public:
+  UpdateTradeItem();
+  virtual ~UpdateTradeItem();
+
+  UpdateTradeItem(const UpdateTradeItem& from);
+  UpdateTradeItem(UpdateTradeItem&& from) noexcept
+    : UpdateTradeItem() {
+    *this = ::std::move(from);
+  }
+
+  inline UpdateTradeItem& operator=(const UpdateTradeItem& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline UpdateTradeItem& operator=(UpdateTradeItem&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const UpdateTradeItem& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const UpdateTradeItem* internal_default_instance() {
+    return reinterpret_cast<const UpdateTradeItem*>(
+               &_UpdateTradeItem_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    9;
+
+  friend void swap(UpdateTradeItem& a, UpdateTradeItem& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(UpdateTradeItem* other) {
+    if (other == this) return;
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline UpdateTradeItem* New() const final {
+    return CreateMaybeMessage<UpdateTradeItem>(nullptr);
+  }
+
+  UpdateTradeItem* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<UpdateTradeItem>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const UpdateTradeItem& from);
+  void MergeFrom(const UpdateTradeItem& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  #else
+  bool MergePartialFromCodedStream(
+      ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) final;
+  #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  void SerializeWithCachedSizes(
+      ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(UpdateTradeItem* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "Proto.UpdateTradeItem";
+  }
+  private:
+  inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_db_2eproto);
+    return ::descriptor_table_db_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kItemFieldNumber = 3,
+    kSenderFieldNumber = 1,
+    kRecverFieldNumber = 2,
+    kGoldFieldNumber = 4,
+    kAckFieldNumber = 5,
+  };
+  // .Proto.ItemData item = 3;
+  bool has_item() const;
+  void clear_item();
+  const ::Proto::ItemData& item() const;
+  ::Proto::ItemData* release_item();
+  ::Proto::ItemData* mutable_item();
+  void set_allocated_item(::Proto::ItemData* item);
+
+  // uint64 sender = 1;
+  void clear_sender();
+  ::PROTOBUF_NAMESPACE_ID::uint64 sender() const;
+  void set_sender(::PROTOBUF_NAMESPACE_ID::uint64 value);
+
+  // uint64 recver = 2;
+  void clear_recver();
+  ::PROTOBUF_NAMESPACE_ID::uint64 recver() const;
+  void set_recver(::PROTOBUF_NAMESPACE_ID::uint64 value);
+
+  // int32 gold = 4;
+  void clear_gold();
+  ::PROTOBUF_NAMESPACE_ID::int32 gold() const;
+  void set_gold(::PROTOBUF_NAMESPACE_ID::int32 value);
+
+  // bool ack = 5;
+  void clear_ack();
+  bool ack() const;
+  void set_ack(bool value);
+
+  // @@protoc_insertion_point(class_scope:Proto.UpdateTradeItem)
+ private:
+  class _Internal;
+
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
+  ::Proto::ItemData* item_;
+  ::PROTOBUF_NAMESPACE_ID::uint64 sender_;
+  ::PROTOBUF_NAMESPACE_ID::uint64 recver_;
+  ::PROTOBUF_NAMESPACE_ID::int32 gold_;
+  bool ack_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_db_2eproto;
+};
+// -------------------------------------------------------------------
+
+class TradeOpen :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Proto.TradeOpen) */ {
+ public:
+  TradeOpen();
+  virtual ~TradeOpen();
+
+  TradeOpen(const TradeOpen& from);
+  TradeOpen(TradeOpen&& from) noexcept
+    : TradeOpen() {
+    *this = ::std::move(from);
+  }
+
+  inline TradeOpen& operator=(const TradeOpen& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline TradeOpen& operator=(TradeOpen&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const TradeOpen& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const TradeOpen* internal_default_instance() {
+    return reinterpret_cast<const TradeOpen*>(
+               &_TradeOpen_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    10;
+
+  friend void swap(TradeOpen& a, TradeOpen& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(TradeOpen* other) {
+    if (other == this) return;
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline TradeOpen* New() const final {
+    return CreateMaybeMessage<TradeOpen>(nullptr);
+  }
+
+  TradeOpen* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<TradeOpen>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const TradeOpen& from);
+  void MergeFrom(const TradeOpen& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  #else
+  bool MergePartialFromCodedStream(
+      ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) final;
+  #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  void SerializeWithCachedSizes(
+      ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(TradeOpen* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "Proto.TradeOpen";
+  }
+  private:
+  inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_db_2eproto);
+    return ::descriptor_table_db_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kApplicantFieldNumber = 1,
+    kResponderFieldNumber = 2,
+  };
+  // uint64 applicant = 1;
+  void clear_applicant();
+  ::PROTOBUF_NAMESPACE_ID::uint64 applicant() const;
+  void set_applicant(::PROTOBUF_NAMESPACE_ID::uint64 value);
+
+  // uint64 responder = 2;
+  void clear_responder();
+  ::PROTOBUF_NAMESPACE_ID::uint64 responder() const;
+  void set_responder(::PROTOBUF_NAMESPACE_ID::uint64 value);
+
+  // @@protoc_insertion_point(class_scope:Proto.TradeOpen)
+ private:
+  class _Internal;
+
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::uint64 applicant_;
+  ::PROTOBUF_NAMESPACE_ID::uint64 responder_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_db_2eproto;
+};
+// -------------------------------------------------------------------
+
+class TradeClose :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Proto.TradeClose) */ {
+ public:
+  TradeClose();
+  virtual ~TradeClose();
+
+  TradeClose(const TradeClose& from);
+  TradeClose(TradeClose&& from) noexcept
+    : TradeClose() {
+    *this = ::std::move(from);
+  }
+
+  inline TradeClose& operator=(const TradeClose& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline TradeClose& operator=(TradeClose&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const TradeClose& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const TradeClose* internal_default_instance() {
+    return reinterpret_cast<const TradeClose*>(
+               &_TradeClose_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    11;
+
+  friend void swap(TradeClose& a, TradeClose& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(TradeClose* other) {
+    if (other == this) return;
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline TradeClose* New() const final {
+    return CreateMaybeMessage<TradeClose>(nullptr);
+  }
+
+  TradeClose* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<TradeClose>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const TradeClose& from);
+  void MergeFrom(const TradeClose& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  #else
+  bool MergePartialFromCodedStream(
+      ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) final;
+  #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  void SerializeWithCachedSizes(
+      ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(TradeClose* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "Proto.TradeClose";
+  }
+  private:
+  inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_db_2eproto);
+    return ::descriptor_table_db_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kSuccessFieldNumber = 1,
+  };
+  // bool success = 1;
+  void clear_success();
+  bool success() const;
+  void set_success(bool value);
+
+  // @@protoc_insertion_point(class_scope:Proto.TradeClose)
+ private:
+  class _Internal;
+
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
+  bool success_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_db_2eproto;
+};
 // ===================================================================
 
 
@@ -2484,9 +2927,176 @@ inline void UpdateKnapItem::set_allocated_item(::Proto::ItemData* item) {
   // @@protoc_insertion_point(field_set_allocated:Proto.UpdateKnapItem.item)
 }
 
+// -------------------------------------------------------------------
+
+// UpdateTradeItem
+
+// uint64 sender = 1;
+inline void UpdateTradeItem::clear_sender() {
+  sender_ = PROTOBUF_ULONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint64 UpdateTradeItem::sender() const {
+  // @@protoc_insertion_point(field_get:Proto.UpdateTradeItem.sender)
+  return sender_;
+}
+inline void UpdateTradeItem::set_sender(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+  
+  sender_ = value;
+  // @@protoc_insertion_point(field_set:Proto.UpdateTradeItem.sender)
+}
+
+// uint64 recver = 2;
+inline void UpdateTradeItem::clear_recver() {
+  recver_ = PROTOBUF_ULONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint64 UpdateTradeItem::recver() const {
+  // @@protoc_insertion_point(field_get:Proto.UpdateTradeItem.recver)
+  return recver_;
+}
+inline void UpdateTradeItem::set_recver(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+  
+  recver_ = value;
+  // @@protoc_insertion_point(field_set:Proto.UpdateTradeItem.recver)
+}
+
+// .Proto.ItemData item = 3;
+inline bool UpdateTradeItem::has_item() const {
+  return this != internal_default_instance() && item_ != nullptr;
+}
+inline void UpdateTradeItem::clear_item() {
+  if (GetArenaNoVirtual() == nullptr && item_ != nullptr) {
+    delete item_;
+  }
+  item_ = nullptr;
+}
+inline const ::Proto::ItemData& UpdateTradeItem::item() const {
+  const ::Proto::ItemData* p = item_;
+  // @@protoc_insertion_point(field_get:Proto.UpdateTradeItem.item)
+  return p != nullptr ? *p : *reinterpret_cast<const ::Proto::ItemData*>(
+      &::Proto::_ItemData_default_instance_);
+}
+inline ::Proto::ItemData* UpdateTradeItem::release_item() {
+  // @@protoc_insertion_point(field_release:Proto.UpdateTradeItem.item)
+  
+  ::Proto::ItemData* temp = item_;
+  item_ = nullptr;
+  return temp;
+}
+inline ::Proto::ItemData* UpdateTradeItem::mutable_item() {
+  
+  if (item_ == nullptr) {
+    auto* p = CreateMaybeMessage<::Proto::ItemData>(GetArenaNoVirtual());
+    item_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:Proto.UpdateTradeItem.item)
+  return item_;
+}
+inline void UpdateTradeItem::set_allocated_item(::Proto::ItemData* item) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == nullptr) {
+    delete item_;
+  }
+  if (item) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena = nullptr;
+    if (message_arena != submessage_arena) {
+      item = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, item, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  item_ = item;
+  // @@protoc_insertion_point(field_set_allocated:Proto.UpdateTradeItem.item)
+}
+
+// int32 gold = 4;
+inline void UpdateTradeItem::clear_gold() {
+  gold_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 UpdateTradeItem::gold() const {
+  // @@protoc_insertion_point(field_get:Proto.UpdateTradeItem.gold)
+  return gold_;
+}
+inline void UpdateTradeItem::set_gold(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  gold_ = value;
+  // @@protoc_insertion_point(field_set:Proto.UpdateTradeItem.gold)
+}
+
+// bool ack = 5;
+inline void UpdateTradeItem::clear_ack() {
+  ack_ = false;
+}
+inline bool UpdateTradeItem::ack() const {
+  // @@protoc_insertion_point(field_get:Proto.UpdateTradeItem.ack)
+  return ack_;
+}
+inline void UpdateTradeItem::set_ack(bool value) {
+  
+  ack_ = value;
+  // @@protoc_insertion_point(field_set:Proto.UpdateTradeItem.ack)
+}
+
+// -------------------------------------------------------------------
+
+// TradeOpen
+
+// uint64 applicant = 1;
+inline void TradeOpen::clear_applicant() {
+  applicant_ = PROTOBUF_ULONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint64 TradeOpen::applicant() const {
+  // @@protoc_insertion_point(field_get:Proto.TradeOpen.applicant)
+  return applicant_;
+}
+inline void TradeOpen::set_applicant(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+  
+  applicant_ = value;
+  // @@protoc_insertion_point(field_set:Proto.TradeOpen.applicant)
+}
+
+// uint64 responder = 2;
+inline void TradeOpen::clear_responder() {
+  responder_ = PROTOBUF_ULONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint64 TradeOpen::responder() const {
+  // @@protoc_insertion_point(field_get:Proto.TradeOpen.responder)
+  return responder_;
+}
+inline void TradeOpen::set_responder(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+  
+  responder_ = value;
+  // @@protoc_insertion_point(field_set:Proto.TradeOpen.responder)
+}
+
+// -------------------------------------------------------------------
+
+// TradeClose
+
+// bool success = 1;
+inline void TradeClose::clear_success() {
+  success_ = false;
+}
+inline bool TradeClose::success() const {
+  // @@protoc_insertion_point(field_get:Proto.TradeClose.success)
+  return success_;
+}
+inline void TradeClose::set_success(bool value) {
+  
+  success_ = value;
+  // @@protoc_insertion_point(field_set:Proto.TradeClose.success)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

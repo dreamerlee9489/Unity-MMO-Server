@@ -55,6 +55,7 @@ protected:
 	void HandleGetPlayerKnap(Player* pPlayer, Packet* pPacket);
 	void HandleReqTrade(Player* pPlayer, Packet* pPacket);
 	void HandleTradeRes(Player* pPlayer, Packet* pPacket);
+	void HandleUpdateTradeItem(Player* pPlayer, Packet* pPacket);
 
 private:
 	void SyncWorldToGather();

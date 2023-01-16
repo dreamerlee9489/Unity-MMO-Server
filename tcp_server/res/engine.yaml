@@ -21,7 +21,7 @@ login:
   thread_logic: 2
   thread_listen: 1
   thread_connector: 1
-  url_login: http://192.168.120.128/member_login_t.php
+  url_login: http://192.168.120.129/member_login_t.php
   url_method: "get"
   apps:
     - id: 101
@@ -57,16 +57,16 @@ dbmgr:
   thread_logic: 1
   thread_mysql: 3
   thread_listen: 1
-  intraIp: 192.168.120.128
-  extraIp: 192.168.120.128
+  intraIp: 192.168.120.129
+  extraIp: 192.168.120.129
   port: 5800 
   dbs:
     - type: redis
-      ip: 192.168.120.128
+      ip: 192.168.120.129
       port: 6379
 
     - type: mysql
-      ip: 192.168.120.128
+      ip: 192.168.120.129
       port: 3306
       user: root
       password: 199473
