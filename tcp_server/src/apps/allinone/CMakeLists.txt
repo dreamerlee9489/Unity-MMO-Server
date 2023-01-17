@@ -25,10 +25,6 @@ include_directories(../../apps)
 include_directories(../../../../include/common)
 include_directories(/usr/local/include)
 
-link_directories(${CMAKE_BINARY_DIR}/../../../libs)
-link_directories(${CMAKE_BINARY_DIR}/../../../../libs/linux)
-link_directories(/usr/local/lib)
-
 aux_source_directory(. SRCS)
 aux_source_directory(../appmgr SRCS)
 aux_source_directory(../login SRCS)
@@ -41,11 +37,9 @@ aux_source_directory(../../libs/libserver/mongoose SRCS)
 aux_source_directory(../../libs/libplayer SRCS)
 aux_source_directory(../../libs/libresource SRCS)
 
-list(REMOVE_ITEM SRCS "../appmgr/main.cpp")
-list(REMOVE_ITEM SRCS "../login/main.cpp")
-list(REMOVE_ITEM SRCS "../dbmgr/main.cpp")
-list(REMOVE_ITEM SRCS "../game/main.cpp")
-list(REMOVE_ITEM SRCS "../space/main.cpp")
+link_directories(${CMAKE_BINARY_DIR}/../../../libs)
+link_directories(${CMAKE_BINARY_DIR}/../../../../libs/linux)
+link_directories(/usr/local/lib)
 
 add_executable(${MyProjectName} ${SRCS})
 target_link_libraries(${MyProjectName} -L/usr/lib64/mysql -lmysqlclient -luuid -lz -lm -lssl -lcrypto -ldl 

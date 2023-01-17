@@ -18,9 +18,11 @@ set(CMAKE_CXX_FLAGS_DEBUG "-D_DEBUG -O0 -g -ggdb")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG")
 
 include_directories(../../libs)
+include_directories(../../apps/space)
 
 aux_source_directory(. SRCS)
 aux_source_directory(./../libserver SRCS)
+aux_source_directory(../../apps/space SRCS)
 
 add_library(${MyProjectName} STATIC ${SRCS})
 target_link_libraries(${MyProjectName} -lprotobuf)
