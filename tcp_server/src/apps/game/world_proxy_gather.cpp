@@ -128,7 +128,7 @@ void WorldProxyGather::HandleLoginByToken(Packet* pPacket)
 void WorldProxyGather::HandleQueryPlayerRs(Packet* pPacket)
 {
     //从数据库中读取到player数据
-    auto& protoRs = pPacket->ParseToProto<Proto::QueryPlayerRs>();
+    auto protoRs = pPacket->ParseToProto<Proto::QueryPlayerRs>();
     auto& account = protoRs.account();
     auto pPlayer = GetComponent<PlayerCollectorComponent>()->GetPlayerByAccount(account);
     if (pPlayer == nullptr)

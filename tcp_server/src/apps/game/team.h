@@ -21,7 +21,7 @@ public:
 
 	void RemoveMember(uint64 sn)
 	{
-		for (auto& iter = _members.begin(); iter != _members.end(); ++iter)
+		for (auto iter = _members.begin(); iter != _members.end(); ++iter)
 		{
 			if (sn == *iter)
 			{

@@ -296,7 +296,8 @@ void WorldProxy::HandleJoinTeamRes(Player* pPlayer, Packet* pPacket)
 			teamProto.set_captain(proto.responder());
 			teamProto.add_members(proto.responder());
 			teamProto.add_members(proto.applicant());
-			MessageSystemHelp::DispatchPacket(Proto::MsgId::MI_CreateTeam, teamProto, &NetIdentify());
+			NetIdentify identify;
+			MessageSystemHelp::DispatchPacket(Proto::MsgId::MI_CreateTeam, teamProto, &identify);
 		}
 	}
 }

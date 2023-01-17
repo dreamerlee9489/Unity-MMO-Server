@@ -438,16 +438,6 @@ void World::HandleUpdateKnapItem(Player* pPlayer, Packet* pPacket)
 	Proto::UpdateKnapItem proto = pPacket->ParseToProto<Proto::UpdateKnapItem>();
 	if ((KnapType)proto.item().knaptype() != KnapType::Trade)
 		pPlayer->UpdateKnapItem(proto.item());
-	//else
-	//{
-	//	Player* target = nullptr;
-	//	if (pPlayer->GetPlayerSN() == tradeMap[pPlayer->GetPlayerSN()]->applicant)
-	//		target = playerMgr->GetPlayerBySn(tradeMap[pPlayer->GetPlayerSN()]->responder);
-	//	else
-	//		target = playerMgr->GetPlayerBySn(tradeMap[pPlayer->GetPlayerSN()]->applicant);
-	//	MessageSystemHelp::SendPacket(Proto::MsgId::S2C_UpdateKnapItem, proto, target);
-	//	LOG_DEBUG("UpdateKnapItem " << pPlayer->GetName().c_str() << " " << target->GetName().c_str());
-	//}
 }
 
 void World::HandleGetPlayerKnap(Player* pPlayer, Packet* pPacket)
