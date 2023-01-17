@@ -52,6 +52,7 @@ protected:
 	void HandleSyncPlayerPos(Player* pPlayer, Packet* pPacket);
 	void HandleSyncPlayerCmd(Player* pPlayer, Packet* pPacket);
 	void HandleUpdateKnapItem(Player* pPlayer, Packet* pPacket);
+	void HandleUpdateKnapGold(Player* pPlayer, Packet* pPacket);
 	void HandleGetPlayerKnap(Player* pPlayer, Packet* pPacket);
 	void HandleReqTrade(Player* pPlayer, Packet* pPacket);
 	void HandleTradeRes(Player* pPlayer, Packet* pPacket);

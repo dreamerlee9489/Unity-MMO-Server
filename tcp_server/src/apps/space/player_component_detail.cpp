@@ -20,7 +20,6 @@ void PlayerComponentDetail::ParserFromProto(const Proto::Player& proto)
 {
 	auto& protoBase = proto.base();
 	auto& protoKnap = proto.knap();
-	auto& protoMisc = proto.misc();
 	_gender = protoBase.gender();
 	lv = protoBase.level();
 	xp = protoBase.xp();
@@ -46,14 +45,31 @@ void PlayerComponentDetail::SerializeToProto(Proto::Player* pProto)
 	pProto->mutable_base()->set_def(def);
 	pProto->mutable_knap()->set_gold(gold);
 	auto& oldItems = *pProto->mutable_knap()->mutable_items();
-	for (auto& item : oldItems)
+	std::list<uint64> rmvSns;
+	for (size_t i = 0; i < oldItems.size(); ++i)
 	{
-		if (pIdxMap->find(item.sn()) != pIdxMap->end())
+		if (pIdxMap->find(oldItems[i].sn()) != pIdxMap->end())
 		{
-			int idx = (*pIdxMap)[item.sn()];
-			item.set_knaptype((Proto::ItemData_KnapType)(*pKnap)[idx].knapType);
-			item.set_index((*pKnap)[idx].index);
-			(*pKnap)[idx].sn = 0;
+			int idx = (*pIdxMap)[oldItems[i].sn()];
+			if ((*pKnap)[idx].knapType == KnapType::World)
+				rmvSns.push_back((*pKnap)[idx].sn);
+			else
+			{
+				(*pKnap)[idx].sn = 0;
+				oldItems[i].set_knaptype((Proto::ItemData_KnapType)(*pKnap)[idx].knapType);
+				oldItems[i].set_index((*pKnap)[idx].index);
+			}
+		}
+	}
+	for (uint64& sn : rmvSns)
+	{
+		for (auto iter = oldItems.begin(); iter != oldItems.end(); ++iter)
+		{
+			if ((*iter).sn() == sn)
+			{
+				oldItems.erase(iter);
+				break;
+			}
 		}
 	}
 	for (auto& item : *pKnap)

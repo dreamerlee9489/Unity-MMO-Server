@@ -18,6 +18,7 @@ void World::Awake(int worldId)
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::G2S_RemovePlayer, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleG2SRemovePlayer));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_Move, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleMove));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_UpdateKnapItem, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleUpdateKnapItem));
+	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_UpdateKnapGold, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleUpdateKnapGold));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_GetPlayerKnap, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleGetPlayerKnap));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_SyncPlayerPos, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleSyncPlayerPos));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_SyncPlayerCmd, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleSyncPlayerCmd));
@@ -436,8 +437,13 @@ void World::HandleNpcAtkEvent(Player* pPlayer, Packet* pPacket)
 void World::HandleUpdateKnapItem(Player* pPlayer, Packet* pPacket)
 {
 	Proto::UpdateKnapItem proto = pPacket->ParseToProto<Proto::UpdateKnapItem>();
-	if ((KnapType)proto.item().knaptype() != KnapType::Trade)
-		pPlayer->UpdateKnapItem(proto.item());
+	pPlayer->UpdateKnapItem(proto.item());
+}
+
+void World::HandleUpdateKnapGold(Player* pPlayer, Packet* pPacket)
+{
+	Proto::UpdateKnapGold proto = pPacket->ParseToProto<Proto::UpdateKnapGold>();
+	pPlayer->detail->gold = proto.gold();
 }
 
 void World::HandleGetPlayerKnap(Player* pPlayer, Packet* pPacket)

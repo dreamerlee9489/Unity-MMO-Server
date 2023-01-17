@@ -48,7 +48,7 @@ struct TableStruct_db_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxillaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[12]
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[13]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
@@ -83,6 +83,9 @@ extern TradeCloseDefaultTypeInternal _TradeClose_default_instance_;
 class TradeOpen;
 class TradeOpenDefaultTypeInternal;
 extern TradeOpenDefaultTypeInternal _TradeOpen_default_instance_;
+class UpdateKnapGold;
+class UpdateKnapGoldDefaultTypeInternal;
+extern UpdateKnapGoldDefaultTypeInternal _UpdateKnapGold_default_instance_;
 class UpdateKnapItem;
 class UpdateKnapItemDefaultTypeInternal;
 extern UpdateKnapItemDefaultTypeInternal _UpdateKnapItem_default_instance_;
@@ -103,6 +106,7 @@ template<> ::Proto::PlayerMisc* Arena::CreateMaybeMessage<::Proto::PlayerMisc>(A
 template<> ::Proto::Team* Arena::CreateMaybeMessage<::Proto::Team>(Arena*);
 template<> ::Proto::TradeClose* Arena::CreateMaybeMessage<::Proto::TradeClose>(Arena*);
 template<> ::Proto::TradeOpen* Arena::CreateMaybeMessage<::Proto::TradeOpen>(Arena*);
+template<> ::Proto::UpdateKnapGold* Arena::CreateMaybeMessage<::Proto::UpdateKnapGold>(Arena*);
 template<> ::Proto::UpdateKnapItem* Arena::CreateMaybeMessage<::Proto::UpdateKnapItem>(Arena*);
 template<> ::Proto::UpdateTradeItem* Arena::CreateMaybeMessage<::Proto::UpdateTradeItem>(Arena*);
 template<> ::Proto::Vector3D* Arena::CreateMaybeMessage<::Proto::Vector3D>(Arena*);
@@ -1508,6 +1512,137 @@ class PlayerKnap :
 };
 // -------------------------------------------------------------------
 
+class UpdateKnapGold :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Proto.UpdateKnapGold) */ {
+ public:
+  UpdateKnapGold();
+  virtual ~UpdateKnapGold();
+
+  UpdateKnapGold(const UpdateKnapGold& from);
+  UpdateKnapGold(UpdateKnapGold&& from) noexcept
+    : UpdateKnapGold() {
+    *this = ::std::move(from);
+  }
+
+  inline UpdateKnapGold& operator=(const UpdateKnapGold& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline UpdateKnapGold& operator=(UpdateKnapGold&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const UpdateKnapGold& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const UpdateKnapGold* internal_default_instance() {
+    return reinterpret_cast<const UpdateKnapGold*>(
+               &_UpdateKnapGold_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    8;
+
+  friend void swap(UpdateKnapGold& a, UpdateKnapGold& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(UpdateKnapGold* other) {
+    if (other == this) return;
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline UpdateKnapGold* New() const final {
+    return CreateMaybeMessage<UpdateKnapGold>(nullptr);
+  }
+
+  UpdateKnapGold* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<UpdateKnapGold>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const UpdateKnapGold& from);
+  void MergeFrom(const UpdateKnapGold& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  #else
+  bool MergePartialFromCodedStream(
+      ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) final;
+  #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  void SerializeWithCachedSizes(
+      ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(UpdateKnapGold* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "Proto.UpdateKnapGold";
+  }
+  private:
+  inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_db_2eproto);
+    return ::descriptor_table_db_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kGoldFieldNumber = 1,
+  };
+  // int32 gold = 1;
+  void clear_gold();
+  ::PROTOBUF_NAMESPACE_ID::int32 gold() const;
+  void set_gold(::PROTOBUF_NAMESPACE_ID::int32 value);
+
+  // @@protoc_insertion_point(class_scope:Proto.UpdateKnapGold)
+ private:
+  class _Internal;
+
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::int32 gold_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_db_2eproto;
+};
+// -------------------------------------------------------------------
+
 class UpdateKnapItem :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Proto.UpdateKnapItem) */ {
  public:
@@ -1550,7 +1685,7 @@ class UpdateKnapItem :
                &_UpdateKnapItem_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    8;
+    9;
 
   friend void swap(UpdateKnapItem& a, UpdateKnapItem& b) {
     a.Swap(&b);
@@ -1684,7 +1819,7 @@ class UpdateTradeItem :
                &_UpdateTradeItem_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    9;
+    10;
 
   friend void swap(UpdateTradeItem& a, UpdateTradeItem& b) {
     a.Swap(&b);
@@ -1846,7 +1981,7 @@ class TradeOpen :
                &_TradeOpen_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    10;
+    11;
 
   friend void swap(TradeOpen& a, TradeOpen& b) {
     a.Swap(&b);
@@ -1984,7 +2119,7 @@ class TradeClose :
                &_TradeClose_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    11;
+    12;
 
   friend void swap(TradeClose& a, TradeClose& b) {
     a.Swap(&b);
@@ -2874,6 +3009,24 @@ PlayerKnap::items() const {
 
 // -------------------------------------------------------------------
 
+// UpdateKnapGold
+
+// int32 gold = 1;
+inline void UpdateKnapGold::clear_gold() {
+  gold_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 UpdateKnapGold::gold() const {
+  // @@protoc_insertion_point(field_get:Proto.UpdateKnapGold.gold)
+  return gold_;
+}
+inline void UpdateKnapGold::set_gold(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  gold_ = value;
+  // @@protoc_insertion_point(field_set:Proto.UpdateKnapGold.gold)
+}
+
+// -------------------------------------------------------------------
+
 // UpdateKnapItem
 
 // .Proto.ItemData item = 1;
@@ -3091,6 +3244,8 @@ inline void TradeClose::set_success(bool value) {
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

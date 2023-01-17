@@ -55,6 +55,10 @@ class PlayerKnapDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<PlayerKnap> _instance;
 } _PlayerKnap_default_instance_;
+class UpdateKnapGoldDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<UpdateKnapGold> _instance;
+} _UpdateKnapGold_default_instance_;
 class UpdateKnapItemDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<UpdateKnapItem> _instance;
@@ -205,6 +209,20 @@ static void InitDefaultsscc_info_TradeOpen_db_2eproto() {
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_TradeOpen_db_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsscc_info_TradeOpen_db_2eproto}, {}};
 
+static void InitDefaultsscc_info_UpdateKnapGold_db_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::Proto::_UpdateKnapGold_default_instance_;
+    new (ptr) ::Proto::UpdateKnapGold();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::Proto::UpdateKnapGold::InitAsDefaultInstance();
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_UpdateKnapGold_db_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsscc_info_UpdateKnapGold_db_2eproto}, {}};
+
 static void InitDefaultsscc_info_UpdateKnapItem_db_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
@@ -249,7 +267,7 @@ static void InitDefaultsscc_info_Vector3D_db_2eproto() {
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Vector3D_db_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsscc_info_Vector3D_db_2eproto}, {}};
 
-static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_db_2eproto[12];
+static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_db_2eproto[13];
 static const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* file_level_enum_descriptors_db_2eproto[3];
 static constexpr ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor const** file_level_service_descriptors_db_2eproto = nullptr;
 
@@ -326,6 +344,12 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_db_2eproto::offsets[] PROTOBUF
   PROTOBUF_FIELD_OFFSET(::Proto::PlayerKnap, gold_),
   PROTOBUF_FIELD_OFFSET(::Proto::PlayerKnap, items_),
   ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::Proto::UpdateKnapGold, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::Proto::UpdateKnapGold, gold_),
+  ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::Proto::UpdateKnapItem, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
@@ -364,10 +388,11 @@ static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOB
   { 43, -1, sizeof(::Proto::Player)},
   { 54, -1, sizeof(::Proto::ItemData)},
   { 64, -1, sizeof(::Proto::PlayerKnap)},
-  { 71, -1, sizeof(::Proto::UpdateKnapItem)},
-  { 77, -1, sizeof(::Proto::UpdateTradeItem)},
-  { 87, -1, sizeof(::Proto::TradeOpen)},
-  { 94, -1, sizeof(::Proto::TradeClose)},
+  { 71, -1, sizeof(::Proto::UpdateKnapGold)},
+  { 77, -1, sizeof(::Proto::UpdateKnapItem)},
+  { 83, -1, sizeof(::Proto::UpdateTradeItem)},
+  { 93, -1, sizeof(::Proto::TradeOpen)},
+  { 100, -1, sizeof(::Proto::TradeClose)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
@@ -379,6 +404,7 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::Proto::_Player_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::Proto::_ItemData_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::Proto::_PlayerKnap_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::Proto::_UpdateKnapGold_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::Proto::_UpdateKnapItem_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::Proto::_UpdateTradeItem_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::Proto::_TradeOpen_default_instance_),
@@ -408,18 +434,19 @@ const char descriptor_table_protodef_db_2eproto[] PROTOBUF_SECTION_VARIABLE(prot
   "n\020\001\022\n\n\006Weapon\020\002\"@\n\010KnapType\022\t\n\005World\020\000\022\007"
   "\n\003Bag\020\001\022\t\n\005Equip\020\002\022\n\n\006Action\020\003\022\t\n\005Trade\020"
   "\004\":\n\nPlayerKnap\022\014\n\004gold\030\001 \001(\005\022\036\n\005items\030\002"
-  " \003(\0132\017.Proto.ItemData\"/\n\016UpdateKnapItem\022"
-  "\035\n\004item\030\001 \001(\0132\017.Proto.ItemData\"k\n\017Update"
-  "TradeItem\022\016\n\006sender\030\001 \001(\004\022\016\n\006recver\030\002 \001("
-  "\004\022\035\n\004item\030\003 \001(\0132\017.Proto.ItemData\022\014\n\004gold"
-  "\030\004 \001(\005\022\013\n\003ack\030\005 \001(\010\"1\n\tTradeOpen\022\021\n\tappl"
-  "icant\030\001 \001(\004\022\021\n\tresponder\030\002 \001(\004\"\035\n\nTradeC"
-  "lose\022\017\n\007success\030\001 \001(\010*(\n\006Gender\022\010\n\004none\020"
-  "\000\022\010\n\004male\020\001\022\n\n\006female\020\002b\006proto3"
+  " \003(\0132\017.Proto.ItemData\"\036\n\016UpdateKnapGold\022"
+  "\014\n\004gold\030\001 \001(\005\"/\n\016UpdateKnapItem\022\035\n\004item\030"
+  "\001 \001(\0132\017.Proto.ItemData\"k\n\017UpdateTradeIte"
+  "m\022\016\n\006sender\030\001 \001(\004\022\016\n\006recver\030\002 \001(\004\022\035\n\004ite"
+  "m\030\003 \001(\0132\017.Proto.ItemData\022\014\n\004gold\030\004 \001(\005\022\013"
+  "\n\003ack\030\005 \001(\010\"1\n\tTradeOpen\022\021\n\tapplicant\030\001 "
+  "\001(\004\022\021\n\tresponder\030\002 \001(\004\"\035\n\nTradeClose\022\017\n\007"
+  "success\030\001 \001(\010*(\n\006Gender\022\010\n\004none\020\000\022\010\n\004mal"
+  "e\020\001\022\n\n\006female\020\002b\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_db_2eproto_deps[1] = {
 };
-static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_db_2eproto_sccs[12] = {
+static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_db_2eproto_sccs[13] = {
   &scc_info_ItemData_db_2eproto.base,
   &scc_info_LastWorld_db_2eproto.base,
   &scc_info_Player_db_2eproto.base,
@@ -429,6 +456,7 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_db_
   &scc_info_Team_db_2eproto.base,
   &scc_info_TradeClose_db_2eproto.base,
   &scc_info_TradeOpen_db_2eproto.base,
+  &scc_info_UpdateKnapGold_db_2eproto.base,
   &scc_info_UpdateKnapItem_db_2eproto.base,
   &scc_info_UpdateTradeItem_db_2eproto.base,
   &scc_info_Vector3D_db_2eproto.base,
@@ -436,10 +464,10 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_db_
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_db_2eproto_once;
 static bool descriptor_table_db_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_db_2eproto = {
-  &descriptor_table_db_2eproto_initialized, descriptor_table_protodef_db_2eproto, "db.proto", 1191,
-  &descriptor_table_db_2eproto_once, descriptor_table_db_2eproto_sccs, descriptor_table_db_2eproto_deps, 12, 0,
+  &descriptor_table_db_2eproto_initialized, descriptor_table_protodef_db_2eproto, "db.proto", 1223,
+  &descriptor_table_db_2eproto_once, descriptor_table_db_2eproto_sccs, descriptor_table_db_2eproto_deps, 13, 0,
   schemas, file_default_instances, TableStruct_db_2eproto::offsets,
-  file_level_metadata_db_2eproto, 12, file_level_enum_descriptors_db_2eproto, file_level_service_descriptors_db_2eproto,
+  file_level_metadata_db_2eproto, 13, file_level_enum_descriptors_db_2eproto, file_level_service_descriptors_db_2eproto,
 };
 
 // Force running AddDescriptors() at dynamic initialization time.
@@ -3673,6 +3701,255 @@ void PlayerKnap::InternalSwap(PlayerKnap* other) {
 
 // ===================================================================
 
+void UpdateKnapGold::InitAsDefaultInstance() {
+}
+class UpdateKnapGold::_Internal {
+ public:
+};
+
+UpdateKnapGold::UpdateKnapGold()
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:Proto.UpdateKnapGold)
+}
+UpdateKnapGold::UpdateKnapGold(const UpdateKnapGold& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  gold_ = from.gold_;
+  // @@protoc_insertion_point(copy_constructor:Proto.UpdateKnapGold)
+}
+
+void UpdateKnapGold::SharedCtor() {
+  gold_ = 0;
+}
+
+UpdateKnapGold::~UpdateKnapGold() {
+  // @@protoc_insertion_point(destructor:Proto.UpdateKnapGold)
+  SharedDtor();
+}
+
+void UpdateKnapGold::SharedDtor() {
+}
+
+void UpdateKnapGold::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const UpdateKnapGold& UpdateKnapGold::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_UpdateKnapGold_db_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void UpdateKnapGold::Clear() {
+// @@protoc_insertion_point(message_clear_start:Proto.UpdateKnapGold)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  gold_ = 0;
+  _internal_metadata_.Clear();
+}
+
+#if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+const char* UpdateKnapGold::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // int32 gold = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
+          gold_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+#else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+bool UpdateKnapGold::MergePartialFromCodedStream(
+    ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+  // @@protoc_insertion_point(parse_start:Proto.UpdateKnapGold)
+  for (;;) {
+    ::std::pair<::PROTOBUF_NAMESPACE_ID::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // int32 gold = 1;
+      case 1: {
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (8 & 0xFF)) {
+
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   ::PROTOBUF_NAMESPACE_ID::int32, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32>(
+                 input, &gold_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:Proto.UpdateKnapGold)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:Proto.UpdateKnapGold)
+  return false;
+#undef DO_
+}
+#endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+
+void UpdateKnapGold::SerializeWithCachedSizes(
+    ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:Proto.UpdateKnapGold)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // int32 gold = 1;
+  if (this->gold() != 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32(1, this->gold(), output);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFields(
+        _internal_metadata_.unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:Proto.UpdateKnapGold)
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* UpdateKnapGold::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:Proto.UpdateKnapGold)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // int32 gold = 1;
+  if (this->gold() != 0) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(1, this->gold(), target);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:Proto.UpdateKnapGold)
+  return target;
+}
+
+size_t UpdateKnapGold::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:Proto.UpdateKnapGold)
+  size_t total_size = 0;
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::ComputeUnknownFieldsSize(
+        _internal_metadata_.unknown_fields());
+  }
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // int32 gold = 1;
+  if (this->gold() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
+        this->gold());
+  }
+
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void UpdateKnapGold::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:Proto.UpdateKnapGold)
+  GOOGLE_DCHECK_NE(&from, this);
+  const UpdateKnapGold* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<UpdateKnapGold>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:Proto.UpdateKnapGold)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:Proto.UpdateKnapGold)
+    MergeFrom(*source);
+  }
+}
+
+void UpdateKnapGold::MergeFrom(const UpdateKnapGold& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:Proto.UpdateKnapGold)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.gold() != 0) {
+    set_gold(from.gold());
+  }
+}
+
+void UpdateKnapGold::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:Proto.UpdateKnapGold)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void UpdateKnapGold::CopyFrom(const UpdateKnapGold& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:Proto.UpdateKnapGold)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool UpdateKnapGold::IsInitialized() const {
+  return true;
+}
+
+void UpdateKnapGold::InternalSwap(UpdateKnapGold* other) {
+  using std::swap;
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  swap(gold_, other->gold_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata UpdateKnapGold::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
+// ===================================================================
+
 void UpdateKnapItem::InitAsDefaultInstance() {
   ::Proto::_UpdateKnapItem_default_instance_._instance.get_mutable()->item_ = const_cast< ::Proto::ItemData*>(
       ::Proto::ItemData::internal_default_instance());
@@ -4942,6 +5219,9 @@ template<> PROTOBUF_NOINLINE ::Proto::ItemData* Arena::CreateMaybeMessage< ::Pro
 }
 template<> PROTOBUF_NOINLINE ::Proto::PlayerKnap* Arena::CreateMaybeMessage< ::Proto::PlayerKnap >(Arena* arena) {
   return Arena::CreateInternal< ::Proto::PlayerKnap >(arena);
+}
+template<> PROTOBUF_NOINLINE ::Proto::UpdateKnapGold* Arena::CreateMaybeMessage< ::Proto::UpdateKnapGold >(Arena* arena) {
+  return Arena::CreateInternal< ::Proto::UpdateKnapGold >(arena);
 }
 template<> PROTOBUF_NOINLINE ::Proto::UpdateKnapItem* Arena::CreateMaybeMessage< ::Proto::UpdateKnapItem >(Arena* arena) {
   return Arena::CreateInternal< ::Proto::UpdateKnapItem >(arena);

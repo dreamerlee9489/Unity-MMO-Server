@@ -79,6 +79,10 @@ message PlayerKnap {
 	repeated ItemData items = 2;
 }
 
+message UpdateKnapGold {
+	int32 gold = 1;
+}
+
 message UpdateKnapItem {
 	ItemData item = 1;
 }

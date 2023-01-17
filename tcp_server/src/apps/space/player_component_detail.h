@@ -5,6 +5,7 @@
 #include "npc.h"
 #include <vector>
 #include <unordered_map>
+#include <list>
 
 struct ItemData;
 class PlayerComponentDetail : public Component<PlayerComponentDetail>, public IAwakeFromPoolSystem<>, public PlayerComponent
