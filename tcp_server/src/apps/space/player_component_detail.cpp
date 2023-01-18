@@ -46,7 +46,7 @@ void PlayerComponentDetail::SerializeToProto(Proto::Player* pProto)
 	pProto->mutable_knap()->set_gold(gold);
 	auto& oldItems = *pProto->mutable_knap()->mutable_items();
 	std::list<uint64> rmvSns;
-	for (size_t i = 0; i < oldItems.size(); ++i)
+	for (int i = 0; i < oldItems.size(); ++i)
 	{
 		if (pIdxMap->find(oldItems[i].sn()) != pIdxMap->end())
 		{
