@@ -5,7 +5,7 @@
 #include "fsm_attack.h"
 #include "fsm_death.h"
 
-FsmState::FsmState(Npc* owner, Player* target) : _owner(owner), _target(target)
+FsmState::FsmState(Npc* owner, Player* target) : _npc(owner), _target(target)
 {
 	_lastTime = Global::GetInstance()->TimeTick;
 	_currTime = _lastTime;

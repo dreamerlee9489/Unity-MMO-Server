@@ -119,28 +119,31 @@
     <ClCompile Include="..\space\npc.cpp">
       <Filter>space\system\ai</Filter>
     </ClCompile>
-    <ClCompile Include="..\space\ai_system.cpp">
-      <Filter>space\system\ai</Filter>
-    </ClCompile>
     <ClCompile Include="..\space\fsm_attack.cpp">
-      <Filter>space\system\ai</Filter>
+      <Filter>space\system\ai\fsm</Filter>
     </ClCompile>
     <ClCompile Include="..\space\fsm_component.cpp">
-      <Filter>space\system\ai</Filter>
+      <Filter>space\system\ai\fsm</Filter>
     </ClCompile>
     <ClCompile Include="..\space\fsm_death.cpp">
-      <Filter>space\system\ai</Filter>
+      <Filter>space\system\ai\fsm</Filter>
     </ClCompile>
     <ClCompile Include="..\space\fsm_idle.cpp">
-      <Filter>space\system\ai</Filter>
+      <Filter>space\system\ai\fsm</Filter>
     </ClCompile>
     <ClCompile Include="..\space\fsm_patrol.cpp">
-      <Filter>space\system\ai</Filter>
+      <Filter>space\system\ai\fsm</Filter>
     </ClCompile>
     <ClCompile Include="..\space\fsm_pursuit.cpp">
-      <Filter>space\system\ai</Filter>
+      <Filter>space\system\ai\fsm</Filter>
     </ClCompile>
     <ClCompile Include="..\space\fsm_state.cpp">
+      <Filter>space\system\ai\fsm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\space\bt_component.cpp">
+      <Filter>space\system\ai\bt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\space\ai_system.cpp">
       <Filter>space\system\ai</Filter>
     </ClCompile>
   </ItemGroup>
@@ -237,6 +240,12 @@
     </Filter>
     <Filter Include="space\system\ai">
       <UniqueIdentifier>{ff059f1d-b0ea-473a-bbc2-c10d648a02b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="space\system\ai\fsm">
+      <UniqueIdentifier>{23dbae24-47fd-4f89-bb34-8c663e71685c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="space\system\ai\bt">
+      <UniqueIdentifier>{6166e6fb-c8a2-4de5-9eca-de86f75bd63d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -339,32 +348,83 @@
     <ClInclude Include="..\space\ai_system.h">
       <Filter>space\system\ai</Filter>
     </ClInclude>
-    <ClInclude Include="..\space\fsm_attack.h">
-      <Filter>space\system\ai</Filter>
-    </ClInclude>
-    <ClInclude Include="..\space\fsm_component.h">
-      <Filter>space\system\ai</Filter>
-    </ClInclude>
-    <ClInclude Include="..\space\fsm_death.h">
-      <Filter>space\system\ai</Filter>
-    </ClInclude>
-    <ClInclude Include="..\space\fsm_idle.h">
-      <Filter>space\system\ai</Filter>
-    </ClInclude>
-    <ClInclude Include="..\space\fsm_patrol.h">
-      <Filter>space\system\ai</Filter>
-    </ClInclude>
-    <ClInclude Include="..\space\fsm_pursuit.h">
-      <Filter>space\system\ai</Filter>
-    </ClInclude>
-    <ClInclude Include="..\space\fsm_state.h">
-      <Filter>space\system\ai</Filter>
-    </ClInclude>
     <ClInclude Include="..\game\team.h">
       <Filter>game\gather</Filter>
     </ClInclude>
     <ClInclude Include="..\space\trade.h">
       <Filter>space\world</Filter>
+    </ClInclude>
+    <ClInclude Include="..\space\fsm_attack.h">
+      <Filter>space\system\ai\fsm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\space\fsm_component.h">
+      <Filter>space\system\ai\fsm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\space\fsm_death.h">
+      <Filter>space\system\ai\fsm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\space\fsm_idle.h">
+      <Filter>space\system\ai\fsm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\space\fsm_patrol.h">
+      <Filter>space\system\ai\fsm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\space\fsm_pursuit.h">
+      <Filter>space\system\ai\fsm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\space\fsm_state.h">
+      <Filter>space\system\ai\fsm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\space\bt_node.h">
+      <Filter>space\system\ai\bt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\space\bt_component.h">
+      <Filter>space\system\ai\bt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\space\bt_action.h">
+      <Filter>space\system\ai\bt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\space\bt_condition.h">
+      <Filter>space\system\ai\bt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\space\bt_composite.h">
+      <Filter>space\system\ai\bt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\space\bt_sequence.h">
+      <Filter>space\system\ai\bt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\space\bt_decorator.h">
+      <Filter>space\system\ai\bt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\space\bt_repeat.h">
+      <Filter>space\system\ai\bt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\space\bt_parallel.h">
+      <Filter>space\system\ai\bt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\space\bt_selector.h">
+      <Filter>space\system\ai\bt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\space\bt_act_view.h">
+      <Filter>space\system\ai\bt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\space\bt_act_birth.h">
+      <Filter>space\system\ai\bt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\space\bt_act_death.h">
+      <Filter>space\system\ai\bt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\space\bt_act_sense.h">
+      <Filter>space\system\ai\bt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\space\bt_act_patrol.h">
+      <Filter>space\system\ai\bt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\space\bt_act_idle.h">
+      <Filter>space\system\ai\bt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\space\bt_act_pursue.h">
+      <Filter>space\system\ai\bt</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

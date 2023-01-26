@@ -25,7 +25,7 @@ void FsmComponent::BackToPool()
 {
 }
 
-void FsmComponent::Update(Npc* pEnemy)
+void FsmComponent::Update()
 {
 	if (_started && _currState)
 		_currState->Execute();

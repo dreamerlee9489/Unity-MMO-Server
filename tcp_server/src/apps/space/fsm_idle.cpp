@@ -10,33 +10,33 @@ void Idle::Enter()
 void Idle::Execute()
 {
 	_currTime = Global::GetInstance()->TimeTick;
-	if (_owner->GetAllPlayer()->empty())
+	if (_npc->GetAllPlayer()->empty())
 		_lastTime = _currTime;
 	else
 	{
 		_timeElapsed = _currTime - _lastTime;
-		if (!_owner->GetLinkPlayer())
+		if (!_npc->GetLinkPlayer())
 		{
-			Player* player = _owner->GetWorld()->GetNearestPlayer(_owner->GetCurrPos());
-			_owner->SetLinkPlayer(player);
+			Player* player = _npc->GetWorld()->GetNearestPlayer(_npc->GetCurrPos());
+			_npc->SetLinkPlayer(player);
 			Proto::ReqLinkPlayer proto;
-			proto.set_npc_id(_owner->GetID());
-			proto.set_npc_sn(_owner->GetSN());
+			proto.set_npc_id(_npc->GetID());
+			proto.set_npc_sn(_npc->GetSN());
 			proto.set_linker(true);
 			MessageSystemHelp::SendPacket(Proto::MsgId::S2C_ReqLinkPlayer, proto, player);
 		}
 		if (_timeElapsed >= 2000)
 		{
 			_lastTime = _currTime;
-			_owner->GetComponent<FsmComponent>()->ChangeState(new Patrol(_owner));
+			_npc->GetComponent<FsmComponent>()->ChangeState(new Patrol(_npc));
 		}
 		else
 		{
-			for (auto& pair : *_owner->GetAllPlayer())
+			for (auto& pair : *_npc->GetAllPlayer())
 			{
-				if (_owner->CanSee(pair.second))
+				if (_npc->CanSee(pair.second))
 				{
-					_owner->GetComponent<FsmComponent>()->ChangeState(new Pursuit(_owner, pair.second));
+					_npc->GetComponent<FsmComponent>()->ChangeState(new Pursuit(_npc, pair.second));
 					break;
 				}
 			}
@@ -54,8 +54,8 @@ void Idle::Broadcast()
 	proto.set_state((int)FsmStateType::Idle);
 	proto.set_code(0);
 	proto.set_player_sn(0);
-	proto.set_npc_sn(_owner->GetSN());
-	_owner->GetWorld()->BroadcastPacket(Proto::MsgId::S2C_SyncFsmState, proto);
+	proto.set_npc_sn(_npc->GetSN());
+	_npc->GetWorld()->BroadcastPacket(Proto::MsgId::S2C_SyncFsmState, proto);
 }
 
 void Idle::Singlecast(Player* pPlayer)
@@ -64,6 +64,6 @@ void Idle::Singlecast(Player* pPlayer)
 	proto.set_state((int)FsmStateType::Idle);
 	proto.set_code(0);
 	proto.set_player_sn(0);
-	proto.set_npc_sn(_owner->GetSN());
+	proto.set_npc_sn(_npc->GetSN());
 	MessageSystemHelp::SendPacket(Proto::MsgId::S2C_SyncFsmState, proto, pPlayer);
 }

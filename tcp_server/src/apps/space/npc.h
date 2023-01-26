@@ -72,6 +72,7 @@ class Npc : public Entity<Npc>, public IAwakeFromPoolSystem<ResourceNpc>
 
 public:
 	int id = 0, type = 0, lv = 0, hp = 0, atk = 0, def = 0;
+	Player* target = nullptr;
 
 	void Awake(ResourceNpc cfg) override;
 

@@ -162,6 +162,8 @@ enum MsgId : int {
   C2S_NpcAtkEvent = 30016,
   S2C_NpcAtkEvent = 30017,
   S2C_DropItemList = 30018,
+  S2C_SyncBtAction = 30019,
+  C2S_SyncBtAction = 30020,
   C2S_UpdateKnapItem = 40001,
   C2S_UpdateKnapGold = 40002,
   C2S_GetPlayerKnap = 40003,

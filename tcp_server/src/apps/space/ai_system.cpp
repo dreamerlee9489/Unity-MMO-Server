@@ -1,6 +1,4 @@
 ﻿#include "ai_system.h"
-#include "npc.h"
-#include "fsm_component.h"
 
 AISystem::AISystem()
 {
@@ -16,17 +14,29 @@ void AISystem::Update(EntitySystem* pEntities)
 	if (_timeElapsed >= 500)
 	{
 		_lastTime = _currTime;
+		//if (_pCollections == nullptr)
+		//{
+		//	_pCollections = pEntities->GetComponentCollections<FsmComponent>();
+		//	if (_pCollections == nullptr)
+		//		return;
+		//}
+		//std::map<uint64, IComponent*>* pMap = _pCollections->GetAll();
+		//for (auto iter = pMap->begin(); iter != pMap->end(); ++iter)
+		//{
+		//	FsmComponent* pFsmComponent = (FsmComponent*)iter->second;
+		//	pFsmComponent->Update();
+		//}
 		if (_pCollections == nullptr)
 		{
-			_pCollections = pEntities->GetComponentCollections<FsmComponent>();
+			_pCollections = pEntities->GetComponentCollections<BtComponent>();
 			if (_pCollections == nullptr)
 				return;
 		}
 		std::map<uint64, IComponent*>* pMap = _pCollections->GetAll();
 		for (auto iter = pMap->begin(); iter != pMap->end(); ++iter)
 		{
-			FsmComponent* pFsmComponent = (FsmComponent*)iter->second;
-			pFsmComponent->Update(pFsmComponent->GetParent<Npc>());
+			BtComponent* pBtComponent = (BtComponent*)iter->second;
+			pBtComponent->Update();
 		}
 	}
 }

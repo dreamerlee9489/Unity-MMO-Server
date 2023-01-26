@@ -10,7 +10,7 @@
 class Player;
 class Npc;
 class FsmState;
-class FsmComponent :public Component<FsmComponent>, public IAwakeFromPoolSystem<>
+class FsmComponent : public Component<FsmComponent>, public IAwakeFromPoolSystem<>
 {
 	Npc* _parent = nullptr;
 	FsmState* _prevState = nullptr;
@@ -26,7 +26,7 @@ public:
 
 	void BackToPool() override;
 
-	void Update(Npc* pEnemy);
+	void Update();
 
 	void ResetState();
 

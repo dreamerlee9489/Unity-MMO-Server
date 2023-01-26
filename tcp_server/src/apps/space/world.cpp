@@ -1,5 +1,4 @@
 ﻿#include "world.h"
-#include "fsm_state.h"
 
 void World::Awake(int worldId)
 {
@@ -39,7 +38,8 @@ void World::Awake(int worldId)
 		Npc* npc = GetSystemManager()->GetEntitySystem()->AddComponent<Npc>(cfg);
 		npc->SetWorld(this);
 		npc->SetAllPlayer(playerMgr->GetAll());
-		npc->AddComponent<FsmComponent>();
+		//npc->AddComponent<FsmComponent>();
+		npc->AddComponent<BtComponent>();
 		npcIdxMap.emplace(npc->GetSN(), npcs.size());
 		npcs.push_back(npc);
 	}
@@ -71,7 +71,6 @@ Player* World::GetPlayer(NetIdentify* pIdentify)
 void World::HandleNetworkDisconnect(Packet* pPacket)
 {
 	//LOG_DEBUG("world id:" << _worldId << " disconnect." << pPacket);
-
 	auto pTags = pPacket->GetTagKey();
 	const auto pTagPlayer = pTags->GetTagValue(TagType::Player);
 	if (pTagPlayer != nullptr)
@@ -184,7 +183,7 @@ void World::PlayerDisappear(Player* pPlayer)
 	{
 		if (enemy->GetLinkPlayer() == pPlayer)
 		{
-			enemy->GetComponent<FsmComponent>()->ResetState();
+			//enemy->GetComponent<FsmComponent>()->ResetState();
 			Player* target = GetNearestPlayer(enemy->GetCurrPos());
 			enemy->SetLinkPlayer(target);
 			if (target)
@@ -348,7 +347,7 @@ void World::HandleReqSyncNpc(Player* pPlayer, Packet* pPacket)
 	syncPos.set_npc_sn(sn);
 	npcs[id]->GetCurrPos().SerializeToProto(syncPos.mutable_pos());
 	MessageSystemHelp::SendPacket(Proto::MsgId::S2C_SyncNpcPos, syncPos, pPlayer);
-	npcs[id]->GetComponent<FsmComponent>()->GetCurrState()->Singlecast(pPlayer);
+	//npcs[id]->GetComponent<FsmComponent>()->GetCurrState()->Singlecast(pPlayer);
 	if (!npcs[id]->GetLinkPlayer())
 	{
 		npcs[id]->SetLinkPlayer(pPlayer);

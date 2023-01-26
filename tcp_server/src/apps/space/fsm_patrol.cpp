@@ -7,31 +7,31 @@ std::uniform_int_distribution<int> Patrol::_dis = std::uniform_int_distribution<
 void Patrol::Enter()
 {
 	_index = _dis(_eng);
-	_owner->SetPatrolPoint(_index);
+	_npc->SetPatrolPoint(_index);
 	Broadcast();
 }
 
 void Patrol::Execute()
 {
-	if (!_owner->GetLinkPlayer())
+	if (!_npc->GetLinkPlayer())
 	{
-		Player* player = _owner->GetWorld()->GetNearestPlayer(_owner->GetCurrPos());
-		_owner->SetLinkPlayer(player);
+		Player* player = _npc->GetWorld()->GetNearestPlayer(_npc->GetCurrPos());
+		_npc->SetLinkPlayer(player);
 		Proto::ReqLinkPlayer proto;
-		proto.set_npc_id(_owner->GetID());
-		proto.set_npc_sn(_owner->GetSN());
+		proto.set_npc_id(_npc->GetID());
+		proto.set_npc_sn(_npc->GetSN());
 		proto.set_linker(true);
 		MessageSystemHelp::SendPacket(Proto::MsgId::S2C_ReqLinkPlayer, proto, player);
 	}
-	if (_owner->GetCurrPos().GetDistance(_owner->GetNextPos()) <= 1)
-		_owner->GetComponent<FsmComponent>()->ChangeState(new Idle(_owner));
+	if (_npc->GetCurrPos().GetDistance(_npc->GetNextPos()) <= 1)
+		_npc->GetComponent<FsmComponent>()->ChangeState(new Idle(_npc));
 	else
 	{
-		for (auto& pair : *_owner->GetAllPlayer())
+		for (auto& pair : *_npc->GetAllPlayer())
 		{
-			if (_owner->CanSee(pair.second))
+			if (_npc->CanSee(pair.second))
 			{
-				_owner->GetComponent<FsmComponent>()->ChangeState(new Pursuit(_owner, pair.second));
+				_npc->GetComponent<FsmComponent>()->ChangeState(new Pursuit(_npc, pair.second));
 				break;
 			}
 		}
@@ -47,9 +47,9 @@ void Patrol::Broadcast()
 	Proto::SyncFsmState proto;
 	proto.set_state((int)FsmStateType::Patrol);
 	proto.set_code(_index);
-	proto.set_npc_sn(_owner->GetSN());
+	proto.set_npc_sn(_npc->GetSN());
 	proto.set_player_sn(0);
-	_owner->GetWorld()->BroadcastPacket(Proto::MsgId::S2C_SyncFsmState, proto);
+	_npc->GetWorld()->BroadcastPacket(Proto::MsgId::S2C_SyncFsmState, proto);
 }
 
 void Patrol::Singlecast(Player* pPlayer)
@@ -57,7 +57,7 @@ void Patrol::Singlecast(Player* pPlayer)
 	Proto::SyncFsmState proto;
 	proto.set_state((int)FsmStateType::Patrol);
 	proto.set_code(_index);
-	proto.set_npc_sn(_owner->GetSN());
+	proto.set_npc_sn(_npc->GetSN());
 	proto.set_player_sn(0);
 	MessageSystemHelp::SendPacket(Proto::MsgId::S2C_SyncFsmState, proto, pPlayer);
 }

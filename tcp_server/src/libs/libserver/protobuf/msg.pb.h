@@ -49,7 +49,7 @@ struct TableStruct_msg_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxillaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[79]
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[80]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
@@ -255,6 +255,9 @@ extern SelectPlayerDefaultTypeInternal _SelectPlayer_default_instance_;
 class SelectPlayerRs;
 class SelectPlayerRsDefaultTypeInternal;
 extern SelectPlayerRsDefaultTypeInternal _SelectPlayerRs_default_instance_;
+class SyncBtAction;
+class SyncBtActionDefaultTypeInternal;
+extern SyncBtActionDefaultTypeInternal _SyncBtAction_default_instance_;
 class SyncEntityStatus;
 class SyncEntityStatusDefaultTypeInternal;
 extern SyncEntityStatusDefaultTypeInternal _SyncEntityStatus_default_instance_;
@@ -362,6 +365,7 @@ template<> ::Proto::RoleDisappear* Arena::CreateMaybeMessage<::Proto::RoleDisapp
 template<> ::Proto::SavePlayer* Arena::CreateMaybeMessage<::Proto::SavePlayer>(Arena*);
 template<> ::Proto::SelectPlayer* Arena::CreateMaybeMessage<::Proto::SelectPlayer>(Arena*);
 template<> ::Proto::SelectPlayerRs* Arena::CreateMaybeMessage<::Proto::SelectPlayerRs>(Arena*);
+template<> ::Proto::SyncBtAction* Arena::CreateMaybeMessage<::Proto::SyncBtAction>(Arena*);
 template<> ::Proto::SyncEntityStatus* Arena::CreateMaybeMessage<::Proto::SyncEntityStatus>(Arena*);
 template<> ::Proto::SyncFsmState* Arena::CreateMaybeMessage<::Proto::SyncFsmState>(Arena*);
 template<> ::Proto::SyncNpcPos* Arena::CreateMaybeMessage<::Proto::SyncNpcPos>(Arena*);
@@ -10553,6 +10557,158 @@ class SyncFsmState :
 };
 // -------------------------------------------------------------------
 
+class SyncBtAction :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Proto.SyncBtAction) */ {
+ public:
+  SyncBtAction();
+  virtual ~SyncBtAction();
+
+  SyncBtAction(const SyncBtAction& from);
+  SyncBtAction(SyncBtAction&& from) noexcept
+    : SyncBtAction() {
+    *this = ::std::move(from);
+  }
+
+  inline SyncBtAction& operator=(const SyncBtAction& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline SyncBtAction& operator=(SyncBtAction&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const SyncBtAction& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const SyncBtAction* internal_default_instance() {
+    return reinterpret_cast<const SyncBtAction*>(
+               &_SyncBtAction_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    67;
+
+  friend void swap(SyncBtAction& a, SyncBtAction& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(SyncBtAction* other) {
+    if (other == this) return;
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline SyncBtAction* New() const final {
+    return CreateMaybeMessage<SyncBtAction>(nullptr);
+  }
+
+  SyncBtAction* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<SyncBtAction>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const SyncBtAction& from);
+  void MergeFrom(const SyncBtAction& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  #else
+  bool MergePartialFromCodedStream(
+      ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) final;
+  #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  void SerializeWithCachedSizes(
+      ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(SyncBtAction* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "Proto.SyncBtAction";
+  }
+  private:
+  inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_msg_2eproto);
+    return ::descriptor_table_msg_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kIdFieldNumber = 1,
+    kCodeFieldNumber = 2,
+    kNpcSnFieldNumber = 3,
+    kPlayerSnFieldNumber = 4,
+  };
+  // int32 id = 1;
+  void clear_id();
+  ::PROTOBUF_NAMESPACE_ID::int32 id() const;
+  void set_id(::PROTOBUF_NAMESPACE_ID::int32 value);
+
+  // int32 code = 2;
+  void clear_code();
+  ::PROTOBUF_NAMESPACE_ID::int32 code() const;
+  void set_code(::PROTOBUF_NAMESPACE_ID::int32 value);
+
+  // uint64 npc_sn = 3;
+  void clear_npc_sn();
+  ::PROTOBUF_NAMESPACE_ID::uint64 npc_sn() const;
+  void set_npc_sn(::PROTOBUF_NAMESPACE_ID::uint64 value);
+
+  // uint64 player_sn = 4;
+  void clear_player_sn();
+  ::PROTOBUF_NAMESPACE_ID::uint64 player_sn() const;
+  void set_player_sn(::PROTOBUF_NAMESPACE_ID::uint64 value);
+
+  // @@protoc_insertion_point(class_scope:Proto.SyncBtAction)
+ private:
+  class _Internal;
+
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::int32 id_;
+  ::PROTOBUF_NAMESPACE_ID::int32 code_;
+  ::PROTOBUF_NAMESPACE_ID::uint64 npc_sn_;
+  ::PROTOBUF_NAMESPACE_ID::uint64 player_sn_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_msg_2eproto;
+};
+// -------------------------------------------------------------------
+
 class SyncPlayerPos :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Proto.SyncPlayerPos) */ {
  public:
@@ -10595,7 +10751,7 @@ class SyncPlayerPos :
                &_SyncPlayerPos_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    67;
+    68;
 
   friend void swap(SyncPlayerPos& a, SyncPlayerPos& b) {
     a.Swap(&b);
@@ -10729,7 +10885,7 @@ class SyncPlayerCmd :
                &_SyncPlayerCmd_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    68;
+    69;
 
   friend void swap(SyncPlayerCmd& a, SyncPlayerCmd& b) {
     a.Swap(&b);
@@ -10884,7 +11040,7 @@ class ReqSyncPlayer :
                &_ReqSyncPlayer_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    69;
+    70;
 
   friend void swap(ReqSyncPlayer& a, ReqSyncPlayer& b) {
     a.Swap(&b);
@@ -11015,7 +11171,7 @@ class ReqSyncNpc :
                &_ReqSyncNpc_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    70;
+    71;
 
   friend void swap(ReqSyncNpc& a, ReqSyncNpc& b) {
     a.Swap(&b);
@@ -11153,7 +11309,7 @@ class ReqLinkPlayer :
                &_ReqLinkPlayer_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    71;
+    72;
 
   friend void swap(ReqLinkPlayer& a, ReqLinkPlayer& b) {
     a.Swap(&b);
@@ -11298,7 +11454,7 @@ class NpcAtkEvent :
                &_NpcAtkEvent_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    72;
+    73;
 
   friend void swap(NpcAtkEvent& a, NpcAtkEvent& b) {
     a.Swap(&b);
@@ -11436,7 +11592,7 @@ class PlayerAtkEvent :
                &_PlayerAtkEvent_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    73;
+    74;
 
   friend void swap(PlayerAtkEvent& a, PlayerAtkEvent& b) {
     a.Swap(&b);
@@ -11574,7 +11730,7 @@ class DropItemList :
                &_DropItemList_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    74;
+    75;
 
   friend void swap(DropItemList& a, DropItemList& b) {
     a.Swap(&b);
@@ -11732,7 +11888,7 @@ class PlayerReq :
                &_PlayerReq_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    75;
+    76;
 
   friend void swap(PlayerReq& a, PlayerReq& b) {
     a.Swap(&b);
@@ -11877,7 +12033,7 @@ class ChatMsg :
                &_ChatMsg_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    76;
+    77;
 
   friend void swap(ChatMsg& a, ChatMsg& b) {
     a.Swap(&b);
@@ -12034,7 +12190,7 @@ class CreateTeam :
                &_CreateTeam_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    77;
+    78;
 
   friend void swap(CreateTeam& a, CreateTeam& b) {
     a.Swap(&b);
@@ -12179,7 +12335,7 @@ class EnterDungeon :
                &_EnterDungeon_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    78;
+    79;
 
   friend void swap(EnterDungeon& a, EnterDungeon& b) {
     a.Swap(&b);
@@ -16469,6 +16625,66 @@ inline void SyncFsmState::set_player_sn(::PROTOBUF_NAMESPACE_ID::uint64 value) {
 
 // -------------------------------------------------------------------
 
+// SyncBtAction
+
+// int32 id = 1;
+inline void SyncBtAction::clear_id() {
+  id_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 SyncBtAction::id() const {
+  // @@protoc_insertion_point(field_get:Proto.SyncBtAction.id)
+  return id_;
+}
+inline void SyncBtAction::set_id(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  id_ = value;
+  // @@protoc_insertion_point(field_set:Proto.SyncBtAction.id)
+}
+
+// int32 code = 2;
+inline void SyncBtAction::clear_code() {
+  code_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 SyncBtAction::code() const {
+  // @@protoc_insertion_point(field_get:Proto.SyncBtAction.code)
+  return code_;
+}
+inline void SyncBtAction::set_code(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  code_ = value;
+  // @@protoc_insertion_point(field_set:Proto.SyncBtAction.code)
+}
+
+// uint64 npc_sn = 3;
+inline void SyncBtAction::clear_npc_sn() {
+  npc_sn_ = PROTOBUF_ULONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint64 SyncBtAction::npc_sn() const {
+  // @@protoc_insertion_point(field_get:Proto.SyncBtAction.npc_sn)
+  return npc_sn_;
+}
+inline void SyncBtAction::set_npc_sn(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+  
+  npc_sn_ = value;
+  // @@protoc_insertion_point(field_set:Proto.SyncBtAction.npc_sn)
+}
+
+// uint64 player_sn = 4;
+inline void SyncBtAction::clear_player_sn() {
+  player_sn_ = PROTOBUF_ULONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint64 SyncBtAction::player_sn() const {
+  // @@protoc_insertion_point(field_get:Proto.SyncBtAction.player_sn)
+  return player_sn_;
+}
+inline void SyncBtAction::set_player_sn(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+  
+  player_sn_ = value;
+  // @@protoc_insertion_point(field_set:Proto.SyncBtAction.player_sn)
+}
+
+// -------------------------------------------------------------------
+
 // SyncPlayerPos
 
 // .Proto.Vector3D pos = 1;
@@ -17154,6 +17370,8 @@ inline void EnterDungeon::set_allocated_sender(std::string* sender) {
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

@@ -15,7 +15,7 @@ class Player;
 class FsmState
 {
 protected:
-	Npc* _owner = nullptr;
+	Npc* _npc = nullptr;
 	Player* _target = nullptr;
 	timeutil::Time _lastTime, _currTime, _timeElapsed;
 

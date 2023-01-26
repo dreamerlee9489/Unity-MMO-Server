@@ -12,7 +12,7 @@
 #include "player_component_detail.h"
 #include "move_component.h"
 #include "fsm_component.h"
-#include "npc.h"
+#include "bt_component.h"
 #include "trade.h"
 #include <cfloat>
 #include <vector>

@@ -4,12 +4,12 @@
 
 void Pursuit::Enter()
 {
-	if (_target != _owner->GetLinkPlayer())
+	if (_target != _npc->GetLinkPlayer())
 	{
-		_owner->SetLinkPlayer(_target);
+		_npc->SetLinkPlayer(_target);
 		Proto::ReqLinkPlayer proto;
-		proto.set_npc_id(_owner->GetID());
-		proto.set_npc_sn(_owner->GetSN());
+		proto.set_npc_id(_npc->GetID());
+		proto.set_npc_sn(_npc->GetSN());
 		proto.set_linker(true);
 		MessageSystemHelp::SendPacket(Proto::MsgId::S2C_ReqLinkPlayer, proto, _target);
 	}
@@ -18,10 +18,10 @@ void Pursuit::Enter()
 
 void Pursuit::Execute()
 {
-	if (_owner->CanAttack(_target))
-		_owner->GetComponent<FsmComponent>()->ChangeState(new Attack(_owner, _target));
-	else if (!_owner->CanSee(_target))
-		_owner->GetComponent<FsmComponent>()->ChangeState(new Idle(_owner));
+	if (_npc->CanAttack(_target))
+		_npc->GetComponent<FsmComponent>()->ChangeState(new Attack(_npc, _target));
+	else if (!_npc->CanSee(_target))
+		_npc->GetComponent<FsmComponent>()->ChangeState(new Idle(_npc));
 }
 
 void Pursuit::Exit()
@@ -33,9 +33,9 @@ void Pursuit::Broadcast()
 	Proto::SyncFsmState proto;
 	proto.set_state((int)FsmStateType::Pursuit);
 	proto.set_code(0);
-	proto.set_npc_sn(_owner->GetSN());
+	proto.set_npc_sn(_npc->GetSN());
 	proto.set_player_sn(_target->GetPlayerSN());
-	_owner->GetWorld()->BroadcastPacket(Proto::MsgId::S2C_SyncFsmState, proto);
+	_npc->GetWorld()->BroadcastPacket(Proto::MsgId::S2C_SyncFsmState, proto);
 }
 
 void Pursuit::Singlecast(Player* pPlayer)
@@ -43,7 +43,7 @@ void Pursuit::Singlecast(Player* pPlayer)
 	Proto::SyncFsmState proto;
 	proto.set_state((int)FsmStateType::Pursuit);
 	proto.set_code(0);
-	proto.set_npc_sn(_owner->GetSN());
+	proto.set_npc_sn(_npc->GetSN());
 	proto.set_player_sn(_target->GetPlayerSN());
 	MessageSystemHelp::SendPacket(Proto::MsgId::S2C_SyncFsmState, proto, pPlayer);
 }
