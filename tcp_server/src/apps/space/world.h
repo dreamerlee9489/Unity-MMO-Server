@@ -11,7 +11,7 @@
 #include "player_manager_component.h"
 #include "player_component_detail.h"
 #include "move_component.h"
-#include "fsm_component.h"
+//#include "fsm_component.h"
 #include "bt_component.h"
 #include "trade.h"
 #include <cfloat>

@@ -29,7 +29,7 @@ public:
 				if (_npc->CanSee(pair.second))
 				{
 					_npc->target = pair.second;
-					//_npc->GetComponent<BtComponent>()->events.push(BtEvent(BtEventId::Pursue));
+					_npc->GetComponent<BtComponent>()->AddEvent(BtEventId::Pursue);
 					break;
 				}
 			}

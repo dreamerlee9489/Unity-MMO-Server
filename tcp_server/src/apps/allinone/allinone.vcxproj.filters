@@ -426,5 +426,11 @@
     <ClInclude Include="..\space\bt_act_pursue.h">
       <Filter>space\system\ai\bt</Filter>
     </ClInclude>
+    <ClInclude Include="..\space\bted_selector.h">
+      <Filter>space\system\ai\bt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\space\bt_act_attack.h">
+      <Filter>space\system\ai\bt</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

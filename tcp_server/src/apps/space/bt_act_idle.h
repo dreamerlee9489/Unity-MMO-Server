@@ -36,30 +36,34 @@ public:
 	{ 
 		_npc->target = nullptr;
 		_lastTime = _currTime = Global::GetInstance()->TimeTick;
+		_npc->GetComponent<BtComponent>()->curAct = this;
 		Broadcast(); 
 	}
 
-	void Exit() override {}
+	void Exit() override 
+	{
+		_npc->GetComponent<BtComponent>()->curAct = nullptr;
+	}
 
 private:
 	BtStatus IdleTask()
 	{
-		//LOG_DEBUG(_npc->id << " IdleTask");
-		if (!_npc->target)
+		if (!_npc->GetLinkPlayer())
 		{
-			for (auto& pair : *_npc->GetAllPlayer())
-			{
-				if (_npc->CanSee(pair.second))
-				{
-					_npc->target = pair.second;
-					_npc->GetComponent<BtComponent>()->events.emplace(BtEventId::Pursue);
-					return BtStatus::Success;
-				}
-			}
+			Player* player = _npc->GetWorld()->GetNearestPlayer(_npc->GetCurrPos());
+			_npc->SetLinkPlayer(player);
+			Proto::ReqLinkPlayer proto;
+			proto.set_npc_id(_npc->GetID());
+			proto.set_npc_sn(_npc->GetSN());
+			proto.set_linker(true);
+			MessageSystemHelp::SendPacket(Proto::MsgId::S2C_ReqLinkPlayer, proto, player);
 		}
 		_currTime = Global::GetInstance()->TimeTick;
 		_timeElapsed = _currTime - _lastTime;
-		return _timeElapsed > 2000 ? BtStatus::Failure : BtStatus::Running;
+		if (_timeElapsed < 2000)
+			return BtStatus::Running;
+		_npc->GetComponent<BtComponent>()->AddEvent(BtEventId::Patrol);
+		return BtStatus::Suspend;
 	}
 };
 

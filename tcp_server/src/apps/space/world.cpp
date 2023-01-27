@@ -348,6 +348,7 @@ void World::HandleReqSyncNpc(Player* pPlayer, Packet* pPacket)
 	npcs[id]->GetCurrPos().SerializeToProto(syncPos.mutable_pos());
 	MessageSystemHelp::SendPacket(Proto::MsgId::S2C_SyncNpcPos, syncPos, pPlayer);
 	//npcs[id]->GetComponent<FsmComponent>()->GetCurrState()->Singlecast(pPlayer);
+	npcs[id]->GetComponent<BtComponent>()->SyncAction(pPlayer);
 	if (!npcs[id]->GetLinkPlayer())
 	{
 		npcs[id]->SetLinkPlayer(pPlayer);

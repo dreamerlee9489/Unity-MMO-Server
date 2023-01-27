@@ -5,7 +5,7 @@
 #include "libserver/component_collections.h"
 #include "libserver/entity_system.h"
 #include "libserver/entity.h"
-#include "fsm_component.h"
+//#include "fsm_component.h"
 #include "bt_component.h"
 
 class AISystem : public ISystem<AISystem>

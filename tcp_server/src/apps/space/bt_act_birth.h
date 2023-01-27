@@ -8,7 +8,6 @@ public:
 	BtActBirth(Npc* npc) : BtAction(npc)
 	{
 		_task = std::bind(&BtActBirth::BirthTask, this);
-		funcMap.emplace(BtEventId::Alive, std::bind(&BtAction::SetSuccess, this, std::placeholders::_1));
 	}
 
 	~BtActBirth() = default;
@@ -17,13 +16,20 @@ public:
 
 	void Singlecast(Player* player) override {}
 
-	void Enter() override {}
+	void Enter() override 
+	{
+		_currTime = _lastTime = Global::GetInstance()->TimeTick;
+	}
 
 	void Exit() override {}
 
 	BtStatus BirthTask()
 	{
-		return BtStatus::Running;
+		_currTime = Global::GetInstance()->TimeTick;
+		_timeElapsed = _currTime - _lastTime;
+		if (_timeElapsed < 2000)
+			return BtStatus::Running;
+		return BtStatus::Success;
 	}
 };
 

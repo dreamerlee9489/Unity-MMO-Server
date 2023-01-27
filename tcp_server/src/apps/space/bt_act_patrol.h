@@ -34,9 +34,19 @@ public:
 		MessageSystemHelp::SendPacket(Proto::MsgId::S2C_SyncBtAction, pb, player);
 	}
 
-	void Enter() override { Broadcast(); }
+	void Enter() override 
+	{
+		_index = _dis(_eng);
+		_npc->SetPatrolPoint(_index);
+		_npc->target = nullptr;
+		_npc->GetComponent<BtComponent>()->curAct = this;
+		Broadcast(); 
+	}
 
-	void Exit() override {}
+	void Exit() override 
+	{
+		_npc->GetComponent<BtComponent>()->curAct = nullptr;
+	}
 
 private:
 	int _index = 0;
@@ -45,7 +55,6 @@ private:
 
 	BtStatus PatrolTask()
 	{
-		//LOG_DEBUG(_npc->id << " PatrolTask");
 		if (!_npc->GetLinkPlayer())
 		{
 			Player* player = _npc->GetWorld()->GetNearestPlayer(_npc->GetCurrPos());
@@ -57,21 +66,9 @@ private:
 			MessageSystemHelp::SendPacket(Proto::MsgId::S2C_ReqLinkPlayer, proto, player);
 		}
 		if (_npc->GetCurrPos().GetDistance(_npc->GetNextPos()) <= 1)
-			_npc->GetComponent<BtComponent>()->events.emplace(BtEventId::Idle);
-		else
 		{
-			if (!_npc->target)
-			{
-				for (auto& pair : *_npc->GetAllPlayer())
-				{
-					if (_npc->CanSee(pair.second))
-					{
-						_npc->target = pair.second;
-						_npc->GetComponent<BtComponent>()->events.emplace(BtEventId::Pursue);
-						return BtStatus::Success;
-					}
-				}
-			}
+			_npc->GetComponent<BtComponent>()->AddEvent(BtEventId::Idle);
+			return BtStatus::Suspend;
 		}
 		return BtStatus::Running;
 	}

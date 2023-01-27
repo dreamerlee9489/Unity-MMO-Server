@@ -6,8 +6,9 @@
 #include <unordered_map>
 
 class Npc;
+class Player;
 enum struct BtEventId { Birth, Alive, Death, Idle, Patrol, Pursue, Attack };
-enum struct BtStatus { Invalid, Running, Success, Failure, Aborted };
+enum struct BtStatus { Invalid, Running, Success, Failure, Suspend, Aborted };
 
 struct BtEvent
 {
@@ -42,7 +43,7 @@ public:
 	Npc* GetNpc() { return _npc; }
 
 	BtStatus& Tick()
-	{
+	{		
 		if (status != BtStatus::Success && status != BtStatus::Failure)
 		{
 			if (status != BtStatus::Running)
@@ -52,6 +53,12 @@ public:
 				Exit();
 		}
 		return status;
+	}
+
+	void ForceExit(BtStatus status)
+	{
+		this->status = status;
+		Exit();
 	}
 
 protected:
