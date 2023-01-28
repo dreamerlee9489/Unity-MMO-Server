@@ -20,12 +20,9 @@ private:
 			switch (tmp)
 			{
 			case BtStatus::Failure:
-				if (++_curr == _children.end())
-					return status = BtStatus::Failure;
-				break;
 			case BtStatus::Aborted:
 				if (++_curr == _children.end())
-					return status = BtStatus::Aborted;
+					return status = BtStatus::Failure;
 				break;
 			default:
 				return status = tmp;
@@ -33,8 +30,6 @@ private:
 		}
 		return status;
 	}
-
-	void Exit() override {}
 };
 
 #endif // !BT_SELECTOR

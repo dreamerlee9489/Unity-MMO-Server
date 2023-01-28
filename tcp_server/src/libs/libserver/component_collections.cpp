@@ -57,7 +57,7 @@ void ComponentCollections::Remove(uint64 sn)
 	_removeObjs.emplace_back(sn);
 }
 
-std::map<uint64, IComponent*>* ComponentCollections::GetAll()
+std::unordered_map<uint64, IComponent*>* ComponentCollections::GetAll()
 {
 	return &_objs;
 }

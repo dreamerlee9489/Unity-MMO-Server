@@ -42,6 +42,8 @@ void World::Awake(int worldId)
 		npc->AddComponent<BtComponent>();
 		npcIdxMap.emplace(npc->GetSN(), npcs.size());
 		npcs.push_back(npc);
+		if (worldCfg->GetType() == ResourceWorldType::Public)
+			npc->rebirth = true;
 	}
 }
 
@@ -89,11 +91,11 @@ void World::HandleNetworkDisconnect(Packet* pPacket)
 		MessageSystemHelp::SendPacket(Proto::MsgId::G2DB_SavePlayer, protoSave, APP_DB_MGR);
 
 		// 玩家掉线
+		PlayerDisappear(pPlayer);
 		Proto::RoleDisappear protoDis;
 		protoDis.set_sn(pPlayer->GetPlayerSN());
 		BroadcastPacket(Proto::MsgId::S2C_RoleDisappear, protoDis);
 		pPlayerMgr->RemovePlayerBySn(pTagPlayer->KeyInt64);
-		PlayerDisappear(pPlayer);
 	}
 	else
 	{
@@ -181,9 +183,14 @@ void World::PlayerDisappear(Player* pPlayer)
 {
 	for (auto& enemy : npcs)
 	{
-		if (enemy->GetLinkPlayer() == pPlayer)
+		if (enemy->target == pPlayer)
 		{
-			//enemy->GetComponent<FsmComponent>()->ResetState();
+			enemy->target = nullptr;
+			enemy->GetComponent<BtComponent>()->AddEvent(BtEventId::Idle, 10);
+		}
+		if (enemy->linker == pPlayer)
+		{
+			//enemy->GetComponent<FsmComponent>()->ResetState();			
 			Player* target = GetNearestPlayer(enemy->GetCurrPos());
 			enemy->SetLinkPlayer(target);
 			if (target)
@@ -298,7 +305,7 @@ void World::HandleG2SRemovePlayer(Player* pPlayer, Packet* pPacket)
 	Proto::RoleDisappear disAppear;
 	disAppear.set_sn(pPlayer->GetPlayerSN());
 	BroadcastPacket(Proto::MsgId::S2C_RoleDisappear, disAppear);
-	LOG_DEBUG("player disappear: sn=" << pPlayer->GetPlayerSN());
+	//LOG_DEBUG("player disappear: sn=" << pPlayer->GetPlayerSN());
 }
 
 void World::HandleMove(Player* pPlayer, Packet* pPacket)
@@ -349,7 +356,7 @@ void World::HandleReqSyncNpc(Player* pPlayer, Packet* pPacket)
 	MessageSystemHelp::SendPacket(Proto::MsgId::S2C_SyncNpcPos, syncPos, pPlayer);
 	//npcs[id]->GetComponent<FsmComponent>()->GetCurrState()->Singlecast(pPlayer);
 	npcs[id]->GetComponent<BtComponent>()->SyncAction(pPlayer);
-	if (!npcs[id]->GetLinkPlayer())
+	if (!npcs[id]->linker)
 	{
 		npcs[id]->SetLinkPlayer(pPlayer);
 		Proto::ReqLinkPlayer proto;

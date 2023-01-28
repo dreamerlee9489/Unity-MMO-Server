@@ -56,12 +56,11 @@ class World;
 class Player;
 class Npc : public Entity<Npc>, public IAwakeFromPoolSystem<ResourceNpc>
 {
-	float _viewDist = 8.0f, _atkDist = 1.5f;
+	float _viewDist = 8.0f, _atkDist = 2.0f;
 	Vector3 _initPos;
 	Vector3 _currPos;
 	Vector3 _nextPos;
 	World* _world = nullptr;
-	Player* _linkPlayer = nullptr;
 	std::map<uint64, Player*>* _players = nullptr;
 
 	timeutil::Time _currTime;
@@ -71,8 +70,9 @@ class Npc : public Entity<Npc>, public IAwakeFromPoolSystem<ResourceNpc>
 	static std::uniform_real_distribution<double> _realDis;
 
 public:
-	int id = 0, type = 0, lv = 0, hp = 0, atk = 0, def = 0;
-	Player* target = nullptr;
+	int id = 0, type = 0, lv = 0, hp = 0, initHp = 0, atk = 0, def = 0;
+	bool fleeing = false, rebirth = false;
+	Player* target = nullptr, * linker = nullptr;
 
 	void Awake(ResourceNpc cfg) override;
 
@@ -105,8 +105,6 @@ public:
 	Vector3& GetNextPos() { return _nextPos; }
 
 	World* GetWorld() const { return _world; }
-
-	Player* GetLinkPlayer() const { return _linkPlayer; }
 
 	std::map<uint64, Player*>* GetAllPlayer() { return _players; }
 

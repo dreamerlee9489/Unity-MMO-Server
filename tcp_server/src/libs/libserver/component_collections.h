@@ -3,10 +3,10 @@
 #include "disposable.h"
 
 #include <list>
-#include <map>
+#include <unordered_map>
 
 // ComponentCollections 是按组件类型来存的
-class ComponentCollections :public IDisposable
+class ComponentCollections : public IDisposable
 {
 public:
 	ComponentCollections(std::string componentName);
@@ -16,7 +16,7 @@ public:
 	void Remove(uint64 sn);
 
 	IComponent* Get(uint64 sn = 0);
-	std::map<uint64, IComponent*>* GetAll();
+	std::unordered_map<uint64, IComponent*>* GetAll();
 
 	void Swap();
 	void Dispose() override;
@@ -24,8 +24,8 @@ public:
 	std::string GetClassType() const;
 
 private:
-	std::map<uint64, IComponent*> _objs;
-	std::map<uint64, IComponent*> _addObjs;
+	std::unordered_map<uint64, IComponent*> _objs;
+	std::unordered_map<uint64, IComponent*> _addObjs;
 	std::list<uint64> _removeObjs;
 
 	std::string _componentName{ "" };

@@ -5,6 +5,7 @@
 #include "bt_act_patrol.h"
 #include "bt_act_pursue.h"
 #include "bt_act_attack.h"
+#include "bt_act_flee.h"
 
 class BtEdSelector : public BtComposite
 {
@@ -36,6 +37,11 @@ public:
 			_nodeMap.emplace(BtEventId::Attack, std::prev(_children.end()));
 			funcMap.emplace(BtEventId::Attack, std::bind(&BtEdSelector::SwitchNode, this, std::placeholders::_1));
 		}
+		else if (dynamic_cast<BtActFlee*>(child))
+		{
+			_nodeMap.emplace(BtEventId::Flee, std::prev(_children.end()));
+			funcMap.emplace(BtEventId::Flee, std::bind(&BtEdSelector::SwitchNode, this, std::placeholders::_1));
+		}
 	}
 
 	void RmvChild(BtNode* child) override
@@ -65,7 +71,7 @@ private:
 		return status = BtStatus::Running;
 	}
 
-	void Exit() override {}
+	void Exit() override { (*_curr)->ForceExit(BtStatus::Aborted); }
 
 	void SwitchNode(BtEventId id) 
 	{ 

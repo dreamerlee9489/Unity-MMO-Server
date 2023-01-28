@@ -22,10 +22,26 @@ public:
 
 	BtStatus ViewTask()
 	{
+		if (!_npc->linker)
+		{
+			Player* player = _npc->GetWorld()->GetNearestPlayer(_npc->GetCurrPos());
+			_npc->SetLinkPlayer(player);
+			Proto::ReqLinkPlayer proto;
+			proto.set_npc_id(_npc->GetID());
+			proto.set_npc_sn(_npc->GetSN());
+			proto.set_linker(true);
+			MessageSystemHelp::SendPacket(Proto::MsgId::S2C_ReqLinkPlayer, proto, player);
+		}
 		if (!_npc->target)
 		{
 			for (auto& pair : *_npc->GetAllPlayer())
 			{
+				if (_npc->CanAttack(pair.second))
+				{
+					_npc->target = pair.second;
+					_npc->GetComponent<BtComponent>()->AddEvent(BtEventId::Attack);
+					break;
+				}
 				if (_npc->CanSee(pair.second))
 				{
 					_npc->target = pair.second;

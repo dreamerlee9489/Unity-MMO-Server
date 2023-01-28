@@ -13,7 +13,7 @@ class BtNode;
 struct BtEvent;
 class BtComponent : public Component<BtComponent>, public IAwakeFromPoolSystem<>
 {
-public:
+public:	
 	BtAction* curAct = nullptr;
 
 	~BtComponent();

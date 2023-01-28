@@ -14,6 +14,22 @@ public:
 
 	~BtActPatrol() = default;
 
+	void Enter() override 
+	{
+		_index = _dis(_eng);
+		_npc->SetPatrolPoint(_index);
+		_npc->target = nullptr;
+		_npc->GetComponent<BtComponent>()->curAct = this;
+		Broadcast(); 
+		//LOG_DEBUG("patrol enter");
+	}
+
+	void Exit() override 
+	{
+		_npc->GetComponent<BtComponent>()->curAct = nullptr;
+		//LOG_DEBUG("patrol exit");
+	}
+
 	void Broadcast() override
 	{
 		Proto::SyncBtAction pb;
@@ -34,20 +50,6 @@ public:
 		MessageSystemHelp::SendPacket(Proto::MsgId::S2C_SyncBtAction, pb, player);
 	}
 
-	void Enter() override 
-	{
-		_index = _dis(_eng);
-		_npc->SetPatrolPoint(_index);
-		_npc->target = nullptr;
-		_npc->GetComponent<BtComponent>()->curAct = this;
-		Broadcast(); 
-	}
-
-	void Exit() override 
-	{
-		_npc->GetComponent<BtComponent>()->curAct = nullptr;
-	}
-
 private:
 	int _index = 0;
 	static std::default_random_engine _eng;
@@ -55,16 +57,6 @@ private:
 
 	BtStatus PatrolTask()
 	{
-		if (!_npc->GetLinkPlayer())
-		{
-			Player* player = _npc->GetWorld()->GetNearestPlayer(_npc->GetCurrPos());
-			_npc->SetLinkPlayer(player);
-			Proto::ReqLinkPlayer proto;
-			proto.set_npc_id(_npc->GetID());
-			proto.set_npc_sn(_npc->GetSN());
-			proto.set_linker(true);
-			MessageSystemHelp::SendPacket(Proto::MsgId::S2C_ReqLinkPlayer, proto, player);
-		}
 		if (_npc->GetCurrPos().GetDistance(_npc->GetNextPos()) <= 1)
 		{
 			_npc->GetComponent<BtComponent>()->AddEvent(BtEventId::Idle);

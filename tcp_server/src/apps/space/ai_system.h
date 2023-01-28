@@ -11,7 +11,7 @@
 class AISystem : public ISystem<AISystem>
 {
 private:
-	timeutil::Time _lastTime, _currTime, _timeElapsed;
+	timeutil::Time _lastTime = 0, _currTime = 0, _timeElapsed = 0;
 	ComponentCollections* _pCollections{ nullptr };
 
 public:

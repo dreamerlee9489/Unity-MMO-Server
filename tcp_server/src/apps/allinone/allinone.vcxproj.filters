@@ -432,5 +432,8 @@
     <ClInclude Include="..\space\bt_act_attack.h">
       <Filter>space\system\ai\bt</Filter>
     </ClInclude>
+    <ClInclude Include="..\space\bt_act_flee.h">
+      <Filter>space\system\ai\bt</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

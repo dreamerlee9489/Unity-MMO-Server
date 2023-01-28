@@ -237,6 +237,7 @@
     <ClInclude Include="..\space\bt_act_attack.h" />
     <ClInclude Include="..\space\bt_act_birth.h" />
     <ClInclude Include="..\space\bt_act_death.h" />
+    <ClInclude Include="..\space\bt_act_flee.h" />
     <ClInclude Include="..\space\bt_act_idle.h" />
     <ClInclude Include="..\space\bt_act_patrol.h" />
     <ClInclude Include="..\space\bt_act_pursue.h" />

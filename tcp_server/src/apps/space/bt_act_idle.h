@@ -12,6 +12,21 @@ public:
 
 	~BtActIdle() = default;
 
+	void Enter() override 
+	{ 
+		_npc->target = nullptr;
+		_lastTime = _currTime = Global::GetInstance()->TimeTick;
+		_npc->GetComponent<BtComponent>()->curAct = this;
+		Broadcast(); 
+		//LOG_DEBUG("idle enter");
+	}
+
+	void Exit() override 
+	{
+		_npc->GetComponent<BtComponent>()->curAct = nullptr;
+		//LOG_DEBUG("idle exit");
+	}
+
 	void Broadcast() override
 	{
 		Proto::SyncBtAction pb;
@@ -32,32 +47,9 @@ public:
 		MessageSystemHelp::SendPacket(Proto::MsgId::S2C_SyncBtAction, pb, player);
 	}
 
-	void Enter() override 
-	{ 
-		_npc->target = nullptr;
-		_lastTime = _currTime = Global::GetInstance()->TimeTick;
-		_npc->GetComponent<BtComponent>()->curAct = this;
-		Broadcast(); 
-	}
-
-	void Exit() override 
-	{
-		_npc->GetComponent<BtComponent>()->curAct = nullptr;
-	}
-
 private:
 	BtStatus IdleTask()
 	{
-		if (!_npc->GetLinkPlayer())
-		{
-			Player* player = _npc->GetWorld()->GetNearestPlayer(_npc->GetCurrPos());
-			_npc->SetLinkPlayer(player);
-			Proto::ReqLinkPlayer proto;
-			proto.set_npc_id(_npc->GetID());
-			proto.set_npc_sn(_npc->GetSN());
-			proto.set_linker(true);
-			MessageSystemHelp::SendPacket(Proto::MsgId::S2C_ReqLinkPlayer, proto, player);
-		}
 		_currTime = Global::GetInstance()->TimeTick;
 		_timeElapsed = _currTime - _lastTime;
 		if (_timeElapsed < 2000)

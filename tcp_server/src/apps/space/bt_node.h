@@ -7,7 +7,7 @@
 
 class Npc;
 class Player;
-enum struct BtEventId { Birth, Alive, Death, Idle, Patrol, Pursue, Attack };
+enum struct BtEventId { Birth, Alive, Death, Idle, Patrol, Pursue, Attack, Flee };
 enum struct BtStatus { Invalid, Running, Success, Failure, Suspend, Aborted };
 
 struct BtEvent
@@ -38,7 +38,7 @@ public:
 
 	virtual void HandleEvent(BtEventId id) = 0;
 
-	void Reset() { status = BtStatus::Invalid; }
+	virtual void Reset() { status = BtStatus::Invalid; }
 
 	Npc* GetNpc() { return _npc; }
 
@@ -55,7 +55,7 @@ public:
 		return status;
 	}
 
-	void ForceExit(BtStatus status)
+	void ForceExit(BtStatus status = BtStatus::Invalid)
 	{
 		this->status = status;
 		Exit();

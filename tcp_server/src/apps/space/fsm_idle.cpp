@@ -15,7 +15,7 @@ void Idle::Execute()
 	else
 	{
 		_timeElapsed = _currTime - _lastTime;
-		if (!_npc->GetLinkPlayer())
+		if (!_npc->linker)
 		{
 			Player* player = _npc->GetWorld()->GetNearestPlayer(_npc->GetCurrPos());
 			_npc->SetLinkPlayer(player);

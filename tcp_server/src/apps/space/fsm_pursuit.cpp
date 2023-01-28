@@ -4,7 +4,7 @@
 
 void Pursuit::Enter()
 {
-	if (_target != _npc->GetLinkPlayer())
+	if (_target != _npc->linker)
 	{
 		_npc->SetLinkPlayer(_target);
 		Proto::ReqLinkPlayer proto;

@@ -11,6 +11,19 @@ public:
 
 	virtual ~BtComposite() = default;
 
+	void Reset() override
+	{
+		Exit();
+		_curr = _children.begin();
+		status = BtStatus::Invalid;
+	}
+
+	void Exit() override
+	{
+		for (auto iter = _children.begin(); iter != _children.end(); ++iter)
+			(*iter)->ForceExit(BtStatus::Invalid);
+	}
+
 	virtual void AddChild(BtNode* child) { _children.push_back(child); }
 
 	virtual void RmvChild(BtNode* child) { _children.remove(child); }

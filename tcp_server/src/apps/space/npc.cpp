@@ -8,8 +8,8 @@ void Npc::Awake(ResourceNpc cfg)
 {
 	id = cfg.id;
 	lv = cfg.level;
-	hp = cfg.initHp;
 	atk = cfg.initAtk;
+	initHp = hp = cfg.initHp;
 	_nextPos = _currPos = _initPos = cfg.initPos;
 }
 
@@ -20,15 +20,15 @@ void Npc::BackToPool()
 
 void Npc::SetLinkPlayer(Player* player)
 {
-	if (_linkPlayer)
+	if (linker)
 	{
 		Proto::ReqLinkPlayer proto;
 		proto.set_npc_id(id);
 		proto.set_npc_sn(_sn);
 		proto.set_linker(false);
-		MessageSystemHelp::SendPacket(Proto::MsgId::S2C_ReqLinkPlayer, proto, _linkPlayer);
+		MessageSystemHelp::SendPacket(Proto::MsgId::S2C_ReqLinkPlayer, proto, linker);
 	}
-	_linkPlayer = player;
+	linker = player;
 }
 
 void Npc::SetCurrPos(const Vector3& pos)
@@ -70,14 +70,14 @@ void Npc::SetPatrolPoint(int index)
 
 bool Npc::CanSee(Player* player)
 {
-	if (_currPos.GetDistance(player->GetCurrPos()) <= _viewDist)
+	if (player && _currPos.GetDistance(player->GetCurrPos()) <= _viewDist)
 		return true;
 	return false;
 }
 
 bool Npc::CanAttack(Player* player)
 {
-	if (_currPos.GetDistance(player->GetCurrPos()) <= _atkDist)
+	if (player && _currPos.GetDistance(player->GetCurrPos()) <= _atkDist)
 		return true;
 	return false;
 }

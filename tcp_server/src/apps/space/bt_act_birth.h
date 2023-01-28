@@ -12,12 +12,10 @@ public:
 
 	~BtActBirth() = default;
 
-	void Broadcast() override {}
-
-	void Singlecast(Player* player) override {}
-
 	void Enter() override 
 	{
+		_npc->target = nullptr;
+		_npc->fleeing = false;
 		_currTime = _lastTime = Global::GetInstance()->TimeTick;
 	}
 
@@ -29,7 +27,28 @@ public:
 		_timeElapsed = _currTime - _lastTime;
 		if (_timeElapsed < 2000)
 			return BtStatus::Running;
+		_npc->hp = _npc->initHp;
 		return BtStatus::Success;
+	}
+
+	void Broadcast() override
+	{
+		Proto::SyncBtAction pb;
+		pb.set_id((int)BtEventId::Birth);
+		pb.set_code(0);
+		pb.set_npc_sn(_npc->GetSN());
+		pb.set_player_sn(0);
+		_npc->GetWorld()->BroadcastPacket(Proto::MsgId::S2C_SyncBtAction, pb);
+	}
+
+	void Singlecast(Player* player) override
+	{
+		Proto::SyncBtAction pb;
+		pb.set_id((int)BtEventId::Birth);
+		pb.set_code(0);
+		pb.set_npc_sn(_npc->GetSN());
+		pb.set_player_sn(0);
+		MessageSystemHelp::SendPacket(Proto::MsgId::S2C_SyncBtAction, pb, player);
 	}
 };
 

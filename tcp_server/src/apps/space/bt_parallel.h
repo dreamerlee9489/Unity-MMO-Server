@@ -47,12 +47,6 @@ private:
 			return status = BtStatus::Failure;
 		return status = BtStatus::Running;
 	}
-
-	void Exit() override
-	{
-		for (auto iter = _children.begin(); iter != _children.end(); ++iter)
-			(*iter)->Reset();
-	}
 };
 
 #endif // !BT_PARALLEL

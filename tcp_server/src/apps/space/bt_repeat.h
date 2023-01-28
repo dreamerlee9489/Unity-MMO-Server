@@ -16,12 +16,14 @@ private:
 
 	BtStatus& Execute() override
 	{
-		while (_count < _limit)
+		//LOG_DEBUG("cur pos=" << _npc->GetCurrPos());
+		if (_count < _limit)
 		{
 			BtStatus& tmp = _child->Tick();
 			switch (tmp)
 			{
 			case BtStatus::Success:
+				_child->Reset();
 				if (++_count == _limit)
 					return status = BtStatus::Success;
 				break;

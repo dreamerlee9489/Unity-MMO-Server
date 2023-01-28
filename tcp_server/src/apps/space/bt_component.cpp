@@ -7,6 +7,7 @@
 #include "bt_act_patrol.h"
 #include "bt_act_pursue.h"
 #include "bt_act_attack.h"
+#include "bt_act_flee.h"
 #include "bt_condition.h"
 #include "bt_repeat.h"
 #include "bt_parallel.h"
@@ -31,6 +32,7 @@ void BtComponent::Awake()
 	BtActIdle* actIdle = new BtActIdle(_npc);
 	BtActPursue* actPursue = new BtActPursue(_npc);
 	BtActAttack* actAttack = new BtActAttack(_npc);
+	BtActFlee* actFlee = new BtActFlee(_npc);
 	seqLife->AddChild(actBirth);
 	seqLife->AddChild(parAlive);
 	seqLife->AddChild(actDeath);
@@ -38,6 +40,7 @@ void BtComponent::Awake()
 	selBehav->AddChild(actIdle);
 	selBehav->AddChild(actPursue);
 	selBehav->AddChild(actAttack);
+	selBehav->AddChild(actFlee);
 	parAlive->AddChild(actView);
 	parAlive->AddChild(actSense);
 	parAlive->AddChild(selBehav);
