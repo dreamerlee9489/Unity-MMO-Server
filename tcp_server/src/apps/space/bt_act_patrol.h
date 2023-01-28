@@ -14,6 +14,8 @@ public:
 
 	~BtActPatrol() = default;
 
+	BtEventId GetEventId() override { return BtEventId::Patrol; }
+
 	void Enter() override 
 	{
 		_index = _dis(_eng);

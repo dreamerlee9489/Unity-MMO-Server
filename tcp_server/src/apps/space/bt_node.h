@@ -7,7 +7,7 @@
 
 class Npc;
 class Player;
-enum struct BtEventId { Birth, Alive, Death, Idle, Patrol, Pursue, Attack, Flee };
+enum struct BtEventId { Unknow, Birth, Alive, Death, Idle, Patrol, Pursue, Attack, Flee };
 enum struct BtStatus { Invalid, Running, Success, Failure, Suspend, Aborted };
 
 struct BtEvent

@@ -12,6 +12,8 @@ public:
 
 	~BtActBirth() = default;
 
+	BtEventId GetEventId() override { return BtEventId::Birth; }
+
 	void Enter() override 
 	{
 		_npc->target = nullptr;

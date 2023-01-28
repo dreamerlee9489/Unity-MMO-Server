@@ -85,6 +85,11 @@ bool Npc::CanAttack(Player* player)
 void Npc::GetDamage(Player* attacker)
 {
 	hp = (std::max)(hp - attacker->detail->atk, 0);
+	if (target != attacker)
+	{
+		target = attacker;
+		GetComponent<BtComponent>()->AddEvent(BtEventId::Pursue);
+	}
 	if (hp == 0)
 	{
 		attacker->ResetCmd();

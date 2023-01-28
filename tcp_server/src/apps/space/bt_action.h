@@ -15,6 +15,8 @@ public:
 
 	virtual void Singlecast(Player* player) = 0;
 
+	virtual BtEventId GetEventId() { return BtEventId::Unknow; }
+
 	void SetSuccess(BtEventId id) { status = BtStatus::Success; }
 
 	void SetFailure(BtEventId id) { status = BtStatus::Failure; }

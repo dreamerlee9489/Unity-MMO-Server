@@ -371,12 +371,15 @@ void World::HandleReqSyncPlayer(Player* pPlayer, Packet* pPacket)
 {
 	Proto::ReqSyncPlayer proto = pPacket->ParseToProto<Proto::ReqSyncPlayer>();
 	Player* player = playerMgr->GetPlayerBySn(proto.player_sn());
-	Proto::SyncPlayerCmd cmd;
-	cmd.set_type(player->cmd.type);
-	cmd.set_player_sn(player->GetPlayerSN());
-	cmd.set_target_sn(player->cmd.target_sn);
-	player->cmd.point.SerializeToProto(cmd.mutable_point());
-	MessageSystemHelp::SendPacket(Proto::MsgId::S2C_SyncPlayerCmd, cmd, pPlayer);
+	if (player)
+	{
+		Proto::SyncPlayerCmd cmd;
+		cmd.set_type(player->cmd.type);
+		cmd.set_player_sn(player->GetPlayerSN());
+		cmd.set_target_sn(player->cmd.target_sn);
+		player->cmd.point.SerializeToProto(cmd.mutable_point());
+		MessageSystemHelp::SendPacket(Proto::MsgId::S2C_SyncPlayerCmd, cmd, pPlayer);
+	}
 }
 
 void World::HandleSyncNpcPos(Packet* pPacket)

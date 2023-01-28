@@ -12,6 +12,8 @@ public:
 
 	~BtActAttack() = default;
 
+	BtEventId GetEventId() override { return BtEventId::Attack; }
+
 	void Enter() override
 	{
 		_npc->GetComponent<BtComponent>()->curAct = this;

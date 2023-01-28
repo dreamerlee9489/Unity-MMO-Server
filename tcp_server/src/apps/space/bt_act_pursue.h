@@ -12,6 +12,8 @@ public:
 
 	~BtActPursue() = default;
 
+	BtEventId GetEventId() override { return BtEventId::Pursue; }
+
 	void Enter() override 
 	{ 
 		_npc->GetComponent<BtComponent>()->curAct = this;

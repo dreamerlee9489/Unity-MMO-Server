@@ -12,6 +12,8 @@ public:
 
 	~BtActIdle() = default;
 
+	BtEventId GetEventId() override { return BtEventId::Idle; }
+
 	void Enter() override 
 	{ 
 		_npc->target = nullptr;

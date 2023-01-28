@@ -66,6 +66,9 @@ void BtComponent::Update()
 void BtComponent::SyncAction(Player* pPlayer)
 {
 	if (curAct)
+	{
 		curAct->Singlecast(pPlayer);
+		LOG_DEBUG("sync actid=" << (int)curAct->GetEventId() << " name=" << pPlayer->GetName().c_str());
+	}
 }
 

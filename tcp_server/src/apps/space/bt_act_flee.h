@@ -12,6 +12,8 @@ public:
 
 	~BtActFlee() = default;
 
+	BtEventId GetEventId() override { return BtEventId::Flee; }
+
 	void Enter() override
 	{		
 		_npc->SetNextPos(_npc->GetInitPos());
