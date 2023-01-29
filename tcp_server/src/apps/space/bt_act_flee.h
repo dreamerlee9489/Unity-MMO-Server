@@ -24,6 +24,8 @@ public:
 
 	void Exit() override
 	{
+		_npc->target = nullptr;
+		_npc->fleeing = false;
 		_npc->GetComponent<BtComponent>()->curAct = nullptr;
 	}
 
@@ -52,10 +54,8 @@ private:
 	{
 		if (_npc->GetCurrPos().GetDistance(_npc->GetNextPos()) <= 1)
 		{
-			if (_npc->hp == _npc->initHp)
+			if (_npc->hp >= static_cast<int>(_npc->initHp * 0.7))
 			{
-				_npc->target = nullptr;
-				_npc->fleeing = false;
 				_npc->GetComponent<BtComponent>()->AddEvent(BtEventId::Patrol);
 				return BtStatus::Suspend;
 			}

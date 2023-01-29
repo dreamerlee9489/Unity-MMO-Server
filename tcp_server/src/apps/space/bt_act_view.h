@@ -50,10 +50,10 @@ public:
 				}
 			}
 		}
-		if (!_npc->fleeing && _npc->GetCurrPos().GetDistance(_npc->GetInitPos()) >= 20)
+		if (!_npc->fleeing && _npc->GetCurrPos().GetDistance(_npc->GetInitPos()) >= 24)
 		{
 			_npc->fleeing = true;
-			_npc->GetComponent<BtComponent>()->AddEvent(BtEventId::Flee);
+			_npc->GetComponent<BtComponent>()->AddEvent(BtEventId::Flee, 1);
 		}
 		return BtStatus::Running;
 	}

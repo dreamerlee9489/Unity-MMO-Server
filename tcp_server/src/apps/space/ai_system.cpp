@@ -9,7 +9,7 @@ void AISystem::Update(EntitySystem* pEntities)
 {
 	_currTime = Global::GetInstance()->TimeTick;
 	_timeElapsed = _currTime - _lastTime;
-	if (_timeElapsed < 100)
+	if (_timeElapsed < 200)
 		return;
 	_lastTime = _currTime;
 	//if (_pCollections == nullptr)

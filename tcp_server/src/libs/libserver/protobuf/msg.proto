@@ -421,9 +421,10 @@ message SyncEntityStatus {
 	int32 hp = 2;
 }
 
-message SyncNpcPos {
-	uint64 npc_sn = 1;
-	Vector3D pos = 2;
+message ReqNpcInfo {
+	int32 npc_id = 1;
+	uint64 npc_sn = 2;
+	Vector3D pos = 3;
 }
 
 message SyncFsmState {
@@ -440,6 +441,11 @@ message SyncBtAction {
 	uint64 player_sn = 4;
 }
 
+message SyncNpcPos {
+	uint64 npc_sn = 1;
+	Vector3D pos = 2;
+}
+
 message SyncPlayerPos {
 	Vector3D pos = 1;
 }
@@ -453,11 +459,6 @@ message SyncPlayerCmd {
 
 message ReqSyncPlayer {
 	uint64 player_sn = 1; 
-}
-
-message ReqSyncNpc {
-	int32 npc_id = 1;
-	uint64 npc_sn = 2;
 }
 
 message ReqLinkPlayer {

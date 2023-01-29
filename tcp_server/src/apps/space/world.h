@@ -47,7 +47,8 @@ protected:
 	void HandleRequestSyncPlayer(Player* pPlayer, Packet* pPacket);
 	void HandleG2SRemovePlayer(Player* pPlayer, Packet* pPacket);
 	void HandleMove(Player* pPlayer, Packet* pPacket);
-	void HandleReqSyncNpc(Player* pPlayer, Packet* pPacket);
+	void HandleReqNpcInfo(Player* pPlayer, Packet* pPacket);
+	void HandleSyncBtAction(Player* pPlayer, Packet* pPacket);
 	void HandleReqSyncPlayer(Player* pPlayer, Packet* pPacket);
 	void HandleSyncPlayerPos(Player* pPlayer, Packet* pPacket);
 	void HandleSyncPlayerCmd(Player* pPlayer, Packet* pPacket);

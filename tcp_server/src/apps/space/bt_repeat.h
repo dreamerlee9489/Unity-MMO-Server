@@ -5,7 +5,10 @@
 class BtRepeat : public BtDecorator
 {
 public:
-	BtRepeat(Npc* npc, BtNode* child, size_t limit = UINT_MAX) : BtDecorator(npc, child), _limit(limit) {}
+	BtRepeat(Npc* npc, BtNode* child, size_t limit = UINT_MAX) : BtDecorator(npc, child), _limit(limit) 
+	{
+		funcMap.emplace(BtEventId::Birth, std::bind(&BtRepeat::HandleRebirth, this, std::placeholders::_1));
+	}
 
 	~BtRepeat() = default;
 
@@ -35,6 +38,12 @@ private:
 	}
 
 	void Exit() override {}
+
+	void HandleRebirth(BtEventId id)
+	{		
+		_count = 0;
+		_child->Reset();
+	}
 };
 
 #endif // !BT_REPEAT

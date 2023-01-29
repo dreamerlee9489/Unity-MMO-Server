@@ -27,7 +27,7 @@ public:
 		if (!_npc->fleeing && _npc->hp * 1.0 / _npc->initHp * 1.0 <= 0.3)
 		{
 			_npc->fleeing = true;
-			_npc->GetComponent<BtComponent>()->AddEvent(BtEventId::Flee, 10);
+			_npc->GetComponent<BtComponent>()->AddEvent(BtEventId::Flee, 1);
 		}
 		return BtStatus::Running;
 	}

@@ -17,6 +17,7 @@ public:
 	void Enter() override 
 	{
 		_npc->target = nullptr;
+		_npc->linker = nullptr;
 		_npc->fleeing = false;
 		_currTime = _lastTime = Global::GetInstance()->TimeTick;
 	}
@@ -26,6 +27,11 @@ public:
 	BtStatus BirthTask()
 	{
 		_currTime = Global::GetInstance()->TimeTick;
+		if (_npc->GetWorld()->playerMgr->GetAll()->empty())
+		{
+			_lastTime = _currTime;
+			return BtStatus::Running;
+		}
 		_timeElapsed = _currTime - _lastTime;
 		if (_timeElapsed < 2000)
 			return BtStatus::Running;

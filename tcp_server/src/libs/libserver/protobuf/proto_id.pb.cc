@@ -25,7 +25,7 @@ static constexpr ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema* schemas = n
 static constexpr ::PROTOBUF_NAMESPACE_ID::Message* const* file_default_instances = nullptr;
 
 const char descriptor_table_protodef_proto_5fid_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\016proto_id.proto\022\005Proto*\314\026\n\005MsgId\022\010\n\004Non"
+  "\n\016proto_id.proto\022\005Proto*\266\026\n\005MsgId\022\010\n\004Non"
   "e\020\000\022\025\n\021MI_NetworkConnect\020\001\022\027\n\023MI_Network"
   "Connected\020\002\022\024\n\020MI_NetworkListen\020\003\022\027\n\023MI_"
   "NetworkListenKey\020\004\022\030\n\024MI_NetworkDisconne"
@@ -79,26 +79,25 @@ const char descriptor_table_protodef_proto_5fid_2eproto[] PROTOBUF_SECTION_VARIA
   "\001\022\026\n\020MI_CmdEfficiency\020\246\234\001\022\023\n\rMI_Efficien"
   "cy\020\247\234\001\022\027\n\021C2S_SyncPlayerPos\020\261\352\001\022\027\n\021S2C_S"
   "yncPlayerPos\020\262\352\001\022\027\n\021C2S_SyncPlayerCmd\020\263\352"
-  "\001\022\027\n\021S2C_SyncPlayerCmd\020\264\352\001\022\024\n\016C2S_SyncNp"
-  "cPos\020\265\352\001\022\024\n\016S2C_SyncNpcPos\020\266\352\001\022\032\n\024S2C_Sy"
-  "ncEntityStatus\020\267\352\001\022\026\n\020S2C_SyncFsmState\020\270"
-  "\352\001\022\026\n\020C2S_SyncFsmState\020\271\352\001\022\024\n\016C2S_ReqSyn"
-  "cNpc\020\272\352\001\022\024\n\016S2C_ReqSyncNpc\020\273\352\001\022\027\n\021C2S_Re"
-  "qSyncPlayer\020\274\352\001\022\027\n\021S2C_ReqLinkPlayer\020\275\352\001"
-  "\022\030\n\022C2S_PlayerAtkEvent\020\276\352\001\022\030\n\022S2C_Player"
-  "AtkEvent\020\277\352\001\022\025\n\017C2S_NpcAtkEvent\020\300\352\001\022\025\n\017S"
-  "2C_NpcAtkEvent\020\301\352\001\022\026\n\020S2C_DropItemList\020\302"
-  "\352\001\022\026\n\020S2C_SyncBtAction\020\303\352\001\022\026\n\020C2S_SyncBt"
-  "Action\020\304\352\001\022\030\n\022C2S_UpdateKnapItem\020\301\270\002\022\030\n\022"
-  "C2S_UpdateKnapGold\020\302\270\002\022\027\n\021C2S_GetPlayerK"
-  "nap\020\303\270\002\022\027\n\021S2C_GetPlayerKnap\020\304\270\002\022\025\n\017C2C_"
-  "ReqJoinTeam\020\321\206\003\022\025\n\017C2C_JoinTeamRes\020\322\206\003\022\031"
-  "\n\023C2C_ReqEnterDungeon\020\323\206\003\022\031\n\023C2C_EnterDu"
-  "ngeonRes\020\324\206\003\022\020\n\nC2C_ReqPvp\020\325\206\003\022\020\n\nC2C_Pv"
-  "pRes\020\326\206\003\022\022\n\014C2C_ReqTrade\020\327\206\003\022\022\n\014C2C_Trad"
-  "eRes\020\330\206\003\022\031\n\023C2C_UpdateTradeItem\020\331\206\003\022\023\n\rS"
-  "2C_TradeOpen\020\332\206\003\022\024\n\016S2C_TradeClose\020\333\206\003b\006"
-  "proto3"
+  "\001\022\027\n\021S2C_SyncPlayerCmd\020\264\352\001\022\032\n\024S2C_SyncEn"
+  "tityStatus\020\265\352\001\022\024\n\016C2S_SyncNpcPos\020\266\352\001\022\026\n\020"
+  "S2C_SyncFsmState\020\267\352\001\022\026\n\020C2S_SyncFsmState"
+  "\020\270\352\001\022\026\n\020S2C_SyncBtAction\020\271\352\001\022\026\n\020C2S_Sync"
+  "BtAction\020\272\352\001\022\024\n\016C2S_ReqNpcInfo\020\273\352\001\022\024\n\016S2"
+  "C_ReqNpcInfo\020\274\352\001\022\027\n\021C2S_ReqSyncPlayer\020\275\352"
+  "\001\022\027\n\021S2C_ReqLinkPlayer\020\276\352\001\022\030\n\022C2S_Player"
+  "AtkEvent\020\277\352\001\022\030\n\022S2C_PlayerAtkEvent\020\300\352\001\022\025"
+  "\n\017C2S_NpcAtkEvent\020\301\352\001\022\025\n\017S2C_NpcAtkEvent"
+  "\020\302\352\001\022\026\n\020S2C_DropItemList\020\303\352\001\022\030\n\022C2S_Upda"
+  "teKnapItem\020\301\270\002\022\030\n\022C2S_UpdateKnapGold\020\302\270\002"
+  "\022\027\n\021C2S_GetPlayerKnap\020\303\270\002\022\027\n\021S2C_GetPlay"
+  "erKnap\020\304\270\002\022\025\n\017C2C_ReqJoinTeam\020\321\206\003\022\025\n\017C2C"
+  "_JoinTeamRes\020\322\206\003\022\031\n\023C2C_ReqEnterDungeon\020"
+  "\323\206\003\022\031\n\023C2C_EnterDungeonRes\020\324\206\003\022\020\n\nC2C_Re"
+  "qPvp\020\325\206\003\022\020\n\nC2C_PvpRes\020\326\206\003\022\022\n\014C2C_ReqTra"
+  "de\020\327\206\003\022\022\n\014C2C_TradeRes\020\330\206\003\022\031\n\023C2C_Update"
+  "TradeItem\020\331\206\003\022\023\n\rS2C_TradeOpen\020\332\206\003\022\024\n\016S2"
+  "C_TradeClose\020\333\206\003b\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_proto_5fid_2eproto_deps[1] = {
 };
@@ -107,7 +106,7 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_pro
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_proto_5fid_2eproto_once;
 static bool descriptor_table_proto_5fid_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_proto_5fid_2eproto = {
-  &descriptor_table_proto_5fid_2eproto_initialized, descriptor_table_protodef_proto_5fid_2eproto, "proto_id.proto", 2926,
+  &descriptor_table_proto_5fid_2eproto_initialized, descriptor_table_protodef_proto_5fid_2eproto, "proto_id.proto", 2904,
   &descriptor_table_proto_5fid_2eproto_once, descriptor_table_proto_5fid_2eproto_sccs, descriptor_table_proto_5fid_2eproto_deps, 0, 0,
   schemas, file_default_instances, TableStruct_proto_5fid_2eproto::offsets,
   file_level_metadata_proto_5fid_2eproto, 0, file_level_enum_descriptors_proto_5fid_2eproto, file_level_service_descriptors_proto_5fid_2eproto,
@@ -227,7 +226,6 @@ bool MsgId_IsValid(int value) {
     case 30017:
     case 30018:
     case 30019:
-    case 30020:
     case 40001:
     case 40002:
     case 40003:

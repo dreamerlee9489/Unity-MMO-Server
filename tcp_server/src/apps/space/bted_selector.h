@@ -71,10 +71,15 @@ private:
 		return status = BtStatus::Running;
 	}
 
-	void Exit() override { (*_curr)->ForceExit(BtStatus::Aborted); }
+	void Exit() override 
+	{ 
+		if (_curr != _children.end())
+			(*_curr)->ForceExit(BtStatus::Aborted); 
+	}
 
 	void SwitchNode(BtEventId id) 
 	{ 
+		//LOG_DEBUG("curr=" << (int)static_cast<BtAction*>(*_curr)->GetEventId());
 		(*_curr)->ForceExit(BtStatus::Suspend);
 		_curr = _nodeMap.find(id) == _nodeMap.end() ? _children.end() : _nodeMap[id];
 	}

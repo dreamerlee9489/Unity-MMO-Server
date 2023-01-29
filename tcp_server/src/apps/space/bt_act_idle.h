@@ -56,7 +56,14 @@ private:
 		_timeElapsed = _currTime - _lastTime;
 		if (_timeElapsed < 2000)
 			return BtStatus::Running;
-		_npc->GetComponent<BtComponent>()->AddEvent(BtEventId::Patrol);
+		if (!_npc->GetWorld()->playerMgr->GetAll()->empty())
+			_npc->GetComponent<BtComponent>()->AddEvent(BtEventId::Patrol);
+		else
+		{
+			_npc->target = nullptr;
+			_npc->linker = nullptr;
+			_npc->GetComponent<BtComponent>()->AddEvent(BtEventId::Birth, 1);
+		}		
 		return BtStatus::Suspend;
 	}
 };

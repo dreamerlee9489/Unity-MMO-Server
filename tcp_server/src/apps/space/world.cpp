@@ -22,7 +22,8 @@ void World::Awake(int worldId)
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_SyncPlayerPos, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleSyncPlayerPos));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_SyncPlayerCmd, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleSyncPlayerCmd));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_ReqSyncPlayer, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleReqSyncPlayer));
-	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_ReqSyncNpc, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleReqSyncNpc));
+	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_ReqNpcInfo, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleReqNpcInfo));
+	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_SyncBtAction, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleSyncBtAction));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_PlayerAtkEvent, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandlePlayerAtkEvent));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_NpcAtkEvent, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleNpcAtkEvent));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2C_ReqTrade, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleReqTrade));
@@ -91,11 +92,11 @@ void World::HandleNetworkDisconnect(Packet* pPacket)
 		MessageSystemHelp::SendPacket(Proto::MsgId::G2DB_SavePlayer, protoSave, APP_DB_MGR);
 
 		// 玩家掉线
-		PlayerDisappear(pPlayer);
 		Proto::RoleDisappear protoDis;
 		protoDis.set_sn(pPlayer->GetPlayerSN());
 		BroadcastPacket(Proto::MsgId::S2C_RoleDisappear, protoDis);
 		pPlayerMgr->RemovePlayerBySn(pTagPlayer->KeyInt64);
+		PlayerDisappear(pPlayer);
 	}
 	else
 	{
@@ -214,7 +215,7 @@ void World::HandleSyncPlayer(Packet* pPacket)
 	const auto playerSn = proto.player().sn();
 	//const int gameAppId = proto.app_id();
 
-	auto pPlayerMgr = GetComponent<PlayerManagerComponent>();
+	auto pPlayerMgr = GetComponent<PlayerManagerComponent>();	
 	auto pPlayer = pPlayerMgr->AddPlayer(playerSn, GetSN(), pPacket);
 	if (pPlayer == nullptr)
 	{
@@ -343,17 +344,19 @@ void World::HandleSyncPlayerCmd(Player* pPlayer, Packet* pPacket)
 	BroadcastPacket(Proto::MsgId::S2C_SyncPlayerCmd, proto);
 }
 
-void World::HandleReqSyncNpc(Player* pPlayer, Packet* pPacket)
+void World::HandleReqNpcInfo(Player* pPlayer, Packet* pPacket)
 {
-	Proto::ReqSyncNpc syncNpc = pPacket->ParseToProto<Proto::ReqSyncNpc>();
-	int id = syncNpc.npc_id();
-	uint64 sn = npcs[id]->GetSN();
-	syncNpc.set_npc_sn(sn);
-	MessageSystemHelp::SendPacket(Proto::MsgId::S2C_ReqSyncNpc, syncNpc, pPlayer);
-	Proto::SyncNpcPos syncPos;
-	syncPos.set_npc_sn(sn);
-	npcs[id]->GetCurrPos().SerializeToProto(syncPos.mutable_pos());
-	MessageSystemHelp::SendPacket(Proto::MsgId::S2C_SyncNpcPos, syncPos, pPlayer);
+	Proto::ReqNpcInfo proto = pPacket->ParseToProto<Proto::ReqNpcInfo>();
+	int id = proto.npc_id();
+	proto.set_npc_sn(npcs[id]->GetSN());
+	npcs[id]->GetCurrPos().SerializeToProto(proto.mutable_pos());
+	MessageSystemHelp::SendPacket(Proto::MsgId::S2C_ReqNpcInfo, proto, pPlayer);
+}
+
+void World::HandleSyncBtAction(Player* pPlayer, Packet* pPacket)
+{
+	Proto::SyncBtAction proto = pPacket->ParseToProto<Proto::SyncBtAction>();
+	int id = proto.id();
 	//npcs[id]->GetComponent<FsmComponent>()->GetCurrState()->Singlecast(pPlayer);
 	npcs[id]->GetComponent<BtComponent>()->SyncAction(pPlayer);
 	if (!npcs[id]->linker)
@@ -371,15 +374,12 @@ void World::HandleReqSyncPlayer(Player* pPlayer, Packet* pPacket)
 {
 	Proto::ReqSyncPlayer proto = pPacket->ParseToProto<Proto::ReqSyncPlayer>();
 	Player* player = playerMgr->GetPlayerBySn(proto.player_sn());
-	if (player)
-	{
-		Proto::SyncPlayerCmd cmd;
-		cmd.set_type(player->cmd.type);
-		cmd.set_player_sn(player->GetPlayerSN());
-		cmd.set_target_sn(player->cmd.target_sn);
-		player->cmd.point.SerializeToProto(cmd.mutable_point());
-		MessageSystemHelp::SendPacket(Proto::MsgId::S2C_SyncPlayerCmd, cmd, pPlayer);
-	}
+	Proto::SyncPlayerCmd cmd;
+	cmd.set_type(player->cmd.type);
+	cmd.set_player_sn(player->GetPlayerSN());
+	cmd.set_target_sn(player->cmd.target_sn);
+	player->cmd.point.SerializeToProto(cmd.mutable_point());
+	MessageSystemHelp::SendPacket(Proto::MsgId::S2C_SyncPlayerCmd, cmd, pPlayer);
 }
 
 void World::HandleSyncNpcPos(Packet* pPacket)

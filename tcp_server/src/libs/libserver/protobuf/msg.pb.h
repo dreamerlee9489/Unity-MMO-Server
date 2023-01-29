@@ -219,9 +219,9 @@ extern RemovePlayerDefaultTypeInternal _RemovePlayer_default_instance_;
 class ReqLinkPlayer;
 class ReqLinkPlayerDefaultTypeInternal;
 extern ReqLinkPlayerDefaultTypeInternal _ReqLinkPlayer_default_instance_;
-class ReqSyncNpc;
-class ReqSyncNpcDefaultTypeInternal;
-extern ReqSyncNpcDefaultTypeInternal _ReqSyncNpc_default_instance_;
+class ReqNpcInfo;
+class ReqNpcInfoDefaultTypeInternal;
+extern ReqNpcInfoDefaultTypeInternal _ReqNpcInfo_default_instance_;
 class ReqSyncPlayer;
 class ReqSyncPlayerDefaultTypeInternal;
 extern ReqSyncPlayerDefaultTypeInternal _ReqSyncPlayer_default_instance_;
@@ -353,7 +353,7 @@ template<> ::Proto::QueryWorldRs* Arena::CreateMaybeMessage<::Proto::QueryWorldR
 template<> ::Proto::RemoveComponent* Arena::CreateMaybeMessage<::Proto::RemoveComponent>(Arena*);
 template<> ::Proto::RemovePlayer* Arena::CreateMaybeMessage<::Proto::RemovePlayer>(Arena*);
 template<> ::Proto::ReqLinkPlayer* Arena::CreateMaybeMessage<::Proto::ReqLinkPlayer>(Arena*);
-template<> ::Proto::ReqSyncNpc* Arena::CreateMaybeMessage<::Proto::ReqSyncNpc>(Arena*);
+template<> ::Proto::ReqNpcInfo* Arena::CreateMaybeMessage<::Proto::ReqNpcInfo>(Arena*);
 template<> ::Proto::ReqSyncPlayer* Arena::CreateMaybeMessage<::Proto::ReqSyncPlayer>(Arena*);
 template<> ::Proto::RequestSyncPlayer* Arena::CreateMaybeMessage<::Proto::RequestSyncPlayer>(Arena*);
 template<> ::Proto::RequestWorld* Arena::CreateMaybeMessage<::Proto::RequestWorld>(Arena*);
@@ -10264,23 +10264,23 @@ class SyncEntityStatus :
 };
 // -------------------------------------------------------------------
 
-class SyncNpcPos :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Proto.SyncNpcPos) */ {
+class ReqNpcInfo :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Proto.ReqNpcInfo) */ {
  public:
-  SyncNpcPos();
-  virtual ~SyncNpcPos();
+  ReqNpcInfo();
+  virtual ~ReqNpcInfo();
 
-  SyncNpcPos(const SyncNpcPos& from);
-  SyncNpcPos(SyncNpcPos&& from) noexcept
-    : SyncNpcPos() {
+  ReqNpcInfo(const ReqNpcInfo& from);
+  ReqNpcInfo(ReqNpcInfo&& from) noexcept
+    : ReqNpcInfo() {
     *this = ::std::move(from);
   }
 
-  inline SyncNpcPos& operator=(const SyncNpcPos& from) {
+  inline ReqNpcInfo& operator=(const ReqNpcInfo& from) {
     CopyFrom(from);
     return *this;
   }
-  inline SyncNpcPos& operator=(SyncNpcPos&& from) noexcept {
+  inline ReqNpcInfo& operator=(ReqNpcInfo&& from) noexcept {
     if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
       if (this != &from) InternalSwap(&from);
     } else {
@@ -10298,37 +10298,37 @@ class SyncNpcPos :
   static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
     return GetMetadataStatic().reflection;
   }
-  static const SyncNpcPos& default_instance();
+  static const ReqNpcInfo& default_instance();
 
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const SyncNpcPos* internal_default_instance() {
-    return reinterpret_cast<const SyncNpcPos*>(
-               &_SyncNpcPos_default_instance_);
+  static inline const ReqNpcInfo* internal_default_instance() {
+    return reinterpret_cast<const ReqNpcInfo*>(
+               &_ReqNpcInfo_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
     65;
 
-  friend void swap(SyncNpcPos& a, SyncNpcPos& b) {
+  friend void swap(ReqNpcInfo& a, ReqNpcInfo& b) {
     a.Swap(&b);
   }
-  inline void Swap(SyncNpcPos* other) {
+  inline void Swap(ReqNpcInfo* other) {
     if (other == this) return;
     InternalSwap(other);
   }
 
   // implements Message ----------------------------------------------
 
-  inline SyncNpcPos* New() const final {
-    return CreateMaybeMessage<SyncNpcPos>(nullptr);
+  inline ReqNpcInfo* New() const final {
+    return CreateMaybeMessage<ReqNpcInfo>(nullptr);
   }
 
-  SyncNpcPos* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
-    return CreateMaybeMessage<SyncNpcPos>(arena);
+  ReqNpcInfo* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<ReqNpcInfo>(arena);
   }
   void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
   void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-  void CopyFrom(const SyncNpcPos& from);
-  void MergeFrom(const SyncNpcPos& from);
+  void CopyFrom(const ReqNpcInfo& from);
+  void MergeFrom(const ReqNpcInfo& from);
   PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
   bool IsInitialized() const final;
 
@@ -10349,10 +10349,10 @@ class SyncNpcPos :
   inline void SharedCtor();
   inline void SharedDtor();
   void SetCachedSize(int size) const final;
-  void InternalSwap(SyncNpcPos* other);
+  void InternalSwap(ReqNpcInfo* other);
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "Proto.SyncNpcPos";
+    return "Proto.ReqNpcInfo";
   }
   private:
   inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
@@ -10377,10 +10377,11 @@ class SyncNpcPos :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kPosFieldNumber = 2,
-    kNpcSnFieldNumber = 1,
+    kPosFieldNumber = 3,
+    kNpcSnFieldNumber = 2,
+    kNpcIdFieldNumber = 1,
   };
-  // .Proto.Vector3D pos = 2;
+  // .Proto.Vector3D pos = 3;
   bool has_pos() const;
   void clear_pos();
   const ::Proto::Vector3D& pos() const;
@@ -10388,18 +10389,24 @@ class SyncNpcPos :
   ::Proto::Vector3D* mutable_pos();
   void set_allocated_pos(::Proto::Vector3D* pos);
 
-  // uint64 npc_sn = 1;
+  // uint64 npc_sn = 2;
   void clear_npc_sn();
   ::PROTOBUF_NAMESPACE_ID::uint64 npc_sn() const;
   void set_npc_sn(::PROTOBUF_NAMESPACE_ID::uint64 value);
 
-  // @@protoc_insertion_point(class_scope:Proto.SyncNpcPos)
+  // int32 npc_id = 1;
+  void clear_npc_id();
+  ::PROTOBUF_NAMESPACE_ID::int32 npc_id() const;
+  void set_npc_id(::PROTOBUF_NAMESPACE_ID::int32 value);
+
+  // @@protoc_insertion_point(class_scope:Proto.ReqNpcInfo)
  private:
   class _Internal;
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
   ::Proto::Vector3D* pos_;
   ::PROTOBUF_NAMESPACE_ID::uint64 npc_sn_;
+  ::PROTOBUF_NAMESPACE_ID::int32 npc_id_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_msg_2eproto;
 };
@@ -10709,6 +10716,147 @@ class SyncBtAction :
 };
 // -------------------------------------------------------------------
 
+class SyncNpcPos :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Proto.SyncNpcPos) */ {
+ public:
+  SyncNpcPos();
+  virtual ~SyncNpcPos();
+
+  SyncNpcPos(const SyncNpcPos& from);
+  SyncNpcPos(SyncNpcPos&& from) noexcept
+    : SyncNpcPos() {
+    *this = ::std::move(from);
+  }
+
+  inline SyncNpcPos& operator=(const SyncNpcPos& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline SyncNpcPos& operator=(SyncNpcPos&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const SyncNpcPos& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const SyncNpcPos* internal_default_instance() {
+    return reinterpret_cast<const SyncNpcPos*>(
+               &_SyncNpcPos_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    68;
+
+  friend void swap(SyncNpcPos& a, SyncNpcPos& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(SyncNpcPos* other) {
+    if (other == this) return;
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline SyncNpcPos* New() const final {
+    return CreateMaybeMessage<SyncNpcPos>(nullptr);
+  }
+
+  SyncNpcPos* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<SyncNpcPos>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const SyncNpcPos& from);
+  void MergeFrom(const SyncNpcPos& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  #else
+  bool MergePartialFromCodedStream(
+      ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) final;
+  #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  void SerializeWithCachedSizes(
+      ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(SyncNpcPos* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "Proto.SyncNpcPos";
+  }
+  private:
+  inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_msg_2eproto);
+    return ::descriptor_table_msg_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kPosFieldNumber = 2,
+    kNpcSnFieldNumber = 1,
+  };
+  // .Proto.Vector3D pos = 2;
+  bool has_pos() const;
+  void clear_pos();
+  const ::Proto::Vector3D& pos() const;
+  ::Proto::Vector3D* release_pos();
+  ::Proto::Vector3D* mutable_pos();
+  void set_allocated_pos(::Proto::Vector3D* pos);
+
+  // uint64 npc_sn = 1;
+  void clear_npc_sn();
+  ::PROTOBUF_NAMESPACE_ID::uint64 npc_sn() const;
+  void set_npc_sn(::PROTOBUF_NAMESPACE_ID::uint64 value);
+
+  // @@protoc_insertion_point(class_scope:Proto.SyncNpcPos)
+ private:
+  class _Internal;
+
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
+  ::Proto::Vector3D* pos_;
+  ::PROTOBUF_NAMESPACE_ID::uint64 npc_sn_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_msg_2eproto;
+};
+// -------------------------------------------------------------------
+
 class SyncPlayerPos :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Proto.SyncPlayerPos) */ {
  public:
@@ -10751,7 +10899,7 @@ class SyncPlayerPos :
                &_SyncPlayerPos_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    68;
+    69;
 
   friend void swap(SyncPlayerPos& a, SyncPlayerPos& b) {
     a.Swap(&b);
@@ -10885,7 +11033,7 @@ class SyncPlayerCmd :
                &_SyncPlayerCmd_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    69;
+    70;
 
   friend void swap(SyncPlayerCmd& a, SyncPlayerCmd& b) {
     a.Swap(&b);
@@ -11040,7 +11188,7 @@ class ReqSyncPlayer :
                &_ReqSyncPlayer_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    70;
+    71;
 
   friend void swap(ReqSyncPlayer& a, ReqSyncPlayer& b) {
     a.Swap(&b);
@@ -11124,144 +11272,6 @@ class ReqSyncPlayer :
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
   ::PROTOBUF_NAMESPACE_ID::uint64 player_sn_;
-  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
-  friend struct ::TableStruct_msg_2eproto;
-};
-// -------------------------------------------------------------------
-
-class ReqSyncNpc :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Proto.ReqSyncNpc) */ {
- public:
-  ReqSyncNpc();
-  virtual ~ReqSyncNpc();
-
-  ReqSyncNpc(const ReqSyncNpc& from);
-  ReqSyncNpc(ReqSyncNpc&& from) noexcept
-    : ReqSyncNpc() {
-    *this = ::std::move(from);
-  }
-
-  inline ReqSyncNpc& operator=(const ReqSyncNpc& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  inline ReqSyncNpc& operator=(ReqSyncNpc&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
-    return GetDescriptor();
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
-    return GetMetadataStatic().descriptor;
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
-    return GetMetadataStatic().reflection;
-  }
-  static const ReqSyncNpc& default_instance();
-
-  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const ReqSyncNpc* internal_default_instance() {
-    return reinterpret_cast<const ReqSyncNpc*>(
-               &_ReqSyncNpc_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    71;
-
-  friend void swap(ReqSyncNpc& a, ReqSyncNpc& b) {
-    a.Swap(&b);
-  }
-  inline void Swap(ReqSyncNpc* other) {
-    if (other == this) return;
-    InternalSwap(other);
-  }
-
-  // implements Message ----------------------------------------------
-
-  inline ReqSyncNpc* New() const final {
-    return CreateMaybeMessage<ReqSyncNpc>(nullptr);
-  }
-
-  ReqSyncNpc* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
-    return CreateMaybeMessage<ReqSyncNpc>(arena);
-  }
-  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-  void CopyFrom(const ReqSyncNpc& from);
-  void MergeFrom(const ReqSyncNpc& from);
-  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
-  bool IsInitialized() const final;
-
-  size_t ByteSizeLong() const final;
-  #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
-  #else
-  bool MergePartialFromCodedStream(
-      ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) final;
-  #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-  void SerializeWithCachedSizes(
-      ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
-  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
-      ::PROTOBUF_NAMESPACE_ID::uint8* target) const final;
-  int GetCachedSize() const final { return _cached_size_.Get(); }
-
-  private:
-  inline void SharedCtor();
-  inline void SharedDtor();
-  void SetCachedSize(int size) const final;
-  void InternalSwap(ReqSyncNpc* other);
-  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
-  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "Proto.ReqSyncNpc";
-  }
-  private:
-  inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
-    return nullptr;
-  }
-  inline void* MaybeArenaPtr() const {
-    return nullptr;
-  }
-  public:
-
-  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
-  private:
-  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
-    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_msg_2eproto);
-    return ::descriptor_table_msg_2eproto.file_level_metadata[kIndexInFileMessages];
-  }
-
-  public:
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  enum : int {
-    kNpcSnFieldNumber = 2,
-    kNpcIdFieldNumber = 1,
-  };
-  // uint64 npc_sn = 2;
-  void clear_npc_sn();
-  ::PROTOBUF_NAMESPACE_ID::uint64 npc_sn() const;
-  void set_npc_sn(::PROTOBUF_NAMESPACE_ID::uint64 value);
-
-  // int32 npc_id = 1;
-  void clear_npc_id();
-  ::PROTOBUF_NAMESPACE_ID::int32 npc_id() const;
-  void set_npc_id(::PROTOBUF_NAMESPACE_ID::int32 value);
-
-  // @@protoc_insertion_point(class_scope:Proto.ReqSyncNpc)
- private:
-  class _Internal;
-
-  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
-  ::PROTOBUF_NAMESPACE_ID::uint64 npc_sn_;
-  ::PROTOBUF_NAMESPACE_ID::int32 npc_id_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_msg_2eproto;
 };
@@ -16502,49 +16512,63 @@ inline void SyncEntityStatus::set_hp(::PROTOBUF_NAMESPACE_ID::int32 value) {
 
 // -------------------------------------------------------------------
 
-// SyncNpcPos
+// ReqNpcInfo
 
-// uint64 npc_sn = 1;
-inline void SyncNpcPos::clear_npc_sn() {
+// int32 npc_id = 1;
+inline void ReqNpcInfo::clear_npc_id() {
+  npc_id_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 ReqNpcInfo::npc_id() const {
+  // @@protoc_insertion_point(field_get:Proto.ReqNpcInfo.npc_id)
+  return npc_id_;
+}
+inline void ReqNpcInfo::set_npc_id(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  npc_id_ = value;
+  // @@protoc_insertion_point(field_set:Proto.ReqNpcInfo.npc_id)
+}
+
+// uint64 npc_sn = 2;
+inline void ReqNpcInfo::clear_npc_sn() {
   npc_sn_ = PROTOBUF_ULONGLONG(0);
 }
-inline ::PROTOBUF_NAMESPACE_ID::uint64 SyncNpcPos::npc_sn() const {
-  // @@protoc_insertion_point(field_get:Proto.SyncNpcPos.npc_sn)
+inline ::PROTOBUF_NAMESPACE_ID::uint64 ReqNpcInfo::npc_sn() const {
+  // @@protoc_insertion_point(field_get:Proto.ReqNpcInfo.npc_sn)
   return npc_sn_;
 }
-inline void SyncNpcPos::set_npc_sn(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+inline void ReqNpcInfo::set_npc_sn(::PROTOBUF_NAMESPACE_ID::uint64 value) {
   
   npc_sn_ = value;
-  // @@protoc_insertion_point(field_set:Proto.SyncNpcPos.npc_sn)
+  // @@protoc_insertion_point(field_set:Proto.ReqNpcInfo.npc_sn)
 }
 
-// .Proto.Vector3D pos = 2;
-inline bool SyncNpcPos::has_pos() const {
+// .Proto.Vector3D pos = 3;
+inline bool ReqNpcInfo::has_pos() const {
   return this != internal_default_instance() && pos_ != nullptr;
 }
-inline const ::Proto::Vector3D& SyncNpcPos::pos() const {
+inline const ::Proto::Vector3D& ReqNpcInfo::pos() const {
   const ::Proto::Vector3D* p = pos_;
-  // @@protoc_insertion_point(field_get:Proto.SyncNpcPos.pos)
+  // @@protoc_insertion_point(field_get:Proto.ReqNpcInfo.pos)
   return p != nullptr ? *p : *reinterpret_cast<const ::Proto::Vector3D*>(
       &::Proto::_Vector3D_default_instance_);
 }
-inline ::Proto::Vector3D* SyncNpcPos::release_pos() {
-  // @@protoc_insertion_point(field_release:Proto.SyncNpcPos.pos)
+inline ::Proto::Vector3D* ReqNpcInfo::release_pos() {
+  // @@protoc_insertion_point(field_release:Proto.ReqNpcInfo.pos)
   
   ::Proto::Vector3D* temp = pos_;
   pos_ = nullptr;
   return temp;
 }
-inline ::Proto::Vector3D* SyncNpcPos::mutable_pos() {
+inline ::Proto::Vector3D* ReqNpcInfo::mutable_pos() {
   
   if (pos_ == nullptr) {
     auto* p = CreateMaybeMessage<::Proto::Vector3D>(GetArenaNoVirtual());
     pos_ = p;
   }
-  // @@protoc_insertion_point(field_mutable:Proto.SyncNpcPos.pos)
+  // @@protoc_insertion_point(field_mutable:Proto.ReqNpcInfo.pos)
   return pos_;
 }
-inline void SyncNpcPos::set_allocated_pos(::Proto::Vector3D* pos) {
+inline void ReqNpcInfo::set_allocated_pos(::Proto::Vector3D* pos) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaNoVirtual();
   if (message_arena == nullptr) {
     delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(pos_);
@@ -16560,7 +16584,7 @@ inline void SyncNpcPos::set_allocated_pos(::Proto::Vector3D* pos) {
     
   }
   pos_ = pos;
-  // @@protoc_insertion_point(field_set_allocated:Proto.SyncNpcPos.pos)
+  // @@protoc_insertion_point(field_set_allocated:Proto.ReqNpcInfo.pos)
 }
 
 // -------------------------------------------------------------------
@@ -16681,6 +16705,69 @@ inline void SyncBtAction::set_player_sn(::PROTOBUF_NAMESPACE_ID::uint64 value) {
   
   player_sn_ = value;
   // @@protoc_insertion_point(field_set:Proto.SyncBtAction.player_sn)
+}
+
+// -------------------------------------------------------------------
+
+// SyncNpcPos
+
+// uint64 npc_sn = 1;
+inline void SyncNpcPos::clear_npc_sn() {
+  npc_sn_ = PROTOBUF_ULONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint64 SyncNpcPos::npc_sn() const {
+  // @@protoc_insertion_point(field_get:Proto.SyncNpcPos.npc_sn)
+  return npc_sn_;
+}
+inline void SyncNpcPos::set_npc_sn(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+  
+  npc_sn_ = value;
+  // @@protoc_insertion_point(field_set:Proto.SyncNpcPos.npc_sn)
+}
+
+// .Proto.Vector3D pos = 2;
+inline bool SyncNpcPos::has_pos() const {
+  return this != internal_default_instance() && pos_ != nullptr;
+}
+inline const ::Proto::Vector3D& SyncNpcPos::pos() const {
+  const ::Proto::Vector3D* p = pos_;
+  // @@protoc_insertion_point(field_get:Proto.SyncNpcPos.pos)
+  return p != nullptr ? *p : *reinterpret_cast<const ::Proto::Vector3D*>(
+      &::Proto::_Vector3D_default_instance_);
+}
+inline ::Proto::Vector3D* SyncNpcPos::release_pos() {
+  // @@protoc_insertion_point(field_release:Proto.SyncNpcPos.pos)
+  
+  ::Proto::Vector3D* temp = pos_;
+  pos_ = nullptr;
+  return temp;
+}
+inline ::Proto::Vector3D* SyncNpcPos::mutable_pos() {
+  
+  if (pos_ == nullptr) {
+    auto* p = CreateMaybeMessage<::Proto::Vector3D>(GetArenaNoVirtual());
+    pos_ = p;
+  }
+  // @@protoc_insertion_point(field_mutable:Proto.SyncNpcPos.pos)
+  return pos_;
+}
+inline void SyncNpcPos::set_allocated_pos(::Proto::Vector3D* pos) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == nullptr) {
+    delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(pos_);
+  }
+  if (pos) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena = nullptr;
+    if (message_arena != submessage_arena) {
+      pos = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, pos, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  pos_ = pos;
+  // @@protoc_insertion_point(field_set_allocated:Proto.SyncNpcPos.pos)
 }
 
 // -------------------------------------------------------------------
@@ -16839,38 +16926,6 @@ inline void ReqSyncPlayer::set_player_sn(::PROTOBUF_NAMESPACE_ID::uint64 value) 
   
   player_sn_ = value;
   // @@protoc_insertion_point(field_set:Proto.ReqSyncPlayer.player_sn)
-}
-
-// -------------------------------------------------------------------
-
-// ReqSyncNpc
-
-// int32 npc_id = 1;
-inline void ReqSyncNpc::clear_npc_id() {
-  npc_id_ = 0;
-}
-inline ::PROTOBUF_NAMESPACE_ID::int32 ReqSyncNpc::npc_id() const {
-  // @@protoc_insertion_point(field_get:Proto.ReqSyncNpc.npc_id)
-  return npc_id_;
-}
-inline void ReqSyncNpc::set_npc_id(::PROTOBUF_NAMESPACE_ID::int32 value) {
-  
-  npc_id_ = value;
-  // @@protoc_insertion_point(field_set:Proto.ReqSyncNpc.npc_id)
-}
-
-// uint64 npc_sn = 2;
-inline void ReqSyncNpc::clear_npc_sn() {
-  npc_sn_ = PROTOBUF_ULONGLONG(0);
-}
-inline ::PROTOBUF_NAMESPACE_ID::uint64 ReqSyncNpc::npc_sn() const {
-  // @@protoc_insertion_point(field_get:Proto.ReqSyncNpc.npc_sn)
-  return npc_sn_;
-}
-inline void ReqSyncNpc::set_npc_sn(::PROTOBUF_NAMESPACE_ID::uint64 value) {
-  
-  npc_sn_ = value;
-  // @@protoc_insertion_point(field_set:Proto.ReqSyncNpc.npc_sn)
 }
 
 // -------------------------------------------------------------------

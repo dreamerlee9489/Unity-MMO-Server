@@ -41,7 +41,7 @@ public:
 
 protected:
 	std::list<BtNode*> _children;
-	std::list<BtNode*>::iterator _curr;	
+	std::list<BtNode*>::iterator _curr = _children.begin();	
 };
 
 #endif // !BT_COMPOSITE
