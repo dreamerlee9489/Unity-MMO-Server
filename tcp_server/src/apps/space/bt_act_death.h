@@ -31,7 +31,6 @@ public:
 		if (_timeElapsed < 8000 || !_npc->rebirth)
 			return BtStatus::Running;
 		_npc->SetCurrPos(_npc->GetInitPos());
-		LOG_DEBUG("_npc->GetInitPos()");
 		return BtStatus::Success;
 	}
 
