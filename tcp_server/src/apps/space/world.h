@@ -42,11 +42,12 @@ protected:
 	void HandleNetworkDisconnect(Packet* pPacket);
 	void HandleSyncPlayer(Packet* pPacket);
 	void HandleSyncNpcPos(Packet* pPacket);
+	void HandlePlayerMove(Player* pPlayer, Packet* pPacket);
+	void HandleNpcMove(Player* pPlayer, Packet* pPacket);
 	void HandlePlayerAtkEvent(Player* pPlayer, Packet* pPacket);
 	void HandleNpcAtkEvent(Player* pPlayer, Packet* pPacket);
 	void HandleRequestSyncPlayer(Player* pPlayer, Packet* pPacket);
 	void HandleG2SRemovePlayer(Player* pPlayer, Packet* pPacket);
-	void HandleMove(Player* pPlayer, Packet* pPacket);
 	void HandleReqNpcInfo(Player* pPlayer, Packet* pPacket);
 	void HandleSyncBtAction(Player* pPlayer, Packet* pPacket);
 	void HandleReqSyncPlayer(Player* pPlayer, Packet* pPacket);

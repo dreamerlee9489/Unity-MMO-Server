@@ -1,19 +1,7 @@
 #include "move_component.h"
 #include "libplayer/player.h"
 #include "libplayer/player_component_last_map.h"
-
 #include <cmath>
-
-void MoveVector3::Update(Vector3 target, Vector3 position)
-{
-	Target = target;
-	const auto xdis = target.X - position.X;
-	const auto zdis = target.Z - position.Z;
-	const auto distance = sqrt(xdis * xdis + zdis * zdis);
-
-	ScaleX = xdis / distance;
-	ScaleZ = zdis / distance;
-}
 
 void MoveComponent::Awake()
 {
@@ -27,49 +15,41 @@ void MoveComponent::BackToPool()
 		_targets.pop();
 }
 
-void MoveComponent::Update(std::queue<Vector3> targets, Vector3 curPosition)
+void MoveComponent::SetPath(std::queue<Vector3> targets, Vector3 curPosition)
 {
 	if (targets.empty())
 		return;
-
-	// 删掉旧点
+	// 鍒犳帀鏃х偣
 	while (!_targets.empty())
-	{
 		_targets.pop();
-	}
 
 	std::swap(targets, _targets);
-
-	auto v3 = _targets.front();
-	_vector3.Update(v3, curPosition);
+	auto& v3 = _targets.front();
+	_vector3.SetTarget(v3, curPosition);
 	_targets.pop();
 }
 
 bool MoveComponent::Update(const float timeElapsed, PlayerComponentLastMap* pLastMap, const float speed)
 {
 	auto curPosition = pLastMap->GetCur()->Position;
-
-	// 本次移动距离, timeElapsed 为毫秒，速度是秒
+	// 鏈绉诲姩璺濈, timeElapsed 涓烘绉掞紝閫熷害鏄
 	const auto moveDis = timeElapsed * 0.001 * speed;
 
 	bool isStop = false;
-	if (curPosition.GetDistance(_vector3.Target) < moveDis )
+	if (curPosition.GetDistance(_vector3.Target) < moveDis)
 	{
-		// 已达到目标点
+		// 宸茶揪鍒扮洰鏍囩偣
 		curPosition = _vector3.Target;
-
-		// 计算下一个点
-		if (!_targets.empty())
-		{
-			const auto v3 = _targets.front();
-			_vector3.Update(v3, curPosition);
-			_targets.pop();
-		}
+		// 璁＄畻涓嬩竴涓偣
+		if (_targets.empty())
+			isStop = true;
 		else
 		{
-			isStop = true;
+			const auto& v3 = _targets.front();
+			_vector3.SetTarget(v3, curPosition);
+			_targets.pop();
 		}
-	} 
+	}
 	else
 	{
 		const auto xDis = moveDis * _vector3.ScaleX;
@@ -80,7 +60,41 @@ bool MoveComponent::Update(const float timeElapsed, PlayerComponentLastMap* pLas
 	}
 
 	pLastMap->GetCur()->Position = curPosition;
-	LOG_DEBUG("cur position. " << curPosition);
+	//LOG_DEBUG("cur position. " << curPosition);
+	return isStop;
+}
 
+bool MoveComponent::Update(float timeElapsed, Npc* npc, const float speed)
+{
+	auto& curPosition = npc->GetCurrPos();
+	// 鏈绉诲姩璺濈, timeElapsed 涓烘绉掞紝閫熷害鏄
+	const auto moveDis = timeElapsed * 0.001 * speed;
+
+	bool isStop = false;
+	if (curPosition.GetDistance(_vector3.Target) < moveDis)
+	{
+		// 宸茶揪鍒扮洰鏍囩偣
+		curPosition = _vector3.Target;
+		// 璁＄畻涓嬩竴涓偣
+		if (_targets.empty())
+			isStop = true;
+		else
+		{
+			const auto& v3 = _targets.front();
+			_vector3.SetTarget(v3, curPosition);
+			_targets.pop();
+		}
+	}
+	else
+	{
+		const auto xDis = moveDis * _vector3.ScaleX;
+		const auto zDis = moveDis * _vector3.ScaleZ;
+
+		curPosition.X += xDis;
+		curPosition.Z += zDis;
+	}
+
+	npc->SetCurrPos(curPosition);
+	//LOG_DEBUG("npc cur position. " << curPosition << " speed=" << speed);
 	return isStop;
 }

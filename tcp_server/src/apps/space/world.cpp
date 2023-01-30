@@ -15,7 +15,8 @@ void World::Awake(int worldId)
 	pMsgSystem->RegisterFunction(this, Proto::MsgId::C2S_SyncNpcPos, BindFunP1(this, &World::HandleSyncNpcPos));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::G2S_RequestSyncPlayer, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleRequestSyncPlayer));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::G2S_RemovePlayer, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleG2SRemovePlayer));
-	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_Move, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleMove));
+	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_PlayerMove, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandlePlayerMove));
+	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_NpcMove, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleNpcMove));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_UpdateKnapItem, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleUpdateKnapItem));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_UpdateKnapGold, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleUpdateKnapGold));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_GetPlayerKnap, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleGetPlayerKnap));
@@ -41,6 +42,7 @@ void World::Awake(int worldId)
 		npc->SetAllPlayer(playerMgr->GetAll());
 		//npc->AddComponent<FsmComponent>();
 		npc->AddComponent<BtComponent>();
+		npc->AddComponent<MoveComponent>();
 		npcIdxMap.emplace(npc->GetSN(), npcs.size());
 		npcs.push_back(npc);
 		if (worldCfg->GetType() == ResourceWorldType::Public)
@@ -67,8 +69,38 @@ Player* World::GetPlayer(NetIdentify* pIdentify)
 	const auto pTagPlayer = pTags->GetTagValue(TagType::Player);
 	if (pTagPlayer == nullptr)
 		return nullptr;
-	auto pPlayerMgr = GetComponent<PlayerManagerComponent>();
-	return pPlayerMgr->GetPlayerBySn(pTagPlayer->KeyInt64);
+	return playerMgr->GetPlayerBySn(pTagPlayer->KeyInt64);
+}
+
+void World::PlayerDisappear(Player* pPlayer)
+{
+	for (auto& enemy : npcs)
+	{
+		if (playerMgr->GetAll()->empty())
+		{
+			enemy->target = nullptr;
+			enemy->GetComponent<BtComponent>()->AddEvent(BtEventId::Birth, 10);
+		}
+		else if (enemy->target == pPlayer)
+		{
+			enemy->target = nullptr;
+			enemy->GetComponent<BtComponent>()->AddEvent(BtEventId::Idle, 10);
+		}
+		if (enemy->linker == pPlayer)
+		{
+			//enemy->GetComponent<FsmComponent>()->ResetState();			
+			Player* target = GetNearestPlayer(enemy->GetCurrPos());
+			enemy->SetLinkPlayer(target);
+			if (target)
+			{
+				Proto::ReqLinkPlayer proto;
+				proto.set_npc_id(enemy->GetID());
+				proto.set_npc_sn(enemy->GetSN());
+				proto.set_linker(true);
+				MessageSystemHelp::SendPacket(Proto::MsgId::S2C_ReqLinkPlayer, proto, target);
+			}
+		}
+	}
 }
 
 void World::HandleNetworkDisconnect(Packet* pPacket)
@@ -108,6 +140,35 @@ void World::HandleNetworkDisconnect(Packet* pPacket)
 			pPlayerMgr->RemoveAllPlayers(pPacket);
 		}
 	}
+}
+
+void World::HandlePlayerMove(Player* pPlayer, Packet* pPacket)
+{
+	auto proto = pPacket->ParseToProto<Proto::EntityMove>();
+	const auto points = proto.mutable_points();
+	auto moveComp = pPlayer->GetComponent<MoveComponent>();
+	if (moveComp == nullptr)
+		moveComp = pPlayer->AddComponent<MoveComponent>();
+	std::queue<Vector3> que;
+	for (auto index = 0; index < proto.points_size(); ++index)
+		que.push(Vector3(points->Get(index)));
+	const auto lastMapComp = pPlayer->GetComponent<PlayerComponentLastMap>();
+	moveComp->SetPath(std::move(que), lastMapComp->GetCur()->Position);
+	BroadcastPacket(Proto::MsgId::S2C_PlayerMove, proto);
+}
+
+void World::HandleNpcMove(Player* pPlayer, Packet* pPacket)
+{
+	auto proto = pPacket->ParseToProto<Proto::EntityMove>();
+	const auto points = proto.mutable_points();
+	Npc* npc = npcs[npcIdxMap[proto.sn()]];
+	auto moveComp = npc->GetComponent<MoveComponent>();
+	moveComp->moveSpeed = proto.running() ? 5.56f : 1.56f;
+	std::queue<Vector3> que;
+	for (auto index = 0; index < proto.points_size(); ++index)
+		que.push(Vector3(points->Get(index)));
+	moveComp->SetPath(std::move(que), npc->GetCurrPos());
+	BroadcastPacket(Proto::MsgId::S2C_NpcMove, proto);
 }
 
 void World::SyncWorldToGather()
@@ -177,32 +238,6 @@ void World::SyncAppearTimer()
 		if (protoOther.roles_size() > 0)
 			BroadcastPacket(Proto::MsgId::S2C_AllRoleAppear, protoOther, _adds);
 		_adds.clear();
-	}
-}
-
-void World::PlayerDisappear(Player* pPlayer)
-{
-	for (auto& enemy : npcs)
-	{
-		if (enemy->target == pPlayer)
-		{
-			enemy->target = nullptr;
-			enemy->GetComponent<BtComponent>()->AddEvent(BtEventId::Idle, 10);
-		}
-		if (enemy->linker == pPlayer)
-		{
-			//enemy->GetComponent<FsmComponent>()->ResetState();			
-			Player* target = GetNearestPlayer(enemy->GetCurrPos());
-			enemy->SetLinkPlayer(target);
-			if (target)
-			{
-				Proto::ReqLinkPlayer proto;
-				proto.set_npc_id(enemy->GetID());
-				proto.set_npc_sn(enemy->GetSN());
-				proto.set_linker(true);
-				MessageSystemHelp::SendPacket(Proto::MsgId::S2C_ReqLinkPlayer, proto, target);
-			}
-		}
 	}
 }
 
@@ -307,25 +342,6 @@ void World::HandleG2SRemovePlayer(Player* pPlayer, Packet* pPacket)
 	disAppear.set_sn(pPlayer->GetPlayerSN());
 	BroadcastPacket(Proto::MsgId::S2C_RoleDisappear, disAppear);
 	//LOG_DEBUG("player disappear: sn=" << pPlayer->GetPlayerSN());
-}
-
-void World::HandleMove(Player* pPlayer, Packet* pPacket)
-{
-	auto proto = pPacket->ParseToProto<Proto::Move>();
-	const auto positions = proto.mutable_position();
-	proto.set_player_sn(pPlayer->GetPlayerSN());
-
-	auto pMoveComponent = pPlayer->GetComponent<MoveComponent>();
-	if (pMoveComponent == nullptr)
-		pMoveComponent = pPlayer->AddComponent<MoveComponent>();
-
-	std::queue<Vector3> pos;
-	for (auto index = 0; index < proto.position_size(); index++)
-		pos.push(Vector3(positions->Get(index)));
-	const auto pComponentLastMap = pPlayer->GetComponent<PlayerComponentLastMap>();
-	pMoveComponent->Update(pos, pComponentLastMap->GetCur()->Position);
-
-	BroadcastPacket(Proto::MsgId::S2C_Move, proto);
 }
 
 void World::HandleSyncPlayerPos(Player* pPlayer, Packet* pPacket)

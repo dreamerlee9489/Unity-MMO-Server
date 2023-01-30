@@ -1,5 +1,4 @@
 ﻿#include "npc.h"
-#include "fsm_death.h"
 
 std::default_random_engine Npc::_realEng = std::default_random_engine();
 std::uniform_real_distribution<double> Npc::_realDis = std::uniform_real_distribution<double>(0.0, 1.0);

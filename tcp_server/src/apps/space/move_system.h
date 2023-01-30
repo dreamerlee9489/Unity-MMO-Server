@@ -10,7 +10,7 @@ public:
 	void Update(EntitySystem* pEntities) override;
 
 private:
-	timeutil::Time _lastTime;
+	timeutil::Time _lastTime = 0, _currTime = 0, _timeElapsed = 0;
 	ComponentCollections* _pCollections{ nullptr };
 };
 

@@ -284,6 +284,10 @@ class MoveDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<Move> _instance;
 } _Move_default_instance_;
+class EntityMoveDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<EntityMove> _instance;
+} _EntityMove_default_instance_;
 class SyncEntityStatusDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<SyncEntityStatus> _instance;
@@ -745,6 +749,21 @@ static void InitDefaultsscc_info_EnterWorld_msg_2eproto() {
 
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_EnterWorld_msg_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsscc_info_EnterWorld_msg_2eproto}, {
+      &scc_info_Vector3D_db_2eproto.base,}};
+
+static void InitDefaultsscc_info_EntityMove_msg_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::Proto::_EntityMove_default_instance_;
+    new (ptr) ::Proto::EntityMove();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::Proto::EntityMove::InitAsDefaultInstance();
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_EntityMove_msg_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsscc_info_EntityMove_msg_2eproto}, {
       &scc_info_Vector3D_db_2eproto.base,}};
 
 static void InitDefaultsscc_info_GameToken_msg_2eproto() {
@@ -1491,7 +1510,7 @@ static void InitDefaultsscc_info_WorldSyncToGather_msg_2eproto() {
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_WorldSyncToGather_msg_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsscc_info_WorldSyncToGather_msg_2eproto}, {}};
 
-static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_msg_2eproto[80];
+static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_msg_2eproto[81];
 static const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* file_level_enum_descriptors_msg_2eproto[12];
 static constexpr ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor const** file_level_service_descriptors_msg_2eproto = nullptr;
 
@@ -1953,6 +1972,14 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_msg_2eproto::offsets[] PROTOBU
   PROTOBUF_FIELD_OFFSET(::Proto::Move, player_sn_),
   PROTOBUF_FIELD_OFFSET(::Proto::Move, position_),
   ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::Proto::EntityMove, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::Proto::EntityMove, sn_),
+  PROTOBUF_FIELD_OFFSET(::Proto::EntityMove, running_),
+  PROTOBUF_FIELD_OFFSET(::Proto::EntityMove, points_),
+  ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::Proto::SyncEntityStatus, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
@@ -2142,22 +2169,23 @@ static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOB
   { 437, -1, sizeof(::Proto::AllRoleAppear)},
   { 443, -1, sizeof(::Proto::RoleDisappear)},
   { 449, -1, sizeof(::Proto::Move)},
-  { 456, -1, sizeof(::Proto::SyncEntityStatus)},
-  { 463, -1, sizeof(::Proto::ReqNpcInfo)},
-  { 471, -1, sizeof(::Proto::SyncFsmState)},
-  { 480, -1, sizeof(::Proto::SyncBtAction)},
-  { 489, -1, sizeof(::Proto::SyncNpcPos)},
-  { 496, -1, sizeof(::Proto::SyncPlayerPos)},
-  { 502, -1, sizeof(::Proto::SyncPlayerCmd)},
-  { 511, -1, sizeof(::Proto::ReqSyncPlayer)},
-  { 517, -1, sizeof(::Proto::ReqLinkPlayer)},
-  { 525, -1, sizeof(::Proto::NpcAtkEvent)},
-  { 532, -1, sizeof(::Proto::PlayerAtkEvent)},
-  { 539, -1, sizeof(::Proto::DropItemList)},
-  { 548, -1, sizeof(::Proto::PlayerReq)},
-  { 556, -1, sizeof(::Proto::ChatMsg)},
-  { 564, -1, sizeof(::Proto::CreateTeam)},
-  { 571, -1, sizeof(::Proto::EnterDungeon)},
+  { 456, -1, sizeof(::Proto::EntityMove)},
+  { 464, -1, sizeof(::Proto::SyncEntityStatus)},
+  { 471, -1, sizeof(::Proto::ReqNpcInfo)},
+  { 479, -1, sizeof(::Proto::SyncFsmState)},
+  { 488, -1, sizeof(::Proto::SyncBtAction)},
+  { 497, -1, sizeof(::Proto::SyncNpcPos)},
+  { 504, -1, sizeof(::Proto::SyncPlayerPos)},
+  { 510, -1, sizeof(::Proto::SyncPlayerCmd)},
+  { 519, -1, sizeof(::Proto::ReqSyncPlayer)},
+  { 525, -1, sizeof(::Proto::ReqLinkPlayer)},
+  { 533, -1, sizeof(::Proto::NpcAtkEvent)},
+  { 540, -1, sizeof(::Proto::PlayerAtkEvent)},
+  { 547, -1, sizeof(::Proto::DropItemList)},
+  { 556, -1, sizeof(::Proto::PlayerReq)},
+  { 564, -1, sizeof(::Proto::ChatMsg)},
+  { 572, -1, sizeof(::Proto::CreateTeam)},
+  { 579, -1, sizeof(::Proto::EnterDungeon)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
@@ -2225,6 +2253,7 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::Proto::_AllRoleAppear_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::Proto::_RoleDisappear_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::Proto::_Move_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::Proto::_EntityMove_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::Proto::_SyncEntityStatus_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::Proto::_ReqNpcInfo_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::Proto::_SyncFsmState_default_instance_),
@@ -2361,49 +2390,51 @@ const char descriptor_table_protodef_msg_2eproto[] PROTOBUF_SECTION_VARIABLE(pro
   "def\030\n \001(\005\"+\n\rAllRoleAppear\022\032\n\005roles\030\001 \003("
   "\0132\013.Proto.Role\"\033\n\rRoleDisappear\022\n\n\002sn\030\001 "
   "\001(\004\"<\n\004Move\022\021\n\tplayer_sn\030\001 \001(\004\022!\n\010positi"
-  "on\030\002 \003(\0132\017.Proto.Vector3D\"*\n\020SyncEntityS"
-  "tatus\022\n\n\002sn\030\001 \001(\004\022\n\n\002hp\030\002 \001(\005\"J\n\nReqNpcI"
-  "nfo\022\016\n\006npc_id\030\001 \001(\005\022\016\n\006npc_sn\030\002 \001(\004\022\034\n\003p"
-  "os\030\003 \001(\0132\017.Proto.Vector3D\"N\n\014SyncFsmStat"
-  "e\022\r\n\005state\030\001 \001(\005\022\014\n\004code\030\002 \001(\005\022\016\n\006npc_sn"
-  "\030\003 \001(\004\022\021\n\tplayer_sn\030\004 \001(\004\"K\n\014SyncBtActio"
-  "n\022\n\n\002id\030\001 \001(\005\022\014\n\004code\030\002 \001(\005\022\016\n\006npc_sn\030\003 "
-  "\001(\004\022\021\n\tplayer_sn\030\004 \001(\004\":\n\nSyncNpcPos\022\016\n\006"
-  "npc_sn\030\001 \001(\004\022\034\n\003pos\030\002 \001(\0132\017.Proto.Vector"
-  "3D\"-\n\rSyncPlayerPos\022\034\n\003pos\030\001 \001(\0132\017.Proto"
-  ".Vector3D\"c\n\rSyncPlayerCmd\022\014\n\004type\030\001 \001(\005"
-  "\022\036\n\005point\030\002 \001(\0132\017.Proto.Vector3D\022\021\n\tplay"
-  "er_sn\030\003 \001(\004\022\021\n\ttarget_sn\030\004 \001(\004\"\"\n\rReqSyn"
-  "cPlayer\022\021\n\tplayer_sn\030\001 \001(\004\"\?\n\rReqLinkPla"
-  "yer\022\016\n\006npc_id\030\001 \001(\005\022\016\n\006npc_sn\030\002 \001(\004\022\016\n\006l"
-  "inker\030\003 \001(\010\"0\n\013NpcAtkEvent\022\016\n\006npc_sn\030\001 \001"
-  "(\004\022\021\n\ttarget_sn\030\002 \001(\004\"6\n\016PlayerAtkEvent\022"
-  "\021\n\tplayer_sn\030\001 \001(\004\022\021\n\ttarget_sn\030\002 \001(\004\"Y\n"
-  "\014DropItemList\022\016\n\006npc_sn\030\001 \001(\004\022\013\n\003exp\030\002 \001"
-  "(\005\022\014\n\004gold\030\003 \001(\005\022\036\n\005items\030\004 \003(\0132\017.Proto."
-  "ItemData\"@\n\tPlayerReq\022\r\n\005agree\030\001 \001(\010\022\021\n\t"
-  "applicant\030\002 \001(\004\022\021\n\tresponder\030\003 \001(\004\"8\n\007Ch"
-  "atMsg\022\016\n\006sender\030\001 \001(\004\022\014\n\004name\030\002 \001(\t\022\017\n\007c"
-  "ontent\030\003 \001(\t\".\n\nCreateTeam\022\017\n\007captain\030\001 "
-  "\001(\004\022\017\n\007members\030\002 \003(\004\"Q\n\014EnterDungeon\022\020\n\010"
-  "world_id\030\001 \001(\005\022\020\n\010world_sn\030\002 \001(\004\022\r\n\005agre"
-  "e\030\003 \001(\010\022\016\n\006sender\030\004 \001(\t*x\n\007TagType\022\017\n\013Ta"
-  "gTypeNone\020\000\022\022\n\016TagTypeAccount\020\001\022\016\n\nTagTy"
-  "peApp\020\002\022\021\n\rTagTypeEntity\020\003\022\022\n\016TagTypeToW"
-  "orld\020\004\022\021\n\rTagTypePlayer\020\005*\232\001\n\026AccountChe"
-  "ckReturnCode\022\n\n\006ARC_OK\020\000\022\017\n\013ARC_UNKONWN\020"
-  "\001\022\031\n\025ARC_NOT_FOUND_ACCOUNT\020\002\022\026\n\022ARC_PASS"
-  "WORD_WRONG\020\003\022\017\n\013ARC_LOGGING\020\004\022\017\n\013ARC_TIM"
-  "EOUT\020\005\022\016\n\nARC_ONLINE\020\006*G\n\023LoginHttpRetur"
-  "nCode\022\013\n\007LHRC_OK\020\000\022\020\n\014LHRC_TIMEOUT\020\001\022\021\n\r"
-  "LHRC_NOTFOUND\020\002*L\n\026CreatePlayerReturnCod"
-  "e\022\021\n\rCPR_Create_OK\020\000\022\017\n\013CPR_Unkonwn\020\001\022\016\n"
-  "\nCPR_Rename\020\002b\006proto3"
+  "on\030\002 \003(\0132\017.Proto.Vector3D\"J\n\nEntityMove\022"
+  "\n\n\002sn\030\001 \001(\004\022\017\n\007running\030\002 \001(\010\022\037\n\006points\030\003"
+  " \003(\0132\017.Proto.Vector3D\"*\n\020SyncEntityStatu"
+  "s\022\n\n\002sn\030\001 \001(\004\022\n\n\002hp\030\002 \001(\005\"J\n\nReqNpcInfo\022"
+  "\016\n\006npc_id\030\001 \001(\005\022\016\n\006npc_sn\030\002 \001(\004\022\034\n\003pos\030\003"
+  " \001(\0132\017.Proto.Vector3D\"N\n\014SyncFsmState\022\r\n"
+  "\005state\030\001 \001(\005\022\014\n\004code\030\002 \001(\005\022\016\n\006npc_sn\030\003 \001"
+  "(\004\022\021\n\tplayer_sn\030\004 \001(\004\"K\n\014SyncBtAction\022\n\n"
+  "\002id\030\001 \001(\005\022\014\n\004code\030\002 \001(\005\022\016\n\006npc_sn\030\003 \001(\004\022"
+  "\021\n\tplayer_sn\030\004 \001(\004\":\n\nSyncNpcPos\022\016\n\006npc_"
+  "sn\030\001 \001(\004\022\034\n\003pos\030\002 \001(\0132\017.Proto.Vector3D\"-"
+  "\n\rSyncPlayerPos\022\034\n\003pos\030\001 \001(\0132\017.Proto.Vec"
+  "tor3D\"c\n\rSyncPlayerCmd\022\014\n\004type\030\001 \001(\005\022\036\n\005"
+  "point\030\002 \001(\0132\017.Proto.Vector3D\022\021\n\tplayer_s"
+  "n\030\003 \001(\004\022\021\n\ttarget_sn\030\004 \001(\004\"\"\n\rReqSyncPla"
+  "yer\022\021\n\tplayer_sn\030\001 \001(\004\"\?\n\rReqLinkPlayer\022"
+  "\016\n\006npc_id\030\001 \001(\005\022\016\n\006npc_sn\030\002 \001(\004\022\016\n\006linke"
+  "r\030\003 \001(\010\"0\n\013NpcAtkEvent\022\016\n\006npc_sn\030\001 \001(\004\022\021"
+  "\n\ttarget_sn\030\002 \001(\004\"6\n\016PlayerAtkEvent\022\021\n\tp"
+  "layer_sn\030\001 \001(\004\022\021\n\ttarget_sn\030\002 \001(\004\"Y\n\014Dro"
+  "pItemList\022\016\n\006npc_sn\030\001 \001(\004\022\013\n\003exp\030\002 \001(\005\022\014"
+  "\n\004gold\030\003 \001(\005\022\036\n\005items\030\004 \003(\0132\017.Proto.Item"
+  "Data\"@\n\tPlayerReq\022\r\n\005agree\030\001 \001(\010\022\021\n\tappl"
+  "icant\030\002 \001(\004\022\021\n\tresponder\030\003 \001(\004\"8\n\007ChatMs"
+  "g\022\016\n\006sender\030\001 \001(\004\022\014\n\004name\030\002 \001(\t\022\017\n\007conte"
+  "nt\030\003 \001(\t\".\n\nCreateTeam\022\017\n\007captain\030\001 \001(\004\022"
+  "\017\n\007members\030\002 \003(\004\"Q\n\014EnterDungeon\022\020\n\010worl"
+  "d_id\030\001 \001(\005\022\020\n\010world_sn\030\002 \001(\004\022\r\n\005agree\030\003 "
+  "\001(\010\022\016\n\006sender\030\004 \001(\t*x\n\007TagType\022\017\n\013TagTyp"
+  "eNone\020\000\022\022\n\016TagTypeAccount\020\001\022\016\n\nTagTypeAp"
+  "p\020\002\022\021\n\rTagTypeEntity\020\003\022\022\n\016TagTypeToWorld"
+  "\020\004\022\021\n\rTagTypePlayer\020\005*\232\001\n\026AccountCheckRe"
+  "turnCode\022\n\n\006ARC_OK\020\000\022\017\n\013ARC_UNKONWN\020\001\022\031\n"
+  "\025ARC_NOT_FOUND_ACCOUNT\020\002\022\026\n\022ARC_PASSWORD"
+  "_WRONG\020\003\022\017\n\013ARC_LOGGING\020\004\022\017\n\013ARC_TIMEOUT"
+  "\020\005\022\016\n\nARC_ONLINE\020\006*G\n\023LoginHttpReturnCod"
+  "e\022\013\n\007LHRC_OK\020\000\022\020\n\014LHRC_TIMEOUT\020\001\022\021\n\rLHRC"
+  "_NOTFOUND\020\002*L\n\026CreatePlayerReturnCode\022\021\n"
+  "\rCPR_Create_OK\020\000\022\017\n\013CPR_Unkonwn\020\001\022\016\n\nCPR"
+  "_Rename\020\002b\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_msg_2eproto_deps[1] = {
   &::descriptor_table_db_2eproto,
 };
-static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_msg_2eproto_sccs[80] = {
+static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_msg_2eproto_sccs[81] = {
   &scc_info_AccountCheck_msg_2eproto.base,
   &scc_info_AccountCheckRs_msg_2eproto.base,
   &scc_info_AccountDeleteOnlineToRedis_msg_2eproto.base,
@@ -2432,6 +2463,7 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_msg
   &scc_info_Efficiency_msg_2eproto.base,
   &scc_info_EnterDungeon_msg_2eproto.base,
   &scc_info_EnterWorld_msg_2eproto.base,
+  &scc_info_EntityMove_msg_2eproto.base,
   &scc_info_GameToken_msg_2eproto.base,
   &scc_info_GameTokenToRedis_msg_2eproto.base,
   &scc_info_GameTokenToRedisRs_msg_2eproto.base,
@@ -2488,10 +2520,10 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_msg
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_msg_2eproto_once;
 static bool descriptor_table_msg_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_msg_2eproto = {
-  &descriptor_table_msg_2eproto_initialized, descriptor_table_protodef_msg_2eproto, "msg.proto", 6181,
-  &descriptor_table_msg_2eproto_once, descriptor_table_msg_2eproto_sccs, descriptor_table_msg_2eproto_deps, 80, 1,
+  &descriptor_table_msg_2eproto_initialized, descriptor_table_protodef_msg_2eproto, "msg.proto", 6257,
+  &descriptor_table_msg_2eproto_once, descriptor_table_msg_2eproto_sccs, descriptor_table_msg_2eproto_deps, 81, 1,
   schemas, file_default_instances, TableStruct_msg_2eproto::offsets,
-  file_level_metadata_msg_2eproto, 80, file_level_enum_descriptors_msg_2eproto, file_level_service_descriptors_msg_2eproto,
+  file_level_metadata_msg_2eproto, 81, file_level_enum_descriptors_msg_2eproto, file_level_service_descriptors_msg_2eproto,
 };
 
 // Force running AddDescriptors() at dynamic initialization time.
@@ -22950,6 +22982,359 @@ void Move::InternalSwap(Move* other) {
 
 // ===================================================================
 
+void EntityMove::InitAsDefaultInstance() {
+}
+class EntityMove::_Internal {
+ public:
+};
+
+void EntityMove::clear_points() {
+  points_.Clear();
+}
+EntityMove::EntityMove()
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:Proto.EntityMove)
+}
+EntityMove::EntityMove(const EntityMove& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr),
+      points_(from.points_) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::memcpy(&sn_, &from.sn_,
+    static_cast<size_t>(reinterpret_cast<char*>(&running_) -
+    reinterpret_cast<char*>(&sn_)) + sizeof(running_));
+  // @@protoc_insertion_point(copy_constructor:Proto.EntityMove)
+}
+
+void EntityMove::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_EntityMove_msg_2eproto.base);
+  ::memset(&sn_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&running_) -
+      reinterpret_cast<char*>(&sn_)) + sizeof(running_));
+}
+
+EntityMove::~EntityMove() {
+  // @@protoc_insertion_point(destructor:Proto.EntityMove)
+  SharedDtor();
+}
+
+void EntityMove::SharedDtor() {
+}
+
+void EntityMove::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const EntityMove& EntityMove::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_EntityMove_msg_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void EntityMove::Clear() {
+// @@protoc_insertion_point(message_clear_start:Proto.EntityMove)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  points_.Clear();
+  ::memset(&sn_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&running_) -
+      reinterpret_cast<char*>(&sn_)) + sizeof(running_));
+  _internal_metadata_.Clear();
+}
+
+#if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+const char* EntityMove::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // uint64 sn = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
+          sn_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // bool running = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
+          running_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // repeated .Proto.Vector3D points = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(add_points(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::uint8>(ptr) == 26);
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+#else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+bool EntityMove::MergePartialFromCodedStream(
+    ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+  // @@protoc_insertion_point(parse_start:Proto.EntityMove)
+  for (;;) {
+    ::std::pair<::PROTOBUF_NAMESPACE_ID::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // uint64 sn = 1;
+      case 1: {
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (8 & 0xFF)) {
+
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   ::PROTOBUF_NAMESPACE_ID::uint64, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_UINT64>(
+                 input, &sn_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // bool running = 2;
+      case 2: {
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (16 & 0xFF)) {
+
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &running_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // repeated .Proto.Vector3D points = 3;
+      case 3: {
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (26 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
+                input, add_points()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:Proto.EntityMove)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:Proto.EntityMove)
+  return false;
+#undef DO_
+}
+#endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+
+void EntityMove::SerializeWithCachedSizes(
+    ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:Proto.EntityMove)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // uint64 sn = 1;
+  if (this->sn() != 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64(1, this->sn(), output);
+  }
+
+  // bool running = 2;
+  if (this->running() != 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBool(2, this->running(), output);
+  }
+
+  // repeated .Proto.Vector3D points = 3;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->points_size()); i < n; i++) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
+      3,
+      this->points(static_cast<int>(i)),
+      output);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFields(
+        _internal_metadata_.unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:Proto.EntityMove)
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* EntityMove::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:Proto.EntityMove)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // uint64 sn = 1;
+  if (this->sn() != 0) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64ToArray(1, this->sn(), target);
+  }
+
+  // bool running = 2;
+  if (this->running() != 0) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(2, this->running(), target);
+  }
+
+  // repeated .Proto.Vector3D points = 3;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->points_size()); i < n; i++) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        3, this->points(static_cast<int>(i)), target);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:Proto.EntityMove)
+  return target;
+}
+
+size_t EntityMove::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:Proto.EntityMove)
+  size_t total_size = 0;
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::ComputeUnknownFieldsSize(
+        _internal_metadata_.unknown_fields());
+  }
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // repeated .Proto.Vector3D points = 3;
+  {
+    unsigned int count = static_cast<unsigned int>(this->points_size());
+    total_size += 1UL * count;
+    for (unsigned int i = 0; i < count; i++) {
+      total_size +=
+        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+          this->points(static_cast<int>(i)));
+    }
+  }
+
+  // uint64 sn = 1;
+  if (this->sn() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt64Size(
+        this->sn());
+  }
+
+  // bool running = 2;
+  if (this->running() != 0) {
+    total_size += 1 + 1;
+  }
+
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void EntityMove::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:Proto.EntityMove)
+  GOOGLE_DCHECK_NE(&from, this);
+  const EntityMove* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<EntityMove>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:Proto.EntityMove)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:Proto.EntityMove)
+    MergeFrom(*source);
+  }
+}
+
+void EntityMove::MergeFrom(const EntityMove& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:Proto.EntityMove)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  points_.MergeFrom(from.points_);
+  if (from.sn() != 0) {
+    set_sn(from.sn());
+  }
+  if (from.running() != 0) {
+    set_running(from.running());
+  }
+}
+
+void EntityMove::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:Proto.EntityMove)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void EntityMove::CopyFrom(const EntityMove& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:Proto.EntityMove)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool EntityMove::IsInitialized() const {
+  return true;
+}
+
+void EntityMove::InternalSwap(EntityMove* other) {
+  using std::swap;
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  CastToBase(&points_)->InternalSwap(CastToBase(&other->points_));
+  swap(sn_, other->sn_);
+  swap(running_, other->running_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata EntityMove::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
+// ===================================================================
+
 void SyncEntityStatus::InitAsDefaultInstance() {
 }
 class SyncEntityStatus::_Internal {
@@ -28548,6 +28933,9 @@ template<> PROTOBUF_NOINLINE ::Proto::RoleDisappear* Arena::CreateMaybeMessage< 
 }
 template<> PROTOBUF_NOINLINE ::Proto::Move* Arena::CreateMaybeMessage< ::Proto::Move >(Arena* arena) {
   return Arena::CreateInternal< ::Proto::Move >(arena);
+}
+template<> PROTOBUF_NOINLINE ::Proto::EntityMove* Arena::CreateMaybeMessage< ::Proto::EntityMove >(Arena* arena) {
+  return Arena::CreateInternal< ::Proto::EntityMove >(arena);
 }
 template<> PROTOBUF_NOINLINE ::Proto::SyncEntityStatus* Arena::CreateMaybeMessage< ::Proto::SyncEntityStatus >(Arena* arena) {
   return Arena::CreateInternal< ::Proto::SyncEntityStatus >(arena);

@@ -11,10 +11,9 @@ MoveSystem::MoveSystem()
 
 void MoveSystem::Update(EntitySystem* pEntities)
 {
-    // Ã¿ 0.5 ÃëË¢Ò»´Î
-    const auto curTime = Global::GetInstance()->TimeTick;
-    const auto timeElapsed = curTime - _lastTime;
-    if (timeElapsed < 500)
+    _currTime = Global::GetInstance()->TimeTick;
+    _timeElapsed = _currTime - _lastTime;
+    if (_timeElapsed < 100)
         return;
 
     if (_pCollections == nullptr)
@@ -24,17 +23,19 @@ void MoveSystem::Update(EntitySystem* pEntities)
             return;
     }
 
-    _lastTime = curTime;
-
-    const auto plists = _pCollections->GetAll();
-    for (auto iter = plists->begin(); iter != plists->end(); ++iter)
+    _lastTime = _currTime;
+    const auto& plists = *_pCollections->GetAll();
+    for (auto iter = plists.begin(); iter != plists.end(); ++iter)
     {
         auto pMoveComponent = dynamic_cast<MoveComponent*>(iter->second);
-        auto pPlayer = pMoveComponent->GetParent<Player>();
-
-        if (pMoveComponent->Update(timeElapsed, pPlayer->GetComponent<PlayerComponentLastMap>(), 2))
+        auto pNpc = pMoveComponent->GetParent<Npc>();
+        if (pNpc)
+            pMoveComponent->Update(_timeElapsed, pNpc, pMoveComponent->moveSpeed);
+        else
         {
-            pPlayer->RemoveComponent<MoveComponent>();
+            auto pPlayer = pMoveComponent->GetParent<Player>();
+            if (pMoveComponent->Update(_timeElapsed, pPlayer->GetComponent<PlayerComponentLastMap>(), 5.56f))
+                pPlayer->RemoveComponent<MoveComponent>();
         }
     }
 }

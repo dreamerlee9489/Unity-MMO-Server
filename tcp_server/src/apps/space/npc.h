@@ -57,13 +57,10 @@ class Player;
 class Npc : public Entity<Npc>, public IAwakeFromPoolSystem<ResourceNpc>
 {
 	float _viewDist = 8.0f, _atkDist = 2.0f;
-	Vector3 _initPos;
-	Vector3 _currPos;
-	Vector3 _nextPos;
+	Vector3 _initPos, _currPos, _nextPos;
 	World* _world = nullptr;
 	std::map<uint64, Player*>* _players = nullptr;
 
-	timeutil::Time _currTime;
 	std::default_random_engine _intEng;
 	std::uniform_int_distribution<int> _idDis, _numDis;
 	static std::default_random_engine _realEng;
@@ -72,7 +69,7 @@ class Npc : public Entity<Npc>, public IAwakeFromPoolSystem<ResourceNpc>
 public:
 	int id = 0, type = 0, lv = 0, hp = 0, initHp = 0, atk = 0, def = 0;
 	bool fleeing = false, rebirth = false;
-	Player* target = nullptr, * linker = nullptr;
+	Player* target = nullptr, *linker = nullptr;
 
 	void Awake(ResourceNpc cfg) override;
 

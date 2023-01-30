@@ -19,6 +19,7 @@ public:
 		_npc->target = nullptr;
 		_npc->linker = nullptr;
 		_npc->fleeing = false;
+		_npc->SetCurrPos(_npc->GetInitPos());
 		_currTime = _lastTime = Global::GetInstance()->TimeTick;
 	}
 

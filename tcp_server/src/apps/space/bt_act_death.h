@@ -30,7 +30,6 @@ public:
 		_timeElapsed = _currTime - _lastTime;
 		if (_timeElapsed < 8000 || !_npc->rebirth)
 			return BtStatus::Running;
-		_npc->SetCurrPos(_npc->GetInitPos());
 		return BtStatus::Success;
 	}
 

@@ -49,7 +49,7 @@ struct TableStruct_msg_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxillaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[80]
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[81]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
@@ -141,6 +141,9 @@ extern EnterDungeonDefaultTypeInternal _EnterDungeon_default_instance_;
 class EnterWorld;
 class EnterWorldDefaultTypeInternal;
 extern EnterWorldDefaultTypeInternal _EnterWorld_default_instance_;
+class EntityMove;
+class EntityMoveDefaultTypeInternal;
+extern EntityMoveDefaultTypeInternal _EntityMove_default_instance_;
 class GameToken;
 class GameTokenDefaultTypeInternal;
 extern GameTokenDefaultTypeInternal _GameToken_default_instance_;
@@ -327,6 +330,7 @@ template<> ::Proto::DropItemList* Arena::CreateMaybeMessage<::Proto::DropItemLis
 template<> ::Proto::Efficiency* Arena::CreateMaybeMessage<::Proto::Efficiency>(Arena*);
 template<> ::Proto::EnterDungeon* Arena::CreateMaybeMessage<::Proto::EnterDungeon>(Arena*);
 template<> ::Proto::EnterWorld* Arena::CreateMaybeMessage<::Proto::EnterWorld>(Arena*);
+template<> ::Proto::EntityMove* Arena::CreateMaybeMessage<::Proto::EntityMove>(Arena*);
 template<> ::Proto::GameToken* Arena::CreateMaybeMessage<::Proto::GameToken>(Arena*);
 template<> ::Proto::GameTokenToRedis* Arena::CreateMaybeMessage<::Proto::GameTokenToRedis>(Arena*);
 template<> ::Proto::GameTokenToRedisRs* Arena::CreateMaybeMessage<::Proto::GameTokenToRedisRs>(Arena*);
@@ -10126,6 +10130,157 @@ class Move :
 };
 // -------------------------------------------------------------------
 
+class EntityMove :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Proto.EntityMove) */ {
+ public:
+  EntityMove();
+  virtual ~EntityMove();
+
+  EntityMove(const EntityMove& from);
+  EntityMove(EntityMove&& from) noexcept
+    : EntityMove() {
+    *this = ::std::move(from);
+  }
+
+  inline EntityMove& operator=(const EntityMove& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline EntityMove& operator=(EntityMove&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const EntityMove& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const EntityMove* internal_default_instance() {
+    return reinterpret_cast<const EntityMove*>(
+               &_EntityMove_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    64;
+
+  friend void swap(EntityMove& a, EntityMove& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(EntityMove* other) {
+    if (other == this) return;
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline EntityMove* New() const final {
+    return CreateMaybeMessage<EntityMove>(nullptr);
+  }
+
+  EntityMove* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<EntityMove>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const EntityMove& from);
+  void MergeFrom(const EntityMove& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  #else
+  bool MergePartialFromCodedStream(
+      ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) final;
+  #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  void SerializeWithCachedSizes(
+      ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(EntityMove* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "Proto.EntityMove";
+  }
+  private:
+  inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_msg_2eproto);
+    return ::descriptor_table_msg_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kPointsFieldNumber = 3,
+    kSnFieldNumber = 1,
+    kRunningFieldNumber = 2,
+  };
+  // repeated .Proto.Vector3D points = 3;
+  int points_size() const;
+  void clear_points();
+  ::Proto::Vector3D* mutable_points(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::Vector3D >*
+      mutable_points();
+  const ::Proto::Vector3D& points(int index) const;
+  ::Proto::Vector3D* add_points();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::Vector3D >&
+      points() const;
+
+  // uint64 sn = 1;
+  void clear_sn();
+  ::PROTOBUF_NAMESPACE_ID::uint64 sn() const;
+  void set_sn(::PROTOBUF_NAMESPACE_ID::uint64 value);
+
+  // bool running = 2;
+  void clear_running();
+  bool running() const;
+  void set_running(bool value);
+
+  // @@protoc_insertion_point(class_scope:Proto.EntityMove)
+ private:
+  class _Internal;
+
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::Vector3D > points_;
+  ::PROTOBUF_NAMESPACE_ID::uint64 sn_;
+  bool running_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_msg_2eproto;
+};
+// -------------------------------------------------------------------
+
 class SyncEntityStatus :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Proto.SyncEntityStatus) */ {
  public:
@@ -10168,7 +10323,7 @@ class SyncEntityStatus :
                &_SyncEntityStatus_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    64;
+    65;
 
   friend void swap(SyncEntityStatus& a, SyncEntityStatus& b) {
     a.Swap(&b);
@@ -10306,7 +10461,7 @@ class ReqNpcInfo :
                &_ReqNpcInfo_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    65;
+    66;
 
   friend void swap(ReqNpcInfo& a, ReqNpcInfo& b) {
     a.Swap(&b);
@@ -10454,7 +10609,7 @@ class SyncFsmState :
                &_SyncFsmState_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    66;
+    67;
 
   friend void swap(SyncFsmState& a, SyncFsmState& b) {
     a.Swap(&b);
@@ -10606,7 +10761,7 @@ class SyncBtAction :
                &_SyncBtAction_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    67;
+    68;
 
   friend void swap(SyncBtAction& a, SyncBtAction& b) {
     a.Swap(&b);
@@ -10758,7 +10913,7 @@ class SyncNpcPos :
                &_SyncNpcPos_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    68;
+    69;
 
   friend void swap(SyncNpcPos& a, SyncNpcPos& b) {
     a.Swap(&b);
@@ -10899,7 +11054,7 @@ class SyncPlayerPos :
                &_SyncPlayerPos_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    69;
+    70;
 
   friend void swap(SyncPlayerPos& a, SyncPlayerPos& b) {
     a.Swap(&b);
@@ -11033,7 +11188,7 @@ class SyncPlayerCmd :
                &_SyncPlayerCmd_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    70;
+    71;
 
   friend void swap(SyncPlayerCmd& a, SyncPlayerCmd& b) {
     a.Swap(&b);
@@ -11188,7 +11343,7 @@ class ReqSyncPlayer :
                &_ReqSyncPlayer_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    71;
+    72;
 
   friend void swap(ReqSyncPlayer& a, ReqSyncPlayer& b) {
     a.Swap(&b);
@@ -11319,7 +11474,7 @@ class ReqLinkPlayer :
                &_ReqLinkPlayer_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    72;
+    73;
 
   friend void swap(ReqLinkPlayer& a, ReqLinkPlayer& b) {
     a.Swap(&b);
@@ -11464,7 +11619,7 @@ class NpcAtkEvent :
                &_NpcAtkEvent_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    73;
+    74;
 
   friend void swap(NpcAtkEvent& a, NpcAtkEvent& b) {
     a.Swap(&b);
@@ -11602,7 +11757,7 @@ class PlayerAtkEvent :
                &_PlayerAtkEvent_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    74;
+    75;
 
   friend void swap(PlayerAtkEvent& a, PlayerAtkEvent& b) {
     a.Swap(&b);
@@ -11740,7 +11895,7 @@ class DropItemList :
                &_DropItemList_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    75;
+    76;
 
   friend void swap(DropItemList& a, DropItemList& b) {
     a.Swap(&b);
@@ -11898,7 +12053,7 @@ class PlayerReq :
                &_PlayerReq_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    76;
+    77;
 
   friend void swap(PlayerReq& a, PlayerReq& b) {
     a.Swap(&b);
@@ -12043,7 +12198,7 @@ class ChatMsg :
                &_ChatMsg_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    77;
+    78;
 
   friend void swap(ChatMsg& a, ChatMsg& b) {
     a.Swap(&b);
@@ -12200,7 +12355,7 @@ class CreateTeam :
                &_CreateTeam_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    78;
+    79;
 
   friend void swap(CreateTeam& a, CreateTeam& b) {
     a.Swap(&b);
@@ -12345,7 +12500,7 @@ class EnterDungeon :
                &_EnterDungeon_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    79;
+    80;
 
   friend void swap(EnterDungeon& a, EnterDungeon& b) {
     a.Swap(&b);
@@ -16480,6 +16635,65 @@ Move::position() const {
 
 // -------------------------------------------------------------------
 
+// EntityMove
+
+// uint64 sn = 1;
+inline void EntityMove::clear_sn() {
+  sn_ = PROTOBUF_ULONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint64 EntityMove::sn() const {
+  // @@protoc_insertion_point(field_get:Proto.EntityMove.sn)
+  return sn_;
+}
+inline void EntityMove::set_sn(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+  
+  sn_ = value;
+  // @@protoc_insertion_point(field_set:Proto.EntityMove.sn)
+}
+
+// bool running = 2;
+inline void EntityMove::clear_running() {
+  running_ = false;
+}
+inline bool EntityMove::running() const {
+  // @@protoc_insertion_point(field_get:Proto.EntityMove.running)
+  return running_;
+}
+inline void EntityMove::set_running(bool value) {
+  
+  running_ = value;
+  // @@protoc_insertion_point(field_set:Proto.EntityMove.running)
+}
+
+// repeated .Proto.Vector3D points = 3;
+inline int EntityMove::points_size() const {
+  return points_.size();
+}
+inline ::Proto::Vector3D* EntityMove::mutable_points(int index) {
+  // @@protoc_insertion_point(field_mutable:Proto.EntityMove.points)
+  return points_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::Vector3D >*
+EntityMove::mutable_points() {
+  // @@protoc_insertion_point(field_mutable_list:Proto.EntityMove.points)
+  return &points_;
+}
+inline const ::Proto::Vector3D& EntityMove::points(int index) const {
+  // @@protoc_insertion_point(field_get:Proto.EntityMove.points)
+  return points_.Get(index);
+}
+inline ::Proto::Vector3D* EntityMove::add_points() {
+  // @@protoc_insertion_point(field_add:Proto.EntityMove.points)
+  return points_.Add();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::Vector3D >&
+EntityMove::points() const {
+  // @@protoc_insertion_point(field_list:Proto.EntityMove.points)
+  return points_;
+}
+
+// -------------------------------------------------------------------
+
 // SyncEntityStatus
 
 // uint64 sn = 1;
@@ -17425,6 +17639,8 @@ inline void EnterDungeon::set_allocated_sender(std::string* sender) {
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

@@ -416,6 +416,12 @@ message Move {
 	repeated Vector3D position = 2;
 }
 
+message EntityMove {
+	uint64 sn = 1;
+	bool running = 2;
+	repeated Vector3D points = 3;
+}
+
 message SyncEntityStatus {
 	uint64 sn = 1;
 	int32 hp = 2;
