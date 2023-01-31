@@ -26,11 +26,14 @@ public:
 		{
 			Player* player = _npc->GetWorld()->GetNearestPlayer(_npc->GetCurrPos());
 			_npc->SetLinkPlayer(player);
-			Proto::ReqLinkPlayer proto;
-			proto.set_npc_id(_npc->GetID());
-			proto.set_npc_sn(_npc->GetSN());
-			proto.set_linker(true);
-			MessageSystemHelp::SendPacket(Proto::MsgId::S2C_ReqLinkPlayer, proto, player);
+			if (player)
+			{
+				Proto::ReqLinkPlayer proto;
+				proto.set_npc_id(_npc->GetID());
+				proto.set_npc_sn(_npc->GetSN());
+				proto.set_linker(true);
+				MessageSystemHelp::SendPacket(Proto::MsgId::S2C_ReqLinkPlayer, proto, player);
+			}
 		}
 		if (!_npc->target)
 		{
