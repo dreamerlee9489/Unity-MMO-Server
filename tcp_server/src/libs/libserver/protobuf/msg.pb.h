@@ -3949,19 +3949,19 @@ class PlayerList :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kPlayerFieldNumber = 2,
+    kPlayersFieldNumber = 2,
     kAccountFieldNumber = 1,
   };
-  // repeated .Proto.PlayerLittle player = 2;
-  int player_size() const;
-  void clear_player();
-  ::Proto::PlayerLittle* mutable_player(int index);
+  // repeated .Proto.PlayerLittle players = 2;
+  int players_size() const;
+  void clear_players();
+  ::Proto::PlayerLittle* mutable_players(int index);
   ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::PlayerLittle >*
-      mutable_player();
-  const ::Proto::PlayerLittle& player(int index) const;
-  ::Proto::PlayerLittle* add_player();
+      mutable_players();
+  const ::Proto::PlayerLittle& players(int index) const;
+  ::Proto::PlayerLittle* add_players();
   const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::PlayerLittle >&
-      player() const;
+      players() const;
 
   // string account = 1;
   void clear_account();
@@ -3979,7 +3979,7 @@ class PlayerList :
   class _Internal;
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::PlayerLittle > player_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::PlayerLittle > players_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr account_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_msg_2eproto;
@@ -14060,34 +14060,34 @@ inline void PlayerList::set_allocated_account(std::string* account) {
   // @@protoc_insertion_point(field_set_allocated:Proto.PlayerList.account)
 }
 
-// repeated .Proto.PlayerLittle player = 2;
-inline int PlayerList::player_size() const {
-  return player_.size();
+// repeated .Proto.PlayerLittle players = 2;
+inline int PlayerList::players_size() const {
+  return players_.size();
 }
-inline void PlayerList::clear_player() {
-  player_.Clear();
+inline void PlayerList::clear_players() {
+  players_.Clear();
 }
-inline ::Proto::PlayerLittle* PlayerList::mutable_player(int index) {
-  // @@protoc_insertion_point(field_mutable:Proto.PlayerList.player)
-  return player_.Mutable(index);
+inline ::Proto::PlayerLittle* PlayerList::mutable_players(int index) {
+  // @@protoc_insertion_point(field_mutable:Proto.PlayerList.players)
+  return players_.Mutable(index);
 }
 inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::PlayerLittle >*
-PlayerList::mutable_player() {
-  // @@protoc_insertion_point(field_mutable_list:Proto.PlayerList.player)
-  return &player_;
+PlayerList::mutable_players() {
+  // @@protoc_insertion_point(field_mutable_list:Proto.PlayerList.players)
+  return &players_;
 }
-inline const ::Proto::PlayerLittle& PlayerList::player(int index) const {
-  // @@protoc_insertion_point(field_get:Proto.PlayerList.player)
-  return player_.Get(index);
+inline const ::Proto::PlayerLittle& PlayerList::players(int index) const {
+  // @@protoc_insertion_point(field_get:Proto.PlayerList.players)
+  return players_.Get(index);
 }
-inline ::Proto::PlayerLittle* PlayerList::add_player() {
-  // @@protoc_insertion_point(field_add:Proto.PlayerList.player)
-  return player_.Add();
+inline ::Proto::PlayerLittle* PlayerList::add_players() {
+  // @@protoc_insertion_point(field_add:Proto.PlayerList.players)
+  return players_.Add();
 }
 inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::Proto::PlayerLittle >&
-PlayerList::player() const {
-  // @@protoc_insertion_point(field_list:Proto.PlayerList.player)
-  return player_;
+PlayerList::players() const {
+  // @@protoc_insertion_point(field_list:Proto.PlayerList.players)
+  return players_;
 }
 
 // -------------------------------------------------------------------

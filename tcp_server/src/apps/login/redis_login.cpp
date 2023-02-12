@@ -81,14 +81,13 @@ void RedisLogin::HandleAccountQueryOnline(Packet* pPacket)
     protoRs.set_account(account.c_str());
     protoRs.set_return_code(Proto::AccountQueryOnlineToRedisRs::SOTR_Offline);
 
-    // 是否正在登录
+    // 鏄惁姝ｅ湪鐧诲綍
     if (!SetnxExpire(RedisKeyAccountOnlineLogin + proto.account(), Global::GetInstance()->GetCurAppId(), RedisKeyAccountOnlineLoginTimeout))
         protoRs.set_return_code(Proto::AccountQueryOnlineToRedisRs::SOTR_Online);
 
-    // 是否 Game 在线
+    // 鏄惁 Game 鍦ㄧ嚎
     if (GetInt(RedisKeyAccountOnlineGame + proto.account()) != 0)
         protoRs.set_return_code(Proto::AccountQueryOnlineToRedisRs::SOTR_Online);
-
 
     MessageSystemHelp::DispatchPacket(Proto::MsgId::MI_AccountQueryOnlineToRedisRs, protoRs, nullptr);
 }

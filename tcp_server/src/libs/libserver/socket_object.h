@@ -38,6 +38,9 @@ struct SocketKey
 	static SocketKey None;
 };
 
+/// <summary>
+/// TagKey中保存的某一个键
+/// </summary>
 enum class TagType
 {
 	None = Proto::TagType::TagTypeNone,
@@ -67,6 +70,9 @@ inline const char* GetTagTypeName(const TagType iType)
 		return "None";
 }
 
+/// <summary>
+/// TagKey中保存的某一个值
+/// </summary>
 struct TagValue
 {
 	/// <summary>

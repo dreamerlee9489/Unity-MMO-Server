@@ -13,160 +13,155 @@
 
 void NetworkConnector::Awake(int iType, int mixConnectAppType)
 {
-    _networkType = (NetworkType)iType;
+	_networkType = (NetworkType)iType;
 
-    // 
-    auto pNetworkLocator = ThreadMgr::GetInstance()->GetEntitySystem()->GetComponent<NetworkLocator>();
-    pNetworkLocator->AddConnectorLocator(this, _networkType);
+	// 
+	auto pNetworkLocator = ThreadMgr::GetInstance()->GetEntitySystem()->GetComponent<NetworkLocator>();
+	pNetworkLocator->AddConnectorLocator(this, _networkType);
 
-    // update
-    AddComponent<UpdateComponent>(BindFunP0(this, &NetworkConnector::Update));
+	// update
+	AddComponent<UpdateComponent>(BindFunP0(this, &NetworkConnector::Update));
 
-    // message
-    auto pMsgSystem = GetSystemManager()->GetMessageSystem();
+	// message
+	auto pMsgSystem = GetSystemManager()->GetMessageSystem();
 
-    pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_NetworkConnect, BindFunP1(this, &NetworkConnector::HandleNetworkConnect));
-    pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_NetworkRequestDisconnect, BindFunP1(this, &NetworkConnector::HandleDisconnect));
+	pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_NetworkConnect, BindFunP1(this, &NetworkConnector::HandleNetworkConnect));
+	pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_NetworkRequestDisconnect, BindFunP1(this, &NetworkConnector::HandleDisconnect));
 
 #ifdef EPOLL
-    std::cout << "epoll model. connector:" << GetNetworkTypeName(_networkType) << std::endl;
-    InitEpoll();
+	std::cout << "epoll model. connector:" << GetNetworkTypeName(_networkType) << std::endl;
+	InitEpoll();
 #else
-    std::cout << "select model. connector:" << GetNetworkTypeName(_networkType) << std::endl;
+	std::cout << "select model. connector:" << GetNetworkTypeName(_networkType) << std::endl;
 #endif
 
-    if (_networkType == NetworkType::TcpConnector && mixConnectAppType > 0)
-    {
-        const auto pYaml = ComponentHelp::GetYaml();
-        APP_TYPE appType;
-        if ((mixConnectAppType & APP_APPMGR) != 0)
-        {
-            appType = APP_APPMGR;
-            const auto pCommonConfig = pYaml->GetIPEndPoint(appType, 0);
-            CreateConnector(appType, 0, pCommonConfig->IntraIp, pCommonConfig->Port);
-        }
+	if (_networkType == NetworkType::TcpConnector && mixConnectAppType > 0)
+	{
+		const auto pYaml = ComponentHelp::GetYaml();
+		APP_TYPE appType;
+		if ((mixConnectAppType & APP_APPMGR) != 0)
+		{
+			appType = APP_APPMGR;
+			const auto pCommonConfig = pYaml->GetIPEndPoint(appType, 0);
+			CreateConnector(appType, 0, pCommonConfig->IntraIp, pCommonConfig->Port);
+		}
 
-        if ((mixConnectAppType & APP_DB_MGR) != 0)
-        {
-            appType = APP_DB_MGR;
-            const auto pCommonConfig = pYaml->GetIPEndPoint(appType, 0);
-            CreateConnector(appType, 0, pCommonConfig->IntraIp, pCommonConfig->Port);
-        }
+		if ((mixConnectAppType & APP_DB_MGR) != 0)
+		{
+			appType = APP_DB_MGR;
+			const auto pCommonConfig = pYaml->GetIPEndPoint(appType, 0);
+			CreateConnector(appType, 0, pCommonConfig->IntraIp, pCommonConfig->Port);
+		}
 
-        if ((mixConnectAppType & APP_LOGIN) != 0)
-        {
-            appType = APP_LOGIN;
-            auto pLoginConfig = dynamic_cast<LoginConfig*>(pYaml->GetConfig(appType));
-            for (auto one : pLoginConfig->Apps)
-            {
-                CreateConnector(appType, one.Id, one.IntraIp, one.Port);
-            }
-        }
+		if ((mixConnectAppType & APP_LOGIN) != 0)
+		{
+			appType = APP_LOGIN;
+			auto pLoginConfig = dynamic_cast<LoginConfig*>(pYaml->GetConfig(appType));
+			for (auto& one : pLoginConfig->Apps)
+			{
+				CreateConnector(appType, one.Id, one.IntraIp, one.Port);
+			}
+		}
 
-        if ((mixConnectAppType & APP_SPACE) != 0)
-        {
-            appType = APP_SPACE;
-            auto pLoginConfig = dynamic_cast<SpaceConfig*>(pYaml->GetConfig(appType));
-            for (auto &one : pLoginConfig->Apps)
-            {
-                CreateConnector(appType, one.Id, one.IntraIp, one.Port);
-            }
-        }
-    }
+		if ((mixConnectAppType & APP_SPACE) != 0)
+		{
+			appType = APP_SPACE;
+			auto pLoginConfig = dynamic_cast<SpaceConfig*>(pYaml->GetConfig(appType));
+			for (auto& one : pLoginConfig->Apps)
+			{
+				CreateConnector(appType, one.Id, one.IntraIp, one.Port);
+			}
+		}
+	}
 }
 
 void NetworkConnector::CreateConnector(APP_TYPE appType, int appId, std::string ip, int port)
 {
-    _connecting.AddObj(new ConnectDetail(TagType::App, TagValue{ "", GetAppKey(appType, appId) }, ip, port));
+	_connecting.AddObj(new ConnectDetail(TagType::App, TagValue{ "", GetAppKey(appType, appId) }, ip, port));
 }
 
 const char* NetworkConnector::GetTypeName()
 {
-    return typeid(NetworkConnector).name();
+	return typeid(NetworkConnector).name();
 }
 
 uint64 NetworkConnector::GetTypeHashCode()
 {
-    return typeid(NetworkConnector).hash_code();
+	return typeid(NetworkConnector).hash_code();
 }
 
 bool NetworkConnector::Connect(ConnectDetail* pDetail)
 {
-    const int socket = CreateSocket();
-    if (socket == INVALID_SOCKET)
-        return false;
+	const int socket = CreateSocket();
+	if (socket == INVALID_SOCKET)
+		return false;
 
-    sockaddr_in addr;
-    memset(&addr, 0, sizeof(sockaddr_in));
-    addr.sin_family = AF_INET;
-    addr.sin_port = htons(pDetail->Port);
-    ::inet_pton(AF_INET, pDetail->Ip.c_str(), &addr.sin_addr.s_addr);
+	sockaddr_in addr;
+	memset(&addr, 0, sizeof(sockaddr_in));
+	addr.sin_family = AF_INET;
+	addr.sin_port = htons(pDetail->Port);
+	::inet_pton(AF_INET, pDetail->Ip.c_str(), &addr.sin_addr.s_addr);
 
-    const int rs = ::connect(socket, (struct sockaddr*) & addr, sizeof(sockaddr));
-    if (rs == 0)
-    {
-        return CreateConnectObj(socket, pDetail->TType, pDetail->TValue, ConnectStateType::Connected);
-    }
-    else
-    {
-        const auto socketError = _sock_err();
-        if (!NetworkHelp::IsError(socketError))
-        {
-            // Œ¥¡¨Ω”…œ£¨µ»¥˝
+	const int rs = ::connect(socket, (struct sockaddr*)&addr, sizeof(sockaddr));
+	if (rs == 0)
+	{
+		return CreateConnectObj(socket, pDetail->TType, pDetail->TValue, ConnectStateType::Connected);
+	}
+	else
+	{
+		const auto socketError = _sock_err();
+		if (!NetworkHelp::IsError(socketError))
+		{
 #ifdef LOG_TRACE_COMPONENT_OPEN
-            std::stringstream traceMsg;
-            traceMsg << "create connect != 0 waiting, err=" << socketError;
-            traceMsg << " network type:" << GetNetworkTypeName(_networkType);
-            ComponentHelp::GetTraceComponent()->Trace(TraceType::Connector, socket, traceMsg.str());
+			// Êú™ËøûÊé•‰∏äÔºåÁ≠âÂæÖ
+			std::stringstream traceMsg;	
+			traceMsg << "create connect != 0 waiting, err=" << socketError;
+			traceMsg << " network type:" << GetNetworkTypeName(_networkType);
+			ComponentHelp::GetTraceComponent()->Trace(TraceType::Connector, socket, traceMsg.str());
 #endif
-
-            return CreateConnectObj(socket, pDetail->TType, pDetail->TValue, ConnectStateType::Connecting);
-        }
-        else
-        {
-            // Œ¥¡¨Ω”…œ£¨≥ˆ¥Ì£¨÷ÿ¿¥
-            LOG_WARN("failed to connect 2. ip:" << pDetail->Ip.c_str() << " port:" << pDetail->Port << " network sn:" << _sn << " socket:" << socket << " err:" << socketError);
-            _sock_close(socket);
-            return false;
-        }
-    }
+			return CreateConnectObj(socket, pDetail->TType, pDetail->TValue, ConnectStateType::Connecting);
+		}
+		else
+		{
+			// Êú™ËøûÊé•‰∏äÔºåÂá∫ÈîôÔºåÈáçÊù•
+			LOG_WARN("failed to connect 2. ip:" << pDetail->Ip.c_str() << " port:" << pDetail->Port << " network sn:" << _sn << " socket:" << socket << " err:" << socketError);
+			_sock_close(socket);
+			return false;
+		}
+	}
 }
 
 void NetworkConnector::HandleNetworkConnect(Packet* pPacket)
 {
-    auto proto = pPacket->ParseToProto<Proto::NetworkConnect>();
-    if (proto.network_type() != (int)_networkType)
-        return;
+	auto proto = pPacket->ParseToProto<Proto::NetworkConnect>();
+	if (proto.network_type() != (int)_networkType)
+		return;
 
-    const auto protoTag = proto.tag();
-    const auto tagValue = protoTag.tag_value();
-    auto tagObj = TagValue{ tagValue.value_str().c_str(), tagValue.value_int64() };
-    const auto pObj = new ConnectDetail((TagType)protoTag.tag_type(), tagObj, proto.ip(), proto.port());
-    _connecting.AddObj(pObj);
+	const auto& protoTag = proto.tag();
+	const auto& tagValue = protoTag.tag_value();
+	auto tagObj = TagValue{ tagValue.value_str().c_str(), tagValue.value_int64() };
+	const auto pObj = new ConnectDetail((TagType)protoTag.tag_type(), tagObj, proto.ip(), proto.port());
+	_connecting.AddObj(pObj);
 }
 
 #ifdef EPOLL
 
 void NetworkConnector::Update()
 {
-    // ”––¬µƒ¡¨Ω”«Î«Û
-    if (_connecting.CanSwap())
-        _connecting.Swap(nullptr);
+	// ÊúâÊñ∞ÁöÑËøûÊé•ËØ∑Ê±Ç
+	if (_connecting.CanSwap())
+		_connecting.Swap(nullptr);
 
-    if (!_connecting.GetReaderCache()->empty())
-    {
-        auto pReader = _connecting.GetReaderCache();
-        for (auto iter = pReader->begin(); iter != pReader->end(); ++iter)
-        {
-            if (Connect(iter->second))
-            {
-                _connecting.RemoveObj(iter->first);
-            }
-        }
-    }
+	if (!_connecting.GetReaderCache()->empty())
+	{
+		auto pReader = _connecting.GetReaderCache();
+		for (auto iter = pReader->begin(); iter != pReader->end(); ++iter)
+			if (Connect(iter->second))
+				_connecting.RemoveObj(iter->first);
+	}
 
-    Epoll();
-    OnNetworkUpdate();
+	Epoll();
+	OnNetworkUpdate();
 }
 
 #else
@@ -174,36 +169,31 @@ void NetworkConnector::Update()
 void NetworkConnector::Update()
 {
 #if LOG_TRACE_COMPONENT_OPEN
-    CheckBegin();
+	CheckBegin();
 #endif
 
-    // ”––¬µƒ¡¨Ω”«Î«Û
-    if (_connecting.CanSwap())
-        _connecting.Swap(nullptr);
+	// ÊúâÊñ∞ÁöÑËøûÊé•ËØ∑Ê±Ç
+	if (_connecting.CanSwap())
+		_connecting.Swap(nullptr);
 
-    if (!_connecting.GetReaderCache()->empty())
-    {
-        auto pReader = _connecting.GetReaderCache();
-        for (auto iter = pReader->begin(); iter != pReader->end(); ++iter)
-        {
-            if (Connect(iter->second))
-            {
-                _connecting.RemoveObj(iter->first);
-            }
-        }
-    }
+	if (!_connecting.GetReaderCache()->empty())
+	{
+		auto pReader = _connecting.GetReaderCache();
+		for (auto iter = pReader->begin(); iter != pReader->end(); ++iter)
+			if (Connect(iter->second))
+				_connecting.RemoveObj(iter->first);
+	}
 
-    FD_ZERO(&readfds);
-    FD_ZERO(&writefds);
-    FD_ZERO(&exceptfds);
+	FD_ZERO(&readfds);
+	FD_ZERO(&writefds);
+	FD_ZERO(&exceptfds);
+	_fdMax = 0;
 
-    _fdMax = 0;
-
-    Select();
-    OnNetworkUpdate();
+	Select();
+	OnNetworkUpdate();
 
 #if LOG_TRACE_COMPONENT_OPEN
-    CheckPoint(GetNetworkTypeName(_networkType));
+	CheckPoint(GetNetworkTypeName(_networkType));
 #endif
 }
 

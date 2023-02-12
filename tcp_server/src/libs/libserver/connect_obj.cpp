@@ -84,7 +84,7 @@ bool ConnectObj::Recv()
 		const int dataSize = ::recv(_socketKey.Socket, pBuffer, emptySize, 0);
 		if (dataSize > 0)
 		{
-			_recvBuffer->FillDate(dataSize);
+			_recvBuffer->FillData(dataSize);
 			isRs = true;
 		}
 		else if (dataSize == 0)
@@ -125,9 +125,7 @@ bool ConnectObj::Recv()
 				{
 					const auto targetEntitySn = pSocketLocator->GetTargetEntitySn(pPacket->GetSocketKey()->Socket);
 					if (targetEntitySn > 0)
-					{
 						pPacket->GetTagKey()->AddTag(TagType::Entity, targetEntitySn);
-					}
 				}
 			}
 
@@ -200,26 +198,23 @@ bool ConnectObj::Send()
 		return true;
 	}
 
-	while (true) {
+	while (true) 
+	{
 		char* pBuffer = nullptr;
 		const int needSendSize = _sendBuffer->GetBuffer(pBuffer);
 
 		// 没有数据可发送
 		if (needSendSize <= 0)
-		{
 			return true;
-		}
 
 		const int size = ::send(_socketKey.Socket, pBuffer, needSendSize, 0);
 		if (size > 0)
 		{
-			_sendBuffer->RemoveDate(size);
+			_sendBuffer->RemoveData(size);
 
 			// 下一帧再发送
 			if (size < needSendSize)
-			{
 				return true;
-			}
 		}
 
 		if (size <= 0)

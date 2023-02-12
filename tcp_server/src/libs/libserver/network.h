@@ -96,9 +96,22 @@ protected:
 #ifdef EPOLL
 	void InitEpoll();
 	void Epoll();
+	/// <summary>
+	/// 将Socket及其event添加到epollfd
+	/// 创建Socket时，注册一次即可
+	/// </summary>
 	void AddEvent(int epollfd, int fd, int flag);
+	/// <summary>
+	/// 修改epollfd中已有的Socket及其event
+	/// </summary>
 	void ModifyEvent(int epollfd, int fd, int flag);
+	/// <summary>
+	/// 删除epollfd中的fd及其event
+	/// </summary>
 	void DeleteEvent(int epollfd, int fd);
+	/// <summary>
+	/// 对于NetworkListen来说，如果主Socket有连接事件发生，需要记录其下标
+	/// </summary>
 	virtual void OnEpoll(SOCKET fd, int index) { };
 #else    
 	void Select();

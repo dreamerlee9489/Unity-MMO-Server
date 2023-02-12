@@ -167,7 +167,7 @@ message PlayerLittle {
 
 message PlayerList {
 	string account = 1;
-	repeated PlayerLittle player = 2;
+	repeated PlayerLittle players = 2;
 }
 
 message QueryPlayerList {

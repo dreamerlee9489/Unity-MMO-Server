@@ -12,12 +12,12 @@ void PlayerComponentProtoList::BackToPool()
 
 void PlayerComponentProtoList::Parse(Proto::PlayerList& proto)
 {
-    const int size = proto.player_size();
+    const int size = proto.players_size();
     for (int i = 0; i < size; i++)
     {
-        auto playerSn = proto.player(i).sn();
+        auto playerSn = proto.players(i).sn();
         std::stringstream* pStream = new std::stringstream();
-        proto.player(i).SerializeToOstream(pStream);
+        proto.players(i).SerializeToOstream(pStream);
         _protos[playerSn] = pStream;
     }
 }

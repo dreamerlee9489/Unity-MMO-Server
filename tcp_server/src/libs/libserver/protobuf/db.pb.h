@@ -48,7 +48,7 @@ struct TableStruct_db_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxillaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[13]
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[12]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
@@ -74,9 +74,6 @@ extern PlayerKnapDefaultTypeInternal _PlayerKnap_default_instance_;
 class PlayerMisc;
 class PlayerMiscDefaultTypeInternal;
 extern PlayerMiscDefaultTypeInternal _PlayerMisc_default_instance_;
-class Team;
-class TeamDefaultTypeInternal;
-extern TeamDefaultTypeInternal _Team_default_instance_;
 class TradeClose;
 class TradeCloseDefaultTypeInternal;
 extern TradeCloseDefaultTypeInternal _TradeClose_default_instance_;
@@ -103,7 +100,6 @@ template<> ::Proto::Player* Arena::CreateMaybeMessage<::Proto::Player>(Arena*);
 template<> ::Proto::PlayerBase* Arena::CreateMaybeMessage<::Proto::PlayerBase>(Arena*);
 template<> ::Proto::PlayerKnap* Arena::CreateMaybeMessage<::Proto::PlayerKnap>(Arena*);
 template<> ::Proto::PlayerMisc* Arena::CreateMaybeMessage<::Proto::PlayerMisc>(Arena*);
-template<> ::Proto::Team* Arena::CreateMaybeMessage<::Proto::Team>(Arena*);
 template<> ::Proto::TradeClose* Arena::CreateMaybeMessage<::Proto::TradeClose>(Arena*);
 template<> ::Proto::TradeOpen* Arena::CreateMaybeMessage<::Proto::TradeOpen>(Arena*);
 template<> ::Proto::UpdateKnapGold* Arena::CreateMaybeMessage<::Proto::UpdateKnapGold>(Arena*);
@@ -812,151 +808,6 @@ class PlayerMisc :
 };
 // -------------------------------------------------------------------
 
-class Team :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Proto.Team) */ {
- public:
-  Team();
-  virtual ~Team();
-
-  Team(const Team& from);
-  Team(Team&& from) noexcept
-    : Team() {
-    *this = ::std::move(from);
-  }
-
-  inline Team& operator=(const Team& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  inline Team& operator=(Team&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
-    return GetDescriptor();
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
-    return GetMetadataStatic().descriptor;
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
-    return GetMetadataStatic().reflection;
-  }
-  static const Team& default_instance();
-
-  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const Team* internal_default_instance() {
-    return reinterpret_cast<const Team*>(
-               &_Team_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    4;
-
-  friend void swap(Team& a, Team& b) {
-    a.Swap(&b);
-  }
-  inline void Swap(Team* other) {
-    if (other == this) return;
-    InternalSwap(other);
-  }
-
-  // implements Message ----------------------------------------------
-
-  inline Team* New() const final {
-    return CreateMaybeMessage<Team>(nullptr);
-  }
-
-  Team* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
-    return CreateMaybeMessage<Team>(arena);
-  }
-  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-  void CopyFrom(const Team& from);
-  void MergeFrom(const Team& from);
-  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
-  bool IsInitialized() const final;
-
-  size_t ByteSizeLong() const final;
-  #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
-  #else
-  bool MergePartialFromCodedStream(
-      ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) final;
-  #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-  void SerializeWithCachedSizes(
-      ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
-  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
-      ::PROTOBUF_NAMESPACE_ID::uint8* target) const final;
-  int GetCachedSize() const final { return _cached_size_.Get(); }
-
-  private:
-  inline void SharedCtor();
-  inline void SharedDtor();
-  void SetCachedSize(int size) const final;
-  void InternalSwap(Team* other);
-  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
-  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "Proto.Team";
-  }
-  private:
-  inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
-    return nullptr;
-  }
-  inline void* MaybeArenaPtr() const {
-    return nullptr;
-  }
-  public:
-
-  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
-  private:
-  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
-    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_db_2eproto);
-    return ::descriptor_table_db_2eproto.file_level_metadata[kIndexInFileMessages];
-  }
-
-  public:
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  enum : int {
-    kMembersFieldNumber = 2,
-    kCaptainFieldNumber = 1,
-  };
-  // repeated uint64 members = 2;
-  int members_size() const;
-  void clear_members();
-  ::PROTOBUF_NAMESPACE_ID::uint64 members(int index) const;
-  void set_members(int index, ::PROTOBUF_NAMESPACE_ID::uint64 value);
-  void add_members(::PROTOBUF_NAMESPACE_ID::uint64 value);
-  const ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::uint64 >&
-      members() const;
-  ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::uint64 >*
-      mutable_members();
-
-  // uint64 captain = 1;
-  void clear_captain();
-  ::PROTOBUF_NAMESPACE_ID::uint64 captain() const;
-  void set_captain(::PROTOBUF_NAMESPACE_ID::uint64 value);
-
-  // @@protoc_insertion_point(class_scope:Proto.Team)
- private:
-  class _Internal;
-
-  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
-  ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::uint64 > members_;
-  mutable std::atomic<int> _members_cached_byte_size_;
-  ::PROTOBUF_NAMESPACE_ID::uint64 captain_;
-  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
-  friend struct ::TableStruct_db_2eproto;
-};
-// -------------------------------------------------------------------
-
 class Player :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Proto.Player) */ {
  public:
@@ -999,7 +850,7 @@ class Player :
                &_Player_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    5;
+    4;
 
   friend void swap(Player& a, Player& b) {
     a.Swap(&b);
@@ -1074,7 +925,6 @@ class Player :
     kBaseFieldNumber = 3,
     kKnapFieldNumber = 4,
     kMiscFieldNumber = 5,
-    kTeamFieldNumber = 6,
     kSnFieldNumber = 1,
   };
   // string name = 2;
@@ -1112,14 +962,6 @@ class Player :
   ::Proto::PlayerMisc* mutable_misc();
   void set_allocated_misc(::Proto::PlayerMisc* misc);
 
-  // .Proto.Team team = 6;
-  bool has_team() const;
-  void clear_team();
-  const ::Proto::Team& team() const;
-  ::Proto::Team* release_team();
-  ::Proto::Team* mutable_team();
-  void set_allocated_team(::Proto::Team* team);
-
   // uint64 sn = 1;
   void clear_sn();
   ::PROTOBUF_NAMESPACE_ID::uint64 sn() const;
@@ -1134,7 +976,6 @@ class Player :
   ::Proto::PlayerBase* base_;
   ::Proto::PlayerKnap* knap_;
   ::Proto::PlayerMisc* misc_;
-  ::Proto::Team* team_;
   ::PROTOBUF_NAMESPACE_ID::uint64 sn_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_db_2eproto;
@@ -1183,7 +1024,7 @@ class ItemData :
                &_ItemData_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    6;
+    5;
 
   friend void swap(ItemData& a, ItemData& b) {
     a.Swap(&b);
@@ -1410,7 +1251,7 @@ class PlayerKnap :
                &_PlayerKnap_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    7;
+    6;
 
   friend void swap(PlayerKnap& a, PlayerKnap& b) {
     a.Swap(&b);
@@ -1554,7 +1395,7 @@ class UpdateKnapGold :
                &_UpdateKnapGold_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    8;
+    7;
 
   friend void swap(UpdateKnapGold& a, UpdateKnapGold& b) {
     a.Swap(&b);
@@ -1685,7 +1526,7 @@ class UpdateKnapItem :
                &_UpdateKnapItem_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    9;
+    8;
 
   friend void swap(UpdateKnapItem& a, UpdateKnapItem& b) {
     a.Swap(&b);
@@ -1819,7 +1660,7 @@ class UpdateTradeItem :
                &_UpdateTradeItem_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    10;
+    9;
 
   friend void swap(UpdateTradeItem& a, UpdateTradeItem& b) {
     a.Swap(&b);
@@ -1981,7 +1822,7 @@ class TradeOpen :
                &_TradeOpen_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    11;
+    10;
 
   friend void swap(TradeOpen& a, TradeOpen& b) {
     a.Swap(&b);
@@ -2119,7 +1960,7 @@ class TradeClose :
                &_TradeClose_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    12;
+    11;
 
   friend void swap(TradeClose& a, TradeClose& b) {
     a.Swap(&b);
@@ -2566,54 +2407,6 @@ inline void PlayerMisc::set_online_version(::PROTOBUF_NAMESPACE_ID::int32 value)
 
 // -------------------------------------------------------------------
 
-// Team
-
-// uint64 captain = 1;
-inline void Team::clear_captain() {
-  captain_ = PROTOBUF_ULONGLONG(0);
-}
-inline ::PROTOBUF_NAMESPACE_ID::uint64 Team::captain() const {
-  // @@protoc_insertion_point(field_get:Proto.Team.captain)
-  return captain_;
-}
-inline void Team::set_captain(::PROTOBUF_NAMESPACE_ID::uint64 value) {
-  
-  captain_ = value;
-  // @@protoc_insertion_point(field_set:Proto.Team.captain)
-}
-
-// repeated uint64 members = 2;
-inline int Team::members_size() const {
-  return members_.size();
-}
-inline void Team::clear_members() {
-  members_.Clear();
-}
-inline ::PROTOBUF_NAMESPACE_ID::uint64 Team::members(int index) const {
-  // @@protoc_insertion_point(field_get:Proto.Team.members)
-  return members_.Get(index);
-}
-inline void Team::set_members(int index, ::PROTOBUF_NAMESPACE_ID::uint64 value) {
-  members_.Set(index, value);
-  // @@protoc_insertion_point(field_set:Proto.Team.members)
-}
-inline void Team::add_members(::PROTOBUF_NAMESPACE_ID::uint64 value) {
-  members_.Add(value);
-  // @@protoc_insertion_point(field_add:Proto.Team.members)
-}
-inline const ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::uint64 >&
-Team::members() const {
-  // @@protoc_insertion_point(field_list:Proto.Team.members)
-  return members_;
-}
-inline ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::uint64 >*
-Team::mutable_members() {
-  // @@protoc_insertion_point(field_mutable_list:Proto.Team.members)
-  return &members_;
-}
-
-// -------------------------------------------------------------------
-
 // Player
 
 // uint64 sn = 1;
@@ -2832,57 +2625,6 @@ inline void Player::set_allocated_misc(::Proto::PlayerMisc* misc) {
   }
   misc_ = misc;
   // @@protoc_insertion_point(field_set_allocated:Proto.Player.misc)
-}
-
-// .Proto.Team team = 6;
-inline bool Player::has_team() const {
-  return this != internal_default_instance() && team_ != nullptr;
-}
-inline void Player::clear_team() {
-  if (GetArenaNoVirtual() == nullptr && team_ != nullptr) {
-    delete team_;
-  }
-  team_ = nullptr;
-}
-inline const ::Proto::Team& Player::team() const {
-  const ::Proto::Team* p = team_;
-  // @@protoc_insertion_point(field_get:Proto.Player.team)
-  return p != nullptr ? *p : *reinterpret_cast<const ::Proto::Team*>(
-      &::Proto::_Team_default_instance_);
-}
-inline ::Proto::Team* Player::release_team() {
-  // @@protoc_insertion_point(field_release:Proto.Player.team)
-  
-  ::Proto::Team* temp = team_;
-  team_ = nullptr;
-  return temp;
-}
-inline ::Proto::Team* Player::mutable_team() {
-  
-  if (team_ == nullptr) {
-    auto* p = CreateMaybeMessage<::Proto::Team>(GetArenaNoVirtual());
-    team_ = p;
-  }
-  // @@protoc_insertion_point(field_mutable:Proto.Player.team)
-  return team_;
-}
-inline void Player::set_allocated_team(::Proto::Team* team) {
-  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == nullptr) {
-    delete team_;
-  }
-  if (team) {
-    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena = nullptr;
-    if (message_arena != submessage_arena) {
-      team = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
-          message_arena, team, submessage_arena);
-    }
-    
-  } else {
-    
-  }
-  team_ = team;
-  // @@protoc_insertion_point(field_set_allocated:Proto.Player.team)
 }
 
 // -------------------------------------------------------------------
@@ -3244,8 +2986,6 @@ inline void TradeClose::set_success(bool value) {
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
-// -------------------------------------------------------------------
-
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

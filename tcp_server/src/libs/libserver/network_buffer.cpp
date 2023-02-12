@@ -35,7 +35,7 @@ bool NetworkBuffer::HasData() const
     if (_dataSize <= 0)
         return false;
 
-    // ÖÁÉÙÒªÓĞÒ»¸öĞ­ÒéÍ·
+    // è‡³å°‘è¦æœ‰ä¸€ä¸ªåè®®å¤´
     if (_dataSize < sizeof(PacketHead))
         return false;
 
@@ -74,11 +74,11 @@ unsigned int NetworkBuffer::GetReadSize() const
     }
 }
 
-void NetworkBuffer::FillDate(unsigned int  size)
+void NetworkBuffer::FillData(unsigned int  size)
 {
     _dataSize += size;
 
-    // ÒÆ¶¯µ½Í·²¿
+    // ç§»åŠ¨åˆ°å¤´éƒ¨
     if ((_bufferSize - _endIndex) <= size)
     {
         size -= _bufferSize - _endIndex;
@@ -88,7 +88,7 @@ void NetworkBuffer::FillDate(unsigned int  size)
     _endIndex += size;
 }
 
-void NetworkBuffer::RemoveDate(unsigned int size)
+void NetworkBuffer::RemoveData(unsigned int size)
 {
     _dataSize -= size;
 
@@ -130,54 +130,54 @@ Packet* RecvNetworkBuffer::GetPacket()
 
 Packet* RecvNetworkBuffer::GetTcpPacket()
 {
-    // Êı¾İ³¤¶È²»¹»
+    // æ•°æ®é•¿åº¦ä¸å¤Ÿ
     if (_dataSize < sizeof(TotalSizeType))
     {
         return nullptr;
     }
 
-    // 1.¶Á³ö ÕûÌå³¤¶È
+    // 1.è¯»å‡º æ•´ä½“é•¿åº¦
     unsigned short totalSize;
     MemcpyFromBuffer(reinterpret_cast<char*>(&totalSize), sizeof(TotalSizeType));
 
-    // Ğ­ÒéÌå³¤¶È²»¹»£¬µÈ´ı
+    // åè®®ä½“é•¿åº¦ä¸å¤Ÿï¼Œç­‰å¾…
     if (_dataSize < totalSize)
     {
         return nullptr;
     }
 
-    RemoveDate(sizeof(TotalSizeType));
+    RemoveData(sizeof(TotalSizeType));
 
-    // 2.Í·²¿³¤
+    // 2.å¤´éƒ¨é•¿
     unsigned short headSize;
     MemcpyFromBuffer(reinterpret_cast<char*>(&headSize), sizeof(TotalSizeType));
-    RemoveDate(sizeof(TotalSizeType));
+    RemoveData(sizeof(TotalSizeType));
 
-    // 3.¶Á³ö PacketHead
+    // 3.è¯»å‡º PacketHead
     PacketHead* pHead;
     PacketHeadS2S* pHeadS2s = nullptr;
     if (headSize == sizeof(PacketHead)) 
     {
         PacketHead head;
         MemcpyFromBuffer(reinterpret_cast<char*>(&head), sizeof(PacketHead));
-        RemoveDate(sizeof(PacketHead));
+        RemoveData(sizeof(PacketHead));
         pHead = &head;
     }
     else
     {
         PacketHeadS2S head;
         MemcpyFromBuffer(reinterpret_cast<char*>(&head), sizeof(PacketHeadS2S));
-        RemoveDate(sizeof(PacketHeadS2S));
+        RemoveData(sizeof(PacketHeadS2S));
         pHead = &head;
         pHeadS2s = &head;
     }
 
-    // 4.¶Á³ö Ğ­Òé
-    // ¼ì²éÒ»ÏÂid
+    // 4.è¯»å‡º åè®®
+    // æ£€æŸ¥ä¸€ä¸‹id
     const google::protobuf::EnumDescriptor* descriptor = Proto::MsgId_descriptor();
     if (descriptor->FindValueByNumber(pHead->MsgId) == nullptr)
     {
-        // ¹Ø±ÕÍøÂç
+        // å…³é—­ç½‘ç»œ
         _pConnectObj->Close();
         std::cout << "recv invalid msg." << std::endl;
         return nullptr;
@@ -195,7 +195,7 @@ Packet* RecvNetworkBuffer::GetTcpPacket()
 
     MemcpyFromBuffer(pPacket->GetBuffer(), dataLength);
     pPacket->FillData(dataLength);
-    RemoveDate(dataLength);
+    RemoveData(dataLength);
 
     if (pHeadS2s != nullptr)
     {
@@ -211,7 +211,7 @@ Packet* RecvNetworkBuffer::GetHttpPacket()
 {
     if (_endIndex < _beginIndex)
     {
-        // ÓĞÒì³££¬¹Ø±ÕÍøÂç
+        // æœ‰å¼‚å¸¸ï¼Œå…³é—­ç½‘ç»œ
         _pConnectObj->Close();
         LOG_ERROR("http recv invalid.");
         return nullptr;
@@ -233,7 +233,7 @@ Packet* RecvNetworkBuffer::GetHttpPacket()
     {
         bodyLen = atoi(mgBody->p);
 
-        // Õû¸ö°üµÄ³¤¶È²»¹»£¬ÔÙµÈÒ»µÈ
+        // æ•´ä¸ªåŒ…çš„é•¿åº¦ä¸å¤Ÿï¼Œå†ç­‰ä¸€ç­‰
         if (bodyLen > 0 && (recvBufLength < (bodyLen + headerLen)))
             return nullptr;
     }
@@ -244,7 +244,7 @@ Packet* RecvNetworkBuffer::GetHttpPacket()
     {
         isChunked = true;
 
-        // ºóÃæµÄÊı¾İ»¹Ã»ÓĞµ½´ï
+        // åé¢çš„æ•°æ®è¿˜æ²¡æœ‰åˆ°è¾¾
         if (recvBufLength == headerLen)
             return nullptr;
 
@@ -256,14 +256,14 @@ Packet* RecvNetworkBuffer::GetHttpPacket()
     }
 
 #ifdef LOG_HTTP_OPEN
-    // ´òÓ¡Ò»ÏÂÊı¾İ¿´¿´
+    // æ‰“å°ä¸€ä¸‹æ•°æ®çœ‹çœ‹
     std::stringstream allBuffer;
     allBuffer.write(_buffer + _beginIndex, (bodyLen + headerLen));
     LOG_HTTP("\r\n" << allBuffer.str().c_str());
 #endif
 
     Packet* pPacket = MessageSystemHelp::ParseHttp(_pConnectObj, _buffer + _beginIndex + headerLen, bodyLen, isChunked, &hm);
-    RemoveDate(bodyLen + headerLen);
+    RemoveData(bodyLen + headerLen);
     return pPacket;
 }
 
@@ -272,10 +272,10 @@ void RecvNetworkBuffer::MemcpyFromBuffer(char* pVoid, const unsigned int size)
     const auto readSize = GetReadSize();
     if (readSize < size)
     {
-        // 1.copyÎ²²¿Êı¾İ
+        // 1.copyå°¾éƒ¨æ•°æ®
         ::memcpy(pVoid, _buffer + _beginIndex, readSize);
 
-        // 2.copyÍ·²¿Êı¾İ
+        // 2.copyå¤´éƒ¨æ•°æ®
         ::memcpy(pVoid + readSize, _buffer, size - readSize);
     }
     else
@@ -317,28 +317,28 @@ void SendNetworkBuffer::AddPacket(Packet* pPacket)
     const auto dataLength = pPacket->GetDataLength();
     const auto pTagValue = pPacket->GetTagKey()->GetTagValue(TagType::Entity);
 
-    // ¼ì²éÒ»ÏÂ×î´ó¿ÉÄÜµÄ³¤¶È£¬Head°´×î³¤µÄËã
-    // ¸ñÊ½Îª£º×Ü³¤ + Í·²¿³¤ + Í·²¿ + Ğ­ÒéÌå
+    // æ£€æŸ¥ä¸€ä¸‹æœ€å¤§å¯èƒ½çš„é•¿åº¦ï¼ŒHeadæŒ‰æœ€é•¿çš„ç®—
+    // æ ¼å¼ä¸ºï¼šæ€»é•¿ + å¤´éƒ¨é•¿ + å¤´éƒ¨ + åè®®ä½“
     TotalSizeType totalSize = dataLength + sizeof(PacketHead) + sizeof(TotalSizeType) * 2;
     if (pTagValue != nullptr)
     {
         totalSize = dataLength + sizeof(PacketHeadS2S) + sizeof(TotalSizeType) * 2;
     }
 
-    // ³¤¶È²»¹»£¬À©Èİ
+    // é•¿åº¦ä¸å¤Ÿï¼Œæ‰©å®¹
     while (GetEmptySize() < totalSize) {
         ReAllocBuffer();
         //std::cout << "send buffer::Realloc. _bufferSize:" << _bufferSize << std::endl;
     }
 
-    // ¶ÔÓÚhttpĞ­ÒéÀ´Ëµ£¬Ö»ÓĞbody£¬Ã»ÓĞ×Ô¶¨ÒåÍ·
+    // å¯¹äºhttpåè®®æ¥è¯´ï¼Œåªæœ‰bodyï¼Œæ²¡æœ‰è‡ªå®šä¹‰å¤´
     const auto msgId = pPacket->GetMsgId();
     if (!NetworkHelp::IsHttpMsg(msgId))
     {
-        // 1.ÕûÌå³¤¶È
+        // 1.æ•´ä½“é•¿åº¦
         MemcpyToBuffer(reinterpret_cast<char*>(&totalSize), sizeof(TotalSizeType));
 
-        // 2.Í·²¿
+        // 2.å¤´éƒ¨
         if (pTagValue == nullptr)
         {
             PacketHead head{};
@@ -366,7 +366,7 @@ void SendNetworkBuffer::AddPacket(Packet* pPacket)
         }
     }
 
-    // 3.Êı¾İ
+    // 3.æ•°æ®
     MemcpyToBuffer(pPacket->GetBuffer(), pPacket->GetDataLength());
 }
 
@@ -375,10 +375,10 @@ void SendNetworkBuffer::MemcpyToBuffer(char* pVoid, const unsigned int size)
     const auto writeSize = GetWriteSize();
     if (writeSize < size)
     {
-        // 1.copyµ½Î²²¿
+        // 1.copyåˆ°å°¾éƒ¨
         ::memcpy(_buffer + _endIndex, pVoid, writeSize);
 
-        // 2.copyµ½Í·²¿
+        // 2.copyåˆ°å¤´éƒ¨
         ::memcpy(_buffer, pVoid + writeSize, size - writeSize);
     }
     else
@@ -386,5 +386,5 @@ void SendNetworkBuffer::MemcpyToBuffer(char* pVoid, const unsigned int size)
         ::memcpy(_buffer + _endIndex, pVoid, size);
     }
 
-    FillDate(size);
+    FillData(size);
 }

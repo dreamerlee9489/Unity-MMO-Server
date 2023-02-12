@@ -42,7 +42,7 @@ void MysqlConnector::QueryPlayerList(std::string account, NetIdentify* pIdentify
         MYSQL_ROW row;
         while ((row = Fetch()))
         {
-            auto pProtoPlayer = protoRs.add_player();
+            auto pProtoPlayer = protoRs.add_players();
             pProtoPlayer->set_sn(GetUint64(row, 0));
             pProtoPlayer->set_name(GetString(row, 1));
 

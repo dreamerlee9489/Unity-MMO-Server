@@ -109,15 +109,13 @@ void WorldProxyGather::HandleNetworkDisconnect(Packet* pPacket)
             MessageSystemHelp::SendPacket(Proto::MsgId::MI_CreateTeam, proto, tmp);
         }
     }
-    GetComponent<PlayerCollectorComponent>()->RemovePlayerBySocket(pPacket->GetSocketKey()->Socket);
+    playerMgr->RemovePlayerBySocket(pPacket->GetSocketKey()->Socket);
 }
 
 void WorldProxyGather::HandleLoginByToken(Packet* pPacket)
 {
-    auto pPlayerCollector = GetComponent<PlayerCollectorComponent>();
-
     auto proto = pPacket->ParseToProto<Proto::LoginByToken>();
-    auto pPlayer = pPlayerCollector->AddPlayer(pPacket, proto.account());
+    auto pPlayer = playerMgr->AddPlayer(pPacket, proto.account());
     if (pPlayer == nullptr)
     {
         MessageSystemHelp::DispatchPacket(Proto::MsgId::MI_NetworkRequestDisconnect, pPacket);
@@ -130,7 +128,7 @@ void WorldProxyGather::HandleQueryPlayerRs(Packet* pPacket)
     //从数据库中读取到player数据
     auto protoRs = pPacket->ParseToProto<Proto::QueryPlayerRs>();
     auto& account = protoRs.account();
-    auto pPlayer = GetComponent<PlayerCollectorComponent>()->GetPlayerByAccount(account);
+    auto pPlayer = playerMgr->GetPlayerByAccount(account);
     if (pPlayer == nullptr)
     {
         LOG_ERROR("HandleQueryPlayer. pPlayer == nullptr. account:" << account.c_str());

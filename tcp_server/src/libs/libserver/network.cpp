@@ -194,17 +194,18 @@ void Network::InitEpoll()
 
 void Network::Epoll()
 {
+	// 收集所有Socket事件并填充到_events前nfds个元素
 	const int nfds = epoll_wait(_epfd, _events, MAX_EVENT, 0);
 	for (int index = 0; index < nfds; index++)
 	{
 		SOCKET socket = _events[index].data.fd;
 		OnEpoll(socket, index);
-
 		// 如果是master socket ，没有 connect obj        
 		auto pObj = _connects[socket];
 		if (pObj == nullptr)
 			continue;
 
+		// 有异常，断开网络
 		if (_events[index].events & EPOLLRDHUP || _events[index].events & EPOLLERR || _events[index].events & EPOLLHUP)
 		{
 			RemoveConnectObj(socket);
@@ -227,7 +228,7 @@ void Network::Epoll()
 				RemoveConnectObj(socket);
 				continue;
 			}
-
+			// 发送完成后，需移除socket绑定的写标记
 			ModifyEvent(_epfd, socket, EPOLLIN | EPOLLRDHUP);
 		}
 	}
@@ -245,7 +246,6 @@ void Network::Select()
 
 		FD_SET(socket, &readfds);
 		FD_SET(socket, &exceptfds);
-
 		if (pObj->HasSendData())
 			FD_SET(socket, &writefds);
 	}
@@ -254,7 +254,14 @@ void Network::Select()
 	CheckPoint("select begin");
 #endif
 
-	struct timeval timeout;
+	/// <summary>
+	/// 每帧将我们关心的所有可能发生事件的Socket作为集合传入::select，来获知哪些Socket有事件发生
+	/// 调用::select后，集合中只会留下有事件的Socket。处理完成后需清空集合
+	/// 阻塞模式：至少有一个Socket事件发生，函数才会返回
+	/// 等待模式：阻塞一段时间，在此期间有Socket事件发生或者超时则返回
+	/// 即时模式：返回值=0表示没有任何Socket事件发生
+	/// </summary>
+	struct timeval timeout{};
 	timeout.tv_sec = 0;
 	timeout.tv_usec = 0;
 	const int nfds = ::select(_fdMax + 1, &readfds, &writefds, &exceptfds, &timeout);
@@ -270,13 +277,14 @@ void Network::Select()
 	{
 		auto socket = *iter;
 		auto pObj = _connects[socket];
+		// 对于异常集合中的Socket，断开网络
 		if (FD_ISSET(socket, &exceptfds))
 		{
 			std::cout << "socket except!! socket:" << socket << std::endl;
 			RemoveConnectObjByItem(iter);
 			continue;
 		}
-
+		// 对于读集合中的Socket，调用ConnectObj::Recv将底层二进制数据转为Packet
 		if (FD_ISSET(socket, &readfds))
 		{
 			if (!pObj->Recv())
@@ -285,7 +293,7 @@ void Network::Select()
 				continue;
 			}
 		}
-
+		// 对于写集合中的Socket，调用ConnectObj::Send将Packet以二进制数据发送
 		if (FD_ISSET(socket, &writefds))
 		{
 			if (!pObj->Send())
@@ -305,9 +313,7 @@ void Network::OnNetworkUpdate()
 {
 	_sendMsgMutex.lock();
 	if (_sendMsgList.CanSwap())
-	{
 		_sendMsgList.Swap();
-	}
 	_sendMsgMutex.unlock();
 
 	auto pList = _sendMsgList.GetReaderCache();
@@ -334,6 +340,7 @@ void Network::OnNetworkUpdate()
 		pObj->SendPacket(pPacket);
 
 #ifdef  EPOLL
+		// 当前Socket有待发送的数据，增加EPOLLOUT事件
 		ModifyEvent(_epfd, socket, EPOLLIN | EPOLLOUT | EPOLLRDHUP);
 #endif
 	}

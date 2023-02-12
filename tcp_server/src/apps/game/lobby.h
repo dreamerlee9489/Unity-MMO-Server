@@ -29,12 +29,10 @@ private:
 private:
 	/// <summary>
 	/// 等待跳转到公共地图的玩家集合
-	/// map<地图id, set<玩家sn>>
 	/// </summary>
 	std::map<int, std::set<uint64>> _waitingForWorld;
 	/// <summary>
 	/// 等待跳转到副本地图的玩家集合
-	/// map<地图sn, set<玩家sn>>
 	/// </summary>
 	std::map<uint64, std::set<uint64>> _waitingForDungeon;
 };

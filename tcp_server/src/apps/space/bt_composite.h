@@ -3,6 +3,7 @@
 #include "bt_node.h"
 #include <list>
 #include <unordered_map>
+#include <initializer_list>
 
 class BtComposite : public BtNode
 {
@@ -10,6 +11,10 @@ public:
 	BtComposite(Npc* npc) : BtNode(npc) {}
 
 	virtual ~BtComposite() = default;
+
+	virtual void AddChild(BtNode* child) { _children.push_back(child); }
+
+	virtual void RmvChild(BtNode* child) { _children.remove(child); }
 
 	void Reset() override
 	{
@@ -24,9 +29,11 @@ public:
 			(*iter)->ForceExit(BtStatus::Invalid);
 	}
 
-	virtual void AddChild(BtNode* child) { _children.push_back(child); }
-
-	virtual void RmvChild(BtNode* child) { _children.remove(child); }
+	void AddChildren(std::initializer_list<BtNode*> children)
+	{
+		for (auto& child : children)
+			AddChild(child);
+	}
 
 	void HandleEvent(BtEventId id) override
 	{

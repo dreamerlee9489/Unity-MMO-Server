@@ -35,8 +35,8 @@ public:
 	// 当前可读长度
 	unsigned int GetReadSize() const;
 
-	void FillDate(unsigned int  size);
-	void RemoveDate(unsigned int size);
+	void FillData(unsigned int  size);
+	void RemoveData(unsigned int size);
 	void ReAllocBuffer();
 
 protected:

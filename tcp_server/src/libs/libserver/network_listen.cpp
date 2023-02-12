@@ -194,9 +194,7 @@ void NetworkListen::Update()
 	Epoll();
 
 	if (_mainSocketEventIndex >= 0)
-	{
 		Accept();
-	}
 
 	Network::OnNetworkUpdate();
 }

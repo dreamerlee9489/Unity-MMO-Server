@@ -224,7 +224,7 @@ void Account::HandleQueryPlayerListRs(Packet* pPacket)
 		return;
 	}
 
-	if (protoRs.player_size() > 0)
+	if (protoRs.players_size() > 0)
 	{
 		auto pListObj = pPlayer->GetComponent<PlayerComponentProtoList>();
 		if (pListObj == nullptr)
@@ -408,18 +408,18 @@ void Account::HandleHttpOuterResponse(Packet* pPacket)
 	MessageSystemHelp::DispatchPacket(Proto::MsgId::MI_NetworkRequestDisconnect, pPacket);
 
 	//通知客户端进入lobby地图
-	auto pResMsg = ResourceHelp::GetResourceManager();
-	auto pRolesMap = pResMsg->Worlds->GetRolesMap();
-	if (pRolesMap != nullptr)
-	{
-		Proto::EnterWorld protoEnterWorld;
-		protoEnterWorld.set_world_id(pRolesMap->GetId());
-		MessageSystemHelp::SendPacket(Proto::MsgId::S2C_EnterWorld, protoEnterWorld, pPlayer);
-	}
-	else
-	{
-		LOG_ERROR("config error. not roles map.");
-	}
+	//auto pResMsg = ResourceHelp::GetResourceManager();
+	//auto pRolesMap = pResMsg->Worlds->GetRolesMap();
+	//if (pRolesMap != nullptr)
+	//{
+	//	Proto::EnterWorld protoEnterWorld;
+	//	protoEnterWorld.set_world_id(pRolesMap->GetId());
+	//	MessageSystemHelp::SendPacket(Proto::MsgId::S2C_EnterWorld, protoEnterWorld, pPlayer);
+	//}
+	//else
+	//{
+	//	LOG_ERROR("config error. not roles map.");
+	//}
 
 	// 验证成功，向DB发起查询
 	if (rsCode == Proto::AccountCheckReturnCode::ARC_OK)

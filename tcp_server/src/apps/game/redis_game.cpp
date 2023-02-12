@@ -49,7 +49,7 @@ void RedisGame::HandleGameTokenToRedis(Packet* pPacket)
 
     const std::string tokenValue = GetString(RedisKeyAccountTokey + protoToken.account());
     protoRs.mutable_token_info()->ParseFromString(tokenValue);
-
+    // 登录到 Game 后移除登录 token
     Delete(RedisKeyAccountTokey + protoToken.account());
 
     MessageSystemHelp::DispatchPacket(Proto::MsgId::MI_GameTokenToRedisRs, protoRs, nullptr);

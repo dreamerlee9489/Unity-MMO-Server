@@ -33,17 +33,9 @@ void BtComponent::Awake()
 	BtActPursue* actPursue = new BtActPursue(_npc);
 	BtActAttack* actAttack = new BtActAttack(_npc);
 	BtActFlee* actFlee = new BtActFlee(_npc);
-	seqLife->AddChild(actBirth);
-	seqLife->AddChild(parAlive);
-	seqLife->AddChild(actDeath);
-	selBehav->AddChild(actPatrol);
-	selBehav->AddChild(actIdle);
-	selBehav->AddChild(actPursue);
-	selBehav->AddChild(actAttack);
-	selBehav->AddChild(actFlee);
-	parAlive->AddChild(actView);
-	parAlive->AddChild(actSense);
-	parAlive->AddChild(selBehav);
+	seqLife->AddChildren({ actBirth, parAlive, actDeath });
+	selBehav->AddChildren({ actPatrol, actIdle, actPursue, actAttack, actFlee });
+	parAlive->AddChildren({ actView, actSense, selBehav });
 	_root = new BtRepeat(_npc, seqLife);
 }
 
