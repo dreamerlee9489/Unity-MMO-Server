@@ -149,6 +149,7 @@ void World::HandlePlayerMove(Player* pPlayer, Packet* pPacket)
 	auto moveComp = pPlayer->GetComponent<MoveComponent>();
 	if (moveComp == nullptr)
 		moveComp = pPlayer->AddComponent<MoveComponent>();
+	moveComp->moveSpeed = 5.56f;
 	std::queue<Vector3> que;
 	for (auto index = 0; index < proto.points_size(); ++index)
 		que.push(Vector3(points->Get(index)));

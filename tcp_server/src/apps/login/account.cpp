@@ -14,7 +14,7 @@
 #include "player_component_onlineinlogin.h"
 #include "libresource/resource_help.h"
 
-void Account::Awake()
+void AccountMgr::Awake()
 {
 	AddComponent<PlayerCollectorComponent>();
 
@@ -34,41 +34,41 @@ void Account::Awake()
 	}
 
 	// timer
-	AddTimer(0, 10, true, 2, BindFunP0(this, &Account::SyncAppInfoToAppMgr));
+	AddTimer(0, 10, true, 2, BindFunP0(this, &AccountMgr::SyncAppInfoToAppMgr));
 
 	// message
 	auto pMsgSystem = GetSystemManager()->GetMessageSystem();
 
 	// check account
-	pMsgSystem->RegisterFunction(this, Proto::MsgId::C2L_AccountCheck, BindFunP1(this, &Account::HandleAccountCheck));
-	pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_AccountQueryOnlineToRedisRs, BindFunP1(this, &Account::HandleAccountQueryOnlineToRedisRs));
-	pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_HttpOuterResponse, BindFunP1(this, &Account::HandleHttpOuterResponse));
+	pMsgSystem->RegisterFunction(this, Proto::MsgId::C2L_AccountCheck, BindFunP1(this, &AccountMgr::HandleAccountCheck));
+	pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_AccountQueryOnlineToRedisRs, BindFunP1(this, &AccountMgr::HandleAccountQueryOnlineToRedisRs));
+	pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_HttpOuterResponse, BindFunP1(this, &AccountMgr::HandleHttpOuterResponse));
 
 	// db
-	pMsgSystem->RegisterFunction(this, Proto::MsgId::L2DB_QueryPlayerListRs, BindFunP1(this, &Account::HandleQueryPlayerListRs));
+	pMsgSystem->RegisterFunction(this, Proto::MsgId::L2DB_QueryPlayerListRs, BindFunP1(this, &AccountMgr::HandleQueryPlayerListRs));
 
 	// 处理断线
-	pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_NetworkDisconnect, BindFunP1(this, &Account::HandleNetworkDisconnect));
-	pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_NetworkConnected, BindFunP1(this, &Account::HandleNetworkConnected));
+	pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_NetworkDisconnect, BindFunP1(this, &AccountMgr::HandleNetworkDisconnect));
+	pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_NetworkConnected, BindFunP1(this, &AccountMgr::HandleNetworkConnected));
 
 	// sync
-	pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_AppInfoListSync, BindFunP1(this, &Account::HandleAppInfoListSync));
+	pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_AppInfoListSync, BindFunP1(this, &AccountMgr::HandleAppInfoListSync));
 
 	// player
-	pMsgSystem->RegisterFunction(this, Proto::MsgId::C2L_CreatePlayer, BindFunP1(this, &Account::HandleCreatePlayer));
-	pMsgSystem->RegisterFunction(this, Proto::MsgId::L2DB_CreatePlayerRs, BindFunP1(this, &Account::HandleCreatePlayerRs));
-	pMsgSystem->RegisterFunction(this, Proto::MsgId::C2L_SelectPlayer, BindFunP1(this, &Account::HandleSelectPlayer));
+	pMsgSystem->RegisterFunction(this, Proto::MsgId::C2L_CreatePlayer, BindFunP1(this, &AccountMgr::HandleCreatePlayer));
+	pMsgSystem->RegisterFunction(this, Proto::MsgId::L2DB_CreatePlayerRs, BindFunP1(this, &AccountMgr::HandleCreatePlayerRs));
+	pMsgSystem->RegisterFunction(this, Proto::MsgId::C2L_SelectPlayer, BindFunP1(this, &AccountMgr::HandleSelectPlayer));
 
 	// token
-	pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_LoginTokenToRedisRs, BindFunP1(this, &Account::HandleTokenToRedisRs));
+	pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_LoginTokenToRedisRs, BindFunP1(this, &AccountMgr::HandleTokenToRedisRs));
 }
 
-void Account::BackToPool()
+void AccountMgr::BackToPool()
 {
 	_apps.clear();
 }
 
-void Account::SyncAppInfoToAppMgr()
+void AccountMgr::SyncAppInfoToAppMgr()
 {
 	Proto::AppInfoSync protoSync;
 	protoSync.set_app_id(Global::GetInstance()->GetCurAppId());
@@ -78,7 +78,7 @@ void Account::SyncAppInfoToAppMgr()
 	MessageSystemHelp::SendPacket(Proto::MsgId::MI_AppInfoSync, protoSync, APP_APPMGR);
 }
 
-void Account::HandleAppInfoListSync(Packet* pPacket)
+void AccountMgr::HandleAppInfoListSync(Packet* pPacket)
 {
 	_apps.clear();
 	auto proto = pPacket->ParseToProto<Proto::AppInfoListSync>();
@@ -88,8 +88,7 @@ void Account::HandleAppInfoListSync(Packet* pPacket)
 	}
 }
 
-// ConnectObj HTTP连接成功后分发MsgId::MI_NetworkConnected
-void Account::HandleNetworkConnected(Packet* pPacket)
+void AccountMgr::HandleNetworkConnected(Packet* pPacket)
 {
 	auto pTagValue = pPacket->GetTagKey()->GetTagValue(TagType::Account);
 	if (pTagValue == nullptr)
@@ -98,7 +97,7 @@ void Account::HandleNetworkConnected(Packet* pPacket)
 	if (pPacket->GetSocketKey()->NetType != NetworkType::HttpConnector)
 		return;
 
-	auto account = pTagValue->KeyStr;
+	auto& account = pTagValue->KeyStr;
 	auto pPlayerCollector = GetComponent<PlayerCollectorComponent>();
 
 	// http 已经连接上了
@@ -127,7 +126,7 @@ void Account::HandleNetworkConnected(Packet* pPacket)
 	MessageSystemHelp::SendHttpRequest(&httpIndentify, _httpIp, _httpPort, _method, &params);
 }
 
-void Account::HandleNetworkDisconnect(Packet* pPacket)
+void AccountMgr::HandleNetworkDisconnect(Packet* pPacket)
 {
 	const auto socketKey = pPacket->GetSocketKey();
 	if (socketKey->NetType != NetworkType::TcpListen)
@@ -137,7 +136,7 @@ void Account::HandleNetworkDisconnect(Packet* pPacket)
 	pPlayerCollector->RemovePlayerBySocket(pPacket->GetSocketKey()->Socket);
 }
 
-void Account::SocketDisconnect(std::string account, NetIdentify* pIdentify)
+void AccountMgr::SocketDisconnect(std::string account, NetIdentify* pIdentify)
 {
 	Proto::AccountCheckRs protoResult;
 	protoResult.set_return_code(Proto::AccountCheckReturnCode::ARC_LOGGING);
@@ -147,7 +146,7 @@ void Account::SocketDisconnect(std::string account, NetIdentify* pIdentify)
 	MessageSystemHelp::DispatchPacket(Proto::MsgId::MI_NetworkRequestDisconnect, pIdentify);
 }
 
-void Account::HandleAccountCheck(Packet* pPacket)
+void AccountMgr::HandleAccountCheck(Packet* pPacket)
 {
 	auto protoCheck = pPacket->ParseToProto<Proto::AccountCheck>();
 	//std::cout << "account check account:" << protoCheck.account() << pPacket << std::endl;
@@ -183,10 +182,9 @@ void Account::HandleAccountCheck(Packet* pPacket)
 }
 
 
-void Account::HandleAccountQueryOnlineToRedisRs(Packet* pPacket)
+void AccountMgr::HandleAccountQueryOnlineToRedisRs(Packet* pPacket)
 {
 	auto protoRs = pPacket->ParseToProto<Proto::AccountQueryOnlineToRedisRs>();
-
 	auto pPlayer = GetComponent<PlayerCollectorComponent>()->GetPlayerByAccount(protoRs.account());
 	if (pPlayer == nullptr)
 		return;
@@ -194,7 +192,6 @@ void Account::HandleAccountQueryOnlineToRedisRs(Packet* pPacket)
 	if (protoRs.return_code() != Proto::AccountQueryOnlineToRedisRs::SOTR_Offline)
 	{
 		//LOG_WARN("check [3/3]. account is online. " << protoRs.account().c_str());
-
 		// 结果给客户端
 		Proto::AccountCheckRs protoResult;
 		protoResult.set_return_code(Proto::AccountCheckReturnCode::ARC_ONLINE);
@@ -204,13 +201,16 @@ void Account::HandleAccountQueryOnlineToRedisRs(Packet* pPacket)
 
 	// 在线组件
 	pPlayer->AddComponent<PlayerComponentOnlineInLogin>(pPlayer->GetAccount());
-
 	// 验证账号，发起一个Http请求
+	// HttpConnector收到MI_NetworkConnect后创建一个Http ConnectObj
+	// Http ConnectObj创建成功后，AccountMgr发起HTTP请求: 192.168.120.129:80/member_login_t.php
+	// HttpListen收到非/login请求后发起MI_HttpOuterResponse
+	// AccountMgr收到MI_HttpOuterResponse，若returncode==200，发起L2DB_QueryPlayerList
 	TagValue tagValue{ pPlayer->GetAccount(), 0 };
 	MessageSystemHelp::CreateConnect(NetworkType::HttpConnector, TagType::Account, tagValue, _httpIp.c_str(), _httpPort);
 }
 
-void Account::HandleQueryPlayerListRs(Packet* pPacket)
+void AccountMgr::HandleQueryPlayerListRs(Packet* pPacket)
 {
 	auto protoRs = pPacket->ParseToProto<Proto::PlayerList>();
 	std::string account = protoRs.account();
@@ -239,7 +239,7 @@ void Account::HandleQueryPlayerListRs(Packet* pPacket)
 	MessageSystemHelp::SendPacket(Proto::MsgId::L2C_PlayerList, protoRs, pPlayer);
 }
 
-void Account::HandleCreatePlayer(Packet* pPacket)
+void AccountMgr::HandleCreatePlayer(Packet* pPacket)
 {
 	auto pPlayerCollector = GetComponent<PlayerCollectorComponent>();
 
@@ -271,7 +271,7 @@ void Account::HandleCreatePlayer(Packet* pPacket)
 	MessageSystemHelp::SendPacket(Proto::MsgId::L2DB_CreatePlayer, proto2Db, APP_DB_MGR);
 }
 
-void Account::HandleCreatePlayerRs(Packet* pPacket)
+void AccountMgr::HandleCreatePlayerRs(Packet* pPacket)
 {
 	auto protoRs = pPacket->ParseToProto<Proto::CreatePlayerToDBRs>();
 	std::string account = protoRs.account();
@@ -290,7 +290,7 @@ void Account::HandleCreatePlayerRs(Packet* pPacket)
 	MessageSystemHelp::SendPacket(Proto::MsgId::C2L_CreatePlayerRs, createProto, pPlayer);
 }
 
-void Account::HandleSelectPlayer(Packet* pPacket)
+void AccountMgr::HandleSelectPlayer(Packet* pPacket)
 {
 	Proto::SelectPlayerRs protoRs;
 	protoRs.set_return_code(Proto::SelectPlayerRs::SPRC_OK);
@@ -347,7 +347,7 @@ void Account::HandleSelectPlayer(Packet* pPacket)
 	RequestToken(pPlayer);
 }
 
-void Account::RequestToken(Player* pPlayer) const
+void AccountMgr::RequestToken(Player* pPlayer) const
 {
 	// 请求一个Token
 	Proto::LoginTokenToRedis protoToken;
@@ -359,7 +359,7 @@ void Account::RequestToken(Player* pPlayer) const
 }
 
 // MessageSystemHelp::SendHttpRequest发送MsgId::MI_HttpOuterRequest
-void Account::HandleHttpOuterResponse(Packet* pPacket)
+void AccountMgr::HandleHttpOuterResponse(Packet* pPacket)
 {
 	auto pTagValue = pPacket->GetTagKey()->GetTagValue(TagType::Account);
 	if (pTagValue == nullptr)
@@ -368,7 +368,7 @@ void Account::HandleHttpOuterResponse(Packet* pPacket)
 		return;
 	}
 
-	auto account = pTagValue->KeyStr;
+	auto& account = pTagValue->KeyStr;
 
 	auto pPlayerCollector = GetComponent<PlayerCollectorComponent>();
 	auto pPlayer = pPlayerCollector->GetPlayerByAccount(account);
@@ -383,7 +383,7 @@ void Account::HandleHttpOuterResponse(Packet* pPacket)
 	int statusCode = protoHttp.status_code();
 	if (statusCode == 200)
 	{
-		auto response = protoHttp.body();
+		auto& response = protoHttp.body();
 		const Json::CharReaderBuilder readerBuilder;
 		Json::CharReader* jsonReader = readerBuilder.newCharReader();
 
@@ -407,20 +407,6 @@ void Account::HandleHttpOuterResponse(Packet* pPacket)
 	// 不论成功，关闭http连接
 	MessageSystemHelp::DispatchPacket(Proto::MsgId::MI_NetworkRequestDisconnect, pPacket);
 
-	//通知客户端进入lobby地图
-	//auto pResMsg = ResourceHelp::GetResourceManager();
-	//auto pRolesMap = pResMsg->Worlds->GetRolesMap();
-	//if (pRolesMap != nullptr)
-	//{
-	//	Proto::EnterWorld protoEnterWorld;
-	//	protoEnterWorld.set_world_id(pRolesMap->GetId());
-	//	MessageSystemHelp::SendPacket(Proto::MsgId::S2C_EnterWorld, protoEnterWorld, pPlayer);
-	//}
-	//else
-	//{
-	//	LOG_ERROR("config error. not roles map.");
-	//}
-
 	// 验证成功，向DB发起查询
 	if (rsCode == Proto::AccountCheckReturnCode::ARC_OK)
 	{
@@ -436,7 +422,7 @@ void Account::HandleHttpOuterResponse(Packet* pPacket)
 	}
 }
 
-Proto::AccountCheckReturnCode Account::ProcessMsg(Json::Value value) const
+Proto::AccountCheckReturnCode AccountMgr::ProcessMsg(Json::Value value) const
 {
 	Proto::AccountCheckReturnCode code = Proto::AccountCheckReturnCode::ARC_UNKONWN;
 	const int httpcode = value["returncode"].asInt();
@@ -450,10 +436,10 @@ Proto::AccountCheckReturnCode Account::ProcessMsg(Json::Value value) const
 	return code;
 }
 
-void Account::HandleTokenToRedisRs(Packet* pPacket)
+void AccountMgr::HandleTokenToRedisRs(Packet* pPacket)
 {
 	auto protoRs = pPacket->ParseToProto<Proto::LoginTokenToRedisRs>();
-	const auto token = protoRs.token();
+	const auto& token = protoRs.token();
 
 	Player* pPlayer = GetComponent<PlayerCollectorComponent>()->GetPlayerByAccount(protoRs.account());
 	if (pPlayer == nullptr)

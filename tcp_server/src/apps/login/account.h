@@ -7,7 +7,7 @@
 #include <json/reader.h>
 class Player;
 
-class Account :public Entity<Account>, public IAwakeSystem<>, public SyncComponent
+class AccountMgr :public Entity<AccountMgr>, public IAwakeSystem<>, public SyncComponent
 {
 public:
 	void Awake() override;

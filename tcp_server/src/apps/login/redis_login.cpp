@@ -40,7 +40,7 @@ void RedisLogin::HandleAccountDeleteOnlineToRedis(Packet* pPacket)
 void RedisLogin::HandleLoginTokenToRedis(Packet* pPacket)
 {
     auto protoToken = pPacket->ParseToProto<Proto::LoginTokenToRedis>();
-    auto account = protoToken.account();
+    auto& account = protoToken.account();
     auto playerSn = protoToken.player_sn();
 
     auto token = Global::GetInstance()->GenerateUUID();
@@ -76,7 +76,7 @@ void RedisLogin::HandleLoginTokenToRedis(Packet* pPacket)
 void RedisLogin::HandleAccountQueryOnline(Packet* pPacket)
 {
     auto proto = pPacket->ParseToProto<Proto::AccountQueryOnlineToRedis>();
-    auto account = proto.account();
+    auto& account = proto.account();
     Proto::AccountQueryOnlineToRedisRs protoRs;
     protoRs.set_account(account.c_str());
     protoRs.set_return_code(Proto::AccountQueryOnlineToRedisRs::SOTR_Offline);

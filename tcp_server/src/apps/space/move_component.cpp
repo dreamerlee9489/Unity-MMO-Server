@@ -60,7 +60,7 @@ bool MoveComponent::Update(const float timeElapsed, PlayerComponentLastMap* pLas
 	}
 
 	pLastMap->GetCur()->Position = curPosition;
-	//LOG_DEBUG("cur position. " << curPosition);
+	//LOG_DEBUG("player cur position. " << curPosition);
 	return isStop;
 }
 

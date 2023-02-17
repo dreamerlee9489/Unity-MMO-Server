@@ -6,6 +6,6 @@
 
 inline void InitializeComponentLogin(ThreadMgr* pThreadMgr)
 {
-    pThreadMgr->CreateComponent<Account>();
+    pThreadMgr->CreateComponent<AccountMgr>();
     pThreadMgr->CreateComponent<RedisLogin>();
 }
