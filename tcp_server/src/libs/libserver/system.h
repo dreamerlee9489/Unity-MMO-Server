@@ -4,7 +4,6 @@
 #include "sn_object.h"
 
 class EntitySystem;
-
 class System :public IDisposable, public SnObject
 {
 public:

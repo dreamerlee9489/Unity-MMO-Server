@@ -13,6 +13,9 @@
     <Filter Include="player\component">
       <UniqueIdentifier>{246b5249-182c-4ff4-beb6-33005676d029}</UniqueIdentifier>
     </Filter>
+    <Filter Include="player\cmd">
+      <UniqueIdentifier>{9d2c2cc9-d0b7-4b65-975b-d87cc0a3fe28}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="player.h">
@@ -33,6 +36,39 @@
     <ClInclude Include="player_component_last_map.h">
       <Filter>player\component</Filter>
     </ClInclude>
+    <ClInclude Include="command.h">
+      <Filter>player\cmd</Filter>
+    </ClInclude>
+    <ClInclude Include="cmd_move.h">
+      <Filter>player\cmd</Filter>
+    </ClInclude>
+    <ClInclude Include="cmd_attack.h">
+      <Filter>player\cmd</Filter>
+    </ClInclude>
+    <ClInclude Include="cmd_pick.h">
+      <Filter>player\cmd</Filter>
+    </ClInclude>
+    <ClInclude Include="cmd_teleport.h">
+      <Filter>player\cmd</Filter>
+    </ClInclude>
+    <ClInclude Include="cmd_observe.h">
+      <Filter>player\cmd</Filter>
+    </ClInclude>
+    <ClInclude Include="cmd_pvp.h">
+      <Filter>player\cmd</Filter>
+    </ClInclude>
+    <ClInclude Include="cmd_death.h">
+      <Filter>player\cmd</Filter>
+    </ClInclude>
+    <ClInclude Include="command_component.h">
+      <Filter>player\cmd</Filter>
+    </ClInclude>
+    <ClInclude Include="command_system.h">
+      <Filter>player\cmd</Filter>
+    </ClInclude>
+    <ClInclude Include="cmd_none.h">
+      <Filter>player\cmd</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="player.cpp">
@@ -52,6 +88,39 @@
     </ClCompile>
     <ClCompile Include="player_component_last_map.cpp">
       <Filter>player\component</Filter>
+    </ClCompile>
+    <ClCompile Include="cmd_move.cpp">
+      <Filter>player\cmd</Filter>
+    </ClCompile>
+    <ClCompile Include="cmd_attack.cpp">
+      <Filter>player\cmd</Filter>
+    </ClCompile>
+    <ClCompile Include="cmd_pick.cpp">
+      <Filter>player\cmd</Filter>
+    </ClCompile>
+    <ClCompile Include="cmd_teleport.cpp">
+      <Filter>player\cmd</Filter>
+    </ClCompile>
+    <ClCompile Include="cmd_pvp.cpp">
+      <Filter>player\cmd</Filter>
+    </ClCompile>
+    <ClCompile Include="cmd_observe.cpp">
+      <Filter>player\cmd</Filter>
+    </ClCompile>
+    <ClCompile Include="cmd_death.cpp">
+      <Filter>player\cmd</Filter>
+    </ClCompile>
+    <ClCompile Include="command_component.cpp">
+      <Filter>player\cmd</Filter>
+    </ClCompile>
+    <ClCompile Include="command_system.cpp">
+      <Filter>player\cmd</Filter>
+    </ClCompile>
+    <ClCompile Include="command.cpp">
+      <Filter>player\cmd</Filter>
+    </ClCompile>
+    <ClCompile Include="cmd_none.cpp">
+      <Filter>player\cmd</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

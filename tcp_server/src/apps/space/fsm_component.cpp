@@ -10,7 +10,7 @@ FsmComponent::~FsmComponent()
 
 void FsmComponent::Awake()
 {
-	_parent = (Npc*)GetParent();
+	_parent = GetParent<Npc>();
 	_currState = new Idle(_parent);
 	AddTimer(1, 2, false, 0, BindFunP0(this, &FsmComponent::Start));
 }

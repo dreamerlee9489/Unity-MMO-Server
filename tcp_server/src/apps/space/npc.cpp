@@ -91,7 +91,7 @@ void Npc::GetDamage(Player* attacker)
 	}
 	if (hp == 0)
 	{
-		attacker->ResetCmd();
+		attacker->GetComponent<CmdComponent>()->ResetCmd();
 		//GetComponent<FsmComponent>()->ChangeState(new Death(this, attacker));
 		int exp = (atk + lv) * 5, gold = (atk + lv) * 10;
 		attacker->detail->xp += exp;

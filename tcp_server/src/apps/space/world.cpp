@@ -40,7 +40,6 @@ void World::Awake(int worldId)
 		Npc* npc = GetSystemManager()->GetEntitySystem()->AddComponent<Npc>(cfg);
 		npc->SetWorld(this);
 		npc->SetAllPlayer(playerMgr->GetAll());
-		//npc->AddComponent<FsmComponent>();
 		npc->AddComponent<BtComponent>();
 		npc->AddComponent<MoveComponent>();
 		npcIdxMap.emplace(npc->GetSN(), npcs.size());
@@ -74,6 +73,7 @@ Player* World::GetPlayer(NetIdentify* pIdentify)
 
 void World::PlayerDisappear(Player* pPlayer)
 {
+	pPlayer->RemoveComponent<CmdComponent>();
 	for (auto& enemy : npcs)
 	{
 		if (playerMgr->GetAll()->empty())
@@ -260,6 +260,7 @@ void World::HandleSyncPlayer(Packet* pPacket)
 	}
 
 	pPlayer->ParserFromProto(playerSn, proto.player());
+	pPlayer->AddComponent<CmdComponent>();
 	pPlayer->detail = pPlayer->AddComponent<PlayerComponentDetail>();
 	pPlayer->lastMap = pPlayer->AddComponent<PlayerComponentLastMap>();
 	pPlayer->lastMap->EnterWorld(_worldId, _sn);
@@ -337,7 +338,7 @@ void World::HandleG2SRemovePlayer(Player* pPlayer, Packet* pPacket)
 	pPlayerMgr->RemovePlayerBySn(pPlayer->GetPlayerSN());
 
 	// 通知其他玩家	
-	pPlayer->ResetCmd();
+	pPlayer->GetComponent<CmdComponent>()->ResetCmd();
 	PlayerDisappear(pPlayer);
 	Proto::RoleDisappear disAppear;
 	disAppear.set_sn(pPlayer->GetPlayerSN());
@@ -354,11 +355,23 @@ void World::HandleSyncPlayerPos(Player* pPlayer, Packet* pPacket)
 void World::HandleSyncPlayerCmd(Player* pPlayer, Packet* pPacket)
 {
 	Proto::SyncPlayerCmd proto = pPacket->ParseToProto<Proto::SyncPlayerCmd>();
-	pPlayer->cmd.type = proto.type();
-	pPlayer->cmd.target_sn = proto.target_sn();
-	pPlayer->cmd.point.ParserFromProto(proto.point());
-	proto.set_player_sn(pPlayer->GetPlayerSN());
-	BroadcastPacket(Proto::MsgId::S2C_SyncPlayerCmd, proto);
+	CmdType type = (CmdType)proto.type();
+	Vector3 point;
+	point.ParserFromProto(proto.point());
+	IEntity* target = nullptr;
+	switch (type)
+	{
+	case CmdType::Attack:
+		target = npcs[npcIdxMap[proto.target_sn()]];
+		break;
+	case CmdType::Observe:
+	case CmdType::Pvp:
+		target = playerMgr->GetPlayerBySn(proto.target_sn());
+		break;
+	default:
+		break;
+	}
+	pPlayer->GetComponent<CmdComponent>()->ChangeCmd(Command::GenCmd(type, pPlayer, point, target));
 }
 
 void World::HandleReqNpcInfo(Player* pPlayer, Packet* pPacket)
@@ -374,7 +387,6 @@ void World::HandleSyncBtAction(Player* pPlayer, Packet* pPacket)
 {
 	Proto::SyncBtAction proto = pPacket->ParseToProto<Proto::SyncBtAction>();
 	int id = proto.id();
-	//npcs[id]->GetComponent<FsmComponent>()->GetCurrState()->Singlecast(pPlayer);
 	npcs[id]->GetComponent<BtComponent>()->SyncAction(pPlayer);
 	if (!npcs[id]->linker)
 	{
@@ -390,13 +402,10 @@ void World::HandleSyncBtAction(Player* pPlayer, Packet* pPacket)
 void World::HandleReqSyncPlayer(Player* pPlayer, Packet* pPacket)
 {
 	Proto::ReqSyncPlayer proto = pPacket->ParseToProto<Proto::ReqSyncPlayer>();
-	Player* player = playerMgr->GetPlayerBySn(proto.player_sn());
-	Proto::SyncPlayerCmd cmd;
-	cmd.set_type(player->cmd.type);
-	cmd.set_player_sn(player->GetPlayerSN());
-	cmd.set_target_sn(player->cmd.target_sn);
-	player->cmd.point.SerializeToProto(cmd.mutable_point());
-	MessageSystemHelp::SendPacket(Proto::MsgId::S2C_SyncPlayerCmd, cmd, pPlayer);
+	Player* target = playerMgr->GetPlayerBySn(proto.player_sn());
+	Command* cmd = target->GetComponent<CmdComponent>()->GetCurrCmd();
+	if (cmd)
+		cmd->Singlecast(pPlayer);
 }
 
 void World::HandleSyncNpcPos(Packet* pPacket)

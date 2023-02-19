@@ -13,8 +13,7 @@ class FsmState;
 class FsmComponent : public Component<FsmComponent>, public IAwakeFromPoolSystem<>
 {
 	Npc* _parent = nullptr;
-	FsmState* _prevState = nullptr;
-	FsmState* _currState = nullptr;
+	FsmState* _prevState = nullptr, * _currState = nullptr;
 	bool _started = false;
 
 	void Start();

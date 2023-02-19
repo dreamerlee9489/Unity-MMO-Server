@@ -8,10 +8,10 @@
 #include "libserver/message_system_help.h"
 #include "libserver/message_system.h"
 #include "libplayer/player_component_last_map.h"
+#include "libplayer/command_component.h"
 #include "player_manager_component.h"
 #include "player_component_detail.h"
 #include "move_component.h"
-//#include "fsm_component.h"
 #include "bt_component.h"
 #include "trade.h"
 #include <cfloat>

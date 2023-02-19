@@ -22,19 +22,41 @@
     <Text Include="CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="cmd_attack.h" />
+    <ClInclude Include="cmd_none.h" />
+    <ClInclude Include="command_component.h" />
+    <ClInclude Include="command_system.h" />
+    <ClInclude Include="command.h" />
+    <ClInclude Include="cmd_death.h" />
+    <ClInclude Include="cmd_observe.h" />
+    <ClInclude Include="cmd_move.h" />
+    <ClInclude Include="cmd_pick.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="player_component.h" />
     <ClInclude Include="player_collector_component.h" />
     <ClInclude Include="player_component_last_map.h" />
     <ClInclude Include="player_component_proto_list.h" />
+    <ClInclude Include="cmd_pvp.h" />
+    <ClInclude Include="cmd_teleport.h" />
     <ClInclude Include="world_base.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="cmd_attack.cpp" />
+    <ClCompile Include="cmd_none.cpp" />
+    <ClCompile Include="command_component.cpp" />
+    <ClCompile Include="command_system.cpp" />
+    <ClCompile Include="command.cpp" />
+    <ClCompile Include="cmd_death.cpp" />
+    <ClCompile Include="cmd_observe.cpp" />
+    <ClCompile Include="cmd_move.cpp" />
+    <ClCompile Include="cmd_pick.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="player_component.cpp" />
     <ClCompile Include="player_collector_component.cpp" />
     <ClCompile Include="player_component_last_map.cpp" />
     <ClCompile Include="player_component_proto_list.cpp" />
+    <ClCompile Include="cmd_pvp.cpp" />
+    <ClCompile Include="cmd_teleport.cpp" />
     <ClCompile Include="world_base.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

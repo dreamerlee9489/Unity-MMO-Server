@@ -1,11 +1,11 @@
-﻿#include "ai_system.h"
+#include "command_system.h"
 
-AISystem::AISystem()
+CmdSystem::CmdSystem()
 {
 	_currTime = _lastTime = Global::GetInstance()->TimeTick;
 }
 
-void AISystem::Update(EntitySystem* pEntities)
+void CmdSystem::Update(EntitySystem* pEntities)
 {
 	_currTime = Global::GetInstance()->TimeTick;
 	_timeElapsed = _currTime - _lastTime;
@@ -14,11 +14,11 @@ void AISystem::Update(EntitySystem* pEntities)
 	_lastTime = _currTime;
 	if (_pCollections == nullptr)
 	{
-		_pCollections = pEntities->GetComponentCollections<BtComponent>();
+		_pCollections = pEntities->GetComponentCollections<CmdComponent>();
 		if (_pCollections == nullptr)
 			return;
 	}
 	auto& map = *_pCollections->GetAll();
 	for (auto iter = map.begin(); iter != map.end(); ++iter)
-		static_cast<BtComponent*>(iter->second)->Update();
+		static_cast<CmdComponent*>(iter->second)->Update();
 }

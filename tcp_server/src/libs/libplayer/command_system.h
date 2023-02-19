@@ -1,21 +1,20 @@
-﻿#ifndef AI_SYSTEM
-#define AI_SYSTEM
+#ifndef CMD_SYSTEM_H
+#define CMD_SYSTEM_H
 #include "libserver/system.h"
-#include "libserver/util_time.h"
 #include "libserver/entity_system.h"
-#include "libserver/entity.h"
-#include "bt_component.h"
+#include "libserver/util_time.h"
+#include "command_component.h"
 
-class AISystem : public ISystem<AISystem>
+class CmdSystem : public ISystem<CmdSystem>
 {
 private:
 	timeutil::Time _lastTime = 0, _currTime = 0, _timeElapsed = 0;
 	ComponentCollections* _pCollections{ nullptr };
 
 public:
-	AISystem();
+	CmdSystem();
 
 	void Update(EntitySystem* pEntities) override;
 };
 
-#endif // !AI_SYSTEM
+#endif // !CMD_SYSTEM_H

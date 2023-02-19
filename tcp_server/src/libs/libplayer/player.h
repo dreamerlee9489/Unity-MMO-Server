@@ -5,6 +5,7 @@
 #include "libserver/system.h"
 #include "libserver/vector3.h"
 #include "player_component_last_map.h"
+#include "command_component.h"
 #include "../../apps/space/player_component_detail.h"
 #include "../../apps/space/npc.h"
 #include "../../apps/game/team.h"
@@ -12,27 +13,19 @@
 #include <list>
 #include <map>
 
-struct Command
-{
-	int type = 0;
-	uint64 target_sn = 0;
-	Vector3 point{0, 0, 0};
-};
-
 class World;
 class Npc;
 class PlayerComponentLastMap;
 class PlayerComponentDetail;
-class Player : public Entity<Player>, public NetIdentify,
-	virtual public IAwakeFromPoolSystem<NetIdentify*, std::string>,
-	virtual public IAwakeFromPoolSystem<NetIdentify*, uint64, uint64>
+class Player : public Entity<Player>, public NetIdentify, virtual public IAwakeFromPoolSystem<NetIdentify*, std::string>, virtual public IAwakeFromPoolSystem<NetIdentify*, uint64, uint64>
 {
+	float _viewDist = 8.0f, _atkDist = 2.0f;
+
 public:
 	PlayerComponentLastMap* lastMap = nullptr;
 	PlayerComponentDetail* detail = nullptr;
 	World* curWorld = nullptr;
 	Team* pTeam = nullptr;
-	Command cmd{};
 
 	void Awake(NetIdentify* pIdentify, std::string account) override;
 	void Awake(NetIdentify* pIdentify, uint64 playerSn, uint64 worldSn) override;
@@ -44,9 +37,10 @@ public:
 	Vector3& GetCurrPos() { return lastMap->GetCur()->Position; }
 	void GetDamage(Npc* enemy);
 	void GetDamage(Player* atker);
-	void ResetCmd();
 	void UpdateKnapItem(const Proto::ItemData& itemData);
 	void GetPlayerKnap();
+	bool CanSee(Vector3& point);
+	bool CanAttack(Vector3& point);
 
 	Proto::Player& GetPlayerProto();
 	void ParseFromStream(uint64 playerSn, std::stringstream* pOpStream);
