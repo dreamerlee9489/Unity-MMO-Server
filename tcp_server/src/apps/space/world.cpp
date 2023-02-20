@@ -11,9 +11,28 @@ void World::Awake(int worldId)
 {
 	//LOG_DEBUG("create world. id:" << worldId << " sn:" << _sn << " space app id:" << Global::GetAppIdFromSN(_sn));
 	_worldId = worldId;
+	_worldMgr = ComponentHelp::GetGlobalEntitySystem()->GetComponent<WorldGather>();
+	_worldMgr->AddWorld(_sn, this);
 	playerMgr = AddComponent<PlayerManagerComponent>();
-	AddTimer(0, 10, false, 0, BindFunP0(this, &World::SyncWorldToGather));
-	AddTimer(0, 1, false, 0, BindFunP0(this, &World::SyncAppearTimer));
+	syncWorldTimer = AddTimer(0, 10, false, 0, BindFunP0(this, &World::SyncWorldToGather));
+	syncAppearTimer = AddTimer(0, 1, false, 0, BindFunP0(this, &World::SyncAppearTimer));
+
+	worldCfg = ResourceHelp::GetResourceManager()->Worlds->GetResource(_worldId);
+	std::vector<ResourceNpc>& npcCfgs = *worldCfg->GetNpcCfgs();
+	potionCfgs = worldCfg->GetPotionCfgs();
+	weaponCfgs = worldCfg->GetWeaponCfgs();
+	for (auto& cfg : npcCfgs)
+	{
+		Npc* npc = GetSystemManager()->GetEntitySystem()->AddComponent<Npc>(cfg);
+		npc->SetWorld(this);
+		npc->SetAllPlayer(playerMgr->GetAll());
+		npc->AddComponent<BtComponent>();
+		npc->AddComponent<MoveComponent>();
+		npcIdxMap.emplace(npc->GetSN(), npcs.size());
+		npcs.push_back(npc);
+		if (worldCfg->GetType() == ResourceWorldType::Public)
+			npc->rebirth = true;
+	}
 
 	// message
 	auto pMsgSystem = GetSystemManager()->GetMessageSystem();
@@ -37,23 +56,6 @@ void World::Awake(int worldId)
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2C_ReqTrade, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleReqTrade));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2C_TradeRes, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleTradeRes));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2C_UpdateTradeItem, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleUpdateTradeItem));
-
-	ResourceWorld* worldCfg = ResourceHelp::GetResourceManager()->Worlds->GetResource(_worldId);
-	std::vector<ResourceNpc>& npcCfgs = *worldCfg->GetNpcCfgs();
-	potionCfgs = worldCfg->GetPotionCfgs();
-	weaponCfgs = worldCfg->GetWeaponCfgs();
-	for (auto& cfg : npcCfgs)
-	{
-		Npc* npc = GetSystemManager()->GetEntitySystem()->AddComponent<Npc>(cfg);
-		npc->SetWorld(this);
-		npc->SetAllPlayer(playerMgr->GetAll());
-		npc->AddComponent<BtComponent>();
-		npc->AddComponent<MoveComponent>();
-		npcIdxMap.emplace(npc->GetSN(), npcs.size());
-		npcs.push_back(npc);
-		if (worldCfg->GetType() == ResourceWorldType::Public)
-			npc->rebirth = true;
-	}
 }
 
 void World::BackToPool()
@@ -214,7 +216,6 @@ inline void AddRoleToAppear(Player* pPlayer, Proto::AllRoleAppear& protoAppear)
 void World::SyncAppearTimer()
 {
 	auto pPlayerMgr = GetComponent<PlayerManagerComponent>();
-
 	if (!_adds.empty())
 	{
 		// 1.新增的数据，同步到全地图
@@ -341,8 +342,15 @@ void World::HandleG2SRemovePlayer(Player* pPlayer, Packet* pPacket)
 		return;
 	}
 
-	auto pPlayerMgr = GetComponent<PlayerManagerComponent>();
-	pPlayerMgr->RemovePlayerBySn(pPlayer->GetPlayerSN());
+	playerMgr->RemovePlayerBySn(pPlayer->GetPlayerSN());
+	if (worldCfg->GetType() == ResourceWorldType::Dungeon && playerMgr->GetAll()->empty())
+	{
+		RemoveTimer(syncWorldTimer);
+		RemoveTimer(syncAppearTimer);
+		Proto::DungeonDisapper pb;
+		pb.set_world_sn(_sn);
+		MessageSystemHelp::DispatchPacket(Proto::MsgId::MI_DungeonDisapper, pb, nullptr);
+	}
 
 	// 通知其他玩家	
 	pPlayer->GetComponent<CmdComponent>()->ResetCmd();
@@ -436,16 +444,14 @@ void World::HandlePlayerAtkEvent(Player* pPlayer, Packet* pPacket)
 	if (pPlayer->GetPlayerSN() == proto.target_sn())
 	{
 		Player* attacker = playerMgr->GetPlayerBySn(proto.player_sn());
-		pPlayer->GetDamage(attacker);
-		Proto::SyncPlayerProps status;
-		status.set_sn(pPlayer->GetPlayerSN());
-		status.set_hp(pPlayer->detail->hp);
-		BroadcastPacket(Proto::MsgId::S2C_SyncPlayerProps, status);
+		pPlayer->GetDamage(attacker);		
 	}
 	else if (pPlayer->GetPlayerSN() == proto.player_sn())
 	{
 		Player* defender = playerMgr->GetPlayerBySn(proto.target_sn());
-		if (!defender)
+		if (defender && pPlayer->GetPlayerSN() != defender->GetPlayerSN())
+			defender->GetDamage(pPlayer);
+		else
 		{
 			if (proto.target_sn() == 0)
 			{
@@ -459,19 +465,7 @@ void World::HandlePlayerAtkEvent(Player* pPlayer, Packet* pPacket)
 			{
 				Npc* npc = npcs[npcIdxMap[proto.target_sn()]];
 				npc->GetDamage(pPlayer);
-				Proto::SyncNpcProps status;
-				status.set_sn(npc->GetSN());
-				status.set_hp(npc->hp);
-				BroadcastPacket(Proto::MsgId::S2C_SyncNpcProps, status);
 			}
-		}
-		else if(pPlayer->GetPlayerSN() != defender->GetPlayerSN())
-		{
-			defender->GetDamage(pPlayer);
-			Proto::SyncPlayerProps status;
-			status.set_sn(defender->GetPlayerSN());
-			status.set_hp(defender->detail->hp);
-			BroadcastPacket(Proto::MsgId::S2C_SyncPlayerProps, status);
 		}
 	}
 }
@@ -480,10 +474,6 @@ void World::HandleNpcAtkEvent(Player* pPlayer, Packet* pPacket)
 {
 	Proto::NpcAtkEvent proto = pPacket->ParseToProto<Proto::NpcAtkEvent>();
 	pPlayer->GetDamage(npcs[npcIdxMap[proto.npc_sn()]]);
-	Proto::SyncPlayerProps status;
-	status.set_sn(pPlayer->GetPlayerSN());
-	status.set_hp(pPlayer->detail->hp);
-	BroadcastPacket(Proto::MsgId::S2C_SyncPlayerProps, status);
 }
 
 void World::HandleUpdateKnapItem(Player* pPlayer, Packet* pPacket)

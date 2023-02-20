@@ -1,12 +1,10 @@
 #include "world_proxy_gather.h"
-
 #include "libserver/message_system_help.h"
 #include "libserver/thread_mgr.h"
 #include "libserver/message_system.h"
 #include "libserver/global.h"
-
-#include <numeric>
 #include "libresource/resource_help.h"
+#include <numeric>
 
 void WorldProxyGather::Awake()
 {
@@ -98,7 +96,7 @@ void WorldProxyGather::HandleNetworkDisconnect(Packet* pPacket)
     if (pPlayer->pTeam)
     {
         Proto::CreateTeam proto;
-        Team* pTeam = teamMap[pPlayer->GetPlayerSN()];
+        GameTeam* pTeam = teamMap[pPlayer->GetPlayerSN()];
         pTeam->RemoveMember(pPlayer->GetPlayerSN());
         proto.set_captain(pTeam->GetCaptain());
         for (uint64 sn : pTeam->GetMembers())
@@ -142,7 +140,7 @@ void WorldProxyGather::HandleQueryPlayerRs(Packet* pPacket)
 void WorldProxyGather::HandleCreateTeam(Packet* pPacket)
 {
     Proto::CreateTeam proto = pPacket->ParseToProto<Proto::CreateTeam>();
-    Team* pTeam = new Team(proto.captain());
+    GameTeam* pTeam = new GameTeam(proto.captain());
     for (uint64 sn : proto.members())
     {
         pTeam->AddMember(sn);

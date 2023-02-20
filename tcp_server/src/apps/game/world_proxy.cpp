@@ -317,7 +317,7 @@ void WorldProxy::HandleC2GEnterWorld(Player* pPlayer, Packet* pPacket)
 		return;
 
 	// create teleport object
-	Team* pTeam = nullptr;
+	GameTeam* pTeam = nullptr;
 	if (proxyMgr->teamMap.find(pPlayer->GetPlayerSN()) != proxyMgr->teamMap.end())
 		pTeam = proxyMgr->teamMap[pPlayer->GetPlayerSN()];
 	if (pTeam && worldId == pTeam->dungeonId && proxyLoc->IsExistDungeon(pTeam->dungeonSn))

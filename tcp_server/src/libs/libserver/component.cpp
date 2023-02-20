@@ -52,18 +52,24 @@ void IComponent::ComponentBackToPool()
 
 	// 从 messageSystem中移除
 	if (_pSystemManager != nullptr && _pSystemManager->GetMessageSystem() != nullptr)
-	{
 		_pSystemManager->GetMessageSystem()->RemoveFunction(this);
-	}
 
 	_sn = 0;
 	_parent = nullptr;
 	_pSystemManager = nullptr;
 }
 
-void IComponent::AddTimer(const int total, const int durations, const bool immediateDo, const int immediateDoDelaySecond, TimerHandleFunction handler)
+uint64 IComponent::AddTimer(const int total, const int durations, const bool immediateDo, const int immediateDoDelaySecond, TimerHandleFunction handler)
 {
 	auto obj = GetSystemManager()->GetEntitySystem()->GetComponent<TimerComponent>();
 	const auto timer = obj->Add(total, durations, immediateDo, immediateDoDelaySecond, std::move(handler));
 	_timers.push_back(timer);
+	return timer;
+}
+
+void IComponent::RemoveTimer(uint64 sn)
+{
+	auto obj = GetSystemManager()->GetEntitySystem()->GetComponent<TimerComponent>();
+	obj->Remove(sn);
+	_timers.remove(sn);
 }

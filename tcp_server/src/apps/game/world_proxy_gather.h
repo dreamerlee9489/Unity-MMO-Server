@@ -3,12 +3,12 @@
 #include "libplayer/player.h"
 #include "libserver/system.h"
 #include "libserver/entity.h"
-#include "team.h"
+#include "game_team.h"
 
 class Packet;
 class Player;
 class PlayerCollectorComponent;
-class Team;
+class GameTeam;
 struct WorldProxyInfo
 {
 	uint64 WorldSn;
@@ -20,7 +20,7 @@ class WorldProxyGather :public Entity<WorldProxyGather>, public IAwakeSystem<>
 {
 public:
 	PlayerCollectorComponent* playerMgr = nullptr;
-	std::map<uint64, Team*> teamMap;
+	std::map<uint64, GameTeam*> teamMap;
 
 	void Awake() override;
 	void BackToPool() override;

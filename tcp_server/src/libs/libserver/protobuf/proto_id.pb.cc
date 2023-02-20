@@ -25,7 +25,7 @@ static constexpr ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema* schemas = n
 static constexpr ::PROTOBUF_NAMESPACE_ID::Message* const* file_default_instances = nullptr;
 
 const char descriptor_table_protodef_proto_5fid_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\016proto_id.proto\022\005Proto*\233\027\n\005MsgId\022\010\n\004Non"
+  "\n\016proto_id.proto\022\005Proto*\264\027\n\005MsgId\022\010\n\004Non"
   "e\020\000\022\025\n\021MI_NetworkConnect\020\001\022\027\n\023MI_Network"
   "Connected\020\002\022\024\n\020MI_NetworkListen\020\003\022\027\n\023MI_"
   "NetworkListenKey\020\004\022\030\n\024MI_NetworkDisconne"
@@ -66,41 +66,41 @@ const char descriptor_table_protodef_proto_5fid_2eproto[] PROTOBUF_SECTION_VARIA
   "s\020\301\014\022\024\n\017C2S_PlayerItems\020\302\014\022\034\n\027MI_Broadca"
   "stCreateWorld\020\321\017\022!\n\034MI_BroadcastCreateWo"
   "rldProxy\020\322\017\022\031\n\024MI_WorldSyncToGather\020\271\027\022\036"
-  "\n\031MI_WorldProxySyncToGather\020\272\027\022 \n\033MI_Acc"
-  "ountSyncOnlineToRedis\020\241\037\022\"\n\035MI_AccountDe"
-  "leteOnlineToRedis\020\242\037\022\037\n\032MI_PlayerSyncOnl"
-  "ineToRedis\020\243\037\022!\n\034MI_PlayerDeleteOnlineTo"
-  "Redis\020\244\037\022\026\n\021MI_RobotSyncState\020\211\'\022\023\n\016MI_R"
-  "obotCreate\020\212\'\022\021\n\014MI_HttpBegin\020\220N\022\031\n\024MI_H"
-  "ttpInnerResponse\020\221N\022\026\n\021MI_HttpRequestBad"
-  "\020\222N\022\030\n\023MI_HttpRequestLogin\020\223N\022\017\n\nMI_Http"
-  "End\020\203R\022\030\n\023MI_HttpOuterRequest\020\204R\022\031\n\024MI_H"
-  "ttpOuterResponse\020\205R\022\022\n\014MI_CmdThread\020\241\234\001\022"
-  "\017\n\tMI_CmdApp\020\242\234\001\022\026\n\020MI_CmdWorldProxy\020\243\234\001"
-  "\022\021\n\013MI_CmdWorld\020\244\234\001\022\022\n\014MI_CmdCreate\020\245\234\001\022"
-  "\026\n\020MI_CmdEfficiency\020\246\234\001\022\023\n\rMI_Efficiency"
-  "\020\247\234\001\022\027\n\021C2S_SyncPlayerPos\020\261\352\001\022\027\n\021S2C_Syn"
-  "cPlayerPos\020\262\352\001\022\027\n\021C2S_SyncPlayerCmd\020\263\352\001\022"
-  "\027\n\021S2C_SyncPlayerCmd\020\264\352\001\022\031\n\023S2C_SyncPlay"
-  "erProps\020\265\352\001\022\026\n\020S2C_SyncNpcProps\020\266\352\001\022\024\n\016C"
-  "2S_SyncNpcPos\020\267\352\001\022\026\n\020S2C_SyncFsmState\020\270\352"
-  "\001\022\026\n\020C2S_SyncFsmState\020\271\352\001\022\026\n\020S2C_SyncBtA"
-  "ction\020\272\352\001\022\026\n\020C2S_SyncBtAction\020\273\352\001\022\024\n\016C2S"
-  "_ReqNpcInfo\020\274\352\001\022\024\n\016S2C_ReqNpcInfo\020\275\352\001\022\027\n"
-  "\021C2S_ReqSyncPlayer\020\276\352\001\022\027\n\021S2C_ReqLinkPla"
-  "yer\020\277\352\001\022\030\n\022C2S_PlayerAtkEvent\020\300\352\001\022\030\n\022S2C"
-  "_PlayerAtkEvent\020\301\352\001\022\025\n\017C2S_NpcAtkEvent\020\302"
-  "\352\001\022\025\n\017S2C_NpcAtkEvent\020\303\352\001\022\026\n\020S2C_DropIte"
-  "mList\020\304\352\001\022\030\n\022C2S_UpdateKnapItem\020\301\270\002\022\030\n\022C"
-  "2S_UpdateKnapGold\020\302\270\002\022\027\n\021C2S_GetPlayerKn"
-  "ap\020\303\270\002\022\027\n\021S2C_GetPlayerKnap\020\304\270\002\022\025\n\017C2C_R"
-  "eqJoinTeam\020\321\206\003\022\025\n\017C2C_JoinTeamRes\020\322\206\003\022\031\n"
-  "\023C2C_ReqEnterDungeon\020\323\206\003\022\031\n\023C2C_EnterDun"
-  "geonRes\020\324\206\003\022\020\n\nC2C_ReqPvp\020\325\206\003\022\020\n\nC2C_Pvp"
-  "Res\020\326\206\003\022\022\n\014C2C_ReqTrade\020\327\206\003\022\022\n\014C2C_Trade"
-  "Res\020\330\206\003\022\031\n\023C2C_UpdateTradeItem\020\331\206\003\022\023\n\rS2"
-  "C_TradeOpen\020\332\206\003\022\024\n\016S2C_TradeClose\020\333\206\003b\006p"
-  "roto3"
+  "\n\031MI_WorldProxySyncToGather\020\272\027\022\027\n\022MI_Dun"
+  "geonDisapper\020\273\027\022 \n\033MI_AccountSyncOnlineT"
+  "oRedis\020\241\037\022\"\n\035MI_AccountDeleteOnlineToRed"
+  "is\020\242\037\022\037\n\032MI_PlayerSyncOnlineToRedis\020\243\037\022!"
+  "\n\034MI_PlayerDeleteOnlineToRedis\020\244\037\022\026\n\021MI_"
+  "RobotSyncState\020\211\'\022\023\n\016MI_RobotCreate\020\212\'\022\021"
+  "\n\014MI_HttpBegin\020\220N\022\031\n\024MI_HttpInnerRespons"
+  "e\020\221N\022\026\n\021MI_HttpRequestBad\020\222N\022\030\n\023MI_HttpR"
+  "equestLogin\020\223N\022\017\n\nMI_HttpEnd\020\203R\022\030\n\023MI_Ht"
+  "tpOuterRequest\020\204R\022\031\n\024MI_HttpOuterRespons"
+  "e\020\205R\022\022\n\014MI_CmdThread\020\241\234\001\022\017\n\tMI_CmdApp\020\242\234"
+  "\001\022\026\n\020MI_CmdWorldProxy\020\243\234\001\022\021\n\013MI_CmdWorld"
+  "\020\244\234\001\022\022\n\014MI_CmdCreate\020\245\234\001\022\026\n\020MI_CmdEffici"
+  "ency\020\246\234\001\022\023\n\rMI_Efficiency\020\247\234\001\022\027\n\021C2S_Syn"
+  "cPlayerPos\020\261\352\001\022\027\n\021S2C_SyncPlayerPos\020\262\352\001\022"
+  "\027\n\021C2S_SyncPlayerCmd\020\263\352\001\022\027\n\021S2C_SyncPlay"
+  "erCmd\020\264\352\001\022\031\n\023S2C_SyncPlayerProps\020\265\352\001\022\026\n\020"
+  "S2C_SyncNpcProps\020\266\352\001\022\024\n\016C2S_SyncNpcPos\020\267"
+  "\352\001\022\026\n\020S2C_SyncFsmState\020\270\352\001\022\026\n\020C2S_SyncFs"
+  "mState\020\271\352\001\022\026\n\020S2C_SyncBtAction\020\272\352\001\022\026\n\020C2"
+  "S_SyncBtAction\020\273\352\001\022\024\n\016C2S_ReqNpcInfo\020\274\352\001"
+  "\022\024\n\016S2C_ReqNpcInfo\020\275\352\001\022\027\n\021C2S_ReqSyncPla"
+  "yer\020\276\352\001\022\027\n\021S2C_ReqLinkPlayer\020\277\352\001\022\030\n\022C2S_"
+  "PlayerAtkEvent\020\300\352\001\022\030\n\022S2C_PlayerAtkEvent"
+  "\020\301\352\001\022\025\n\017C2S_NpcAtkEvent\020\302\352\001\022\025\n\017S2C_NpcAt"
+  "kEvent\020\303\352\001\022\026\n\020S2C_DropItemList\020\304\352\001\022\030\n\022C2"
+  "S_UpdateKnapItem\020\301\270\002\022\030\n\022C2S_UpdateKnapGo"
+  "ld\020\302\270\002\022\027\n\021C2S_GetPlayerKnap\020\303\270\002\022\027\n\021S2C_G"
+  "etPlayerKnap\020\304\270\002\022\025\n\017C2C_ReqJoinTeam\020\321\206\003\022"
+  "\025\n\017C2C_JoinTeamRes\020\322\206\003\022\031\n\023C2C_ReqEnterDu"
+  "ngeon\020\323\206\003\022\031\n\023C2C_EnterDungeonRes\020\324\206\003\022\020\n\n"
+  "C2C_ReqPvp\020\325\206\003\022\020\n\nC2C_PvpRes\020\326\206\003\022\022\n\014C2C_"
+  "ReqTrade\020\327\206\003\022\022\n\014C2C_TradeRes\020\330\206\003\022\031\n\023C2C_"
+  "UpdateTradeItem\020\331\206\003\022\023\n\rS2C_TradeOpen\020\332\206\003"
+  "\022\024\n\016S2C_TradeClose\020\333\206\003b\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_proto_5fid_2eproto_deps[1] = {
 };
@@ -109,7 +109,7 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_pro
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_proto_5fid_2eproto_once;
 static bool descriptor_table_proto_5fid_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_proto_5fid_2eproto = {
-  &descriptor_table_proto_5fid_2eproto_initialized, descriptor_table_protodef_proto_5fid_2eproto, "proto_id.proto", 3005,
+  &descriptor_table_proto_5fid_2eproto_initialized, descriptor_table_protodef_proto_5fid_2eproto, "proto_id.proto", 3030,
   &descriptor_table_proto_5fid_2eproto_once, descriptor_table_proto_5fid_2eproto_sccs, descriptor_table_proto_5fid_2eproto_deps, 0, 0,
   schemas, file_default_instances, TableStruct_proto_5fid_2eproto::offsets,
   file_level_metadata_proto_5fid_2eproto, 0, file_level_enum_descriptors_proto_5fid_2eproto, file_level_service_descriptors_proto_5fid_2eproto,
@@ -194,6 +194,7 @@ bool MsgId_IsValid(int value) {
     case 2002:
     case 3001:
     case 3002:
+    case 3003:
     case 4001:
     case 4002:
     case 4003:

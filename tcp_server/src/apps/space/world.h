@@ -9,6 +9,7 @@
 #include "libserver/message_system.h"
 #include "libplayer/player_component_last_map.h"
 #include "libplayer/command_component.h"
+#include "world_gather.h"
 #include "player_manager_component.h"
 #include "player_component_detail.h"
 #include "move_component.h"
@@ -20,14 +21,16 @@
 class Player;
 class Npc;
 class PlayerManagerComponent;
+class WorldGather;
 class World :public Entity<World>, public IWorld, public IAwakeFromPoolSystem<int>
 {
 public:
-	std::vector<int>* potionCfgs;
-	std::vector<int>* weaponCfgs;
 	std::vector<Npc*> npcs;
 	std::unordered_map<uint64, int> npcIdxMap;
-	PlayerManagerComponent* playerMgr;
+	std::vector<int>* potionCfgs = nullptr;
+	std::vector<int>* weaponCfgs = nullptr;
+	ResourceWorld* worldCfg = nullptr;
+	PlayerManagerComponent* playerMgr = nullptr;
 
 	void Awake(int worldId) override;
 	void BackToPool() override;
@@ -67,5 +70,7 @@ private:
 	// 缓存1秒内增加或是删除的玩家
 	std::set<uint64> _adds;
 	std::unordered_map<uint64, Trade*> tradeMap;
+	uint64 syncWorldTimer, syncAppearTimer;
+	WorldGather* _worldMgr = nullptr;
 };
 

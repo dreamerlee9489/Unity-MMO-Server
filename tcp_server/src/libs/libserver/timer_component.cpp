@@ -40,9 +40,9 @@ void TimerComponent::BackToPool()
 
 uint64 TimerComponent::Add(const int total, const int durations, const bool immediateDo, const int immediateDoDelaySecond, TimerHandleFunction handler)
 {
-    // durations Ö´ĞĞ¼ä¸ôÃë
-    // immediateDo ÊÇ·ñÂíÉÏÖ´ĞĞ
-    // immediateDoDelaySecond Ê×´ÎÖ´ĞĞÓëµ±Ç°Ê±¼äµÄ¼ä¸ôÊ±¼ä
+    // durations æ‰§è¡Œé—´éš”ç§’
+    // immediateDo æ˜¯å¦é©¬ä¸Šæ‰§è¡Œ
+    // immediateDoDelaySecond é¦–æ¬¡æ‰§è¡Œä¸å½“å‰æ—¶é—´çš„é—´éš”æ—¶é—´
 
     Timer data;
     data.SN = Global::GetInstance()->GenerateSN();
@@ -76,7 +76,21 @@ void TimerComponent::Remove(std::list<uint64>& timers)
         _heap.erase(iter);
     }
 
-    // ÖØĞÂ½¨Á¢heapÊı¾İ
+    // é‡æ–°å»ºç«‹heapæ•°æ®
+    make_heap(_heap.begin(), _heap.end(), CompareTimer());
+}
+
+void TimerComponent::Remove(uint64 timer)
+{
+    auto iter = std::find_if(_heap.begin(), _heap.end(), [timer](const Timer& one)
+        {
+            return one.SN == timer;
+        });
+
+    if (iter == _heap.end())
+        return;
+
+    _heap.erase(iter);
     make_heap(_heap.begin(), _heap.end(), CompareTimer());
 }
 
@@ -85,13 +99,13 @@ bool TimerComponent::CheckTime()
     if (_heap.empty())
         return false;
 
-    const auto data = _heap.front();
+    const auto& data = _heap.front();
     return data.NextTime <= Global::GetInstance()->TimeTick;
 }
 
 Timer TimerComponent::PopTimeHeap()
 {
-    // µ¯³öheap¶¥ÔªËØ, ½«Æä·ÅÖÃÓÚÇø¼äÄ©Î²
+    // å¼¹å‡ºheapé¡¶å…ƒç´ , å°†å…¶æ”¾ç½®äºåŒºé—´æœ«å°¾
     pop_heap(_heap.begin(), _heap.end(), CompareTimer());
 
     Timer data = _heap.back();
@@ -110,13 +124,9 @@ void TimerComponent::Update()
         if (data.CallCountTotal != 0)
             data.CallCountCur++;
 
-        if (data.CallCountTotal != 0 && data.CallCountCur >= data.CallCountTotal)
+        if (data.CallCountTotal == 0 || data.CallCountCur < data.CallCountTotal)
         {
-            //delete pNode; È¡³öÖ®ºó£¬²»ÔÙ¼ÓÈë¶ÑÖĞ
-        }
-        else
-        {
-            // ÖØĞÂ¼ÓÈë¶ÑÖĞ
+            // é‡æ–°åŠ å…¥å †ä¸­
             data.NextTime = timeutil::AddSeconds(Global::GetInstance()->TimeTick, data.DurationSecond);
             Add(data);
         }

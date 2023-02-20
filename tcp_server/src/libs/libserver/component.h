@@ -35,7 +35,8 @@ public:
 	virtual uint64 GetTypeHashCode() = 0;
 
 protected:
-	void AddTimer(const int total, const int durations, const bool immediateDo, const int immediateDoDelaySecond, TimerHandleFunction handler);
+	uint64 AddTimer(const int total, const int durations, const bool immediateDo, const int immediateDoDelaySecond, TimerHandleFunction handler);
+	void RemoveTimer(uint64 sn);
 	std::list<uint64> _timers;
 
 	IEntity* _parent{ nullptr };

@@ -106,6 +106,10 @@ void Npc::GetDamage(Player* attacker)
 		MessageSystemHelp::SendPacket(Proto::MsgId::S2C_DropItemList, list, attacker);
 		delete items;
 	}
+	Proto::SyncNpcProps status;
+	status.set_sn(_sn);
+	status.set_hp(hp);
+	_world->BroadcastPacket(Proto::MsgId::S2C_SyncNpcProps, status);
 }
 
 std::list<ItemData>* Npc::GetDropList(Player* player)

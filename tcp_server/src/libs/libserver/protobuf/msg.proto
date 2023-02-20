@@ -232,6 +232,10 @@ message WorldSyncToGather {
 	int32 online = 3;
 }
 
+message DungeonDisapper {
+	uint64 world_sn = 1;
+}
+
 message WorldProxySyncToGather {
 	uint64 world_sn = 1;
 	bool is_remove = 2;

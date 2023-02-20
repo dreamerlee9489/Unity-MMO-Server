@@ -160,6 +160,10 @@ class WorldSyncToGatherDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<WorldSyncToGather> _instance;
 } _WorldSyncToGather_default_instance_;
+class DungeonDisapperDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<DungeonDisapper> _instance;
+} _DungeonDisapper_default_instance_;
 class WorldProxySyncToGatherDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<WorldProxySyncToGather> _instance;
@@ -711,6 +715,20 @@ static void InitDefaultsscc_info_DropItemList_msg_2eproto() {
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_DropItemList_msg_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsscc_info_DropItemList_msg_2eproto}, {
       &scc_info_ItemData_db_2eproto.base,}};
+
+static void InitDefaultsscc_info_DungeonDisapper_msg_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::Proto::_DungeonDisapper_default_instance_;
+    new (ptr) ::Proto::DungeonDisapper();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::Proto::DungeonDisapper::InitAsDefaultInstance();
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_DungeonDisapper_msg_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsscc_info_DungeonDisapper_msg_2eproto}, {}};
 
 static void InitDefaultsscc_info_Efficiency_msg_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -1528,7 +1546,7 @@ static void InitDefaultsscc_info_WorldSyncToGather_msg_2eproto() {
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_WorldSyncToGather_msg_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsscc_info_WorldSyncToGather_msg_2eproto}, {}};
 
-static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_msg_2eproto[82];
+static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_msg_2eproto[83];
 static const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* file_level_enum_descriptors_msg_2eproto[12];
 static constexpr ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor const** file_level_service_descriptors_msg_2eproto = nullptr;
 
@@ -1766,6 +1784,12 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_msg_2eproto::offsets[] PROTOBU
   PROTOBUF_FIELD_OFFSET(::Proto::WorldSyncToGather, world_sn_),
   PROTOBUF_FIELD_OFFSET(::Proto::WorldSyncToGather, world_id_),
   PROTOBUF_FIELD_OFFSET(::Proto::WorldSyncToGather, online_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::Proto::DungeonDisapper, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::Proto::DungeonDisapper, world_sn_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::Proto::WorldProxySyncToGather, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -2163,55 +2187,56 @@ static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOB
   { 212, -1, sizeof(::Proto::SelectPlayerRs)},
   { 218, -1, sizeof(::Proto::SavePlayer)},
   { 225, -1, sizeof(::Proto::WorldSyncToGather)},
-  { 233, -1, sizeof(::Proto::WorldProxySyncToGather)},
-  { 242, -1, sizeof(::Proto::GameToken)},
-  { 251, -1, sizeof(::Proto::LoginByToken)},
-  { 258, -1, sizeof(::Proto::LoginByTokenRs)},
-  { 264, -1, sizeof(::Proto::LoginTokenToRedis)},
-  { 271, -1, sizeof(::Proto::LoginTokenToRedisRs)},
-  { 278, -1, sizeof(::Proto::AccountQueryOnlineToRedis)},
-  { 284, -1, sizeof(::Proto::AccountQueryOnlineToRedisRs)},
-  { 291, -1, sizeof(::Proto::AccountSyncOnlineToRedis)},
-  { 297, -1, sizeof(::Proto::AccountDeleteOnlineToRedis)},
-  { 303, -1, sizeof(::Proto::PlayerSyncOnlineToRedis)},
-  { 310, -1, sizeof(::Proto::PlayerDeleteOnlineToRedis)},
-  { 317, -1, sizeof(::Proto::GameTokenToRedis)},
-  { 323, -1, sizeof(::Proto::TokenInfo)},
-  { 330, -1, sizeof(::Proto::GameTokenToRedisRs)},
-  { 337, -1, sizeof(::Proto::SyncPlayer)},
-  { 345, -1, sizeof(::Proto::EnterWorld)},
-  { 352, -1, sizeof(::Proto::RequestWorld)},
-  { 358, -1, sizeof(::Proto::CreateWorld)},
-  { 366, -1, sizeof(::Proto::BroadcastCreateWorld)},
-  { 374, -1, sizeof(::Proto::BroadcastCreateWorldProxy)},
-  { 381, -1, sizeof(::Proto::QueryWorld)},
-  { 388, -1, sizeof(::Proto::QueryWorldRs)},
-  { 395, -1, sizeof(::Proto::Teleport)},
-  { 404, -1, sizeof(::Proto::TeleportAfter)},
-  { 410, -1, sizeof(::Proto::RemovePlayer)},
-  { 416, -1, sizeof(::Proto::RequestSyncPlayer)},
-  { 422, -1, sizeof(::Proto::Role)},
-  { 437, -1, sizeof(::Proto::AllRoleAppear)},
-  { 443, -1, sizeof(::Proto::RoleDisappear)},
-  { 449, -1, sizeof(::Proto::Move)},
-  { 456, -1, sizeof(::Proto::EntityMove)},
-  { 464, -1, sizeof(::Proto::SyncPlayerProps)},
-  { 471, -1, sizeof(::Proto::SyncNpcProps)},
-  { 478, -1, sizeof(::Proto::ReqNpcInfo)},
-  { 486, -1, sizeof(::Proto::SyncFsmState)},
-  { 495, -1, sizeof(::Proto::SyncBtAction)},
-  { 504, -1, sizeof(::Proto::SyncNpcPos)},
-  { 511, -1, sizeof(::Proto::SyncPlayerPos)},
-  { 517, -1, sizeof(::Proto::SyncPlayerCmd)},
-  { 526, -1, sizeof(::Proto::ReqSyncPlayer)},
-  { 532, -1, sizeof(::Proto::ReqLinkPlayer)},
-  { 540, -1, sizeof(::Proto::NpcAtkEvent)},
-  { 547, -1, sizeof(::Proto::PlayerAtkEvent)},
-  { 554, -1, sizeof(::Proto::DropItemList)},
-  { 563, -1, sizeof(::Proto::PlayerReq)},
-  { 571, -1, sizeof(::Proto::ChatMsg)},
-  { 579, -1, sizeof(::Proto::CreateTeam)},
-  { 586, -1, sizeof(::Proto::EnterDungeon)},
+  { 233, -1, sizeof(::Proto::DungeonDisapper)},
+  { 239, -1, sizeof(::Proto::WorldProxySyncToGather)},
+  { 248, -1, sizeof(::Proto::GameToken)},
+  { 257, -1, sizeof(::Proto::LoginByToken)},
+  { 264, -1, sizeof(::Proto::LoginByTokenRs)},
+  { 270, -1, sizeof(::Proto::LoginTokenToRedis)},
+  { 277, -1, sizeof(::Proto::LoginTokenToRedisRs)},
+  { 284, -1, sizeof(::Proto::AccountQueryOnlineToRedis)},
+  { 290, -1, sizeof(::Proto::AccountQueryOnlineToRedisRs)},
+  { 297, -1, sizeof(::Proto::AccountSyncOnlineToRedis)},
+  { 303, -1, sizeof(::Proto::AccountDeleteOnlineToRedis)},
+  { 309, -1, sizeof(::Proto::PlayerSyncOnlineToRedis)},
+  { 316, -1, sizeof(::Proto::PlayerDeleteOnlineToRedis)},
+  { 323, -1, sizeof(::Proto::GameTokenToRedis)},
+  { 329, -1, sizeof(::Proto::TokenInfo)},
+  { 336, -1, sizeof(::Proto::GameTokenToRedisRs)},
+  { 343, -1, sizeof(::Proto::SyncPlayer)},
+  { 351, -1, sizeof(::Proto::EnterWorld)},
+  { 358, -1, sizeof(::Proto::RequestWorld)},
+  { 364, -1, sizeof(::Proto::CreateWorld)},
+  { 372, -1, sizeof(::Proto::BroadcastCreateWorld)},
+  { 380, -1, sizeof(::Proto::BroadcastCreateWorldProxy)},
+  { 387, -1, sizeof(::Proto::QueryWorld)},
+  { 394, -1, sizeof(::Proto::QueryWorldRs)},
+  { 401, -1, sizeof(::Proto::Teleport)},
+  { 410, -1, sizeof(::Proto::TeleportAfter)},
+  { 416, -1, sizeof(::Proto::RemovePlayer)},
+  { 422, -1, sizeof(::Proto::RequestSyncPlayer)},
+  { 428, -1, sizeof(::Proto::Role)},
+  { 443, -1, sizeof(::Proto::AllRoleAppear)},
+  { 449, -1, sizeof(::Proto::RoleDisappear)},
+  { 455, -1, sizeof(::Proto::Move)},
+  { 462, -1, sizeof(::Proto::EntityMove)},
+  { 470, -1, sizeof(::Proto::SyncPlayerProps)},
+  { 477, -1, sizeof(::Proto::SyncNpcProps)},
+  { 484, -1, sizeof(::Proto::ReqNpcInfo)},
+  { 492, -1, sizeof(::Proto::SyncFsmState)},
+  { 501, -1, sizeof(::Proto::SyncBtAction)},
+  { 510, -1, sizeof(::Proto::SyncNpcPos)},
+  { 517, -1, sizeof(::Proto::SyncPlayerPos)},
+  { 523, -1, sizeof(::Proto::SyncPlayerCmd)},
+  { 532, -1, sizeof(::Proto::ReqSyncPlayer)},
+  { 538, -1, sizeof(::Proto::ReqLinkPlayer)},
+  { 546, -1, sizeof(::Proto::NpcAtkEvent)},
+  { 553, -1, sizeof(::Proto::PlayerAtkEvent)},
+  { 560, -1, sizeof(::Proto::DropItemList)},
+  { 569, -1, sizeof(::Proto::PlayerReq)},
+  { 577, -1, sizeof(::Proto::ChatMsg)},
+  { 585, -1, sizeof(::Proto::CreateTeam)},
+  { 592, -1, sizeof(::Proto::EnterDungeon)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
@@ -2248,6 +2273,7 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::Proto::_SelectPlayerRs_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::Proto::_SavePlayer_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::Proto::_WorldSyncToGather_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::Proto::_DungeonDisapper_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::Proto::_WorldProxySyncToGather_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::Proto::_GameToken_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::Proto::_LoginByToken_default_instance_),
@@ -2360,109 +2386,110 @@ const char descriptor_table_protodef_msg_2eproto[] PROTOBUF_SECTION_VARIABLE(pro
   "\n\tplayer_sn\030\001 \001(\004\022\035\n\006player\030\002 \001(\0132\r.Prot"
   "o.Player\"G\n\021WorldSyncToGather\022\020\n\010world_s"
   "n\030\001 \001(\004\022\020\n\010world_id\030\002 \001(\005\022\016\n\006online\030\003 \001("
-  "\005\"_\n\026WorldProxySyncToGather\022\020\n\010world_sn\030"
-  "\001 \001(\004\022\021\n\tis_remove\030\002 \001(\010\022\020\n\010world_id\030\003 \001"
-  "(\005\022\016\n\006online\030\004 \001(\005\"\235\001\n\tGameToken\0220\n\013retu"
-  "rn_code\030\001 \001(\0162\033.Proto.GameToken.ReturnCo"
-  "de\022\r\n\005token\030\002 \001(\t\022\n\n\002ip\030\003 \001(\t\022\014\n\004port\030\004 "
-  "\001(\005\"5\n\nReturnCode\022\020\n\014GameToken_OK\020\000\022\025\n\021G"
-  "ameToken_NO_GAME\020\001\".\n\014LoginByToken\022\017\n\007ac"
-  "count\030\001 \001(\t\022\r\n\005token\030\002 \001(\t\"\246\001\n\016LoginByTo"
-  "kenRs\0225\n\013return_code\030\001 \001(\0162 .Proto.Login"
-  "ByTokenRs.ReturnCode\"]\n\nReturnCode\022\013\n\007LG"
-  "RC_OK\020\000\022\020\n\014LGRC_UNKONWN\020\001\022\032\n\026LGRC_NOT_FO"
-  "UND_ACCOUNT\020\002\022\024\n\020LGRC_TOKEN_WRONG\020\003\"7\n\021L"
-  "oginTokenToRedis\022\017\n\007account\030\001 \001(\t\022\021\n\tpla"
-  "yer_sn\030\002 \001(\004\"5\n\023LoginTokenToRedisRs\022\017\n\007a"
-  "ccount\030\001 \001(\t\022\r\n\005token\030\002 \001(\t\",\n\031AccountQu"
-  "eryOnlineToRedis\022\017\n\007account\030\001 \001(\t\"\243\001\n\033Ac"
-  "countQueryOnlineToRedisRs\022\017\n\007account\030\001 \001"
-  "(\t\022B\n\013return_code\030\002 \001(\0162-.Proto.AccountQ"
-  "ueryOnlineToRedisRs.ReturnCode\"/\n\nReturn"
-  "Code\022\020\n\014SOTR_Offline\020\000\022\017\n\013SOTR_Online\020\001\""
-  "+\n\030AccountSyncOnlineToRedis\022\017\n\007account\030\001"
-  " \001(\t\"-\n\032AccountDeleteOnlineToRedis\022\017\n\007ac"
-  "count\030\001 \001(\t\";\n\027PlayerSyncOnlineToRedis\022\017"
-  "\n\007account\030\001 \001(\t\022\017\n\007version\030\002 \001(\005\"=\n\031Play"
-  "erDeleteOnlineToRedis\022\017\n\007account\030\001 \001(\t\022\017"
-  "\n\007version\030\002 \001(\005\"#\n\020GameTokenToRedis\022\017\n\007a"
-  "ccount\030\001 \001(\t\"-\n\tTokenInfo\022\r\n\005token\030\001 \001(\t"
-  "\022\021\n\tplayer_sn\030\002 \001(\004\"K\n\022GameTokenToRedisR"
-  "s\022\017\n\007account\030\001 \001(\t\022$\n\ntoken_info\030\002 \001(\0132\020"
-  ".Proto.TokenInfo\"L\n\nSyncPlayer\022\016\n\006app_id"
-  "\030\001 \001(\005\022\017\n\007account\030\002 \001(\t\022\035\n\006player\030\003 \001(\0132"
-  "\r.Proto.Player\"A\n\nEnterWorld\022\020\n\010world_id"
-  "\030\001 \001(\005\022!\n\010position\030\002 \001(\0132\017.Proto.Vector3"
-  "D\" \n\014RequestWorld\022\020\n\010world_id\030\001 \001(\005\"K\n\013C"
-  "reateWorld\022\020\n\010world_id\030\001 \001(\005\022\025\n\rlast_wor"
-  "ld_sn\030\002 \001(\004\022\023\n\013game_app_id\030\003 \001(\005\"Q\n\024Broa"
-  "dcastCreateWorld\022\020\n\010world_id\030\001 \001(\005\022\020\n\010wo"
-  "rld_sn\030\002 \001(\004\022\025\n\rlast_world_sn\030\003 \001(\004\"\?\n\031B"
-  "roadcastCreateWorldProxy\022\020\n\010world_id\030\001 \001"
-  "(\005\022\020\n\010world_sn\030\002 \001(\004\"5\n\nQueryWorld\022\020\n\010wo"
-  "rld_sn\030\001 \001(\004\022\025\n\rlast_world_sn\030\002 \001(\004\"\215\001\n\014"
-  "QueryWorldRs\022\020\n\010world_sn\030\001 \001(\004\0223\n\013return"
-  "_code\030\002 \001(\0162\036.Proto.QueryWorldRs.ReturnC"
-  "ode\"6\n\nReturnCode\022\021\n\rQueryWorld_OK\020\000\022\025\n\021"
-  "QueryWorld_Failed\020\001\"d\n\010Teleport\022\025\n\rlast_"
-  "world_sn\030\001 \001(\004\022\021\n\tplayer_sn\030\002 \001(\004\022\017\n\007acc"
-  "ount\030\003 \001(\t\022\035\n\006player\030\004 \001(\0132\r.Proto.Playe"
-  "r\"\"\n\rTeleportAfter\022\021\n\tplayer_sn\030\001 \001(\004\"!\n"
-  "\014RemovePlayer\022\021\n\tplayer_sn\030\001 \001(\004\"&\n\021Requ"
-  "estSyncPlayer\022\021\n\tplayer_sn\030\001 \001(\004\"\257\001\n\004Rol"
-  "e\022\014\n\004name\030\001 \001(\t\022\n\n\002sn\030\002 \001(\004\022\035\n\006gender\030\003 "
-  "\001(\0162\r.Proto.Gender\022!\n\010position\030\004 \001(\0132\017.P"
-  "roto.Vector3D\022\r\n\005level\030\005 \001(\005\022\n\n\002xp\030\006 \001(\005"
-  "\022\n\n\002hp\030\007 \001(\005\022\n\n\002mp\030\010 \001(\005\022\013\n\003atk\030\t \001(\005\022\013\n"
-  "\003def\030\n \001(\005\"+\n\rAllRoleAppear\022\032\n\005roles\030\001 \003"
-  "(\0132\013.Proto.Role\"\033\n\rRoleDisappear\022\n\n\002sn\030\001"
-  " \001(\004\"<\n\004Move\022\021\n\tplayer_sn\030\001 \001(\004\022!\n\010posit"
-  "ion\030\002 \003(\0132\017.Proto.Vector3D\"J\n\nEntityMove"
-  "\022\n\n\002sn\030\001 \001(\004\022\017\n\007running\030\002 \001(\010\022\037\n\006points\030"
-  "\003 \003(\0132\017.Proto.Vector3D\")\n\017SyncPlayerProp"
-  "s\022\n\n\002sn\030\001 \001(\004\022\n\n\002hp\030\002 \001(\005\"&\n\014SyncNpcProp"
-  "s\022\n\n\002sn\030\001 \001(\004\022\n\n\002hp\030\002 \001(\005\"J\n\nReqNpcInfo\022"
-  "\016\n\006npc_id\030\001 \001(\005\022\016\n\006npc_sn\030\002 \001(\004\022\034\n\003pos\030\003"
-  " \001(\0132\017.Proto.Vector3D\"N\n\014SyncFsmState\022\r\n"
-  "\005state\030\001 \001(\005\022\014\n\004code\030\002 \001(\005\022\016\n\006npc_sn\030\003 \001"
-  "(\004\022\021\n\tplayer_sn\030\004 \001(\004\"K\n\014SyncBtAction\022\n\n"
-  "\002id\030\001 \001(\005\022\014\n\004code\030\002 \001(\005\022\016\n\006npc_sn\030\003 \001(\004\022"
-  "\021\n\tplayer_sn\030\004 \001(\004\":\n\nSyncNpcPos\022\016\n\006npc_"
-  "sn\030\001 \001(\004\022\034\n\003pos\030\002 \001(\0132\017.Proto.Vector3D\"-"
-  "\n\rSyncPlayerPos\022\034\n\003pos\030\001 \001(\0132\017.Proto.Vec"
-  "tor3D\"c\n\rSyncPlayerCmd\022\014\n\004type\030\001 \001(\005\022\036\n\005"
-  "point\030\002 \001(\0132\017.Proto.Vector3D\022\021\n\tplayer_s"
-  "n\030\003 \001(\004\022\021\n\ttarget_sn\030\004 \001(\004\"\"\n\rReqSyncPla"
-  "yer\022\021\n\tplayer_sn\030\001 \001(\004\"\?\n\rReqLinkPlayer\022"
-  "\016\n\006npc_id\030\001 \001(\005\022\016\n\006npc_sn\030\002 \001(\004\022\016\n\006linke"
-  "r\030\003 \001(\010\"0\n\013NpcAtkEvent\022\016\n\006npc_sn\030\001 \001(\004\022\021"
-  "\n\ttarget_sn\030\002 \001(\004\"6\n\016PlayerAtkEvent\022\021\n\tp"
-  "layer_sn\030\001 \001(\004\022\021\n\ttarget_sn\030\002 \001(\004\"Y\n\014Dro"
-  "pItemList\022\016\n\006npc_sn\030\001 \001(\004\022\013\n\003exp\030\002 \001(\005\022\014"
-  "\n\004gold\030\003 \001(\005\022\036\n\005items\030\004 \003(\0132\017.Proto.Item"
-  "Data\"@\n\tPlayerReq\022\r\n\005agree\030\001 \001(\010\022\021\n\tappl"
-  "icant\030\002 \001(\004\022\021\n\tresponder\030\003 \001(\004\"8\n\007ChatMs"
-  "g\022\016\n\006sender\030\001 \001(\004\022\014\n\004name\030\002 \001(\t\022\017\n\007conte"
-  "nt\030\003 \001(\t\".\n\nCreateTeam\022\017\n\007captain\030\001 \001(\004\022"
-  "\017\n\007members\030\002 \003(\004\"Q\n\014EnterDungeon\022\020\n\010worl"
-  "d_id\030\001 \001(\005\022\020\n\010world_sn\030\002 \001(\004\022\r\n\005agree\030\003 "
-  "\001(\010\022\016\n\006sender\030\004 \001(\t*x\n\007TagType\022\017\n\013TagTyp"
-  "eNone\020\000\022\022\n\016TagTypeAccount\020\001\022\016\n\nTagTypeAp"
-  "p\020\002\022\021\n\rTagTypeEntity\020\003\022\022\n\016TagTypeToWorld"
-  "\020\004\022\021\n\rTagTypePlayer\020\005*\232\001\n\026AccountCheckRe"
-  "turnCode\022\n\n\006ARC_OK\020\000\022\017\n\013ARC_UNKONWN\020\001\022\031\n"
-  "\025ARC_NOT_FOUND_ACCOUNT\020\002\022\026\n\022ARC_PASSWORD"
-  "_WRONG\020\003\022\017\n\013ARC_LOGGING\020\004\022\017\n\013ARC_TIMEOUT"
-  "\020\005\022\016\n\nARC_ONLINE\020\006*G\n\023LoginHttpReturnCod"
-  "e\022\013\n\007LHRC_OK\020\000\022\020\n\014LHRC_TIMEOUT\020\001\022\021\n\rLHRC"
-  "_NOTFOUND\020\002*L\n\026CreatePlayerReturnCode\022\021\n"
-  "\rCPR_Create_OK\020\000\022\017\n\013CPR_Unkonwn\020\001\022\016\n\nCPR"
-  "_Rename\020\002b\006proto3"
+  "\005\"#\n\017DungeonDisapper\022\020\n\010world_sn\030\001 \001(\004\"_"
+  "\n\026WorldProxySyncToGather\022\020\n\010world_sn\030\001 \001"
+  "(\004\022\021\n\tis_remove\030\002 \001(\010\022\020\n\010world_id\030\003 \001(\005\022"
+  "\016\n\006online\030\004 \001(\005\"\235\001\n\tGameToken\0220\n\013return_"
+  "code\030\001 \001(\0162\033.Proto.GameToken.ReturnCode\022"
+  "\r\n\005token\030\002 \001(\t\022\n\n\002ip\030\003 \001(\t\022\014\n\004port\030\004 \001(\005"
+  "\"5\n\nReturnCode\022\020\n\014GameToken_OK\020\000\022\025\n\021Game"
+  "Token_NO_GAME\020\001\".\n\014LoginByToken\022\017\n\007accou"
+  "nt\030\001 \001(\t\022\r\n\005token\030\002 \001(\t\"\246\001\n\016LoginByToken"
+  "Rs\0225\n\013return_code\030\001 \001(\0162 .Proto.LoginByT"
+  "okenRs.ReturnCode\"]\n\nReturnCode\022\013\n\007LGRC_"
+  "OK\020\000\022\020\n\014LGRC_UNKONWN\020\001\022\032\n\026LGRC_NOT_FOUND"
+  "_ACCOUNT\020\002\022\024\n\020LGRC_TOKEN_WRONG\020\003\"7\n\021Logi"
+  "nTokenToRedis\022\017\n\007account\030\001 \001(\t\022\021\n\tplayer"
+  "_sn\030\002 \001(\004\"5\n\023LoginTokenToRedisRs\022\017\n\007acco"
+  "unt\030\001 \001(\t\022\r\n\005token\030\002 \001(\t\",\n\031AccountQuery"
+  "OnlineToRedis\022\017\n\007account\030\001 \001(\t\"\243\001\n\033Accou"
+  "ntQueryOnlineToRedisRs\022\017\n\007account\030\001 \001(\t\022"
+  "B\n\013return_code\030\002 \001(\0162-.Proto.AccountQuer"
+  "yOnlineToRedisRs.ReturnCode\"/\n\nReturnCod"
+  "e\022\020\n\014SOTR_Offline\020\000\022\017\n\013SOTR_Online\020\001\"+\n\030"
+  "AccountSyncOnlineToRedis\022\017\n\007account\030\001 \001("
+  "\t\"-\n\032AccountDeleteOnlineToRedis\022\017\n\007accou"
+  "nt\030\001 \001(\t\";\n\027PlayerSyncOnlineToRedis\022\017\n\007a"
+  "ccount\030\001 \001(\t\022\017\n\007version\030\002 \001(\005\"=\n\031PlayerD"
+  "eleteOnlineToRedis\022\017\n\007account\030\001 \001(\t\022\017\n\007v"
+  "ersion\030\002 \001(\005\"#\n\020GameTokenToRedis\022\017\n\007acco"
+  "unt\030\001 \001(\t\"-\n\tTokenInfo\022\r\n\005token\030\001 \001(\t\022\021\n"
+  "\tplayer_sn\030\002 \001(\004\"K\n\022GameTokenToRedisRs\022\017"
+  "\n\007account\030\001 \001(\t\022$\n\ntoken_info\030\002 \001(\0132\020.Pr"
+  "oto.TokenInfo\"L\n\nSyncPlayer\022\016\n\006app_id\030\001 "
+  "\001(\005\022\017\n\007account\030\002 \001(\t\022\035\n\006player\030\003 \001(\0132\r.P"
+  "roto.Player\"A\n\nEnterWorld\022\020\n\010world_id\030\001 "
+  "\001(\005\022!\n\010position\030\002 \001(\0132\017.Proto.Vector3D\" "
+  "\n\014RequestWorld\022\020\n\010world_id\030\001 \001(\005\"K\n\013Crea"
+  "teWorld\022\020\n\010world_id\030\001 \001(\005\022\025\n\rlast_world_"
+  "sn\030\002 \001(\004\022\023\n\013game_app_id\030\003 \001(\005\"Q\n\024Broadca"
+  "stCreateWorld\022\020\n\010world_id\030\001 \001(\005\022\020\n\010world"
+  "_sn\030\002 \001(\004\022\025\n\rlast_world_sn\030\003 \001(\004\"\?\n\031Broa"
+  "dcastCreateWorldProxy\022\020\n\010world_id\030\001 \001(\005\022"
+  "\020\n\010world_sn\030\002 \001(\004\"5\n\nQueryWorld\022\020\n\010world"
+  "_sn\030\001 \001(\004\022\025\n\rlast_world_sn\030\002 \001(\004\"\215\001\n\014Que"
+  "ryWorldRs\022\020\n\010world_sn\030\001 \001(\004\0223\n\013return_co"
+  "de\030\002 \001(\0162\036.Proto.QueryWorldRs.ReturnCode"
+  "\"6\n\nReturnCode\022\021\n\rQueryWorld_OK\020\000\022\025\n\021Que"
+  "ryWorld_Failed\020\001\"d\n\010Teleport\022\025\n\rlast_wor"
+  "ld_sn\030\001 \001(\004\022\021\n\tplayer_sn\030\002 \001(\004\022\017\n\007accoun"
+  "t\030\003 \001(\t\022\035\n\006player\030\004 \001(\0132\r.Proto.Player\"\""
+  "\n\rTeleportAfter\022\021\n\tplayer_sn\030\001 \001(\004\"!\n\014Re"
+  "movePlayer\022\021\n\tplayer_sn\030\001 \001(\004\"&\n\021Request"
+  "SyncPlayer\022\021\n\tplayer_sn\030\001 \001(\004\"\257\001\n\004Role\022\014"
+  "\n\004name\030\001 \001(\t\022\n\n\002sn\030\002 \001(\004\022\035\n\006gender\030\003 \001(\016"
+  "2\r.Proto.Gender\022!\n\010position\030\004 \001(\0132\017.Prot"
+  "o.Vector3D\022\r\n\005level\030\005 \001(\005\022\n\n\002xp\030\006 \001(\005\022\n\n"
+  "\002hp\030\007 \001(\005\022\n\n\002mp\030\010 \001(\005\022\013\n\003atk\030\t \001(\005\022\013\n\003de"
+  "f\030\n \001(\005\"+\n\rAllRoleAppear\022\032\n\005roles\030\001 \003(\0132"
+  "\013.Proto.Role\"\033\n\rRoleDisappear\022\n\n\002sn\030\001 \001("
+  "\004\"<\n\004Move\022\021\n\tplayer_sn\030\001 \001(\004\022!\n\010position"
+  "\030\002 \003(\0132\017.Proto.Vector3D\"J\n\nEntityMove\022\n\n"
+  "\002sn\030\001 \001(\004\022\017\n\007running\030\002 \001(\010\022\037\n\006points\030\003 \003"
+  "(\0132\017.Proto.Vector3D\")\n\017SyncPlayerProps\022\n"
+  "\n\002sn\030\001 \001(\004\022\n\n\002hp\030\002 \001(\005\"&\n\014SyncNpcProps\022\n"
+  "\n\002sn\030\001 \001(\004\022\n\n\002hp\030\002 \001(\005\"J\n\nReqNpcInfo\022\016\n\006"
+  "npc_id\030\001 \001(\005\022\016\n\006npc_sn\030\002 \001(\004\022\034\n\003pos\030\003 \001("
+  "\0132\017.Proto.Vector3D\"N\n\014SyncFsmState\022\r\n\005st"
+  "ate\030\001 \001(\005\022\014\n\004code\030\002 \001(\005\022\016\n\006npc_sn\030\003 \001(\004\022"
+  "\021\n\tplayer_sn\030\004 \001(\004\"K\n\014SyncBtAction\022\n\n\002id"
+  "\030\001 \001(\005\022\014\n\004code\030\002 \001(\005\022\016\n\006npc_sn\030\003 \001(\004\022\021\n\t"
+  "player_sn\030\004 \001(\004\":\n\nSyncNpcPos\022\016\n\006npc_sn\030"
+  "\001 \001(\004\022\034\n\003pos\030\002 \001(\0132\017.Proto.Vector3D\"-\n\rS"
+  "yncPlayerPos\022\034\n\003pos\030\001 \001(\0132\017.Proto.Vector"
+  "3D\"c\n\rSyncPlayerCmd\022\014\n\004type\030\001 \001(\005\022\036\n\005poi"
+  "nt\030\002 \001(\0132\017.Proto.Vector3D\022\021\n\tplayer_sn\030\003"
+  " \001(\004\022\021\n\ttarget_sn\030\004 \001(\004\"\"\n\rReqSyncPlayer"
+  "\022\021\n\tplayer_sn\030\001 \001(\004\"\?\n\rReqLinkPlayer\022\016\n\006"
+  "npc_id\030\001 \001(\005\022\016\n\006npc_sn\030\002 \001(\004\022\016\n\006linker\030\003"
+  " \001(\010\"0\n\013NpcAtkEvent\022\016\n\006npc_sn\030\001 \001(\004\022\021\n\tt"
+  "arget_sn\030\002 \001(\004\"6\n\016PlayerAtkEvent\022\021\n\tplay"
+  "er_sn\030\001 \001(\004\022\021\n\ttarget_sn\030\002 \001(\004\"Y\n\014DropIt"
+  "emList\022\016\n\006npc_sn\030\001 \001(\004\022\013\n\003exp\030\002 \001(\005\022\014\n\004g"
+  "old\030\003 \001(\005\022\036\n\005items\030\004 \003(\0132\017.Proto.ItemDat"
+  "a\"@\n\tPlayerReq\022\r\n\005agree\030\001 \001(\010\022\021\n\tapplica"
+  "nt\030\002 \001(\004\022\021\n\tresponder\030\003 \001(\004\"8\n\007ChatMsg\022\016"
+  "\n\006sender\030\001 \001(\004\022\014\n\004name\030\002 \001(\t\022\017\n\007content\030"
+  "\003 \001(\t\".\n\nCreateTeam\022\017\n\007captain\030\001 \001(\004\022\017\n\007"
+  "members\030\002 \003(\004\"Q\n\014EnterDungeon\022\020\n\010world_i"
+  "d\030\001 \001(\005\022\020\n\010world_sn\030\002 \001(\004\022\r\n\005agree\030\003 \001(\010"
+  "\022\016\n\006sender\030\004 \001(\t*x\n\007TagType\022\017\n\013TagTypeNo"
+  "ne\020\000\022\022\n\016TagTypeAccount\020\001\022\016\n\nTagTypeApp\020\002"
+  "\022\021\n\rTagTypeEntity\020\003\022\022\n\016TagTypeToWorld\020\004\022"
+  "\021\n\rTagTypePlayer\020\005*\232\001\n\026AccountCheckRetur"
+  "nCode\022\n\n\006ARC_OK\020\000\022\017\n\013ARC_UNKONWN\020\001\022\031\n\025AR"
+  "C_NOT_FOUND_ACCOUNT\020\002\022\026\n\022ARC_PASSWORD_WR"
+  "ONG\020\003\022\017\n\013ARC_LOGGING\020\004\022\017\n\013ARC_TIMEOUT\020\005\022"
+  "\016\n\nARC_ONLINE\020\006*G\n\023LoginHttpReturnCode\022\013"
+  "\n\007LHRC_OK\020\000\022\020\n\014LHRC_TIMEOUT\020\001\022\021\n\rLHRC_NO"
+  "TFOUND\020\002*L\n\026CreatePlayerReturnCode\022\021\n\rCP"
+  "R_Create_OK\020\000\022\017\n\013CPR_Unkonwn\020\001\022\016\n\nCPR_Re"
+  "name\020\002b\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_msg_2eproto_deps[1] = {
   &::descriptor_table_db_2eproto,
 };
-static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_msg_2eproto_sccs[82] = {
+static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_msg_2eproto_sccs[83] = {
   &scc_info_AccountCheck_msg_2eproto.base,
   &scc_info_AccountCheckRs_msg_2eproto.base,
   &scc_info_AccountDeleteOnlineToRedis_msg_2eproto.base,
@@ -2488,6 +2515,7 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_msg
   &scc_info_CreateTeam_msg_2eproto.base,
   &scc_info_CreateWorld_msg_2eproto.base,
   &scc_info_DropItemList_msg_2eproto.base,
+  &scc_info_DungeonDisapper_msg_2eproto.base,
   &scc_info_Efficiency_msg_2eproto.base,
   &scc_info_EnterDungeon_msg_2eproto.base,
   &scc_info_EnterWorld_msg_2eproto.base,
@@ -2549,10 +2577,10 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_msg
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_msg_2eproto_once;
 static bool descriptor_table_msg_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_msg_2eproto = {
-  &descriptor_table_msg_2eproto_initialized, descriptor_table_protodef_msg_2eproto, "msg.proto", 6297,
-  &descriptor_table_msg_2eproto_once, descriptor_table_msg_2eproto_sccs, descriptor_table_msg_2eproto_deps, 82, 1,
+  &descriptor_table_msg_2eproto_initialized, descriptor_table_protodef_msg_2eproto, "msg.proto", 6334,
+  &descriptor_table_msg_2eproto_once, descriptor_table_msg_2eproto_sccs, descriptor_table_msg_2eproto_deps, 83, 1,
   schemas, file_default_instances, TableStruct_msg_2eproto::offsets,
-  file_level_metadata_msg_2eproto, 82, file_level_enum_descriptors_msg_2eproto, file_level_service_descriptors_msg_2eproto,
+  file_level_metadata_msg_2eproto, 83, file_level_enum_descriptors_msg_2eproto, file_level_service_descriptors_msg_2eproto,
 };
 
 // Force running AddDescriptors() at dynamic initialization time.
@@ -13139,6 +13167,255 @@ void WorldSyncToGather::InternalSwap(WorldSyncToGather* other) {
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata WorldSyncToGather::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
+// ===================================================================
+
+void DungeonDisapper::InitAsDefaultInstance() {
+}
+class DungeonDisapper::_Internal {
+ public:
+};
+
+DungeonDisapper::DungeonDisapper()
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:Proto.DungeonDisapper)
+}
+DungeonDisapper::DungeonDisapper(const DungeonDisapper& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  world_sn_ = from.world_sn_;
+  // @@protoc_insertion_point(copy_constructor:Proto.DungeonDisapper)
+}
+
+void DungeonDisapper::SharedCtor() {
+  world_sn_ = PROTOBUF_ULONGLONG(0);
+}
+
+DungeonDisapper::~DungeonDisapper() {
+  // @@protoc_insertion_point(destructor:Proto.DungeonDisapper)
+  SharedDtor();
+}
+
+void DungeonDisapper::SharedDtor() {
+}
+
+void DungeonDisapper::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const DungeonDisapper& DungeonDisapper::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_DungeonDisapper_msg_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void DungeonDisapper::Clear() {
+// @@protoc_insertion_point(message_clear_start:Proto.DungeonDisapper)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  world_sn_ = PROTOBUF_ULONGLONG(0);
+  _internal_metadata_.Clear();
+}
+
+#if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+const char* DungeonDisapper::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // uint64 world_sn = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
+          world_sn_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+#else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+bool DungeonDisapper::MergePartialFromCodedStream(
+    ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+  // @@protoc_insertion_point(parse_start:Proto.DungeonDisapper)
+  for (;;) {
+    ::std::pair<::PROTOBUF_NAMESPACE_ID::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // uint64 world_sn = 1;
+      case 1: {
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (8 & 0xFF)) {
+
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   ::PROTOBUF_NAMESPACE_ID::uint64, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_UINT64>(
+                 input, &world_sn_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:Proto.DungeonDisapper)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:Proto.DungeonDisapper)
+  return false;
+#undef DO_
+}
+#endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+
+void DungeonDisapper::SerializeWithCachedSizes(
+    ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:Proto.DungeonDisapper)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // uint64 world_sn = 1;
+  if (this->world_sn() != 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64(1, this->world_sn(), output);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFields(
+        _internal_metadata_.unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:Proto.DungeonDisapper)
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* DungeonDisapper::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:Proto.DungeonDisapper)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // uint64 world_sn = 1;
+  if (this->world_sn() != 0) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt64ToArray(1, this->world_sn(), target);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:Proto.DungeonDisapper)
+  return target;
+}
+
+size_t DungeonDisapper::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:Proto.DungeonDisapper)
+  size_t total_size = 0;
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::ComputeUnknownFieldsSize(
+        _internal_metadata_.unknown_fields());
+  }
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // uint64 world_sn = 1;
+  if (this->world_sn() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt64Size(
+        this->world_sn());
+  }
+
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void DungeonDisapper::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:Proto.DungeonDisapper)
+  GOOGLE_DCHECK_NE(&from, this);
+  const DungeonDisapper* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<DungeonDisapper>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:Proto.DungeonDisapper)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:Proto.DungeonDisapper)
+    MergeFrom(*source);
+  }
+}
+
+void DungeonDisapper::MergeFrom(const DungeonDisapper& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:Proto.DungeonDisapper)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.world_sn() != 0) {
+    set_world_sn(from.world_sn());
+  }
+}
+
+void DungeonDisapper::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:Proto.DungeonDisapper)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void DungeonDisapper::CopyFrom(const DungeonDisapper& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:Proto.DungeonDisapper)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool DungeonDisapper::IsInitialized() const {
+  return true;
+}
+
+void DungeonDisapper::InternalSwap(DungeonDisapper* other) {
+  using std::swap;
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  swap(world_sn_, other->world_sn_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata DungeonDisapper::GetMetadata() const {
   return GetMetadataStatic();
 }
 
@@ -29165,6 +29442,9 @@ template<> PROTOBUF_NOINLINE ::Proto::SavePlayer* Arena::CreateMaybeMessage< ::P
 }
 template<> PROTOBUF_NOINLINE ::Proto::WorldSyncToGather* Arena::CreateMaybeMessage< ::Proto::WorldSyncToGather >(Arena* arena) {
   return Arena::CreateInternal< ::Proto::WorldSyncToGather >(arena);
+}
+template<> PROTOBUF_NOINLINE ::Proto::DungeonDisapper* Arena::CreateMaybeMessage< ::Proto::DungeonDisapper >(Arena* arena) {
+  return Arena::CreateInternal< ::Proto::DungeonDisapper >(arena);
 }
 template<> PROTOBUF_NOINLINE ::Proto::WorldProxySyncToGather* Arena::CreateMaybeMessage< ::Proto::WorldProxySyncToGather >(Arena* arena) {
   return Arena::CreateInternal< ::Proto::WorldProxySyncToGather >(arena);

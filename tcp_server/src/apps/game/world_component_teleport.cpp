@@ -186,7 +186,7 @@ bool WorldComponentTeleport::Check(TeleportObject* pObj)
     WorldProxyHelp::Teleport(pPlayer, pWorldProxy->GetSN(), pObj->FlagWorld.GetValue());
     if (pWorldProxy->proxyMgr->teamMap.find(pPlayer->GetPlayerSN()) != pWorldProxy->proxyMgr->teamMap.end())
     {
-        Team* pTeam = pWorldProxy->proxyMgr->teamMap[pPlayer->GetPlayerSN()];
+        GameTeam* pTeam = pWorldProxy->proxyMgr->teamMap[pPlayer->GetPlayerSN()];
         if (pTeam->dungeonId == worldId && pWorldProxy->proxyLoc->IsExistDungeon(pObj->FlagWorld.GetValue()))
         {
             for (uint64 sn : pTeam->GetMembers())

@@ -8,7 +8,7 @@
 #include "command_component.h"
 #include "../../apps/space/player_component_detail.h"
 #include "../../apps/space/npc.h"
-#include "../../apps/game/team.h"
+#include "../../apps/game/game_team.h"
 #include <algorithm>
 #include <list>
 #include <map>
@@ -25,7 +25,7 @@ public:
 	PlayerComponentLastMap* lastMap = nullptr;
 	PlayerComponentDetail* detail = nullptr;
 	World* curWorld = nullptr;
-	Team* pTeam = nullptr;
+	GameTeam* pTeam = nullptr;
 
 	void Awake(NetIdentify* pIdentify, std::string account) override;
 	void Awake(NetIdentify* pIdentify, uint64 playerSn, uint64 worldSn) override;

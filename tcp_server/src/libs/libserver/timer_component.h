@@ -38,6 +38,7 @@ public:
 
 	uint64 Add(int total, int durations, bool immediateDo, int immediateDoDelaySecond, TimerHandleFunction handler);
 	void Remove(std::list<uint64>& timers);
+	void Remove(uint64 timer);
 
 	bool CheckTime();
 	Timer PopTimeHeap();

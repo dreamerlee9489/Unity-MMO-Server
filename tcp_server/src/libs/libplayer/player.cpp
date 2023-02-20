@@ -71,6 +71,10 @@ Proto::Player& Player::GetPlayerProto()
 void Player::GetDamage(Npc* enemy)
 {
 	detail->hp = (std::max)(detail->hp - enemy->atk, 0);
+	Proto::SyncPlayerProps status;
+	status.set_sn(_playerSn);
+	status.set_hp(detail->hp);
+	curWorld->BroadcastPacket(Proto::MsgId::S2C_SyncPlayerProps, status);
 }
 
 void Player::GetDamage(Player* atker)
@@ -85,6 +89,10 @@ void Player::GetDamage(Player* atker)
 		proto.set_target_sn(atker->GetPlayerSN());
 		curWorld->BroadcastPacket(Proto::MsgId::S2C_SyncPlayerCmd, proto);
 	}
+	Proto::SyncPlayerProps status;
+	status.set_sn(_playerSn);
+	status.set_hp(detail->hp);
+	curWorld->BroadcastPacket(Proto::MsgId::S2C_SyncPlayerProps, status);
 }
 
 void Player::UpdateKnapItem(const Proto::ItemData& item)

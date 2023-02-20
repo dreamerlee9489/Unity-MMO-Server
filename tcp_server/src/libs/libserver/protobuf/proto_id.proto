@@ -117,6 +117,7 @@ enum MsgId {
 	// Sync
 	MI_WorldSyncToGather		    = 3001;  // world
 	MI_WorldProxySyncToGather	    = 3002;	 // world proxy
+	MI_DungeonDisapper				= 3003;
 
 	// redis
 	MI_AccountSyncOnlineToRedis		= 4001;  // 设置 account online 标志

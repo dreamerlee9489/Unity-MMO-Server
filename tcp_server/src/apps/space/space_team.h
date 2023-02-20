@@ -1,21 +1,19 @@
-#ifndef TEAM_H
-#define TEAM_H
-#include "world_proxy.h"
-#include "world_component_teleport.h"
-#include "libplayer/player.h"
+#ifndef SPACE_TEAM_H
+#define SPACE_TEAM_H
+#include "world.h"
 #include <list>
 
-class Team
+class SpaceTeam
 {
 public:
 	int dungeonId = 0;
 	uint64 dungeonSn = 0;
 
-	Team() {}
+	SpaceTeam() {}
 
-	Team(uint64 captain) { _captain = captain; }
+	SpaceTeam(uint64 captain) { _captain = captain; }
 
-	~Team() {}
+	~SpaceTeam() {}
 
 	void AddMember(uint64 sn) { _members.emplace_back(sn); }
 
@@ -48,5 +46,5 @@ private:
 	std::list<uint64> _members{};
 };
 
-#endif // !TEAM_H
+#endif // !SPACE_TEAM_H
 

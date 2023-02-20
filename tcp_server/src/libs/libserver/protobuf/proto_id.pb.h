@@ -128,6 +128,7 @@ enum MsgId : int {
   MI_BroadcastCreateWorldProxy = 2002,
   MI_WorldSyncToGather = 3001,
   MI_WorldProxySyncToGather = 3002,
+  MI_DungeonDisapper = 3003,
   MI_AccountSyncOnlineToRedis = 4001,
   MI_AccountDeleteOnlineToRedis = 4002,
   MI_PlayerSyncOnlineToRedis = 4003,

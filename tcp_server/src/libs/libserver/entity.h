@@ -44,42 +44,31 @@ template <class T, typename ... TArgs>
 T* IEntity::AddComponentWithSn(uint64 sn, TArgs... args)
 {
 	const auto typeHashCode = typeid(T).hash_code();
-	if (_components.find(typeHashCode) != _components.end())
+	if (_components.find(typeHashCode) == _components.end())
 	{
-		LOG_ERROR("Add same component. type:" << typeid(T).name());
-		return nullptr;
+		T* pComponent = _pSystemManager->GetEntitySystem()->AddComponentWithParent<T>(this, sn, std::forward<TArgs>(args)...);
+		_components.insert(std::make_pair(typeHashCode, pComponent));
+		return pComponent;
 	}
-
-	T* pComponent = _pSystemManager->GetEntitySystem()->AddComponentWithParent<T>(this, sn, std::forward<TArgs>(args)...);
-	_components.insert(std::make_pair(typeHashCode, pComponent));
-	return pComponent;
+	return nullptr;
 }
 
 template<class T>
 T* IEntity::GetComponent()
 {
-	const auto typeHashCode = typeid(T).hash_code();
-	const auto iter = _components.find(typeHashCode);
-	if (iter == _components.end())
-		return nullptr;
-
-	return dynamic_cast<T*>(iter->second);
+	const auto iter = _components.find(typeid(T).hash_code());
+	if (iter != _components.end())
+		return dynamic_cast<T*>(iter->second);
+	return nullptr;
 }
 
 template<class T>
 void IEntity::RemoveComponent()
 {
 	// 先删除本地组件数据
-	const auto typeHashCode = typeid(T).hash_code();
-	const auto iter = _components.find(typeHashCode);
-	if (iter == _components.end())
-	{
-		LOG_ERROR("Entity RemoveComponent error. not find. className:" << typeid(T).name());
-		return;
-	}
-
-	auto pComponent = iter->second;
-	RemoveComponent(pComponent);
+	const auto iter = _components.find(typeid(T).hash_code());
+	if (iter != _components.end())
+		RemoveComponent(iter->second);
 }
 
 template<class T>

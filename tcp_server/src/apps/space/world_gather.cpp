@@ -1,5 +1,4 @@
 #include "world_gather.h"
-
 #include "libserver/thread_mgr.h"
 #include "libserver/network_locator.h"
 #include "libserver/message_system_help.h"
@@ -8,26 +7,32 @@
 
 void WorldGather::Awake()
 {
+	playerMgr = AddComponent<PlayerManagerComponent>();
 	AddTimer(0, 10, true, 2, BindFunP0(this, &WorldGather::SyncSpaceInfo));
 
     auto pMsgSystem = GetSystemManager()->GetMessageSystem();
-
+	pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_CmdWorld, BindFunP1(this, &WorldGather::HandleCmdWorld));
     pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_WorldSyncToGather, BindFunP1(this, &WorldGather::HandleWorldSyncToGather));
-    pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_CmdWorld, BindFunP1(this, &WorldGather::HandleCmdWorld));
+	pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_DungeonDisapper, BindFunP1(this, &WorldGather::HandleDungeonDisapper));
+	pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_CreateTeam, BindFunP1(this, &WorldGather::HandleCreateTeam));
 }
 
 void WorldGather::BackToPool()
 {
-	_maps.clear();
+	_worldOnlines.clear();
+}
+
+void WorldGather::AddWorld(uint64 sn, World* world)
+{
+	_worlds.emplace(sn, world);
 }
 
 void WorldGather::SyncSpaceInfo()
 {
 	Proto::AppInfoSync proto;
-
 	int online = 0;
-	auto iter = _maps.begin();
-	while (iter != _maps.end())
+	auto iter = _worldOnlines.begin();
+	while (iter != _worldOnlines.end())
 	{
 		online += iter->second;
 		++iter;
@@ -38,24 +43,67 @@ void WorldGather::SyncSpaceInfo()
 	proto.set_app_type((int)pGlobal->GetCurAppType());
 	proto.set_online(online);
 
-    // ¶ÔÁ´½ÓµÄËùÓÐGame·¢ËÍ±¾½ø³Ìµ±Ç°×´Ì¬
+    // å¯¹é“¾æŽ¥çš„æ‰€æœ‰Gameå‘é€æœ¬è¿›ç¨‹å½“å‰çŠ¶æ€
     MessageSystemHelp::SendPacketToAllApp(Proto::MsgId::MI_AppInfoSync, proto, APP_GAME);
 
-    // ·¢ËÍ¸øappmgr
+    // å‘é€ç»™appmgr
     MessageSystemHelp::SendPacket(Proto::MsgId::MI_AppInfoSync, proto, APP_APPMGR);
-}
-
-void WorldGather::HandleWorldSyncToGather(Packet* pPacket)
-{
-	auto proto = pPacket->ParseToProto<Proto::WorldSyncToGather>();
-	_maps[proto.world_sn()] = proto.online();
 }
 
 void WorldGather::HandleCmdWorld(Packet* pPacket)
 {
 	LOG_DEBUG("**** world gather ****");
-	for (auto one : _maps)
-	{
+	for (auto& one : _worldOnlines)
 		LOG_DEBUG("sn:" << one.first << " online:" << one.second);
+}
+
+void WorldGather::HandleNetworkDisconnect(Packet* pPacket)
+{
+	auto pTags = pPacket->GetTagKey();
+	const auto pTagPlayer = pTags->GetTagValue(TagType::Player);
+	if (pTagPlayer != nullptr)
+	{
+		const auto pPlayer = playerMgr->GetPlayerBySn(pTagPlayer->KeyInt64);
+		//if (pPlayer && pPlayer->pTeam)
+		//{
+		//	Proto::CreateTeam proto;
+		//	Team* pTeam = teamMap[pPlayer->GetPlayerSN()];
+		//	pTeam->RemoveMember(pPlayer->GetPlayerSN());
+		//	proto.set_captain(pTeam->GetCaptain());
+		//	for (uint64 sn : pTeam->GetMembers())
+		//		proto.add_members(sn);
+		//	for (uint64 sn : pTeam->GetMembers())
+		//	{
+		//		Player* tmp = playerMgr->GetPlayerBySn(sn);
+		//		MessageSystemHelp::SendPacket(Proto::MsgId::MI_CreateTeam, proto, tmp);
+		//	}
+		//}
+		playerMgr->RemovePlayerBySn(pTagPlayer->KeyInt64);
 	}
+}
+
+void WorldGather::HandleWorldSyncToGather(Packet* pPacket)
+{
+	auto proto = pPacket->ParseToProto<Proto::WorldSyncToGather>();
+	_worldOnlines[proto.world_sn()] = proto.online();
+}
+
+void WorldGather::HandleDungeonDisapper(Packet* pPacket)
+{
+	auto proto = pPacket->ParseToProto<Proto::DungeonDisapper>();
+	_worldOnlines.erase(proto.world_sn());
+}
+
+void WorldGather::HandleCreateTeam(Packet* pPacket)
+{
+	Proto::CreateTeam proto = pPacket->ParseToProto<Proto::CreateTeam>();
+	//Team* pTeam = new Team(proto.captain());
+	//for (uint64 sn : proto.members())
+	//{
+	//	pTeam->AddMember(sn);
+	//	teamMap.emplace(std::make_pair(sn, pTeam));
+	//	Player* tmp = playerMgr->GetPlayerBySn(sn);
+	//	tmp->pTeam = pTeam;
+	//	MessageSystemHelp::SendPacket(Proto::MsgId::MI_CreateTeam, proto, tmp);
+	//}
 }
