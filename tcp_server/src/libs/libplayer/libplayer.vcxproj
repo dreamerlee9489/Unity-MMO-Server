@@ -45,7 +45,6 @@
     <ClCompile Include="cmd_none.cpp" />
     <ClCompile Include="command_component.cpp" />
     <ClCompile Include="command_system.cpp" />
-    <ClCompile Include="command.cpp" />
     <ClCompile Include="cmd_death.cpp" />
     <ClCompile Include="cmd_observe.cpp" />
     <ClCompile Include="cmd_move.cpp" />

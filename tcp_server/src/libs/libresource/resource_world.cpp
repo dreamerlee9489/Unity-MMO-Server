@@ -151,10 +151,10 @@ bool ResourceWorldMgr::AfterInit()
 
 		if (pRef->IsInitMap())
 		{
-			if (_initMapId != 0)
-			{
-				LOG_ERROR("map has tow init Map. id1:" << _initMapId << " id2:" << pRef->GetId());
-			}
+			//if (_initMapId != 0)
+			//{
+			//	LOG_ERROR("map has tow init Map. id1:" << _initMapId << " id2:" << pRef->GetId());
+			//}
 			_initMapId = pRef->GetId();
 		}
 
@@ -171,16 +171,10 @@ bool ResourceWorldMgr::AfterInit()
 
 ResourceWorld* ResourceWorldMgr::GetInitMap()
 {
-	if (_initMapId > 0)
-		return GetResource(_initMapId);
-
-	return nullptr;
+	return GetResource(_initMapId);
 }
 
 ResourceWorld* ResourceWorldMgr::GetRolesMap()
 {
-	if (_rolesMapId > 0)
-		return GetResource(_rolesMapId);
-
-	return nullptr;
+	return GetResource(_rolesMapId);
 }

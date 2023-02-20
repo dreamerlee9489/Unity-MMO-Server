@@ -61,7 +61,7 @@ protected:
 	Vector3 GetVector(std::string& line);
 	void DebugHead() const;
 
-private:
+protected:
 	int _id;
 	/// <summary>
 	/// 字段名与索引下标的映射关系

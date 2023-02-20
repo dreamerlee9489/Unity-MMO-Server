@@ -422,7 +422,12 @@ message EntityMove {
 	repeated Vector3D points = 3;
 }
 
-message SyncEntityStatus {
+message SyncPlayerProps {
+	uint64 sn = 1;
+	int32 hp = 2;
+}
+
+message SyncNpcProps {
 	uint64 sn = 1;
 	int32 hp = 2;
 }

@@ -14,7 +14,6 @@
 #include "move_component.h"
 #include "bt_component.h"
 #include "trade.h"
-#include <cfloat>
 #include <vector>
 #include <unordered_map>
 

@@ -67,10 +67,10 @@ private:
 					return BtStatus::Running;
 				_lastTime = _currTime;
 				_npc->hp = (std::min)(static_cast<int>(_npc->hp + _npc->initHp * 0.05), _npc->initHp);
-				Proto::SyncEntityStatus status;
+				Proto::SyncNpcProps status;
 				status.set_sn(_npc->GetSN());
 				status.set_hp(_npc->hp);
-				_npc->GetWorld()->BroadcastPacket(Proto::MsgId::S2C_SyncEntityStatus, status);
+				_npc->GetWorld()->BroadcastPacket(Proto::MsgId::S2C_SyncNpcProps, status);
 			}
 		}
 		return BtStatus::Running;

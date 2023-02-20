@@ -1,4 +1,4 @@
 Id,Name,Init,Type,AbPath,ResName,UiResType,EnemyCSV,PlayerInitPos
-0,login,0,1,scenes/login,Login,1,null,-1
-1,jiangxia,1,3,scenes/jiangxia,jiangxia,0,world03_npcs,"0,0,0"
-2,dungeon02,0,4,scenes/jiangxia,jiangxia,0,world04_npcs,"0,0,-40"
+-1,login,0,1,scenes/login,Login,1,null,-1
+1,public01,1,3,scenes/jiangxia,jiangxia,0,public01_npcs,"0,0,0"
+2,dungeon01,0,4,scenes/jiangxia,jiangxia,0,dungeon01_npcs,"0,0,-40"

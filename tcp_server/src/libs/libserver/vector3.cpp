@@ -3,11 +3,21 @@
 
 Vector3 Vector3::Zero = Vector3(0, 0, 0);
 
-void Vector3::ParserFromProto(const Proto::Vector3D& position)
+Vector3 Vector3::CreateByProto(const Proto::Vector3D& position)
+{
+	Vector3 point;
+	point.X = position.x();
+	point.Y = position.y();
+	point.Z = position.z();
+	return point;
+}
+
+Vector3& Vector3::ParserFromProto(const Proto::Vector3D& position)
 {
 	this->X = position.x();
 	this->Y = position.y();
 	this->Z = position.z();
+	return *this;
 }
 
 void Vector3::SerializeToProto(Proto::Vector3D* pProto) const

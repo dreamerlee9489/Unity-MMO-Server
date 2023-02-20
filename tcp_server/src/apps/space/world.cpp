@@ -1,4 +1,11 @@
 ﻿#include "world.h"
+#include "libplayer/cmd_none.h"
+#include "libplayer/cmd_move.h"
+#include "libplayer/cmd_attack.h"
+#include "libplayer/cmd_pick.h"
+#include "libplayer/cmd_teleport.h"
+#include "libplayer/cmd_observe.h"
+#include "libplayer/cmd_pvp.h"
 
 void World::Awake(int worldId)
 {
@@ -303,7 +310,7 @@ void World::BroadcastPacket(Proto::MsgId msgId, google::protobuf::Message& proto
 Player* World::GetNearestPlayer(Vector3& pos)
 {
 	auto players = playerMgr->GetAll();
-	float dist = FLT_MAX;
+	float dist = 9999;
 	Player* player = nullptr;
 	for (const auto& pair : *players)
 	{
@@ -355,23 +362,32 @@ void World::HandleSyncPlayerPos(Player* pPlayer, Packet* pPacket)
 void World::HandleSyncPlayerCmd(Player* pPlayer, Packet* pPacket)
 {
 	Proto::SyncPlayerCmd proto = pPacket->ParseToProto<Proto::SyncPlayerCmd>();
-	CmdType type = (CmdType)proto.type();
-	Vector3 point;
-	point.ParserFromProto(proto.point());
-	IEntity* target = nullptr;
-	switch (type)
+	switch ((CmdType)proto.type())
 	{
+	case CmdType::None:
+		pPlayer->GetComponent<CmdComponent>()->ChangeCmd(new NoneCommand(pPlayer));
+		break;
+	case CmdType::Move:
+		pPlayer->GetComponent<CmdComponent>()->ChangeCmd(new MoveCommand(pPlayer, Vector3::CreateByProto(proto.point())));
+		break;
 	case CmdType::Attack:
-		target = npcs[npcIdxMap[proto.target_sn()]];
+		pPlayer->GetComponent<CmdComponent>()->ChangeCmd(new AttackCommand(pPlayer, npcs[npcIdxMap[proto.target_sn()]]));
+		break;
+	case CmdType::Pick:
+		pPlayer->GetComponent<CmdComponent>()->ChangeCmd(new PickCommand(pPlayer, proto.target_sn(), Vector3::CreateByProto(proto.point())));
+		break;
+	case CmdType::Teleport:
+		pPlayer->GetComponent<CmdComponent>()->ChangeCmd(new TeleportCommand(pPlayer, proto.target_sn()));
 		break;
 	case CmdType::Observe:
+		pPlayer->GetComponent<CmdComponent>()->ChangeCmd(new ObserveCommand(pPlayer, playerMgr->GetPlayerBySn(proto.target_sn())));
+		break;
 	case CmdType::Pvp:
-		target = playerMgr->GetPlayerBySn(proto.target_sn());
+		pPlayer->GetComponent<CmdComponent>()->ChangeCmd(new PvpCommand(pPlayer, playerMgr->GetPlayerBySn(proto.target_sn())));
 		break;
 	default:
 		break;
 	}
-	pPlayer->GetComponent<CmdComponent>()->ChangeCmd(Command::GenCmd(type, pPlayer, point, target));
 }
 
 void World::HandleReqNpcInfo(Player* pPlayer, Packet* pPacket)
@@ -421,10 +437,10 @@ void World::HandlePlayerAtkEvent(Player* pPlayer, Packet* pPacket)
 	{
 		Player* attacker = playerMgr->GetPlayerBySn(proto.player_sn());
 		pPlayer->GetDamage(attacker);
-		Proto::SyncEntityStatus status;
+		Proto::SyncPlayerProps status;
 		status.set_sn(pPlayer->GetPlayerSN());
 		status.set_hp(pPlayer->detail->hp);
-		BroadcastPacket(Proto::MsgId::S2C_SyncEntityStatus, status);
+		BroadcastPacket(Proto::MsgId::S2C_SyncPlayerProps, status);
 	}
 	else if (pPlayer->GetPlayerSN() == proto.player_sn())
 	{
@@ -434,28 +450,28 @@ void World::HandlePlayerAtkEvent(Player* pPlayer, Packet* pPacket)
 			if (proto.target_sn() == 0)
 			{
 				pPlayer->detail->hp = 1000;
-				Proto::SyncEntityStatus status;
+				Proto::SyncPlayerProps status;
 				status.set_sn(pPlayer->GetPlayerSN());
 				status.set_hp(pPlayer->detail->hp);
-				BroadcastPacket(Proto::MsgId::S2C_SyncEntityStatus, status);
+				BroadcastPacket(Proto::MsgId::S2C_SyncPlayerProps, status);
 			}
 			else if (npcIdxMap.find(proto.target_sn()) != npcIdxMap.end())
 			{
 				Npc* npc = npcs[npcIdxMap[proto.target_sn()]];
 				npc->GetDamage(pPlayer);
-				Proto::SyncEntityStatus status;
+				Proto::SyncNpcProps status;
 				status.set_sn(npc->GetSN());
 				status.set_hp(npc->hp);
-				BroadcastPacket(Proto::MsgId::S2C_SyncEntityStatus, status);
+				BroadcastPacket(Proto::MsgId::S2C_SyncNpcProps, status);
 			}
 		}
 		else if(pPlayer->GetPlayerSN() != defender->GetPlayerSN())
 		{
 			defender->GetDamage(pPlayer);
-			Proto::SyncEntityStatus status;
+			Proto::SyncPlayerProps status;
 			status.set_sn(defender->GetPlayerSN());
 			status.set_hp(defender->detail->hp);
-			BroadcastPacket(Proto::MsgId::S2C_SyncEntityStatus, status);
+			BroadcastPacket(Proto::MsgId::S2C_SyncPlayerProps, status);
 		}
 	}
 }
@@ -464,10 +480,10 @@ void World::HandleNpcAtkEvent(Player* pPlayer, Packet* pPacket)
 {
 	Proto::NpcAtkEvent proto = pPacket->ParseToProto<Proto::NpcAtkEvent>();
 	pPlayer->GetDamage(npcs[npcIdxMap[proto.npc_sn()]]);
-	Proto::SyncEntityStatus status;
+	Proto::SyncPlayerProps status;
 	status.set_sn(pPlayer->GetPlayerSN());
 	status.set_hp(pPlayer->detail->hp);
-	BroadcastPacket(Proto::MsgId::S2C_SyncEntityStatus, status);
+	BroadcastPacket(Proto::MsgId::S2C_SyncPlayerProps, status);
 }
 
 void World::HandleUpdateKnapItem(Player* pPlayer, Packet* pPacket)

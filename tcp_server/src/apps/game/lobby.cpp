@@ -19,7 +19,7 @@
 void Lobby::Awake()
 {
 	auto pResMgr = ResourceHelp::GetResourceManager();
-	//_worldId = pResMgr->Worlds->GetRolesMap()->GetId();
+	_worldId = pResMgr->Worlds->GetRolesMap()->GetId();
 
 	AddComponent<PlayerCollectorComponent>();
 	AddComponent<WorldProxyComponentGather>();
@@ -173,7 +173,6 @@ void Lobby::HandleQueryPlayerRs(Packet* pPacket)
 		_waitingForDungeon[pLastMap->WorldSn].insert(pPlayer->GetPlayerSN());
 		return;
 	}
-
 	EnterPublicWorld(pPlayer);
 }
 

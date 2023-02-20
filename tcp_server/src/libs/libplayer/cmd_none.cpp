@@ -1,5 +1,24 @@
 #include "cmd_none.h"
 
+void NoneCommand::Enter()
+{
+	if (_owner->GetComponent<MoveComponent>())
+		_owner->RemoveComponent<MoveComponent>();
+	Command::Enter();
+}
+
+CmdState NoneCommand::Execute()
+{
+	return state;
+}
+
+void NoneCommand::Exit()
+{
+	if (!_owner->GetComponent<MoveComponent>())
+		_owner->AddComponent<MoveComponent>();
+	Command::Exit();
+}
+
 void NoneCommand::Broadcast()
 {
 	Proto::SyncPlayerCmd proto;

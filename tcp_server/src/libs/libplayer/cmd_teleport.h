@@ -4,10 +4,11 @@
 
 class TeleportCommand : public Command
 {
-	Vector3 _point{ 0, 0, 0 };
-
 public:
-	TeleportCommand(Player* owner, Vector3& point) : Command(owner), _point(point) {}
+	TeleportCommand(Player* owner, uint64 target_sn) : Command(owner) 
+	{
+		this->target_sn = target_sn;
+	}
 
 	void Enter() override;
 

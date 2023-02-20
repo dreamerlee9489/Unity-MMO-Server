@@ -4,10 +4,14 @@
 
 class PickCommand : public Command
 {
-	Vector3 _point{ 0, 0, 0 };
+	Vector3 _point{0, 0, 0};
 
 public:
-	PickCommand(Player* owner, Vector3& point) : Command(owner), _point(point) {}
+	PickCommand(Player* owner, uint64 target_sn, Vector3 point) : Command(owner) 
+	{
+		_point = point;
+		this->target_sn = target_sn;
+	}
 
 	void Enter() override;
 

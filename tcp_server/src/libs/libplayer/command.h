@@ -29,8 +29,6 @@ public:
 
 	virtual void Singlecast(Player* player) = 0;
 
-	static Command* GenCmd(CmdType type, Player* owner, Vector3& point, IEntity* target);
-
 protected:
 	Player* _owner = nullptr;
 };

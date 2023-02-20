@@ -5,7 +5,10 @@
 class DeathCommand : public Command
 {
 public:
-	DeathCommand(Player* owner, IEntity* target = nullptr) : Command(owner) {}
+	DeathCommand(Player* owner, uint64 target_sn) : Command(owner) 
+	{
+		this->target_sn = target_sn;
+	}
 
 	void Enter() override;
 

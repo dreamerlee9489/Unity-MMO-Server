@@ -45,9 +45,7 @@ void PlayerComponentLastMap::ParserFromProto(const Proto::Player& proto)
 	auto pResMgr = ResourceHelp::GetResourceManager();
 	auto pMap = pResMgr->Worlds->GetResource(worldId);
 	if (pMap != nullptr)
-	{
 		_pPublic = new LastWorld(protoMap);
-	}
 	else
 	{
 		pMap = pResMgr->Worlds->GetInitMap();
@@ -59,9 +57,7 @@ void PlayerComponentLastMap::ParserFromProto(const Proto::Player& proto)
 	worldId = protoDungeon.world_id();
 	pMap = pResMgr->Worlds->GetResource(worldId);
 	if (pMap != nullptr)
-	{
 		_pDungeon = new LastWorld(protoDungeon);
-	}
 }
 
 void PlayerComponentLastMap::SerializeToProto(Proto::Player* pProto)

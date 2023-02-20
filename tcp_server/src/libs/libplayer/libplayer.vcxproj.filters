@@ -116,9 +116,6 @@
     <ClCompile Include="command_system.cpp">
       <Filter>player\cmd</Filter>
     </ClCompile>
-    <ClCompile Include="command.cpp">
-      <Filter>player\cmd</Filter>
-    </ClCompile>
     <ClCompile Include="cmd_none.cpp">
       <Filter>player\cmd</Filter>
     </ClCompile>

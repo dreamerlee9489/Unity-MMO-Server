@@ -52,10 +52,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "resource", "resource", "{19E0A06F-EB5E-43A5-9001-EDAB625425AF}"
 	ProjectSection(SolutionItems) = preProject
 		res\resource\ItemPotions.csv = res\resource\ItemPotions.csv
+		res\resource\dungeon01_npcs.csv = res\resource\dungeon01_npcs.csv
 		res\resource\ItemWeapons.csv = res\resource\ItemWeapons.csv
 		res\resource\world.csv = res\resource\world.csv
-		res\resource\world03_npcs.csv = res\resource\world03_npcs.csv
-		res\resource\world04_npcs.csv = res\resource\world04_npcs.csv
+		res\resource\public01_npcs.csv = res\resource\public01_npcs.csv
 	EndProjectSection
 EndProject
 Global

@@ -9,7 +9,7 @@ class MoveCommand : public Command
 	Vector3 _point{0, 0, 0};
 
 public:
-	MoveCommand(Player* owner, Vector3& point) : Command(owner), _point(point) {}
+	MoveCommand(Player* owner, Vector3 point) : Command(owner), _point(point) {}
 
 	void Enter() override;
 

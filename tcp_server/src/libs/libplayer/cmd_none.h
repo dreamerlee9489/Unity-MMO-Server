@@ -7,6 +7,12 @@ class NoneCommand : public Command
 public:
 	NoneCommand(Player* owner) : Command(owner) {}
 
+	void Enter() override;
+
+	CmdState Execute() override;
+
+	void Exit() override;
+
 	void Broadcast() override;
 
 	void Singlecast(Player* player) override;

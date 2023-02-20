@@ -86,18 +86,10 @@ class ResourceWorldMgr :public ResourceManagerTemplate<ResourceWorld>
 {
 public:
 	bool AfterInit() override;
-	/// <summary>
-	/// 获取初始地图
-	/// </summary>
-	/// <returns></returns>
 	ResourceWorld* GetInitMap();
-	/// <summary>
-	/// 获取选角场景
-	/// </summary>
-	/// <returns></returns>
 	ResourceWorld* GetRolesMap();
 
 private:
-	int _initMapId{ 0 };
-	int _rolesMapId{ 0 };
+	int _initMapId{ -2 };
+	int _rolesMapId{ -1 };
 };
