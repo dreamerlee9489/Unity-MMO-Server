@@ -3,18 +3,18 @@
 #include "libserver/common.h"
 #include "libserver/message_system_help.h"
 
-struct Trade
+struct PlayerTrade
 {
 	uint64 applicant, responder;
 	bool appAck = false, resAck = false;
 
-	Trade(uint64 applicant, uint64 responder)
+	PlayerTrade(uint64 applicant, uint64 responder)
 	{
 		this->applicant = applicant;
 		this->responder = responder;
 	}
 
-	~Trade() = default;
+	~PlayerTrade() = default;
 };
 
 #endif // !TRADE_MGR_H

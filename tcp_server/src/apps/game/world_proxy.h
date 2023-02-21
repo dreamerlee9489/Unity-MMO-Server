@@ -4,6 +4,7 @@
 #include "libplayer/world_base.h"
 #include "world_proxy_gather.h"
 #include "world_proxy_help.h"
+#include "player_trade.h"
 
 class Player;
 class PlayerCollectorComponent;
@@ -61,9 +62,13 @@ private:
 	void HandleJoinTeamRes(Player* pPlayer, Packet* pPacket);
 	void HandleReqPvp(Player* pPlayer, Packet* pPacket);
 	void HandlePvpRes(Player* pPlayer, Packet* pPacket);
+	void HandleReqTrade(Player* pPlayer, Packet* pPacket);
+	void HandleTradeRes(Player* pPlayer, Packet* pPacket);
+	void HandleUpdateTradeItem(Player* pPlayer, Packet* pPacket);
 
 	int _spaceAppId{ 0 };
 	PlayerCollectorComponent* _playerMgr = nullptr;
 	WorldComponentTeleport* _teleportMgr = nullptr;	
+	std::unordered_map<uint64, PlayerTrade*> tradeMap;
 };
 

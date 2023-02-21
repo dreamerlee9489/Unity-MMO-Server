@@ -14,7 +14,6 @@
 #include "player_component_detail.h"
 #include "move_component.h"
 #include "bt_component.h"
-#include "trade.h"
 #include <vector>
 #include <unordered_map>
 
@@ -58,9 +57,6 @@ protected:
 	void HandleUpdateKnapItem(Player* pPlayer, Packet* pPacket);
 	void HandleUpdateKnapGold(Player* pPlayer, Packet* pPacket);
 	void HandleGetPlayerKnap(Player* pPlayer, Packet* pPacket);
-	void HandleReqTrade(Player* pPlayer, Packet* pPacket);
-	void HandleTradeRes(Player* pPlayer, Packet* pPacket);
-	void HandleUpdateTradeItem(Player* pPlayer, Packet* pPacket);
 
 private:
 	void SyncWorldToGather();
@@ -69,7 +65,6 @@ private:
 
 	// 缓存1秒内增加或是删除的玩家
 	std::set<uint64> _adds;
-	std::unordered_map<uint64, Trade*> tradeMap;
 	uint64 syncWorldTimer, syncAppearTimer;
 	WorldGather* _worldMgr = nullptr;
 };

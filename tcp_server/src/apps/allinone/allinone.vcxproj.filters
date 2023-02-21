@@ -348,9 +348,6 @@
     <ClInclude Include="..\space\ai_system.h">
       <Filter>space\system\ai</Filter>
     </ClInclude>
-    <ClInclude Include="..\space\trade.h">
-      <Filter>space\world</Filter>
-    </ClInclude>
     <ClInclude Include="..\space\fsm_attack.h">
       <Filter>space\system\ai\fsm</Filter>
     </ClInclude>
@@ -437,6 +434,9 @@
     </ClInclude>
     <ClInclude Include="..\game\game_team.h">
       <Filter>game\gather</Filter>
+    </ClInclude>
+    <ClInclude Include="..\game\player_trade.h">
+      <Filter>game\world\proxy</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -62,6 +62,9 @@ void WorldProxy::Awake(int worldId, uint64 lastWorldSn)
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2C_EnterDungeonRes, BindFunP1(this, &WorldProxy::GetPlayer), BindFunP2(this, &WorldProxy::HandleEnterDungeonRes));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2C_ReqPvp, BindFunP1(this, &WorldProxy::GetPlayer), BindFunP2(this, &WorldProxy::HandleReqPvp));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2C_PvpRes, BindFunP1(this, &WorldProxy::GetPlayer), BindFunP2(this, &WorldProxy::HandlePvpRes));
+	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2C_ReqTrade, BindFunP1(this, &WorldProxy::GetPlayer), BindFunP2(this, &WorldProxy::HandleReqTrade));
+	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2C_TradeRes, BindFunP1(this, &WorldProxy::GetPlayer), BindFunP2(this, &WorldProxy::HandleTradeRes));
+	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2C_UpdateTradeItem, BindFunP1(this, &WorldProxy::GetPlayer), BindFunP2(this, &WorldProxy::HandleUpdateTradeItem));
 
 	// 默认协议处理函数
 	pMsgSystem->RegisterDefaultFunction(this, BindFunP1(this, &WorldProxy::HandleDefaultFunction));
@@ -271,37 +274,6 @@ void WorldProxy::HandleTeleportAfter(Player* pPlayer, Packet* pPacket)
 	SendPacketToWorld(Proto::MsgId::G2S_RemovePlayer, protoRs, pPlayer);
 }
 
-void WorldProxy::HandleReqJoinTeam(Player* pPlayer, Packet* pPacket)
-{
-	Proto::PlayerReq proto = pPacket->ParseToProto<Proto::PlayerReq>();
-	if (pPlayer->GetPlayerSN() == proto.applicant())
-	{
-		Player* target = _playerMgr->GetPlayerBySn(proto.responder());
-		MessageSystemHelp::SendPacket(Proto::MsgId::C2C_ReqJoinTeam, proto, target);
-	}
-}
-
-void WorldProxy::HandleJoinTeamRes(Player* pPlayer, Packet* pPacket)
-{
-	Proto::PlayerReq proto = pPacket->ParseToProto<Proto::PlayerReq>();
-	Player* responder = _playerMgr->GetPlayerBySn(proto.responder());
-	Player* applicant = _playerMgr->GetPlayerBySn(proto.applicant());
-	if (pPlayer == responder)
-	{
-		if (!proto.agree())
-			MessageSystemHelp::SendPacket(Proto::MsgId::C2C_JoinTeamRes, proto, applicant);
-		else
-		{
-			Proto::CreateTeam teamProto;
-			teamProto.set_captain(proto.responder());
-			teamProto.add_members(proto.responder());
-			teamProto.add_members(proto.applicant());
-			NetIdentify identify;
-			MessageSystemHelp::DispatchPacket(Proto::MsgId::MI_CreateTeam, teamProto, &identify);
-		}
-	}
-}
-
 void WorldProxy::HandleC2GEnterWorld(Player* pPlayer, Packet* pPacket)
 {
 	auto proto = pPacket->ParseToProto<Proto::EnterWorld>();
@@ -391,6 +363,31 @@ void WorldProxy::HandleEnterDungeonRes(Player* pPlayer, Packet* pPacket)
 	}
 }
 
+void WorldProxy::HandleReqJoinTeam(Player* pPlayer, Packet* pPacket)
+{
+	Proto::PlayerReq proto = pPacket->ParseToProto<Proto::PlayerReq>();
+	MessageSystemHelp::SendPacket(Proto::MsgId::C2C_ReqJoinTeam, proto, _playerMgr->GetPlayerBySn(proto.responder()));
+}
+
+void WorldProxy::HandleJoinTeamRes(Player* pPlayer, Packet* pPacket)
+{
+	Proto::PlayerReq proto = pPacket->ParseToProto<Proto::PlayerReq>();
+	if (pPlayer->GetPlayerSN() == proto.responder())
+	{
+		if (!proto.agree())
+			MessageSystemHelp::SendPacket(Proto::MsgId::C2C_JoinTeamRes, proto, _playerMgr->GetPlayerBySn(proto.applicant()));
+		else
+		{
+			Proto::CreateTeam teamProto;
+			teamProto.set_captain(proto.responder());
+			teamProto.add_members(proto.responder());
+			teamProto.add_members(proto.applicant());
+			NetIdentify identify;
+			MessageSystemHelp::DispatchPacket(Proto::MsgId::MI_CreateTeam, teamProto, &identify);
+		}
+	}
+}
+
 void WorldProxy::HandleReqPvp(Player* pPlayer, Packet* pPacket)
 {
 	Proto::PlayerReq proto = pPacket->ParseToProto<Proto::PlayerReq>();
@@ -404,5 +401,54 @@ void WorldProxy::HandlePvpRes(Player* pPlayer, Packet* pPacket)
 	{
 		MessageSystemHelp::SendPacket(Proto::MsgId::C2C_PvpRes, proto, _playerMgr->GetPlayerBySn(proto.applicant()));
 		MessageSystemHelp::SendPacket(Proto::MsgId::C2C_PvpRes, proto, _playerMgr->GetPlayerBySn(proto.responder()));
+	}
+}
+
+void WorldProxy::HandleReqTrade(Player* pPlayer, Packet* pPacket)
+{
+	Proto::PlayerReq proto = pPacket->ParseToProto<Proto::PlayerReq>();
+	MessageSystemHelp::SendPacket(Proto::MsgId::C2C_ReqTrade, proto, _playerMgr->GetPlayerBySn(proto.responder()));
+}
+
+void WorldProxy::HandleTradeRes(Player* pPlayer, Packet* pPacket)
+{
+	Proto::PlayerReq proto = pPacket->ParseToProto<Proto::PlayerReq>();
+	if (proto.agree())
+	{
+		if (tradeMap.find(proto.applicant()) != tradeMap.end())
+			delete tradeMap[proto.applicant()];
+		else if (tradeMap.find(proto.responder()) != tradeMap.end())
+			delete tradeMap[proto.responder()];
+		PlayerTrade* pTrade = new PlayerTrade(proto.applicant(), proto.responder());
+		tradeMap.emplace(proto.responder(), pTrade);
+		tradeMap.emplace(proto.applicant(), pTrade);
+		Proto::TradeOpen pbOpen;
+		pbOpen.set_applicant(proto.applicant());
+		pbOpen.set_responder(proto.responder());
+		MessageSystemHelp::SendPacket(Proto::MsgId::S2C_TradeOpen, pbOpen, _playerMgr->GetPlayerBySn(proto.applicant()));
+		MessageSystemHelp::SendPacket(Proto::MsgId::S2C_TradeOpen, pbOpen, _playerMgr->GetPlayerBySn(proto.responder()));
+	}
+}
+
+void WorldProxy::HandleUpdateTradeItem(Player* pPlayer, Packet* pPacket)
+{
+	Proto::UpdateTradeItem pbUpdate = pPacket->ParseToProto<Proto::UpdateTradeItem>();
+	PlayerTrade* pTrade = tradeMap[pPlayer->GetPlayerSN()];
+	if (pTrade)
+	{
+		if (pbUpdate.sender() == pTrade->applicant)
+			pTrade->appAck = pbUpdate.ack();
+		else if (pbUpdate.sender() == pTrade->responder)
+			pTrade->resAck = pbUpdate.ack();
+		MessageSystemHelp::SendPacket(Proto::MsgId::C2C_UpdateTradeItem, pbUpdate, _playerMgr->GetPlayerBySn(pbUpdate.recver()));
+		if (pTrade->appAck && pTrade->resAck)
+		{
+			Proto::TradeClose pbClose;
+			pbClose.set_success(true);
+			MessageSystemHelp::SendPacket(Proto::MsgId::S2C_TradeClose, pbClose, _playerMgr->GetPlayerBySn(pTrade->responder));
+			MessageSystemHelp::SendPacket(Proto::MsgId::S2C_TradeClose, pbClose, _playerMgr->GetPlayerBySn(pTrade->applicant));
+			tradeMap.erase(pTrade->responder);
+			tradeMap.erase(pTrade->applicant);
+		}
 	}
 }

@@ -223,6 +223,7 @@
     <ClInclude Include="..\game\space_sync_handler.h" />
     <ClInclude Include="..\game\game_team.h" />
     <ClInclude Include="..\game\teleport_object.h" />
+    <ClInclude Include="..\game\player_trade.h" />
     <ClInclude Include="..\game\world_component_teleport.h" />
     <ClInclude Include="..\game\world_proxy.h" />
     <ClInclude Include="..\game\world_proxy_component_gather.h" />
@@ -268,7 +269,6 @@
     <ClInclude Include="..\space\player_component_detail.h" />
     <ClInclude Include="..\space\player_manager_component.h" />
     <ClInclude Include="..\space\space_team.h" />
-    <ClInclude Include="..\space\trade.h" />
     <ClInclude Include="..\space\world_operator_component.h" />
     <ClInclude Include="..\space\world.h" />
     <ClInclude Include="..\space\world_gather.h" />

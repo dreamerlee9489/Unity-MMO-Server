@@ -8,8 +8,9 @@
 
 void WorldProxyGather::Awake()
 {
-    AddTimer(0, 10, true, 2, BindFunP0(this, &WorldProxyGather::SyncGameInfo));
     playerMgr = AddComponent<PlayerCollectorComponent>();
+    AddTimer(0, 10, true, 2, BindFunP0(this, &WorldProxyGather::SyncGameInfo));
+    
     // message
     auto pMsgSystem = GetSystemManager()->GetMessageSystem();
     pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_NetworkDisconnect, BindFunP1(this, &WorldProxyGather::HandleNetworkDisconnect));

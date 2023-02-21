@@ -53,9 +53,6 @@ void World::Awake(int worldId)
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_SyncBtAction, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleSyncBtAction));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_PlayerAtkEvent, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandlePlayerAtkEvent));
 	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2S_NpcAtkEvent, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleNpcAtkEvent));
-	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2C_ReqTrade, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleReqTrade));
-	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2C_TradeRes, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleTradeRes));
-	pMsgSystem->RegisterFunctionFilter<Player>(this, Proto::MsgId::C2C_UpdateTradeItem, BindFunP1(this, &World::GetPlayer), BindFunP2(this, &World::HandleUpdateTradeItem));
 }
 
 void World::BackToPool()
@@ -491,56 +488,4 @@ void World::HandleUpdateKnapGold(Player* pPlayer, Packet* pPacket)
 void World::HandleGetPlayerKnap(Player* pPlayer, Packet* pPacket)
 {
 	pPlayer->GetPlayerKnap();
-}
-
-void World::HandleReqTrade(Player* pPlayer, Packet* pPacket)
-{
-	Proto::PlayerReq proto = pPacket->ParseToProto<Proto::PlayerReq>();
-	if (pPlayer->GetPlayerSN() == proto.applicant())
-		MessageSystemHelp::SendPacket(Proto::MsgId::C2C_ReqTrade, proto, playerMgr->GetPlayerBySn(proto.responder()));
-}
-
-void World::HandleTradeRes(Player* pPlayer, Packet* pPacket)
-{
-	Proto::PlayerReq proto = pPacket->ParseToProto<Proto::PlayerReq>();
-	if (pPlayer->GetPlayerSN() == proto.responder() && proto.agree())
-	{
-		if (tradeMap.find(proto.applicant()) == tradeMap.end() && tradeMap.find(proto.responder()) == tradeMap.end())
-		{
-			Trade* pTrade = new Trade(proto.applicant(), proto.responder());
-			tradeMap.emplace(proto.responder(), pTrade);
-			tradeMap.emplace(proto.applicant(), pTrade);
-			Proto::TradeOpen pbOpen;
-			pbOpen.set_applicant(proto.applicant());
-			pbOpen.set_responder(proto.responder());
-			MessageSystemHelp::SendPacket(Proto::MsgId::S2C_TradeOpen, pbOpen, playerMgr->GetPlayerBySn(proto.applicant()));
-			MessageSystemHelp::SendPacket(Proto::MsgId::S2C_TradeOpen, pbOpen, playerMgr->GetPlayerBySn(proto.responder()));
-		}
-	}
-}
-
-void World::HandleUpdateTradeItem(Player* pPlayer, Packet* pPacket)
-{
-	Proto::UpdateTradeItem pbUpdate = pPacket->ParseToProto<Proto::UpdateTradeItem>();
-	Trade* pTrade = tradeMap[pPlayer->GetPlayerSN()];
-	if (pTrade)
-	{
-		if (pPlayer->GetPlayerSN() == pbUpdate.sender())
-		{
-			if (pbUpdate.sender() == pTrade->applicant)
-				pTrade->appAck = pbUpdate.ack();
-			else if (pbUpdate.sender() == pTrade->responder)
-				pTrade->resAck = pbUpdate.ack();
-			MessageSystemHelp::SendPacket(Proto::MsgId::C2C_UpdateTradeItem, pbUpdate, playerMgr->GetPlayerBySn(pbUpdate.recver()));
-		}
-		if (pTrade->appAck && pTrade->resAck)
-		{
-			Proto::TradeClose pbClose;
-			pbClose.set_success(true);
-			MessageSystemHelp::SendPacket(Proto::MsgId::S2C_TradeClose, pbClose, playerMgr->GetPlayerBySn(pTrade->responder));
-			MessageSystemHelp::SendPacket(Proto::MsgId::S2C_TradeClose, pbClose, playerMgr->GetPlayerBySn(pTrade->applicant));
-			tradeMap.erase(pTrade->responder);
-			tradeMap.erase(pTrade->applicant);
-		}
-	}
 }
