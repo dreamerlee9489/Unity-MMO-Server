@@ -18,7 +18,6 @@ void World::Awake(int worldId)
 	syncAppearTimer = AddTimer(0, 1, false, 0, BindFunP0(this, &World::SyncAppearTimer));
 	if (!_worldMgr)
 		_worldMgr = ComponentHelp::GetGlobalEntitySystem()->GetComponent<WorldGather>();
-	_worldMgr->AddWorld(_sn, this);
 
 	worldCfg = ResourceHelp::GetResourceManager()->Worlds->GetResource(_worldId);
 	std::vector<ResourceNpc>& npcCfgs = *worldCfg->GetNpcCfgs();

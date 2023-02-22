@@ -19,15 +19,8 @@ public:
 
 	void RemoveMember(uint64 sn)
 	{
-		for (auto iter = _members.begin(); iter != _members.end(); ++iter)
-		{
-			if (sn == *iter)
-			{
-				_members.erase(iter);
-				break;
-			}
-		}
-		if (_members.size() >= 1)
+		_members.remove(sn);
+		if (!_members.empty())
 			_captain = _members.front();
 	}
 

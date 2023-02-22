@@ -15,7 +15,6 @@ public:
 
 	void Awake() override;
 	void BackToPool() override;
-	void AddWorld(uint64 sn, World* world) { _worlds.emplace(sn, world); }
 	void RegistPlayer(uint64 sn, Player* player);
 	Player* GetPlayerBySn(uint64 sn);
 
@@ -29,6 +28,5 @@ private:
 private:
 	// <map sn, map player count>
 	std::map<uint64, int> _worldOnlines;
-	std::map<uint64, World*> _worlds;
 	std::map<uint64, Player*> _players;
 };

@@ -24,8 +24,7 @@ void WorldProxyGather::Awake()
 void WorldProxyGather::BackToPool()
 {
     _maps.clear();
-    for (auto& pair : teamMap)
-        delete pair.second;
+    teamMap.clear();
 }
 
 void WorldProxyGather::SyncGameInfo()

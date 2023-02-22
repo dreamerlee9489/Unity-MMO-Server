@@ -19,14 +19,20 @@ void WorldGather::Awake()
 void WorldGather::BackToPool()
 {
 	_worldOnlines.clear();
+	_players.clear();
+	teamMap.clear();
 }
 
 void WorldGather::RegistPlayer(uint64 sn, Player* player)
 {
-	if (!player)
-		_players.erase(sn);
-	else
+	if (player)
 		_players[sn] = player;
+	else
+	{
+		_players.erase(sn);
+		if (teamMap.find(sn) != teamMap.end())
+			teamMap[sn]->RemoveMember(sn);
+	}
 }
 
 Player* WorldGather::GetPlayerBySn(uint64 sn)
