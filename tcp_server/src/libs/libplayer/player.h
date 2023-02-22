@@ -25,16 +25,18 @@ public:
 	PlayerComponentLastMap* lastMap = nullptr;
 	PlayerComponentDetail* detail = nullptr;
 	World* curWorld = nullptr;
-	GameTeam* pTeam = nullptr;
 
 	void Awake(NetIdentify* pIdentify, std::string account) override;
 	void Awake(NetIdentify* pIdentify, uint64 playerSn, uint64 worldSn) override;
 	void BackToPool() override;
 
-	std::string GetAccount() const;
-	std::string GetName() const;
-	uint64 GetPlayerSN() const;
+	int GetSocket() const { return _socketKey.Socket; }
+	std::string GetAccount() const { return _account; }
+	std::string GetName() const { return _name; }
+	uint64 GetPlayerSN() const { return _playerSn; }
 	Vector3& GetCurrPos() { return lastMap->GetCur()->Position; }
+	Proto::Player& GetPlayerProto() { return _player; }
+
 	void GetDamage(Npc* enemy);
 	void GetDamage(Player* atker);
 	void UpdateKnapItem(const Proto::ItemData& itemData);
@@ -42,7 +44,6 @@ public:
 	bool CanSee(Vector3& point);
 	bool CanAttack(Vector3& point);
 
-	Proto::Player& GetPlayerProto();
 	void ParseFromStream(uint64 playerSn, std::stringstream* pOpStream);
 	void ParserFromProto(uint64 playerSn, const Proto::Player& proto);
 	void SerializeToProto(Proto::Player* pProto);

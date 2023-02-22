@@ -7,15 +7,18 @@
 #include "libplayer/cmd_observe.h"
 #include "libplayer/cmd_pvp.h"
 
+WorldGather* World::_worldMgr = nullptr;
+
 void World::Awake(int worldId)
 {
 	//LOG_DEBUG("create world. id:" << worldId << " sn:" << _sn << " space app id:" << Global::GetAppIdFromSN(_sn));
 	_worldId = worldId;
-	_worldMgr = ComponentHelp::GetGlobalEntitySystem()->GetComponent<WorldGather>();
-	_worldMgr->AddWorld(_sn, this);
 	playerMgr = AddComponent<PlayerManagerComponent>();
 	syncWorldTimer = AddTimer(0, 10, false, 0, BindFunP0(this, &World::SyncWorldToGather));
 	syncAppearTimer = AddTimer(0, 1, false, 0, BindFunP0(this, &World::SyncAppearTimer));
+	if (!_worldMgr)
+		_worldMgr = ComponentHelp::GetGlobalEntitySystem()->GetComponent<WorldGather>();
+	_worldMgr->AddWorld(_sn, this);
 
 	worldCfg = ResourceHelp::GetResourceManager()->Worlds->GetResource(_worldId);
 	std::vector<ResourceNpc>& npcCfgs = *worldCfg->GetNpcCfgs();
@@ -71,14 +74,24 @@ void World::BackToPool()
 Player* World::GetPlayer(NetIdentify* pIdentify)
 {
 	auto pTags = pIdentify->GetTagKey();
+	const auto pTagSocket = pTags->GetTagValue(TagType::Socket);
+	if (pTagSocket)
+	{
+		Player* pPlayer = playerMgr->GetPlayerBySocket(pTagSocket->KeyInt64);
+		return pPlayer;
+	}
 	const auto pTagPlayer = pTags->GetTagValue(TagType::Player);
-	if (pTagPlayer == nullptr)
-		return nullptr;
-	return playerMgr->GetPlayerBySn(pTagPlayer->KeyInt64);
+	if (pTagPlayer)
+	{
+		Player* pPlayer = playerMgr->GetPlayerBySn(pTagPlayer->KeyInt64);
+		return pPlayer;
+	}
+	return nullptr;
 }
 
 void World::PlayerDisappear(Player* pPlayer)
 {
+	pPlayer->GetComponent<CmdComponent>()->ResetCmd();
 	pPlayer->RemoveComponent<CmdComponent>();
 	for (auto& enemy : npcs)
 	{
@@ -129,7 +142,8 @@ void World::HandleNetworkDisconnect(Packet* pPacket)
 		pPlayer->SerializeToProto(protoSave.mutable_player());
 		MessageSystemHelp::SendPacket(Proto::MsgId::G2DB_SavePlayer, protoSave, APP_DB_MGR);
 
-		// 玩家掉线
+		// 玩家掉线		
+		_worldMgr->RegistPlayer(pPlayer->GetPlayerSN(), nullptr);
 		Proto::RoleDisappear protoDis;
 		protoDis.set_sn(pPlayer->GetPlayerSN());
 		BroadcastPacket(Proto::MsgId::S2C_RoleDisappear, protoDis);
@@ -264,6 +278,7 @@ void World::HandleSyncPlayer(Packet* pPacket)
 		return;
 	}
 
+	_worldMgr->RegistPlayer(playerSn, pPlayer);
 	pPlayer->ParserFromProto(playerSn, proto.player());
 	pPlayer->AddComponent<CmdComponent>();
 	pPlayer->detail = pPlayer->AddComponent<PlayerComponentDetail>();
@@ -350,7 +365,6 @@ void World::HandleG2SRemovePlayer(Player* pPlayer, Packet* pPacket)
 	}
 
 	// 通知其他玩家	
-	pPlayer->GetComponent<CmdComponent>()->ResetCmd();
 	PlayerDisappear(pPlayer);
 	Proto::RoleDisappear disAppear;
 	disAppear.set_sn(pPlayer->GetPlayerSN());
@@ -438,31 +452,20 @@ void World::HandleSyncNpcPos(Packet* pPacket)
 void World::HandlePlayerAtkEvent(Player* pPlayer, Packet* pPacket)
 {
 	Proto::PlayerAtkEvent proto = pPacket->ParseToProto<Proto::PlayerAtkEvent>();
-	if (pPlayer->GetPlayerSN() == proto.target_sn())
+	Player* defender = playerMgr->GetPlayerBySn(proto.target_sn());
+	if (defender)
+		defender->GetDamage(pPlayer);
+	else
 	{
-		Player* attacker = playerMgr->GetPlayerBySn(proto.player_sn());
-		pPlayer->GetDamage(attacker);		
-	}
-	else if (pPlayer->GetPlayerSN() == proto.player_sn())
-	{
-		Player* defender = playerMgr->GetPlayerBySn(proto.target_sn());
-		if (defender && pPlayer->GetPlayerSN() != defender->GetPlayerSN())
-			defender->GetDamage(pPlayer);
+		if (proto.target_sn() != 0)
+			npcs[npcIdxMap[proto.target_sn()]]->GetDamage(pPlayer);
 		else
 		{
-			if (proto.target_sn() == 0)
-			{
-				pPlayer->detail->hp = 1000;
-				Proto::SyncPlayerProps status;
-				status.set_sn(pPlayer->GetPlayerSN());
-				status.set_hp(pPlayer->detail->hp);
-				BroadcastPacket(Proto::MsgId::S2C_SyncPlayerProps, status);
-			}
-			else if (npcIdxMap.find(proto.target_sn()) != npcIdxMap.end())
-			{
-				Npc* npc = npcs[npcIdxMap[proto.target_sn()]];
-				npc->GetDamage(pPlayer);
-			}
+			pPlayer->detail->hp = 1000;
+			Proto::SyncPlayerProps status;
+			status.set_sn(pPlayer->GetPlayerSN());
+			status.set_hp(pPlayer->detail->hp);
+			BroadcastPacket(Proto::MsgId::S2C_SyncPlayerProps, status);
 		}
 	}
 }

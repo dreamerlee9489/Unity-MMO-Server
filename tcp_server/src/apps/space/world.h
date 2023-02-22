@@ -36,7 +36,7 @@ public:
 	void BroadcastPacket(Proto::MsgId msgId, google::protobuf::Message& proto);
 	void BroadcastPacket(Proto::MsgId msgId, google::protobuf::Message& proto, std::set<uint64>& players);
 	Player* GetNearestPlayer(Vector3& pos);
-	PlayerManagerComponent* GetPlayerManager() const { return playerMgr; }
+	WorldGather* GetWorldMgr() { return _worldMgr; }
 
 protected:
 	Player* GetPlayer(NetIdentify* pIdentify);
@@ -66,6 +66,6 @@ private:
 	// 缓存1秒内增加或是删除的玩家
 	std::set<uint64> _adds;
 	uint64 syncWorldTimer, syncAppearTimer;
-	WorldGather* _worldMgr = nullptr;
+	static WorldGather* _worldMgr;
 };
 

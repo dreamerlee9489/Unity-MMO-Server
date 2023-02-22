@@ -18,9 +18,7 @@
 
 void Lobby::Awake()
 {
-	auto pResMgr = ResourceHelp::GetResourceManager();
-	_worldId = pResMgr->Worlds->GetRolesMap()->GetId();
-
+	_worldId = ResourceHelp::GetResourceManager()->Worlds->GetRolesMap()->GetId();
 	AddComponent<PlayerCollectorComponent>();
 	AddComponent<WorldProxyComponentGather>();
 
@@ -30,7 +28,6 @@ void Lobby::Awake()
 
 	// message
 	auto pMsgSystem = GetSystemManager()->GetMessageSystem();
-
 	pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_NetworkDisconnect, BindFunP1(this, &Lobby::HandleNetworkDisconnect));
 	pMsgSystem->RegisterFunction(this, Proto::MsgId::C2G_LoginByToken, BindFunP1(this, &Lobby::HandleLoginByToken));
 	pMsgSystem->RegisterFunction(this, Proto::MsgId::MI_GameTokenToRedisRs, BindFunP1(this, &Lobby::HandleGameTokenToRedisRs));
@@ -103,9 +100,7 @@ void Lobby::HandleGameTokenToRedisRs(Packet* pPacket)
 	protoLoginGameRs.set_return_code(Proto::LoginByTokenRs::LGRC_TOKEN_WRONG);
 	const auto pTokenComponent = pPlayer->GetComponent<PlayerComponentToken>();
 	if (pTokenComponent->IsTokenValid(protoRs.token_info().token()))
-	{
 		protoLoginGameRs.set_return_code(Proto::LoginByTokenRs::LGRC_OK);
-	}
 
 	MessageSystemHelp::SendPacket(Proto::MsgId::C2G_LoginByTokenRs, protoLoginGameRs, pPlayer);
 
@@ -124,7 +119,7 @@ void Lobby::HandleQueryPlayerRs(Packet* pPacket)
 {
 	//从数据库中读取到player数据
 	auto protoRs = pPacket->ParseToProto<Proto::QueryPlayerRs>();
-	auto account = protoRs.account();
+	auto& account = protoRs.account();
 	auto pPlayer = GetComponent<PlayerCollectorComponent>()->GetPlayerByAccount(account);
 	if (pPlayer == nullptr)
 	{
@@ -138,12 +133,13 @@ void Lobby::HandleQueryPlayerRs(Packet* pPacket)
 	MessageSystemHelp::SendPacket(Proto::MsgId::G2C_SyncPlayer, syncPlayer, pPlayer);
 
 	// 分析进入地图
-	auto protoPlayer = protoRs.player();
+	auto& protoPlayer = protoRs.player();
 	const auto playerSn = protoPlayer.sn();
 	pPlayer->ParserFromProto(playerSn, protoPlayer);
 	const auto pPlayerLastMap = pPlayer->AddComponent<PlayerComponentLastMap>();
 	auto pWorldLocator = ComponentHelp::GetGlobalEntitySystem()->GetComponent<WorldProxyLocator>();
 	//LOG_DEBUG("Lobby::HandleQueryPlayerRs " << pPlayer->GetName().c_str() << " " << pPlayer->GetPlayerSN());
+	
 	// 进入副本
 	auto pLastMap = pPlayerLastMap->GetLastDungeon();
 	if (pLastMap != nullptr)
@@ -157,9 +153,7 @@ void Lobby::HandleQueryPlayerRs(Packet* pPacket)
 
 		// 查询副本是否存在
 		if (_waitingForDungeon.find(pLastMap->WorldSn) == _waitingForDungeon.end())
-		{
 			_waitingForDungeon[pLastMap->WorldSn] = std::set<uint64>();
-		}
 
 		if (_waitingForDungeon[pLastMap->WorldSn].empty())
 		{
@@ -187,7 +181,6 @@ void Lobby::EnterPublicWorld(Player* pPlayer)
 	if (lastMapSn != (uint64)INVALID_ID)
 	{
 		//LOG_DEBUG("teleport to public. world id:" << pLastMap->WorldId);
-
 		// 存在公共地图，跳转
 		WorldProxyHelp::Teleport(pPlayer, GetSN(), lastMapSn);
 		return;
@@ -195,9 +188,7 @@ void Lobby::EnterPublicWorld(Player* pPlayer)
 
 	// 等待跳转
 	if (_waitingForWorld.find(pLastMap->WorldId) == _waitingForWorld.end())
-	{
 		_waitingForWorld[pLastMap->WorldId] = std::set<uint64>();
-	}
 
 	if (_waitingForWorld[pLastMap->WorldId].empty())
 	{
@@ -290,7 +281,7 @@ void Lobby::HandleBroadcastCreateWorldProxy(Packet* pPacket)
 		}
 
 		auto pPlayerMgr = GetComponent<PlayerCollectorComponent>();
-		auto players = iter->second;
+		auto& players = iter->second;
 		for (auto one : players)
 		{
 			const auto player = pPlayerMgr->GetPlayerBySn(one);

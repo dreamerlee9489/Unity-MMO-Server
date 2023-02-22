@@ -7,7 +7,6 @@
 
 void WorldGather::Awake()
 {
-	playerMgr = AddComponent<PlayerManagerComponent>();
 	AddTimer(0, 10, true, 2, BindFunP0(this, &WorldGather::SyncSpaceInfo));
 
     auto pMsgSystem = GetSystemManager()->GetMessageSystem();
@@ -22,9 +21,19 @@ void WorldGather::BackToPool()
 	_worldOnlines.clear();
 }
 
-void WorldGather::AddWorld(uint64 sn, World* world)
+void WorldGather::RegistPlayer(uint64 sn, Player* player)
 {
-	_worlds.emplace(sn, world);
+	if (!player)
+		_players.erase(sn);
+	else
+		_players[sn] = player;
+}
+
+Player* WorldGather::GetPlayerBySn(uint64 sn)
+{
+	if (_players.find(sn) == _players.end())
+		return nullptr;
+	return _players[sn];
 }
 
 void WorldGather::SyncSpaceInfo()
@@ -57,31 +66,6 @@ void WorldGather::HandleCmdWorld(Packet* pPacket)
 		LOG_DEBUG("sn:" << one.first << " online:" << one.second);
 }
 
-void WorldGather::HandleNetworkDisconnect(Packet* pPacket)
-{
-	auto pTags = pPacket->GetTagKey();
-	const auto pTagPlayer = pTags->GetTagValue(TagType::Player);
-	if (pTagPlayer != nullptr)
-	{
-		const auto pPlayer = playerMgr->GetPlayerBySn(pTagPlayer->KeyInt64);
-		//if (pPlayer && pPlayer->pTeam)
-		//{
-		//	Proto::CreateTeam proto;
-		//	Team* pTeam = teamMap[pPlayer->GetPlayerSN()];
-		//	pTeam->RemoveMember(pPlayer->GetPlayerSN());
-		//	proto.set_captain(pTeam->GetCaptain());
-		//	for (uint64 sn : pTeam->GetMembers())
-		//		proto.add_members(sn);
-		//	for (uint64 sn : pTeam->GetMembers())
-		//	{
-		//		Player* tmp = playerMgr->GetPlayerBySn(sn);
-		//		MessageSystemHelp::SendPacket(Proto::MsgId::MI_CreateTeam, proto, tmp);
-		//	}
-		//}
-		playerMgr->RemovePlayerBySn(pTagPlayer->KeyInt64);
-	}
-}
-
 void WorldGather::HandleWorldSyncToGather(Packet* pPacket)
 {
 	auto proto = pPacket->ParseToProto<Proto::WorldSyncToGather>();
@@ -97,13 +81,10 @@ void WorldGather::HandleDungeonDisapper(Packet* pPacket)
 void WorldGather::HandleCreateTeam(Packet* pPacket)
 {
 	Proto::CreateTeam proto = pPacket->ParseToProto<Proto::CreateTeam>();
-	//Team* pTeam = new Team(proto.captain());
-	//for (uint64 sn : proto.members())
-	//{
-	//	pTeam->AddMember(sn);
-	//	teamMap.emplace(std::make_pair(sn, pTeam));
-	//	Player* tmp = playerMgr->GetPlayerBySn(sn);
-	//	tmp->pTeam = pTeam;
-	//	MessageSystemHelp::SendPacket(Proto::MsgId::MI_CreateTeam, proto, tmp);
-	//}
+	SpaceTeam* pTeam = new SpaceTeam(proto.captain());
+	for (const uint64& sn : proto.members())
+	{
+		pTeam->AddMember(sn);
+		teamMap.emplace(sn, pTeam);
+	}
 }

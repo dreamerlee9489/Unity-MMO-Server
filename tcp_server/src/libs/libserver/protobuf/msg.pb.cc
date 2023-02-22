@@ -2473,18 +2473,18 @@ const char descriptor_table_protodef_msg_2eproto[] PROTOBUF_SECTION_VARIABLE(pro
   "\003 \001(\t\".\n\nCreateTeam\022\017\n\007captain\030\001 \001(\004\022\017\n\007"
   "members\030\002 \003(\004\"Q\n\014EnterDungeon\022\020\n\010world_i"
   "d\030\001 \001(\005\022\020\n\010world_sn\030\002 \001(\004\022\r\n\005agree\030\003 \001(\010"
-  "\022\016\n\006sender\030\004 \001(\t*x\n\007TagType\022\017\n\013TagTypeNo"
-  "ne\020\000\022\022\n\016TagTypeAccount\020\001\022\016\n\nTagTypeApp\020\002"
-  "\022\021\n\rTagTypeEntity\020\003\022\022\n\016TagTypeToWorld\020\004\022"
-  "\021\n\rTagTypePlayer\020\005*\232\001\n\026AccountCheckRetur"
-  "nCode\022\n\n\006ARC_OK\020\000\022\017\n\013ARC_UNKONWN\020\001\022\031\n\025AR"
-  "C_NOT_FOUND_ACCOUNT\020\002\022\026\n\022ARC_PASSWORD_WR"
-  "ONG\020\003\022\017\n\013ARC_LOGGING\020\004\022\017\n\013ARC_TIMEOUT\020\005\022"
-  "\016\n\nARC_ONLINE\020\006*G\n\023LoginHttpReturnCode\022\013"
-  "\n\007LHRC_OK\020\000\022\020\n\014LHRC_TIMEOUT\020\001\022\021\n\rLHRC_NO"
-  "TFOUND\020\002*L\n\026CreatePlayerReturnCode\022\021\n\rCP"
-  "R_Create_OK\020\000\022\017\n\013CPR_Unkonwn\020\001\022\016\n\nCPR_Re"
-  "name\020\002b\006proto3"
+  "\022\016\n\006sender\030\004 \001(\t*\213\001\n\007TagType\022\017\n\013TagTypeN"
+  "one\020\000\022\022\n\016TagTypeAccount\020\001\022\016\n\nTagTypeApp\020"
+  "\002\022\021\n\rTagTypeEntity\020\003\022\022\n\016TagTypeToWorld\020\004"
+  "\022\021\n\rTagTypePlayer\020\005\022\021\n\rTagTypeSocket\020\006*\232"
+  "\001\n\026AccountCheckReturnCode\022\n\n\006ARC_OK\020\000\022\017\n"
+  "\013ARC_UNKONWN\020\001\022\031\n\025ARC_NOT_FOUND_ACCOUNT\020"
+  "\002\022\026\n\022ARC_PASSWORD_WRONG\020\003\022\017\n\013ARC_LOGGING"
+  "\020\004\022\017\n\013ARC_TIMEOUT\020\005\022\016\n\nARC_ONLINE\020\006*G\n\023L"
+  "oginHttpReturnCode\022\013\n\007LHRC_OK\020\000\022\020\n\014LHRC_"
+  "TIMEOUT\020\001\022\021\n\rLHRC_NOTFOUND\020\002*L\n\026CreatePl"
+  "ayerReturnCode\022\021\n\rCPR_Create_OK\020\000\022\017\n\013CPR"
+  "_Unkonwn\020\001\022\016\n\nCPR_Rename\020\002b\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_msg_2eproto_deps[1] = {
   &::descriptor_table_db_2eproto,
@@ -2577,7 +2577,7 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_msg
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_msg_2eproto_once;
 static bool descriptor_table_msg_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_msg_2eproto = {
-  &descriptor_table_msg_2eproto_initialized, descriptor_table_protodef_msg_2eproto, "msg.proto", 6334,
+  &descriptor_table_msg_2eproto_initialized, descriptor_table_protodef_msg_2eproto, "msg.proto", 6354,
   &descriptor_table_msg_2eproto_once, descriptor_table_msg_2eproto_sccs, descriptor_table_msg_2eproto_deps, 83, 1,
   schemas, file_default_instances, TableStruct_msg_2eproto::offsets,
   file_level_metadata_msg_2eproto, 83, file_level_enum_descriptors_msg_2eproto, file_level_service_descriptors_msg_2eproto,
@@ -2772,6 +2772,7 @@ bool TagType_IsValid(int value) {
     case 3:
     case 4:
     case 5:
+    case 6:
       return true;
     default:
       return false;

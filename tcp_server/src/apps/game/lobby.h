@@ -14,7 +14,6 @@ public:
 
 private:
 	Player* GetPlayer(NetIdentify* pIdentify);
-
 	void HandleNetworkDisconnect(Packet* pPacket);
 	void HandleLoginByToken(Packet* pPacket);
 	void HandleGameTokenToRedisRs(Packet* pPacket);

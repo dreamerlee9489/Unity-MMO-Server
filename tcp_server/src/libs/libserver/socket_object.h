@@ -1,10 +1,9 @@
 ﻿#pragma once
 #include "common.h"
-
 #include <log4cplus/streams.h>
 #include <ostream>
-
 #include "network_type.h"
+class NetIdentify;
 
 /// <summary>
 /// 发送方的唯一网络标识
@@ -15,6 +14,7 @@ struct SocketKey
 
 	void Clear();
 	void CopyFrom(SocketKey* pSocketKey);
+	void CopyFrom(NetIdentify* pIdentify);
 
 	SOCKET Socket;
 	NetworkType NetType;
@@ -49,6 +49,7 @@ enum class TagType
 	Entity = Proto::TagType::TagTypeEntity,
 	ToWorld = Proto::TagType::TagTypeToWorld,
 	Player = Proto::TagType::TagTypePlayer,
+	Socket = Proto::TagType::TagTypeSocket
 };
 
 inline bool IsTagTypeStr(const TagType iType)
@@ -63,9 +64,11 @@ inline const char* GetTagTypeName(const TagType iType)
 	else if (iType == TagType::App)
 		return "App";
 	else if (iType == TagType::Entity)
-		return "world";
+		return "World";
 	else if (iType == TagType::Player)
-		return "player";
+		return "Player";
+	else if (iType == TagType::Socket)
+		return "Socket";
 	else
 		return "None";
 }

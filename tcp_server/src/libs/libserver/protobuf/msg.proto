@@ -55,6 +55,7 @@ enum TagType {
 	TagTypeEntity = 3;    
 	TagTypeToWorld = 4;  // allinone toworld
 	TagTypePlayer = 5;    
+	TagTypeSocket = 6;    
 }
 
 message TagValue {

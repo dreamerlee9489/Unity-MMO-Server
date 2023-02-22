@@ -32,6 +32,7 @@ Player* PlayerManagerComponent::AddPlayer(const uint64 playerSn, uint64 worldSn,
 
 	const auto pPlayer = GetSystemManager()->GetEntitySystem()->AddComponent<Player>(pNetIdentify, playerSn, worldSn);
 	_players[playerSn] = pPlayer;
+	_sockets[pPlayer->GetSocket()] = pPlayer;
 	return pPlayer;
 }
 
@@ -39,6 +40,15 @@ Player* PlayerManagerComponent::GetPlayerBySn(const uint64 playerSn)
 {
 	const auto iter = _players.find(playerSn);
 	if (iter == _players.end())
+		return nullptr;
+
+	return iter->second;
+}
+
+Player* PlayerManagerComponent::GetPlayerBySocket(SOCKET socket)
+{
+	const auto iter = _sockets.find(socket);
+	if (iter == _sockets.end())
 		return nullptr;
 
 	return iter->second;
@@ -52,12 +62,13 @@ void PlayerManagerComponent::RemovePlayerBySn(const uint64 playerSn)
 
 	Player* pPlayer = iter->second;
 	_players.erase(playerSn);
-
+	_sockets.erase(pPlayer->GetSocket());
 	GetSystemManager()->GetEntitySystem()->RemoveComponent(pPlayer);
 }
 
 void PlayerManagerComponent::RemoveAllPlayers(NetIdentify* pNetIdentify)
 {
+	_sockets.clear();
 	auto iter = _players.begin();
 	while (iter != _players.end())
 	{
@@ -76,7 +87,6 @@ void PlayerManagerComponent::RemoveAllPlayers(NetIdentify* pNetIdentify)
 		pPlayer->SerializeToProto(protoSave.mutable_player());
 		MessageSystemHelp::SendPacket(Proto::MsgId::G2DB_SavePlayer, protoSave, APP_DB_MGR);
 
-		// 
 		GetSystemManager()->GetEntitySystem()->RemoveComponent(pPlayer);
 	}
 }

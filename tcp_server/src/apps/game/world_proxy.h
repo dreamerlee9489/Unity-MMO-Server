@@ -19,8 +19,8 @@ class WorldProxyHelp;
 class WorldProxy : public IWorld, public Entity<WorldProxy>, public IAwakeFromPoolSystem<int, uint64>
 {
 public:
-	WorldProxyGather* proxyMgr;
-	WorldProxyLocator* proxyLoc;
+	static WorldProxyGather* proxyMgr;
+	static WorldProxyLocator* proxyLoc;
 
 	void Awake(int worldId, uint64 lastWorldSn) override;
 	void BackToPool() override;

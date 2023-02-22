@@ -11,6 +11,7 @@ public:
 
 	Player* AddPlayer(uint64 playerSn, uint64 worldSn, NetIdentify* pNetIdentify);
 	Player* GetPlayerBySn(uint64 playerSn);
+	Player* GetPlayerBySocket(SOCKET socket);
 	void RemovePlayerBySn(uint64 playerSn);
 	void RemoveAllPlayers(NetIdentify* pNetIdentify);
 
@@ -19,5 +20,6 @@ public:
 
 private:
 	std::map<uint64, Player*> _players;
+	std::map<SOCKET, Player*> _sockets;
 };
 

@@ -604,12 +604,13 @@ enum TagType : int {
   TagTypeEntity = 3,
   TagTypeToWorld = 4,
   TagTypePlayer = 5,
+  TagTypeSocket = 6,
   TagType_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
   TagType_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
 };
 bool TagType_IsValid(int value);
 constexpr TagType TagType_MIN = TagTypeNone;
-constexpr TagType TagType_MAX = TagTypePlayer;
+constexpr TagType TagType_MAX = TagTypeSocket;
 constexpr int TagType_ARRAYSIZE = TagType_MAX + 1;
 
 const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* TagType_descriptor();

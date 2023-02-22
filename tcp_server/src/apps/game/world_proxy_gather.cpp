@@ -68,7 +68,9 @@ void WorldProxyGather::HandleWorldProxySyncToGather(Packet* pPacket)
     const int worldId = proto.world_id();
     const auto isRemove = proto.is_remove();
 
-    if (!isRemove)
+    if (isRemove)
+        _maps.erase(worldSn);
+    else
     {
         const int online = proto.online();
 
@@ -82,10 +84,6 @@ void WorldProxyGather::HandleWorldProxySyncToGather(Packet* pPacket)
 
         _maps[worldSn].Online = online;
     }
-    else
-    {
-        _maps.erase(worldSn);
-    }
 }
 
 void WorldProxyGather::HandleNetworkDisconnect(Packet* pPacket)
@@ -94,19 +92,16 @@ void WorldProxyGather::HandleNetworkDisconnect(Packet* pPacket)
     const auto pPlayer = playerMgr->GetPlayerBySocket(pPacket->GetSocketKey()->Socket);
     if (pTagValue == nullptr || pPlayer == nullptr)
         return;
-    if (pPlayer->pTeam)
+    GameTeam* pTeam = teamMap[pPlayer->GetPlayerSN()];
+    if (pTeam)
     {
         Proto::CreateTeam proto;
-        GameTeam* pTeam = teamMap[pPlayer->GetPlayerSN()];
         pTeam->RemoveMember(pPlayer->GetPlayerSN());
         proto.set_captain(pTeam->GetCaptain());
         for (uint64 sn : pTeam->GetMembers())
             proto.add_members(sn);
         for (uint64 sn : pTeam->GetMembers())
-        {
-            Player* tmp = playerMgr->GetPlayerBySn(sn);
-            MessageSystemHelp::SendPacket(Proto::MsgId::MI_CreateTeam, proto, tmp);
-        }
+            MessageSystemHelp::SendPacket(Proto::MsgId::MI_CreateTeam, proto, playerMgr->GetPlayerBySn(sn));
     }
     playerMgr->RemovePlayerBySocket(pPacket->GetSocketKey()->Socket);
 }
@@ -145,9 +140,7 @@ void WorldProxyGather::HandleCreateTeam(Packet* pPacket)
     for (uint64 sn : proto.members())
     {
         pTeam->AddMember(sn);
-        teamMap.emplace(std::make_pair(sn, pTeam));
-        Player* tmp = playerMgr->GetPlayerBySn(sn);
-        tmp->pTeam = pTeam;
-        MessageSystemHelp::SendPacket(Proto::MsgId::MI_CreateTeam, proto, tmp);
+        teamMap.emplace(sn, pTeam);
+        MessageSystemHelp::SendPacket(Proto::MsgId::MI_CreateTeam, proto, playerMgr->GetPlayerBySn(sn));
     }
 }

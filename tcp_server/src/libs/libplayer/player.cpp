@@ -9,11 +9,11 @@ void Player::Awake(NetIdentify* pIdentify, std::string account)
 	_playerSn = 0;
 	_player.Clear();		
 
-	if (pIdentify != nullptr)
-		_socketKey.CopyFrom(pIdentify->GetSocketKey());
-
 	_tagKey.Clear();
 	_tagKey.AddTag(TagType::Account, _account);
+
+	if (pIdentify != nullptr)
+		_socketKey.CopyFrom(pIdentify->GetSocketKey());
 	
 	// 登录成功，修改网络底层的标识
 	MessageSystemHelp::DispatchPacket(Proto::MsgId::MI_NetworkListenKey, this);
@@ -24,13 +24,13 @@ void Player::Awake(NetIdentify* pIdentify, uint64 playerSn, uint64 worldSn)
 	_account = "";
 	_playerSn = playerSn;
 	_player.Clear();
-
-	if (pIdentify != nullptr)
-		_socketKey.CopyFrom(pIdentify->GetSocketKey());
-
+	
 	_tagKey.Clear();
 	_tagKey.AddTag(TagType::Player, playerSn);
 	_tagKey.AddTag(TagType::Entity, worldSn);
+
+	if (pIdentify != nullptr)
+		_socketKey.CopyFrom(pIdentify);
 
 	// space进程调用，但Space不需要修改网络标识
 	// 登录成功，修改网络底层的标识
@@ -48,26 +48,6 @@ void Player::BackToPool()
 	_tagKey.Clear();
 }
 
-std::string Player::GetAccount() const
-{
-	return _account;
-}
-
-std::string Player::GetName() const
-{
-	return _name;
-}
-
-uint64 Player::GetPlayerSN() const
-{
-	return _playerSn;
-}
-
-Proto::Player& Player::GetPlayerProto()
-{
-	return _player;
-}
-
 void Player::GetDamage(Npc* enemy)
 {
 	detail->hp = (std::max)(detail->hp - enemy->atk, 0);
@@ -75,6 +55,17 @@ void Player::GetDamage(Npc* enemy)
 	status.set_sn(_playerSn);
 	status.set_hp(detail->hp);
 	curWorld->BroadcastPacket(Proto::MsgId::S2C_SyncPlayerProps, status);
+	auto& teamMap = curWorld->GetWorldMgr()->teamMap;
+	if (teamMap.find(_playerSn) != teamMap.end())
+	{
+		auto& members = teamMap[_playerSn]->GetMembers();
+		for (uint64& sn : members)
+		{
+			Player* member = curWorld->GetWorldMgr()->GetPlayerBySn(sn);
+			if (sn != _playerSn && member->curWorld != curWorld)
+				MessageSystemHelp::SendPacket(Proto::MsgId::S2C_SyncPlayerProps, status, member);
+		}
+	}
 }
 
 void Player::GetDamage(Player* atker)
@@ -93,6 +84,17 @@ void Player::GetDamage(Player* atker)
 	status.set_sn(_playerSn);
 	status.set_hp(detail->hp);
 	curWorld->BroadcastPacket(Proto::MsgId::S2C_SyncPlayerProps, status);
+	auto& teamMap = curWorld->GetWorldMgr()->teamMap;
+	if (teamMap.find(_playerSn) != teamMap.end())
+	{
+		auto& members = teamMap[_playerSn]->GetMembers();
+		for (uint64& sn : members)
+		{
+			Player* member = curWorld->GetWorldMgr()->GetPlayerBySn(sn);
+			if (sn != _playerSn && member->curWorld != curWorld)
+				MessageSystemHelp::SendPacket(Proto::MsgId::S2C_SyncPlayerProps, status, member);
+		}
+	}
 }
 
 void Player::UpdateKnapItem(const Proto::ItemData& item)

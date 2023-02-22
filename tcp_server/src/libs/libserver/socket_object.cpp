@@ -20,6 +20,12 @@ void SocketKey::CopyFrom(SocketKey* pSocketKey)
     NetType = pSocketKey->NetType;
 }
 
+void SocketKey::CopyFrom(NetIdentify* pIdentify)
+{
+    Socket = pIdentify->GetTagKey()->GetTagValue(TagType::Socket)->KeyInt64;
+    NetType = pIdentify->GetSocketKey()->NetType;
+}
+
 void TagKey::Clear()
 {
     _tags.clear();
