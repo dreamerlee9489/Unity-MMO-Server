@@ -35,6 +35,7 @@ public:
 	void BackToPool() override;
 	void BroadcastPacket(Proto::MsgId msgId, google::protobuf::Message& proto);
 	void BroadcastPacket(Proto::MsgId msgId, google::protobuf::Message& proto, std::set<uint64>& players);
+	bool IsPublic() { return worldCfg->GetType() == ResourceWorldType::Public; }
 	Player* GetNearestPlayer(Vector3& pos);
 	WorldGather* GetWorldMgr() { return _worldMgr; }
 

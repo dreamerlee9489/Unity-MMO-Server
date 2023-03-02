@@ -1,8 +1,19 @@
 #pragma once
 
+enum struct NPC_TYPE { Public, Dungeon };
+
+inline const char* GetNpcType(const NPC_TYPE npcType)
+{
+    if (npcType == NPC_TYPE::Public)
+        return "public";
+    if (npcType == NPC_TYPE::Dungeon)
+        return "dungeon";
+    return "unknown";
+}
+
 enum APP_TYPE
 {
-    // APP_Global ºÍ APP_None ÖµÏàÍ¬£¬ APP_Global Ö»ÓÃÓÚ¶ÁÈ¡ÅäÖÃ
+    // APP_Global å’Œ APP_None å€¼ç›¸åŒï¼Œ APP_Global åªç”¨äºè¯»å–é…ç½®
     APP_None = 0,
     APP_Global = 0,
 

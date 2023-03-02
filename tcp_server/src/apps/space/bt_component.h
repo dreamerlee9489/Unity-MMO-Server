@@ -5,6 +5,7 @@
 #include "libserver/vector3.h"
 #include "libplayer/player.h"
 #include "bt_action.h"
+#include "bt_composite.h"
 #include <queue>
 
 class Player;
@@ -35,6 +36,8 @@ private:
 	Player* _target = nullptr;
 	BtNode* _root = nullptr;
 	std::priority_queue<BtEvent> _events;
+
+	void ParseConfig(BtConfig* pConfig);
 };
 
 #endif // !BT_COMPONENT

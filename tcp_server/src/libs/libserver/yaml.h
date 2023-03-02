@@ -103,6 +103,29 @@ struct RobotConfig : public AppConfig
 
 };
 
+struct BtNodeConfig : YamlConfig
+{
+	std::string type;
+};
+
+struct BtCompositeConfig : YamlConfig
+{
+	std::vector<BtNodeConfig> nodes;
+
+	BtNodeConfig* GetOne(std::string type)
+	{
+		for (size_t i = 0; i < nodes.size(); ++i)
+			if (nodes[i].type == type)
+				return &nodes[i];
+		return nullptr;
+	}
+};
+
+struct BtConfig : BtCompositeConfig
+{
+	bool rebirth;
+};
+
 class Yaml : public Component<Yaml>, public IAwakeSystem<>
 {
 public:
@@ -110,13 +133,16 @@ public:
 	void BackToPool() override;
 
 	YamlConfig* GetConfig(APP_TYPE appType);
+	BtConfig* GetConfig(NPC_TYPE npcType);
 	CommonConfig* GetIPEndPoint(APP_TYPE appType, int appId = 0);
 
 private:
 	void LoadConfig(APP_TYPE appType, YAML::Node& config);
+	void LoadConfig(NPC_TYPE npcType, YAML::Node& config);
 	DBConfig LoadDbConfig(YAML::Node node) const;
 	void LoadAppList(AppListConfig* pConfig, YAML::Node node) const;
 
 private:
-	std::map<APP_TYPE, YamlConfig*> _configs;
+	std::map<APP_TYPE, YamlConfig*> _appConfigs;
+	std::map<NPC_TYPE, BtConfig*> _npcConfigs;
 };

@@ -1,0 +1,18 @@
+public:
+  rebirth: true
+  selector: 
+    - type: BtActPatrol
+    - type: BtActIdle
+    - type: BtActPursue
+    - type: BtActAttack
+    - type: BtActFlee
+
+dungeon:
+  rebirth: false
+  selector: 
+    - type: BtActPatrol
+    - type: BtActIdle
+    - type: BtActPursue
+    - type: BtActAttack
+    - type: BtActFlee
+

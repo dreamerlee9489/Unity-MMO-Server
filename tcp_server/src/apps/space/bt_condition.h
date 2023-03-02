@@ -11,14 +11,10 @@ public:
 
 	~BtCondition() = default;
 
-	void SetSuccess() { status = BtStatus::Success; }
-
-	void SetFailure() { status = BtStatus::Failure; }
-
 	void HandleEvent(BtEventId id) override
 	{
-		if (funcMap.find(id) != funcMap.end())
-			funcMap[id](id);
+		if (callbacks.find(id) != callbacks.end())
+			callbacks[id](id);
 	}
 
 private:

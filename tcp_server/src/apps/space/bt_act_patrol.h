@@ -23,13 +23,11 @@ public:
 		_npc->target = nullptr;
 		_npc->GetComponent<BtComponent>()->curAct = this;
 		Broadcast(); 
-		//LOG_DEBUG("patrol enter");
 	}
 
 	void Exit() override 
 	{
 		_npc->GetComponent<BtComponent>()->curAct = nullptr;
-		//LOG_DEBUG("patrol exit");
 	}
 
 	void Broadcast() override

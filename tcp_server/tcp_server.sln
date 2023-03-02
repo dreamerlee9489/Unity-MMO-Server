@@ -11,6 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "apps", "apps", "{2101C55C-E
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "res", "res", "{CEB39B1C-C53C-449C-9789-57CDCF4D0AC4}"
 	ProjectSection(SolutionItems) = preProject
+		res\bt_config.yaml = res\bt_config.yaml
 		res\engine.yaml = res\engine.yaml
 	EndProjectSection
 EndProject
@@ -51,11 +52,12 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libresource", "src\libs\lib
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "resource", "resource", "{19E0A06F-EB5E-43A5-9001-EDAB625425AF}"
 	ProjectSection(SolutionItems) = preProject
-		res\resource\ItemPotions.csv = res\resource\ItemPotions.csv
+		bt_config.yaml = bt_config.yaml
 		res\resource\dungeon01_npcs.csv = res\resource\dungeon01_npcs.csv
-		res\resource\ItemWeapons.csv = res\resource\ItemWeapons.csv
-		res\resource\world.csv = res\resource\world.csv
+		res\resource\item_potions.csv = res\resource\item_potions.csv
+		res\resource\item_weapons.csv = res\resource\item_weapons.csv
 		res\resource\public01_npcs.csv = res\resource\public01_npcs.csv
+		res\resource\world.csv = res\resource\world.csv
 	EndProjectSection
 EndProject
 Global

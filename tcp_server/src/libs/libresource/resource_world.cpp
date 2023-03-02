@@ -98,7 +98,7 @@ void ResourceWorld::ParseItemsCSV()
 	const auto pResPath = ComponentHelp::GetResPath();
 	std::string path = pResPath->FindResPath("/resource");
 	std::string line;
-	path = strutil::format("%s/ItemPotions.csv", path.c_str());
+	path = strutil::format("%s/item_potions.csv", path.c_str());
 	std::ifstream reader(path.c_str(), std::ios::in);
 	if (!reader || reader.eof())
 	{
@@ -117,7 +117,7 @@ void ResourceWorld::ParseItemsCSV()
 	}
 
 	path = pResPath->FindResPath("/resource");
-	path = strutil::format("%s/ItemWeapons.csv", path.c_str());
+	path = strutil::format("%s/item_weapons.csv", path.c_str());
 	reader = std::ifstream(path.c_str(), std::ios::in);
 	if (!reader || reader.eof())
 	{

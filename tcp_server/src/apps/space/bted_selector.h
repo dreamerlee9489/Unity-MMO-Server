@@ -19,47 +19,47 @@ public:
 		BtComposite::AddChild(child);
 		if (dynamic_cast<BtActIdle*>(child))
 		{
-			_nodeMap.emplace(BtEventId::Idle, std::prev(_children.end()));
-			funcMap.emplace(BtEventId::Idle, std::bind(&BtEdSelector::SwitchNode, this, std::placeholders::_1));
+			_nodes.emplace(BtEventId::Idle, std::prev(_children.end()));
+			callbacks.emplace(BtEventId::Idle, std::bind(&BtEdSelector::SwitchNode, this, std::placeholders::_1));
 		}
 		else if (dynamic_cast<BtActPatrol*>(child))
 		{
-			_nodeMap.emplace(BtEventId::Patrol, std::prev(_children.end()));
-			funcMap.emplace(BtEventId::Patrol, std::bind(&BtEdSelector::SwitchNode, this, std::placeholders::_1));
+			_nodes.emplace(BtEventId::Patrol, std::prev(_children.end()));
+			callbacks.emplace(BtEventId::Patrol, std::bind(&BtEdSelector::SwitchNode, this, std::placeholders::_1));
 		}
 		else if (dynamic_cast<BtActPursue*>(child))
 		{
-			_nodeMap.emplace(BtEventId::Pursue, std::prev(_children.end()));
-			funcMap.emplace(BtEventId::Pursue, std::bind(&BtEdSelector::SwitchNode, this, std::placeholders::_1));
+			_nodes.emplace(BtEventId::Pursue, std::prev(_children.end()));
+			callbacks.emplace(BtEventId::Pursue, std::bind(&BtEdSelector::SwitchNode, this, std::placeholders::_1));
 		}
 		else if (dynamic_cast<BtActAttack*>(child))
 		{
-			_nodeMap.emplace(BtEventId::Attack, std::prev(_children.end()));
-			funcMap.emplace(BtEventId::Attack, std::bind(&BtEdSelector::SwitchNode, this, std::placeholders::_1));
+			_nodes.emplace(BtEventId::Attack, std::prev(_children.end()));
+			callbacks.emplace(BtEventId::Attack, std::bind(&BtEdSelector::SwitchNode, this, std::placeholders::_1));
 		}
 		else if (dynamic_cast<BtActFlee*>(child))
 		{
-			_nodeMap.emplace(BtEventId::Flee, std::prev(_children.end()));
-			funcMap.emplace(BtEventId::Flee, std::bind(&BtEdSelector::SwitchNode, this, std::placeholders::_1));
+			_nodes.emplace(BtEventId::Flee, std::prev(_children.end()));
+			callbacks.emplace(BtEventId::Flee, std::bind(&BtEdSelector::SwitchNode, this, std::placeholders::_1));
 		}
 	}
 
 	void RmvChild(BtNode* child) override
 	{
 		BtComposite::RmvChild(child);
-		for (auto iter = _nodeMap.begin(); iter != _nodeMap.end(); ++iter)
+		for (auto iter = _nodes.begin(); iter != _nodes.end(); ++iter)
 		{
 			if (*(*iter).second == child)
 			{
-				_nodeMap.erase(iter);
-				funcMap.erase((*iter).first);
+				_nodes.erase(iter);
+				callbacks.erase((*iter).first);
 				return;
 			}
 		}
 	}
 
 private:
-	std::unordered_map<BtEventId, std::list<BtNode*>::iterator> _nodeMap;
+	std::unordered_map<BtEventId, std::list<BtNode*>::iterator> _nodes;
 
 	void Enter() override { _curr = _children.begin(); }
 
@@ -79,9 +79,8 @@ private:
 
 	void SwitchNode(BtEventId id) 
 	{ 
-		//LOG_DEBUG("curr=" << (int)static_cast<BtAction*>(*_curr)->GetEventId());
 		(*_curr)->ForceExit(BtStatus::Suspend);
-		_curr = _nodeMap.find(id) == _nodeMap.end() ? _children.end() : _nodeMap[id];
+		_curr = _nodes.find(id) == _nodes.end() ? _children.end() : _nodes[id];
 	}
 };
 

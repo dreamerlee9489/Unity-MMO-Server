@@ -64,7 +64,6 @@ private:
 			_npc->GetComponent<BtComponent>()->AddEvent(BtEventId::Idle);
 			return BtStatus::Suspend;
 		}
-		//LOG_DEBUG(_npc->id << " AttackTask()");
 		return BtStatus::Running;
 	}
 };

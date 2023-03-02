@@ -13,8 +13,8 @@ public:
 
 	void HandleEvent(BtEventId id) override
 	{
-		if (funcMap.find(id) != funcMap.end())
-			funcMap[id](id);
+		if (callbacks.find(id) != callbacks.end())
+			callbacks[id](id);
 		else
 			_child->HandleEvent(id);
 	}

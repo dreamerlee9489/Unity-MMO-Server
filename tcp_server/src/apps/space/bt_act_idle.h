@@ -20,13 +20,11 @@ public:
 		_lastTime = _currTime = Global::GetInstance()->TimeTick;
 		_npc->GetComponent<BtComponent>()->curAct = this;
 		Broadcast(); 
-		//LOG_DEBUG("idle enter");
 	}
 
 	void Exit() override 
 	{
 		_npc->GetComponent<BtComponent>()->curAct = nullptr;
-		//LOG_DEBUG("idle exit");
 	}
 
 	void Broadcast() override

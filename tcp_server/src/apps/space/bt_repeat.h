@@ -7,7 +7,7 @@ class BtRepeat : public BtDecorator
 public:
 	BtRepeat(Npc* npc, BtNode* child, size_t limit = UINT_MAX) : BtDecorator(npc, child), _limit(limit) 
 	{
-		funcMap.emplace(BtEventId::Birth, std::bind(&BtRepeat::HandleRebirth, this, std::placeholders::_1));
+		callbacks.emplace(BtEventId::Birth, std::bind(&BtRepeat::HandleRebirth, this, std::placeholders::_1));
 	}
 
 	~BtRepeat() = default;
@@ -19,7 +19,6 @@ private:
 
 	BtStatus& Execute() override
 	{
-		//LOG_DEBUG("cur pos=" << _npc->GetCurrPos());
 		if (_count < _limit)
 		{
 			BtStatus& tmp = _child->Tick();

@@ -32,8 +32,6 @@ void World::Awake(int worldId)
 		npc->AddComponent<MoveComponent>();
 		npcIdxMap.emplace(npc->GetSN(), npcs.size());
 		npcs.push_back(npc);
-		if (worldCfg->GetType() == ResourceWorldType::Public)
-			npc->rebirth = true;
 	}
 
 	// message

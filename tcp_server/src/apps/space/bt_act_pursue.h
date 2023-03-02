@@ -18,13 +18,11 @@ public:
 	{ 
 		_npc->GetComponent<BtComponent>()->curAct = this;
 		Broadcast(); 
-		//LOG_DEBUG("pursue enter");
 	}
 
 	void Exit() override 
 	{
 		_npc->GetComponent<BtComponent>()->curAct = nullptr;
-		//LOG_DEBUG("pursue exit");
 	}
 
 	void Broadcast() override

@@ -30,7 +30,7 @@ class BtNode
 {
 public:
 	BtStatus status = BtStatus::Invalid;
-	std::unordered_map<BtEventId, std::function<void(BtEventId)>> funcMap;
+	std::unordered_map<BtEventId, std::function<void(BtEventId)>> callbacks;
 
 	BtNode(Npc* npc) : _npc(npc) {}
 

@@ -17,14 +17,10 @@ public:
 
 	virtual BtEventId GetEventId() { return BtEventId::Unknow; }
 
-	void SetSuccess(BtEventId id) { status = BtStatus::Success; }
-
-	void SetFailure(BtEventId id) { status = BtStatus::Failure; }
-
 	void HandleEvent(BtEventId id) override
 	{
-		if (funcMap.find(id) != funcMap.end())
-			funcMap[id](id);
+		if (callbacks.find(id) != callbacks.end())
+			callbacks[id](id);
 	}	
 
 protected:

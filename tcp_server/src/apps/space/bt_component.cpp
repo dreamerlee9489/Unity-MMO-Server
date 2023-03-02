@@ -21,22 +21,7 @@ BtComponent::~BtComponent()
 void BtComponent::Awake()
 {
 	_npc = GetParent<Npc>();
-	BtActBirth* actBirth = new BtActBirth(_npc);
-	BtActDeath* actDeath = new BtActDeath(_npc);
-	BtParallel* parAlive = new BtParallel(_npc);
-	BtSequence* seqLife = new BtSequence(_npc);
-	BtActView* actView = new BtActView(_npc);
-	BtActSense* actSense = new BtActSense(_npc);
-	BtEdSelector* selBehav = new BtEdSelector(_npc);
-	BtActPatrol* actPatrol = new BtActPatrol(_npc);
-	BtActIdle* actIdle = new BtActIdle(_npc);
-	BtActPursue* actPursue = new BtActPursue(_npc);
-	BtActAttack* actAttack = new BtActAttack(_npc);
-	BtActFlee* actFlee = new BtActFlee(_npc);
-	seqLife->AddChildren({ actBirth, parAlive, actDeath });
-	selBehav->AddChildren({ actPatrol, actIdle, actPursue, actAttack, actFlee });
-	parAlive->AddChildren({ actView, actSense, selBehav });
-	_root = new BtRepeat(_npc, seqLife);
+	ParseConfig(ComponentHelp::GetYaml()->GetConfig(_npc->GetWorld()->IsPublic() ? NPC_TYPE::Public : NPC_TYPE::Dungeon));
 }
 
 void BtComponent::BackToPool()
@@ -59,5 +44,33 @@ void BtComponent::SyncAction(Player* pPlayer)
 {
 	if (curAct)
 		curAct->Singlecast(pPlayer);
+}
+
+void BtComponent::ParseConfig(BtConfig* pConfig)
+{
+	_npc->rebirth = pConfig->rebirth;
+	BtActBirth* actBirth = new BtActBirth(_npc);
+	BtActDeath* actDeath = new BtActDeath(_npc);
+	BtParallel* parAlive = new BtParallel(_npc);
+	BtSequence* seqLife = new BtSequence(_npc);
+	BtActView* actView = new BtActView(_npc);
+	BtActSense* actSense = new BtActSense(_npc);
+	BtEdSelector* selBehav = new BtEdSelector(_npc);
+	for (auto& one : pConfig->nodes)
+	{
+		if (one.type == "BtActPatrol")
+			selBehav->AddChild(new BtActPatrol(_npc));
+		else if (one.type == "BtActIdle")
+			selBehav->AddChild(new BtActIdle(_npc));
+		else if (one.type == "BtActPursue")
+			selBehav->AddChild(new BtActPursue(_npc));
+		else if (one.type == "BtActAttack")
+			selBehav->AddChild(new BtActAttack(_npc));
+		else if (one.type == "BtActFlee")
+			selBehav->AddChild(new BtActFlee(_npc));
+	}
+	seqLife->AddChildren({ actBirth, parAlive, actDeath });
+	parAlive->AddChildren({ actView, actSense, selBehav });
+	_root = new BtRepeat(_npc, seqLife);
 }
 
