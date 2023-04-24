@@ -60,7 +60,7 @@ void CreateWorldComponent::HandleCmdCreate(Packet* pPacket)
 	LOG_DEBUG("------------------------------------");
 	LOG_DEBUG("**** public world ****");
 	auto pResMgr = ResourceHelp::GetResourceManager();
-	for (auto pair : _created)
+	for (auto& pair : _created)
 	{
 		LOG_DEBUG("id:" << pair.first
 			<< " world sn:" << pair.second
@@ -68,7 +68,7 @@ void CreateWorldComponent::HandleCmdCreate(Packet* pPacket)
 	}
 
 	LOG_DEBUG("**** dungeons world ****");
-	for (auto pair : _dungeons)
+	for (auto& pair : _dungeons)
 	{
 		LOG_DEBUG("id:" << pair.second
 			<< " world sn:" << pair.first

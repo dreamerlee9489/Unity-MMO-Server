@@ -66,16 +66,16 @@ void AppSyncComponent::HandleNetworkDisconnect(Packet* pPacket)
 
     SyncComponent::HandleNetworkDisconnect(pPacket);
 
-    // ÓÐÁ¬½Ó¶Ï¿ªÁË£¬ÖØÐÂÏòLogin·¢ËÍSpaceÐÅÏ¢
+    // æœ‰è¿žæŽ¥æ–­å¼€äº†ï¼Œé‡æ–°å‘Loginå‘é€Spaceä¿¡æ¯
     SyncGameInfoToLogin();
 }
 
 void AppSyncComponent::SyncGameInfoToLogin()
 {
     Proto::AppInfoListSync proto;
-    for (auto pair : _apps)
+    for (auto& pair : _apps)
     {
-        auto info = pair.second;
+        auto& info = pair.second;
         if ((info.AppType & APP_GAME) == 0)
             continue;
 
@@ -85,7 +85,7 @@ void AppSyncComponent::SyncGameInfoToLogin()
         pProto->set_online(info.Online);
     }
 
-    // ·¢ËÍ¸øËùÓÐlogin½ø³Ì
+    // å‘é€ç»™æ‰€æœ‰loginè¿›ç¨‹
     if (proto.apps_size() > 0)
     {
         MessageSystemHelp::SendPacketToAllApp(Proto::MsgId::MI_AppInfoListSync, proto, APP_LOGIN);

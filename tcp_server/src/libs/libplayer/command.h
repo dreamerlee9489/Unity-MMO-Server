@@ -14,6 +14,8 @@ public:
 	uint64 target_sn = 0;
 
 	Command(Player* owner) : _owner(owner) {}
+
+	virtual ~Command() = default;
 	
 	virtual void Enter() 
 	{ 

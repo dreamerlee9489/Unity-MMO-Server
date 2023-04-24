@@ -169,7 +169,7 @@ void Yaml::LoadConfig(NPC_TYPE npcType, YAML::Node& config)
 	for (size_t i = 0; i < size; i++)
 	{
 		BtNodeConfig one;
-		one.type = selector[i]["type"].as<std::string>();
+		one.type = selector[i]["node"].as<std::string>();
 		pBtConfig->nodes.push_back(one);
 	}
 	_npcConfigs.emplace(npcType, pBtConfig);

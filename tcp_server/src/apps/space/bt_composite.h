@@ -1,6 +1,11 @@
 #ifndef BT_COMPOSITE
 #define BT_COMPOSITE
 #include "bt_node.h"
+#include "bt_act_idle.h"
+#include "bt_act_patrol.h"
+#include "bt_act_pursue.h"
+#include "bt_act_attack.h"
+#include "bt_act_flee.h"
 #include <list>
 #include <unordered_map>
 #include <initializer_list>

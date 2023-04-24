@@ -1,11 +1,6 @@
 #ifndef BT_ED_SELECTOR
 #define BT_ED_SELECTOR
 #include "bt_composite.h"
-#include "bt_act_idle.h"
-#include "bt_act_patrol.h"
-#include "bt_act_pursue.h"
-#include "bt_act_attack.h"
-#include "bt_act_flee.h"
 
 class BtEdSelector : public BtComposite
 {
@@ -67,7 +62,7 @@ private:
 	{ 
 		if (_curr == _children.end())
 			return status = BtStatus::Aborted;
-		status = (*_curr)->Tick(); 
+		(*_curr)->Tick();
 		return status = BtStatus::Running;
 	}
 

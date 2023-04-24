@@ -234,6 +234,7 @@
     <ClInclude Include="..\login\player_component_account.h" />
     <ClInclude Include="..\login\player_component_onlineinlogin.h" />
     <ClInclude Include="..\login\redis_login.h" />
+    <ClInclude Include="..\space\bted_sequence.h" />
     <ClInclude Include="..\space\bt_action.h" />
     <ClInclude Include="..\space\bt_act_attack.h" />
     <ClInclude Include="..\space\bt_act_birth.h" />
@@ -254,6 +255,7 @@
     <ClInclude Include="..\space\bt_selector.h" />
     <ClInclude Include="..\space\bted_selector.h" />
     <ClInclude Include="..\space\bt_sequence.h" />
+    <ClInclude Include="..\space\bted_parallel.h" />
     <ClInclude Include="..\space\npc.h" />
     <ClInclude Include="..\space\ai_system.h" />
     <ClInclude Include="..\space\console_cmd_world.h" />

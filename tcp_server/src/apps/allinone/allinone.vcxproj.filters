@@ -438,5 +438,11 @@
     <ClInclude Include="..\game\player_trade.h">
       <Filter>game\world\proxy</Filter>
     </ClInclude>
+    <ClInclude Include="..\space\bted_sequence.h">
+      <Filter>space\system\ai\bt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\space\bted_parallel.h">
+      <Filter>space\system\ai\bt</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
