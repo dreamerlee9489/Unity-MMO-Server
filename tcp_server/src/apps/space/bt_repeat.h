@@ -1,6 +1,4 @@
-#ifndef BT_REPEAT
-#define BT_REPEAT
-#include "bt_decorator.h"
+﻿#include "bt_decorator.h"
 
 class BtRepeat : public BtDecorator
 {
@@ -44,5 +42,3 @@ private:
 		_child->Reset();
 	}
 };
-
-#endif // !BT_REPEAT

@@ -146,6 +146,33 @@
     <ClCompile Include="..\space\ai_system.cpp">
       <Filter>space\system\ai</Filter>
     </ClCompile>
+    <ClCompile Include="..\space\bt_act_attack.cpp">
+      <Filter>space\system\ai\bt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\space\bt_act_birth.cpp">
+      <Filter>space\system\ai\bt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\space\bt_act_death.cpp">
+      <Filter>space\system\ai\bt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\space\bt_act_flee.cpp">
+      <Filter>space\system\ai\bt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\space\bt_act_idle.cpp">
+      <Filter>space\system\ai\bt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\space\bt_act_patrol.cpp">
+      <Filter>space\system\ai\bt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\space\bt_act_pursue.cpp">
+      <Filter>space\system\ai\bt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\space\bt_act_sense.cpp">
+      <Filter>space\system\ai\bt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\space\bt_act_view.cpp">
+      <Filter>space\system\ai\bt</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="login">
@@ -437,12 +464,6 @@
     </ClInclude>
     <ClInclude Include="..\game\player_trade.h">
       <Filter>game\world\proxy</Filter>
-    </ClInclude>
-    <ClInclude Include="..\space\bted_sequence.h">
-      <Filter>space\system\ai\bt</Filter>
-    </ClInclude>
-    <ClInclude Include="..\space\bted_parallel.h">
-      <Filter>space\system\ai\bt</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

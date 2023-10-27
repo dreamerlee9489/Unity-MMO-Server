@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 enum struct NPC_TYPE { Public, Dungeon };
 

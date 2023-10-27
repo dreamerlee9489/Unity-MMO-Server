@@ -1,5 +1,4 @@
-#ifndef BT_COMPONENT
-#define BT_COMPONENT
+﻿#pragma once
 #include "libserver/component.h"
 #include "libserver/system.h"
 #include "libserver/vector3.h"
@@ -39,6 +38,3 @@ private:
 
 	void ParseConfig(BtConfig* pConfig);
 };
-
-#endif // !BT_COMPONENT
-

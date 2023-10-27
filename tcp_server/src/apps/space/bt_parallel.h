@@ -1,5 +1,4 @@
-#ifndef BT_PARALLEL
-#define BT_PARALLEL
+﻿#pragma once
 #include "bt_composite.h"
 
 enum struct BtPolicy { Sequence, Selector };
@@ -48,5 +47,3 @@ private:
 		return status = BtStatus::Running;
 	}
 };
-
-#endif // !BT_PARALLEL

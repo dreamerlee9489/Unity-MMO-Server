@@ -1,5 +1,4 @@
-#ifndef BT_ED_SELECTOR
-#define BT_ED_SELECTOR
+﻿#pragma once
 #include "bt_composite.h"
 
 class BtEdSelector : public BtComposite
@@ -78,5 +77,3 @@ private:
 		_curr = _nodes.find(id) == _nodes.end() ? _children.end() : _nodes[id];
 	}
 };
-
-#endif // !BT_ED_SELECTOR

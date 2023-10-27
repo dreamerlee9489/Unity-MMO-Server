@@ -1,5 +1,4 @@
-#ifndef BT_COMPOSITE
-#define BT_COMPOSITE
+﻿#pragma once
 #include "bt_node.h"
 #include "bt_act_idle.h"
 #include "bt_act_patrol.h"
@@ -55,6 +54,3 @@ protected:
 	std::list<BtNode*> _children;
 	std::list<BtNode*>::iterator _curr = _children.begin();	
 };
-
-#endif // !BT_COMPOSITE
-

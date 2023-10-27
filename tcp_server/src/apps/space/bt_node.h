@@ -1,5 +1,4 @@
-#ifndef BT_NODE
-#define BT_NODE
+﻿#pragma once
 #include "libplayer/player.h"
 #include "npc.h"
 #include <functional>
@@ -70,5 +69,3 @@ protected:
 
 	virtual void Exit() = 0;
 };
-
-#endif // !BT_NODE

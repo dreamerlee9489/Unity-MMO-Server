@@ -1,5 +1,4 @@
-#ifndef BT_ACTION
-#define BT_ACTION
+﻿#pragma once
 #include "bt_node.h"
 
 class BtAction : public BtNode
@@ -34,5 +33,3 @@ protected:
 		return status = BtStatus::Failure;
 	}
 };
-
-#endif // !BT_ACTION

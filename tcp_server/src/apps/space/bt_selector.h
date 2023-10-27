@@ -1,5 +1,4 @@
-#ifndef BT_SELECTOR
-#define BT_SELECTOR
+﻿#pragma once
 #include "bt_composite.h"
 
 class BtSelector : public BtComposite
@@ -31,5 +30,3 @@ private:
 		return status;
 	}
 };
-
-#endif // !BT_SELECTOR

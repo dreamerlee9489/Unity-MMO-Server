@@ -1,5 +1,4 @@
-#ifndef BT_DECORATOR
-#define BT_DECORATOR
+﻿#pragma once
 #include "bt_node.h"
 
 class BtDecorator : public BtNode
@@ -22,5 +21,3 @@ public:
 protected:
 	BtNode* _child = nullptr;
 };
-
-#endif // !BT_DECORATOR

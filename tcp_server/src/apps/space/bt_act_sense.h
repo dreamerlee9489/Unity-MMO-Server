@@ -1,14 +1,10 @@
-#ifndef BT_ACTION_SENSE
-#define BT_ACTION_SENSE
+﻿#pragma once
 #include "bt_action.h"
 
 class BtActSense : public BtAction
 {
 public:
-	BtActSense(Npc* npc) : BtAction(npc)
-	{
-		_task = std::bind(&BtActSense::SenseTask, this);
-	}
+	BtActSense(Npc* npc);
 
 	~BtActSense() = default;
 
@@ -20,17 +16,5 @@ public:
 
 	void Exit() override {}
 
-	BtStatus SenseTask()
-	{
-		if (_npc->hp == 0)
-			return BtStatus::Aborted;	
-		if (!_npc->fleeing && _npc->hp * 1.0 / _npc->initHp * 1.0 <= 0.3)
-		{
-			_npc->fleeing = true;
-			_npc->GetComponent<BtComponent>()->AddEvent(BtEventId::Flee, 1);
-		}
-		return BtStatus::Running;
-	}
+	BtStatus SenseTask();
 };
-
-#endif // !BT_ACTION_SENSE

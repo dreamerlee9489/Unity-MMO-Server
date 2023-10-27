@@ -1,5 +1,4 @@
-﻿#ifndef AI_SYSTEM
-#define AI_SYSTEM
+﻿#pragma once
 #include "libserver/system.h"
 #include "libserver/util_time.h"
 #include "libserver/entity_system.h"
@@ -17,5 +16,3 @@ public:
 
 	void Update(EntitySystem* pEntities) override;
 };
-
-#endif // !AI_SYSTEM

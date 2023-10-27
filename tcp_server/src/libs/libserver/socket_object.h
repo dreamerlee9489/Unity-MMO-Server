@@ -3,7 +3,7 @@
 #include <log4cplus/streams.h>
 #include <ostream>
 #include "network_type.h"
-class NetIdentify;
+struct NetIdentify;
 
 /// <summary>
 /// 发送方的唯一网络标识

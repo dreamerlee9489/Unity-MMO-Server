@@ -1,5 +1,4 @@
-﻿#ifndef AI_ENEMY
-#define AI_ENEMY
+﻿#pragma once
 #include "libserver/entity.h"
 #include "libserver/system.h"
 #include "libserver/vector3.h"
@@ -107,5 +106,3 @@ public:
 
 	std::list<ItemData>* GetDropList(Player* player);
 };
-
-#endif // !AIENEMY

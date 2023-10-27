@@ -1,62 +1,23 @@
-#ifndef BT_ACTION_IDLE
-#define BT_ACTION_IDLE
+﻿#pragma once
 #include "bt_action.h"
 
 class BtActIdle : public BtAction
 {
 public:
-	BtActIdle(Npc* npc) : BtAction(npc) 
-	{
-		_task = std::bind(&BtActIdle::IdleTask, this);
-	}
+	BtActIdle(Npc* npc);
 
 	~BtActIdle() = default;
 
-	BtEventId GetEventId() override { return BtEventId::Idle; }
+	BtEventId GetEventId() override;
 
-	void Enter() override 
-	{ 
-		_npc->target = nullptr;
-		_lastTime = _currTime = Global::GetInstance()->TimeTick;
-		_npc->GetComponent<BtComponent>()->curAct = this;
-		Broadcast(); 
-	}
+	void Enter() override;
 
-	void Exit() override 
-	{
-		_npc->GetComponent<BtComponent>()->curAct = nullptr;
-	}
+	void Exit() override;
 
-	void Broadcast() override
-	{
-		Proto::SyncBtAction pb;
-		pb.set_id((int)BtEventId::Idle);
-		pb.set_code(0);
-		pb.set_npc_sn(_npc->GetSN());
-		pb.set_player_sn(0);
-		_npc->GetWorld()->BroadcastPacket(Proto::MsgId::S2C_SyncBtAction, pb);
-	}
+	void Broadcast() override;
 
-	void Singlecast(Player* player) override
-	{
-		Proto::SyncBtAction pb;
-		pb.set_id((int)BtEventId::Idle);
-		pb.set_code(0);
-		pb.set_npc_sn(_npc->GetSN());
-		pb.set_player_sn(0);
-		MessageSystemHelp::SendPacket(Proto::MsgId::S2C_SyncBtAction, pb, player);
-	}
+	void Singlecast(Player* player) override;
 
 private:
-	BtStatus IdleTask()
-	{
-		_currTime = Global::GetInstance()->TimeTick;
-		_timeElapsed = _currTime - _lastTime;
-		if (_timeElapsed < 2000)
-			return BtStatus::Running;
-		_npc->GetComponent<BtComponent>()->AddEvent(BtEventId::Patrol);
-		return BtStatus::Suspend;
-	}
+	BtStatus IdleTask();
 };
-
-#endif // !BT_ACTION_IDLE

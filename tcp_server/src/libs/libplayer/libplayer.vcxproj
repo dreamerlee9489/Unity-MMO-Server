@@ -112,7 +112,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)libs\$(Configuration)\</OutDir>
-    <IncludePath>$(SolutionDir)..\include\common;$(SolutionDir)..\include\windows;..\tcp_server\src\apps\space;..\;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)..\include\common;$(SolutionDir)..\include\windows;..\;..\..\apps\space;$(IncludePath)</IncludePath>
     <LibraryPath>$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

@@ -1,5 +1,4 @@
-#ifndef BT_SEQUENCE
-#define BT_SEQUENCE
+﻿#pragma once
 #include "bt_composite.h"
 
 class BtSequence : public BtComposite
@@ -31,5 +30,3 @@ private:
 		return status;
 	}
 };
-
-#endif // !BT_SEQUENCE

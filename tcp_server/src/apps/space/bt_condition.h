@@ -1,5 +1,4 @@
-#ifndef BT_CONDITION
-#define BT_CONDITION
+﻿#pragma once
 #include "bt_node.h"
 
 class BtCondition : public BtNode
@@ -31,5 +30,3 @@ private:
 
 	void Exit() override {}
 };
-
-#endif // !BT_CONDITION
