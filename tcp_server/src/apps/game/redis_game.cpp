@@ -1,4 +1,4 @@
-#include "redis_game.h"
+﻿#include "redis_game.h"
 #include "libserver/redis_constants.h"
 #include "libserver/message_system_help.h"
 #include "libserver/message_system.h"

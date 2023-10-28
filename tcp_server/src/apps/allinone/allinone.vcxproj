@@ -72,7 +72,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
-    <IncludePath>../../apps/;../../libs/;$(SolutionDir)..\include\common;$(SolutionDir)..\include\windows;$(IncludePath)</IncludePath>
+    <IncludePath>..\..\apps\;..\..\libs\;$(SolutionDir)..\include\common;$(SolutionDir)..\include\windows;$(IncludePath)</IncludePath>
     <LibraryPath>../../../libs/$(Configuration);$(SolutionDir)..\libs\windows;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -188,16 +188,8 @@
     <ClCompile Include="..\login\player_component_account.cpp" />
     <ClCompile Include="..\login\player_component_onlineinlogin.cpp" />
     <ClCompile Include="..\login\redis_login.cpp" />
-    <ClCompile Include="..\space\bt_act_attack.cpp" />
-    <ClCompile Include="..\space\bt_act_birth.cpp" />
-    <ClCompile Include="..\space\bt_act_death.cpp" />
-    <ClCompile Include="..\space\bt_act_flee.cpp" />
-    <ClCompile Include="..\space\bt_act_idle.cpp" />
-    <ClCompile Include="..\space\bt_act_patrol.cpp" />
-    <ClCompile Include="..\space\bt_act_pursue.cpp" />
-    <ClCompile Include="..\space\bt_act_sense.cpp" />
-    <ClCompile Include="..\space\bt_act_view.cpp" />
     <ClCompile Include="..\space\bt_component.cpp" />
+    <ClCompile Include="..\space\bt_node.cpp" />
     <ClCompile Include="..\space\npc.cpp" />
     <ClCompile Include="..\space\ai_system.cpp" />
     <ClCompile Include="..\space\console_cmd_world.cpp" />
@@ -243,26 +235,8 @@
     <ClInclude Include="..\login\player_component_account.h" />
     <ClInclude Include="..\login\player_component_onlineinlogin.h" />
     <ClInclude Include="..\login\redis_login.h" />
-    <ClInclude Include="..\space\bt_action.h" />
-    <ClInclude Include="..\space\bt_act_attack.h" />
-    <ClInclude Include="..\space\bt_act_birth.h" />
-    <ClInclude Include="..\space\bt_act_death.h" />
-    <ClInclude Include="..\space\bt_act_flee.h" />
-    <ClInclude Include="..\space\bt_act_idle.h" />
-    <ClInclude Include="..\space\bt_act_patrol.h" />
-    <ClInclude Include="..\space\bt_act_pursue.h" />
-    <ClInclude Include="..\space\bt_act_sense.h" />
-    <ClInclude Include="..\space\bt_act_view.h" />
     <ClInclude Include="..\space\bt_component.h" />
-    <ClInclude Include="..\space\bt_composite.h" />
-    <ClInclude Include="..\space\bt_condition.h" />
-    <ClInclude Include="..\space\bt_decorator.h" />
     <ClInclude Include="..\space\bt_node.h" />
-    <ClInclude Include="..\space\bt_parallel.h" />
-    <ClInclude Include="..\space\bt_repeat.h" />
-    <ClInclude Include="..\space\bt_selector.h" />
-    <ClInclude Include="..\space\bted_selector.h" />
-    <ClInclude Include="..\space\bt_sequence.h" />
     <ClInclude Include="..\space\npc.h" />
     <ClInclude Include="..\space\ai_system.h" />
     <ClInclude Include="..\space\console_cmd_world.h" />

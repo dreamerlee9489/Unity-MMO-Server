@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-enum class NetworkType
+enum struct NetworkType
 {
 	None = 0,
 	TcpListen = 1 << 0,

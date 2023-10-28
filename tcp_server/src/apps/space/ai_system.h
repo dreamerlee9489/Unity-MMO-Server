@@ -3,7 +3,6 @@
 #include "libserver/util_time.h"
 #include "libserver/entity_system.h"
 #include "libserver/entity.h"
-#include "bt_component.h"
 
 class AISystem : public ISystem<AISystem>
 {

@@ -12,7 +12,7 @@ class Packet;
 #define PingTime 1000 // 1秒
 #define PingDelayTime  10 * 1000 // 10秒
 
-enum class ConnectStateType
+enum struct ConnectStateType
 {
 	None,
 	Connecting,

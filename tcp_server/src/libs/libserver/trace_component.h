@@ -6,7 +6,7 @@
 #include <map>
 #include <set>
 
-enum class TraceType
+enum struct TraceType
 {
 	Packet = 0,
 	Connector = 1,

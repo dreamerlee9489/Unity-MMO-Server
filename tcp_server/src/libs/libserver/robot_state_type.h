@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-enum class RobotStateType
+enum struct RobotStateType
 {
 	None = -1,
 

@@ -1,5 +1,4 @@
 ﻿#pragma once
-
 #include "libserver/common.h"
 #include "libserver/component.h"
 #include "libserver/system.h"

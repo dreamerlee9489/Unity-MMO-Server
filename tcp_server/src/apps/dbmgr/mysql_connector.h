@@ -11,7 +11,7 @@
 
 class Packet;
 
-enum class DatabaseStmtKey
+enum struct DatabaseStmtKey
 {
 	Create,
 	Save,

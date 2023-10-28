@@ -50,7 +50,6 @@
     <ClCompile Include="cmd_move.cpp" />
     <ClCompile Include="cmd_pick.cpp" />
     <ClCompile Include="player.cpp" />
-    <ClCompile Include="player_component.cpp" />
     <ClCompile Include="player_collector_component.cpp" />
     <ClCompile Include="player_component_last_map.cpp" />
     <ClCompile Include="player_component_proto_list.cpp" />
@@ -112,7 +111,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)libs\$(Configuration)\</OutDir>
-    <IncludePath>$(SolutionDir)..\include\common;$(SolutionDir)..\include\windows;..\;..\..\apps\space;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)..\include\common;$(SolutionDir)..\include\windows;..\..\apps\;..\;$(IncludePath)</IncludePath>
     <LibraryPath>$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

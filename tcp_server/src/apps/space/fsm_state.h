@@ -8,7 +8,7 @@
 #include "libplayer/player.h"
 #include "npc.h"
 
-enum class FsmStateType { Idle, Patrol, Pursuit, Attack, Death };
+enum struct FsmStateType { Idle, Patrol, Pursuit, Attack, Death };
 
 class Npc;
 class Player;

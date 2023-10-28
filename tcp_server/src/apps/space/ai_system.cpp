@@ -1,4 +1,5 @@
 ﻿#include "ai_system.h"
+#include "bt_component.h"
 
 AISystem::AISystem()
 {

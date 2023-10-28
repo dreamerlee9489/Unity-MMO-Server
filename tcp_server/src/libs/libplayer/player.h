@@ -4,11 +4,11 @@
 #include "libserver/entity.h"
 #include "libserver/system.h"
 #include "libserver/vector3.h"
+#include "space/player_component_detail.h"
+#include "space/npc.h"
+#include "game/game_team.h"
 #include "player_component_last_map.h"
 #include "command_component.h"
-#include "../../apps/space/player_component_detail.h"
-#include "../../apps/space/npc.h"
-#include "../../apps/game/game_team.h"
 #include <algorithm>
 #include <list>
 #include <map>

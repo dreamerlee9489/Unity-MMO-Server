@@ -1,31 +1,9 @@
-#include "bt_component.h"
-#include "bt_act_birth.h"
-#include "bt_act_death.h"
-#include "bt_act_view.h"
-#include "bt_act_sense.h"
-#include "bt_act_idle.h"
-#include "bt_act_patrol.h"
-#include "bt_act_pursue.h"
-#include "bt_act_attack.h"
-#include "bt_act_flee.h"
-#include "bt_condition.h"
-#include "bt_repeat.h"
-#include "bt_parallel.h"
-#include "bt_sequence.h"
-#include "bted_selector.h"
-
-BtComponent::~BtComponent()
-{
-}
+﻿#include "bt_component.h"
 
 void BtComponent::Awake()
 {
 	_npc = GetParent<Npc>();
 	ParseConfig(ComponentHelp::GetYaml()->GetConfig(_npc->GetWorld()->IsPublic() ? NPC_TYPE::Public : NPC_TYPE::Dungeon));
-}
-
-void BtComponent::BackToPool()
-{
 }
 
 void BtComponent::Update()
@@ -38,6 +16,11 @@ void BtComponent::Update()
 		_events.pop();
 		_root->HandleEvent(e.id);
 	}
+}
+
+void BtComponent::AddEvent(BtEventId id, int priority)
+{
+	_events.emplace(id, priority);
 }
 
 void BtComponent::SyncAction(Player* pPlayer)
@@ -73,4 +56,3 @@ void BtComponent::ParseConfig(BtConfig* pConfig)
 	parAlive->AddChildren({ actView, actSense, selBehav });
 	_root = new BtRepeat(_npc, seqLife);
 }
-

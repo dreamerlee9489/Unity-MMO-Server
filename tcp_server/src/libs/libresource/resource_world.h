@@ -16,7 +16,7 @@ struct ResourceNpc
 	Vector3 initPos{ 0, 0, 0 };
 };
 
-enum class ResourceWorldType
+enum struct ResourceWorldType
 {
 	Login = 1,
 	Roles = 2, // 角色选择场景

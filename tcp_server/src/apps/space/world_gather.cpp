@@ -1,4 +1,4 @@
-#include "world_gather.h"
+﻿#include "world_gather.h"
 #include "libserver/thread_mgr.h"
 #include "libserver/network_locator.h"
 #include "libserver/message_system_help.h"

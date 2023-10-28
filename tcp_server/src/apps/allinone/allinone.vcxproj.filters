@@ -146,31 +146,7 @@
     <ClCompile Include="..\space\ai_system.cpp">
       <Filter>space\system\ai</Filter>
     </ClCompile>
-    <ClCompile Include="..\space\bt_act_attack.cpp">
-      <Filter>space\system\ai\bt</Filter>
-    </ClCompile>
-    <ClCompile Include="..\space\bt_act_birth.cpp">
-      <Filter>space\system\ai\bt</Filter>
-    </ClCompile>
-    <ClCompile Include="..\space\bt_act_death.cpp">
-      <Filter>space\system\ai\bt</Filter>
-    </ClCompile>
-    <ClCompile Include="..\space\bt_act_flee.cpp">
-      <Filter>space\system\ai\bt</Filter>
-    </ClCompile>
-    <ClCompile Include="..\space\bt_act_idle.cpp">
-      <Filter>space\system\ai\bt</Filter>
-    </ClCompile>
-    <ClCompile Include="..\space\bt_act_patrol.cpp">
-      <Filter>space\system\ai\bt</Filter>
-    </ClCompile>
-    <ClCompile Include="..\space\bt_act_pursue.cpp">
-      <Filter>space\system\ai\bt</Filter>
-    </ClCompile>
-    <ClCompile Include="..\space\bt_act_sense.cpp">
-      <Filter>space\system\ai\bt</Filter>
-    </ClCompile>
-    <ClCompile Include="..\space\bt_act_view.cpp">
+    <ClCompile Include="..\space\bt_node.cpp">
       <Filter>space\system\ai\bt</Filter>
     </ClCompile>
   </ItemGroup>
@@ -400,60 +376,6 @@
       <Filter>space\system\ai\bt</Filter>
     </ClInclude>
     <ClInclude Include="..\space\bt_component.h">
-      <Filter>space\system\ai\bt</Filter>
-    </ClInclude>
-    <ClInclude Include="..\space\bt_action.h">
-      <Filter>space\system\ai\bt</Filter>
-    </ClInclude>
-    <ClInclude Include="..\space\bt_condition.h">
-      <Filter>space\system\ai\bt</Filter>
-    </ClInclude>
-    <ClInclude Include="..\space\bt_composite.h">
-      <Filter>space\system\ai\bt</Filter>
-    </ClInclude>
-    <ClInclude Include="..\space\bt_sequence.h">
-      <Filter>space\system\ai\bt</Filter>
-    </ClInclude>
-    <ClInclude Include="..\space\bt_decorator.h">
-      <Filter>space\system\ai\bt</Filter>
-    </ClInclude>
-    <ClInclude Include="..\space\bt_repeat.h">
-      <Filter>space\system\ai\bt</Filter>
-    </ClInclude>
-    <ClInclude Include="..\space\bt_parallel.h">
-      <Filter>space\system\ai\bt</Filter>
-    </ClInclude>
-    <ClInclude Include="..\space\bt_selector.h">
-      <Filter>space\system\ai\bt</Filter>
-    </ClInclude>
-    <ClInclude Include="..\space\bt_act_view.h">
-      <Filter>space\system\ai\bt</Filter>
-    </ClInclude>
-    <ClInclude Include="..\space\bt_act_birth.h">
-      <Filter>space\system\ai\bt</Filter>
-    </ClInclude>
-    <ClInclude Include="..\space\bt_act_death.h">
-      <Filter>space\system\ai\bt</Filter>
-    </ClInclude>
-    <ClInclude Include="..\space\bt_act_sense.h">
-      <Filter>space\system\ai\bt</Filter>
-    </ClInclude>
-    <ClInclude Include="..\space\bt_act_patrol.h">
-      <Filter>space\system\ai\bt</Filter>
-    </ClInclude>
-    <ClInclude Include="..\space\bt_act_idle.h">
-      <Filter>space\system\ai\bt</Filter>
-    </ClInclude>
-    <ClInclude Include="..\space\bt_act_pursue.h">
-      <Filter>space\system\ai\bt</Filter>
-    </ClInclude>
-    <ClInclude Include="..\space\bted_selector.h">
-      <Filter>space\system\ai\bt</Filter>
-    </ClInclude>
-    <ClInclude Include="..\space\bt_act_attack.h">
-      <Filter>space\system\ai\bt</Filter>
-    </ClInclude>
-    <ClInclude Include="..\space\bt_act_flee.h">
       <Filter>space\system\ai\bt</Filter>
     </ClInclude>
     <ClInclude Include="..\space\space_team.h">

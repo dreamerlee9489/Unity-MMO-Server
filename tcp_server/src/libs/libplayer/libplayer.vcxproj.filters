@@ -83,9 +83,6 @@
     <ClCompile Include="player_component_proto_list.cpp">
       <Filter>player\component</Filter>
     </ClCompile>
-    <ClCompile Include="player_component.cpp">
-      <Filter>player\component</Filter>
-    </ClCompile>
     <ClCompile Include="player_component_last_map.cpp">
       <Filter>player\component</Filter>
     </ClCompile>

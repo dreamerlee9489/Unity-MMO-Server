@@ -41,7 +41,7 @@ struct SocketKey
 /// <summary>
 /// TagKey中保存的某一个键
 /// </summary>
-enum class TagType
+enum struct TagType
 {
 	None = Proto::TagType::TagTypeNone,
 	Account = Proto::TagType::TagTypeAccount,

@@ -1,9 +1,8 @@
 ﻿#pragma once
 #include "libserver/component.h"
-
-#include "player_component.h"
 #include "libserver/vector3.h"
 #include "libserver/system.h"
+#include "player_component.h"
 
 /// <summary>
 /// 上次登录的地图id/sn/坐标(可能是公共地图也可能是副本)

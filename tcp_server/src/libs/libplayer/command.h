@@ -1,4 +1,4 @@
-#ifndef COMMAND_H
+﻿#ifndef COMMAND_H
 #define COMMAND_H
 #include "player.h"
 

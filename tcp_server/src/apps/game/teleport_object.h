@@ -6,7 +6,7 @@
 // 1,跳转需要等待目标地图创建完成
 // 2,跳转需要等待玩家数据从真实地图中同步
 
-enum class TeleportFlagType
+enum struct TeleportFlagType
 {
 	None = 0,
 	Waiting = 1,

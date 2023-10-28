@@ -7,7 +7,7 @@
 #include "system_manager.h"
 #include "thread_type.h"
 
-enum class ThreadState
+enum struct ThreadState
 {
 	Init,
 	Run,
