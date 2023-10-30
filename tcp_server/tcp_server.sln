@@ -52,7 +52,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libresource", "src\libs\lib
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "resource", "resource", "{19E0A06F-EB5E-43A5-9001-EDAB625425AF}"
 	ProjectSection(SolutionItems) = preProject
-		bt_config.yaml = bt_config.yaml
 		res\resource\dungeon01_npcs.csv = res\resource\dungeon01_npcs.csv
 		res\resource\item_potions.csv = res\resource\item_potions.csv
 		res\resource\item_weapons.csv = res\resource\item_weapons.csv
