@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.8)
+﻿cmake_minimum_required(VERSION 3.8)
 
 if (CMAKE_BUILD_TYPE STREQUAL Release) 
 	set(MyProjectName resource)
@@ -16,6 +16,8 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "../../../libs")
 set(CMAKE_CXX_FLAGS "-Wall -std=c++14 -pthread -DEPOLL")
 set(CMAKE_CXX_FLAGS_DEBUG "-D_DEBUG -O0 -g -ggdb")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG")
+
+include_directories(../../libs)
 
 aux_source_directory(. SRCS)
 aux_source_directory(./../libserver SRCS)

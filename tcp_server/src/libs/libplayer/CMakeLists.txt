@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.8)
+﻿cmake_minimum_required(VERSION 3.8)
 
 if (CMAKE_BUILD_TYPE STREQUAL Release) 
 	set(MyProjectName player)
@@ -18,8 +18,11 @@ set(CMAKE_CXX_FLAGS_DEBUG "-D_DEBUG -O0 -g -ggdb")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG")
 
 include_directories(../../libs)
+include_directories(../../apps)
 
 aux_source_directory(. SRCS)
+aux_source_directory(../game SRCS)
+aux_source_directory(../space SRCS)
 aux_source_directory(./../libserver SRCS)
 
 add_library(${MyProjectName} STATIC ${SRCS})

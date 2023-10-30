@@ -9,7 +9,6 @@ elif [ ${args}v = "clean"v ];then
     clean=true
 fi
 
-
 build(){
     for i in `ls -d */`;do 
         cd $i

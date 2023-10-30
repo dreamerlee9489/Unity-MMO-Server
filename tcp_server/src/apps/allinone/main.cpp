@@ -1,5 +1,4 @@
-﻿
-#include "libserver/common.h"
+﻿#include "libserver/common.h"
 #include "libserver/server_app.h"
 #include "libserver/component_help.h"
 
