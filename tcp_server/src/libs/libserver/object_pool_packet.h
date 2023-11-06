@@ -2,7 +2,6 @@
 #include "object_pool.h"
 #include "packet.h"
 #include "singleton.h"
-
 #include <mutex>
 
 class DynamicPacketPool :public DynamicObjectPool<Packet>, public Singleton<DynamicPacketPool>

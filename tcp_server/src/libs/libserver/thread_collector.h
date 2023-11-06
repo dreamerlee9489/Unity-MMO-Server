@@ -1,5 +1,4 @@
 ﻿#pragma once
-
 #include "common.h"
 #include "thread.h"
 #include "cache_refresh.h"

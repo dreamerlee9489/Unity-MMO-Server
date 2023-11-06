@@ -1,9 +1,7 @@
 ﻿#pragma once
-
 #include "app_type.h"
 #include "component.h"
 #include "system.h"
-
 #include <log4cplus/logger.h>   
 
 class Log4 : public Component<Log4>, public IAwakeSystem<APP_TYPE>

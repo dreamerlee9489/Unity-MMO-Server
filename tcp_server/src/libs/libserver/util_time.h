@@ -1,8 +1,6 @@
-#pragma once
-
+﻿#pragma once
 #include "common.h"
 #include "util_string.h"
-
 #include <chrono>
 #include <sys/timeb.h>
 

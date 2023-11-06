@@ -1,7 +1,7 @@
-#include "res_path.h"
-#include <ostream>
+ï»¿#include "res_path.h"
 #include "common.h"
 #include "util_string.h"
+#include <ostream>
 
 #if ENGINE_PLATFORM != PLATFORM_WIN32	
 #include <unistd.h>
@@ -9,7 +9,7 @@
 
 void ResPath::Awake()
 {
-    // »ñÈ¡ÒıÇæ»·¾³ÅäÖÃ
+    // è·å–å¼•æ“ç¯å¢ƒé…ç½®
 #if ENGINE_PLATFORM != PLATFORM_WIN32		
     char* envValue = getenv("GENGINE_RES_PATH");
     _resPath = envValue == nullptr ? "" : envValue;
@@ -23,7 +23,7 @@ void ResPath::Awake()
     }
 #endif
 
-    // Ä¬ÈÏÂ·¾¶
+    // é»˜è®¤è·¯å¾„
     if (_resPath.empty())
     {
 #if ENGINE_PLATFORM != PLATFORM_WIN32		
@@ -44,7 +44,7 @@ void ResPath::Awake()
             _resPath = _resPath.substr(0, index);
         }
 #else
-        // windowÏÂµÄÄ¿Â¼±ØĞëÊÇÈ«Ó¢ÎÄ
+        // windowä¸‹çš„ç›®å½•å¿…é¡»æ˜¯å…¨è‹±æ–‡
         char name[PATH_MAX];
         ZeroMemory(name, PATH_MAX);
         const DWORD rslt = GetModuleFileNameA(nullptr, name, MAX_PATH);

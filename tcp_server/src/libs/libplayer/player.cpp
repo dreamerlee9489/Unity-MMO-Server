@@ -1,7 +1,7 @@
 ﻿#include "player.h"
 #include "player_component.h"
-#include "libserver/message_system_help.h"
 #include "space/world.h"
+#include "libserver/message_system_help.h"
 
 void Player::Awake(NetIdentify* pIdentify, std::string account)
 {

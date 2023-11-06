@@ -1,16 +1,14 @@
-#include "mysql_table_update.h"
-
+ï»¿#include "mysql_table_update.h"
 #include "libserver/log4_help.h"
 #include "libserver/util_string.h"
 #include "libserver/component_help.h"
-
 #include <mysql/mysql.h>
 #include <mysql/mysqld_error.h>
 #include <thread>
 
 MysqlTableUpdate::MysqlTableUpdate()
 {
-    // ×¢²á¸üĞÂº¯Êı£¬°´ÏÂ±êÖ´ĞĞ£¬×¢ÒâË³Ğò
+    // æ³¨å†Œæ›´æ–°å‡½æ•°ï¼ŒæŒ‰ä¸‹æ ‡æ‰§è¡Œï¼Œæ³¨æ„é¡ºåº
     _update_func.push_back(BindFunP0(this, &MysqlTableUpdate::Update00)); 
 }
 
@@ -45,7 +43,7 @@ void MysqlTableUpdate::Check()
     {
         LOG_DEBUG("Mysql. try create database:" << _pDbCfg->DatabaseName.c_str());
 
-        // 1049: Unknown database¡£ Ã»ÓĞÕÒµ½Êı¾İ¿â£¬¾ÍĞÂ½¨Ò»¸ö
+        // 1049: Unknown databaseã€‚ æ²¡æœ‰æ‰¾åˆ°æ•°æ®åº“ï¼Œå°±æ–°å»ºä¸€ä¸ª
         if (!CreateDatabaseIfNotExist())
         {
             Disconnect();
@@ -62,7 +60,7 @@ void MysqlTableUpdate::Check()
         return;
     }
 
-    // ¼ì²é°æ±¾£¬×Ô¶¯¸üĞÂ
+    // æ£€æŸ¥ç‰ˆæœ¬ï¼Œè‡ªåŠ¨æ›´æ–°
     if (!UpdateToVersion())
     {
         LOG_ERROR("!!!Failed. Mysql update. UpdateToVersion");
@@ -82,7 +80,7 @@ void MysqlTableUpdate::Check()
 
 bool MysqlTableUpdate::CreateDatabaseIfNotExist()
 {
-    // ÊÇ·ñ´æÔÚÊı¾İ¿â£¬Èç¹û²»´æÔÚ£¬Ôò´´½¨
+    // æ˜¯å¦å­˜åœ¨æ•°æ®åº“ï¼Œå¦‚æœä¸å­˜åœ¨ï¼Œåˆ™åˆ›å»º
     std::string querycmd = strutil::format("CREATE DATABASE IF NOT EXISTS %s;", _pDbCfg->DatabaseName.c_str());
 
     my_ulonglong affected_rows;
@@ -91,26 +89,26 @@ bool MysqlTableUpdate::CreateDatabaseIfNotExist()
         return false;
     }
 
-    // Á´½ÓÉÏµÄDBÖ®ºó£¬Ñ¡ÔñÖ¸¶¨µÄÊı¾İ¿â
+    // é“¾æ¥ä¸Šçš„DBä¹‹åï¼Œé€‰æ‹©æŒ‡å®šçš„æ•°æ®åº“
     if (mysql_select_db(_pMysql, _pDbCfg->DatabaseName.c_str()) != 0) {
         LOG_ERROR("!!! Failed. MysqlConnector::CreateDatabaseIfNotExist: mysql_select_db:" << LOG4CPLUS_STRING_TO_TSTRING(_pDbCfg->DatabaseName));
         return false;
     }
 
-    // ÉèÖÃÊı¾İÎªµÄ×Ö·û¼¯£¬´ÓyamlÖĞÅäÖÃÖĞ¶ÁÈ¡ÎÒÃÇĞèÒªµÄ×Ö·û¼¯
+    // è®¾ç½®æ•°æ®ä¸ºçš„å­—ç¬¦é›†ï¼Œä»yamlä¸­é…ç½®ä¸­è¯»å–æˆ‘ä»¬éœ€è¦çš„å­—ç¬¦é›†
     if (mysql_set_character_set(_pMysql, _pDbCfg->CharacterSet.c_str()) != 0) {
         LOG_ERROR("!!! Failed. MysqlConnector::CreateDatabaseIfNotExist: Could not set client connection character set to " << LOG4CPLUS_STRING_TO_TSTRING(_pDbCfg->CharacterSet));
         return false;
     }
 
-    // ÉèÖÃÁËÊı¾İ¿â´óĞ¡Ğ´Ãô¸Ğ£¬ÅäÖÃÎÄ¼şÖĞÎª utf8_general_ci
+    // è®¾ç½®äº†æ•°æ®åº“å¤§å°å†™æ•æ„Ÿï¼Œé…ç½®æ–‡ä»¶ä¸­ä¸º utf8_general_ci
     querycmd = strutil::format("ALTER DATABASE CHARACTER SET %s COLLATE %s", _pDbCfg->CharacterSet.c_str(), _pDbCfg->Collation.c_str());
     if (!Query(querycmd.c_str(), affected_rows)) {
         LOG_ERROR("!!! Failed. MysqlConnector::CreateDatabaseIfNotExist. cmd:" << LOG4CPLUS_STRING_TO_TSTRING(querycmd.c_str()));
         return false;
     }
 
-    // ´´½¨Ò»¸översion ±í£¬Ê¹ÓÃÁË InnoDB ·½Ê½
+    // åˆ›å»ºä¸€ä¸ªversion è¡¨ï¼Œä½¿ç”¨äº† InnoDB æ–¹å¼
     std::string create_version =
         "CREATE TABLE IF NOT EXISTS `version` (" \
         "`version` int(11) NOT NULL," \
@@ -123,7 +121,7 @@ bool MysqlTableUpdate::CreateDatabaseIfNotExist()
         return false;
     }
 
-    // ´´½¨Ò»¸ö player ±í
+    // åˆ›å»ºä¸€ä¸ª player è¡¨
     std::string create_player =
         "CREATE TABLE IF NOT EXISTS `player` (" \
         "`sn` bigint(20) NOT NULL," \
@@ -145,7 +143,7 @@ bool MysqlTableUpdate::CreateDatabaseIfNotExist()
         return false;
     }
 
-    // ×îºó´´½¨ÍêÁË£¬ĞŞ¸Ä version±íµÄÖĞversion ×Ö¶Î£¬ÉèÎª³õÊ¼µÄ0ºÅ°æ±¾
+    // æœ€ååˆ›å»ºå®Œäº†ï¼Œä¿®æ”¹ versionè¡¨çš„ä¸­version å­—æ®µï¼Œè®¾ä¸ºåˆå§‹çš„0å·ç‰ˆæœ¬
     cmd = "insert into `version` VALUES ('0')";
     if (!Query(cmd.c_str(), affected_rows)) {
         LOG_ERROR("!!! Failed. MysqlConnector::CreateTable." << LOG4CPLUS_STRING_TO_TSTRING(cmd));
@@ -170,7 +168,7 @@ bool MysqlTableUpdate::UpdateToVersion()
     if (version == _version)
         return true;
 
-    // Èç¹ûDB°æ±¾²»Æ¥Åä£¬Éı¼¶DB
+    // å¦‚æœDBç‰ˆæœ¬ä¸åŒ¹é…ï¼Œå‡çº§DB
     for (int i = version + 1; i <= _version; i++) {
         if (_update_func[i] == nullptr)
             continue;
@@ -182,7 +180,7 @@ bool MysqlTableUpdate::UpdateToVersion()
 
         LOG_INFO("update db to version:" << i);
 
-        // ³É¹¦Ö®ºó£¬¸ü¸ÄDBµÄversion
+        // æˆåŠŸä¹‹åï¼Œæ›´æ”¹DBçš„version
         std::string cmd = strutil::format("update `version` set version = %d", i);
         if (!Query(cmd.c_str(), affected_rows)) {
             LOG_ERROR("UpdateToVersion failed!!!!!, change version failed. version=" << i);

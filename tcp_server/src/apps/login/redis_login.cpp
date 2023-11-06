@@ -1,9 +1,8 @@
-#include "redis_login.h"
+﻿#include "redis_login.h"
 #include "libserver/protobuf/proto_id.pb.h"
 #include "libserver/redis_constants.h"
 #include "libserver/log4_help.h"
 #include "libserver/thread_mgr.h"
-
 #include "libserver/message_system_help.h"
 #include "libserver/global.h"
 #include "libserver/message_system.h"

@@ -1,8 +1,6 @@
 ﻿#pragma once
-
 #include "entity.h"
 #include "system.h"
-
 #include <hiredis/hiredis.h>
 
 class RedisConnector :public Entity<RedisConnector>, public IAwakeSystem<>

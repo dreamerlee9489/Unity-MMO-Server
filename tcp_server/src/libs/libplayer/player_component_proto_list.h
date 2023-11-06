@@ -2,7 +2,6 @@
 #include "libserver/common.h"
 #include "libserver/component.h"
 #include "libserver/system.h"
-
 #include <sstream>
 
 // player 组件，处理PlayerList
@@ -18,4 +17,3 @@ public:
 private:
 	std::map<uint64, std::stringstream*> _protos;
 };
-

@@ -1,7 +1,4 @@
-﻿
-#include <iostream>
-
-#include "common.h"
+﻿#include "common.h"
 #include "network_connector.h"
 #include "network_locator.h"
 #include "log4_help.h"

@@ -1,10 +1,9 @@
 ﻿#pragma once
-
-#include <string>
-#include <vector>
 #include "resource_base.h"
 #include "resource_mgr_template.h"
 #include "libserver/vector3.h"
+#include <string>
+#include <vector>
 
 struct ResourceNpc
 {

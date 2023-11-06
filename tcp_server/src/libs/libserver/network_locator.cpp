@@ -1,12 +1,12 @@
-#include "network_locator.h"
+ï»¿#include "network_locator.h"
 #include "network_listen.h"
-#include <algorithm>
-#include <utility>
 #include "message_system_help.h"
 #include "component_help.h"
 #include "socket_object.h"
 #include "global.h"
 #include "message_system.h"
+#include <algorithm>
+#include <utility>
 
 void NetworkLocator::Awake()
 {
@@ -64,7 +64,7 @@ void NetworkLocator::AddNetworkIdentify(SocketKey* pSocket, uint64 appKey)
     {
         if (((appType & APP_APPMGR) != 0) || ((appType & APP_SPACE) != 0) || ((appType & APP_GAME) != 0))
         {
-            // ·¢ËÍÒ»¸ö×¢²áÐ­Òé
+            // å‘é€ä¸€ä¸ªæ³¨å†Œåè®®
             Proto::AppRegister proto;
             proto.set_type(pGlobal->GetCurAppType());
             proto.set_id(pGlobal->GetCurAppId());
@@ -156,7 +156,7 @@ void NetworkLocator::HandleAppRegister(Packet* pPacket)
 
         LOG_DEBUG("connected appType:" << GetAppName(GetTypeFromAppKey(appKey)) << " appId:" << GetIdFromAppKey(appKey) << " " << &netIdentify);
 
-        // ÐÞ¸ÄÍøÂçµ×²ãµÄ±êÊ¶
+        // ä¿®æ”¹ç½‘ç»œåº•å±‚çš„æ ‡è¯†
         MessageSystemHelp::DispatchPacket(Proto::MsgId::MI_NetworkListenKey, &netIdentify);
     } 
     else
@@ -179,7 +179,7 @@ void NetworkLocator::HandleNetworkDisconnect(Packet* pPacket)
 
     LOG_DEBUG("remove appType:" << GetAppName(GetTypeFromAppKey(appKey)) << " appId:" << GetIdFromAppKey(appKey));
 
-    // ÇëÇóÔÙ´ÎÁ¬½Ó
+    // è¯·æ±‚å†æ¬¡è¿žæŽ¥
     auto appType = GetTypeFromAppKey(appKey);
     auto appId = GetIdFromAppKey(appKey);
     const auto pYaml = ComponentHelp::GetYaml();

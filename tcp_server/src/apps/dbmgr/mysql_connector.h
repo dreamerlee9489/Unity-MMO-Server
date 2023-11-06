@@ -1,12 +1,9 @@
 ﻿#pragma once
-
 #include "libserver/common.h"
 #include "libserver/entity.h"
 #include "libserver/system.h"
 #include "libserver/socket_object.h"
-
 #include "mysql_base.h"
-
 #include <mysql/mysql.h>
 
 class Packet;

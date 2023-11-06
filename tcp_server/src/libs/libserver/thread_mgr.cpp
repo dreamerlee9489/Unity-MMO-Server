@@ -6,11 +6,9 @@
 #include "res_path.h"
 #include "packet.h"
 #include "log4_help.h"
-
 #include "network_locator.h"
 #include "console.h"
 #include "console_cmd_thread.h"
-
 #include "thread_collector_exclusive.h"
 #include "global.h"
 #include "trace_component.h"

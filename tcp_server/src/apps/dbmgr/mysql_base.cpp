@@ -1,12 +1,11 @@
-#include "mysql_base.h"
-
+ï»¿#include "mysql_base.h"
 #include "libserver/log4_help.h"
 
 bool MysqlBase::ConnectInit()
 {
     Disconnect();
 
-    // ÓÉmysql¿â×ÔĞĞnew³öMysql¶ÔÏóµÄ·½Ê½
+    // ç”±mysqlåº“è‡ªè¡Œnewå‡ºMysqlå¯¹è±¡çš„æ–¹å¼
     _pMysql = mysql_init(nullptr);
     if (_pMysql == nullptr)
     {
@@ -14,11 +13,11 @@ bool MysqlBase::ConnectInit()
         return false;
     }
 
-    // ÉèÖÃÁ¬½ÓµÈ´ıÊ±¼ä£¬ÕâÀïÉèÖÃµÄÊÇ10Ãë
+    // è®¾ç½®è¿æ¥ç­‰å¾…æ—¶é—´ï¼Œè¿™é‡Œè®¾ç½®çš„æ˜¯10ç§’
     int outtime = 10;
     mysql_options(_pMysql, MYSQL_OPT_CONNECT_TIMEOUT, &outtime);
 
-    // ÉèÖÃÈç¹ûÁ¬½ÓÊ§°Ü ²»×Ô¶¯Á¬½Ó
+    // è®¾ç½®å¦‚æœè¿æ¥å¤±è´¥ ä¸è‡ªåŠ¨è¿æ¥
     bool reConnect = false;
     mysql_options(_pMysql, MYSQL_OPT_RECONNECT, &reConnect);
 

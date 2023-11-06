@@ -1,5 +1,4 @@
 ﻿#pragma once
-
 #include <climits>
 #include "protobuf/proto_id.pb.h"
 #include "protobuf/db.pb.h"

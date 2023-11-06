@@ -1,7 +1,5 @@
-#pragma once
-
+﻿#pragma once
 #include "common.h"
-
 #include <log4cplus/logger.h>   
 #include <log4cplus/tstring.h>   
 #include <log4cplus/tstring.h>
@@ -40,7 +38,7 @@
 
 #define LogColorGrey	90	// dark grey
 
-#define LogColorRedEx		91 // ��ɫ
+#define LogColorRedEx		91 // 亮色
 #define LogColorGreenEx		92
 #define LogColorYellowEx	93
 #define LogColorBlueEx		94

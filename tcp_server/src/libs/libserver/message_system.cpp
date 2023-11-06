@@ -1,11 +1,11 @@
-#include "message_system.h"
-#include <utility>
+ï»¿#include "message_system.h"
 #include "system_manager.h"
 #include "packet.h"
 #include "entity_system.h"
 #include "component.h"
 #include "object_pool_packet.h"
 #include "component_help.h"
+#include <utility>
 
 MessageSystem::MessageSystem(SystemManager* pMgr)
 {
@@ -22,7 +22,7 @@ void MessageSystem::AddPacketToList(Packet* pPacket)
     std::lock_guard<std::mutex> guard(_packet_lock);
     _cachePackets.GetWriterCache()->emplace_back(pPacket);
 
-    // ½øÈëÊ± Ref +1
+    // è¿›å…¥æ—¶ Ref +1
     pPacket->AddRef();
 }
 
@@ -34,17 +34,17 @@ void MessageSystem::RegisterFunction(IEntity* obj, int msgId, MsgCallbackFun cbf
         _callbacks.insert(std::make_pair(msgId, new std::map<uint64, IMessageCallBack*>()));
     }
 
-    // ´´½¨ MessageCallBack
+    // åˆ›å»º MessageCallBack
     const auto pCallback = _systemMgr->GetEntitySystem()->AddComponent<MessageCallBack>(std::move(cbfun));
     pCallback->SetParent(obj);
 
-    // ½«¸¸ÀàµÄSN£¬·ÅÔÚkeyÖµÖÐ£¬±ãÓÚ²éÕÒ
+    // å°†çˆ¶ç±»çš„SNï¼Œæ”¾åœ¨keyå€¼ä¸­ï¼Œä¾¿äºŽæŸ¥æ‰¾
     _callbacks[msgId]->insert(std::make_pair(obj->GetSN(), pCallback));
 }
 
 void MessageSystem::RegisterDefaultFunction(IEntity* obj, MsgCallbackFun cbfun)
 {
-    // ´´½¨ MessageCallBack
+    // åˆ›å»º MessageCallBack
     const auto pCallback = _systemMgr->GetEntitySystem()->AddComponent<MessageCallBack>(std::move(cbfun));
     pCallback->SetParent(obj);
 
@@ -117,10 +117,10 @@ void MessageSystem::Update(EntitySystem* pEntities)
 
         if (!isDo)
         {
-            // ÊÇ·ñÓÐÄ¬ÈÏ´¦Àíº¯Êý
+            // æ˜¯å¦æœ‰é»˜è®¤å¤„ç†å‡½æ•°
             if (entitySn > 0)
             {
-                // allinone Ê± £¬worldºÍworldproxy snÏàÍ¬£¬µ«¸øworldµÄÐ­Òé£¬ÊÇ²»¿ÉÄÜÓÐÄ¬ÈÏ´¦Àíº¯ÊýµÄ
+                // allinone æ—¶ ï¼Œworldå’Œworldproxy snç›¸åŒï¼Œä½†ç»™worldçš„åè®®ï¼Œæ˜¯ä¸å¯èƒ½æœ‰é»˜è®¤å¤„ç†å‡½æ•°çš„
                 const auto pTagToWorld = pTags->GetTagValue(TagType::ToWorld);
                 if (pTagToWorld == nullptr)
                 {
@@ -133,7 +133,7 @@ void MessageSystem::Update(EntitySystem* pEntities)
             }
         }
 
-        // Àë¿ªÊ± Ref - 1
+        // ç¦»å¼€æ—¶ Ref - 1
         pPacket->RemoveRef();
     }
 

@@ -15,13 +15,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "res", "res", "{CEB39B1C-C53
 		res\engine.yaml = res\engine.yaml
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "proto", "proto", "{9DA1DF6B-B311-480C-ABF8-621A5E688EBA}"
-	ProjectSection(SolutionItems) = preProject
-		src\libs\libserver\protobuf\db.proto = src\libs\libserver\protobuf\db.proto
-		src\libs\libserver\protobuf\msg.proto = src\libs\libserver\protobuf\msg.proto
-		src\libs\libserver\protobuf\proto_id.proto = src\libs\libserver\protobuf\proto_id.proto
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "log4", "log4", "{4B171B77-7EA5-49DA-A432-CAB12C2B21CC}"
 	ProjectSection(SolutionItems) = preProject
 		res\log4\log4_allinone.properties = res\log4\log4_allinone.properties
@@ -105,7 +98,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{07CE9E74-2C56-4379-88C5-A7086A8DBCD5} = {F93E11B6-8D8F-4DF8-B2C9-51F116FF48E4}
-		{9DA1DF6B-B311-480C-ABF8-621A5E688EBA} = {CEB39B1C-C53C-449C-9789-57CDCF4D0AC4}
 		{4B171B77-7EA5-49DA-A432-CAB12C2B21CC} = {CEB39B1C-C53C-449C-9789-57CDCF4D0AC4}
 		{004559E4-8521-47DD-934B-3A36FD09AD7F} = {2101C55C-EBE3-4E85-81B4-97EB2AEA5D31}
 		{147C8467-FDD9-42DD-AEBE-010AAFD5A198} = {F93E11B6-8D8F-4DF8-B2C9-51F116FF48E4}

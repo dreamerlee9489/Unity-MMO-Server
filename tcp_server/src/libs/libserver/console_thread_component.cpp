@@ -1,14 +1,12 @@
-#include "console_thread_component.h"
-
+﻿#include "console_thread_component.h"
 #include "create_component.h"
 #include "update_component.h"
 #include "entity_system.h"
-
-#include <thread>
 #include "network_listen.h"
 #include "util_string.h"
 #include "timer_component.h"
 #include "packet.h"
+#include <thread>
 
 std::mutex ConsoleThreadComponent::_show_lock;
 

@@ -1,6 +1,5 @@
 ﻿#pragma once
 #include "component.h"
-
 #include "disposable.h"
 #include "component_factory.h"
 #include "object_pool.h"

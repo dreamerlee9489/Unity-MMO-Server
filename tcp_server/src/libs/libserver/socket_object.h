@@ -1,8 +1,9 @@
 ﻿#pragma once
 #include "common.h"
+#include "network_type.h"
 #include <log4cplus/streams.h>
 #include <ostream>
-#include "network_type.h"
+
 struct NetIdentify;
 
 /// <summary>

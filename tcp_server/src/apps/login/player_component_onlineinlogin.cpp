@@ -1,8 +1,7 @@
-#include "player_component_onlineinlogin.h"
+ï»¿#include "player_component_onlineinlogin.h"
 #include "libserver/redis_constants.h"
-
-#include "libplayer/player.h"
 #include "libserver/message_system_help.h"
+#include "libplayer/player.h"
 
 void PlayerComponentOnlineInLogin::Awake(std::string account)
 {
@@ -19,7 +18,7 @@ void PlayerComponentOnlineInLogin::BackToPool()
 
 void PlayerComponentOnlineInLogin::SetOnlineFlag() const
 {
-	// ÉèÖÃÔÚÏß±êÖ¾
+	// è®¾ç½®åœ¨çº¿æ ‡å¿—
 	Proto::AccountSyncOnlineToRedis protoSync;
 	protoSync.set_account(_account.c_str());
 	MessageSystemHelp::DispatchPacket(Proto::MsgId::MI_AccountSyncOnlineToRedis, protoSync, nullptr);

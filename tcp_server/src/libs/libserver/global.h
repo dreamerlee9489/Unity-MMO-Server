@@ -1,10 +1,8 @@
 ﻿#pragma once
-
 #include "common.h"
 #include "util_time.h"
 #include "app_type.h"
 #include "singleton.h"
-
 #include <mutex>
 
 class Global : public Singleton<Global>

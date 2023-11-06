@@ -1,5 +1,4 @@
-#include "world_proxy_component_gather.h"
-
+﻿#include "world_proxy_component_gather.h"
 #include "libserver/message_system_help.h"
 #include "libplayer/player_collector_component.h"
 #include "libplayer/world_base.h"

@@ -1,5 +1,4 @@
 ﻿#pragma once
-
 #include <map>
 #include "log4_help.h"
 

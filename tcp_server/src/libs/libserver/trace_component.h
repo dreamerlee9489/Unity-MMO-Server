@@ -2,7 +2,6 @@
 #include "component.h"
 #include "system.h"
 #include "common.h"
-
 #include <map>
 #include <set>
 

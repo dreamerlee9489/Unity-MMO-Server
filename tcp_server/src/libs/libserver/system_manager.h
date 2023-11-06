@@ -1,14 +1,12 @@
 ﻿#pragma once
-
 #include "disposable.h"
 #include "system.h"
 #include "common.h"
 #include "thread_type.h"
-
-#include <list>
-#include <random>
 #include "check_time_component.h"
 #include "update_system.h"
+#include <list>
+#include <random>
 
 class EntitySystem;
 class MessageSystem;

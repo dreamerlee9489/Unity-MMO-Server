@@ -1,5 +1,4 @@
 ﻿#pragma once
-
 #include "libserver/sync_component.h"
 #include "libserver/system.h"
 #include <json/writer.h>

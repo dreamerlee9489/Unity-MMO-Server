@@ -1,7 +1,6 @@
 ﻿#pragma once
 #include "component.h"
 #include "disposable.h"
-
 #include <list>
 #include <unordered_map>
 

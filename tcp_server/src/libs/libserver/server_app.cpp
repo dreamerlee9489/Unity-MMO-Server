@@ -1,9 +1,7 @@
-#include "common.h"
+ï»¿#include "common.h"
 #include "server_app.h"
-
 #include "app_type.h"
 #include "yaml.h"
-
 #include "object_pool_packet.h"
 #include "component_help.h"
 #include "global.h"
@@ -46,14 +44,14 @@ void ServerApp::Initialize()
 
     Global::Instance(_appType, _appId);
 
-    // Packet¶ÔÏó³Ø
+    // Packetå¯¹è±¡æ± 
     DynamicPacketPool::Instance();
 
-    // È«¾Ö»ù´¡×é¼ş
+    // å…¨å±€åŸºç¡€ç»„ä»¶
     _pThreadMgr = ThreadMgr::Instance();
     _pThreadMgr->InitializeGlobalComponent(_appType, _appId);
 
-    // ´´½¨Ïß³Ì
+    // åˆ›å»ºçº¿ç¨‹
     _pThreadMgr->InitializeThread();
 }
 
@@ -89,7 +87,7 @@ void ServerApp::Run()
         std::this_thread::sleep_for(std::chrono::milliseconds(1));
     }
 
-    // Í£Ö¹ËùÓĞÏß³Ì
+    // åœæ­¢æ‰€æœ‰çº¿ç¨‹
     std::cout << "stoping all threads..." << std::endl;
     bool isStop;
     do
@@ -98,7 +96,7 @@ void ServerApp::Run()
         std::this_thread::sleep_for(std::chrono::milliseconds(10));
     } while (!isStop);
 
-    // Ïú»ÙÏß³Ì
+    // é”€æ¯çº¿ç¨‹
     std::cout << "destroy all threads..." << std::endl;
     _pThreadMgr->DestroyThread();
     bool isDestroy;

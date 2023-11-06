@@ -1,6 +1,6 @@
 ﻿#include "player_component_last_map.h"
-#include "libresource/resource_manager.h"
 #include "player.h"
+#include "libresource/resource_manager.h"
 #include "libresource/resource_help.h"
 #include "libserver/vector3.h"
 

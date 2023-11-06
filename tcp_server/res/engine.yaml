@@ -1,4 +1,4 @@
-allinone:
+﻿allinone:
   thread_logic: 2
   thread_mysql: 2
   thread_listen: 2
@@ -73,7 +73,3 @@ dbmgr:
       database_name: e_gamedata
       character_set: utf8
       collation: utf8_general_ci
-
-robot:
-  thread_logic: 10
-  thread_connector: 2

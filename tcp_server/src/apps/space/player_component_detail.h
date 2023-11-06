@@ -4,8 +4,8 @@
 #include "libplayer/player_component.h"
 #include "npc.h"
 #include <vector>
-#include <unordered_map>
 #include <list>
+#include <unordered_map>
 
 struct ItemData;
 class PlayerComponentDetail : public Component<PlayerComponentDetail>, public IAwakeFromPoolSystem<>, public PlayerComponent

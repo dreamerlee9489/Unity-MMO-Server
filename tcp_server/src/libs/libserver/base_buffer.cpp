@@ -1,6 +1,5 @@
-#include "base_buffer.h"
+ï»¿#include "base_buffer.h"
 #include "log4_help.h"
-
 #include <iostream>
 #include <cstring>
 
@@ -11,7 +10,7 @@ unsigned Buffer::GetEmptySize()
 
 void Buffer::ReAllocBuffer(const unsigned int dataLength)
 {
-	// Èç¹û»º³åÇø³¬¹ı×î´ó»º³åÖµ£¬·¢³ö¾¯¸æ
+	// å¦‚æœç¼“å†²åŒºè¶…è¿‡æœ€å¤§ç¼“å†²å€¼ï¼Œå‘å‡ºè­¦å‘Š
 	if (_bufferSize >= MAX_SIZE) {
 		std::cout << "Buffer::Realloc except!! Max size:" << _bufferSize << std::endl;
 	}
@@ -31,11 +30,11 @@ void Buffer::ReAllocBuffer(const unsigned int dataLength)
 		}
 		else 
 		{
-			// 1.ÏÈCOPYÎ²²¿
+			// 1.å…ˆCOPYå°¾éƒ¨
 			::memcpy(tempBuffer, _buffer + _beginIndex, _bufferSize - _beginIndex);
 			_newEndIndex = _bufferSize - _beginIndex;
 
-			// 2.ÔÙCOPYÍ·²¿
+			// 2.å†COPYå¤´éƒ¨
 			if (_endIndex > 0)
 			{
 				::memcpy(tempBuffer + _newEndIndex, _buffer, _endIndex);
@@ -44,7 +43,7 @@ void Buffer::ReAllocBuffer(const unsigned int dataLength)
 		}
 	}
 
-	// ĞŞ¸ÄÊı¾İ
+	// ä¿®æ”¹æ•°æ®
 	_bufferSize += ADDITIONAL_SIZE;
 
 	delete[] _buffer;

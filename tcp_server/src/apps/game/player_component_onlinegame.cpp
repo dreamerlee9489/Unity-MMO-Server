@@ -1,9 +1,8 @@
-#include "player_component_onlinegame.h"
+ï»¿#include "player_component_onlinegame.h"
 #include "libserver/redis_constants.h"
-
-#include "libplayer/player.h"
 #include "libserver/entity.h"
 #include "libserver/message_system_help.h"
+#include "libplayer/player.h"
 
 void PlayerComponentOnlineInGame::Awake(const std::string account, int version)
 {
@@ -36,7 +35,7 @@ void PlayerComponentOnlineInGame::BackToPool()
 
 void PlayerComponentOnlineInGame::SetOnlineFlag() const
 {
-	// ÉèÖÃÔÚÏß±êÖ¾
+	// è®¾ç½®åœ¨çº¿æ ‡å¿—
 	Proto::PlayerSyncOnlineToRedis protoSync;
 	protoSync.set_account(_account.c_str());
 	protoSync.set_version(_onlineVersion);

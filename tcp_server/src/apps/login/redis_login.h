@@ -1,5 +1,4 @@
 ﻿#pragma once
-
 #include "libserver/redis_connector.h"
 
 class Packet;

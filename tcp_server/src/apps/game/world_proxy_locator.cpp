@@ -1,10 +1,10 @@
 ﻿#include "world_proxy_locator.h"
-#include "libresource/resource_manager.h"
+#include "world_proxy.h"
 #include "libserver/thread_mgr.h"
 #include "libserver/component_help.h"
-#include "libresource/resource_help.h"
 #include "libserver/message_system.h"
-#include "world_proxy.h"
+#include "libresource/resource_help.h"
+#include "libresource/resource_manager.h"
 
 void WorldProxyLocator::Awake()
 {

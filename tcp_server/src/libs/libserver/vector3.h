@@ -1,5 +1,4 @@
 ﻿#pragma once
-
 #include "common.h"
 #include <log4cplus/streams.h>
 

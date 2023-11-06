@@ -1,5 +1,4 @@
 ﻿#pragma once
-
 #include "system.h"
 #include "component_collections.h"
 

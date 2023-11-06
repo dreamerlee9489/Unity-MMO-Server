@@ -1,13 +1,11 @@
-#include "console.h"
-
-#include <iostream>
-#include <thread>
-
+﻿#include "console.h"
 #include "util_string.h"
 #include "log4_help.h"
 #include "update_component.h"
 #include "component_help.h"
 #include "global.h"
+#include <iostream>
+#include <thread>
 
 void ConsoleCmd::OnRegisterHandler(std::string key, HandleConsole handler)
 {

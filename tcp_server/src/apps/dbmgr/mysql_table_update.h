@@ -1,8 +1,6 @@
 ﻿#pragma once
-
 #include "mysql_base.h"
 #include "libserver/singleton.h"
-
 #include <functional>
 
 class MysqlTableUpdate :public MysqlBase, public Singleton<MysqlTableUpdate>

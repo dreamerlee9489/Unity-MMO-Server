@@ -1,5 +1,4 @@
 ﻿#pragma once
-
 #include "common.h"
 #include "entity.h"
 #include "system.h"

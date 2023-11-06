@@ -1,17 +1,17 @@
 ﻿#include "world_proxy.h"
 #include "world_proxy_locator.h"
+#include "world_proxy_component_gather.h"
+#include "world_component_teleport.h"
 #include "player_component_onlinegame.h"
 #include "libserver/component_help.h"
 #include "libserver/message_system_help.h"
 #include "libserver/message_system.h"
-#include "libplayer/player_collector_component.h"
-#include "libplayer/player.h"
 #include "libserver/log4.h"
 #include "libserver/network_help.h"
-#include "world_proxy_component_gather.h"
-#include "world_component_teleport.h"
-#include "libresource/resource_help.h"
 #include "libserver/socket_locator.h"
+#include "libresource/resource_help.h"
+#include "libplayer/player_collector_component.h"
+#include "libplayer/player.h"
 
 WorldProxyGather* WorldProxy::proxyMgr = nullptr;
 WorldProxyLocator* WorldProxy::proxyLoc = nullptr;

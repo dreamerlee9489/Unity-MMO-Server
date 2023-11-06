@@ -1,15 +1,11 @@
 ﻿#include "connect_obj.h"
-
 #include "network.h"
 #include "network_buffer.h"
-
 #include "thread_mgr.h"
-
 #include "system_manager.h"
 #include "message_system.h"
 #include "message_system_help.h"
 #include "component_help.h"
-
 #include "object_pool_packet.h"
 #include "network_locator.h"
 #include "socket_locator.h"

@@ -1,12 +1,12 @@
 ﻿#ifndef FSM_STATE
 #define FSM_STATE
+#include "libplayer/player_component_last_map.h"
+#include "libplayer/player.h"
+#include "npc.h"
 #include <map>
 #include <cmath>
 #include <random>
 #include <stdexcept>
-#include "libplayer/player_component_last_map.h"
-#include "libplayer/player.h"
-#include "npc.h"
 
 enum struct FsmStateType { Idle, Patrol, Pursuit, Attack, Death };
 

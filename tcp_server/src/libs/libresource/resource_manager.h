@@ -1,5 +1,4 @@
 ﻿#pragma once
-
 #include "libserver/entity.h"
 #include "resource_world.h"
 

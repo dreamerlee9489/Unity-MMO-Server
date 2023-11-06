@@ -3,7 +3,6 @@
 #include <iostream>
 #include <sstream>
 #include <iomanip>
-
 #include "sn_object.h"
 #include "object_pool_interface.h"
 #include "cache_refresh.h"

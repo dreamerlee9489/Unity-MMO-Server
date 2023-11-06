@@ -1,5 +1,4 @@
 ﻿#pragma once
-
 #include "network.h"
 
 class NetworkListen :public Network,

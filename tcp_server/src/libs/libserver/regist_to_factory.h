@@ -1,8 +1,7 @@
 ﻿#pragma once
-#include <typeinfo>
-
 #include "component_factory.h"
 #include "object_pool.h"
+#include <typeinfo>
 
 template<typename T, typename...Targs>
 class RegistToFactory

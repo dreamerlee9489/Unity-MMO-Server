@@ -1,5 +1,4 @@
 ﻿#pragma once
-
 #include "libserver/entity.h"
 #include "libserver/sync_component.h"
 

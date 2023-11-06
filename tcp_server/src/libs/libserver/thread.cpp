@@ -2,7 +2,6 @@
 #include "global.h"
 #include "entity_system.h"
 #include "efficiency_thread_component.h"
-
 #include <iterator>
 
 Thread::Thread(ThreadType threadType)

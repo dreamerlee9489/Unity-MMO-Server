@@ -1,5 +1,4 @@
 ﻿#pragma once
-
 #include "base_buffer.h"
 #include "common.h"
 #include "entity.h"

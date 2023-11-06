@@ -1,7 +1,6 @@
-#include "redis_connector.h"
+ï»¿#include "redis_connector.h"
 #include "log4_help.h"
 #include "common.h"
-
 #include "util_string.h"
 #include "thread_mgr.h"
 #include "yaml.h"
@@ -92,7 +91,7 @@ bool RedisConnector::Connect()
         return false;
     }
 
-    // Ñ¡ÔñÊı¾İ¿â(1)ºÅÊı¾İ¿â
+    // é€‰æ‹©æ•°æ®åº“(1)å·æ•°æ®åº“
     int db_index = 1;
     std::string sql = strutil::format("select %d", db_index);
     redisReply* pRedisReply = static_cast<redisReply*>(redisCommand(c, sql.c_str()));
@@ -174,7 +173,7 @@ bool RedisConnector::SetnxExpire(std::string key, const int value, const int tim
     redisReply* pRedisReply = static_cast<redisReply*>(redisCommand(_pRedisContext, command.c_str()));
     if (pRedisReply->type != REDIS_REPLY_INTEGER || pRedisReply->integer != 1)
     {
-        // Ã»ÓĞÉèÖÃ³É¹¦£¬¿ÉÄÜÒÑ¾­ÓĞÖµ£¬¿ÉÄÜredis¹Òµô£¬¶¼ÈÏÎªÒÑ¾­ÔÚÏß
+        // æ²¡æœ‰è®¾ç½®æˆåŠŸï¼Œå¯èƒ½å·²ç»æœ‰å€¼ï¼Œå¯èƒ½redisæŒ‚æ‰ï¼Œéƒ½è®¤ä¸ºå·²ç»åœ¨çº¿
         LOG_WARN("[SETNX] failed 1. command:" << command.c_str() << " pRedisReply->type:" << pRedisReply->type << " pRedisReply->integer:" << pRedisReply->integer);
         freeReplyObject(pRedisReply);
         return false;
@@ -186,12 +185,12 @@ bool RedisConnector::SetnxExpire(std::string key, const int value, const int tim
 
     freeReplyObject(pRedisReply);
 
-    // ³É¹¦Ö®ºó£¬ÎªÕâ¸öÖµÉèÒ»¸öÊ±¼äÏŞÖÆ£¬ÔÚÕâ¸öÊ±¼äÄÚ²»ÄÜÖØ¸´µÇÂ¼
+    // æˆåŠŸä¹‹åï¼Œä¸ºè¿™ä¸ªå€¼è®¾ä¸€ä¸ªæ—¶é—´é™åˆ¶ï¼Œåœ¨è¿™ä¸ªæ—¶é—´å†…ä¸èƒ½é‡å¤ç™»å½•
     command = strutil::format("EXPIRE %s %d", key.c_str(), timeout);
     pRedisReply = static_cast<redisReply*>(redisCommand(_pRedisContext, command.c_str()));
     if (pRedisReply->type != REDIS_REPLY_INTEGER || pRedisReply->integer != 1)
     {
-        // Ã»ÓĞÉèÖÃ³É¹¦£¬¿ÉÄÜÓĞÒì³££¬¿ÉÄÜredis¹Òµô£¬¶¼ÈÏÎªÒÑ¾­ÔÚÏß
+        // æ²¡æœ‰è®¾ç½®æˆåŠŸï¼Œå¯èƒ½æœ‰å¼‚å¸¸ï¼Œå¯èƒ½redisæŒ‚æ‰ï¼Œéƒ½è®¤ä¸ºå·²ç»åœ¨çº¿
         LOG_WARN("[EXPIRE] failed 2. command:" << command.c_str() << " pRedisReply->type:" << pRedisReply->type << " pRedisReply->integer:" << pRedisReply->integer);
         freeReplyObject(pRedisReply);
         return false;
@@ -207,7 +206,7 @@ bool RedisConnector::SetnxExpire(std::string key, const int value, const int tim
 
 void RedisConnector::Delete(std::string key) const
 {
-    // del ·µ»ØÖµÊÇ±»É¾³ıµÄÊıÁ¿
+    // del è¿”å›å€¼æ˜¯è¢«åˆ é™¤çš„æ•°é‡
     std::string command = strutil::format("del %s", key.c_str());
     redisReply* pRedisReply = static_cast<redisReply*>(redisCommand(_pRedisContext, command.c_str()));
     if (pRedisReply->type != REDIS_REPLY_INTEGER)

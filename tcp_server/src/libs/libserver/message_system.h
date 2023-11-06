@@ -1,9 +1,7 @@
 ﻿#pragma once
-
 #include <map>
 #include <list>
 #include <functional>
-
 #include "common.h"
 #include "system.h"
 #include "cache_swap.h"

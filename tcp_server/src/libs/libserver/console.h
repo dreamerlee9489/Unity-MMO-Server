@@ -1,13 +1,10 @@
 ﻿#pragma once
-
 #include <thread>
 #include <vector>
 #include <queue>
 #include <functional>
-
 #include "system.h"
 #include "disposable.h"
-
 #include "entity.h"
 
 #define ConsoleMaxBuffer 512

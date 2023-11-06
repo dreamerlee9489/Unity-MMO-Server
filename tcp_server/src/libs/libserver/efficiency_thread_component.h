@@ -2,7 +2,6 @@
 #include "system.h"
 #include "thread_type.h"
 #include "entity.h"
-
 #include <thread>
 
 #define ThreadEfficiencyTime 5

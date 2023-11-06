@@ -1,12 +1,9 @@
 ﻿#pragma once
-
 #include <list>
 #include <mutex>
-
 #include "common.h"
 #include "component.h"
 #include "system.h"
-
 #include "object_pool.h"
 
 class SystemManager;

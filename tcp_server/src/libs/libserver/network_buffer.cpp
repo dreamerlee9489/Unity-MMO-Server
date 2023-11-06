@@ -3,10 +3,9 @@
 #include "connect_obj.h"
 #include "message_system_help.h"
 #include "network.h"
-
+#include "mongoose/mongoose.h"
 #include <cstdlib>
 #include <cstring>
-#include "mongoose/mongoose.h"
 
 NetworkBuffer::NetworkBuffer(const unsigned int size, ConnectObj* pConnectObj)
 {

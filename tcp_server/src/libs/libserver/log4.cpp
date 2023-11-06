@@ -1,17 +1,15 @@
-#include "common.h"
+﻿#include "common.h"
 #include "log4.h"
-
-#include <iostream>
-#include <log4cplus/configurator.h>
-#include <log4cplus/spi/loggingevent.h>
-#include <log4cplus/logger.h>
-
 #include "util_string.h"
 #include "thread_mgr.h"
 #include "res_path.h"
 #include "app_type.h"
 #include "log4_help.h"
 #include "component_help.h"
+#include <log4cplus/configurator.h>
+#include <log4cplus/spi/loggingevent.h>
+#include <log4cplus/logger.h>
+#include <iostream>
 
 void Log4::Awake(APP_TYPE appType)
 {

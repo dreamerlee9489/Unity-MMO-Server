@@ -1,7 +1,4 @@
-﻿#include <iostream>
-#include <set>
-
-#include "common.h"
+﻿#include "common.h"
 #include "network_listen.h"
 #include "connect_obj.h"
 #include "thread_mgr.h"
@@ -11,12 +8,12 @@
 #include "global.h"
 #include "message_system.h"
 #include "update_component.h"
+#include <set>
 
 void NetworkListen::Awake(std::string ip, int port, NetworkType iType)
 {
 	_networkType = iType;
 
-	// 
 	auto pNetworkLocator = ThreadMgr::GetInstance()->GetEntitySystem()->GetComponent<NetworkLocator>();
 	pNetworkLocator->AddListenLocator(this, iType);
 

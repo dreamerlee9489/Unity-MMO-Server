@@ -3,7 +3,6 @@
 #include <list>
 #include <map>
 #include <queue>
-
 #include "log4_help.h"
 #include "disposable.h"
 

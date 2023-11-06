@@ -2,9 +2,7 @@
 #include "connect_obj.h"
 #include "packet.h"
 #include "common.h"
-
 #include "object_pool.h"
-#include <iostream>
 #include "component_help.h"
 #include "object_pool_packet.h"
 

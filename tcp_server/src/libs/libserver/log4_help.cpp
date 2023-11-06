@@ -1,6 +1,5 @@
-#include "log4_help.h"
+﻿#include "log4_help.h"
 #include "common.h"
-
 #include <list>
 
 #if ENGINE_PLATFORM == PLATFORM_WIN32

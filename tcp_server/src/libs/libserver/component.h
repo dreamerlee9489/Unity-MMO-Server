@@ -1,7 +1,6 @@
 ﻿#pragma once
 #include "sn_object.h"
 #include "common.h"
-
 #include <functional>
 #include <list>
 

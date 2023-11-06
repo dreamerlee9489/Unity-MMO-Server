@@ -1,5 +1,4 @@
 ﻿#pragma once
-
 #include "entity.h"
 #include "system.h"
 #include "message_system.h"

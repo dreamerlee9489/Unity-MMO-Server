@@ -1,5 +1,4 @@
 ﻿#pragma once
-
 #include "common.h"
 #include "app_type.h"
 #include "component.h"

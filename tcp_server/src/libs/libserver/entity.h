@@ -1,11 +1,9 @@
 ﻿#pragma once
-
 #include <map>
 #include <list>
 #include <memory>
 #include <algorithm>
 #include <queue>
-
 #include "component.h"
 #include "entity_system.h"
 

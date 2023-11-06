@@ -1,9 +1,7 @@
 ﻿#pragma once
-
 #include <string>
 #include <vector>
 #include <cstdarg>
-
 #include "common.h"
 
 namespace strutil

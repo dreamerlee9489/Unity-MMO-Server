@@ -1,8 +1,6 @@
 ﻿#pragma once
-
 #include "libserver/common.h"
 #include "libserver/yaml.h"
-
 #include <mysql/mysql.h>
 
 class MysqlBase

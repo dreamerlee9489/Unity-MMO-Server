@@ -2,7 +2,6 @@
 #include "system.h"
 #include "entity.h"
 #include "util_time.h"
-
 #include <map>
 
 class Packet;

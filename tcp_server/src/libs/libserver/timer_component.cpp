@@ -1,8 +1,8 @@
 ﻿#include "timer_component.h"
-#include <utility>
 #include "global.h"
 #include "log4_help.h"
 #include "update_component.h"
+#include <utility>
 
 struct CompareTimer
 {

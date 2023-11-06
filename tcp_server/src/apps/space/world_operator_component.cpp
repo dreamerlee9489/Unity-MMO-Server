@@ -1,9 +1,7 @@
 ﻿#include "world_operator_component.h"
 #include "world.h"
-
 #include "libserver/thread_mgr.h"
 #include "libserver/message_system.h"
-
 #include "libresource/resource_manager.h"
 #include "libresource/resource_help.h"
 

@@ -1,20 +1,17 @@
-#include "world_component_teleport.h"
+﻿#include "world_component_teleport.h"
 #include "world_proxy_locator.h"
 #include "world_proxy_help.h"
 #include "teleport_object.h"
 #include "world_proxy.h"
-
+#include "space_sync_handler.h"
 #include "libserver/message_system_help.h"
 #include "libserver/sync_component.h"
-
+#include "libserver/component_help.h"
 #include "libresource/resource_world.h"
 #include "libresource/resource_manager.h"
 #include "libresource/resource_help.h"
-
 #include "libplayer/player.h"
 #include "libplayer/player_collector_component.h"
-#include "space_sync_handler.h"
-#include "libserver/component_help.h"
 
 void WorldComponentTeleport::Awake()
 {

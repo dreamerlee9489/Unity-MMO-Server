@@ -1,5 +1,4 @@
 ﻿#pragma once
-
 #include <utility>
 #include "network.h"
 #include "connect_obj.h"

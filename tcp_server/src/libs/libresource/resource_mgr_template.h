@@ -1,5 +1,4 @@
 ﻿#pragma once
-
 #include "libserver/log4_help.h"
 #include "libserver/res_path.h"
 #include "libserver/global.h"

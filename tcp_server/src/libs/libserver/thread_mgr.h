@@ -1,8 +1,6 @@
 ﻿#pragma once
-
 #include <mutex>
 #include <vector>
-
 #include "common.h"
 #include "thread.h"
 #include "cache_swap.h"

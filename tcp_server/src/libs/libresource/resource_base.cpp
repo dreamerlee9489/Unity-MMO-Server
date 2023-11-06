@@ -1,5 +1,4 @@
 ﻿#include "resource_base.h"
-
 #include "libserver/log4_help.h"
 #include "libserver/util_string.h"
 

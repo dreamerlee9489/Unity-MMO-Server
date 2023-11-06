@@ -1,18 +1,17 @@
 ﻿#include "account.h"
+#include "player_component_account.h"
+#include "player_component_onlineinlogin.h"
+#include "libresource/resource_help.h"
 #include "libserver/common.h"
 #include "libserver/thread_mgr.h"
 #include "libserver/log4_help.h"
 #include "libserver/message_system_help.h"
 #include "libserver/component_help.h"
-
 #include "libserver/global.h"
-#include "libplayer/player_collector_component.h"
-#include "player_component_account.h"
-#include "libplayer/player_component_proto_list.h"
 #include "libserver/message_system.h"
+#include "libplayer/player_collector_component.h"
+#include "libplayer/player_component_proto_list.h"
 #include "libplayer/player.h"
-#include "player_component_onlineinlogin.h"
-#include "libresource/resource_help.h"
 
 void AccountMgr::Awake()
 {
