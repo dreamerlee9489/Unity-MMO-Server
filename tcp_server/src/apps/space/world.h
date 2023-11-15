@@ -8,7 +8,7 @@
 #include "libresource/resource_help.h"
 #include "libplayer/world_base.h"
 #include "libplayer/player_component_last_map.h"
-#include "libplayer/command_component.h"
+#include "libplayer/cmd_component.h"
 #include "world_gather.h"
 #include "player_manager_component.h"
 #include "player_component_detail.h"

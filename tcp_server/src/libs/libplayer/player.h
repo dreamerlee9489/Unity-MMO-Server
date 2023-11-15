@@ -8,7 +8,7 @@
 #include "space/npc.h"
 #include "game/game_team.h"
 #include "player_component_last_map.h"
-#include "command_component.h"
+#include "cmd_component.h"
 #include <algorithm>
 #include <list>
 #include <map>

@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include "libserver/thread_mgr.h"
-#include "libplayer/command_system.h"
+#include "libplayer/cmd_system.h"
 #include "console_cmd_world.h"
 #include "world_operator_component.h"
 #include "world_gather.h"

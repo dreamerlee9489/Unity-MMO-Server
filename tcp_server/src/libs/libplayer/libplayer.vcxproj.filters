@@ -60,13 +60,13 @@
     <ClInclude Include="cmd_death.h">
       <Filter>player\cmd</Filter>
     </ClInclude>
-    <ClInclude Include="command_component.h">
-      <Filter>player\cmd</Filter>
-    </ClInclude>
-    <ClInclude Include="command_system.h">
-      <Filter>player\cmd</Filter>
-    </ClInclude>
     <ClInclude Include="cmd_none.h">
+      <Filter>player\cmd</Filter>
+    </ClInclude>
+    <ClInclude Include="cmd_component.h">
+      <Filter>player\cmd</Filter>
+    </ClInclude>
+    <ClInclude Include="cmd_system.h">
       <Filter>player\cmd</Filter>
     </ClInclude>
   </ItemGroup>
@@ -107,13 +107,13 @@
     <ClCompile Include="cmd_death.cpp">
       <Filter>player\cmd</Filter>
     </ClCompile>
-    <ClCompile Include="command_component.cpp">
-      <Filter>player\cmd</Filter>
-    </ClCompile>
-    <ClCompile Include="command_system.cpp">
-      <Filter>player\cmd</Filter>
-    </ClCompile>
     <ClCompile Include="cmd_none.cpp">
+      <Filter>player\cmd</Filter>
+    </ClCompile>
+    <ClCompile Include="cmd_component.cpp">
+      <Filter>player\cmd</Filter>
+    </ClCompile>
+    <ClCompile Include="cmd_system.cpp">
       <Filter>player\cmd</Filter>
     </ClCompile>
   </ItemGroup>
